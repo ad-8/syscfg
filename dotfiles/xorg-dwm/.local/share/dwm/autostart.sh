@@ -1,38 +1,40 @@
 #!/usr/bin/env sh
 
-# why nm doesnt work when started here
-nm-applet &
-blueman-applet &
+backlight 40 &
 
-dunst &
-#.screenlayout/view.sh &
-~/scripts/bb/licht.clj hi &
 dwmblocks &
+dunst &
 
-# Disable annoying beep from computer (I think on keypresses when an action is not available)
 xset b off
-#xset s off
-#xset -dpms
+# xset s off
+# xset -dpms
+# xset s 5400 0
+# xset dpms 0 0 5400
 
-xset s 5400 0
-xset dpms 0 0 5400
-xautolock -time 10 -locker slock &
+# set delay before autorepeat starts and repeat rate
+xset r rate 200 35
 
-# TODO disable on macbook
-# setxkbmap -option altwin:swap_lalt_lwin -option caps:escape
-setxkbmap -option caps:escape
+setxkbmap de -option caps:escape
 
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+xautolock -time 20 -locker slock &
 
-sleep 0.3
-firefox &
-sleep 0.3
-alacritty -T ax-btop -e btop &
 sleep 0.5
-xfce4-power-manager &
-feh --bg-scale --randomize ~/sync/wallpapers/wallpapers-ax-fav &
+
+
+# info terminals, sleep makes the correct tiling order more likely
+alacritty -T ax-log -e tail -F /var/log/messages &
+sleep 0.5
+alacritty -T ax-top -e top &
+sleep 0.5
+alacritty -T ax-btop -e btop &
+
+
+# feh --bg-scale --randomize ~/sync/wallpapers/wallpapers-ax-fav &
 emacs --daemon &
+sleep 1
+firefox &
+sleep 0.5
+emacsclient --create-frame ~/org/todo.org
 sxhkd -t 3 &
-syncthing -no-browser &
-megasync &
+syncthing --no-browser &
 
