@@ -171,6 +171,8 @@ abbr -a ffa rfvuuu
 abbr -a rcp 'rclone copy --progress'
 abbr -a rct 'rclone tree --level 2'
 
+abbr -a ifc ifconfig
+
 fish_add_path ~/.cargo/bin/
 fish_add_path ~/.config/emacs/bin/
 fish_add_path ~/.local/bin

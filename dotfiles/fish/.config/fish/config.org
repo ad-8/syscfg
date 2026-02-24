@@ -16,6 +16,7 @@
   - [[#package-managers][package managers]]
   - [[#update-rsync][update: (r)sync]]
   - [[#special-use][special use]]
+  - [[#freebsd][FreeBSD]]
 - [[#add-to-path][add to $PATH]]
 - [[#alias][alias]]
 - [[#set-in-nix----export][set in nix? -- export]]
@@ -223,6 +224,10 @@ abbr -a ff rfv
 abbr -a ffa rfvuuu
 abbr -a rcp 'rclone copy --progress'
 abbr -a rct 'rclone tree --level 2'
+#+end_src
+** FreeBSD
+#+begin_src shell
+abbr -a ifc ifconfig
 #+end_src
 * add to $PATH
 #+begin_src shell
