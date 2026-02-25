@@ -2,4 +2,4 @@
 
 back=$(backlight | awk '{print $2}')
 
-printf "Bl: %s\n" "$back"
+printf " %s\n" "$back"

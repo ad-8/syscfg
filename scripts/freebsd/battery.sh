@@ -5,7 +5,7 @@ rate=$(sysctl -n hw.acpi.battery.rate 2>/dev/null)
 
 # Handle unknown time (-1 when charching?)
 if [ "$time" -lt 0 ] 2>/dev/null; then
-    time_str="unknown"
+    time_str="AC"
 else
     hours=$((time / 60))
     mins=$((time % 60))
@@ -13,4 +13,4 @@ else
 fi
 
 # Output in one line
-printf "Bat: %s%% %s %s mW\n" "$life" "$time_str" "$rate"
+printf "󰄌 %s%% %s %s mW\n" "$life" "$time_str" "$rate"
