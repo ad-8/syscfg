@@ -34,7 +34,8 @@ emacs --daemon &
 sleep 1
 firefox &
 sleep 0.5
-emacsclient --create-frame ~/org/todo.org
+emacs ~/org/todo.org &
+sleep 0.5
 sxhkd -t 3 &
 syncthing --no-browser &
 
