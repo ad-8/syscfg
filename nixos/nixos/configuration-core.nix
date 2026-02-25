@@ -60,7 +60,22 @@
 
   programs.fish.enable = true;
 
-  security.sudo.extraConfig = ''
-    Defaults timestamp_timeout=30
-  '';
+  security.sudo = {
+    extraConfig = ''
+      Defaults timestamp_timeout=30
+    '';
+    extraRules = [
+      {
+        users = [ "ax" ];
+        commands = [
+          {
+            # TODO apparently installing wg-quick as *system* pkg and using that path is more stable
+            command = "/etc/profiles/per-user/ax/bin/wg-quick";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+      }
+    ];
+  };
+
 }
