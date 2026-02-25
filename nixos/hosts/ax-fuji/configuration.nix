@@ -66,7 +66,7 @@
     cron = {
       enable = true;
       systemCronJobs = [
-        "10 3 * * *     ax     . /etc/profile; ruby $HOME/x/backup/ax-srv-backup-radicale.clj >> ~/cron-radicale.log 2>&1"
+        "10 3 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/backup/ax-srv-backup-radicale.clj >> ~/cron-radicale.log 2>&1"
         "12 3 * * *     ax     . /etc/profile; ruby $HOME/x/backup/ax-srv-backup-linkding.rb >> ~/cron-linkding.log 2>&1"
         "15 3 * * *     ax     . /etc/profile; ruby $HOME/x/backup/ax-srv-backup-immich.rb >> ~/cron-immich.log 2>&1"
         "25 3 * * *     ax     . /etc/profile; ruby $HOME/x/backup/ax-srv-rclone-b2.rb >> ~/cron-rclone-b2.log 2>&1"
