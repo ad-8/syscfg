@@ -129,7 +129,7 @@ switch $distro
         abbr -a up 'sudo dnf upgrade --refresh'
         abbr -a nf "clear && fastfetch"
     case freebsd
-        abbr -a nf "clear && fastfetch --logo bsd"
+        abbr -a nf "clear && fastfetch --config neofetch"
     case '*'
         abbr -a up 'Unknown distribution. KEKW'
         abbr -a nf "clear && fastfetch"
