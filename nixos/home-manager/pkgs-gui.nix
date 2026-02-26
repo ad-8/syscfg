@@ -29,6 +29,7 @@
       qalculate-gtk
       qbittorrent
       qutebrowser
+      signal-desktop
       strawberry
       thunderbird
       ungoogled-chromium
