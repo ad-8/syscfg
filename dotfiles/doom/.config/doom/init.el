@@ -190,9 +190,7 @@
        ;;everywhere        ; *leave* Emacs!? You must be joking
        ;;irc               ; how neckbeards socialize
 
-       ;; TODO +org allows setup of feeds in specific org file
-       ;;(rss +org)        ; emacs as an RSS reader
-       rss
+       (rss +org)        ; emacs as an RSS reader
 
        ;;twitter           ; twitter client https://twitter.com/vnought
 

@@ -17,7 +17,6 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#elfeed---atom-and-rss-reader][Elfeed - Atom and RSS Reader]]
   - [[#database-syncthing-seems-to-corrupt-it][Database (syncthing seems to corrupt it)]]
   - [[#default-search-filter][Default Search Filter]]
-  - [[#feeds][Feeds]]
 - [[#emms---emacs-multimedia-system][Emms - Emacs Multimedia System]]
   - [[#basic-setup][basic setup]]
   - [[#format-of-title-in-the-emms-playlist-buffer][format of ~title~ in the /EMMS Playlist/ buffer]]
@@ -189,55 +188,6 @@ By default elfeed-search-filter is set to @2-weeks-ago and makes the last 2 week
 #+begin_src emacs-lisp
 (after! elfeed
   (setq elfeed-search-filter "@3-days-ago +unread"))
-#+end_src
-** Feeds
-#+begin_src emacs-lisp
-(setq elfeed-feeds '(
-  ("https://planet.emacslife.com/atom.xml" emacs)
-  ("http://nullprogram.com/feed/" blog emacs)
-  ("http://nedroid.com/feed/" webcomic)
-  "https://feeds.arstechnica.com/arstechnica/index"
-  "https://feeds.arstechnica.com/arstechnica/features"
-  "https://www.heise.de/rss/heise-top-atom.xml"
-  "https://daringfireball.net/feeds/main"
-
-  ("https://lwn.net/headlines/rss" tech linux)
-  ("https://lwn.net/headlines/Features" tech linux)
-  ("https://rss.slashdot.org/Slashdot/slashdotMain" tech)
-  ("https://www.whompcomic.com/comic/rss" webcomic)
-
-  ;; hackernews
-  ("https://hnrss.org/frontpage" hackernews)
-
-  ;; youtube
-  ;; ("https://www.youtube.com/feeds/videos.xml?channel_id=" youtube) ; 
-  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCylGUf9BvQooEFjgdNudoQg" youtube) ; The Linux Cast
-  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" youtube) ; DistroTube
-  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCg6gPGh8HU2U01vaFCAsvmQ" youtube) ; Chris Titus Tech
-  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCtYg149E_wUGVmjGz-TgyNA" youtube) ; Titus Tech Talk
-  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCXuqSBlHAE6Xw-yeJA0Tunw" youtube) ; LTT
-  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCR-DXc1voovS8nhAvccRZhg" youtube) ; Jeff Geerling
-  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCbiGcwDWZjz05njNPrJU7jA" youtube) ; EC 
-  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC65_CVnMw6hvPET_DRDg3GA" youtube) ; tony-btw
-  ("https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA" youtube) ; Brodie Robertson
-  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC_zBdZ0_H_jn41FDRG7q4Tw" youtube) ; vimjoyer 
-
-  ;; reddit
-  ("https://old.reddit.com/r/linux/top/.rss?t=week" reddit r/linux)
-  ("https://old.reddit.com/r/technology/top/.rss?t=week" reddit r/technology)
-  ("https://old.reddit.com/r/homelab/top/.rss?t=week" reddit r/homelab)
-  ("https://old.reddit.com/r/selfhosted/top/.rss?t=week" reddit r/selfhosted)
-  ;; ("https://old.reddit.com/r/archlinux/top/.rss?t=week" reddit r/archlinux)
-  ;; ("https://old.reddit.com/r/debian/top/.rss?t=week" reddit r/debian)
-  ("https://old.reddit.com/r/nixos/top/.rss?t=week" reddit r/nixos) 
-  ("https://old.reddit.com/r/bundesliga/top/.rss?t=week" reddit r/bundesliga)
-  ("https://old.reddit.com/r/formula1/top/.rss?t=week" reddit r/formula1)
-
-  ;; blogs
-  ("https://mtwb.blog//index.xml" personal)
-  ("https://joshblais.com/index.xml" personal)
-  ))
-
 #+end_src
 
 * Emms - Emacs Multimedia System
