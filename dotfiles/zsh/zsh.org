@@ -23,6 +23,7 @@ Lets try to keep this "minimal".
 - [[#stuff-to-load-at-the-end-eg-plugins][stuff to load at the end, e.g. plugins]]
   - [[#hold-autosuggestions][HOLD autosuggestions]]
   - [[#syntax-highlighting][syntax highlighting]]
+  - [[#nnn][nnn]]
 
 * useful info, links, etc 
 list available options: =set -o=
@@ -69,9 +70,11 @@ export LANG=en_US.UTF-8
 
 #+end_src
 * alias
+=preview-tabbed= does not display text files when =VISUAL=emacsclient -nw=,
+so we use =nvim= for now
 #+begin_src sh
 alias e='emacs -nw'
-alias n="VISUAL='emacsclient -nw' nnn"
+alias n="VISUAL='nvim' nnn -a -e"
 alias nf='clear && fastfetch --config neofetch && echo'
 alias l='eza -l --group-directories-first --icons'
 alias lll='eza -al --group-directories-first --icons'
@@ -116,5 +119,11 @@ OpenBSD pkg: =zsh-syntax-highlighting=
 
 #+begin_src sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#+end_src
+** nnn
+#+begin_src sh
+export NNN_PLUG='p:preview-tabbed;F:fzcd;f:fzopen;'
+
+export NNN_BMS=".:$HOME/.config;d:$HOME/Downloads/;h:$HOME;o:$HOME/org;s:$HOME/sync"
 #+end_src
 
