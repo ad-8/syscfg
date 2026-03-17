@@ -4,7 +4,7 @@ end
 
 abbr -a cd. 'cd ~/.config'
 abbr -a cdc 'cd ~/my/code'
-abbr -a cdd 'cd ~/syscfg'
+abbr -a cdd 'cd ~/syscfg/dotfiles'
 abbr -a cdj "cd ~/my/code/clojure"
 abbr -a cdr 'cd ~/my/code/rust'
 abbr -a cds 'cd ~/sync'
