@@ -8,8 +8,8 @@
     ../../nixos/laptop/default.nix
   ];
 
-  boot.initrd.luks.devices."luks-f43e8971-1fb7-4d8c-be86-c8162a78d104".device =
-    "/dev/disk/by-uuid/f43e8971-1fb7-4d8c-be86-c8162a78d104";
+  boot.initrd.luks.devices."luks-8e763d50-8c69-4cf3-9f68-57652e1fede8".device = 
+    "/dev/disk/by-uuid/8e763d50-8c69-4cf3-9f68-57652e1fede8";
 
   networking.hostName = "ax-t14";
 
