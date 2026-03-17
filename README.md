@@ -30,14 +30,14 @@ Also add `git` and `vim` to `environment.systemPackages` for the next steps.
 
 3. `git clone https://github.com/ad-8/syscfg`
 
-4. `cp /etc/nixos/hardware-configuration.nix ~/syscfg/nixos/hosts/<host>/` 
+4. `cp /etc/nixos/hardware-configuration.nix ~/syscfg/nixos-config/hosts/<host>/`
 
 5. if *not* using LUKS, skip this step  
-   add this line from `/etc/nixos/configuration.nix` to `~/syscfg/nixos/hosts/<host>/configuration.nix`  
+   add this line from `/etc/nixos/configuration.nix` to `~/syscfg/nixos-config/hosts/<host>/configuration.nix`  
    (or replace existing equivalent)
 ```nix
    boot.initrd.luks.devices... = "/dev/disk/by-uuid/..."
 ```
 
-6. `sudo nixos-rebuild boot --flake ~/syscfg/nixos#<host>`, finally reboot and enjoy
+6. `sudo nixos-rebuild boot --flake ~/syscfg/nixos-config#<host>`, finally reboot and enjoy
 
