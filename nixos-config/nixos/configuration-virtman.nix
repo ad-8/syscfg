@@ -1,6 +1,6 @@
 {
   config,
-  lib,
+  lib, pkgs,
   ...
 }:
 
@@ -18,6 +18,10 @@
 
     users.users.ax.extraGroups = [
       "libvirtd"
+    ];
+
+    environment.systemPackages = with pkgs; [
+      virtiofsd # e.g. needed to share NFS mount with VM
     ];
   };
 }
