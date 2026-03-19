@@ -126,11 +126,9 @@ switch $distro
     case void
         abbr -a up 'sudo xbps-install -Su'
         abbr -a nf "clear && fastfetch"
-    case fedora
-        abbr -a up 'sudo dnf upgrade --refresh'
-        abbr -a nf "clear && fastfetch"
-    case freebsd
-        abbr -a nf "clear && fastfetch --config neofetch"
+    case alpine
+         abbr -a up 'doas apk update && doas apk upgrade'
+         abbr -a nf "clear && fastfetch"
     case '*'
         abbr -a up 'Unknown distribution. KEKW'
         abbr -a nf "clear && fastfetch"
