@@ -4,10 +4,10 @@
 
 {
   imports = [
-    ./configuration-clamav.nix
-    ./configuration-distrobox.nix
-    ./configuration-extra.nix
-    ./configuration-printing.nix
-    ./configuration-virtman.nix
+    ./config-clamav.nix
+    ./config-distrobox.nix
+    ./config-extra.nix
+    ./config-printing.nix
+    ./config-virtman.nix
   ];
 }

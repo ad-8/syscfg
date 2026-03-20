@@ -6,7 +6,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../nixos/configuration-core.nix
+    ../../nixos/config-core.nix
     ./homepage-dashboard.nix
   ];
 
