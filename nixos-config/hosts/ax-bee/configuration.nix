@@ -7,7 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../nixos/config-core.nix
-    ../../nixos/ax-configs.nix
+    ../../nixos/all-configs.nix
   ];
 
   configExtra.enable = true;

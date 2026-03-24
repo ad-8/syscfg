@@ -3,7 +3,7 @@
 {
   imports = [
     ../config-core.nix
-    ../ax-configs.nix
+    ../all-configs.nix
   ];
 
   configExtra.enable = false;
