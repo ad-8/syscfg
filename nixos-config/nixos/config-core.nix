@@ -75,4 +75,12 @@
     ];
   };
 
+  systemd.settings.Manager = {
+    DefaultTimeoutStopSec = "10s";
+    DefaultDeviceTimeoutSec = "10s";
+  };
+  systemd.user.extraConfig = ''
+    DefaultTimeoutStartSec=10s
+    DefaultTimeoutStopSec=10s
+  '';
 }
