@@ -10,28 +10,19 @@
     ./homepage-dashboard.nix
   ];
 
-  boot.initrd.luks.devices."luks-2fc19056-a600-4e50-8de6-47b442b623c9".device =
-    "/dev/disk/by-uuid/2fc19056-a600-4e50-8de6-47b442b623c9";
+  boot.initrd.luks.devices."luks-2fc19056-a600-4e50-8de6-47b442b623c9".device = "/dev/disk/by-uuid/2fc19056-a600-4e50-8de6-47b442b623c9";
+
   networking.hostName = "ax-fuji";
 
   environment.systemPackages = with pkgs; [
-    vlock
-
-    # cli tools
-    gh
-
-    # backup
-    restic
-    rclone
-
-    # code
-    ruby_3_4
-
-    # selfhosting
-    podman-compose
     jellyfin
-    jellyfin-web
     jellyfin-ffmpeg
+    jellyfin-web
+    podman-compose
+    rclone
+    restic
+    ruby_3_4
+    vlock
   ];
 
   users.users.ax = {
@@ -39,13 +30,15 @@
     extraGroups = [ "podman" ];
   };
 
-  networking.firewall.enable = true; # enabled by default, still enable explicitly
-  networking.firewall.allowedTCPPorts = [
-    2283
-    5232
-    9090
-  ]; # immich, radicale, linkding
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      2283 # immich
+      5232 # radicale
+      9090 # linkding
+    ];
+    allowedUDPPorts = [ ];
+  };
 
   services = {
     cron = {
@@ -98,5 +91,5 @@
     };
   };
 
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 }
