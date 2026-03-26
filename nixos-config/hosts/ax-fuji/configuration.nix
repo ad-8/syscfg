@@ -56,6 +56,16 @@
     };
     forgejo = {
       enable = true;
+      settings = {
+        server = {
+          # after setting this, the repo URLs in the GUI contain this $DOMAIN instead of localhost
+          DOMAIN = "192.168.178.8";
+          # fixes warning: "This Forgejo instance is configured to be served on "http://localhost:3000/".
+          # You are currently viewing Forgejo through a different URL, which may cause parts of the application to break.
+          # The canonical URL is controlled by Forgejo admins via the ROOT_URL setting in the app.ini."
+          ROOT_URL = "http://192.168.178.8:3000"; 
+        };
+      };
     };
     jellyfin = {
       enable = true;
