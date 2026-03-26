@@ -34,6 +34,7 @@
     enable = true;
     allowedTCPPorts = [
       2283 # immich
+      3000 # forgejo
       5232 # radicale
       9090 # linkding
     ];
@@ -52,6 +53,9 @@
         # download daily wallpaper
         "0 9,10,11 * * *     ax     . /etc/profile; nix develop ~/x --command ruby ~/x/bing_wallpaper_dl.rb >> ~/bing.log 2>&1"
       ];
+    };
+    forgejo = {
+      enable = true;
     };
     jellyfin = {
       enable = true;
