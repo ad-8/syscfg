@@ -77,6 +77,9 @@
 
   programs.fish.enable = true;
 
+  # ensure the client has the necessary NFS utilities installed
+  boot.supportedFilesystems = [ "nfs" ];
+
   security.sudo = {
     extraConfig = ''
       Defaults timestamp_timeout=30

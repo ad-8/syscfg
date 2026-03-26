@@ -12,8 +12,6 @@
 
   boot.initrd.luks.devices."luks-2fc19056-a600-4e50-8de6-47b442b623c9".device =
     "/dev/disk/by-uuid/2fc19056-a600-4e50-8de6-47b442b623c9";
-  # TODO evaluate nfs use
-  boot.supportedFilesystems = [ "nfs" ]; # installs NFS utilities for the client
   networking.hostName = "ax-fuji";
 
   environment.systemPackages = with pkgs; [
