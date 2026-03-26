@@ -18,20 +18,13 @@
       emacs
       eza
       fastfetch
-      fd
-      file
       foot
       fzf
       htop
-      nh
-      (nnn.override { withNerdIcons = true; })
-      psmisc # provides killall
-      ripgrep
       starship
       stow
       tealdeer
       tokei
-      tree
       zoxide
     ];
   };

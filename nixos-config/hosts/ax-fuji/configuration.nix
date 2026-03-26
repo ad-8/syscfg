@@ -24,12 +24,9 @@
     delta
     eza
     fastfetch
-    fd
     fzf
     gh
     htop
-    nnn
-    ripgrep
     starship
     stow
     tokei

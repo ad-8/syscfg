@@ -35,10 +35,18 @@
   };
 
   environment.systemPackages = with pkgs; [
-    neovim
-    wget
+    fd
+    file
+    git
     ncdu
+    nh
+    (nnn.override { withNerdIcons = true; })
+    psmisc # provides killall
+    ripgrep
     tmux
+    tree
+    vim
+    wget
   ];
 
   users.users.ax = {
@@ -51,7 +59,7 @@
       "wheel"
     ];
     packages = with pkgs; [
-      git
+      neovim
     ];
   };
 
