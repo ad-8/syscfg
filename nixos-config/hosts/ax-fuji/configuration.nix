@@ -17,27 +17,16 @@
   networking.hostName = "ax-fuji";
 
   environment.systemPackages = with pkgs; [
-    emacs
     vlock
 
     # cli tools
-    delta
-    eza
-    fastfetch
-    fzf
     gh
-    htop
-    starship
-    stow
-    tokei
-    zoxide
 
     # backup
     restic
     rclone
 
     # code
-    babashka
     ruby_3_4
 
     # selfhosting

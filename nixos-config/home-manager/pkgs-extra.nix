@@ -40,11 +40,6 @@
       hunspellDicts.de_DE
       hunspellDicts.en_US
 
-      # screenshot setup
-      grim
-      slurp
-      swappy
-
       # required for the emacs everywhere for wayland script by Thanos Apollo
       wtype
     ];

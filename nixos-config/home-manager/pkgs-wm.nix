@@ -16,12 +16,15 @@
       bluetui
       ddcutil
       dunst
+      grim
       hypridle
       hyprsunset
       libnotify
       networkmanagerapplet
       playerctl
       rofi
+      slurp
+      swappy
       swaybg
       swaylock
       waybar

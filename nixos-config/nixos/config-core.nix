@@ -35,18 +35,30 @@
   };
 
   environment.systemPackages = with pkgs; [
+    babashka
+    bat
+    delta
+    emacs
+    eza
+    fastfetch
     fd
     file
+    fzf
     git
+    htop
     ncdu
     nh
     (nnn.override { withNerdIcons = true; })
     psmisc # provides killall
     ripgrep
+    starship
+    stow
     tmux
+    tokei
     tree
     vim
     wget
+    zoxide
   ];
 
   users.users.ax = {
