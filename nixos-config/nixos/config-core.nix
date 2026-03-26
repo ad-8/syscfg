@@ -75,6 +75,7 @@
     ];
   };
 
+  # verify with `systemctl [--user] show | grep 10s`
   systemd.settings.Manager = {
     DefaultTimeoutStopSec = "10s";
     DefaultDeviceTimeoutSec = "10s";
