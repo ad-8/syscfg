@@ -80,11 +80,11 @@
             "key": "  ├",
             "keyColor": "green"
         },
-//        {
-//            "type": "packages",
-//            "key": "  ├󰏖",
-//            "keyColor": "green"
-//        },
+        {
+            "type": "packages",
+            "key": "  ├󰏖",
+            "keyColor": "green"
+        },
         {
             "type": "shell",
             "key": "  ├",
