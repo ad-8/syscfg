@@ -19,7 +19,7 @@ export LANG=en_US.UTF-8
 
 alias e='emacs -nw'
 alias n="VISUAL='nvim' nnn -a -e"
-alias nf='clear && fastfetch --config neofetch && echo'
+alias nf='clear && fastfetch --config neofetch --logo openbsd_small'
 alias l='eza -l --group-directories-first --icons'
 alias lll='eza -al --group-directories-first --icons'
 alias v=nvim
