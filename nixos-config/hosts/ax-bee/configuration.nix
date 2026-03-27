@@ -45,7 +45,6 @@
   };
 
   # -----------------------------------------------------------------------------------------------
-  # TODO this could be one line in the systemCronJobs vector below ...
   systemd.timers."ax-restic" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
