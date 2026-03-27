@@ -112,5 +112,31 @@
     };
   };
 
+  # TODO testing a systemd timer - verbose but the integrated logging is nice
+  systemd.services.forgejo-backup = {
+    description = "Forgejo Backup Service";
+    # adding path fixed errors, all those programs are missing otherwise
+    path = with pkgs; [
+      babashka
+      gnutar
+      gzip
+      util-linux # required for mountpoint
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      ExecStart = "${pkgs.babashka}/bin/bb /home/ax/x/backup/ax_srv_forgejo.clj";
+    };
+  };
+
+  systemd.timers.forgejo-backup = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      # OnCalendar = "*:0/1"; # Runs every minute at the start of the minute
+      OnCalendar = "*-*-* 03:17:00";
+      Unit = "forgejo-backup.service";
+    };
+  };
+
   system.stateVersion = "25.05";
 }
