@@ -31,6 +31,7 @@
       strawberry
       thunderbird
       vlc
+      waypaper
       xfce.mousepad
       xfce.ristretto
     ];
