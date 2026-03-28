@@ -17,7 +17,7 @@
     "modules-left": [
         "custom/snowflake",
         "hyprland/workspaces",
-//        "hyprland/windowcount",
+       "hyprland/windowcount",
 //       "hyprland/mode",
         "hyprland/window",
     ],
