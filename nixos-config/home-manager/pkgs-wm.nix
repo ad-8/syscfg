@@ -18,7 +18,6 @@
       dunst
       grim
       hypridle
-      hyprpaper
       hyprsunset
       libnotify
       networkmanagerapplet
