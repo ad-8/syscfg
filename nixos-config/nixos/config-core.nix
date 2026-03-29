@@ -38,6 +38,7 @@
     babashka
     bat
     delta
+    duf
     emacs
     eza
     fastfetch
