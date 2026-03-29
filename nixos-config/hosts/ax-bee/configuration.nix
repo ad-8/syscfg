@@ -66,7 +66,7 @@
       Type = "oneshot";
       User = "ax";
       ExecStart = "${pkgs.babashka}/bin/bb /home/ax/x/backup/ax_bee_restic_mega.clj";
-      RemainAfterExit = false; # see nixos wiki
+      # RemainAfterExit = false; # TODO does NOT prevent the timer from running on `nixos-rebuild switch`
     };
   };
   # -----------------------------------------------------------------------------------------------
