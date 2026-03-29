@@ -134,6 +134,7 @@
       Type = "oneshot";
       User = "root";
       ExecStart = "${pkgs.babashka}/bin/bb /home/ax/x/backup/ax_srv_forgejo.clj";
+      RemainAfterExit = false; # TODO see if this does NOT trigger a backup when running `nixos-rebuild`
     };
   };
   # -----------------------------------------------------------------------------------------------
