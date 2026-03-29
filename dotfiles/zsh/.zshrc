@@ -17,6 +17,7 @@ setopt autocd
 export LANG=en_US.UTF-8
 # export LC_ALL=en_US.UTF-8
 
+alias df='df -h'
 alias e='emacs -nw'
 alias n="VISUAL='nvim' nnn -a -e"
 alias nf='clear && fastfetch --config neofetch --logo openbsd_small'
