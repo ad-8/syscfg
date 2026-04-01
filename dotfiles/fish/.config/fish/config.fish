@@ -128,6 +128,8 @@ switch $distro
     case alpine
          abbr -a up 'doas apk update && doas apk upgrade'
          abbr -a nf "clear && fastfetch"
+         abbr -a br brightnessctl
+         alias sct xsct
     case '*'
         abbr -a up 'Unknown distribution. KEKW'
         abbr -a nf "clear && fastfetch"
@@ -161,8 +163,6 @@ abbr -a flac2mp3 'fd -e flac --exec ffmpeg -loglevel error -i {} -codec:a libmp3
 
 abbr -a ytdlp-split-audio "yt-dlp --format ba[ext=m4a] --split-chapters URL"
 
-abbr -a bk bin/kamal
-abbr -a br bin/rails
 abbr -a dcc 'steam-run $HOME/syscfg/scripts/bb/dict.cc.clj'
 abbr -a ff rfv
 abbr -a ffa rfvuuu
