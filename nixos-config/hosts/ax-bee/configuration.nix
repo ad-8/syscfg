@@ -124,6 +124,12 @@
   networking.firewall.allowedTCPPorts = [ 53317 ];
   networking.firewall.allowedUDPPorts = [ 53317 ];
 
+  # TODO ZFS TEST
+  # setup from https://openzfs.github.io/openzfs-docs/Getting%20Started/NixOS/index.html
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
+  networking.hostId = "315ecd42"; # generated via `head -c4 /dev/urandom | od -A none -t x4`
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
