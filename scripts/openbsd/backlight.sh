@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
-back=$(xbacklight -get)
+bl=$(xbacklight -get)
 
-printf " %.0f\n" "$back"
+printf " %.0f\n" "$bl"
+
