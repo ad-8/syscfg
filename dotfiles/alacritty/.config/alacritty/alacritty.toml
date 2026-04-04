@@ -1,0 +1,51 @@
+# General Info and Config Howto:
+# https://wiki.archlinux.org/title/Alacritty
+
+# ---
+
+# https://github.com/alacritty/alacritty-theme 
+general.import = [
+    "~/.config/alacritty/themes/themes/gotham.toml"
+]
+
+# ---
+
+[font]
+size = 10
+
+[font.bold]
+family = "HackNerdFont"
+style = "Bold"
+
+[font.bold_italic]
+family = "HackNerdFont"
+style = "Bold Italic"
+
+[font.italic]
+family = "HackNerdFont"
+style = "Italic"
+
+[font.normal]
+family = "HackNerdFont"
+style = "Regular"
+
+# ---
+
+[window]
+opacity = 0.97
+
+[window.padding]
+x = 10
+y = 10
+
+[window.dimensions]
+columns = 125
+lines = 40
+
+[cursor.style]
+shape = "Underline" # "Block" | "Underline" | "Beam"
+blinking = "Always" # "Never" | "Off" | "On" | "Always"
+
+[cursor]
+thickness = 0.2
+
