@@ -1,0 +1,7 @@
+[[language]]
+name = "nix"
+# language-servers = ["nixd","nil"]
+language-servers = ["nixd"]
+
+[language-server.nixd]
+command = "nixd"
