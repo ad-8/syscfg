@@ -120,10 +120,6 @@
     };
   };
 
-  # LocalSend
-  networking.firewall.allowedTCPPorts = [ 53317 ];
-  networking.firewall.allowedUDPPorts = [ 53317 ];
-
   # TODO ZFS TEST
   # setup from https://openzfs.github.io/openzfs-docs/Getting%20Started/NixOS/index.html
   boot.supportedFilesystems = [ "zfs" ];

@@ -19,7 +19,6 @@
       kdePackages.okular
       keepassxc
       libreoffice-still
-      localsend
       mpv
       pavucontrol
       picard
