@@ -1,1 +1,4 @@
 theme = "nord"
+
+[editor]
+line-number = "relative"
