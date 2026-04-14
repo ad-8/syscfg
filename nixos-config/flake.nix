@@ -8,7 +8,7 @@
 	  home-manager-unstable = { url = "github:nix-community/home-manager/master"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, ... }:
+  outputs = { self, nixpkgs-stable, home-manager-stable, ... } @inputs:
   let
     system = "x86_64-linux";
     mkConfig = { hostname, username ? "ax", nixpkgs ? nixpkgs-stable , home-manager ? home-manager-stable}:
@@ -33,12 +33,11 @@
     };
   in {
     nixosConfigurations = {
+      ax-bee = mkConfig { hostname = "ax-bee"; };
+      ax-fuji = mkConfig { hostname = "ax-fuji"; home-manager = null; };
       ax-mac = mkConfig { hostname = "ax-mac"; };
       ax-t14 = mkConfig { hostname = "ax-t14"; };
-      ax-x1c = mkConfig { hostname = "ax-x1c"; };
-      ax-bee = mkConfig { hostname = "ax-bee"; };
       ax-vm = mkConfig { hostname = "ax-vm"; };
-      ax-fuji = mkConfig { hostname = "ax-fuji"; home-manager = null; };
     };
   };
 }
