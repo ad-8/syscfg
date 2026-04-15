@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-backlight 40 &
+xbacklight -set 40 &
 
 dwmblocks &
 dunst &
@@ -20,16 +20,10 @@ xautolock -time 20 -locker slock &
 
 sleep 0.5
 
-
-# info terminals, sleep makes the correct tiling order more likely
-alacritty -T ax-log -e tail -F /var/log/messages &
-sleep 0.5
-alacritty -T ax-top -e top &
-sleep 0.5
-alacritty -T ax-btop -e btop &
+st -T ax-top -e ~/x/openbsd/tmux-monitor.sh &
 
 
-# feh --bg-scale --randomize ~/sync/wallpapers/wallpapers-ax-fav &
+feh --bg-max ~/sync/openbsd-art/openbsd-7.8-Terraodontidae.png
 emacs --daemon &
 sleep 1
 firefox &
