@@ -106,7 +106,7 @@ super + mod1 + l
 
 # restart sxhkd
 super + Escape
-      pkill --exact sxhkd && notify-send "sxhkd" "restarting sxhkd" && sleep 1 && sxhkd &
+      pkill -x sxhkd && notify-send "sxhkd" "restarting sxhkd" && sleep 1 && sxhkd -t 3 &
 
 # powermenu
 alt + space; p
