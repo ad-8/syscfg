@@ -16,10 +16,10 @@
 
     "modules-left": [
         "custom/snowflake",
-        "hyprland/workspaces",
-       "hyprland/windowcount",
-//       "hyprland/mode",
-        "hyprland/window",
+        "niri/workspaces",
+       "niri/windowcount",
+//       "niri/mode",
+        "niri/window",
     ],
     "modules-center": [
         "custom/date",
