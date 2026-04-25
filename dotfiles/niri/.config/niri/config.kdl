@@ -164,7 +164,8 @@ spawn-at-startup "blueman-applet"
 spawn-at-startup "emacs" "--daemon"
 spawn-at-startup "emacs" 
 spawn-at-startup "firefox" 
-spawn-sh-at-startup "alacritty -e btop"
+spawn-sh-at-startup "foot -e btop" 
+spawn-sh-at-startup "foot --server"
 
 spawn-at-startup "~/syscfg/scripts/niri-set-wallpaper.sh"
 spawn-sh-at-startup "swayidle -w timeout 1180 'notify-send locking-screen in-10-seconds' timeout 1200 'swaylock -f -c 000000 -F' timeout 1250 'niri msg action power-off-monitors' before-sleep 'swaylock -f -c 000000 -F'"
@@ -172,7 +173,7 @@ spawn-sh-at-startup "swayidle -w timeout 1180 'notify-send locking-screen in-10-
 binds {
     Mod+Shift+X { show-hotkey-overlay; }
 
-    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "footclient"; }
     Super+Shift+O hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --show-failed-attempts --color 0c1014"; }
 
@@ -385,12 +386,12 @@ binds {
     Mod+Alt+Right { spawn-sh "~/syscfg/scripts/bb/play_pause.clj" ; }
 
     // TODO - need keychords ...
-    Mod+Ctrl+B { spawn-sh "alacritty -T ax-bluetui -e bluetui";}
+    Mod+Ctrl+B { spawn-sh "foot -T ax-bluetui -e bluetui";}
     // linkding (bookmarks)
     Mod+Alt+B { spawn-sh "bb ~/x/ax_bookmarks.clj std"; }
     Mod+Alt+N { spawn-sh "bb ~/x/ax_bookmarks.clj archived"; }
     Mod+Alt+F { spawn-sh "rofi -show recursivebrowser"; }
-    Mod+Y     { spawn-sh "alacritty -T ax-command-runner -e fish -C '/usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'"; }
+    Mod+Y     { spawn-sh "foot -T ax-command-runner -e fish -C '/usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'"; }
 
     // Screenshots
     // put into swappy for annotations
@@ -425,13 +426,13 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"Alacritty$"# title="^ax-bluetui$" // this is most specific
-    match app-id=r#"Alacritty$"# title="^ax-wiremix$"
-    match app-id=r#"Alacritty$"# title="^ax-command-runner$"
+    match app-id=r#"foot$"# title="^ax-bluetui$" // this is most specific
+    match app-id=r#"foot$"# title="^ax-wiremix$"
+    match app-id=r#"foot$"# title="^ax-command-runner$"
     match app-id=r#"org.pulseaudio.pavucontrol$"# title="^Volume Control$"
     match app-id=r#"qalculate-gtk$"# title="^Qalculate!$"
 //    match title="ax-bluetui" // this alone works
-//    match app-id="Alacritty" // TODO this matches other Alacritty windows as well!
+//    match app-id="foot" // TODO this matches other foot windows as well!
     open-floating true
     min-width 1024
     max-width 1024
