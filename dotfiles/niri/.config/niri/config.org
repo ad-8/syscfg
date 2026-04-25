@@ -413,7 +413,7 @@ binds {
     Mod+E { spawn-sh "emacsclient -c"; }
     Mod+Shift+E { spawn-sh "emacs"; }
     Mod+O { spawn-sh "bb ~/syscfg/scripts/launcher.clj main"; } // TODO hopefully replace w// niri keychords someday
-    Mod+P { spawn-sh "wmenu-run -i -l 25"; }
+    Mod+P { spawn-sh "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\" -s \"d3ebe9\""; }
     Mod+S { spawn-sh "kitten quick-access-terminal"; }
     Mod+Shift+W { spawn-sh "bb ~/syscfg/scripts/niri.clj select-window-from-all";}
     Mod+X { spawn-sh "emacsclient --eval '(thanos/type)'"; }
