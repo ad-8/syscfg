@@ -1,0 +1,551 @@
+#+title: Config
+#+PROPERTY: header-args:shell :tangle config.kdl
+
+* ToC :toc:
+- [[#about-this-config][About this config]]
+- [[#input][Input]]
+- [[#output][Output]]
+- [[#layout][Layout]]
+- [[#autostart][Autostart]]
+- [[#keybindings][Keybindings]]
+- [[#window-rules][Window Rules]]
+  - [[#open-specific-windows-maximized-full-width][open specific windows maximized (full width)]]
+  - [[#misc][misc]]
+- [[#screenshot-settings][Screenshot settings]]
+- [[#misc-1][Misc]]
+
+* About this config
+This config is in the KDL format: https://kdl.dev
+=/-= comments out the following node.
+Check the wiki for a full description of the configuration:
+https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
+
+* Input
+#+begin_src shell
+input {
+    keyboard {
+
+        repeat-rate 35
+        repeat-delay 200
+
+        xkb {
+            // You can set rules, model, layout, variant and options.
+            // For more information, see xkeyboard-config(7).
+            // For example:
+            // layout "us,ru"
+            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+	        layout "de"
+        }
+
+        numlock
+    }
+
+    // Next sections include libinput settings.
+    // Omitting settings disables them, or leaves them at their default values.
+    touchpad {
+        // off
+        tap
+        // dwt
+        // dwtp
+        // drag false
+        // drag-lock
+        natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "two-finger"
+        // disabled-on-external-mouse
+    }
+
+    mouse {
+        // off
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "no-scroll"
+    }
+
+    trackpoint {
+        // off
+        // natural-scroll
+        accel-speed 1.0
+        // accel-profile "flat"
+        // scroll-method "on-button-down"
+        // scroll-button 273
+        // middle-emulation
+    }
+
+    warp-mouse-to-focus // puts mouse in center of newly focused window
+
+    focus-follows-mouse max-scroll-amount="0%" // 0%" makes it work only on windows already fully on screen
+
+    workspace-auto-back-and-forth
+}
+#+end_src
+
+* Output 
+You can configure outputs by their name, which you can find by running =niri msg outputs= while inside a niri instance.
+#+begin_src shell
+// ThinkPad
+output "eDP-1" {
+    // Uncomment this line to disable this output.
+    // off
+
+    // Resolution and, optionally, refresh rate of the output.
+    // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
+    // If the refresh rate is omitted, niri will pick the highest refresh rate
+    // for the resolution.
+    // If the mode is omitted altogether or is invalid, niri will pick one automatically.
+    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
+    //mode "1920x1080@120.030"
+    //mode "2560x1600@60.972"
+    mode "1920x1080@60"
+
+    // You can use integer or fractional scale, for example use 1.5 for 150% scale.
+    scale 1.0
+
+    // Transform allows to rotate the output counter-clockwise, valid values are:
+    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+    transform "normal"
+
+    // Position of the output in the global coordinate space.
+    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
+    // The cursor can only move between directly adjacent outputs.
+    // Output scale and rotation has to be taken into account for positioning:
+    // outputs are sized in logical, or scaled, pixels.
+    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
+    // so to put another output directly adjacent to it on the right, set its x to 1920.
+    // If the position is unset or results in an overlap, the output is instead placed
+    // automatically.
+    position x=0 y=0
+
+    // visible between workspaces or in the overview
+    backdrop-color "#0c1014" 
+}
+// LG 
+output "DP-1" {
+       mode "3840x2160"
+       scale 1.25
+       position x=0 y=0
+       backdrop-color "#0c1014"
+}
+// Acer
+output "HDMI-A-1" {
+       mode "1920x1080"
+       scale 1
+       position x=3072 y=648
+       backdrop-color "#0c1014"
+}
+#+end_src
+
+* Layout
+#+begin_src shell
+layout {
+    gaps 8
+
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    // preset-window-heights { }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        off
+    }
+
+    border {
+        on
+        width 2
+        active-color "#d26937"
+        inactive-color "#4e5166" 
+        urgent-color "#c23127" // for windows that request your attention.
+    }
+
+    shadow {
+        off
+    }
+
+    // Struts shrink the area occupied by windows [...] You can think of them as a kind of outer gaps. 
+    struts {
+        // left 64
+        // right 64
+        // top 64
+        // bottom 64
+    }
+
+    background-color "#0c1014" 
+
+    tab-indicator {
+        on
+        position "top"
+        width 8
+        active-color "#2aa889"
+        place-within-column // avoid overlaying adjacent columns
+    }
+}
+#+end_src
+
+* Autostart 
+Note that running niri as a session supports =xdg-desktop-autostart=, which may be more convenient to use.
+#+begin_src shell
+spawn-at-startup "waybar"
+spawn-at-startup "nm-applet"
+spawn-at-startup "blueman-applet"
+spawn-at-startup "emacs" "--daemon"
+spawn-at-startup "emacs" 
+spawn-at-startup "firefox" 
+spawn-sh-at-startup "alacritty -e btop" 
+#+end_src
+
+Somehow, could not get =swaybg= to work with =spawn-at-startup= directly ...
+#+begin_src shell
+spawn-at-startup "~/syscfg/scripts/niri-set-wallpaper.sh"
+spawn-sh-at-startup "swayidle -w timeout 1180 'notify-send locking-screen in-10-seconds' timeout 1200 'swaylock -f -c 000000 -F' timeout 1250 'niri msg action power-off-monitors' before-sleep 'swaylock -f -c 000000 -F'"
+#+end_src
+
+* Keybindings
+Keys consist of modifiers separated by + signs, followed by an XKB key name
+in the end. To find an XKB name for a particular key, you may use a program
+like wev.
+"Mod" is a special modifier equal to Super when running on a TTY, and to Alt
+when running as a winit window.
+Most actions that you can bind here can also be invoked programmatically with
+`niri msg action do-something`.
+
+#+begin_src shell
+binds {
+    Mod+Shift+X { show-hotkey-overlay; }
+
+    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Super+Shift+O hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --show-failed-attempts --color 0c1014"; }
+
+    // You can also use a shell. Do this if you need pipes, multiple commands, etc.
+    // Note: the entire command goes as a single argument in the end.
+    // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
+
+    // Example volume keys mappings for PipeWire & WirePlumber.
+    // The allow-when-locked=true property makes them work even when the session is locked.
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    Mod+W     repeat=false { toggle-overview; }
+    Mod+Space repeat=false { toggle-overview; }
+
+    Mod+Q { close-window; }
+
+    Mod+Left  { focus-column-left; }
+    Mod+Down  { focus-window-down-or-top; }
+    Mod+Up    { focus-window-up-or-bottom; }
+    Mod+Right { focus-column-right; }
+    Mod+H     { focus-column-left; }
+    Mod+J     { focus-window-down-or-top; }
+    Mod+K     { focus-window-up-or-bottom; }
+    Mod+L     { focus-column-right; }
+
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Down  { move-window-down; }
+    Mod+Shift+Up    { move-window-up; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+H     { move-column-left; }
+    Mod+Shift+J     { move-window-down; }
+    Mod+Shift+K     { move-window-up; }
+    Mod+Shift+L     { move-column-right; }
+
+    // TODO test those binds
+    Mod+Home { focus-column-first; }
+    Mod+End  { focus-column-last; }
+    Mod+Ctrl+Home { move-column-to-first; }
+    Mod+Ctrl+End  { move-column-to-last; }
+
+    Mod+Ctrl+Left  { focus-monitor-left; }
+    Mod+Ctrl+Down  { focus-monitor-down; }
+    Mod+Ctrl+Up    { focus-monitor-up; }
+    Mod+Ctrl+Right { focus-monitor-right; }
+    Mod+Ctrl+H     { focus-monitor-left; }
+    Mod+Ctrl+J     { focus-monitor-down; }
+    Mod+Ctrl+K     { focus-monitor-up; }
+    Mod+Ctrl+L     { focus-monitor-right; }
+
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+    // ax: All we need for a two monitor setup
+    Mod+Period { focus-monitor-next; }
+    Mod+Shift+Period { move-column-to-monitor-next; } // or move-window-to-monitor-left 
+    Mod+Shift+Comma { move-workspace-to-monitor-next; }
+
+    Mod+Page_Down      { focus-workspace-down; }
+    Mod+Page_Up        { focus-workspace-up; }
+    Mod+I              { focus-workspace-down; }
+    Mod+U              { focus-workspace-up; }
+    Mod+Ctrl+Page_Down { move-column-to-workspace-down; } // or move-window-to-workspace-down
+    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+    Mod+Shift+I        { move-column-to-workspace-down; } 
+    Mod+Shift+U        { move-column-to-workspace-up; }
+
+    Mod+Shift+Page_Down { move-workspace-down; }
+    Mod+Shift+Page_Up   { move-workspace-up; }
+    Mod+Ctrl+I          { move-workspace-down; }
+    Mod+Ctrl+U          { move-workspace-up; }
+
+    // You can bind mouse wheel scroll ticks using the following syntax.
+    // These binds will change direction based on the natural-scroll setting.
+    //
+    // To avoid scrolling through workspaces really fast, you can use
+    // the cooldown-ms property. The bind will be rate-limited to this value.
+    // You can set a cooldown on any bind, but it's most useful for the wheel.
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+
+    Mod+WheelScrollRight      { focus-column-right; }
+    Mod+WheelScrollLeft       { focus-column-left; }
+    Mod+Ctrl+WheelScrollRight { move-column-right; }
+    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+
+    // Usually scrolling up and down with Shift in applications results in
+    // horizontal scrolling; these binds replicate that.
+    Mod+Shift+WheelScrollDown      { focus-column-right; }
+    Mod+Shift+WheelScrollUp        { focus-column-left; }
+    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+
+    // Similarly, you can bind touchpad scroll "ticks".
+    // Touchpad scrolling is continuous, so for these binds it is split into
+    // discrete intervals.
+    // These binds are also affected by touchpad's natural-scroll, so these
+    // example binds are "inverted", since we have natural-scroll enabled for
+    // touchpads by default.
+    // Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
+    // Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
+
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    Mod+Shift+1 { move-column-to-workspace 1 focus=false; }
+    Mod+Shift+2 { move-column-to-workspace 2 focus=false; }
+    Mod+Shift+3 { move-column-to-workspace 3 focus=false; }
+    Mod+Shift+4 { move-column-to-workspace 4 focus=false; }
+    Mod+Shift+5 { move-column-to-workspace 5 focus=false; }
+    Mod+Shift+6 { move-column-to-workspace 6 focus=false; }
+    Mod+Shift+7 { move-column-to-workspace 7 focus=false; }
+    Mod+Shift+8 { move-column-to-workspace 8 focus=false; }
+    Mod+Shift+9 { move-column-to-workspace 9 focus=false; }
+
+    Mod+Tab { focus-workspace-previous; }
+
+    Mod+N       { consume-or-expel-window-left; }
+    Mod+M       { consume-or-expel-window-right; }
+    Mod+Shift+N { consume-window-into-column; }
+    Mod+Shift+M { expel-window-from-column; }
+
+    Mod+R       { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R  { reset-window-height; }
+    Mod+F       { maximize-column; }
+    Mod+Ctrl+F  { expand-column-to-available-width; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+Ctrl+Shift+F { toggle-windowed-fullscreen; }
+
+    Mod+C       { center-column; }
+    Mod+Shift+C { center-visible-columns; }
+
+    Mod+Minus       { set-column-width "-3%"; }
+    Mod+Plus        { set-column-width "+3%"; }
+    Mod+Shift+Minus { set-window-height "-3%"; }
+    Mod+Shift+Plus  { set-window-height "+3%"; }
+
+    Mod+V       { toggle-window-floating; }
+    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+    Mod+T { toggle-column-tabbed-display; }
+
+    // Actions to switch layouts.
+    // Note: if you uncomment these, make sure you do NOT have
+    // a matching layout switch hotkey configured in xkb options above.
+    // Having both at once on the same hotkey will break the switching,
+    // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
+    // Mod+Space       { switch-layout "next"; }
+    // Mod+Shift+Space { switch-layout "prev"; }
+
+    // Applications such as remote-desktop clients and software KVM switches may
+    // request that niri stops processing the keyboard shortcuts defined here
+    // so they may, for example, forward the key presses as-is to a remote machine.
+    // It's a good idea to bind an escape hatch to toggle the inhibitor,
+    // so a buggy application can't hold your session hostage.
+    //
+    // The allow-inhibiting=false property can be applied to other binds as well,
+    // which ensures niri always processes them, even when an inhibitor is active.
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    
+    Mod+Shift+P { power-off-monitors; }
+    Mod+Shift+Q { quit; }
+
+
+    // ax: dwm-like keybinds
+    // general
+    Mod+Shift+Y { spawn-sh "~/syscfg/scripts/bb/licht.clj"; }
+    Mod+E { spawn-sh "emacsclient -c"; }
+    Mod+Shift+E { spawn-sh "emacs"; }
+    Mod+O { spawn-sh "bb ~/syscfg/scripts/launcher.clj main"; } // TODO hopefully replace w// niri keychords someday
+    Mod+P { spawn-sh "wmenu-run -i -l 25"; }
+    Mod+S { spawn-sh "kitten quick-access-terminal"; }
+    Mod+Shift+W { spawn-sh "bb ~/syscfg/scripts/niri.clj select-window-from-all";}
+    Mod+X { spawn-sh "emacsclient --eval '(thanos/type)'"; }
+
+    // toggle waybar
+    Mod+B { spawn-sh "~/syscfg/scripts/waybar.clj toggle";}
+    Mod+Shift+B { spawn-sh "~/syscfg/scripts/waybar.clj toggle-min";}
+
+    // notifications
+    Mod+Alt+H { spawn-sh "dunstctl history-pop"; }
+    Mod+Alt+K { spawn-sh "dunstctl close-all"; }
+    Mod+Alt+W { spawn "~/syscfg/scripts/bb/weather.clj" "dunst" ; }
+
+    // volume
+    Mod+Alt+Left  { spawn-sh "~/syscfg/scripts/wayland.clj volume-mute" ; }
+    Mod+Alt+Up    { spawn-sh "~/syscfg/scripts/wayland.clj volume-up" ; }
+    Mod+Alt+Down  { spawn-sh "~/syscfg/scripts/wayland.clj volume-down" ; }
+    Mod+Alt+Space { spawn-sh "~/syscfg/scripts/bb/play_pause.clj" ; }
+    Mod+Alt+Right { spawn-sh "~/syscfg/scripts/bb/play_pause.clj" ; }
+
+    // TODO - need keychords ...
+    Mod+Ctrl+B { spawn-sh "alacritty -T ax-bluetui -e bluetui";}
+    // linkding (bookmarks)
+    Mod+Alt+B { spawn-sh "bb ~/x/ax_bookmarks.clj std"; }
+    Mod+Alt+N { spawn-sh "bb ~/x/ax_bookmarks.clj archived"; }
+    Mod+Alt+F { spawn-sh "rofi -show recursivebrowser"; }
+    Mod+Y     { spawn-sh "alacritty -T ax-command-runner -e fish -C '/usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'"; }
+
+    // Screenshots
+    // put into swappy for annotations
+    Mod+Ctrl+Shift+A { spawn-sh "grim - | swappy -f -"; }
+    Mod+Ctrl+Shift+S { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
+    // Mod+Ctrl+Shift+W { spawn-sh "TODO"; }
+
+    // niri native
+    Print      { screenshot; }
+    Mod+Ctrl+S { screenshot; }
+    
+    Ctrl+Print { screenshot-screen; }
+    Mod+Ctrl+A { screenshot-screen; }
+    
+    Alt+Print  { screenshot-window; }
+    Mod+Ctrl+W { screenshot-window; }
+}
+#+end_src
+
+* Window Rules
+** open specific windows maximized (full width)
+#+begin_src shell
+window-rule {
+    match app-id="firefox"
+    match app-id="brave-browser"
+    open-maximized true
+}
+#+end_src
+** misc
+#+begin_src shell
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"Alacritty$"# title="^ax-bluetui$" // this is most specific
+    match app-id=r#"Alacritty$"# title="^ax-wiremix$"
+    match app-id=r#"Alacritty$"# title="^ax-command-runner$"
+    match app-id=r#"org.pulseaudio.pavucontrol$"# title="^Volume Control$"
+    match app-id=r#"qalculate-gtk$"# title="^Qalculate!$"
+//    match title="ax-bluetui" // this alone works
+//    match app-id="Alacritty" // TODO this matches other Alacritty windows as well!
+    open-floating true
+    min-width 1024
+    max-width 1024
+    min-height 768  
+    max-height 768  
+}
+
+// block out KeePassXC from screen capture.
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+
+    block-out-from "screen-capture"
+
+    // Use this instead if you want them visible on third-party screenshot tools.
+    // block-out-from "screencast"
+}
+
+// enable rounded corners for all windows
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id=r#"thunar$"# title="^File Operation Progress$"
+    open-floating true
+}
+window-rule {
+    // thanos/type (emacs everywhere for wayland)
+    match app-id=r#"Emacs$"# title="^emacs-float$"
+    open-floating true
+}
+window-rule {
+    match app-id="anki"
+    open-floating true
+    min-width 1250
+    min-height 900  
+}
+#+end_src
+* Screenshot settings
+#+begin_src shell
+// You can change the path where screenshots are saved.
+// A ~ at the front will be expanded to the home directory.
+// The path is formatted with strftime(3) to give you the screenshot date and time.
+screenshot-path "~/sync/screenshots/2026/Screenshot_from_%Y-%m-%d_%H-%M-%S.png"
+
+// You can also set this to null to disable saving screenshots to disk.
+// screenshot-path null
+#+end_src
+* Misc
+#+begin_src shell
+prefer-no-csd // ask the clients to omit their client-side decorations if possible
+
+animations {
+    off
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+#+end_src
+
