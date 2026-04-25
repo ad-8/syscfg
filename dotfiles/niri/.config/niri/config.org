@@ -200,7 +200,8 @@ spawn-at-startup "emacs" "--daemon"
 spawn-at-startup "emacs" 
 spawn-at-startup "firefox" 
 spawn-sh-at-startup "foot -e btop" 
-spawn-sh-at-startup "foot --server" 
+spawn-sh-at-startup "foot --server"
+spawn-sh-at-startup "syncthing serve --no-browser"
 #+end_src
 
 Somehow, could not get =swaybg= to work with =spawn-at-startup= directly ...

@@ -166,6 +166,7 @@ spawn-at-startup "emacs"
 spawn-at-startup "firefox" 
 spawn-sh-at-startup "foot -e btop" 
 spawn-sh-at-startup "foot --server"
+spawn-sh-at-startup "syncthing serve --no-browser"
 
 spawn-at-startup "~/syscfg/scripts/niri-set-wallpaper.sh"
 spawn-sh-at-startup "swayidle -w timeout 1180 'notify-send locking-screen in-10-seconds' timeout 1200 'swaylock -f -c 000000 -F' timeout 1250 'niri msg action power-off-monitors' before-sleep 'swaylock -f -c 000000 -F'"
