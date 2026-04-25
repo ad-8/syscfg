@@ -41,13 +41,22 @@
       autoRepeatDelay = 200;
       autoRepeatInterval = 35;
     };
-    # services.displayManager.ly.enable = true;
-    systemd.services.display-manager.enable = false; # disables all display managers. NixOS defaults to LightDM when no display-manager is explicitly enabled
-    programs.hyprland = {
+    services.displayManager.ly.enable = true;
+    # systemd.services.display-manager.enable = false; # disables all display managers. NixOS defaults to LightDM when no display-manager is explicitly enabled
+    # programs.hyprland = {
+    #   enable = true;
+    #   withUWSM = false;
+    #   xwayland.enable = true;
+    # };
+    programs.niri = {
       enable = true;
-      withUWSM = false;
-      xwayland.enable = true;
     };
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      wlr.enable = true;
+    };
+
 
 
     # -------------------------------------
@@ -82,6 +91,7 @@
       restic
       rclone
       libsecret
+      xwayland-satellite # xwayland support for niri
     ];
 
     # The firewall is enabled by default on NixOS. Still, explicitly ensure it is enabled

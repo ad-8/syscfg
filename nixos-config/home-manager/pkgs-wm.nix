@@ -26,6 +26,7 @@
       slurp
       swappy
       swaybg
+      swayidle
       swaylock
       waybar
       wiremix
