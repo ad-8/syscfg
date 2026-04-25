@@ -437,6 +437,7 @@ binds {
 
     // TODO - need keychords ...
     Mod+Ctrl+B { spawn-sh "foot -T ax-bluetui -e bluetui";}
+    Mod+Ctrl+Shift+B { spawn-sh "foot -T ax-bluetui -e wiremix";}
     // linkding (bookmarks)
     Mod+Alt+B { spawn-sh "bb ~/x/ax_bookmarks.clj std"; }
     Mod+Alt+N { spawn-sh "bb ~/x/ax_bookmarks.clj archived"; }
@@ -486,6 +487,7 @@ window-rule {
     match app-id=r#"foot$"# title="^ax-wiremix$"
     match app-id=r#"foot$"# title="^ax-command-runner$"
     match app-id=r#"org.pulseaudio.pavucontrol$"# title="^Volume Control$"
+    match app-id=r#"firefox$"# title="^About Mozilla Firefox$"
     match app-id=r#"qalculate-gtk$"# title="^Qalculate!$"
 //    match title="ax-bluetui" // this alone works
 //    match app-id="foot" // TODO this matches other foot windows as well!
