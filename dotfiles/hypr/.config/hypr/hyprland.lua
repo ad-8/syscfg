@@ -415,3 +415,9 @@ hl.window_rule({
     opacity      = 0.95,
 })
 
+-- TODO scrolling test
+hl.workspace_rule({ workspace = "5", layout = "scrolling"})
+hl.bind(mainMod .. "+ M", hl.dsp.layout("move +col"))
+hl.bind(mainMod .. "+ N", hl.dsp.layout("move -col"))
+hl.bind(mainMod .. "+ SHIFT + M", hl.dsp.layout("swapcol r"))
+hl.bind(mainMod .. "+ SHIFT + N", hl.dsp.layout("swapcol l"))
