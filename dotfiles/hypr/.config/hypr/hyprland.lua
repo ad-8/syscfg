@@ -397,3 +397,19 @@ hl.window_rule({
     move  = "20 monitor_h-120",
     float = true,
 })
+
+hl.window_rule({
+    name  = "scratchpad",
+    match = {
+        -- class      = "^$",
+        title      = "^hypr-scratchpad-01$",
+    },
+    center = true,
+    float = true,
+    size  = "1200 800",
+    -- size = "(monitor_w*0.5) (monitor_h*0.5)",
+    -- border_color = "rgba(1122ffee)",
+    border_size  = 10,
+    opacity      = 0.95,
+})
+
