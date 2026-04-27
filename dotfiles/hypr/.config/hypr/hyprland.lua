@@ -15,6 +15,7 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- `nwg-displays` is nice tool for this (similar to arandr on xorg)
 hl.monitor({
     output   = "DP-1",
     mode     = "3840x2160",
@@ -34,7 +35,7 @@ hl.monitor({
 ---------------------
 
 -- Set programs that you use
-local terminal    = "foot"
+local terminal    = "footclient"
 local fileManager = "thunar"
 local menu        = "rofi -show drun"
 local menu2       = "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\" -s \"d3ebe9\""
@@ -43,16 +44,20 @@ local menu2       = "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\
 ---- AUTOSTART ----
 -------------------
 
--- See https://wiki.hypr.land/Configuring/Basics/Autostart/
+hl.on("hyprland.start", function () 
+  hl.exec_cmd("blueman-applet &")
+  hl.exec_cmd("dunst &")
+  hl.exec_cmd("emacs --daemon &")
+  hl.exec_cmd("foot --server &")
+  hl.exec_cmd("hypridle &")
+  hl.exec_cmd("nm-applet &")
+  hl.exec_cmd("waybar &")
+  hl.exec_cmd("syncthing serve --no-browser &")
+  hl.exec_cmd("swaybg -i $HOME/sync/wallpapers/default.jpg &")
+  hl.exec_cmd("$HOME/syscfg/scripts/bb/licht.clj hi &")
 
--- Autostart necessary processes (like notifications daemons, status bars, etc.)
--- Or execute your favorite apps at launch like this:
---
--- hl.on("hyprland.start", function () 
---   hl.exec_cmd(terminal)
---   hl.exec_cmd("nm-applet")
---   hl.exec_cmd("waybar & hyprpaper & firefox")
--- end)
+  hl.exec_cmd("[workspace special:magic silent] foot --title hypr-scratchpad-01 -e sh -c '~/x/hyprland-tmux-scratchpad.sh'")
+end)
 
 
 -------------------------------
