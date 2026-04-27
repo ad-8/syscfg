@@ -277,7 +277,7 @@ hl.bind(mainMod .. " + H", hl.dsp.layout("mfact -0.05"))
 hl.bind(mainMod .. " + L", hl.dsp.layout("mfact +0.05"))
 hl.bind(mainMod .. " + Z", hl.dsp.layout("swapwithmaster master"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(mainMod .. " + SPACE", hl.dsp.window.fullscreen({ mode = "maximized" }))
 
 -- multi-monitor keybinds
 hl.bind(mainMod .. " + PERIOD", hl.dsp.focus({ monitor = "+1" }))
@@ -285,6 +285,8 @@ hl.bind(mainMod .. " + SHIFT + PERIOD", hl.dsp.window.move({ monitor = "+1", fol
 hl.bind(mainMod .. " + SHIFT + COMMA", hl.dsp.workspace.move({ monitor = "+1", follow = false }))
 -- misc
 hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("swaylock --color 000000"))
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("rofi -show recursivebrowser"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("rofi -show window"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle"))
 -- notifications
 hl.bind(mainMod .. " + ALT + H", hl.dsp.exec_cmd("dunstctl history-pop"))
