@@ -6,6 +6,7 @@
 	  nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 	  home-manager-stable = { url = "github:nix-community/home-manager/release-25.11"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
 	  home-manager-unstable = { url = "github:nix-community/home-manager/master"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = { self, nixpkgs-stable, home-manager-stable, ... } @inputs:
@@ -27,6 +28,7 @@
     in
     nixpkgs.lib.nixosSystem {
       inherit system;
+      specialArgs = { inherit inputs; }; # this is the important part (see hyprland wiki)
       modules = [
         ./hosts/${hostname}/configuration.nix
       ] ++ hm;
