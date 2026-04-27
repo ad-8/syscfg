@@ -49,8 +49,8 @@
       autoRepeatDelay = 200;
       autoRepeatInterval = 35;
     };
-    services.displayManager.ly.enable = true;
-    # systemd.services.display-manager.enable = false; # disables all display managers. NixOS defaults to LightDM when no display-manager is explicitly enabled
+    # services.displayManager.ly.enable = true;
+    systemd.services.display-manager.enable = false; # disables all display managers. NixOS defaults to LightDM when no display-manager is explicitly enabled
     programs.hyprland = {
       enable = true;
 
