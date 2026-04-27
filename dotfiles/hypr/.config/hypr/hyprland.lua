@@ -205,9 +205,16 @@ hl.config({
 ----------------
 
 hl.config({
+    binds = {
+        workspace_back_and_forth = true,
+    },
+    ecosystem = {
+        no_donation_nag = true,
+    },
     misc = {
         force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
         disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
+        exit_window_retains_fullscreen = true,
     },
 })
 
@@ -280,6 +287,8 @@ hl.bind(mainMod .. " + L", hl.dsp.layout("mfact +0.05"))
 hl.bind(mainMod .. " + Z", hl.dsp.layout("swapwithmaster master"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(mainMod .. " + SPACE", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(mainMod .. " + I", hl.dsp.layout("addmaster"))
+hl.bind(mainMod .. " + D", hl.dsp.layout("removemaster"))
 
 -- multi-monitor keybinds
 hl.bind(mainMod .. " + PERIOD", hl.dsp.focus({ monitor = "+1" }))
@@ -290,6 +299,7 @@ hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("swaylock --color 000000"))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("rofi -show recursivebrowser"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("rofi -show window"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle"))
+hl.bind(mainMod .. " + TAB", hl.dsp.focus( { workspace = "previous" } ))
 -- notifications
 hl.bind(mainMod .. " + ALT + H", hl.dsp.exec_cmd("dunstctl history-pop"))
 hl.bind(mainMod .. " + ALT + K", hl.dsp.exec_cmd("dunstctl close-all"))
