@@ -256,6 +256,7 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu2))
 ------------------------------------------------------------------------------------------------------
 -- ax essential keybindings
 ------------------------------------------------------------------------------------------------------
+-- dwm-inspired layout basics
 hl.bind(mainMod .. " + J", hl.dsp.layout("cyclenext"))
 hl.bind(mainMod .. " + K", hl.dsp.layout("cycleprev"))
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.layout("swapnext"))
@@ -266,9 +267,23 @@ hl.bind(mainMod .. " + Z", hl.dsp.layout("swapwithmaster master"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
 
+-- multi-monitor keybinds
 hl.bind(mainMod .. " + PERIOD", hl.dsp.focus({ monitor = "+1" }))
 hl.bind(mainMod .. " + SHIFT + PERIOD", hl.dsp.window.move({ monitor = "+1", follow = false }))
 hl.bind(mainMod .. " + SHIFT + COMMA", hl.dsp.workspace.move({ monitor = "+1", follow = false }))
+-- misc
+hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("swaylock --color 000000"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle"))
+-- notifications
+hl.bind(mainMod .. " + ALT + H", hl.dsp.exec_cmd("dunstctl history-pop"))
+hl.bind(mainMod .. " + ALT + K", hl.dsp.exec_cmd("dunstctl close-all"))
+hl.bind(mainMod .. " + ALT + W", hl.dsp.exec_cmd("~/syscfg/scripts/bb/weather.clj dunst"))
+-- volume
+hl.bind(mainMod .. " + ALT + LEFT",  hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-mute"))
+hl.bind(mainMod .. " + ALT + UP",    hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-up"))
+hl.bind(mainMod .. " + ALT + DOWN",  hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-down"))
+hl.bind(mainMod .. " + ALT + RIGHT", hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj"))
+hl.bind(mainMod .. " + ALT + SPACE", hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj"))
 
 -- TODO keychords
 -- hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
@@ -291,7 +306,7 @@ hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
 -- Example special workspace (scratchpad)
