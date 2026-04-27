@@ -29,6 +29,17 @@ hl.monitor({
     scale    = 1,
 })
 
+-- ax: fix for pixelated emacs
+-- unscale XWayland
+hl.config({
+    xwayland = {
+        force_zero_scaling = true
+    }
+})
+-- toolkit-specific scale
+hl.env("GDK_SCALE", "2")
+hl.env("XCURSOR_SIZE", "32")
+
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -39,6 +50,7 @@ local terminal    = "footclient"
 local fileManager = "thunar"
 local menu        = "rofi -show drun"
 local menu2       = "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\" -s \"d3ebe9\""
+
 
 -------------------
 ---- AUTOSTART ----
