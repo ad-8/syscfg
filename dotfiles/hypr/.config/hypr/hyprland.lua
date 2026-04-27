@@ -238,18 +238,42 @@ hl.device({
 ---- KEYBINDINGS ----
 ---------------------
 
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local mainMod = "SUPER"
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
-local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu2))
+
+
+------------------------------------------------------------------------------------------------------
+-- ax essential keybindings
+------------------------------------------------------------------------------------------------------
+hl.bind(mainMod .. " + J", hl.dsp.layout("cyclenext"))
+hl.bind(mainMod .. " + K", hl.dsp.layout("cycleprev"))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.layout("swapnext"))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.layout("swapprev"))
+hl.bind(mainMod .. " + H", hl.dsp.layout("mfact -0.05"))
+hl.bind(mainMod .. " + L", hl.dsp.layout("mfact +0.05"))
+hl.bind(mainMod .. " + Z", hl.dsp.layout("swapwithmaster master"))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
+
+hl.bind(mainMod .. " + PERIOD", hl.dsp.focus({ monitor = "+1" }))
+hl.bind(mainMod .. " + SHIFT + PERIOD", hl.dsp.window.move({ monitor = "+1", follow = false }))
+hl.bind(mainMod .. " + SHIFT + COMMA", hl.dsp.workspace.move({ monitor = "+1", follow = false }))
+
+-- TODO keychords
+-- hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
+-- TODO look into when this would be useful
+-- local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+-- closeWindowBind:set_enabled(false)
+------------------------------------------------------------------------------------------------------
+-- end
+------------------------------------------------------------------------------------------------------
+
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
