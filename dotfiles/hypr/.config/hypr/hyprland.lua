@@ -178,14 +178,6 @@ hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "
 --     rounding    = 0,
 -- })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
-hl.config({
-    dwindle = {
-        preserve_split = true, -- You probably want this
-    },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
 hl.config({
     master = {
         new_status = "master",
@@ -193,10 +185,11 @@ hl.config({
     },
 })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
 hl.config({
     scrolling = {
         fullscreen_on_one_column = true,
+        wrap_focus = false,
+        wrap_swapcol = false,
     },
 })
 
@@ -446,9 +439,11 @@ hl.window_rule({
     size  = "800 500",
 })
 
--- TODO scrolling test
+-- TODO test scrolling layout 
 hl.workspace_rule({ workspace = "5", layout = "scrolling"})
-hl.bind(mainMod .. "+ M", hl.dsp.layout("move +col"))
-hl.bind(mainMod .. "+ N", hl.dsp.layout("move -col"))
+hl.bind(mainMod .. "+ M", hl.dsp.layout("focus r"))
+hl.bind(mainMod .. "+ N", hl.dsp.layout("focus l"))
 hl.bind(mainMod .. "+ SHIFT + M", hl.dsp.layout("swapcol r"))
 hl.bind(mainMod .. "+ SHIFT + N", hl.dsp.layout("swapcol l"))
+hl.bind(mainMod .. "+ CONTROL + M", hl.dsp.layout("colresize +0.05"))
+hl.bind(mainMod .. "+ CONTROL + N", hl.dsp.layout("colresize -0.05"))
