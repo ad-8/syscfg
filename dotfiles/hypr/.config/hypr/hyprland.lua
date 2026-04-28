@@ -427,6 +427,25 @@ hl.window_rule({
     opacity      = 0.95,
 })
 
+
+hl.window_rule({
+    name  = "anki (TODO and other floating windows?)",
+    match = {
+        class = "^anki$",
+    },
+    float = true,
+    size  = "1200 800",
+})
+
+hl.window_rule({
+    name  = "About Firefox",
+    match = {
+        title = "^About Mozilla Firefox$",
+    },
+    float = true,
+    size  = "800 500",
+})
+
 -- TODO scrolling test
 hl.workspace_rule({ workspace = "5", layout = "scrolling"})
 hl.bind(mainMod .. "+ M", hl.dsp.layout("move +col"))
