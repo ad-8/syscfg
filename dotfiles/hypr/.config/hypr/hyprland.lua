@@ -293,8 +293,30 @@ hl.bind(mainMod .. " + ALT + DOWN",  hl.dsp.exec_cmd("~/syscfg/scripts/wayland.c
 hl.bind(mainMod .. " + ALT + RIGHT", hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj"))
 hl.bind(mainMod .. " + ALT + SPACE", hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj"))
 
--- TODO keychords
+
+-- TODO keychords - `reset` is not working properly
 -- hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
+hl.bind("SUPER + O", hl.dsp.submap("resize"))
+
+hl.define_submap("resize", function()
+    hl.bind("F", function()
+        hl.exec_cmd("notify-send opening thunar &")
+        -- hl.exec_cmd(fileManager)
+        hl.exec_cmd("notify-send after-opening thunar &")
+        hl.dsp.submap("reset")
+    end)
+
+    hl.bind("B", function()
+        hl.exec_cmd("key-pressed B")
+        hl.exec_cmd("foot -T bluetui bluetui &")
+        hl.dsp.submap("reset")
+        hl.exec_cmd("notify-send after-reset B")
+    end)
+    hl.bind("escape", hl.dsp.submap("reset"))
+end)
+
+hl.bind(mainMod .. " + K", hl.dsp.submap("reset"), { submap_universal = true })
+
 -- TODO look into when this would be useful
 -- local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
