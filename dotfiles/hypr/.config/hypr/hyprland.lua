@@ -75,6 +75,24 @@ hl.env("HYPRCURSOR_SIZE", "24")
 ---- LOOK AND FEEL ----
 -----------------------
 
+local gotham_black = "0c1014"
+local gotham_brightblack = "11151c"
+local gotham_brightgreen = "091f2e"
+local gotham_brightblue = "0a3749"
+local gotham_brightyellow = "245361"
+local gotham_brightcyan = "599cab"
+local gotham_white = "99d1ce"
+local gotham_brightwhite = "d3ebe9"
+local gotham_red = "c23127"
+local gotham_brightred = "d26937"
+local gotham_yellow = "edb443"
+local gotham_brightmagenta = "888ca6"
+local gotham_magenta = "4e5166"
+local gotham_blue = "195466"
+local gotham_cyan = "33859e"
+local gotham_green = "2aa889"
+
+
 hl.config({
     general = {
         gaps_in  = 4,
@@ -122,6 +140,27 @@ hl.config({
     animations = {
         enabled = true,
     },
+    group = {
+      ["col.border_active"]   = "rgb(" .. gotham_blue .. ")",
+      ["col.border_inactive"] = "rgb(" .. gotham_black .. ")",
+
+      groupbar = {
+        height = 1,
+        indicator_height = 30,
+        text_offset = -15,
+        rounding = 10,
+        gaps_in = 3,
+        gaps_out = 3,
+
+        font_family         = 'Hack Nerd Font',
+        font_size           = 12,
+
+        ["col.active"]      = "rgb(" .. gotham_brightred .. ")",
+        ["col.inactive"]    = "rgb(" .. gotham_black .. ")",
+        text_color          = "rgb(" .. gotham_white .. ")",
+        text_color_inactive = "rgb(" .. gotham_white .. ")",
+      }
+    }
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
@@ -272,6 +311,18 @@ hl.bind(mainMod .. " + SPACE", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + I", hl.dsp.layout("addmaster"))
 hl.bind(mainMod .. " + D", hl.dsp.layout("removemaster"))
 
+-- tabbed windows (groups)
+hl.bind(mainMod .. " + T", hl.dsp.group.toggle())
+hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.move({ out_of_group = true }))
+hl.bind(mainMod .. " + CONTROL + J", hl.dsp.group.next())
+hl.bind(mainMod .. " + CONTROL + K", hl.dsp.group.prev())
+hl.bind(mainMod .. " + ALT + J", hl.dsp.group.move_window({ forward = true}))
+hl.bind(mainMod .. " + ALT + K", hl.dsp.group.move_window({ forward = false}))
+-- TODO those bindings suck ...
+hl.bind(mainMod .. " + CONTROL + SHIFT + J", hl.dsp.window.move({ into_group = 'd' }))
+hl.bind(mainMod .. " + CONTROL + SHIFT + K", hl.dsp.window.move({ into_group = 'u' }))
+hl.bind(mainMod .. " + CONTROL + SHIFT + H", hl.dsp.window.move({ into_group = 'l' }))
+hl.bind(mainMod .. " + CONTROL + SHIFT + L", hl.dsp.window.move({ into_group = "r" }))
 -- multi-monitor keybinds
 hl.bind(mainMod .. " + PERIOD", hl.dsp.focus({ monitor = "+1" }))
 hl.bind(mainMod .. " + SHIFT + PERIOD", hl.dsp.window.move({ monitor = "+1", follow = false }))
