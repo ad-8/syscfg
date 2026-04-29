@@ -462,36 +462,42 @@ hl.window_rule({
 hl.window_rule({
     name  = "scratchpad",
     match = {
-        -- class      = "^$",
-        title      = "^hypr-scratchpad-01$",
+        title = "^hypr-scratchpad-01$",
     },
     center = true,
     float = true,
     size  = "1200 800",
-    -- size = "(monitor_w*0.5) (monitor_h*0.5)",
-    -- border_color = "rgba(1122ffee)",
     border_size  = 10,
     opacity      = 0.95,
 })
 
-
-hl.window_rule({
-    name  = "anki (TODO and other floating windows?)",
-    match = {
-        class = "^anki$",
-    },
-    float = true,
-    size  = "1200 800",
-})
-
+-- ax: named rule
 hl.window_rule({
     name  = "About Firefox",
     match = {
         title = "^About Mozilla Firefox$",
     },
     float = true,
-    size  = "800 500",
 })
+-- ax: anon rule
+hl.window_rule({ match = { class = "^anki$" }, float = true, size = "1200 800" })
+
+-- open programs on a certain workspace (to find out the class: `hyprctl clients`)
+hl.window_rule({ match = { class = "firefox" }, workspace = "2 silent" })
+hl.window_rule({ match = { class = "org.strawberrymusicplayer.strawberry" }, workspace = "6 silent" })
+hl.window_rule({ match = { class = "Emacs", title = "ax-emacs-emms" }, workspace = "6 silent" })
+hl.window_rule({ match = { class = "org.qbittorrent.qBittorrent" }, workspace = "7 silent" })
+hl.window_rule({ match = { class = "brave-browser" }, workspace = "8 silent" })
+hl.window_rule({ match = { class = ".virt-manager-wrapped" }, workspace = "8 silent" })
+hl.window_rule({ match = { class = "org.keepassxc.KeePassXC" }, workspace = "9 silent" })
+-- programs that should float and have a certain size
+hl.window_rule({ match = { class = "qalculate-gtk" }, float = true, size = "800 600" })
+hl.window_rule({ match = { class = "foot", title = "^(bluetui)|^(wiremix)$" }, float = true, size = "1024 768" })
+hl.window_rule({ match = { class = "waypaper" }, float = true, size = "1024 768" })
+-- more stuff that should float and keep its size
+hl.window_rule({ match = { class = "Thunar", title = "File Operation Progress" }, float = true })
+hl.window_rule({ match = { class = "org.pulseaudio.pavucontrol" }, float = true })
+
 
 -- TODO test scrolling layout 
 hl.workspace_rule({ workspace = "5", layout = "scrolling"})
