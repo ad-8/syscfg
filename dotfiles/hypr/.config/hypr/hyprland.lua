@@ -1,8 +1,3 @@
--- You can (and should!!) split this configuration into multiple files
--- Create your files separately and then require them like this:
--- require("myColors")
-
-
 ------------------
 ---- MONITORS ----
 ------------------
@@ -58,6 +53,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("waybar &")
   hl.exec_cmd("syncthing serve --no-browser &")
   hl.exec_cmd("swaybg -i $HOME/sync/wallpapers/default.jpg &")
+
   hl.exec_cmd("$HOME/syscfg/scripts/bb/licht.clj hi &")
 
   hl.exec_cmd("[workspace special:magic silent] foot --title hypr-scratchpad-01 -e sh -c '~/x/hyprland-tmux-scratchpad.sh'")
@@ -70,6 +66,7 @@ end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -277,32 +274,19 @@ hl.gesture({
     action = "workspace"
 })
 
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
--- hl.device({
---     name        = "epic-mouse-v1",
---     sensitivity = -0.5,
--- })
-
 
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
 
 local mainMod = "SUPER"
-
+-- dwm-inspired basics
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu2))
-
-
-------------------------------------------------------------------------------------------------------
--- ax essential keybindings
-------------------------------------------------------------------------------------------------------
--- dwm-inspired layout basics
 hl.bind(mainMod .. " + J", hl.dsp.layout("cyclenext"))
 hl.bind(mainMod .. " + K", hl.dsp.layout("cycleprev"))
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.layout("swapnext"))
@@ -320,6 +304,7 @@ hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.move({ out_of_group = true }))
 hl.bind(mainMod .. " + CONTROL + J", hl.dsp.group.next())
 hl.bind(mainMod .. " + CONTROL + K", hl.dsp.group.prev())
 hl.bind(mainMod .. " + ALT + J", hl.dsp.group.move_window({ forward = true}))
+-- TODO conflicts with dunst history-kill
 hl.bind(mainMod .. " + ALT + K", hl.dsp.group.move_window({ forward = false}))
 -- TODO those bindings suck ...
 hl.bind(mainMod .. " + CONTROL + SHIFT + J", hl.dsp.window.move({ into_group = 'd' }))
@@ -427,10 +412,6 @@ hl.define_submap("change", function()
         hl.exec_cmd("$HOME/syscfg/scripts/bb/set_random_wallpaper.clj")
         hl.dsp.submap("reset")
     end)
-    hl.bind("X", function()
-        hl.exec_cmd("killall swaybg")
-        hl.dsp.submap("reset")
-    end)
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
 -- mode toggle
@@ -468,10 +449,6 @@ hl.bind(mainMod .. " + K", hl.dsp.submap("reset"), { submap_universal = true })
 -- TODO look into when this would be useful
 -- local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
-------------------------------------------------------------------------------------------------------
--- end
-------------------------------------------------------------------------------------------------------
-
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
