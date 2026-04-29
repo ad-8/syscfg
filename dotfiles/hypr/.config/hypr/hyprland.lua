@@ -159,7 +159,7 @@ hl.config({
         font_family         = 'Hack Nerd Font',
         font_size           = 12,
 
-        ["col.active"]      = "rgb(" .. gotham_brightred .. ")",
+        ["col.active"]      = "rgb(" .. gotham_blue .. ")",
         ["col.inactive"]    = "rgb(" .. gotham_black .. ")",
         text_color          = "rgb(" .. gotham_white .. ")",
         text_color_inactive = "rgb(" .. gotham_white .. ")",
@@ -350,24 +350,15 @@ hl.bind(mainMod .. " + ALT + SPACE", hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_p
 
 
 -- TODO keychords - `reset` is not working properly
--- hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
-hl.bind("SUPER + O", hl.dsp.submap("resize"))
+hl.bind(mainMod .. "+ O", hl.dsp.submap("open"))
 
-hl.define_submap("resize", function()
+hl.define_submap("open", function()
     hl.bind("F", function()
         hl.exec_cmd("notify-send opening thunar &")
-        -- hl.exec_cmd(fileManager)
+        hl.exec_cmd(fileManager)
+        hl.dsp.submap("reset")
         hl.exec_cmd("notify-send after-opening thunar &")
-        hl.dsp.submap("reset")
     end)
-
-    hl.bind("B", function()
-        hl.exec_cmd("key-pressed B")
-        hl.exec_cmd("foot -T bluetui bluetui &")
-        hl.dsp.submap("reset")
-        hl.exec_cmd("notify-send after-reset B")
-    end)
-    hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
 hl.bind(mainMod .. " + K", hl.dsp.submap("reset"), { submap_universal = true })
@@ -508,5 +499,10 @@ hl.bind(mainMod .. "+ M", hl.dsp.layout("focus r"))
 hl.bind(mainMod .. "+ N", hl.dsp.layout("focus l"))
 hl.bind(mainMod .. "+ SHIFT + M", hl.dsp.layout("swapcol r"))
 hl.bind(mainMod .. "+ SHIFT + N", hl.dsp.layout("swapcol l"))
+-- TODO use a submap for those, it gets too convoluted like this
+hl.bind(mainMod .. "+ SHIFT + V", hl.dsp.layout("fit visible"))
+hl.bind(mainMod .. "+ SHIFT + P", hl.dsp.layout("promote"))
+hl.bind(mainMod .. "+ SHIFT + H", hl.dsp.layout("colresize -conf"))
+hl.bind(mainMod .. "+ SHIFT + L", hl.dsp.layout("colresize +conf"))
 hl.bind(mainMod .. "+ CONTROL + M", hl.dsp.layout("colresize +0.05"))
 hl.bind(mainMod .. "+ CONTROL + N", hl.dsp.layout("colresize -0.05"))
