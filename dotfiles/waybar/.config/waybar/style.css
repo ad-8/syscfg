@@ -163,3 +163,11 @@ menuitem {
 #custom-sep2b {
     color: #195466;
 }
+
+#submap {
+    background-color: #c23127;
+    color: #d3ebe9;
+    padding: 3px 10px;
+    font-weight: bold;
+    border-radius: 8px;
+}

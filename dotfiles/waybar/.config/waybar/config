@@ -5,6 +5,7 @@
     "modules-left": [
         "custom/snowflake",
         "hyprland/workspaces",
+        "hyprland/submap",
         "hyprland/windowcount",
         "hyprland/window",
     ],
