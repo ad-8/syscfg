@@ -2,7 +2,7 @@
 ---- MONITORS ----
 ------------------
 
--- `nwg-displays` is nice tool for this (similar to arandr on xorg)
+-- use `nwg-displays` to figure out position
 hl.monitor({
     output   = "DP-1",
     mode     = "3840x2160",
@@ -16,8 +16,7 @@ hl.monitor({
     scale    = 1,
 })
 
--- ax: fix for pixelated emacs
--- unscale XWayland
+-- unscale XWayland (ax: fixes pixelated emacs)
 hl.config({
     xwayland = {
         force_zero_scaling = true
@@ -32,7 +31,6 @@ hl.env("XCURSOR_SIZE", "32")
 ---- MY PROGRAMS ----
 ---------------------
 
--- Set programs that you use
 local terminal    = "footclient"
 local fileManager = "thunar"
 local menu        = "rofi -show drun"
@@ -164,7 +162,7 @@ hl.config({
     }
 })
 
--- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
+-- Default curves and animations
 hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1},    {0.32, 1}    } })
 hl.curve("easeInOutCubic", { type = "bezier", points = { {0.65, 0.05}, {0.36, 1}    } })
 hl.curve("linear",         { type = "bezier", points = { {0, 0},       {1, 1}       } })
@@ -337,8 +335,8 @@ hl.bind(mainMod .. " + ALT + SPACE", hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_p
 -- bind = $mainMod SHIFT, M, exec, bb ~/x/ax_bookmarks.clj archived
 
 -- TODO keychords - `reset` is not working properly in anon fn
--- its in the docs (https://wiki.hypr.land/Configuring/Basics/Binds/#submaps), so its probably a bug ...
--- mode open
+--      its in the docs (https://wiki.hypr.land/Configuring/Basics/Binds/#submaps), so its probably a bug ...
+-- submap open
 hl.bind(mainMod .. "+ O", hl.dsp.submap("open"))
 hl.define_submap("open", function()
     hl.bind("B", function()
@@ -354,10 +352,8 @@ hl.define_submap("open", function()
         hl.dsp.submap("reset")
     end)
     hl.bind("F", function()
-        hl.exec_cmd("notify-send opening thunar &")
         hl.exec_cmd(fileManager)
         hl.dsp.submap("reset")
-        hl.exec_cmd("notify-send after-opening thunar &")
     end)
     hl.bind("K", function()
         hl.exec_cmd("keepassxc")
@@ -402,7 +398,7 @@ hl.define_submap("open", function()
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
--- mode change
+-- submap change
 hl.bind(mainMod .. "+ C", hl.dsp.submap("change"))
 hl.define_submap("change", function()
     hl.bind("L", function()
@@ -415,7 +411,7 @@ hl.define_submap("change", function()
     end)
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
--- mode toggle
+-- submap toggle
 hl.bind(mainMod .. "+ G", hl.dsp.submap("toggle"))
 hl.define_submap("toggle", function()
     hl.bind("B", function()
@@ -428,7 +424,7 @@ hl.define_submap("toggle", function()
     end)
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
--- mode X
+-- submap X
 hl.bind(mainMod .. "+ X", hl.dsp.submap("modeX"))
 hl.define_submap("modeX", function()
     -- screenshot all
@@ -543,6 +539,7 @@ hl.window_rule({
     float = true,
 })
 
+-- ax rules
 hl.window_rule({
     name  = "scratchpad",
     match = {
