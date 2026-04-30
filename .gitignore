@@ -5,3 +5,5 @@ fish/.config/fish/fish_variables
 /.clj-kondo/
 /.lsp/
 /dotfiles/foot/.config/foot/themes/
+/dotfiles/.clj-kondo/
+/dotfiles/.lsp/
