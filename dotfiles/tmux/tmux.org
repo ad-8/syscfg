@@ -1,4 +1,4 @@
-#+title:  Tmux
+#+title:  tmux
 #+PROPERTY: header-args:shell :tangle .tmux.conf
 
 * Settings
@@ -7,7 +7,6 @@
 # Enable mouse control (clickable windows, panes, resizable panes)
 set -g mouse on
 
-# TODO not sure this works - cant paste outisde tmux
 set -g set-clipboard on
 
 set -g renumber-windows on
@@ -48,8 +47,9 @@ setw -g window-status-format ' #I #[fg=white]#W #[fg=yellow]#F '
 
 setw -g window-status-bell-style 'fg=yellow bg=red bold'
 #+end_src
-** TODO evaluate -- Disable bell
+** Disable bell
 don't do anything when a 'bell' rings
+(*not used any of those settings so far* after a few month of using tmux (30.04.26))
 #+begin_src shell :tangle no
 set -g visual-activity off
 set -g visual-bell off
@@ -60,7 +60,6 @@ set -g bell-action none
 * Keybindings
 ~bind~ = needs prefix; ~bind -n~ = no prefix
 ** Remap Prefix Key
-TODO testing ö - next alternative would be C-a (best with capslock remapped to ctrl)
 #+begin_src shell 
 unbind C-b
 set -g prefix ö
