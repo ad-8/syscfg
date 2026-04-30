@@ -1,15 +1,9 @@
 # Source this file in config.fish !
 
 # Bookmarks: example from wiki -> spaces in path are ok
-export NNN_BMS=".:$HOME/.config;c:$HOME/code;D:$HOME/Documents;d:$HOME/Downloads/;h:$HOME;M:$HOME/MEGA/MEGAsync;m:/run/media/ax;p:$HOME/Pictures;s:$HOME/sync"
-
+export NNN_BMS=".:$HOME/.config;c:$HOME/my/code;d:$HOME/Downloads/;h:$HOME;m:$HOME/my;s:$HOME/sync"
 # Plugins
-export NNN_PLUG='P:preview-tui;p:preview-tabbed;F:fzcd;f:fzopen;'
-
-# Other
-alias nnn "nnn -e"
-
 set --export NNN_FIFO "/tmp/nnn.fifo"
-
-# Preview TUI Plugin uses this for text files
-export NNN_TERMINAL="alacritty"
+export NNN_PLUG='P:preview-tui;p:preview-tabbed;F:fzcd;f:fzopen;'
+# preview-tui uses this
+export NNN_TERMINAL="foot"
