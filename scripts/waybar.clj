@@ -124,10 +124,10 @@
             (printf "killing waybar, status = %d\n" status)))
       (do (println "not runnin'")
           (if minimal?
-            (let [status (-> (shell {:out :string} "sh -c 'setsid waybar -c ~/.config/waybar/config-minimal -s ~/.config/waybar/style-minimal.css >/dev/null 2>&1 &'") :exit)]
-              (printf "killing waybar, status = %d\n" status))
+            (let [status (-> (shell {:out :string} "sh -c 'setsid waybar -c ~/.config/waybar/config-minimal -s ~/.config/waybar/style.css >/dev/null 2>&1 &'") :exit)]
+              (printf "starting waybar, status = %d\n" status))
             (let [status (-> (shell {:out :string} "sh -c 'setsid waybar >/dev/null 2>&1 &'") :exit)]
-              (printf "killing waybar, status = %d\n" status)))))))
+              (printf "starting waybar, status = %d\n" status)))))))
 
 ; match e.g.: ["ProtonVPN DE#316" "DE#316"]
 (defn waybar-vpn []

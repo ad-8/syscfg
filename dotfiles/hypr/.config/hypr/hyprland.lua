@@ -320,6 +320,7 @@ hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("swaylock --color 000000"))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("rofi -show recursivebrowser"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("rofi -show window"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle-min"))
 hl.bind(mainMod .. " + TAB", hl.dsp.focus( { workspace = "previous" } ))
 -- notifications
 hl.bind(mainMod .. " + ALT + H", hl.dsp.exec_cmd("dunstctl history-pop"))
