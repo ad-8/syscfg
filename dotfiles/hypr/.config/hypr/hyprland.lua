@@ -343,6 +343,7 @@ hl.define_submap("open", "reset", function()
     hl.bind("B",         function() hl.exec_cmd("foot -T bluetui bluetui") end)
     hl.bind("C",         function() hl.exec_cmd("qalculate-gtk") end)
     hl.bind("E",         function() hl.exec_cmd("emacsclient -c") end)
+    hl.bind("SHIFT + E", function() hl.exec_cmd("emacs") end)
     hl.bind("F",         function() hl.exec_cmd(fileManager) end)
     hl.bind("K",         function() hl.exec_cmd("keepassxc") end)
     hl.bind("M",         function() hl.exec_cmd("emacs --name ax-emacs-emms --eval '(ax/open-emms-layout)'") end)
@@ -370,9 +371,9 @@ hl.define_submap("toggle", "reset", function()
     hl.bind("W",         function() hl.exec_cmd("rfkill toggle wifi") end)
     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
 end)
--- submap X
-hl.bind(mainMod .. "+ X", hl.dsp.submap("modeX"))
-hl.define_submap("modeX", "reset", function()
+-- submap screenshot
+hl.bind(mainMod .. "+ CTRL + S", hl.dsp.submap("screenshot"))
+hl.define_submap("screenshot", "reset", function()
     -- screenshot all
     hl.bind("A",         function() hl.exec_cmd("grim - | swappy -f -") end)
     -- screenshot select
