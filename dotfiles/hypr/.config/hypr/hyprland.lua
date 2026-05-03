@@ -384,15 +384,9 @@ hl.define_submap("screenshot", "reset", function()
     hl.bind("W",         function() hl.exec_cmd("$HOME/x/hypr-screenshot-window.sh") end)
     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
 end)
--- universal submap reset
-hl.bind(mainMod .. " + K", hl.dsp.submap("reset"), { submap_universal = true })
 ------------------------------------------------------------------------------------------
 -- SUBMAP END
 ------------------------------------------------------------------------------------------
-
--- TODO look into when this would be useful
--- local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
