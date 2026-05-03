@@ -297,19 +297,7 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(mainMod .. " + SPACE", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + I", hl.dsp.layout("addmaster"))
 hl.bind(mainMod .. " + D", hl.dsp.layout("removemaster"))
--- tabbed windows (groups)
-hl.bind(mainMod .. " + T", hl.dsp.group.toggle())
-hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.move({ out_of_group = true }))
-hl.bind(mainMod .. " + CTRL + J", hl.dsp.group.next())
-hl.bind(mainMod .. " + CTRL + K", hl.dsp.group.prev())
-hl.bind(mainMod .. " + ALT + J", hl.dsp.group.move_window({ forward = true}))
--- TODO conflicts with dunst history-kill
-hl.bind(mainMod .. " + ALT + K", hl.dsp.group.move_window({ forward = false}))
--- TODO those bindings suck ...
-hl.bind(mainMod .. " + CTRL + SHIFT + J", hl.dsp.window.move({ into_group = 'd' }))
-hl.bind(mainMod .. " + CTRL + SHIFT + K", hl.dsp.window.move({ into_group = 'u' }))
-hl.bind(mainMod .. " + CTRL + SHIFT + H", hl.dsp.window.move({ into_group = 'l' }))
-hl.bind(mainMod .. " + CTRL + SHIFT + L", hl.dsp.window.move({ into_group = "r" }))
+hl.bind(mainMod .. " + TAB", hl.dsp.focus( { workspace = "previous" } ))
 -- multi-monitor keybinds
 hl.bind(mainMod .. " + PERIOD", hl.dsp.focus({ monitor = "+1" }))
 hl.bind(mainMod .. " + SHIFT + PERIOD", hl.dsp.window.move({ monitor = "+1", follow = false }))
@@ -321,7 +309,6 @@ hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("rofi -show recursivebrowser"
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("rofi -show window"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle-min"))
-hl.bind(mainMod .. " + TAB", hl.dsp.focus( { workspace = "previous" } ))
 -- notifications
 hl.bind(mainMod .. " + ALT + H", hl.dsp.exec_cmd("dunstctl history-pop"))
 hl.bind(mainMod .. " + ALT + K", hl.dsp.exec_cmd("dunstctl close-all"))
@@ -336,57 +323,6 @@ hl.bind(mainMod .. " + ALT + SPACE", hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_p
 -- bind = $mainMod, M, exec, bb ~/x/ax_bookmarks.clj std
 -- bind = $mainMod SHIFT, M, exec, bb ~/x/ax_bookmarks.clj archived
 
-------------------------------------------------------------------------------------------
--- SUBMAP START
-------------------------------------------------------------------------------------------
--- submap open
-hl.bind(mainMod .. "+ O", hl.dsp.submap("open"))
-hl.define_submap("open", "reset", function()
-    hl.bind("B",         function() hl.exec_cmd("foot -T bluetui bluetui") end)
-    hl.bind("C",         function() hl.exec_cmd("qalculate-gtk") end)
-    hl.bind("E",         function() hl.exec_cmd("emacsclient -c") end)
-    hl.bind("SHIFT + E", function() hl.exec_cmd("emacs") end)
-    hl.bind("F",         function() hl.exec_cmd(fileManager) end)
-    hl.bind("K",         function() hl.exec_cmd("keepassxc") end)
-    hl.bind("M",         function() hl.exec_cmd("emacs --name ax-emacs-emms --eval '(ax/open-emms-layout)'") end)
-    hl.bind("SHIFT + M", function() hl.exec_cmd("strawberry") end)
-    hl.bind("P",         function() hl.exec_cmd("pavucontrol") end)
-    hl.bind("Q",         function() hl.exec_cmd("qbittorrent") end)
-    hl.bind("V",         function() hl.exec_cmd("brave") end)
-    hl.bind("SHIFT + V", function() hl.exec_cmd("virt-manager") end)
-    hl.bind("W",         function() hl.exec_cmd("foot -T wiremix wiremix") end)
-    hl.bind("SHIFT + W", function() hl.exec_cmd("waypaper") end)
-    hl.bind("X",         function() hl.exec_cmd("firefox") end)
-    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
-end)
--- submap change
-hl.bind(mainMod .. "+ C", hl.dsp.submap("change"))
-hl.define_submap("change", "reset", function()
-    hl.bind("L",         function() hl.exec_cmd("$HOME/syscfg/scripts/bb/licht.clj") end)
-    hl.bind("W",         function() hl.exec_cmd("$HOME/syscfg/scripts/bb/set_random_wallpaper.clj") end)
-    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
-end)
--- submap toggle
-hl.bind(mainMod .. "+ G", hl.dsp.submap("toggle"))
-hl.define_submap("toggle", "reset", function()
-    hl.bind("B",         function() hl.exec_cmd("rfkill toggle bluetooth") end)
-    hl.bind("W",         function() hl.exec_cmd("rfkill toggle wifi") end)
-    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
-end)
--- submap screenshot
-hl.bind(mainMod .. "+ CTRL + S", hl.dsp.submap("screenshot"))
-hl.define_submap("screenshot", "reset", function()
-    -- screenshot all
-    hl.bind("A",         function() hl.exec_cmd("grim - | swappy -f -") end)
-    -- screenshot select
-    hl.bind("S",         function() hl.exec_cmd('grim -g "$(slurp)" - | swappy -f -') end)
-    -- screenshot window
-    hl.bind("W",         function() hl.exec_cmd("$HOME/x/hypr-screenshot-window.sh") end)
-    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
-end)
-------------------------------------------------------------------------------------------
--- SUBMAP END
-------------------------------------------------------------------------------------------
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -428,6 +364,73 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
+
+------------------------------------------------------------------------------------------
+-- SUBMAP START
+------------------------------------------------------------------------------------------
+-- submap open
+hl.bind(mainMod .. "+ O", hl.dsp.submap("open"))
+hl.define_submap("open", "reset", function()
+    hl.bind("B",         function() hl.exec_cmd("foot -T bluetui bluetui") end)
+    hl.bind("C",         function() hl.exec_cmd("qalculate-gtk") end)
+    hl.bind("E",         function() hl.exec_cmd("emacsclient -c") end)
+    hl.bind("SHIFT + E", function() hl.exec_cmd("emacs") end)
+    hl.bind("F",         function() hl.exec_cmd(fileManager) end)
+    hl.bind("K",         function() hl.exec_cmd("keepassxc") end)
+    hl.bind("M",         function() hl.exec_cmd("emacs --name ax-emacs-emms --eval '(ax/open-emms-layout)'") end)
+    hl.bind("SHIFT + M", function() hl.exec_cmd("strawberry") end)
+    hl.bind("P",         function() hl.exec_cmd("pavucontrol") end)
+    hl.bind("Q",         function() hl.exec_cmd("qbittorrent") end)
+    hl.bind("V",         function() hl.exec_cmd("brave") end)
+    hl.bind("SHIFT + V", function() hl.exec_cmd("virt-manager") end)
+    hl.bind("W",         function() hl.exec_cmd("foot -T wiremix wiremix") end)
+    hl.bind("SHIFT + W", function() hl.exec_cmd("waypaper") end)
+    hl.bind("X",         function() hl.exec_cmd("firefox") end)
+    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
+end)
+-- tabbed windows (groups)
+hl.bind(mainMod .. "+ W", hl.dsp.submap("tabs"))
+hl.define_submap("tabs", function()
+    hl.bind("W",                       hl.dsp.group.toggle())
+    hl.bind("O",                       hl.dsp.window.move({ out_of_group = true }))
+    hl.bind(mainMod .. " + J",         hl.dsp.group.next())
+    hl.bind(mainMod .. " + K",         hl.dsp.group.prev())
+    hl.bind(mainMod .. " + SHIFT + J", hl.dsp.group.move_window({ forward = true}))
+    hl.bind(mainMod .. " + SHIFT + K", hl.dsp.group.move_window({ forward = false}))
+    hl.bind(mainMod .. " + CTRL + J",  hl.dsp.window.move({ into_group = 'd' }))
+    hl.bind(mainMod .. " + CTRL + K",  hl.dsp.window.move({ into_group = 'u' }))
+    hl.bind(mainMod .. " + CTRL + H",  hl.dsp.window.move({ into_group = 'l' }))
+    hl.bind(mainMod .. " + CTRL + L",  hl.dsp.window.move({ into_group = 'r' }))
+    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
+end)
+-- submap change
+hl.bind(mainMod .. "+ C", hl.dsp.submap("change"))
+hl.define_submap("change", "reset", function()
+    hl.bind("L",         function() hl.exec_cmd("$HOME/syscfg/scripts/bb/licht.clj") end)
+    hl.bind("W",         function() hl.exec_cmd("$HOME/syscfg/scripts/bb/set_random_wallpaper.clj") end)
+    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
+end)
+-- submap toggle
+hl.bind(mainMod .. "+ G", hl.dsp.submap("toggle"))
+hl.define_submap("toggle", "reset", function()
+    hl.bind("B",         function() hl.exec_cmd("rfkill toggle bluetooth") end)
+    hl.bind("W",         function() hl.exec_cmd("rfkill toggle wifi") end)
+    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
+end)
+-- submap screenshot
+hl.bind(mainMod .. "+ CTRL + S", hl.dsp.submap("screenshot"))
+hl.define_submap("screenshot", "reset", function()
+    -- screenshot all
+    hl.bind("A",         function() hl.exec_cmd("grim - | swappy -f -") end)
+    -- screenshot select
+    hl.bind("S",         function() hl.exec_cmd('grim -g "$(slurp)" - | swappy -f -') end)
+    -- screenshot window
+    hl.bind("W",         function() hl.exec_cmd("$HOME/x/hypr-screenshot-window.sh") end)
+    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
+end)
+------------------------------------------------------------------------------------------
+-- SUBMAP END
+------------------------------------------------------------------------------------------
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
