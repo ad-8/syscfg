@@ -128,7 +128,7 @@
       babashka
       gnutar
       gzip
-      util-linux # required for mountpoint
+      util-linux # required for `mountpoint` cmd
     ];
     serviceConfig = {
       Type = "oneshot";
