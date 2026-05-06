@@ -11,11 +11,13 @@
   };
 
   config = lib.mkIf config.configPrinting.enable {
-    # Enable CUPS to print documents.
-    services.printing.enable = true;
+    
+    services.printing = {
+      enable = true; # Enable CUPS to print documents.
+      # drivers = [ pkgs.hplip ]; # printer works w/ or w/o this
+    };
 
     environment.systemPackages = with pkgs; [
-      hplip
       system-config-printer
     ];
   };
