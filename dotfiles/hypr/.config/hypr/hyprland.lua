@@ -280,8 +280,8 @@ hl.gesture({
 
 local mainMod = "SUPER"
 -- dwm-inspired basics
-hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
+hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd(menu))
@@ -292,15 +292,15 @@ hl.bind(mainMod .. " + SHIFT + J", hl.dsp.layout("swapnext"))
 hl.bind(mainMod .. " + SHIFT + K", hl.dsp.layout("swapprev"))
 hl.bind(mainMod .. " + H", hl.dsp.layout("mfact -0.05"))
 hl.bind(mainMod .. " + L", hl.dsp.layout("mfact +0.05"))
-hl.bind(mainMod .. " + RETURN", hl.dsp.layout("swapwithmaster master"))
+hl.bind(mainMod .. " + U", hl.dsp.layout("swapwithmaster master"))
+hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.layout("swapwithmaster master"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
--- TODO remove?
--- hl.bind(mainMod .. " + SPACE", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(mainMod .. " + SPACE", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + I", hl.dsp.layout("addmaster"))
 hl.bind(mainMod .. " + D", hl.dsp.layout("removemaster"))
 hl.bind(mainMod .. " + TAB", hl.dsp.focus( { workspace = "previous" } ))
 -- TODO test wlr-which-key
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("wlr-which-key"))
+hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.exec_cmd("wlr-which-key"))
 hl.bind(mainMod .. " + O",     hl.dsp.exec_cmd("wlr-which-key --initial-keys \"o\""))
 hl.bind(mainMod .. " + C",     hl.dsp.exec_cmd("wlr-which-key --initial-keys \"c\""))
 -- TODO test monitor sleep (the hl.timer construct is from the wiki)
