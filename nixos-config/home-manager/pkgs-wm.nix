@@ -31,6 +31,7 @@
       waybar
       wiremix
       wl-clipboard
+      wlr-which-key
       wmenu
     ];
   };
