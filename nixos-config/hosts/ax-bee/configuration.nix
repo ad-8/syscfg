@@ -20,30 +20,6 @@
     "/dev/disk/by-uuid/1101d87b-2380-4455-a516-1dda026f32e3";
   networking.hostName = "ax-bee";
 
-  services.keyd = {
-    enable = true;
-    keyboards = {
-      # The name is just the name of the configuration file, it does not really matter
-      default = {
-        ids = [ "*" ]; # what goes into the [id] section, here we select all keyboards
-        # Everything but the ID section:
-        settings = {
-          # The main layer, if you choose to declare it in Nix
-          main = {
-            # Maps capslock to escape when pressed and control when held.
-            capslock = "overload(control, esc)";
-            # leftalt = "leftmeta";
-            # leftmeta = "leftalt";
-          };
-          otherlayer = { };
-        };
-        extraConfig = ''
-          # put here any extra-config, e.g. you can copy/paste here directly a configuration, just remove the ids part
-        '';
-      };
-    };
-  };
-
   # -----------------------------------------------------------------------------------------------
   systemd.timers."ax-restic" = {
     wantedBy = [ "timers.target" ];
