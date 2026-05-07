@@ -249,7 +249,7 @@ hl.config({
         kb_layout  = "de",
         kb_variant = "",
         kb_model   = "",
-        kb_options = "",
+        kb_options = "caps:escape",
         kb_rules   = "",
 
         numlock_by_default = true,
