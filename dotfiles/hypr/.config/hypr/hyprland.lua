@@ -539,6 +539,7 @@ hl.window_rule({ match = { class = "org.keepassxc.KeePassXC" }, workspace = "9" 
 hl.window_rule({ match = { class = "qalculate-gtk" }, float = true, size = "800 600" })
 hl.window_rule({ match = { class = "foot", title = "^(bluetui)|^(wiremix)$" }, float = true, size = "1024 768" })
 hl.window_rule({ match = { class = "waypaper" }, float = true, size = "1024 768" })
+hl.window_rule({ match = { class = ".virt-manager-wrapped", title = "Locate ISO media" }, float = true, size = "1024 768" })
 -- more stuff that should float and keep its size
 hl.window_rule({ match = { class = "Thunar", title = "File Operation Progress" }, float = true })
 hl.window_rule({ match = { class = "org.pulseaudio.pavucontrol" }, float = true })
