@@ -5,7 +5,7 @@ time=$(apm -m 2>/dev/null)
 rate=$(sysctl -n hw.sensors.acpibat0.power0 2>/dev/null | sed 's/ (rate)//')
 
 
-if [ "$time" = "unknown" ] 2>/dev/null; then
+if [ -z "$time" ] || [ "$time" = "unknown" ]; then
     time_str="AC"
 else
     hours=$((time / 60))

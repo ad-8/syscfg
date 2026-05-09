@@ -4,7 +4,7 @@ time=$(sysctl -n hw.acpi.battery.time 2>/dev/null)
 rate=$(sysctl -n hw.acpi.battery.rate 2>/dev/null)
 
 # Handle unknown time (-1 when charching?)
-if [ "$time" -lt 0 ] 2>/dev/null; then
+if [ -z "$time" ] || [ "$time" -lt 0 ] 2>/dev/null; then
     time_str="AC"
 else
     hours=$((time / 60))
