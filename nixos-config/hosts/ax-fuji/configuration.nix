@@ -123,7 +123,6 @@
 
   systemd.services.forgejo-backup = {
     description = "Forgejo Backup Service";
-    wantedBy = [ "multi-user.target" ];
     path = with pkgs; [
       babashka
       gnutar
