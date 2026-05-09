@@ -1,7 +1,6 @@
 #!/usr/bin/env bb
 (ns licht
-  (:require [clojure.java.shell :refer [sh]]
-            [clojure.string :as str]
+  (:require [clojure.string :as str]
             [clojure.edn]
             [babashka.process :refer [shell process]])
   (:import java.net.InetAddress))
@@ -13,17 +12,17 @@
 
 
 (defn light-screen [brightness]
-  (sh "light" "-S" (str brightness)))
+  (shell "light" "-S" (str brightness)))
 
 ; light -L lists available devices
 (defn light-keyboard [brightness]
-  (sh "light" "-s" "sysfs/leds/smc::kbd_backlight" "-S" (str brightness)))
+  (shell "light" "-s" "sysfs/leds/smc::kbd_backlight" "-S" (str brightness)))
 
 (defn get-light-screen []
-  (-> (sh "light" "-G") :out (str/trim)))
+  (-> (shell {:out :string} "light" "-G") :out str/trim))
 
 (defn get-light-keyboard []
-  (-> (sh "light" "-s" "sysfs/leds/smc::kbd_backlight" "-G") :out (str/trim)))
+  (-> (shell {:out :string} "light" "-s" "sysfs/leds/smc::kbd_backlight" "-G") :out str/trim))
 
 (defn set-two-monitors [what val]
   (let [vcp-number (case what
@@ -41,7 +40,7 @@
                      :brightness 10
                      :contrast   12
                      (throw (ex-info "invalid type for `what`" {:valid-types [:brightness :contrast]})))]
-    (sh "ddcutil" "setvcp" vcp-number val)))
+    (shell "ddcutil" "setvcp" vcp-number val)))
 
 (comment
   (try (set-two-monitors :foo 23)
@@ -103,8 +102,8 @@
 
 
 (defn get-one-monitor []
-  (let [brigh (-> (sh "ddcutil" "getvcp" "10") :out extract-brightness)
-        cont  (-> (sh "ddcutil" "getvcp" "12") :out extract-contrast)]
+  (let [brigh (-> (shell {:out :string} "ddcutil" "getvcp" "10") :out extract-brightness)
+        cont  (-> (shell {:out :string} "ddcutil" "getvcp" "12") :out extract-contrast)]
     (format "Brightness: %s\nContrast:   %s\n"  brigh cont)))
 
 (defn get-ext-vals []
