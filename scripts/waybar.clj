@@ -20,7 +20,7 @@
                                 last
                                 str/trim)
         fmt (format "󰋊 %s" free-space-on-root)
-        free-space-int (Integer/parseInt (re-find #"\d+" free-space-on-root))
+        free-space-int (or (some-> (re-find #"\d+" free-space-on-root) Integer/parseInt) 0)
         class (if (< free-space-int 25) :low :ok)
         json (json/encode {:text fmt :class class})]
 
