@@ -411,6 +411,36 @@ hl.define_submap("tabs", function()
     hl.bind(mainMod .. " + CTRL + L",  hl.dsp.window.move({ into_group = 'r' }))
     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
 end)
+-- scrolling
+hl.bind(mainMod .. "+ E", hl.dsp.submap("scrolling"))
+hl.define_submap("scrolling", function()
+    -- Focus
+    hl.bind("H",              hl.dsp.layout("focus l"))
+    hl.bind("L",              hl.dsp.layout("focus r"))
+    hl.bind("J",              hl.dsp.focus({ direction = "down" }))
+    hl.bind("K",              hl.dsp.focus({ direction = "up" }))
+    -- Swap 
+    hl.bind("SHIFT + H",      hl.dsp.layout("swapcol l"))
+    hl.bind("SHIFT + L",      hl.dsp.layout("swapcol r"))
+    hl.bind("SHIFT + K",      hl.dsp.window.move({ direction = "up" }))
+    hl.bind("SHIFT + J",      hl.dsp.window.move({ direction = "down" }))
+    -- Resize
+    hl.bind("comma",          hl.dsp.layout("colresize -conf"))
+    hl.bind("SHIFT + comma",  hl.dsp.layout("colresize -0.05"))
+    hl.bind("period",         hl.dsp.layout("colresize +conf"))
+    hl.bind("SHIFT + period", hl.dsp.layout("colresize +0.05"))
+    -- Consume and Expel
+    hl.bind("C",              hl.dsp.layout("consume"))
+    hl.bind("E",              hl.dsp.layout("expel"))
+    hl.bind("N",              hl.dsp.layout("consume_or_expel next"))
+    hl.bind("M",              hl.dsp.layout("consume_or_expel prev"))
+    -- Misc
+    hl.bind("P",              hl.dsp.layout("promote"))
+    hl.bind("V",              hl.dsp.layout("fit visible"))
+    hl.bind("SPACE",          hl.dsp.layout("center"))
+
+    hl.bind("ESCAPE",         hl.dsp.submap("reset"))
+end)
 -- submap change
 -- hl.bind(mainMod .. "+ C", hl.dsp.submap("change"))
 -- hl.define_submap("change", "reset", function()
@@ -547,34 +577,5 @@ hl.window_rule({ match = { class = "org.pulseaudio.pavucontrol" }, float = true 
 
 -- TODO test scrolling layout 
 hl.workspace_rule({ workspace = "5", layout = "scrolling"})
-
-hl.bind(mainMod .. "+ E", hl.dsp.submap("scrolling"))
-hl.define_submap("scrolling", function()
-    -- Focus
-    hl.bind("H",                       hl.dsp.layout("focus l"))
-    hl.bind("L",                       hl.dsp.layout("focus r"))
-    hl.bind("K",                       hl.dsp.focus({ direction = "up" }))
-    hl.bind("J",                       hl.dsp.focus({ direction = "down" }))
-    -- Swap 
-    hl.bind("SHIFT + H",               hl.dsp.layout("swapcol l"))
-    hl.bind("SHIFT + L",               hl.dsp.layout("swapcol r"))
-    hl.bind("SHIFT + K",               hl.dsp.window.move({ direction = "up" }))
-    hl.bind("SHIFT + J",               hl.dsp.window.move({ direction = "down" }))
-    -- Resize
-    hl.bind("comma",                   hl.dsp.layout("colresize -conf"))
-    hl.bind("SHIFT + comma",           hl.dsp.layout("colresize -0.05"))
-    hl.bind("period",                  hl.dsp.layout("colresize +conf"))
-    hl.bind("SHIFT + period",          hl.dsp.layout("colresize +0.05"))
-    -- Consume and Expel
-    hl.bind("C",                       hl.dsp.layout("consume"))
-    hl.bind("E",                       hl.dsp.layout("expel"))
-    hl.bind("N",                       hl.dsp.layout("consume_or_expel next"))
-    hl.bind("M",                       hl.dsp.layout("consume_or_expel prev"))
-    -- Misc
-    hl.bind("P",                       hl.dsp.layout("promote"))
-    hl.bind("V",                       hl.dsp.layout("fit visible"))
-    hl.bind("SPACE",                   hl.dsp.layout("center"))
-
-    hl.bind("ESCAPE",                  hl.dsp.submap("reset"))
-end)
+hl.workspace_rule({ workspace = "9", layout = "scrolling"})
 
