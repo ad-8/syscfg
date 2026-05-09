@@ -2,7 +2,7 @@
 
 result=$(dunstctl is-paused)
 
-if [ "$result" == "true" ]; then
+if [ "$result" = "true" ]; then
     echo ""
 else
     echo ""
