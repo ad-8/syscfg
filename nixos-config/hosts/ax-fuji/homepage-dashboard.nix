@@ -6,7 +6,7 @@
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    allowedHosts = "192.168.178.8:3000";
+    allowedHosts = "192.168.178.8:8082";
     settings = {
       statusStyle = "dot";
     };
