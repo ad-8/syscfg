@@ -6,7 +6,7 @@
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
-    environmentFile = "/home/ax/dotfiles-nixos/hosts/ax-fuji/.env"; # must contain HOMEPAGE_ALLOWED_HOSTS
+    allowedHosts = "192.168.178.8:3000";
     settings = {
       statusStyle = "dot";
     };
