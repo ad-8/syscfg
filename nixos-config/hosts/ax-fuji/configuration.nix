@@ -46,12 +46,12 @@
       enable = true;
       systemCronJobs = [
         # run backup scripts
-        "10 3 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/backup/ax_srv_radicale.clj >> ~/cron-radicale.log 2>&1"
-        "12 3 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/backup/ax_srv_linkding.clj >> ~/cron-linkding.log 2>&1"
-        "15 3 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/backup/ax_srv_immich.clj >> ~/cron-immich.log 2>&1"
-        "25 3 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/backup/ax_srv_rclone_b2.clj >> ~/cron-rclone-b2.log 2>&1"
+        "10 3 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/backup/ax_srv_radicale.clj >> $HOME/cron-radicale.log 2>&1"
+        "12 3 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/backup/ax_srv_linkding.clj >> $HOME/cron-linkding.log 2>&1"
+        "15 3 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/backup/ax_srv_immich.clj >> $HOME/cron-immich.log 2>&1"
+        "25 3 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/backup/ax_srv_rclone_b2.clj >> $HOME/cron-rclone-b2.log 2>&1"
         # download daily wallpaper
-        "0 9,10,11 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/bing_wallpaper_dl.clj >> ~/bing.log 2>&1"
+        "0 9,10,11 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/bing_wallpaper_dl.clj >> $HOME/bing.log 2>&1"
       ];
     };
     forgejo = {
