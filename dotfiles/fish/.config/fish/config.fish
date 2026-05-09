@@ -148,15 +148,15 @@ switch $distro
          abbr -a cu "(checkupdate) Don't know how to on $distro"
 end
 
-abbr -a syncmoto-music "rsync -ahvP --stats '$HOME/mukke/' '/run/user/1000/gvfs/mtp:host=motorola_moto_g54_5G_ZY22HWD8XQ/Internal shared storage/Music/mukke/' --delete --omit-dir-times --no-perms --inplace --size-only --ignore-existing -n"
-abbr -a syncmoto-pics "rsync -ahvP --stats '/run/user/1000/gvfs/mtp:host=motorola_moto_g54_5G_ZY22HWD8XQ/Internal shared storage/DCIM' '$HOME/sync/Moto/' -n"
-abbr -a syncmoto-backup "rsync -ahvP --stats '/run/user/1000/gvfs/mtp:host=motorola_moto_g54_5G_ZY22HWD8XQ/Internal shared storage/backups' '$HOME/sync/Moto/' -n"
+# update these when devices change
+set -g mtp_moto    "motorola_moto_g54_5G_ZY22HWD8XQ"
+set -g mtp_pixel7a "Google_Pixel_7a_37211JEHN10476"
 
-abbr -a sync-pixel-music "rsync -ahvP --stats ~/mukke/ /run/user/1000/gvfs/mtp:host=Google_Pixel_7a_37211JEHN10476/Internal\ shared\ storage/mukke/ --omit-dir-times --no-perms --inplace --size-only --ignore-existing -n"
+abbr -a syncmoto-music "rsync -ahvP --stats '$HOME/mukke/' '/run/user/1000/gvfs/mtp:host=$mtp_moto/Internal shared storage/Music/mukke/' --delete --omit-dir-times --no-perms --inplace --size-only --ignore-existing -n"
+abbr -a syncmoto-pics "rsync -ahvP --stats '/run/user/1000/gvfs/mtp:host=$mtp_moto/Internal shared storage/DCIM' '$HOME/sync/Moto/' -n"
+abbr -a syncmoto-backup "rsync -ahvP --stats '/run/user/1000/gvfs/mtp:host=$mtp_moto/Internal shared storage/backups' '$HOME/sync/Moto/' -n"
 
-abbr -a sync-pixel-backup "rsync -ahvP --stats --no-g '/run/user/1000/gvfs/mtp:host=Google_Pixel_6a_25281JEGR07582/Internal shared storage/backup' '/nas/data/backup/pixel6a' -n"
-
-abbr -a sync-pixel-pics "rsync -ahvP --stats --no-g '/run/user/1000/gvfs/mtp:host=Google_Pixel_6a_25281JEGR07582/Internal shared storage/DCIM' '/nas/data/backup/pixel6a' -n"
+abbr -a sync-pixel-music "rsync -ahvP --stats ~/mukke/ /run/user/1000/gvfs/mtp:host=$mtp_pixel7a/Internal\ shared\ storage/mukke/ --omit-dir-times --no-perms --inplace --size-only --ignore-existing -n"
 
 # official example:                     ffmpeg                 -i input.wav -codec:a libmp3lame -qscale:a 2 output.mp3
 abbr -a flac2mp3 'fd -e flac --exec ffmpeg -loglevel error -i {} -codec:a libmp3lame -qscale:a 1 {.}.mp3'
