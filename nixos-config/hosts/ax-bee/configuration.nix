@@ -33,7 +33,6 @@
 
   systemd.services."ax-restic" = {
     description = "Restic backup service";
-    wantedBy = [ "multi-user.target" ];
     # the $PATH is almost empty when running a systemd service, so we add to it
     path = [
       pkgs.restic
@@ -42,7 +41,6 @@
       Type = "oneshot";
       User = "ax";
       ExecStart = "${pkgs.babashka}/bin/bb /home/ax/x/backup/ax_bee_restic_mega.clj";
-      # RemainAfterExit = false; # TODO does NOT prevent the timer from running on `nixos-rebuild switch`
     };
   };
   # -----------------------------------------------------------------------------------------------
