@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   ...
 }:
@@ -132,7 +133,7 @@
     serviceConfig = {
       Type = "oneshot";
       User = "root";
-      ExecStart = "${pkgs.babashka}/bin/bb /home/ax/x/backup/ax_srv_forgejo.clj";
+      ExecStart = "${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/backup/ax_srv_forgejo.clj";
     };
   };
   # -----------------------------------------------------------------------------------------------

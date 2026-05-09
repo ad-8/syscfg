@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   ...
 }:
@@ -40,7 +41,7 @@
     serviceConfig = {
       Type = "oneshot";
       User = "ax";
-      ExecStart = "${pkgs.babashka}/bin/bb /home/ax/x/backup/ax_bee_restic_mega.clj";
+      ExecStart = "${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/backup/ax_bee_restic_mega.clj";
     };
   };
   # -----------------------------------------------------------------------------------------------
