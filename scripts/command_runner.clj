@@ -1,6 +1,7 @@
 #!/usr/bin/env bb
 (ns command-runner
   (:require [babashka.deps :as deps]
+            [babashka.fs :as fs]
             [babashka.process :refer [shell]]
             [bling.core :refer [bling print-bling callout point-of-interest]]
             [clojure.string :as str]
@@ -40,7 +41,7 @@
    ({:name "Check disk usage", :cmd "df -h / && echo && df -h | grep -i nas"}
     {:name "toggle notifications (dunst)", :cmd "$HOME/scripts/dunst_toggle_and_notify.clj"})}
   {:etc :pp})
-(def commands-data (yaml/parse-string (slurp "/home/ax/x/commands.yml")))
+(def commands-data (yaml/parse-string (slurp (fs/path (fs/home) "x/commands.yml"))))
 
 
 '({:name "help - about R", :cmd "echo 'This is R, a simple command runner.'", :category "Help"}
