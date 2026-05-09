@@ -12,11 +12,15 @@
 
 
 (defn light-screen [brightness]
-  (shell "light" "-S" (str brightness)))
+  (let [res (shell {:continue true} "light" "-S" (str brightness))]
+    (when (not= 0 (:exit res))
+      (println "warn: light-screen failed (device may not exist)"))))
 
 ; light -L lists available devices
 (defn light-keyboard [brightness]
-  (shell "light" "-s" "sysfs/leds/smc::kbd_backlight" "-S" (str brightness)))
+  (let [res (shell {:continue true} "light" "-s" "sysfs/leds/smc::kbd_backlight" "-S" (str brightness))]
+    (when (not= 0 (:exit res))
+      (println "warn: light-keyboard failed (device may not exist)"))))
 
 (defn get-light-screen []
   (-> (shell {:out :string} "light" "-G") :out str/trim))
