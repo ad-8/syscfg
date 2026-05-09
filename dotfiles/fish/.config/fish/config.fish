@@ -68,7 +68,7 @@ end
 
 abbr -a t tmux
 abbr -a tn 'tmux new-session -s'
-abbr -a tl 'tmux list-sessions'
+abbr -a tls 'tmux list-sessions'
 abbr -a ta 'tmux attach-session'
 
 abbr -a nxr nix run #e.g. 'nix run nixpkgs#hello'
