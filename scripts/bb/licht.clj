@@ -105,6 +105,11 @@
     (println (heading "External"))
     (print-ext-vals displays)))
 
+(defn notify-lights! []
+  (shell "notify-send" "Licht" (with-out-str (print-all-the-light-we-can-see))
+         "--app-name" "dwm-licht" "--expire-time" "8000"
+         "--icon" "brightness-high-symbolic" "--replace-id" "127"))
+
 (defn illuminate! [{:keys [internal keyboard ext-b ext-c col-temp]}]
   (let [displays (get-displays)]
     (light-screen internal)
@@ -147,7 +152,8 @@
            :vals {:internal 0 :keyboard 0 :ext-b [100 20] :ext-c [100 20] :col-temp 6500}}
    "fo5"  {:name "Focus-5"
            :vals {:internal 0 :keyboard 0 :ext-b [100 5]  :ext-c [100 5]  :col-temp 6500}}
-   "cust" {:name "Custom"}})
+   "cust" {:name "Custom"}
+   "get"  {:name "Get current values"}})
 
 
 (def nord
@@ -208,8 +214,10 @@
         user-choice (if valid-arg first-arg (ask-user))]
     (if-not user-choice
       (println "no selection, exiting")
-      (if (= user-choice "cust")
-        (set-custom-lights!)
+      (cond
+        (= user-choice "cust") (set-custom-lights!)
+        (= user-choice "get")  (notify-lights!)
+        :else
         (let [selected-value (get settings user-choice)]
           (illuminate! (:vals selected-value))
           (spit "/tmp/licht-curr-val" (str user-choice "\n"))
