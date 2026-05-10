@@ -81,12 +81,15 @@
     {:display d :brightness b :contrast c}))
 
 (defn print-ext-vals [displays names]
-  (doseq [{:keys [display brightness contrast]} (map get-ext-display-vals displays)]
-    (let [label (get names display "")]
-      (println (format "Display %d%s — brightness: %s  contrast: %s"
-                       display
-                       (if (seq label) (str " (" label ")") "")
-                       brightness contrast)))))
+  (let [rows  (map get-ext-display-vals displays)
+        label (fn [{:keys [display]}]
+                (let [n (get names display "")]
+                  (str "Display " display (if (seq n) (str " (" n ")") ""))))
+        w     (apply max (map (comp count label) rows))]
+    (doseq [row rows]
+      (let [{:keys [brightness contrast]} row]
+        (println (format (str "%-" w "s — brightness: %s  contrast: %s")
+                         (label row) brightness contrast))))))
 
 
 (defn set-color-temp [n]
