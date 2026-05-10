@@ -6,9 +6,13 @@
   (:import java.net.InetAddress))
 
 
-
 (defn get-hostname []
   (.getHostName (InetAddress/getLocalHost)))
+
+(def host-config
+  {"ax-bee" {:internal false :displays [1 2]}
+   "ax-mac" {:internal true  :displays :detect}
+   "ax-t14" {:internal true  :displays :detect}})
 
 
 (defn light-screen [brightness]
@@ -28,47 +32,6 @@
 (defn get-light-keyboard []
   (-> (shell {:out :string} "light" "-s" "sysfs/leds/smc::kbd_backlight" "-G") :out str/trim))
 
-(defn set-two-monitors [what val]
-  (let [vcp-number (case what
-                     :brightness 10
-                     :contrast   12
-                     (throw (ex-info "invalid type for `what`" {:valid-types [:brightness :contrast]})))
-        set-display1 (format "ddcutil --display 1 setvcp %d %s" vcp-number val)
-        set-display2 (format "ddcutil --display 2 setvcp %d %s" vcp-number (+ val 0))]
-    (shell set-display1)
-    (Thread/sleep 500)
-    (shell set-display2)))
-
-(defn set-one-monitor [what val]
-  (let [vcp-number (case what
-                     :brightness 10
-                     :contrast   12
-                     (throw (ex-info "invalid type for `what`" {:valid-types [:brightness :contrast]})))]
-    (shell "ddcutil" "setvcp" vcp-number val)))
-
-(comment
-  (try (set-two-monitors :foo 23)
-       (catch Exception e (println (.getMessage e) "\n" (ex-data e)))) 
-  ;;
-  )
-
-;; TODO by night +10 (day +0)
-(defn set-ext-brightness [val]
-  (case (get-hostname)
-    "ax-bee" (set-two-monitors :brightness val)
-    "ax-mac" (set-one-monitor :brightness val)
-    "ax-x1c" (set-one-monitor :brightness val)
-    (do (shell "notify-send 'fatal error in licht.clj' 'set-ext-brightness: no setup for this hostname'")
-        (System/exit 1))))
-
-;; TODO by night +15 (day +10)
-(defn set-ext-contrast [val]
-  (case (get-hostname)
-    "ax-bee" (set-two-monitors :contrast val)
-    "ax-mac" (set-one-monitor :contrast val)
-    "ax-x1c" (set-one-monitor :contrast val)
-    (do (shell "notify-send 'fatal error in licht.clj' 'set-ext-contrast: no setup for this hostname'")
-        (System/exit 1))))
 
 (defn shell-out [cmd]
   (-> (shell {:out :string} cmd) :out str/trim))
@@ -76,8 +39,8 @@
 (defn extract-vcp-value [s]
   (last (re-find #"\bcurrent value =\s*(\d+)\b" s)))
 
-(comment 
-  (re-find  #"\bcurrent value =\s*(\d+)\b" "VCP code 0x10 (Brightness                    ): current value =   100, max value =   100")
+(comment
+  (re-find #"\bcurrent value =\s*(\d+)\b" "VCP code 0x10 (Brightness                    ): current value =   100, max value =   100")
 
   (->> (shell-out "ddcutil detect")
        str/split-lines
@@ -85,35 +48,35 @@
        (map-indexed (fn [idx s] [idx s])))
   )
 
-(defn get-two-monitors []
-  (let [monitors (->> (shell-out "ddcutil detect") str/split-lines (map str/trim))
-        m1 (format "%s: %s (%s)" (nth monitors 0) (nth monitors 4) (nth monitors 9))
-        m2 (format "%s: %s (%s)" (nth monitors 12) (nth monitors 16) (nth monitors 21))
-        b1 (-> (shell-out  "ddcutil --display 1 getvcp 10") extract-vcp-value)
-        b2 (-> (shell-out "ddcutil --display 2 getvcp 10") extract-vcp-value)
-        c1 (-> (shell-out "ddcutil --display 1 getvcp 12") extract-vcp-value)
-        c2 (-> (shell-out "ddcutil --display 2 getvcp 12") extract-vcp-value)]
+(defn detect-display-ids []
+  (->> (shell-out "ddcutil detect")
+       str/split-lines
+       (map str/trim)
+       (filter #(re-matches #"Display \d+" %))
+       (map #(Integer/parseInt (re-find #"\d+" %)))))
 
-    (println (str/replace m1 #"\s+" " "))
-    (println "brightness:" b1)
-    (println "contrast:  " c1)
-    (println (str/replace m2 #"\s+" " "))
-    (println "brightness:" b2)
-    (println "contrast:  " c2)))
+(defn get-displays []
+  (let [displays (:displays (host-config (get-hostname)))]
+    (if (= :detect displays)
+      (detect-display-ids)
+      displays)))
 
+(defn ext-val-for-display [val idx]
+  (if (vector? val) (get val idx (last val)) val))
 
-(defn get-one-monitor []
-  (let [brigh (-> (shell {:out :string} "ddcutil" "getvcp" "10") :out extract-vcp-value)
-        cont  (-> (shell {:out :string} "ddcutil" "getvcp" "12") :out extract-vcp-value)]
-    (format "Brightness: %s\nContrast:   %s\n"  brigh cont)))
+(defn set-ext-vcp [displays vcp-code val]
+  (doseq [[idx d] (map-indexed vector displays)]
+    (when (pos? idx) (Thread/sleep 500))
+    (shell "ddcutil" "--display" (str d) "setvcp" (str vcp-code) (str (ext-val-for-display val idx)))))
 
-(defn get-ext-vals []
-  (case (get-hostname)
-    "ax-bee" (get-two-monitors)
-    "ax-mac" (get-one-monitor)
-    (do (shell "notify-send 'fatal error in licht.clj' 'get-ext-vals: no setup for this hostname'")
-        (System/exit 1))))
+(defn get-ext-display-vals [d]
+  (let [b (-> (shell-out (format "ddcutil --display %d getvcp 10" d)) extract-vcp-value)
+        c (-> (shell-out (format "ddcutil --display %d getvcp 12" d)) extract-vcp-value)]
+    {:display d :brightness b :contrast c}))
 
+(defn print-ext-vals [displays]
+  (doseq [{:keys [display brightness contrast]} (map get-ext-display-vals displays)]
+    (println (format "Display %d — brightness: %s  contrast: %s" display brightness contrast))))
 
 
 (defn set-color-temp [n]
@@ -123,64 +86,54 @@
   (process ["hyprsunset" "-t" (str n)]))
 
 
-
 (defn heading [s]
   (let [line (apply str (repeat (count s) "-"))]
     (format "%s\n%s\n%s" line s line)))
 
 
 (defn print-all-the-light-we-can-see []
-  (case (get-hostname)
-    "ax-bee" (get-two-monitors)
-    "ax-mac" (let [disp (get-light-screen)
-                   keyb (get-light-keyboard)
-                   ext  (get-ext-vals)]
-               (printf "%s\nDisplay:  %s\nKeyboard: %s" (heading "Internal") disp keyb)
-               (printf "\n\n%s\n%s" (heading "External") ext))
-    (do (shell "notify-send 'fatal error in licht.clj' 'print-all-the-light-we-can-see: no setup for this hostname'")
-        (System/exit 1))))
+  (let [{:keys [internal]} (host-config (get-hostname))
+        displays (get-displays)]
+    (when internal
+      (printf "%s\nDisplay:  %s\nKeyboard: %s\n\n"
+              (heading "Internal") (get-light-screen) (get-light-keyboard)))
+    (println (heading "External"))
+    (print-ext-vals displays)))
 
-(defn illuminate! [int-b key-b ext-b ext-c col-t]
-  (light-screen int-b) (light-keyboard key-b)
-  (set-ext-brightness ext-b) (set-ext-contrast ext-c)
-  (set-color-temp col-t))
+(defn illuminate! [{:keys [internal keyboard ext-b ext-c col-temp]}]
+  (let [displays (get-displays)]
+    (light-screen internal)
+    (light-keyboard keyboard)
+    (set-ext-vcp displays 10 ext-b)
+    (set-ext-vcp displays 12 ext-c)
+    (set-color-temp col-temp)))
 
 
-(def settings {"aus"  {:name "AUS"
-                       :vals [0 0 0 0 0]}
-               "hi+"   {:name "High"
-                       :vals [90 0 90 90 6500]}
-               "hi"   {:name "High"
-                       :vals [80 0 80 80 6000]}
-               "hi2"  {:name "High2"
-                       :vals [67 67 67 67 5500]}
-               "hi3"  {:name "High3"
-                       :vals [59 59 59 59 4900]}
-               "lo"   {:name "Low"
-                       :vals [23 25 40 33 3750]}
-               "ul1"  {:name "Ultra-Low-1"
-                       :vals [20 20 35 25 3000]}
-               "ul2"  {:name "Ultra-Low-2"
-                       :vals [10 10 15 15 3000]}
-               "ni"  {:name "night"
-                      :vals [2 2 15 15 3000]}
-               "ni2"  {:name "night"
-                       :vals [2 2 8 8 2000]}
-               "max"  {:name "Max"
-                       :vals [100 0 100 100 6500]}
-               ;; "max-e" {:name "Max-External"
-               ;;          :vals [50 0 100 100 6500]}
-               "med" {:name "Medium"
-                      :vals [50 50 50 50 4250]}
-               ;; "kl"   {:name "Kino-Low"
-               ;;         :vals [0 5 50 40 3333]}
-               ;; "kl2"   {:name "Kino-Low-2"
-               ;;          :vals [0 5 25 25 3333]}
-               ;; "kh"   {:name "Kino-High"
-               ;;         :vals [0 5 80 80 6000]}
-               ;; "km"   {:name "Kino-Max"
-               ;;         :vals [0 0 100 100 6500]}
-               })
+(def settings
+  {"aus"  {:name "AUS"
+           :vals {:internal 0  :keyboard 0  :ext-b 0   :ext-c 0   :col-temp 0}}
+   "hi+"  {:name "High+"
+           :vals {:internal 90 :keyboard 0  :ext-b 90  :ext-c 90  :col-temp 6500}}
+   "hi"   {:name "High"
+           :vals {:internal 80 :keyboard 0  :ext-b 80  :ext-c 80  :col-temp 6000}}
+   "hi2"  {:name "High2"
+           :vals {:internal 67 :keyboard 67 :ext-b 67  :ext-c 67  :col-temp 5500}}
+   "hi3"  {:name "High3"
+           :vals {:internal 59 :keyboard 59 :ext-b 59  :ext-c 59  :col-temp 4900}}
+   "med"  {:name "Medium"
+           :vals {:internal 50 :keyboard 50 :ext-b 50  :ext-c 50  :col-temp 4250}}
+   "lo"   {:name "Low"
+           :vals {:internal 23 :keyboard 25 :ext-b 40  :ext-c 33  :col-temp 3750}}
+   "ul1"  {:name "Ultra-Low-1"
+           :vals {:internal 20 :keyboard 20 :ext-b 35  :ext-c 25  :col-temp 3000}}
+   "ul2"  {:name "Ultra-Low-2"
+           :vals {:internal 10 :keyboard 10 :ext-b 15  :ext-c 15  :col-temp 3000}}
+   "ni"   {:name "Night"
+           :vals {:internal 2  :keyboard 2  :ext-b 15  :ext-c 15  :col-temp 3000}}
+   "ni2"  {:name "Night-2"
+           :vals {:internal 2  :keyboard 2  :ext-b 8   :ext-c 8   :col-temp 2000}}
+   "max"  {:name "Max"
+           :vals {:internal 100 :keyboard 0 :ext-b 100 :ext-c 100 :col-temp 6500}}})
 
 
 (def nord
@@ -202,7 +155,6 @@
    :lila   "#b48ead"})
 
 
-
 (defn ask-user []
   (let [echo-proc (process ["echo" "-e" (str/join "\n" (into (sorted-map) settings))])]
     (-> (process {:prev echo-proc
@@ -220,7 +172,7 @@
       (println "no selection, exiting")
       (let [selected-value (get settings user-choice)
             ntfy (format "notify-send Licht %s --app-name dwm-licht --expire-time 4000 --icon brightness-high-symbolic --replace-id 126" (:name selected-value))]
-        (apply illuminate! (:vals selected-value))
+        (illuminate! (:vals selected-value))
         (spit "/tmp/licht-curr-val" (str user-choice "\n"))
         (shell ntfy)))))
 
