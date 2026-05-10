@@ -114,9 +114,7 @@
 
 
 (def settings
-  {"aus"  {:name "AUS"
-           :vals {:internal 0  :keyboard 0  :ext-b 0   :ext-c 0   :col-temp 0}}
-   "hi+"  {:name "High+"
+  {"hi+"  {:name "High+"
            :vals {:internal 90 :keyboard 0  :ext-b 90  :ext-c 90  :col-temp 6500}}
    "hi"   {:name "High"
            :vals {:internal 80 :keyboard 0  :ext-b 80  :ext-c 80  :col-temp 6000}}
@@ -138,12 +136,12 @@
            :vals {:internal 2  :keyboard 2  :ext-b 8   :ext-c 8   :col-temp 2000}}
    "max"  {:name "Max"
            :vals {:internal 100 :keyboard 0 :ext-b 100 :ext-c 100 :col-temp 6500}}
-   "mv1"  {:name "Movie-1"
-           :vals {:internal 0 :keyboard 0 :ext-b [100 0] :ext-c [100 0] :col-temp 6500}}
-   "mv2"  {:name "Movie-2"
-           :vals {:internal 0 :keyboard 0 :ext-b [59  0] :ext-c [59  0] :col-temp 4900}}
-   "mv3"  {:name "Movie-3"
-           :vals {:internal 0 :keyboard 0 :ext-b [40  0] :ext-c [33  0] :col-temp 3750}}})
+   "fo1"  {:name "Focus-1"
+           :vals {:internal 0 :keyboard 0 :ext-b [100 80] :ext-c [100 0] :col-temp 6500}}
+   "fo2"  {:name "Focus-2"
+           :vals {:internal 0 :keyboard 0 :ext-b [59  50] :ext-c [59  0] :col-temp 4900}}
+   "fo3"  {:name "Focus-3"
+           :vals {:internal 0 :keyboard 0 :ext-b [40 10] :ext-c [33  0] :col-temp 3750}}})
 
 
 (def nord
