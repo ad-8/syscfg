@@ -146,7 +146,7 @@
            :vals {:internal 0 :keyboard 0 :ext-b [100 20] :ext-c [100 20] :col-temp 6500}}
    "fo5"  {:name "Focus-5"
            :vals {:internal 0 :keyboard 0 :ext-b [100 5]  :ext-c [100 5]  :col-temp 6500}}
-   "cust" {:name "Custom"})
+   "cust" {:name "Custom"}})
 
 
 (def nord
