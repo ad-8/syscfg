@@ -10,7 +10,9 @@
   (.getHostName (InetAddress/getLocalHost)))
 
 (def host-config
-  {"ax-bee" {:internal false :displays [1 2]}
+  ; ax-bee: IDs are ddcutil display numbers — run `ddcutil detect` to see model names and verify mapping
+  ; LG-4K=2, Acer=1 — ordered LG-first so preset vectors read [LG-val Acer-val]
+  {"ax-bee" {:internal false :displays [2 1]}
    "ax-mac" {:internal true  :displays :detect}
    "ax-t14" {:internal true  :displays :detect}})
 
@@ -135,7 +137,13 @@
    "ni2"  {:name "Night-2"
            :vals {:internal 2  :keyboard 2  :ext-b 8   :ext-c 8   :col-temp 2000}}
    "max"  {:name "Max"
-           :vals {:internal 100 :keyboard 0 :ext-b 100 :ext-c 100 :col-temp 6500}}})
+           :vals {:internal 100 :keyboard 0 :ext-b 100 :ext-c 100 :col-temp 6500}}
+   "mv1"  {:name "Movie-1"
+           :vals {:internal 0 :keyboard 0 :ext-b [100 0] :ext-c [100 0] :col-temp 6500}}
+   "mv2"  {:name "Movie-2"
+           :vals {:internal 0 :keyboard 0 :ext-b [59  0] :ext-c [59  0] :col-temp 4900}}
+   "mv3"  {:name "Movie-3"
+           :vals {:internal 0 :keyboard 0 :ext-b [40  0] :ext-c [33  0] :col-temp 3750}}})
 
 
 (def nord
