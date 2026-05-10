@@ -30,10 +30,12 @@
       (println "warn: light-keyboard failed (device may not exist)"))))
 
 (defn get-light-screen []
-  (-> (shell {:out :string} "light" "-G") :out str/trim))
+  (let [res (shell {:continue true :out :string} "light" "-G")]
+    (if (= 0 (:exit res)) (str/trim (:out res)) "err")))
 
 (defn get-light-keyboard []
-  (-> (shell {:out :string} "light" "-s" "sysfs/leds/smc::kbd_backlight" "-G") :out str/trim))
+  (let [res (shell {:continue true :out :string} "light" "-s" "sysfs/leds/smc::kbd_backlight" "-G")]
+    (if (= 0 (:exit res)) (str/trim (:out res)) "err")))
 
 
 (defn extract-vcp-value [s]
@@ -84,8 +86,7 @@
 
 
 (defn set-color-temp [n]
-  (try (shell "pkill" "-f" "hyprsunset")
-       (catch Exception _e (println "warn: could not kill hyprsunset")))
+  (shell {:continue true} "pkill" "-f" "hyprsunset")
   (Thread/sleep 500)
   (process ["hyprsunset" "-t" (str n)]))
 
@@ -209,11 +210,12 @@
       (println "no selection, exiting")
       (if (= user-choice "cust")
         (set-custom-lights!)
-        (let [selected-value (get settings user-choice)
-              ntfy (format "notify-send Licht %s --app-name dwm-licht --expire-time 4000 --icon brightness-high-symbolic --replace-id 126" (:name selected-value))]
+        (let [selected-value (get settings user-choice)]
           (illuminate! (:vals selected-value))
           (spit "/tmp/licht-curr-val" (str user-choice "\n"))
-          (shell ntfy))))))
+          (shell "notify-send" "Licht" (:name selected-value)
+                 "--app-name" "dwm-licht" "--expire-time" "4000"
+                 "--icon" "brightness-high-symbolic" "--replace-id" "126"))))))
 
 
 (let [fst (first *command-line-args*)]
