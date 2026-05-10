@@ -300,8 +300,8 @@ hl.bind(mainMod .. " + I", hl.dsp.layout("addmaster"))
 hl.bind(mainMod .. " + D", hl.dsp.layout("removemaster"))
 hl.bind(mainMod .. " + TAB", hl.dsp.focus( { workspace = "previous" } ))
 -- tabs
-hl.bind(mainMod .. "+ N", hl.dsp.group.next())
-hl.bind(mainMod .. "+ M", hl.dsp.group.prev())
+hl.bind(mainMod .. "+ M", hl.dsp.group.next())
+hl.bind(mainMod .. "+ N", hl.dsp.group.prev())
 -- TODO test wlr-which-key
 hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.exec_cmd("wlr-which-key"))
 hl.bind(mainMod .. " + O",     hl.dsp.exec_cmd("wlr-which-key --initial-keys \"o\""))
@@ -432,8 +432,8 @@ hl.define_submap("scrolling", function()
     -- Consume and Expel
     hl.bind("C",              hl.dsp.layout("consume"))
     hl.bind("E",              hl.dsp.layout("expel"))
-    hl.bind("N",              hl.dsp.layout("consume_or_expel next"))
-    hl.bind("M",              hl.dsp.layout("consume_or_expel prev"))
+    hl.bind("M",              hl.dsp.layout("consume_or_expel next"))
+    hl.bind("N",              hl.dsp.layout("consume_or_expel prev"))
     -- Misc
     hl.bind("P",              hl.dsp.layout("promote"))
     hl.bind("V",              hl.dsp.layout("fit visible"))
