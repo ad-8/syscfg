@@ -202,7 +202,7 @@
   (let [echo-proc (process ["echo" "-e" (str/join "\n" (into (sorted-map) settings))])]
     (-> (process {:prev echo-proc
                   :out :string
-                  :cmd ["wmenu" "-i" "-l" "20" "-p" "licht"
+                  :cmd ["wmenu" "-i" "-l" (str (count settings)) "-p" "licht"
                         "-f" "HackNerdFont 15" "-N" (:polar1 nord) "-M" (:orange nord)
                         "-m" (:snow3 nord) "-S" (:orange nord) "-s" (:snow3 nord)]})
         deref :out str/trim clojure.edn/read-string first)))
