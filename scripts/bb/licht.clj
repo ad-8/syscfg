@@ -57,7 +57,7 @@
        str/split-lines
        (map str/trim)
        (filter #(re-matches #"Display \d+" %))
-       (map #(Integer/parseInt (re-find #"\d+" %)))))
+       (map #(parse-long (re-find #"\d+" %)))))
 
 (defn get-displays []
   (let [displays (:displays (host-config (get-hostname)))]
