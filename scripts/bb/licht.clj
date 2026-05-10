@@ -215,13 +215,14 @@
 
 (defn set-lights! [first-arg]
   (let [valid-arg (get settings first-arg)
-        user-choice (if valid-arg first-arg (ask-user))
-        selected-value (get settings user-choice)
-        ntfy (format "notify-send Licht %s --app-name dwm-licht --expire-time 4000 --icon 
-                      brightness-high-symbolic --replace-id 126" (:name selected-value))]
-    (apply illuminate! (:vals selected-value))
-    (spit "/tmp/licht-curr-val" (str user-choice "\n"))
-    (shell ntfy)))
+        user-choice (if valid-arg first-arg (ask-user))]
+    (if-not user-choice
+      (println "no selection, exiting")
+      (let [selected-value (get settings user-choice)
+            ntfy (format "notify-send Licht %s --app-name dwm-licht --expire-time 4000 --icon brightness-high-symbolic --replace-id 126" (:name selected-value))]
+        (apply illuminate! (:vals selected-value))
+        (spit "/tmp/licht-curr-val" (str user-choice "\n"))
+        (shell ntfy)))))
 
 
 (let [fst (first *command-line-args*)]
