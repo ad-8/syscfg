@@ -73,11 +73,8 @@
 (defn shell-out [cmd]
   (-> (shell {:out :string} cmd) :out str/trim))
 
-(defn extract-brightness [s]
-  (last (re-find  #"\bcurrent value =\s*(\d+)\b" s)))
-
-(defn extract-contrast [s]
-  (last (re-find  #"\bcurrent value =\s*(\d+)\b" s)))
+(defn extract-vcp-value [s]
+  (last (re-find #"\bcurrent value =\s*(\d+)\b" s)))
 
 (comment 
   (re-find  #"\bcurrent value =\s*(\d+)\b" "VCP code 0x10 (Brightness                    ): current value =   100, max value =   100")
@@ -92,10 +89,10 @@
   (let [monitors (->> (shell-out "ddcutil detect") str/split-lines (map str/trim))
         m1 (format "%s: %s (%s)" (nth monitors 0) (nth monitors 4) (nth monitors 9))
         m2 (format "%s: %s (%s)" (nth monitors 12) (nth monitors 16) (nth monitors 21))
-        b1 (-> (shell-out  "ddcutil --display 1 getvcp 10") extract-brightness)
-        b2 (-> (shell-out "ddcutil --display 2 getvcp 10") extract-brightness)
-        c1 (-> (shell-out "ddcutil --display 1 getvcp 12") extract-contrast)
-        c2 (-> (shell-out "ddcutil --display 2 getvcp 12") extract-contrast)]
+        b1 (-> (shell-out  "ddcutil --display 1 getvcp 10") extract-vcp-value)
+        b2 (-> (shell-out "ddcutil --display 2 getvcp 10") extract-vcp-value)
+        c1 (-> (shell-out "ddcutil --display 1 getvcp 12") extract-vcp-value)
+        c2 (-> (shell-out "ddcutil --display 2 getvcp 12") extract-vcp-value)]
 
     (println (str/replace m1 #"\s+" " "))
     (println "brightness:" b1)
@@ -106,8 +103,8 @@
 
 
 (defn get-one-monitor []
-  (let [brigh (-> (shell {:out :string} "ddcutil" "getvcp" "10") :out extract-brightness)
-        cont  (-> (shell {:out :string} "ddcutil" "getvcp" "12") :out extract-contrast)]
+  (let [brigh (-> (shell {:out :string} "ddcutil" "getvcp" "10") :out extract-vcp-value)
+        cont  (-> (shell {:out :string} "ddcutil" "getvcp" "12") :out extract-vcp-value)]
     (format "Brightness: %s\nContrast:   %s\n"  brigh cont)))
 
 (defn get-ext-vals []
@@ -119,22 +116,11 @@
 
 
 
-(defn get-session-type
-  "Returns the session type as string; should return either 'x11' or 'wayland'."
-  []
-  (-> (shell {:out :string} "/usr/bin/env bash -c" "echo $XDG_SESSION_TYPE") :out str/trim))
-
-(defn set-color-temp
-  "Usage: sct [temperature]
-   Temperatures must be in a range from 1000-10000
-   If no arguments are passed sct resets the display to the default temperature (6500K)"
-  [n]
-  (if (= "x11" (get-session-type))
-    (shell (format "/usr/bin/env sct %s" (str n)))
-    (do (try (shell "pkill -f hyprsunset")
-             (catch Exception _e (println "error killing hyprsunset")))
-        (Thread/sleep 500)
-        (babashka.process/process "hyprsunset -t" (str n)))))
+(defn set-color-temp [n]
+  (try (shell "pkill" "-f" "hyprsunset")
+       (catch Exception _e (println "warn: could not kill hyprsunset")))
+  (Thread/sleep 500)
+  (process ["hyprsunset" "-t" (str n)]))
 
 
 
@@ -217,21 +203,12 @@
 
 
 
-(defn ask-user
-  "Lets the user choose a setting interactively via dmenu."
-  []
-  (let [session-type (get-session-type)]
-    (if (= "wayland" session-type)
-      (-> (process "echo" "-e" (str/join "\n" (into (sorted-map) settings)))
-          (process {:out :string} "wmenu" "-i" "-l" "15" "-p" "licht"
-                   "-f" "HackNerdFont 15" "-N" (:polar1 nord) "-M" (:orange nord)
-                   "-m" (:snow3 nord) "-S" (:orange nord) "-s" (:snow3 nord))
-          deref :out str/trim clojure.edn/read-string first)
-      (-> (process "echo" "-e" (str/join "\n" (into (sorted-map) settings)))
-          (process {:out :string} "dmenu" "-i" "-l" "15" "-p" "licht"
-                   "-fn" "HackNerdFont-15" "-nb" (:polar1 nord) "-nf" (:snow3 nord)
-                   "-sb" (:orange nord) "-sf" (:snow3 nord))
-          deref :out str/trim clojure.edn/read-string first))))
+(defn ask-user []
+  (-> (process ["echo" "-e" (str/join "\n" (into (sorted-map) settings))])
+      (process {:out :string} ["wmenu" "-i" "-l" "15" "-p" "licht"
+                               "-f" "HackNerdFont 15" "-N" (:polar1 nord) "-M" (:orange nord)
+                               "-m" (:snow3 nord) "-S" (:orange nord) "-s" (:snow3 nord)])
+      deref :out str/trim clojure.edn/read-string first))
 
 
 (defn set-lights! [first-arg]
