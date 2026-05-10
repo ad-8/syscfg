@@ -137,11 +137,15 @@
    "max"  {:name "Max"
            :vals {:internal 100 :keyboard 0 :ext-b 100 :ext-c 100 :col-temp 6500}}
    "fo1"  {:name "Focus-1"
-           :vals {:internal 0 :keyboard 0 :ext-b [100 80] :ext-c [100 0] :col-temp 6500}}
+           :vals {:internal 0 :keyboard 0 :ext-b [100 80] :ext-c [100 80] :col-temp 6500}}
    "fo2"  {:name "Focus-2"
-           :vals {:internal 0 :keyboard 0 :ext-b [59  50] :ext-c [59  0] :col-temp 4900}}
+           :vals {:internal 0 :keyboard 0 :ext-b [100 60] :ext-c [100 60] :col-temp 5500}}
    "fo3"  {:name "Focus-3"
-           :vals {:internal 0 :keyboard 0 :ext-b [40 10] :ext-c [33  0] :col-temp 3750}}})
+           :vals {:internal 0 :keyboard 0 :ext-b [100 40] :ext-c [100 40] :col-temp 4500}}
+   "fo4"  {:name "Focus-4"
+           :vals {:internal 0 :keyboard 0 :ext-b [100 20] :ext-c [100 20] :col-temp 3500}}
+   "fo5"  {:name "Focus-5"
+           :vals {:internal 0 :keyboard 0 :ext-b [100 5]  :ext-c [100 5]  :col-temp 3000}}}))
 
 
 (def nord
