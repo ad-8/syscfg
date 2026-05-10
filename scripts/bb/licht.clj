@@ -106,9 +106,9 @@
     (print-ext-vals displays)))
 
 (defn notify-lights! []
-  (shell "notify-send" "Licht" (with-out-str (print-all-the-light-we-can-see))
-         "--app-name" "dwm-licht" "--expire-time" "8000"
-         "--icon" "brightness-high-symbolic" "--replace-id" "127"))
+  (shell "notify-send" "--app-name" "dwm-licht" "--expire-time" "8000"
+         "--icon" "brightness-high-symbolic" "--replace-id" "127"
+         "--" "Licht" (with-out-str (print-all-the-light-we-can-see))))
 
 (defn illuminate! [{:keys [internal keyboard ext-b ext-c col-temp]}]
   (let [displays (get-displays)]
