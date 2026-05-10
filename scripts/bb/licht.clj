@@ -68,7 +68,9 @@
 (defn set-ext-vcp [displays vcp-code val]
   (doseq [[idx d] (map-indexed vector displays)]
     (when (pos? idx) (Thread/sleep 500))
-    (shell "ddcutil" "--display" (str d) "setvcp" (str vcp-code) (str (ext-val-for-display val idx)))))
+    (let [res (shell {:continue true} "ddcutil" "--display" (str d) "setvcp" (str vcp-code) (str (ext-val-for-display val idx)))]
+      (when (not= 0 (:exit res))
+        (println (format "warn: ddcutil setvcp failed for display %d (exit %d)" d (:exit res)))))))
 
 (defn get-ext-display-vals [d]
   (let [b (-> (shell-out (format "ddcutil --display %d getvcp 10" d)) extract-vcp-value)
