@@ -12,7 +12,7 @@
 (def host-config
   ; ax-bee: IDs are ddcutil display numbers — run `ddcutil detect` to see model names and verify mapping
   ; LG-4K=2, Acer=1 — ordered LG-first so preset vectors read [LG-val Acer-val]
-  {"ax-bee" {:internal false :displays [2 1]}
+  {"ax-bee" {:internal false :displays [2 1] :display-names {2 "LG" 1 "Acer"}}
    "ax-mac" {:internal true  :displays :detect}
    "ax-t14" {:internal true  :displays :detect}})
 
@@ -80,9 +80,13 @@
         c (-> (shell {:continue true :out :string} "ddcutil" "--display" (str d) "getvcp" "12") :out extract-vcp-value)]
     {:display d :brightness b :contrast c}))
 
-(defn print-ext-vals [displays]
+(defn print-ext-vals [displays names]
   (doseq [{:keys [display brightness contrast]} (map get-ext-display-vals displays)]
-    (println (format "Display %d — brightness: %s  contrast: %s" display brightness contrast))))
+    (let [label (get names display "")]
+      (println (format "Display %d%s — brightness: %s  contrast: %s"
+                       display
+                       (if (seq label) (str " (" label ")") "")
+                       brightness contrast)))))
 
 
 (defn set-color-temp [n]
@@ -97,13 +101,13 @@
 
 
 (defn print-all-the-light-we-can-see []
-  (let [{:keys [internal]} (host-config (get-hostname))
+  (let [{:keys [internal display-names]} (host-config (get-hostname))
         displays (get-displays)]
     (when internal
       (printf "%s\nDisplay:  %s\nKeyboard: %s\n\n"
               (heading "Internal") (get-light-screen) (get-light-keyboard)))
     (println (heading "External"))
-    (print-ext-vals displays)))
+    (print-ext-vals displays display-names)))
 
 (defn notify-lights! []
   (shell "notify-send" "--app-name" "dwm-licht" "--expire-time" "8000"
