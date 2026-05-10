@@ -145,7 +145,7 @@
    "fo4"  {:name "Focus-4"
            :vals {:internal 0 :keyboard 0 :ext-b [100 20] :ext-c [100 20] :col-temp 3500}}
    "fo5"  {:name "Focus-5"
-           :vals {:internal 0 :keyboard 0 :ext-b [100 5]  :ext-c [100 5]  :col-temp 3000}}}))
+           :vals {:internal 0 :keyboard 0 :ext-b [100 5]  :ext-c [100 5]  :col-temp 3000}}})
 
 
 (def nord
