@@ -38,18 +38,9 @@
     (if (= 0 (:exit res)) (str/trim (:out res)) "err")))
 
 
-(defn extract-vcp-value [s]
-  (last (re-find #"\bcurrent value =\s*(\d+)\b" s)))
+(defn extract-vcp-value [s code]
+  (last (re-find (re-pattern (str "(?i)VCP code 0x" code ".*?current value =\\s*(\\d+)")) s)))
 
-(comment
-  (re-find #"\bcurrent value =\s*(\d+)\b" "VCP code 0x10 (Brightness                    ): current value =   100, max value =   100")
-
-  (->> (shell {:continue true :out :string} "ddcutil" "detect")
-       :out
-       str/split-lines
-       (map str/trim)
-       (map-indexed (fn [idx s] [idx s])))
-  )
 
 (defn detect-display-ids []
   (->> (shell {:continue true :out :string} "ddcutil" "detect")
@@ -76,12 +67,13 @@
         (println (format "warn: ddcutil setvcp failed for display %d (exit %d)" d (:exit res)))))))
 
 (defn get-ext-display-vals [d]
-  (let [b (-> (shell {:continue true :out :string} "ddcutil" "--display" (str d) "getvcp" "10") :out extract-vcp-value)
-        c (-> (shell {:continue true :out :string} "ddcutil" "--display" (str d) "getvcp" "12") :out extract-vcp-value)]
-    {:display d :brightness b :contrast c}))
+  (let [out (-> (shell {:continue true :out :string} "ddcutil" "--display" (str d) "getvcp" "10" "12") :out)]
+    {:display    d
+     :brightness (extract-vcp-value out "10")
+     :contrast   (extract-vcp-value out "12")}))
 
 (defn print-ext-vals [displays names]
-  (let [rows  (map get-ext-display-vals displays)
+  (let [rows  (mapv get-ext-display-vals displays)
         label (fn [{:keys [display]}]
                 (let [n (get names display "")]
                   (str "Display " display (if (seq n) (str " (" n ")") ""))))
