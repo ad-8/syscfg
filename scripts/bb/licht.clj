@@ -204,11 +204,13 @@
 
 
 (defn ask-user []
-  (-> (process ["echo" "-e" (str/join "\n" (into (sorted-map) settings))])
-      (process {:out :string} ["wmenu" "-i" "-l" "15" "-p" "licht"
-                               "-f" "HackNerdFont 15" "-N" (:polar1 nord) "-M" (:orange nord)
-                               "-m" (:snow3 nord) "-S" (:orange nord) "-s" (:snow3 nord)])
-      deref :out str/trim clojure.edn/read-string first))
+  (let [echo-proc (process ["echo" "-e" (str/join "\n" (into (sorted-map) settings))])]
+    (-> (process {:prev echo-proc
+                  :out :string
+                  :cmd ["wmenu" "-i" "-l" "15" "-p" "licht"
+                        "-f" "HackNerdFont 15" "-N" (:polar1 nord) "-M" (:orange nord)
+                        "-m" (:snow3 nord) "-S" (:orange nord) "-s" (:snow3 nord)]})
+        deref :out str/trim clojure.edn/read-string first)))
 
 
 (defn set-lights! [first-arg]
