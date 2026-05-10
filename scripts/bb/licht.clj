@@ -145,7 +145,8 @@
    "fo4"  {:name "Focus-4"
            :vals {:internal 0 :keyboard 0 :ext-b [100 20] :ext-c [100 20] :col-temp 6500}}
    "fo5"  {:name "Focus-5"
-           :vals {:internal 0 :keyboard 0 :ext-b [100 5]  :ext-c [100 5]  :col-temp 6500}}})
+           :vals {:internal 0 :keyboard 0 :ext-b [100 5]  :ext-c [100 5]  :col-temp 6500}}
+   "cust" {:name "Custom"})
 
 
 (def nord
@@ -167,11 +168,35 @@
    :lila   "#b48ead"})
 
 
+(defn ask-value [prompt options]
+  (let [echo-proc (process ["echo" "-e" (str/join "\n" options)])
+        result    (-> (process {:prev echo-proc
+                                :out :string
+                                :cmd ["wmenu" "-i" "-l" (str (count options)) "-p" prompt
+                                      "-f" "HackNerdFont 15" "-N" (:polar1 nord) "-M" (:orange nord)
+                                      "-m" (:snow3 nord) "-S" (:orange nord) "-s" (:snow3 nord)]})
+                      deref :out str/trim)]
+    (when-not (str/blank? result)
+      (parse-long result))))
+
+(defn set-custom-lights! []
+  (let [b-opts  [100 80 60 40 20 5 0]
+        ct-opts [6500 6000 5500 5000 4500 4000 3500 3000 2500 2000]
+        lg   (ask-value "LG brightness" b-opts)
+        acer (when lg   (ask-value "Acer brightness" b-opts))
+        ct   (when acer (ask-value "color temp" ct-opts))]
+    (when ct
+      (illuminate! {:internal 0 :keyboard 0 :ext-b [lg acer] :ext-c [lg acer] :col-temp ct})
+      (spit "/tmp/licht-curr-val" "cust\n")
+      (shell "notify-send" "Licht" (format "Custom %d/%d %dK" lg acer ct)
+             "--app-name" "dwm-licht" "--expire-time" "4000"
+             "--icon" "brightness-high-symbolic" "--replace-id" "126"))))
+
 (defn ask-user []
   (let [echo-proc (process ["echo" "-e" (str/join "\n" (into (sorted-map) settings))])]
     (-> (process {:prev echo-proc
                   :out :string
-                  :cmd ["wmenu" "-i" "-l" "15" "-p" "licht"
+                  :cmd ["wmenu" "-i" "-l" "20" "-p" "licht"
                         "-f" "HackNerdFont 15" "-N" (:polar1 nord) "-M" (:orange nord)
                         "-m" (:snow3 nord) "-S" (:orange nord) "-s" (:snow3 nord)]})
         deref :out str/trim clojure.edn/read-string first)))
@@ -182,11 +207,13 @@
         user-choice (if valid-arg first-arg (ask-user))]
     (if-not user-choice
       (println "no selection, exiting")
-      (let [selected-value (get settings user-choice)
-            ntfy (format "notify-send Licht %s --app-name dwm-licht --expire-time 4000 --icon brightness-high-symbolic --replace-id 126" (:name selected-value))]
-        (illuminate! (:vals selected-value))
-        (spit "/tmp/licht-curr-val" (str user-choice "\n"))
-        (shell ntfy)))))
+      (if (= user-choice "cust")
+        (set-custom-lights!)
+        (let [selected-value (get settings user-choice)
+              ntfy (format "notify-send Licht %s --app-name dwm-licht --expire-time 4000 --icon brightness-high-symbolic --replace-id 126" (:name selected-value))]
+          (illuminate! (:vals selected-value))
+          (spit "/tmp/licht-curr-val" (str user-choice "\n"))
+          (shell ntfy))))))
 
 
 (let [fst (first *command-line-args*)]
