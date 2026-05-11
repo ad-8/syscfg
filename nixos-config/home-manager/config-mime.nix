@@ -33,7 +33,6 @@ in
         # Images
         "image/gif" = imageViewer;
         "image/jpeg" = imageViewer;
-        "image/jpg" = imageViewer;
         "image/png" = imageViewer;
         "image/webp" = imageViewer;
         "image/*" = imageViewer;

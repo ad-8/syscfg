@@ -41,3 +41,22 @@ Also add `git` and `vim` to `environment.systemPackages` for the next steps.
 
 6. `sudo nixos-rebuild boot --flake ~/syscfg/nixos-config#<host>`, finally reboot and enjoy
 
+### Overriding a home-manager default from a host
+
+Options enabled by default in `home-manager/default.nix` can be overridden per-host with `lib.mkForce`:
+
+```nix
+# hosts/ax-mac/home.nix
+configQt.enable = lib.mkForce false;
+```
+
+### Testing a host config in a VM
+
+Temporarily add `users.users.ax.initialPassword = "test";` to the host's `configuration.nix`, then:
+
+```
+nixos-rebuild build-vm --flake ~/syscfg/nixos-config#ax-bee
+./result/bin/run-ax-bee-vm
+```
+
+Remove `initialPassword` again before committing.
