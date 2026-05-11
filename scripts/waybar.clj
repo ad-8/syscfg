@@ -110,7 +110,7 @@
     (some #(str/starts-with? line %) supported-players)))
 
 (defn waybar-music []
-  (let [proc (shell {:out :string :continue true} "playerctl metadata")]
+  (let [proc (shell {:out :string :err :string :continue true} "playerctl metadata")]
     (when (zero? (:exit proc))
       (let [metadata (-> proc :out str/trim)]
         (if (supported-player? metadata)
