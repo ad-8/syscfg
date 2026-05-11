@@ -5,7 +5,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../nixos/vm/default.nix
+    ../../nixos/vm/base.nix
   ];
 
   networking.hostName = "ax-vm";
