@@ -105,7 +105,6 @@
       restic
       rclone
       libsecret
-      xwayland-satellite # xwayland support for niri
     ];
 
     # The firewall is enabled by default on NixOS. Still, explicitly ensure it is enabled
