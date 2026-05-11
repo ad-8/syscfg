@@ -13,6 +13,7 @@
 
   configExtra.enable = true;
   configClamav.enable = true;
+  configGaming.enable = true;
   configPrinting.enable = true;
   configVirtman.enable = true;
   configDistrobox.enable = true;
@@ -53,28 +54,12 @@
     ];
   };
 
-  programs.steam.enable = true;
-  # heroic wiki recommends
-  programs.gamescope.enable = true;
-  programs.gamemode.enable = true;
-
   # https://wiki.nixos.org/wiki/WireGuard#wg-quick_issues_with_NetworkManager
   # didn't have this problem, but for me,
   # prevents DNS leaks and works well with `wg-quick up`
   # TODO for all machines?
   networking.networkmanager.dns = "systemd-resolved";
   services.resolved.enable = true;
-
-  # -----------------------------------------------------------------------------------------------
-  environment.systemPackages = with pkgs; [
-    (heroic.override {
-      extraPkgs = pkgs: [
-        pkgs.gamescope
-        pkgs.mangohud
-      ];
-    })
-  ];
-  # -----------------------------------------------------------------------------------------------
 
   # android adb setup
   programs.adb.enable = true;
