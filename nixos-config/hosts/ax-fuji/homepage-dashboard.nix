@@ -96,6 +96,18 @@ in
         ];
       }
       {
+        "Dev" = [
+          {
+            Forgejo = {
+              href = "http://${serverIp}:3000";
+              icon = "forgejo.png";
+              description = "Git Hosting";
+              siteMonitor = "http://${serverIp}:3000";
+            };
+          }
+        ];
+      }
+      {
         "Networking" = [
           {
             Router = {
