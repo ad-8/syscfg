@@ -11,7 +11,10 @@
 
   systemd.services."ax-restic-b2" = {
     description = "Restic B2 backup service";
-    path = [ pkgs.restic ];
+    path = [
+      pkgs.bash
+      pkgs.restic
+    ];
     serviceConfig = {
       Type = "oneshot";
       User = "ax";
