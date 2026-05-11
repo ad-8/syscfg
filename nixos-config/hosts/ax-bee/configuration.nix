@@ -79,6 +79,10 @@
   # android adb setup
   programs.adb.enable = true;
 
+  # VM testing only — build: nixos-rebuild build-vm --flake .#ax-bee
+  #                   launch: ./result/bin/run-ax-bee-vm
+  users.users.ax.initialPassword = "test";
+
   users.users.ax.extraGroups = [
     "adbusers"
     "i2c"
