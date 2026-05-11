@@ -15,6 +15,7 @@ in
     allowedHosts = "${serverIp}:8082";
     settings = {
       statusStyle = "dot";
+      maxGroupColumns = 5;
     };
     widgets = [
       {
