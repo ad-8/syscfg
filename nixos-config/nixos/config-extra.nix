@@ -1,7 +1,8 @@
 {
   config,
   lib,
-  pkgs, inputs,
+  pkgs,
+  inputs,
   ...
 }:
 
@@ -38,12 +39,11 @@
       };
     };
 
-
     # use cachix to avoid building hyprland locally
     nix.settings = {
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
 
     # TODO put settings in the following sections in config-<category>.nix files
@@ -61,16 +61,16 @@
       # set the flake package
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       # make sure to also set the portal package, so that they are in sync
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      portalPackage =
+        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
       withUWSM = false;
       xwayland.enable = true;
     };
 
-
     # -------------------------------------
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/firefox.nix
-    # https://mozilla.github.io/policy-templates/ 
+    # https://mozilla.github.io/policy-templates/
     programs.firefox = {
       enable = true;
       policies.DisableTelemetry = true;

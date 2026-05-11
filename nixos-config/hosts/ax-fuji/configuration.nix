@@ -15,7 +15,8 @@ in
     ./homepage-dashboard.nix
   ];
 
-  boot.initrd.luks.devices."luks-2fc19056-a600-4e50-8de6-47b442b623c9".device = "/dev/disk/by-uuid/2fc19056-a600-4e50-8de6-47b442b623c9";
+  boot.initrd.luks.devices."luks-2fc19056-a600-4e50-8de6-47b442b623c9".device =
+    "/dev/disk/by-uuid/2fc19056-a600-4e50-8de6-47b442b623c9";
 
   networking.hostName = "ax-fuji";
 
@@ -31,7 +32,7 @@ in
   ];
 
   users.users.ax = {
-    packages = [];
+    packages = [ ];
     extraGroups = [ "podman" ];
   };
 
