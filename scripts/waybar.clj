@@ -110,10 +110,12 @@
     (some #(str/starts-with? line %) supported-players)))
 
 (defn waybar-music []
-  (let [metadata (stdout! "playerctl metadata")]
-    (if (supported-player? metadata)
-      (print-curr-playing)
-      (printf "err-usp"))))
+  (let [proc (shell {:out :string :continue true} "playerctl metadata")]
+    (when (zero? (:exit proc))
+      (let [metadata (-> proc :out str/trim)]
+        (if (supported-player? metadata)
+          (print-curr-playing)
+          (printf "err-usp"))))))
 
 (defn waybar-toggle [minimal?]
   ;; `:continue true` prevents the exception on non-zero exit codes.
