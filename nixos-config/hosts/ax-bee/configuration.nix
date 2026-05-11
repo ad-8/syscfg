@@ -7,6 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./restic.nix
     ../../nixos/config-core.nix
     ../../nixos/all-modules.nix
   ];
@@ -21,31 +22,6 @@
   boot.initrd.luks.devices."luks-1101d87b-2380-4455-a516-1dda026f32e3".device =
     "/dev/disk/by-uuid/1101d87b-2380-4455-a516-1dda026f32e3";
   networking.hostName = "ax-bee";
-
-  # -----------------------------------------------------------------------------------------------
-  systemd.timers."ax-restic" = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      # OnCalendar="*:0/1"; # every minute
-      # OnCalendar = "*-*-* *:01:00";  # every hour at minute 1, second 0
-      OnCalendar = "*-*-* *:00/30:00"; # every 30 minutes
-      Unit = "ax-restic.service";
-    };
-  };
-
-  systemd.services."ax-restic" = {
-    description = "Restic backup service";
-    # the $PATH is almost empty when running a systemd service, so we add to it
-    path = [
-      pkgs.restic
-    ];
-    serviceConfig = {
-      Type = "oneshot";
-      User = "ax";
-      ExecStart = "${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/backup/ax_bee_restic_mega.clj";
-    };
-  };
-  # -----------------------------------------------------------------------------------------------
 
   services.cron = {
     enable = true;
