@@ -84,6 +84,11 @@
                          (label row) brightness contrast))))))
 
 
+(defn get-hyprsunset-temp []
+  (let [res (shell {:continue true :out :string} "pgrep" "-a" "hyprsunset")]
+    (when (= 0 (:exit res))
+      (second (re-find #"-t\s+(\d+)" (:out res))))))
+
 (defn set-color-temp [n]
   (shell {:continue true} "pkill" "-f" "hyprsunset")
   (Thread/sleep 500)
@@ -102,7 +107,8 @@
       (printf "%s\nDisplay:  %s\nKeyboard: %s\n\n"
               (heading "Internal") (get-light-screen) (get-light-keyboard)))
     (println (heading "External"))
-    (print-ext-vals displays display-names)))
+    (print-ext-vals displays display-names)
+    (printf "\nColor temp: %sK\n" (or (get-hyprsunset-temp) "unknown"))))
 
 (defn notify-lights! []
   (shell "notify-send" "--app-name" "dwm-licht" "--expire-time" "8000"
