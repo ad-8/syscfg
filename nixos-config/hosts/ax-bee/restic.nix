@@ -1,6 +1,24 @@
 { config, pkgs, ... }:
 
 {
+  systemd.timers."ax-restic-b2" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 00/2:05:00"; # every 2 hours at minute 5
+      Unit = "ax-restic-b2.service";
+    };
+  };
+
+  systemd.services."ax-restic-b2" = {
+    description = "Restic B2 backup service";
+    path = [ pkgs.restic ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "ax";
+      ExecStart = "${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/backup/ax_bee_restic_b2.clj";
+    };
+  };
+
   systemd.timers."ax-restic" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {

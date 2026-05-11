@@ -21,13 +21,6 @@
     "/dev/disk/by-uuid/1101d87b-2380-4455-a516-1dda026f32e3";
   networking.hostName = "ax-bee";
 
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "5 */2 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/backup/ax_bee_restic_b2.clj >> $HOME/restic.log 2>&1"
-    ];
-  };
-
   # https://wiki.nixos.org/wiki/WireGuard#wg-quick_issues_with_NetworkManager
   # didn't have this problem, but for me,
   # prevents DNS leaks and works well with `wg-quick up`

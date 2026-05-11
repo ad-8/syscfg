@@ -21,7 +21,7 @@ in
   networking.hostName = "ax-fuji";
 
   environment.systemPackages = with pkgs; [
-    jellyfin
+    # services.jellyfin only installs pkgs.jellyfin; web and ffmpeg must be explicit
     jellyfin-ffmpeg
     jellyfin-web
     podman-compose
