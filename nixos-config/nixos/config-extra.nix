@@ -15,8 +15,7 @@
 
     security.polkit.enable = true;
     services.gnome.gnome-keyring.enable = true;
-    security.pam.services.gdm.enableGnomeKeyring = true; # load gnome-keyring at startup
-    # seahorse is a GUI to manage secrets.  
+    # seahorse is a GUI to manage secrets.
     # Make sure make 'Login' the default keyring, so it gets unlocked automatically
     # (now works via `start-hyprland` from TTY, no display manager).
     # 'Default keyring' was set as default before, and after reboot, the keyring had to be manually unlocked ...
