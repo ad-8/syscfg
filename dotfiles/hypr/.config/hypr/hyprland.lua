@@ -577,5 +577,4 @@ hl.window_rule({ match = { class = "org.pulseaudio.pavucontrol" }, float = true 
 
 -- TODO test scrolling layout 
 hl.workspace_rule({ workspace = "5", layout = "scrolling"})
-hl.workspace_rule({ workspace = "9", layout = "scrolling"})
 
