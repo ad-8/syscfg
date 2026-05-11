@@ -6,12 +6,6 @@
     ../all-modules.nix
   ];
 
-  configExtra.enable = false;
-  configClamav.enable = false;
-  configPrinting.enable = false;
-  configVirtman.enable = false;
-  configDistrobox.enable = false;
-
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true; # enable copy and paste between host and guest
 
