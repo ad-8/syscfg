@@ -12,13 +12,13 @@
 
   config = lib.mkIf config.pkgsGui.enable {
     home.packages = with pkgs; [
-      # megasync # this compiles from src! TODO broken after upgrading to 25.11 (won't build)
       anki
       brave
       gimp3
       kdePackages.okular
       keepassxc
       libreoffice-still
+      megasync # compiles from src!
       mpv
       pavucontrol
       picard
