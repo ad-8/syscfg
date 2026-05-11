@@ -28,7 +28,7 @@
     in
     nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs; }; # this is the important part (see hyprland wiki)
+      specialArgs = { inherit inputs; }; # makes inputs available to all modules, needed to reference inputs.hyprland directly
       modules = [
         ./hosts/${hostname}/configuration.nix
       ] ++ hm;
