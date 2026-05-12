@@ -9,8 +9,8 @@ super + o ; {a,f}
       {xfce4-appfinder,thunar}
 
 # apps: [q]utebrowser, bra[v]e, libre[w]olf, firefo[x]
-super + o ; {q,v,w,x}
-      {qbittorrent,~/scripts/brave.sh,flatpak run io.gitlab.librewolf-community,firefox}
+super + o ; {q,w,x}
+      {qbittorrent,flatpak run io.gitlab.librewolf-community,firefox}
 
 # blueman, keepass, pavuctl, system-monitor
 super + o ; {b,k,p,s}
@@ -41,6 +41,12 @@ alt + space ; h
 # should be easier to manage and find
 
 # CHANGE [l]icht, [s]creen, [w]allpaper
+
+super + o; l
+      ~/syscfg/scripts/openbsd/dmenu-light.sh
+super + o; v
+      ~/syscfg/scripts/openbsd/dmenu-sound.sh
+
 alt + space ; c ; {l, s, w}
      {~/scripts/bb/licht.clj, ~/scripts/bb/screen_config.clj, $HOME/scripts/bb/set_random_wallpaper.clj}
 # --------------------------------------------------------------
