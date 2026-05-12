@@ -124,7 +124,7 @@ in
   systemd.timers.forgejo-backup = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "*-*-* 03:17:00";
+      OnCalendar = "03,12,18:17:00";
       Unit = "forgejo-backup.service";
     };
   };
