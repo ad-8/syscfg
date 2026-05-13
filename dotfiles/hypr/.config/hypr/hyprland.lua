@@ -4,23 +4,23 @@
 
 -- use `nwg-displays` to figure out position
 hl.monitor({
-    output   = "DP-1",
-    mode     = "3840x2160",
-    position = "0x0",
-    scale    = 1.25,
+  output   = "DP-1",
+  mode     = "3840x2160",
+  position = "0x0",
+  scale    = 1.25,
 })
 hl.monitor({
-    output   = "HDMI-A-1",
-    mode     = "1920x1080",
-    position = "3072x648",
-    scale    = 1,
+  output   = "HDMI-A-1",
+  mode     = "1920x1080",
+  position = "3072x648",
+  scale    = 1,
 })
 
 -- unscale XWayland (ax: fixes pixelated emacs)
 hl.config({
-    xwayland = {
-        force_zero_scaling = true
-    }
+  xwayland = {
+    force_zero_scaling = true
+  }
 })
 
 
@@ -39,7 +39,7 @@ local scripts     = os.getenv("HOME") .. "/syscfg/scripts"
 ---- AUTOSTART ----
 -------------------
 
-hl.on("hyprland.start", function () 
+hl.on("hyprland.start", function()
   hl.exec_cmd("blueman-applet &")
   hl.exec_cmd("dunst &")
   hl.exec_cmd("emacs --daemon &")
@@ -91,78 +91,79 @@ local gotham_green = "2aa889"
 
 
 hl.config({
-    general = {
-        gaps_in  = 4,
-        gaps_out = 8,
+  general = {
+    gaps_in          = 4,
+    gaps_out         = 8,
 
-        border_size = 3,
+    border_size      = 3,
 
-        col = {
-            -- default
-            active_border   = { colors = {rgba("33ccffee"), rgba("00ff99ee")}, angle = 45 },
-            -- inactive_border = rgba("595959aa"),
-            -- gotham
-            -- active_border   = rgb(gotham_blue),
-            inactive_border = rgb(gotham_black),
-        },
-
-        -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = false,
-
-        -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
-        allow_tearing = false,
-
-        layout = "master",
+    col              = {
+      -- default
+      active_border   = { colors = { rgba("33ccffee"), rgba("00ff99ee") }, angle = 45 },
+      -- inactive_border = rgba("595959aa"),
+      -- gotham
+      -- active_border   = rgb(gotham_blue),
+      inactive_border = rgb(gotham_black),
     },
 
-    decoration = {
-        rounding       = 10,
-        rounding_power = 2,
+    -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
+    resize_on_border = false,
 
-        -- Change transparency of focused and unfocused windows
-        active_opacity   = 1.0,
-        inactive_opacity = 1.0,
+    -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
+    allow_tearing    = false,
 
-        shadow = {
-            enabled      = true,
-            range        = 4,
-            render_power = 3,
-            color        = 0xee1a1a1a,
-        },
+    layout           = "master",
+  },
 
-        blur = {
-            enabled   = true,
-            size      = 3,
-            passes    = 1,
-            vibrancy  = 0.1696,
-        },
+  decoration = {
+    rounding         = 10,
+    rounding_power   = 2,
+
+    -- Change transparency of focused and unfocused windows
+    active_opacity   = 1.0,
+    inactive_opacity = 1.0,
+
+    shadow           = {
+      enabled      = true,
+      range        = 4,
+      render_power = 3,
+      color        = 0xee1a1a1a,
     },
 
-    animations = {
-        enabled = true,
+    blur             = {
+      enabled  = true,
+      size     = 3,
+      passes   = 1,
+      vibrancy = 0.1696,
     },
-    group = {
-      ["col.border_active"]   = rgb(gotham_blue),
-      ["col.border_inactive"] = rgb(gotham_black),
+  },
 
-      groupbar = {
-        height = 1,
-        indicator_height = 30,
-        text_offset = -15,
-        rounding = 10,
-        gaps_in = 3,
-        gaps_out = 3,
+  animations = {
+    enabled = true,
+  },
+  group = {
+    ["col.border_active"]   = rgb(gotham_blue),
+    ["col.border_inactive"] = rgb(gotham_black),
 
-        font_family         = 'Hack Nerd Font',
-        font_size           = 12,
+    groupbar                = {
+      height              = 1,
+      indicator_height    = 30,
+      text_offset         = -15,
+      rounding            = 10,
+      gaps_in             = 3,
+      gaps_out            = 3,
 
-        ["col.active"]      = rgb(gotham_blue),
-        ["col.inactive"]    = rgb(gotham_black),
-        text_color          = rgb(gotham_white),
-        text_color_inactive = rgb(gotham_white),
-      }
+      font_family         = 'Hack Nerd Font',
+      font_size           = 12,
+
+      ["col.active"]      = rgb(gotham_blue),
+      ["col.inactive"]    = rgb(gotham_black),
+      text_color          = rgb(gotham_white),
+      text_color_inactive = rgb(gotham_white),
     }
+  }
 })
+
 
 -- Default curves and animations
 hl.curve("easeOutQuint",   { type = "bezier", points = { {0.23, 1},    {0.32, 1}    } })
@@ -208,18 +209,18 @@ hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "
 -- })
 
 hl.config({
-    master = {
-        new_status = "master",
-        new_on_top = true,
-    },
+  master = {
+    new_status = "master",
+    new_on_top = true,
+  },
 })
 
 hl.config({
-    scrolling = {
-        fullscreen_on_one_column = true,
-        wrap_focus = false,
-        wrap_swapcol = false,
-    },
+  scrolling = {
+    fullscreen_on_one_column = true,
+    wrap_focus = false,
+    wrap_swapcol = false,
+  },
 })
 
 ----------------
@@ -227,54 +228,52 @@ hl.config({
 ----------------
 
 hl.config({
-    binds = {
-        workspace_back_and_forth = true,
-    },
-    ecosystem = {
-        no_donation_nag = true,
-    },
-    misc = {
-        force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
-        disable_splash_rendering = true,
-        exit_window_retains_fullscreen = true,
-    },
+  binds = {
+    workspace_back_and_forth = true,
+  },
+  ecosystem = {
+    no_donation_nag = true,
+  },
+  misc = {
+    force_default_wallpaper        = 0, -- Set to 0 or 1 to disable the anime mascot wallpapers
+    disable_hyprland_logo          = true, -- If true disables the random hyprland logo / anime girl background. :(
+    disable_splash_rendering       = true,
+    exit_window_retains_fullscreen = true,
+  },
 })
-
 
 ---------------
 ---- INPUT ----
 ---------------
 
 hl.config({
-    input = {
-        kb_layout  = "de",
-        kb_variant = "",
-        kb_model   = "",
-        kb_options = "caps:escape",
-        kb_rules   = "",
+  input = {
+    kb_layout          = "de",
+    kb_variant         = "",
+    kb_model           = "",
+    kb_options         = "caps:escape",
+    kb_rules           = "",
 
-        numlock_by_default = true,
+    numlock_by_default = true,
 
-        repeat_rate = 35,
-        repeat_delay = 200,
+    repeat_rate        = 35,
+    repeat_delay       = 200,
 
-        follow_mouse = 1,
+    follow_mouse       = 1,
 
-        sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
+    sensitivity        = 0, -- -1.0 - 1.0, 0 means no modification.
 
-        touchpad = {
-            natural_scroll = false,
-        },
+    touchpad           = {
+      natural_scroll = false,
     },
+  },
 })
 
 hl.gesture({
-    fingers = 3,
-    direction = "horizontal",
-    action = "workspace"
+  fingers = 3,
+  direction = "horizontal",
+  action = "workspace"
 })
-
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -496,29 +495,28 @@ end)
 -- Example window rules that are useful
 
 local suppressMaximizeRule = hl.window_rule({
-    -- Ignore maximize requests from all apps. You'll probably like this.
-    name  = "suppress-maximize-events",
-    match = { class = ".*" },
+  -- Ignore maximize requests from all apps. You'll probably like this.
+  name           = "suppress-maximize-events",
+  match          = { class = ".*" },
 
-    suppress_event = "maximize",
+  suppress_event = "maximize",
 })
 -- suppressMaximizeRule:set_enabled(false)
 
 hl.window_rule({
-    -- Fix some dragging issues with XWayland
-    name  = "fix-xwayland-drags",
-    match = {
-        class      = "^$",
-        title      = "^$",
-        xwayland   = true,
-        float      = true,
-        fullscreen = false,
-        pin        = false,
-    },
+  -- Fix some dragging issues with XWayland
+  name     = "fix-xwayland-drags",
+  match    = {
+    class      = "^$",
+    title      = "^$",
+    xwayland   = true,
+    float      = true,
+    fullscreen = false,
+    pin        = false,
+  },
 
-    no_focus = true,
+  no_focus = true,
 })
-
 -- Layer rules also return a handle.
 -- local overlayLayerRule = hl.layer_rule({
 --     name  = "no-anim-overlay",
@@ -529,54 +527,53 @@ hl.window_rule({
 
 -- Hyprland-run windowrule
 hl.window_rule({
-    name  = "move-hyprland-run",
-    match = { class = "hyprland-run" },
+  name  = "move-hyprland-run",
+  match = { class = "hyprland-run" },
 
-    move  = "20 monitor_h-120",
-    float = true,
+  move  = "20 monitor_h-120",
+  float = true,
 })
 
 -- ax rules
 hl.window_rule({
-    name  = "scratchpad",
-    match = {
-        title = "^hypr-scratchpad-01$",
-    },
-    center = true,
-    float = true,
-    size  = "1200 800",
-    border_size  = 10,
-    opacity      = 0.95,
+  name        = "scratchpad",
+  match       = {
+    title = "^hypr-scratchpad-01$",
+  },
+  center      = true,
+  float       = true,
+  size        = "1200 800",
+  border_size = 10,
+  opacity     = 0.95,
 })
 
 hl.window_rule({
-    name  = "About Firefox",
-    match = { title = "^About Mozilla Firefox$" },
-    float = true,
+  name  = "About Firefox",
+  match = { title = "^About Mozilla Firefox$" },
+  float = true,
 })
 
 local rules = {
-    -- workspace assignments
-    { match = { class = "firefox" },                                           workspace = "2 silent" },
-    { match = { class = "org.strawberrymusicplayer.strawberry" },              workspace = "6" },
-    { match = { class = "Emacs", title = "ax-emacs-emms" },                   workspace = "6" },
-    { match = { class = "org.qbittorrent.qBittorrent" },                       workspace = "7 silent" },
-    { match = { class = "brave-browser" },                                     workspace = "8 silent" },
-    { match = { class = ".virt-manager-wrapped" },                             workspace = "8 silent" },
-    { match = { class = "org.keepassxc.KeePassXC" },                           workspace = "9" },
-    -- float + size
-    { match = { class = "^anki$" },                                            float = true, size = "1200 800" },
-    { match = { class = "qalculate-gtk" },                                     float = true, size = "800 600" },
-    { match = { class = "foot", title = "^(bluetui|wiremix)$" },            float = true, size = "1024 768" },
-    { match = { class = "waypaper" },                                          float = true, size = "1024 768" },
-    { match = { class = ".virt-manager-wrapped", title = "Locate ISO media" }, float = true, size = "1024 768" },
-    -- float only
-    { match = { class = "Thunar", title = "File Operation Progress" },         float = true },
-    { match = { class = "org.pulseaudio.pavucontrol" },                        float = true },
+  -- workspace assignments
+  { match = { class = "firefox" },                                           workspace = "2 silent" },
+  { match = { class = "org.strawberrymusicplayer.strawberry" },              workspace = "6" },
+  { match = { class = "Emacs", title = "ax-emacs-emms" },                    workspace = "6" },
+  { match = { class = "org.qbittorrent.qBittorrent" },                       workspace = "7 silent" },
+  { match = { class = "brave-browser" },                                     workspace = "8 silent" },
+  { match = { class = ".virt-manager-wrapped" },                             workspace = "8 silent" },
+  { match = { class = "org.keepassxc.KeePassXC" },                           workspace = "9" },
+  -- float + size
+  { match = { class = "^anki$" },                                            float = true,          size = "1200 800" },
+  { match = { class = "qalculate-gtk" },                                     float = true,          size = "800 600" },
+  { match = { class = "foot", title = "^(bluetui|wiremix)$" },               float = true,          size = "1024 768" },
+  { match = { class = "waypaper" },                                          float = true,          size = "1024 768" },
+  { match = { class = ".virt-manager-wrapped", title = "Locate ISO media" }, float = true,          size = "1024 768" },
+  -- float only
+  { match = { class = "Thunar", title = "File Operation Progress" },         float = true },
+  { match = { class = "org.pulseaudio.pavucontrol" },                        float = true },
 }
 for _, rule in ipairs(rules) do hl.window_rule(rule) end
 
-
--- TODO test scrolling layout 
-hl.workspace_rule({ workspace = "5", layout = "scrolling"})
+-- TODO test scrolling layout
+hl.workspace_rule({ workspace = "5", layout = "scrolling" })
 
