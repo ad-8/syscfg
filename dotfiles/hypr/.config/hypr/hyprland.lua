@@ -452,21 +452,20 @@ end)
 --     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
 -- end)
 -- submap toggle
+local function set_dpms(action, monitor)
+  return function()
+    hl.timer(function()  -- delayed per wiki recommendation
+      hl.dispatch(hl.dsp.dpms({ action = action, monitor = monitor }))
+    end, { timeout = 500, type = "oneshot" })
+  end
+end
+
 hl.bind(mainMod .. "+ G", hl.dsp.submap("toggle"))
 hl.define_submap("toggle", "reset", function()
     hl.bind("B",         function() hl.exec_cmd("rfkill toggle bluetooth") end)
     hl.bind("W",         function() hl.exec_cmd("rfkill toggle wifi") end)
--- toggle 2nd monitor off/on (the hl.timer construct is suggested in the wiki)
-    hl.bind("0", function()
-                 hl.timer(function()
-                   hl.dispatch(hl.dsp.dpms({ action = "disable", monitor = "HDMI-A-1" }))
-                 end, {timeout = 500, type = "oneshot"})
-               end)
-    hl.bind("1", function()
-                 hl.timer(function()
-                   hl.dispatch(hl.dsp.dpms({ action = "enable", monitor = "HDMI-A-1" }))
-                 end, {timeout = 500, type = "oneshot"})
-               end)
+    hl.bind("0", set_dpms("disable", "HDMI-A-1"))
+    hl.bind("1", set_dpms("enable",  "HDMI-A-1"))
     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
 end)
 -- submap screenshot
