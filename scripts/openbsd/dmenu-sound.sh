@@ -7,7 +7,7 @@ die() {
     exit 1
 }
 
-vol=$(printf '0\n10\n20\n30\n40\n50\n60\n70\n80\n90\n100' | dmenu -p 'volume:') || die 'user cancelled volume selection'
+vol=$(printf '100\n90\n80\n70\n60\n50\n40\n30\n20\n10\n0' | dmenu -p 'volume:') || die 'user cancelled volume selection'
 [ -z "$vol" ] && die 'empty volume value'
 case "$vol" in
     *[!0-9]*) die "invalid volume value: $vol" ;;
