@@ -337,10 +337,10 @@ hl.bind(mod("ALT", "SPACE"), hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj
 
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mod("left"),  hl.dsp.focus({ direction = "left" }))
-hl.bind(mod("right"), hl.dsp.focus({ direction = "right" }))
-hl.bind(mod("up"),    hl.dsp.focus({ direction = "up" }))
-hl.bind(mod("down"),  hl.dsp.focus({ direction = "down" }))
+hl.bind(mod("LEFT"),  hl.dsp.focus({ direction = "left" }))
+hl.bind(mod("RIGHT"), hl.dsp.focus({ direction = "right" }))
+hl.bind(mod("UP"),    hl.dsp.focus({ direction = "up" }))
+hl.bind(mod("DOWN"),  hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -430,10 +430,10 @@ hl.define_submap("scrolling", function()
     hl.bind("SHIFT + K",      hl.dsp.window.move({ direction = "up" }))
     hl.bind("SHIFT + J",      hl.dsp.window.move({ direction = "down" }))
     -- Resize
-    hl.bind("comma",          hl.dsp.layout("colresize -conf"))
-    hl.bind("SHIFT + comma",  hl.dsp.layout("colresize -0.05"))
-    hl.bind("period",         hl.dsp.layout("colresize +conf"))
-    hl.bind("SHIFT + period", hl.dsp.layout("colresize +0.05"))
+    hl.bind("COMMA",          hl.dsp.layout("colresize -conf"))
+    hl.bind("SHIFT + COMMA",  hl.dsp.layout("colresize -0.05"))
+    hl.bind("PERIOD",         hl.dsp.layout("colresize +conf"))
+    hl.bind("SHIFT + PERIOD", hl.dsp.layout("colresize +0.05"))
     -- Consume and Expel
     hl.bind("C",              hl.dsp.layout("consume"))
     hl.bind("E",              hl.dsp.layout("expel"))
@@ -476,7 +476,7 @@ hl.define_submap("screenshot", "reset", function()
     -- screenshot selection, copy to clipboard
     hl.bind("C",         function() hl.exec_cmd('grim -g "$(slurp)" - | wl-copy && notify-send -t 2500 "Screenshot copied to clipboard"') end)
     -- screenshot all outputs, save directly to disk
-    hl.bind("P",         function() hl.exec_cmd('FILE="$HOME/sync/screenshots/2026/$(date +%Y%m%d-%H%M%S)_screenshot.png"; grim "$FILE" && notify-send "Screenshot saved" "$FILE"') end)
+    hl.bind("P",         function() hl.exec_cmd('NOW="$(date +%Y%m%d-%H%M%S)"; DIR="$HOME/sync/screenshots/${NOW:0:4}"; mkdir -p "$DIR"; FILE="$DIR/${NOW}_screenshot.png"; grim "$FILE" && notify-send "Screenshot saved" "$FILE"') end)
     -- swappy (annotation tool)
     -- screenshot all
     hl.bind("A",         function() hl.exec_cmd("grim - | swappy -f -") end)
@@ -568,7 +568,7 @@ local rules = {
     -- float + size
     { match = { class = "^anki$" },                                            float = true, size = "1200 800" },
     { match = { class = "qalculate-gtk" },                                     float = true, size = "800 600" },
-    { match = { class = "foot", title = "^(bluetui)|^(wiremix)$" },            float = true, size = "1024 768" },
+    { match = { class = "foot", title = "^(bluetui|wiremix)$" },            float = true, size = "1024 768" },
     { match = { class = "waypaper" },                                          float = true, size = "1024 768" },
     { match = { class = ".virt-manager-wrapped", title = "Locate ISO media" }, float = true, size = "1024 768" },
     -- float only
