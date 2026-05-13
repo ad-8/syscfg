@@ -32,6 +32,7 @@ local terminal    = "footclient"
 local fileManager = "thunar"
 local menu        = "rofi -show drun"
 local menu2       = "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\" -s \"d3ebe9\""
+local scripts     = os.getenv("HOME") .. "/syscfg/scripts"
 
 
 -------------------
@@ -49,7 +50,7 @@ hl.on("hyprland.start", function ()
   hl.exec_cmd("syncthing serve --no-browser &")
   hl.exec_cmd("swaybg -i $HOME/sync/wallpapers/default.jpg &")
 
-  hl.exec_cmd("$HOME/syscfg/scripts/bb/licht.clj hi &")
+  hl.exec_cmd(scripts .. "/bb/licht.clj hi &")
 
   hl.exec_cmd("[workspace special:magic silent] foot --title hypr-scratchpad-01 -e sh -c '~/x/hyprland-tmux-scratchpad.sh'")
 end)
@@ -317,18 +318,18 @@ hl.bind(mod("SHIFT", "COMMA"),  hl.dsp.workspace.move({ monitor = "+1", follow =
 hl.bind(mod("ALT", "L"),   hl.dsp.exec_cmd("swaylock --color 000000"))
 hl.bind(mod("SHIFT", "F"), hl.dsp.exec_cmd("rofi -show recursivebrowser"))
 hl.bind(mod("SHIFT", "W"), hl.dsp.exec_cmd("rofi -show window"))
-hl.bind(mod("B"),          hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle"))
-hl.bind(mod("SHIFT", "B"), hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle-min"))
+hl.bind(mod("B"),          hl.dsp.exec_cmd(scripts .. "/waybar.clj toggle"))
+hl.bind(mod("SHIFT", "B"), hl.dsp.exec_cmd(scripts .. "/waybar.clj toggle-min"))
 -- notifications
 hl.bind(mod("ALT", "H"), hl.dsp.exec_cmd("dunstctl history-pop"))
 hl.bind(mod("ALT", "K"), hl.dsp.exec_cmd("dunstctl close-all"))
-hl.bind(mod("ALT", "W"), hl.dsp.exec_cmd("~/syscfg/scripts/bb/weather.clj dunst"))
+hl.bind(mod("ALT", "W"), hl.dsp.exec_cmd(scripts .. "/bb/weather.clj dunst"))
 -- volume
-hl.bind(mod("ALT", "LEFT"),  hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-mute"))
-hl.bind(mod("ALT", "UP"),    hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-up"))
-hl.bind(mod("ALT", "DOWN"),  hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-down"))
-hl.bind(mod("ALT", "RIGHT"), hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj"))
-hl.bind(mod("ALT", "SPACE"), hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj"))
+hl.bind(mod("ALT", "LEFT"),  hl.dsp.exec_cmd(scripts .. "/wayland.clj volume-mute"))
+hl.bind(mod("ALT", "UP"),    hl.dsp.exec_cmd(scripts .. "/wayland.clj volume-up"))
+hl.bind(mod("ALT", "DOWN"),  hl.dsp.exec_cmd(scripts .. "/wayland.clj volume-down"))
+hl.bind(mod("ALT", "RIGHT"), hl.dsp.exec_cmd(scripts .. "/bb/play_pause.clj"))
+hl.bind(mod("ALT", "SPACE"), hl.dsp.exec_cmd(scripts .. "/bb/play_pause.clj"))
 -- TODO find free keybinds or put in submap
 -- bind = $mainMod, M, exec, bb ~/x/ax_bookmarks.clj std
 -- bind = $mainMod SHIFT, M, exec, bb ~/x/ax_bookmarks.clj archived
@@ -447,8 +448,8 @@ end)
 -- submap change
 -- hl.bind(mod("C"), hl.dsp.submap("change"))
 -- hl.define_submap("change", "reset", function()
---     hl.bind("L",         function() hl.exec_cmd("$HOME/syscfg/scripts/bb/licht.clj") end)
---     hl.bind("W",         function() hl.exec_cmd("$HOME/syscfg/scripts/bb/set_random_wallpaper.clj") end)
+--     hl.bind("L",         function() hl.exec_cmd(scripts .. "/bb/licht.clj") end)
+--     hl.bind("W",         function() hl.exec_cmd(scripts .. "/bb/set_random_wallpaper.clj") end)
 --     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
 -- end)
 -- submap toggle
