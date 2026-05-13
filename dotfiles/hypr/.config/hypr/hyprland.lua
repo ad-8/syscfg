@@ -282,83 +282,85 @@ hl.gesture({
 ---------------------
 
 local mainMod = "SUPER"
+local function mod(...) return mainMod .. " + " .. table.concat({...}, " + ") end
+
 -- dwm-inspired basics
-hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + Q", hl.dsp.window.close())
-hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu2))
-hl.bind(mainMod .. " + J", hl.dsp.layout("cyclenext"))
-hl.bind(mainMod .. " + K", hl.dsp.layout("cycleprev"))
-hl.bind(mainMod .. " + SHIFT + J", hl.dsp.layout("swapnext"))
-hl.bind(mainMod .. " + SHIFT + K", hl.dsp.layout("swapprev"))
-hl.bind(mainMod .. " + H", hl.dsp.layout("mfact -0.05"))
-hl.bind(mainMod .. " + L", hl.dsp.layout("mfact +0.05"))
-hl.bind(mainMod .. " + U", hl.dsp.layout("swapwithmaster master"))
-hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.layout("swapwithmaster master"))
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(mainMod .. " + SPACE", hl.dsp.window.fullscreen({ mode = "maximized" }))
-hl.bind(mainMod .. " + I", hl.dsp.layout("addmaster"))
-hl.bind(mainMod .. " + D", hl.dsp.layout("removemaster"))
-hl.bind(mainMod .. " + TAB", hl.dsp.focus( { workspace = "previous" } ))
+hl.bind(mod("RETURN"),          hl.dsp.exec_cmd(terminal))
+hl.bind(mod("Q"),               hl.dsp.window.close())
+hl.bind(mod("SHIFT", "Q"),      hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mod("V"),               hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mod("SHIFT", "O"),      hl.dsp.exec_cmd(menu))
+hl.bind(mod("P"),               hl.dsp.exec_cmd(menu2))
+hl.bind(mod("J"),               hl.dsp.layout("cyclenext"))
+hl.bind(mod("K"),               hl.dsp.layout("cycleprev"))
+hl.bind(mod("SHIFT", "J"),      hl.dsp.layout("swapnext"))
+hl.bind(mod("SHIFT", "K"),      hl.dsp.layout("swapprev"))
+hl.bind(mod("H"),               hl.dsp.layout("mfact -0.05"))
+hl.bind(mod("L"),               hl.dsp.layout("mfact +0.05"))
+hl.bind(mod("U"),               hl.dsp.layout("swapwithmaster master"))
+hl.bind(mod("SHIFT", "RETURN"), hl.dsp.layout("swapwithmaster master"))
+hl.bind(mod("F"),               hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+hl.bind(mod("SPACE"),           hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(mod("I"),               hl.dsp.layout("addmaster"))
+hl.bind(mod("D"),               hl.dsp.layout("removemaster"))
+hl.bind(mod("TAB"),             hl.dsp.focus( { workspace = "previous" } ))
 -- tabs
-hl.bind(mainMod .. "+ M", hl.dsp.group.next())
-hl.bind(mainMod .. "+ N", hl.dsp.group.prev())
+hl.bind(mod("M"), hl.dsp.group.next())
+hl.bind(mod("N"), hl.dsp.group.prev())
 -- TODO test wlr-which-key
-hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.exec_cmd("wlr-which-key"))
-hl.bind(mainMod .. " + O",     hl.dsp.exec_cmd("wlr-which-key --initial-keys \"o\""))
-hl.bind(mainMod .. " + C",     hl.dsp.exec_cmd("wlr-which-key --initial-keys \"c\""))
+hl.bind(mod("SHIFT", "SPACE"), hl.dsp.exec_cmd("wlr-which-key"))
+hl.bind(mod("O"),              hl.dsp.exec_cmd("wlr-which-key --initial-keys \"o\""))
+hl.bind(mod("C"),              hl.dsp.exec_cmd("wlr-which-key --initial-keys \"c\""))
 -- multi-monitor keybinds
-hl.bind(mainMod .. " + PERIOD", hl.dsp.focus({ monitor = "+1" }))
-hl.bind(mainMod .. " + SHIFT + PERIOD", hl.dsp.window.move({ monitor = "+1", follow = false }))
-hl.bind(mainMod .. " + SHIFT + COMMA", hl.dsp.workspace.move({ monitor = "+1", follow = false }))
+hl.bind(mod("PERIOD"),          hl.dsp.focus({ monitor = "+1" }))
+hl.bind(mod("SHIFT", "PERIOD"), hl.dsp.window.move({ monitor = "+1", follow = false }))
+hl.bind(mod("SHIFT", "COMMA"),  hl.dsp.workspace.move({ monitor = "+1", follow = false }))
 -- misc
-hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("swaylock --color 000000"))
-hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd("rofi -show recursivebrowser"))
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("rofi -show window"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle"))
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle-min"))
+hl.bind(mod("ALT", "L"),   hl.dsp.exec_cmd("swaylock --color 000000"))
+hl.bind(mod("SHIFT", "F"), hl.dsp.exec_cmd("rofi -show recursivebrowser"))
+hl.bind(mod("SHIFT", "W"), hl.dsp.exec_cmd("rofi -show window"))
+hl.bind(mod("B"),          hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle"))
+hl.bind(mod("SHIFT", "B"), hl.dsp.exec_cmd("~/syscfg/scripts/waybar.clj toggle-min"))
 -- notifications
-hl.bind(mainMod .. " + ALT + H", hl.dsp.exec_cmd("dunstctl history-pop"))
-hl.bind(mainMod .. " + ALT + K", hl.dsp.exec_cmd("dunstctl close-all"))
-hl.bind(mainMod .. " + ALT + W", hl.dsp.exec_cmd("~/syscfg/scripts/bb/weather.clj dunst"))
+hl.bind(mod("ALT", "H"), hl.dsp.exec_cmd("dunstctl history-pop"))
+hl.bind(mod("ALT", "K"), hl.dsp.exec_cmd("dunstctl close-all"))
+hl.bind(mod("ALT", "W"), hl.dsp.exec_cmd("~/syscfg/scripts/bb/weather.clj dunst"))
 -- volume
-hl.bind(mainMod .. " + ALT + LEFT",  hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-mute"))
-hl.bind(mainMod .. " + ALT + UP",    hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-up"))
-hl.bind(mainMod .. " + ALT + DOWN",  hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-down"))
-hl.bind(mainMod .. " + ALT + RIGHT", hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj"))
-hl.bind(mainMod .. " + ALT + SPACE", hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj"))
+hl.bind(mod("ALT", "LEFT"),  hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-mute"))
+hl.bind(mod("ALT", "UP"),    hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-up"))
+hl.bind(mod("ALT", "DOWN"),  hl.dsp.exec_cmd("~/syscfg/scripts/wayland.clj volume-down"))
+hl.bind(mod("ALT", "RIGHT"), hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj"))
+hl.bind(mod("ALT", "SPACE"), hl.dsp.exec_cmd("~/syscfg/scripts/bb/play_pause.clj"))
 -- TODO find free keybinds or put in submap
 -- bind = $mainMod, M, exec, bb ~/x/ax_bookmarks.clj std
 -- bind = $mainMod SHIFT, M, exec, bb ~/x/ax_bookmarks.clj archived
 
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+hl.bind(mod("left"),  hl.dsp.focus({ direction = "left" }))
+hl.bind(mod("right"), hl.dsp.focus({ direction = "right" }))
+hl.bind(mod("up"),    hl.dsp.focus({ direction = "up" }))
+hl.bind(mod("down"),  hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i, follow = false }))
+    hl.bind(mod(key),          hl.dsp.focus({ workspace = i}))
+    hl.bind(mod("SHIFT", key), hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
 -- special workspace (scratchpad)
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mod("S"),          hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mod("SHIFT", "S"), hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mod("mouse_down"), hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mod("mouse_up"),   hl.dsp.focus({ workspace = "e-1" }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind(mod("mouse:272"), hl.dsp.window.drag(),   { mouse = true })
+hl.bind(mod("mouse:273"), hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
@@ -379,7 +381,7 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 -- SUBMAP START
 ------------------------------------------------------------------------------------------
 -- submap open
--- hl.bind(mainMod .. "+ O", hl.dsp.submap("open"))
+-- hl.bind(mod("O"), hl.dsp.submap("open"))
 -- hl.define_submap("open", "reset", function()
 --     hl.bind("B",         function() hl.exec_cmd("foot -T bluetui bluetui") end)
 --     hl.bind("C",         function() hl.exec_cmd("qalculate-gtk") end)
@@ -400,22 +402,22 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 --     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
 -- end)
 -- tabbed windows (groups)
-hl.bind(mainMod .. "+ W", hl.dsp.submap("tabs"))
+hl.bind(mod("W"), hl.dsp.submap("tabs"))
 hl.define_submap("tabs", function()
-    hl.bind("W",                       hl.dsp.group.toggle())
-    hl.bind("O",                       hl.dsp.window.move({ out_of_group = true }))
-    hl.bind(mainMod .. " + J",         hl.dsp.group.next())
-    hl.bind(mainMod .. " + K",         hl.dsp.group.prev())
-    hl.bind(mainMod .. " + SHIFT + J", hl.dsp.group.move_window({ forward = true}))
-    hl.bind(mainMod .. " + SHIFT + K", hl.dsp.group.move_window({ forward = false}))
-    hl.bind(mainMod .. " + CTRL + J",  hl.dsp.window.move({ into_group = 'd' }))
-    hl.bind(mainMod .. " + CTRL + K",  hl.dsp.window.move({ into_group = 'u' }))
-    hl.bind(mainMod .. " + CTRL + H",  hl.dsp.window.move({ into_group = 'l' }))
-    hl.bind(mainMod .. " + CTRL + L",  hl.dsp.window.move({ into_group = 'r' }))
-    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
+    hl.bind("W",               hl.dsp.group.toggle())
+    hl.bind("O",               hl.dsp.window.move({ out_of_group = true }))
+    hl.bind(mod("J"),          hl.dsp.group.next())
+    hl.bind(mod("K"),          hl.dsp.group.prev())
+    hl.bind(mod("SHIFT", "J"), hl.dsp.group.move_window({ forward = true}))
+    hl.bind(mod("SHIFT", "K"), hl.dsp.group.move_window({ forward = false}))
+    hl.bind(mod("CTRL", "J"),  hl.dsp.window.move({ into_group = 'd' }))
+    hl.bind(mod("CTRL", "K"),  hl.dsp.window.move({ into_group = 'u' }))
+    hl.bind(mod("CTRL", "H"),  hl.dsp.window.move({ into_group = 'l' }))
+    hl.bind(mod("CTRL", "L"),  hl.dsp.window.move({ into_group = 'r' }))
+    hl.bind("ESCAPE",          hl.dsp.submap("reset"))
 end)
 -- scrolling
-hl.bind(mainMod .. "+ E", hl.dsp.submap("scrolling"))
+hl.bind(mod("E"), hl.dsp.submap("scrolling"))
 hl.define_submap("scrolling", function()
     -- Focus
     hl.bind("H",              hl.dsp.layout("focus l"))
@@ -445,7 +447,7 @@ hl.define_submap("scrolling", function()
     hl.bind("ESCAPE",         hl.dsp.submap("reset"))
 end)
 -- submap change
--- hl.bind(mainMod .. "+ C", hl.dsp.submap("change"))
+-- hl.bind(mod("C"), hl.dsp.submap("change"))
 -- hl.define_submap("change", "reset", function()
 --     hl.bind("L",         function() hl.exec_cmd("$HOME/syscfg/scripts/bb/licht.clj") end)
 --     hl.bind("W",         function() hl.exec_cmd("$HOME/syscfg/scripts/bb/set_random_wallpaper.clj") end)
@@ -460,7 +462,7 @@ local function set_dpms(action, monitor)
   end
 end
 
-hl.bind(mainMod .. "+ G", hl.dsp.submap("toggle"))
+hl.bind(mod("G"), hl.dsp.submap("toggle"))
 hl.define_submap("toggle", "reset", function()
     hl.bind("B",         function() hl.exec_cmd("rfkill toggle bluetooth") end)
     hl.bind("W",         function() hl.exec_cmd("rfkill toggle wifi") end)
@@ -469,7 +471,7 @@ hl.define_submap("toggle", "reset", function()
     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
 end)
 -- submap screenshot
-hl.bind(mainMod .. "+ CTRL + S", hl.dsp.submap("screenshot"))
+hl.bind(mod("CTRL", "S"), hl.dsp.submap("screenshot"))
 hl.define_submap("screenshot", "reset", function()
     -- screenshot selection, copy to clipboard
     hl.bind("C",         function() hl.exec_cmd('grim -g "$(slurp)" - | wl-copy && notify-send -t 2500 "Screenshot copied to clipboard"') end)
