@@ -6,13 +6,13 @@ die() {
     exit 1
 }
 
-bri=$(printf '10\n20\n30\n40\n50\n60\n70\n80\n90\n100' | dmenu -p 'brightness:') || die 'user cancelled brightness selection'
+bri=$(printf '100\n90\n80\n70\n60\n50\n40\n30\n20\n10' | dmenu -p 'brightness:') || die 'user cancelled brightness selection'
 [ -z "$bri" ] && die 'empty brightness value'
 case "$bri" in
     *[!0-9]*) die "invalid brightness value: $bri" ;;
 esac
 
-tmp=$(printf '2000\n3000\n4000\n5000\n6000\n6500' | dmenu -p 'color temp:') || die 'user cancelled color temp selection'
+tmp=$(printf '6500\n6000\n5000\n4000\n3000\n2000' | dmenu -p 'color temp:') || die 'user cancelled color temp selection'
 [ -z "$tmp" ] && die 'empty color temp value'
 case "$tmp" in
     *[!0-9]*) die "invalid color temp value: $tmp" ;;
