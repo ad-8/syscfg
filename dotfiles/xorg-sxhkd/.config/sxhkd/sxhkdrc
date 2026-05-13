@@ -77,15 +77,15 @@ XF86AudioPlay
     ~/scripts/bb/play_pause.clj
 
 super + mod1 + Up
-     ~/scripts/legacy-xorg-dwm/volume up
+     sndioctl output.level=+0.05
 super + mod1 + Down
-     ~/scripts/legacy-xorg-dwm/volume down
+     sndioctl output.level=-0.05
 super + mod1 + Left
-     ~/scripts/legacy-xorg-dwm/volume mute
+     sndioctl output.mute=!
 super + mod1 + Right
-    ~/scripts/bb/play_pause.clj
+    xdotool search --name "Picture-in-Picture" key space
 super + mod1 + space
-    ~/scripts/bb/play_pause.clj
+    xdotool search --name "Picture-in-Picture" key space
 
 # --------------------------------------------------------------
 #                       NOTIFICATIONS
