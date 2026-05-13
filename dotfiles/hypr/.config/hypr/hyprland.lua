@@ -563,16 +563,19 @@ local rules = {
   { match = { class = ".virt-manager-wrapped" },                             workspace = "8 silent" },
   { match = { class = "org.keepassxc.KeePassXC" },                           workspace = "9" },
   -- float + size
-  { match = { class = "^anki$" },                                            float = true,          size = "1200 800" },
-  { match = { class = "qalculate-gtk" },                                     float = true,          size = "800 600" },
-  { match = { class = "foot", title = "^(bluetui|wiremix)$" },               float = true,          size = "1024 768" },
-  { match = { class = "waypaper" },                                          float = true,          size = "1024 768" },
-  { match = { class = ".virt-manager-wrapped", title = "Locate ISO media" }, float = true,          size = "1024 768" },
+  { match = { class = "^anki$" },                                            float = true, size = "1200 800" },
+  { match = { class = "qalculate-gtk" },                                     float = true, size = "800 600" },
+  { match = { class = "foot", title = "^(bluetui|wiremix)$" },               float = true, size = "1024 768" },
+  { match = { class = "waypaper" },                                          float = true, size = "1024 768" },
+  { match = { class = ".virt-manager-wrapped", title = "Locate ISO media" }, float = true, size = "1024 768" },
   -- float only
   { match = { class = "Thunar", title = "File Operation Progress" },         float = true },
   { match = { class = "org.pulseaudio.pavucontrol" },                        float = true },
 }
-for _, rule in ipairs(rules) do hl.window_rule(rule) end
+
+for _, rule in ipairs(rules) do
+  hl.window_rule(rule)
+end
 
 -- TODO test scrolling layout
 hl.workspace_rule({ workspace = "5", layout = "scrolling" })
