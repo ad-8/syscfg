@@ -22,9 +22,6 @@ hl.config({
         force_zero_scaling = true
     }
 })
--- toolkit-specific scale
-hl.env("GDK_SCALE", "2")
-hl.env("XCURSOR_SIZE", "32")
 
 
 ---------------------
@@ -62,6 +59,7 @@ end)
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
 
+hl.env("GDK_SCALE", "2")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
