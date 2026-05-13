@@ -549,33 +549,32 @@ hl.window_rule({
     opacity      = 0.95,
 })
 
--- ax: named rule
 hl.window_rule({
     name  = "About Firefox",
-    match = {
-        title = "^About Mozilla Firefox$",
-    },
+    match = { title = "^About Mozilla Firefox$" },
     float = true,
 })
--- ax: anon rule
-hl.window_rule({ match = { class = "^anki$" }, float = true, size = "1200 800" })
 
--- open programs on a certain workspace (to find out the class: `hyprctl clients`)
-hl.window_rule({ match = { class = "firefox" }, workspace = "2 silent" })
-hl.window_rule({ match = { class = "org.strawberrymusicplayer.strawberry" }, workspace = "6" })
-hl.window_rule({ match = { class = "Emacs", title = "ax-emacs-emms" }, workspace = "6" })
-hl.window_rule({ match = { class = "org.qbittorrent.qBittorrent" }, workspace = "7 silent" })
-hl.window_rule({ match = { class = "brave-browser" }, workspace = "8 silent" })
-hl.window_rule({ match = { class = ".virt-manager-wrapped" }, workspace = "8 silent" })
-hl.window_rule({ match = { class = "org.keepassxc.KeePassXC" }, workspace = "9" })
--- programs that should float and have a certain size
-hl.window_rule({ match = { class = "qalculate-gtk" }, float = true, size = "800 600" })
-hl.window_rule({ match = { class = "foot", title = "^(bluetui)|^(wiremix)$" }, float = true, size = "1024 768" })
-hl.window_rule({ match = { class = "waypaper" }, float = true, size = "1024 768" })
-hl.window_rule({ match = { class = ".virt-manager-wrapped", title = "Locate ISO media" }, float = true, size = "1024 768" })
--- more stuff that should float and keep its size
-hl.window_rule({ match = { class = "Thunar", title = "File Operation Progress" }, float = true })
-hl.window_rule({ match = { class = "org.pulseaudio.pavucontrol" }, float = true })
+local rules = {
+    -- workspace assignments
+    { match = { class = "firefox" },                                           workspace = "2 silent" },
+    { match = { class = "org.strawberrymusicplayer.strawberry" },              workspace = "6" },
+    { match = { class = "Emacs", title = "ax-emacs-emms" },                   workspace = "6" },
+    { match = { class = "org.qbittorrent.qBittorrent" },                       workspace = "7 silent" },
+    { match = { class = "brave-browser" },                                     workspace = "8 silent" },
+    { match = { class = ".virt-manager-wrapped" },                             workspace = "8 silent" },
+    { match = { class = "org.keepassxc.KeePassXC" },                           workspace = "9" },
+    -- float + size
+    { match = { class = "^anki$" },                                            float = true, size = "1200 800" },
+    { match = { class = "qalculate-gtk" },                                     float = true, size = "800 600" },
+    { match = { class = "foot", title = "^(bluetui)|^(wiremix)$" },            float = true, size = "1024 768" },
+    { match = { class = "waypaper" },                                          float = true, size = "1024 768" },
+    { match = { class = ".virt-manager-wrapped", title = "Locate ISO media" }, float = true, size = "1024 768" },
+    -- float only
+    { match = { class = "Thunar", title = "File Operation Progress" },         float = true },
+    { match = { class = "org.pulseaudio.pavucontrol" },                        float = true },
+}
+for _, rule in ipairs(rules) do hl.window_rule(rule) end
 
 
 -- TODO test scrolling layout 
