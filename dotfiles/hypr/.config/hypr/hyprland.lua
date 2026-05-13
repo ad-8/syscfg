@@ -70,6 +70,9 @@ hl.env("HYPRCURSOR_SIZE", "24")
 ---- LOOK AND FEEL ----
 -----------------------
 
+local function rgb(c)  return string.format("rgb(%s)",  c) end
+local function rgba(c) return string.format("rgba(%s)", c) end
+
 local gotham_black = "0c1014"
 local gotham_brightblack = "11151c"
 local gotham_brightgreen = "091f2e"
@@ -97,11 +100,11 @@ hl.config({
 
         col = {
             -- default
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
-            -- inactive_border = "rgba(595959aa)",
+            active_border   = { colors = {rgba("33ccffee"), rgba("00ff99ee")}, angle = 45 },
+            -- inactive_border = rgba("595959aa"),
             -- gotham
-            -- active_border   = "rgb(" .. gotham_blue .. ")",
-            inactive_border = "rgb(" .. gotham_black .. ")",
+            -- active_border   = rgb(gotham_blue),
+            inactive_border = rgb(gotham_black),
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -140,8 +143,8 @@ hl.config({
         enabled = true,
     },
     group = {
-      ["col.border_active"]   = "rgb(" .. gotham_blue .. ")",
-      ["col.border_inactive"] = "rgb(" .. gotham_black .. ")",
+      ["col.border_active"]   = rgb(gotham_blue),
+      ["col.border_inactive"] = rgb(gotham_black),
 
       groupbar = {
         height = 1,
@@ -154,10 +157,10 @@ hl.config({
         font_family         = 'Hack Nerd Font',
         font_size           = 12,
 
-        ["col.active"]      = "rgb(" .. gotham_blue .. ")",
-        ["col.inactive"]    = "rgb(" .. gotham_black .. ")",
-        text_color          = "rgb(" .. gotham_white .. ")",
-        text_color_inactive = "rgb(" .. gotham_white .. ")",
+        ["col.active"]      = rgb(gotham_blue),
+        ["col.inactive"]    = rgb(gotham_black),
+        text_color          = rgb(gotham_white),
+        text_color_inactive = rgb(gotham_white),
       }
     }
 })
