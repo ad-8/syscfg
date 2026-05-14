@@ -56,6 +56,9 @@
     :reload  (fn [_] (shell ["hyprctl" "reload"]))}
    {:file    "emacs-theme.el"
     :symlink (fs/path (fs/xdg-config-home) "doom/active-theme.el")
+    :reload  (fn [_] nil)}
+   {:file    "rofi.rasi"
+    :symlink (fs/path (fs/xdg-config-home) "rofi/active-theme.rasi")
     :reload  (fn [_] nil)}])
 
 (defn available-themes []

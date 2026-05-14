@@ -160,4 +160,4 @@ combi-modi: "drun,recursivebrowser";
 
 /* Nord Theme */
 /* https://github.com/undiabler/nord-rofi-theme */
-@theme "~/.config/rofi/nord.rasi"
+@theme "~/.config/rofi/active-theme.rasi"
