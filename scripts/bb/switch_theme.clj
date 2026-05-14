@@ -68,6 +68,7 @@
   (let [src (fs/path theme-dir file)]
     (when (fs/exists? src)
       (when symlink
+        (fs/create-dirs (fs/parent symlink))
         (fs/delete-if-exists symlink)
         (fs/create-sym-link symlink src))
       (try (reload src) (catch Exception _)))))
