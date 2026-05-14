@@ -178,7 +178,7 @@ Toggle with ~M-x variable-pitch-font~.
 
 ;; Watch doom config dir so symlink swaps are picked up at runtime
 (require 'filenotify)
-(file-notify-add-watch (expand-file-name "~/.config/doom/") '(change)
+(file-notify-add-watch (file-truename (expand-file-name "~/.config/doom/")) '(change)
   (lambda (event)
     (when (and (memq (nth 1 event) '(created changed))
                (string-suffix-p "active-theme.el" (nth 2 event)))
