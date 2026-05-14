@@ -127,7 +127,8 @@ in
               href = "http://${nasIp}:5000";
               icon = "synology-dsm.png";
               description = "Synology DS224+ NAS";
-              siteMonitor = "http://${nasIp}:5000";
+              # TODO siteMonitor probably keeps NAS disks from sleeping
+              # siteMonitor = "http://${nasIp}:5000";
             };
           }
           {
