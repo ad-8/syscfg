@@ -19,7 +19,7 @@
       (cond
         (= k "foreground") (str "\033]10;#" v "\007")
         (= k "background") (str "\033]11;#" v "\007")
-        (= k "cursor")     (when-let [fg (first (remove str/blank? (str/split v #" +")))]
+        (= k "cursor")     (when-let [fg (second (remove str/blank? (str/split v #" +")))]
                              (str "\033]12;#" fg "\007"))
         (re-matches #"regular[0-7]" k) (str "\033]4;" (last k) ";#" v "\007")
         (re-matches #"bright[0-7]" k)  (str "\033]4;" (+ 8 (Integer/parseInt (str (last k)))) ";#" v "\007")))))
