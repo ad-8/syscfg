@@ -59,7 +59,14 @@
     :reload  (fn [_] nil)}
    {:file    "rofi.rasi"
     :symlink (fs/path (fs/xdg-config-home) "rofi/active-theme.rasi")
-    :reload  (fn [_] nil)}])
+    :reload  (fn [_] nil)}
+   {:file    "dunst.conf"
+    :symlink (fs/path (fs/xdg-config-home) "dunst/active-theme.conf")
+    :reload  (fn [_]
+               (shell {:continue true}
+                      ["dunstctl" "reload"
+                       (str (fs/path (fs/xdg-config-home) "dunst/dunstrc"))
+                       (str (fs/path (fs/xdg-config-home) "dunst/active-theme.conf"))]))}])
 
 (defn available-themes []
   (->> (fs/list-dir themes-dir)
