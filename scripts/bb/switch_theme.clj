@@ -94,7 +94,7 @@
     (run! #(apply-app-theme theme-dir %) apps)))
 
 (defn pick-theme []
-  (-> (process ["wmenu" "-p" "theme"]
+  (-> (process ["fuzzel" "--dmenu" "-p" "select theme: "]
                {:in (str/join "\n" (available-themes)) :out :string})
       deref
       :out
