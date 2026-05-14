@@ -50,7 +50,10 @@
     :symlink (fs/path (fs/xdg-config-home) "waybar/active-theme.css")
     :reload  (fn [_]
                (shell {:continue true} "sh -c 'pkill -f waybar'")
-               (shell "sh -c 'setsid waybar >/dev/null 2>&1 &'"))}])
+               (shell "sh -c 'setsid waybar >/dev/null 2>&1 &'"))}
+   {:file    "hyprland.lua"
+    :symlink (fs/path (fs/xdg-config-home) "hypr/active-theme.lua")
+    :reload  (fn [_] (shell ["hyprctl" "reload"]))}])
 
 (defn available-themes []
   (->> (fs/list-dir themes-dir)

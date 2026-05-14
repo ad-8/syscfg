@@ -71,22 +71,7 @@ hl.env("HYPRCURSOR_SIZE", "24")
 local function rgb(c)  return string.format("rgb(%s)",  c) end
 local function rgba(c) return string.format("rgba(%s)", c) end
 
-local gotham_black = "0c1014"
-local gotham_brightblack = "11151c"
-local gotham_brightgreen = "091f2e"
-local gotham_brightblue = "0a3749"
-local gotham_brightyellow = "245361"
-local gotham_brightcyan = "599cab"
-local gotham_white = "99d1ce"
-local gotham_brightwhite = "d3ebe9"
-local gotham_red = "c23127"
-local gotham_brightred = "d26937"
-local gotham_yellow = "edb443"
-local gotham_brightmagenta = "888ca6"
-local gotham_magenta = "4e5166"
-local gotham_blue = "195466"
-local gotham_cyan = "33859e"
-local gotham_green = "2aa889"
+local colors = require("active-theme")
 
 
 hl.config({
@@ -101,8 +86,8 @@ hl.config({
       active_border   = { colors = { rgba("33ccffee"), rgba("00ff99ee") }, angle = 45 },
       -- inactive_border = rgba("595959aa"),
       -- gotham
-      -- active_border   = rgb(gotham_blue),
-      inactive_border = rgb(gotham_black),
+      -- active_border   = rgb(colors.blue),
+      inactive_border = rgb(colors.black),
     },
 
     -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -141,8 +126,8 @@ hl.config({
     enabled = true,
   },
   group = {
-    ["col.border_active"]   = rgb(gotham_blue),
-    ["col.border_inactive"] = rgb(gotham_black),
+    ["col.border_active"]   = rgb(colors.blue),
+    ["col.border_inactive"] = rgb(colors.black),
 
     groupbar                = {
       height              = 1,
@@ -155,10 +140,10 @@ hl.config({
       font_family         = 'Hack Nerd Font',
       font_size           = 12,
 
-      ["col.active"]      = rgb(gotham_blue),
-      ["col.inactive"]    = rgb(gotham_black),
-      text_color          = rgb(gotham_white),
-      text_color_inactive = rgb(gotham_white),
+      ["col.active"]      = rgb(colors.blue),
+      ["col.inactive"]    = rgb(colors.black),
+      text_color          = rgb(colors.white),
+      text_color_inactive = rgb(colors.white),
     }
   }
 })
