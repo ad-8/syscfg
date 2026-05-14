@@ -308,7 +308,7 @@ hl.bind(mod("N"), hl.dsp.group.prev())
 -- TODO test wlr-which-key
 hl.bind(mod("SHIFT", "SPACE"), hl.dsp.exec_cmd("wlr-which-key"))
 hl.bind(mod("O"),              hl.dsp.exec_cmd("wlr-which-key --initial-keys \"o\""))
-hl.bind(mod("C"),              hl.dsp.exec_cmd("wlr-which-key --initial-keys \"c\""))
+-- hl.bind(mod("C"),              hl.dsp.exec_cmd("wlr-which-key --initial-keys \"c\""))
 -- multi-monitor keybinds
 hl.bind(mod("PERIOD"),          hl.dsp.focus({ monitor = "+1" }))
 hl.bind(mod("SHIFT", "PERIOD"), hl.dsp.window.move({ monitor = "+1", follow = false }))
@@ -445,12 +445,12 @@ hl.define_submap("scrolling", function()
     hl.bind("ESCAPE",         hl.dsp.submap("reset"))
 end)
 -- submap change
--- hl.bind(mod("C"), hl.dsp.submap("change"))
--- hl.define_submap("change", "reset", function()
---     hl.bind("L",         function() hl.exec_cmd(scripts .. "/bb/licht.clj") end)
---     hl.bind("W",         function() hl.exec_cmd(scripts .. "/bb/set_random_wallpaper.clj") end)
---     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
--- end)
+hl.bind(mod("C"), hl.dsp.submap("change"))
+hl.define_submap("change", "reset", function()
+    hl.bind("L",         function() hl.exec_cmd(scripts .. "/bb/licht.clj") end)
+    hl.bind("W",         function() hl.exec_cmd(scripts .. "/bb/set_random_wallpaper.clj") end)
+    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
+end)
 -- submap toggle
 local function set_dpms(action, monitor)
   return function()
@@ -459,13 +459,12 @@ local function set_dpms(action, monitor)
     end, { timeout = 500, type = "oneshot" })
   end
 end
-
 hl.bind(mod("G"), hl.dsp.submap("toggle"))
 hl.define_submap("toggle", "reset", function()
     hl.bind("B",         function() hl.exec_cmd("rfkill toggle bluetooth") end)
     hl.bind("W",         function() hl.exec_cmd("rfkill toggle wifi") end)
-    hl.bind("0", set_dpms("disable", "HDMI-A-1"))
-    hl.bind("1", set_dpms("enable",  "HDMI-A-1"))
+    hl.bind("0",         set_dpms("disable", "HDMI-A-1"))
+    hl.bind("1",         set_dpms("enable",  "HDMI-A-1"))
     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
 end)
 -- submap screenshot
