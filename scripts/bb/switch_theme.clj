@@ -45,7 +45,12 @@
     :reload  (fn [_] (shell ["pkill" "-SIGUSR2" "btop"]))}
    {:file    "foot.theme"
     :symlink (fs/path (fs/xdg-config-home) "foot/active-theme")
-    :reload  reload-foot}])
+    :reload  reload-foot}
+   {:file    "waybar.css"
+    :symlink (fs/path (fs/xdg-config-home) "waybar/active-theme.css")
+    :reload  (fn [_]
+               (shell {:continue true} ["pkill" "-9" "-x" "waybar"])
+               (shell "sh -c 'setsid waybar >/dev/null 2>&1 &'"))}])
 
 (defn available-themes []
   (->> (fs/list-dir themes-dir)
