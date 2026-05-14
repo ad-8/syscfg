@@ -16,6 +16,7 @@
       bluetui
       ddcutil
       dunst
+      fuzzel
       grim
       hypridle
       hyprsunset
