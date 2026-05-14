@@ -7,3 +7,8 @@ fish/.config/fish/fish_variables
 /dotfiles/foot/.config/foot/themes/
 /dotfiles/.clj-kondo/
 /dotfiles/.lsp/
+/dotfiles/btop/.config/btop/themes/
+/dotfiles/doom/.config/doom/active-theme.el
+/dotfiles/foot/.config/foot/active-theme
+/dotfiles/hypr/.config/hypr/active-theme.lua
+/dotfiles/waybar/.config/waybar/active-theme.css
