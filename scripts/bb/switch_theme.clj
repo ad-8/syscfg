@@ -60,6 +60,9 @@
    {:file    "rofi.rasi"
     :symlink (fs/path (fs/xdg-config-home) "rofi/active-theme.rasi")
     :reload  (fn [_] nil)}
+   {:file    "fuzzel.ini"
+    :symlink (fs/path (fs/xdg-config-home) "fuzzel/active-theme.ini")
+    :reload  (fn [_] nil)}
    {:file    "dunst.conf"
     :symlink (fs/path (fs/xdg-config-home) "dunst/active-theme.conf")
     :reload  (fn [_]
