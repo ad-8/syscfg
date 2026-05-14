@@ -160,7 +160,7 @@ Toggle with ~M-x variable-pitch-font~.
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 #+end_src
-** Theme 
+** Theme
 #+begin_src emacs-lisp :tangle no
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -169,7 +169,19 @@ Toggle with ~M-x variable-pitch-font~.
 #+end_src
 
 #+begin_src emacs-lisp
-(setq doom-theme 'gotham)
+(defvar ax/doom-active-theme-file (expand-file-name "~/.config/doom/active-theme.el"))
+
+;; Load active theme from symlink if present, else fall back to gotham
+(if (file-exists-p ax/doom-active-theme-file)
+    (load-file ax/doom-active-theme-file)
+  (setq doom-theme 'gotham))
+
+;; Watch doom config dir so symlink swaps are picked up at runtime
+(file-notify-add-watch (expand-file-name "~/.config/doom/") '(change)
+  (lambda (event)
+    (when (and (memq (nth 1 event) '(created changed))
+               (string-suffix-p "active-theme.el" (nth 2 event)))
+      (load-file ax/doom-active-theme-file))))
 #+end_src
 ** Misc
 #+begin_src emacs-lisp

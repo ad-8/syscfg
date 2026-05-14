@@ -53,7 +53,10 @@
                (shell "sh -c 'setsid waybar >/dev/null 2>&1 &'"))}
    {:file    "hyprland.lua"
     :symlink (fs/path (fs/xdg-config-home) "hypr/active-theme.lua")
-    :reload  (fn [_] (shell ["hyprctl" "reload"]))}])
+    :reload  (fn [_] (shell ["hyprctl" "reload"]))}
+   {:file    "emacs-theme.el"
+    :symlink (fs/path (fs/xdg-config-home) "doom/active-theme.el")
+    :reload  (fn [_] nil)}])
 
 (defn available-themes []
   (->> (fs/list-dir themes-dir)
@@ -64,8 +67,9 @@
 (defn apply-app-theme [theme-dir {:keys [file symlink reload]}]
   (let [src (fs/path theme-dir file)]
     (when (fs/exists? src)
-      (fs/delete-if-exists symlink)
-      (fs/create-sym-link symlink src)
+      (when symlink
+        (fs/delete-if-exists symlink)
+        (fs/create-sym-link symlink src))
       (try (reload src) (catch Exception _)))))
 
 (defn switch-theme [theme]
