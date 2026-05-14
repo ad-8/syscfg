@@ -49,7 +49,7 @@
    {:file    "waybar.css"
     :symlink (fs/path (fs/xdg-config-home) "waybar/active-theme.css")
     :reload  (fn [_]
-               (shell {:continue true} ["pkill" "-9" "-x" "waybar"])
+               (shell {:continue true} "sh -c 'pkill -f waybar'")
                (shell "sh -c 'setsid waybar >/dev/null 2>&1 &'"))}])
 
 (defn available-themes []
