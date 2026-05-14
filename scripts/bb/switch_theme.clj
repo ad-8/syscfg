@@ -10,18 +10,17 @@
 (def themes-dir (fs/path (fs/home) "syscfg/scripts/themes"))
 
 (defn foot-osc [theme-file]
-  (let [sb (StringBuilder.)]
-    (doseq [line (str/split-lines (slurp (str theme-file)))]
-      (let [[k v] (str/split line #"=" 2)]
-        (when v
-          (cond
-            (= k "foreground")         (.append sb (str "\033]10;#" v "\007"))
-            (= k "background")         (.append sb (str "\033]11;#" v "\007"))
-            (= k "cursor")             (when-let [fg (first (remove str/blank? (str/split v #" +")))]
-                                         (.append sb (str "\033]12;#" fg "\007")))
-            (re-matches #"regular[0-7]" k) (.append sb (str "\033]4;" (last k) ";#" v "\007"))
-            (re-matches #"bright[0-7]" k)  (.append sb (str "\033]4;" (+ 8 (Integer/parseInt (str (last k)))) ";#" v "\007"))))))
-    (str sb)))
+  (str/join
+    (for [line (str/split-lines (slurp (str theme-file)))
+          :let [[k v] (str/split line #"=" 2)]
+          :when v]
+      (cond
+        (= k "foreground") (str "\033]10;#" v "\007")
+        (= k "background") (str "\033]11;#" v "\007")
+        (= k "cursor")     (when-let [fg (first (remove str/blank? (str/split v #" +")))]
+                             (str "\033]12;#" fg "\007"))
+        (re-matches #"regular[0-7]" k) (str "\033]4;" (last k) ";#" v "\007")
+        (re-matches #"bright[0-7]" k)  (str "\033]4;" (+ 8 (Integer/parseInt (str (last k)))) ";#" v "\007")))))
 
 (defn foot-ptys []
   (->> (-> (process ["pgrep" "-x" "foot"] {:out :string}) deref :out str/trim str/split-lines)
@@ -38,6 +37,10 @@
   (let [osc (foot-osc src)]
     (doseq [pty (foot-ptys)]
       (try (spit pty osc :append true) (catch Exception _)))))
+
+(defn no-reload
+  "Placeholder reload for apps that don't require an explicit restart."
+  [_] nil)
 
 (def apps
   [{:file    "btop.theme"
@@ -56,13 +59,13 @@
     :reload  (fn [_] (shell ["hyprctl" "reload"]))}
    {:file    "emacs-theme.el"
     :symlink (fs/path (fs/xdg-config-home) "doom/active-theme.el")
-    :reload  (fn [_] nil)}
+    :reload  no-reload}
    {:file    "rofi.rasi"
     :symlink (fs/path (fs/xdg-config-home) "rofi/active-theme.rasi")
-    :reload  (fn [_] nil)}
+    :reload  no-reload}
    {:file    "fuzzel.ini"
     :symlink (fs/path (fs/xdg-config-home) "fuzzel/active-theme.ini")
-    :reload  (fn [_] nil)}
+    :reload  no-reload}
    {:file    "dunst.conf"
     :symlink (fs/path (fs/xdg-config-home) "dunst/active-theme.conf")
     :reload  (fn [_]
