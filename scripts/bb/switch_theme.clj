@@ -79,16 +79,20 @@
 
 (defn apply-app-theme [theme-dir {:keys [file symlink reload]}]
   (let [src (fs/path theme-dir file)]
-    (when (fs/exists? src)
-      (fs/create-dirs (fs/parent symlink))
-      (fs/delete-if-exists symlink)
-      (fs/create-sym-link symlink src)
-      (try (reload src) (catch Exception _)))))
+    (if (fs/exists? src)
+      (do
+        (fs/create-dirs (fs/parent symlink))
+        (fs/delete-if-exists symlink)
+        (fs/create-sym-link symlink src)
+        (try (reload src) (catch Exception _)))
+      (do
+        (binding [*out* *err*] (println "switch_theme: missing" (str src)))
+        (shell {:continue true} ["notify-send" "-u" "critical" "switch_theme" (str "missing: " (fs/file-name src))])))))
 
 (defn switch-theme [theme]
   (let [theme-dir (fs/path themes-dir theme)]
     (when-not (fs/directory? theme-dir)
-      (println (str "Unknown theme: " theme))
+      (binding [*out* *err*] (println "Unknown theme:" theme))
       (System/exit 1))
     (run! #(apply-app-theme theme-dir %) apps)))
 
