@@ -31,7 +31,8 @@ hl.config({
 local terminal    = "foot"
 local fileManager = "thunar"
 local menu        = "rofi -show drun"
-local menu2       = "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\" -s \"d3ebe9\""
+-- local menu2       = "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\" -s \"d3ebe9\""
+local menu2       = "fuzzel"
 local scripts     = os.getenv("HOME") .. "/syscfg/scripts"
 
 
