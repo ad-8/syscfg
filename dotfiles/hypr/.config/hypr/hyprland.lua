@@ -28,7 +28,7 @@ hl.config({
 ---- MY PROGRAMS ----
 ---------------------
 
-local terminal    = "footclient"
+local terminal    = "foot"
 local fileManager = "thunar"
 local menu        = "rofi -show drun"
 local menu2       = "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\" -s \"d3ebe9\""
@@ -43,7 +43,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("blueman-applet &")
   hl.exec_cmd("dunst &")
   hl.exec_cmd("emacs --daemon &")
-  hl.exec_cmd("foot --server &")
   hl.exec_cmd("hypridle &")
   hl.exec_cmd("nm-applet &")
   hl.exec_cmd("waybar &")
