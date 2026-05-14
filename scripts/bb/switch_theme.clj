@@ -12,7 +12,10 @@
 (def apps
   [{:file    "btop.theme"
     :symlink (fs/path (fs/xdg-config-home) "btop/themes/active.theme")
-    :reload  #(shell ["pkill" "-SIGUSR2" "btop"])}])
+    :reload  #(shell ["pkill" "-SIGUSR2" "btop"])}
+   {:file    "foot.theme"
+    :symlink (fs/path (fs/xdg-config-home) "foot/active-theme")
+    :reload  #(shell ["pkill" "-SIGUSR1" "foot"])}])
 
 (defn available-themes []
   (->> (fs/list-dir themes-dir)
