@@ -7,7 +7,7 @@ return {
   brightgreen   = "a7c080",
   yellow        = "dbbc7f",
   brightyellow  = "dbbc7f",
-  blue          = "7fbbb3",
+  blue          = "384b55",
   brightblue    = "7fbbb3",
   magenta       = "d699b6",
   brightmagenta = "d699b6",
