@@ -1,5 +1,5 @@
 return {
-  black         = "3e4058",
+  black         = "0b0c16",
   brightblack   = "6a6e95",
   red           = "50f872",
   brightred     = "85ff9d",
@@ -13,6 +13,6 @@ return {
   brightmagenta = "cddbf4",
   cyan          = "7cf8f7",
   brightcyan    = "d1fffe",
-  white         = "0b0c16",
+  white         = "6a6e95",
   brightwhite   = "ddf7ff",
 }
