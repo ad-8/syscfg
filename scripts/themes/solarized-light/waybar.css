@@ -1,0 +1,169 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: HackNerdFont;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(253, 246, 227, 1);
+    border-bottom: 0px solid rgba(147, 161, 161, 0.5);
+    color: #268bd2;
+}
+
+tooltip {
+  background: rgba(238, 232, 213, 0.5);
+  border: 1px solid rgba(147, 161, 161, 0.5);
+}
+tooltip label {
+  color: #586e75;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: #657b83;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background: #eee8d5;
+    border-bottom: 3px solid #2aa198;
+}
+
+#workspaces button.active {
+    background-color: #eee8d5;
+    color: #657b83;
+    border-radius: 3px;
+}
+
+#mode, #clock, #battery {
+    padding: 0 10px;
+}
+
+#mode {
+    background: #dc322f;
+    border-bottom: 3px solid #dc322f;
+}
+
+#clock {
+    color: #b58900;
+}
+
+#battery {
+    color: #dc322f;
+}
+
+#battery.charging {
+    color: #dc322f;
+    background-color: #859900;
+}
+
+@keyframes blink {
+    to {
+        background-color: #073642;
+        color: #fdf6e3;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #dc322f;
+    color: #dc322f;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+    color: #268bd2;
+}
+
+#custom-vpn {
+    color: #859900;
+}
+
+#custom-vpn.down {
+    color: #dc322f;
+}
+
+#custom-cpu {
+    color: #268bd2;
+}
+#custom-cpu.warn {
+    color: #b58900;
+}
+#custom-cpu.crit {
+    color: #dc322f;
+}
+
+#custom-disk {
+    color: #268bd2;
+}
+#custom-disk.low {
+    color: #dc322f;
+}
+#custom-memory {
+    color: #268bd2;
+}
+#custom-memory.low {
+    color: #dc322f;
+}
+#custom-date {
+    color: #268bd2;
+}
+#custom-weather {
+    color: #268bd2;
+}
+#custom-music-info {
+    color: #2aa198;
+}
+
+#window {
+    margin-left: 8px;
+}
+
+#battery {
+    color: #268bd2;
+}
+#custom-licht {
+    color: #268bd2;
+}
+#custom-notification-status {
+    color: #268bd2;
+}
+#pulseaudio {
+    color: #268bd2;
+}
+
+#workspaces button.empty {
+    color: #93a1a1;
+}
+
+#custom-snowflake {
+    color: #2aa198;
+    font-size: 15px;
+    font-weight: bold;
+}
+menu {
+    border-radius: 15px;
+    background: #eee8d5;
+    color: #657b83;
+}
+menuitem {
+    border-radius: 15px;
+}
+
+#custom-sep2b {
+    color: #268bd2;
+}
+
+#submap {
+    background-color: #dc322f;
+    color: #fdf6e3;
+    padding: 3px 10px;
+    font-weight: bold;
+    border-radius: 8px;
+}
