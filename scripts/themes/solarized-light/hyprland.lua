@@ -1,6 +1,6 @@
 return {
-  black         = "eee8d5",
-  brightblack   = "fdf6e3",
+  black         = "073642",
+  brightblack   = "002b36",
   red           = "dc322f",
   brightred     = "cb4b16",
   green         = "859900",
