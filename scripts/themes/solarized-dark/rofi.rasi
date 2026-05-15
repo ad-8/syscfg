@@ -4,19 +4,19 @@
  */
 
 * {
-    sol_base03: #002b36;
-    sol_base02: #073642;
-    sol_base01: #586e75;
-    sol_base0:  #839496;
-    sol_base1:  #93a1a1;
-    sol_blue:   #268bd2;
-    sol_cyan:   #2aa198;
-    sol_orange: #cb4b16;
+    solbase03: #002b36;
+    solbase02: #073642;
+    solbase01: #586e75;
+    solbase0:  #839496;
+    solbase1:  #93a1a1;
+    solblue:   #268bd2;
+    solcyan:   #2aa198;
+    solorange: #cb4b16;
 
-    foreground:       @sol_base0;
+    foreground:       @solbase0;
     background-color: transparent;
 
-    highlight:   underline bold @sol_base1;
+    highlight:   underline bold @solbase1;
     transparent: rgba(0, 43, 54, 0);
 }
 
@@ -42,21 +42,21 @@ mainbox {
 }
 
 message {
-    color: @sol_base03;
+    color: @solbase03;
     padding: 5;
     border-color: @foreground;
     border:  0px 2px 2px 2px;
-    background-color: @sol_cyan;
+    background-color: @solcyan;
 }
 
 inputbar {
-    color: @sol_base1;
+    color: @solbase1;
     padding: 11px;
     background-color: #073642;
 
     border: 1px;
     border-radius:  6px 6px 0px 0px;
-    border-color: @sol_blue;
+    border-color: @solblue;
 }
 
 entry, prompt, case-indicator {
@@ -71,7 +71,7 @@ prompt {
 listview {
     padding: 8px;
     border-radius: 0px 0px 6px 6px;
-    border-color: @sol_blue;
+    border-color: @solblue;
     border: 0px 1px 1px 1px;
     background-color: rgba(0, 43, 54, 0.9);
     dynamic: false;
@@ -87,7 +87,7 @@ element {
 }
 
 element selected.normal {
-    background-color: @sol_cyan;
+    background-color: @solcyan;
     text-color: #002b36;
 }
 
