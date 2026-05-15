@@ -1,0 +1,112 @@
+/**
+ * Gruvbox Light rofi theme
+ * https://github.com/morhetz/gruvbox
+ */
+
+* {
+    gruvbg:     #fbf1c7;
+    gruvbg1:    #ebdbb2;
+    gruvbg4:    #a89984;
+    gruvfg:     #3c3836;
+    gruvfg2:    #504945;
+    gruvblue:   #458588;
+    gruvaqua:   #689d6a;
+    gruvorange: #d65d0e;
+
+    foreground:       @gruvfg;
+    background-color: transparent;
+
+    highlight:   underline bold #504945;
+    transparent: rgba(251, 241, 199, 0);
+}
+
+window {
+    location: center;
+    anchor:   center;
+    transparency: "screenshot";
+    padding: 10px;
+    border:  0px;
+    border-radius: 6px;
+
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+
+    width: 33%;
+}
+
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
+}
+
+message {
+    color: @gruvbg;
+    padding: 5;
+    border-color: @foreground;
+    border:  0px 2px 2px 2px;
+    background-color: @gruvaqua;
+}
+
+inputbar {
+    color: @gruvfg2;
+    padding: 11px;
+    background-color: #ebdbb2;
+
+    border: 1px;
+    border-radius:  6px 6px 0px 0px;
+    border-color: @gruvblue;
+}
+
+entry, prompt, case-indicator {
+    text-font: inherit;
+    text-color: inherit;
+}
+
+prompt {
+    margin: 0px 1em 0em 0em;
+}
+
+listview {
+    padding: 8px;
+    border-radius: 0px 0px 6px 6px;
+    border-color: @gruvblue;
+    border: 0px 1px 1px 1px;
+    background-color: rgba(251, 241, 199, 0.9);
+    dynamic: false;
+}
+
+element {
+    padding: 3px;
+    vertical-align: 0.5;
+    border-radius: 4px;
+    background-color: transparent;
+    color: @foreground;
+    text-color: rgb(60, 56, 54);
+}
+
+element selected.normal {
+    background-color: @gruvaqua;
+    text-color: #fbf1c7;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+button {
+    padding: 6px;
+    color: @foreground;
+    horizontal-align: 0.5;
+
+    border: 2px 0px 2px 2px;
+    border-radius: 4px 0px 0px 4px;
+    border-color: @foreground;
+}
+
+button selected normal {
+    border: 2px 0px 2px 2px;
+    border-color: @foreground;
+}
