@@ -13,6 +13,6 @@ return {
   brightmagenta = "cddbf4",
   cyan          = "7cf8f7",
   brightcyan    = "d1fffe",
-  white         = "ddf7ff",
+  white         = "0b0c16",
   brightwhite   = "ddf7ff",
 }
