@@ -16,7 +16,7 @@
     foreground:       @solbase00;
     background-color: transparent;
 
-    highlight:   underline bold @solbase01;
+    highlight:   underline bold #586e75;
     transparent: rgba(253, 246, 227, 0);
 }
 
