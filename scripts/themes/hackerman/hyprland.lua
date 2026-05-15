@@ -1,0 +1,18 @@
+return {
+  black         = "3e4058",
+  brightblack   = "6a6e95",
+  red           = "50f872",
+  brightred     = "85ff9d",
+  green         = "4fe88f",
+  brightgreen   = "9cf7c2",
+  yellow        = "50f7d4",
+  brightyellow  = "a4ffec",
+  blue          = "6a6e95",
+  brightblue    = "829dd4",
+  magenta       = "86a7df",
+  brightmagenta = "cddbf4",
+  cyan          = "7cf8f7",
+  brightcyan    = "d1fffe",
+  white         = "ddf7ff",
+  brightwhite   = "ddf7ff",
+}
