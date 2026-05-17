@@ -167,3 +167,9 @@ menuitem {
     font-weight: bold;
     border-radius: 8px;
 }
+
+#tray {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding: 0 4px;
+}
