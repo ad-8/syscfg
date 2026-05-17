@@ -1,0 +1,112 @@
+/**
+ * Lumon rofi theme
+ * https://github.com/OldJobobo/omarchy-lumon-theme
+ */
+
+* {
+    lumon0: #1b2d40;
+    lumon1: #0c1822;
+    lumon2: #4A6B80;
+    lumon3: #112a3c;
+    lumon4: #d6e2ee;
+    lumon5: #f2fcff;
+    lumon6: #6fb8e3;
+    lumon7: #8bc9eb;
+
+    foreground:       @lumon4;
+    background-color: transparent;
+
+    highlight:   underline bold #f2fcff;
+    transparent: rgba(27, 45, 64, 0);
+}
+
+window {
+    location: center;
+    anchor:   center;
+    transparency: "screenshot";
+    padding: 10px;
+    border:  0px;
+    border-radius: 6px;
+
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+
+    width: 33%;
+}
+
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
+}
+
+message {
+    color: @lumon0;
+    padding: 5;
+    border-color: @foreground;
+    border:  0px 2px 2px 2px;
+    background-color: @lumon7;
+}
+
+inputbar {
+    color: @lumon5;
+    padding: 11px;
+    background-color: #0c1822;
+
+    border: 1px;
+    border-radius:  6px 6px 0px 0px;
+    border-color: @lumon6;
+}
+
+entry, prompt, case-indicator {
+    text-font: inherit;
+    text-color: inherit;
+}
+
+prompt {
+    margin: 0px 1em 0em 0em;
+}
+
+listview {
+    padding: 8px;
+    border-radius: 0px 0px 6px 6px;
+    border-color: @lumon6;
+    border: 0px 1px 1px 1px;
+    background-color: rgba(27, 45, 64, 0.9);
+    dynamic: false;
+}
+
+element {
+    padding: 3px;
+    vertical-align: 0.5;
+    border-radius: 4px;
+    background-color: transparent;
+    color: @foreground;
+    text-color: rgb(214, 226, 238);
+}
+
+element selected.normal {
+    background-color: @lumon6;
+    text-color: #1b2d40;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+button {
+    padding: 6px;
+    color: @foreground;
+    horizontal-align: 0.5;
+
+    border: 2px 0px 2px 2px;
+    border-radius: 4px 0px 0px 4px;
+    border-color: @foreground;
+}
+
+button selected normal {
+    border: 2px 0px 2px 2px;
+    border-color: @foreground;
+}

@@ -1,0 +1,170 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: HackNerdFont;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(27, 45, 64, 1);
+    border-bottom: 0px solid rgba(74, 107, 128, 0.5);
+    color: #6fb8e3;
+}
+
+tooltip {
+  background: rgba(27, 45, 64, 0.5);
+  border: 1px solid rgba(74, 107, 128, 0.5);
+}
+tooltip label {
+  color: #d6e2ee;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: #d6e2ee;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background: #112a3c;
+    border-bottom: 3px solid #f2fcff;
+}
+
+#workspaces button.active {
+    background-color: #6fb8e3;
+    color: #1b2d40;
+    border-radius: 3px;
+}
+
+#mode, #clock, #battery {
+    padding: 0 10px;
+}
+
+#mode {
+    background: #f2fcff;
+    border-bottom: 3px solid #f2fcff;
+    color: #1b2d40;
+}
+
+#clock {
+    color: #8bc9eb;
+}
+
+#battery {
+    color: #6fb8e3;
+}
+
+#battery.charging {
+    color: #1b2d40;
+    background-color: #b4e4f6;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #1b2d40;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #f2fcff;
+    color: #1b2d40;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+    color: #6fb8e3;
+}
+
+#custom-vpn {
+    color: #6fb8e3;
+}
+
+#custom-vpn.down {
+    color: #f2fcff;
+}
+
+#custom-cpu {
+    color: #6fb8e3;
+}
+#custom-cpu.warn {
+    color: #b4e4f6;
+}
+#custom-cpu.crit {
+    color: #f2fcff;
+}
+
+#custom-disk {
+    color: #6fb8e3;
+}
+#custom-disk.low {
+    color: #f2fcff;
+}
+#custom-memory {
+    color: #6fb8e3;
+}
+#custom-memory.low {
+    color: #f2fcff;
+}
+#custom-date {
+    color: #6fb8e3;
+}
+#custom-weather {
+    color: #6fb8e3;
+}
+#custom-music-info {
+    color: #8bc9eb;
+}
+
+#window {
+    margin-left: 8px;
+}
+
+#battery {
+    color: #6fb8e3;
+}
+#custom-licht {
+    color: #6fb8e3;
+}
+#custom-notification-status {
+    color: #6fb8e3;
+}
+#pulseaudio {
+    color: #6fb8e3;
+}
+
+#workspaces button.empty {
+    color: #4A6B80;
+}
+
+#custom-snowflake {
+    color: #8bc9eb;
+    font-size: 15px;
+    font-weight: bold;
+}
+menu {
+    border-radius: 15px;
+    background: #0c1822;
+    color: #d6e2ee;
+}
+menuitem {
+    border-radius: 15px;
+}
+
+#custom-sep2b {
+    color: #6fb8e3;
+}
+
+#submap {
+    background-color: #f2fcff;
+    color: #1b2d40;
+    padding: 3px 10px;
+    font-weight: bold;
+    border-radius: 8px;
+}
