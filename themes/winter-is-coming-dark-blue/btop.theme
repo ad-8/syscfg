@@ -1,7 +1,8 @@
 # Winter is Coming Dark Blue color theme for btop
 # https://github.com/johnpapa/vscode-winteriscoming
 
-theme[main_bg]="#011627"
+theme[main_bg]=""
+theme_background=false
 theme[main_fg]="#d6deeb"
 theme[title]="#a7dbf7"
 theme[hi_fg]="#219fd5"

@@ -1,7 +1,8 @@
 # Nord color theme for btop
 # https://www.nordtheme.com
 
-theme[main_bg]="#2E3440"
+theme[main_bg]=""
+theme_background=false
 theme[main_fg]="#D8DEE9"
 theme[title]="#ECEFF4"
 theme[hi_fg]="#88C0D0"

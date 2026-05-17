@@ -1,7 +1,8 @@
 # Everforest Light Soft color theme for btop
 # https://github.com/sainnhe/everforest
 
-theme[main_bg]="#f3ead3"
+theme[main_bg]=""
+theme_background=false
 theme[main_fg]="#5c6a72"
 theme[title]="#708089"
 theme[hi_fg]="#35a77c"

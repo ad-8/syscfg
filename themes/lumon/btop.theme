@@ -1,6 +1,7 @@
 # Lumon color theme for btop
 # https://github.com/OldJobobo/omarchy-lumon-theme
 
+theme[main_bg]=""
 theme_background=false
 
 theme[main_fg]="#d6e2ee"

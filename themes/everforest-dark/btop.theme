@@ -1,7 +1,8 @@
 # Everforest Dark Hard color theme for btop
 # https://github.com/sainnhe/everforest
 
-theme[main_bg]="#272e33"
+theme[main_bg]=""
+theme_background=false
 theme[main_fg]="#d3c6aa"
 theme[title]="#9da9a0"
 theme[hi_fg]="#83c092"

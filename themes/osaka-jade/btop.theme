@@ -1,7 +1,8 @@
 # Osaka Jade color theme for btop
 # https://github.com/Justikun/omarchy-osaka-jade-theme
 
-theme[main_bg]="#111c18"
+theme[main_bg]=""
+theme_background=false
 theme[main_fg]="#F7E8B2"
 theme[title]="#D6D5BC"
 theme[hi_fg]="#E67D64"

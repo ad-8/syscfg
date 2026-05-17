@@ -1,7 +1,8 @@
 # Gruvbox Light color theme for btop
 # https://github.com/morhetz/gruvbox
 
-theme[main_bg]="#fbf1c7"
+theme[main_bg]=""
+theme_background=false
 theme[main_fg]="#3c3836"
 theme[title]="#504945"
 theme[hi_fg]="#689d6a"

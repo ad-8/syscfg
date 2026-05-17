@@ -1,7 +1,8 @@
 # Hackerman color theme for btop
 # https://github.com/bjarneo/hackerman.nvim
 
-theme[main_bg]="#0b0c16"
+theme[main_bg]=""
+theme_background=false
 theme[main_fg]="#ddf7ff"
 theme[title]="#ddf7ff"
 theme[hi_fg]="#82fb9c"

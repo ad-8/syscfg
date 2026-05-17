@@ -1,7 +1,8 @@
 # Solarized Light color theme for btop
 # https://ethanschoonover.com/solarized/
 
-theme[main_bg]="#fdf6e3"
+theme[main_bg]=""
+theme_background=false
 theme[main_fg]="#657b83"
 theme[title]="#586e75"
 theme[hi_fg]="#2aa198"
