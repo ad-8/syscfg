@@ -16,7 +16,7 @@
     foreground:       @gruvfg;
     background-color: transparent;
 
-    highlight:   underline bold #fabd2f;
+    highlight:   underline bold #ebdbb2;
     transparent: rgba(40, 40, 40, 0);
 }
 
