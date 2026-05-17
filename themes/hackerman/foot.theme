@@ -1,6 +1,7 @@
 [colors]
 foreground=ddf7ff
 background=0b0c16
+cursor=0b0c16 ddf7ff
 
 regular0=3e4058
 regular1=50f872
@@ -19,6 +20,3 @@ bright4=c4d2ed
 bright5=cddbf4
 bright6=d1fffe
 bright7=ddf7ff
-
-[cursor]
-color=0b0c16 ddf7ff
