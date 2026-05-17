@@ -151,7 +151,7 @@
     "custom/theme": {
         "interval": 30,
         "tooltip": false,
-        "format": " {}",
+        "format": "{}",
         "return-type": "text",
         "exec": "basename $(dirname $(readlink $HOME/.config/foot/active-theme))"
     },
