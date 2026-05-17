@@ -7,7 +7,7 @@
             [babashka.fs :as fs]
             [clojure.string :as str]))
 
-(def themes-dir (fs/path (fs/home) "syscfg/scripts/themes"))
+(def themes-dir (fs/path (fs/home) "syscfg/themes"))
 
 (defn foot-osc
   "Builds OSC escape sequences from a foot theme file to set terminal foreground, background, cursor, and palette colors."
