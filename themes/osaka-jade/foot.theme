@@ -1,0 +1,28 @@
+# -*- conf -*-
+#
+# Osaka Jade color theme for foot
+# https://github.com/Justikun/omarchy-osaka-jade-theme
+
+[colors]
+cursor= 111c18 D7C995
+
+background=111c18
+foreground=C1C497
+
+regular0=23372B
+regular1=FF5345
+regular2=549E6A
+regular3=459451
+regular4=509475
+regular5=D2689C
+regular6=2DD5B7
+regular7=F6F5DD
+
+bright0=53685B
+bright1=DB9F9C
+bright2=63B07A
+bright3=E5C736
+bright4=ACD4CF
+bright5=75BBB3
+bright6=8CD3CB
+bright7=9EEBB3
