@@ -22,6 +22,8 @@
         "custom/sep2",
         "custom/licht",
         "custom/sep2",
+        "custom/theme",
+        "custom/sep2",
         "custom/cpu",
         "custom/disk",
         "custom/memory",
@@ -145,6 +147,13 @@
         "format": "{}",
         "return-type": "text",
         "exec": "$HOME/syscfg/scripts/waybar.clj licht"
+    },
+    "custom/theme": {
+        "interval": 30,
+        "tooltip": false,
+        "format": " {}",
+        "return-type": "text",
+        "exec": "basename $(dirname $(readlink $HOME/.config/foot/active-theme))"
     },
     "custom/cpu": {
         "interval": 5,
