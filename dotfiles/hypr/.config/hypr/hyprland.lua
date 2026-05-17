@@ -69,8 +69,12 @@ hl.env("HYPRCURSOR_SIZE", "24")
 ---- LOOK AND FEEL ----
 -----------------------
 
-local function rgb(c)  return string.format("rgb(%s)",  c) end
-local function rgba(c) return string.format("rgba(%s)", c) end
+local function rgb(c)
+  return string.format("rgb(%s)",  c)
+end
+local function rgba(c)
+  return string.format("rgba(%s)", c)
+end
 
 local colors = require("active-theme")
 
@@ -265,7 +269,9 @@ hl.gesture({
 ---------------------
 
 local mainMod = "SUPER"
-local function mod(...) return mainMod .. " + " .. table.concat({...}, " + ") end
+local function mod(...)
+  return mainMod .. " + " .. table.concat({...}, " + ")
+end
 
 -- dwm-inspired basics
 hl.bind(mod("RETURN"),          hl.dsp.exec_cmd(terminal))
