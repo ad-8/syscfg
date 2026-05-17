@@ -52,18 +52,12 @@
 
 
 (defn determine-memory
-  "returns total and used memory [GiB] as reported by `free -h`"
+  "returns total and used memory [GiB] as reported by `free -m`"
   []
   (let [[_full-match total used]
-        (re-find #"Mem:\s+([\d.,]+)Gi\s+([\d.,]+)Gi\s+" (:out (shell {:out :string} "free -h")))
-        total' (-> total
-                   (str/replace #"," ".")
-                   Float/parseFloat)
-        used' (-> used
-                  (str/replace #"," ".")
-                  Float/parseFloat)]
-
-    [total' used']))
+        (re-find #"Mem:\s+(\d+)\s+(\d+)" (:out (shell {:out :string} "free -m")))]
+    [(/ (parse-long total) 1024.0)
+     (/ (parse-long used) 1024.0)]))
 
 (defn- determine-css-class [total used]
   (if (> used (* 0.8 total))
