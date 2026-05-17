@@ -17,14 +17,13 @@
 
 (def settings-file (io/file (System/getProperty "user.home") "sync" "cfg" "weather.edn"))
 (def weather-codes-file (io/file (System/getProperty "user.home") "sync" "cfg" "weather-codes.json"))
+
+(doseq [f [settings-file weather-codes-file]]
+  (when-not (.exists f)
+    (println "weather.clj: missing config file:" (str f))
+    (System/exit 1)))
+
 (def weather-codes (-> weather-codes-file slurp json/decode clojure.walk/keywordize-keys))
-
-
-(when-not (.exists settings-file)
-  (println "failed to read weather.edn")
-  (System/exit 1))
-
-
 (def settings (-> settings-file slurp edn/read-string))
 (def current-place (get-in settings [:locations (:curr-loc settings)]))
 

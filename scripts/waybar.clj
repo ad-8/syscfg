@@ -1,6 +1,7 @@
 #!/usr/bin/env bb
 (ns waybar
   (:require [clojure.string :as str]
+            [babashka.fs :as fs]
             [babashka.process :refer [shell]]
             [cheshire.core :as json]))
 
@@ -32,7 +33,8 @@
   (print-free-space "json"))
 
 (defn waybar-licht []
-  (let [licht-val (slurp "/tmp/licht-curr-val")]
+  (let [path "/tmp/licht-curr-val"
+        licht-val (if (fs/exists? path) (slurp path) "--")]
     (printf " %s" licht-val)))
 
 

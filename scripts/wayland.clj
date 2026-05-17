@@ -40,7 +40,7 @@
         vol-digits (->> vol-str
                         (filter #(Character/isDigit %))
                         (apply str))
-        vol (-> (str/replace vol-digits #"^0{1,2}" "") Integer/parseInt)]
+        vol (or (parse-long (str/replace vol-digits #"^0+" "")) 0)]
     [vol vol-str]))
 
 (defn- volume-send-notification
