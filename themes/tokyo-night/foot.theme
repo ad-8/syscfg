@@ -4,7 +4,7 @@
 [colors]
 background=1a1b26
 foreground=a9b1d6
-cursor=a9b1d6 1a1b26
+cursor=1a1b26 c0caf5
 
 regular0=414868
 regular1=f7768e
