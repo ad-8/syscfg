@@ -12,14 +12,13 @@
 
 (defn get-inner [elem]
   (loop [current elem]
-    (let []
-      (cond
-        (string? current) current
-        (map? current) (recur (:content current))
-        (vector? current) (if (string? (first current))
-                            (first current)
-                            (recur (first current)))
-        :else :should-not-happen))))
+    (cond
+      (string? current) current
+      (map? current) (recur (:content current))
+      (vector? current) (if (string? (first current))
+                          (first current)
+                          (recur (first current)))
+      :else :should-not-happen)))
 
 ;; with just the *or* as filter
 #_({:a ("to" "dare" "sth."), :div ("to"), :dfn ("to"), :var ("to")}
@@ -102,6 +101,7 @@
   ;; h to include nouns before low upvoted others
   (def resp (http/get "https://www.dict.cc/?s=whimsical" {:headers h}))
 
+  resp
 
 ; :a   - überetztung, info like genus
 ; :dfn - bereich like comp. 

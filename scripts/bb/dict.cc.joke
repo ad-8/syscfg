@@ -19,7 +19,7 @@
 
 (defn div-upvotes [cell]
   (if-let [m (re-find #"(?s)<div[^>]*>(\d+)</div>" cell)]
-    (try (strconv/atoi (second m)) (catch Error _ 0))
+    (strconv/atoi (second m))
     0))
 
 (defn td7nl-blocks [html-body]
