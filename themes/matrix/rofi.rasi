@@ -14,7 +14,7 @@
     foreground:       @hfg;
     background-color: transparent;
 
-    highlight:   underline bold #00ff88;
+    highlight:   underline bold #0081c7;
     transparent: rgba(0, 0, 0, 0);
 }
 
