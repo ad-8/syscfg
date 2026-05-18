@@ -69,9 +69,7 @@
         ; (zusammengesetzte Wörter / Redewendungen)
         upvotes' (try
                    (Integer/parseInt upvotes)
-                   (catch Exception _e
-                     (println "error parsing" left "/" right)
-                     0))]
+                   (catch Exception _e 0))]
     {:x (->> left :a (str/join " "))
      :y (->> right :a (str/join " "))
      :upvotes upvotes'}))
@@ -84,8 +82,6 @@
         sel (->> resp :body (utils/html->hickory)
                  (s/select (s/and (s/tag "td") (s/class "td7nl")))
                  (map :content))]
-
-    (println "url =" url)
 
     (->> sel
          (map extract-from-vec)
