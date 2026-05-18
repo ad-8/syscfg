@@ -114,8 +114,9 @@
 (defn pick-theme
   "Opens a fuzzel dmenu picker populated with available themes and returns the selected theme name."
   []
-  (let [themes (available-themes)]
-    (-> (process ["fuzzel" "--dmenu" "-p" (str "select theme (" (count themes) "): ")]
+  (let [themes (available-themes)
+        n-themes (count themes)]
+    (-> (process ["fuzzel" "--dmenu" "-l" n-themes "-p" (str "select theme (" n-themes "): ")]
                {:in (str/join "\n" themes) :out :string})
       deref
       :out
