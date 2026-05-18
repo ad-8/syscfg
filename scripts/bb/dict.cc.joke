@@ -11,6 +11,7 @@
                     (str/replace #"(?s)<div[^>]*>.*?</div>" "")
                     (str/replace #"(?s)<dfn[^>]*>.*?</dfn>" "")
                     (str/replace #"(?s)<var[^>]*>.*?</var>" "")
+                    (str/replace #"(?s)<sup[^>]*>.*?</sup>" "")
                     (str/replace #"<[^>]+>" " ")
                     html/unescape)]
     (->> (re-seq #"\S+" cleaned)
