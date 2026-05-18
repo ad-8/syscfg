@@ -371,27 +371,6 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 ------------------------------------------------------------------------------------------
 -- SUBMAP START
 ------------------------------------------------------------------------------------------
--- submap open
--- hl.bind(mod("O"), hl.dsp.submap("open"))
--- hl.define_submap("open", "reset", function()
---     hl.bind("B",         function() hl.exec_cmd("foot -T bluetui bluetui") end)
---     hl.bind("C",         function() hl.exec_cmd("qalculate-gtk") end)
---     hl.bind("E",         function() hl.exec_cmd("emacsclient -c") end)
---     hl.bind("SHIFT + E", function() hl.exec_cmd("emacs") end)
---     hl.bind("F",         function() hl.exec_cmd(fileManager) end)
---     hl.bind("K",         function() hl.exec_cmd("keepassxc") end)
---     hl.bind("M",         function() hl.exec_cmd("emacs --name ax-emacs-emms --eval '(ax/open-emms-layout)'") end)
---     hl.bind("SHIFT + M", function() hl.exec_cmd("strawberry") end)
---     hl.bind("P",         function() hl.exec_cmd("pavucontrol") end)
---     hl.bind("Q",         function() hl.exec_cmd("qbittorrent") end)
---     hl.bind("S",         function() hl.exec_cmd("signal-desktop") end)
---     hl.bind("V",         function() hl.exec_cmd("brave") end)
---     hl.bind("SHIFT + V", function() hl.exec_cmd("virt-manager") end)
---     hl.bind("W",         function() hl.exec_cmd("foot -T wiremix wiremix") end)
---     hl.bind("SHIFT + W", function() hl.exec_cmd("waypaper") end)
---     hl.bind("X",         function() hl.exec_cmd("firefox") end)
---     hl.bind("ESCAPE",    hl.dsp.submap("reset"))
--- end)
 -- tabbed windows (groups)
 hl.bind(mod("W"), hl.dsp.submap("tabs"))
 hl.define_submap("tabs", function()
