@@ -73,6 +73,7 @@ export LANG=en_US.UTF-8
 =preview-tabbed= does not display text files when =VISUAL=emacsclient -nw=,
 so we use =nvim= for now
 #+begin_src sh
+alias dcc='joker /home/ax/syscfg/scripts/bb/dict.cc.joke'
 alias df='df -h'
 alias e='emacs -nw'
 alias n="VISUAL='nvim' nnn -a -e"
