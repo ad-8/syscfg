@@ -1,0 +1,25 @@
+# Tokyo Night (Night) color theme for foot
+# https://github.com/enkia/tokyo-night-vscode-theme
+
+[colors]
+background=1a1b26
+foreground=a9b1d6
+cursor=a9b1d6 1a1b26
+
+regular0=414868
+regular1=f7768e
+regular2=73daca
+regular3=e0af68
+regular4=7aa2f7
+regular5=bb9af7
+regular6=7dcfff
+regular7=a9b1d6
+
+bright0=565f89
+bright1=ff7a93
+bright2=b9f27c
+bright3=ff9e64
+bright4=7da6ff
+bright5=bb9af7
+bright6=b4f9f8
+bright7=c0caf5

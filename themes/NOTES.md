@@ -4,3 +4,4 @@
 |-------------------|------------------------|
 | everforest-dark   | everforest-dark-hard   |
 | everforest-light  | everforest-light-soft  |
+| tokyo-night       | tokyo-night-night      |
