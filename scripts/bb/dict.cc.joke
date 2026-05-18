@@ -36,6 +36,7 @@
         cell  (fn [s w] (str " " (str/pad-left (str s) " " w) " "))
         row-s (fn [vals] (str "|" (str/join "|" (map cell vals ws)) "|"))
         sep   (str "|" (str/join "+" (map #(str/pad-right "" "-" (+ % 2)) ws)) "|")]
+    (println)
     (println (row-s (map str ks)))
     (println sep)
     (doseq [row rows]
