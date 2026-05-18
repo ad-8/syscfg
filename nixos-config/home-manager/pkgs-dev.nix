@@ -18,6 +18,7 @@
       geckodriver
       gh
       helix
+      joker
       jq
       leiningen
       nil # nix language server
