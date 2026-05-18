@@ -314,6 +314,7 @@ hl.bind(mod("PERIOD"),          hl.dsp.focus({ monitor = "+1" }))
 hl.bind(mod("SHIFT", "PERIOD"), hl.dsp.window.move({ monitor = "+1", follow = false }))
 hl.bind(mod("SHIFT", "COMMA"),  hl.dsp.workspace.move({ monitor = "+1", follow = false }))
 -- misc
+hl.bind(mod("SHIFT", "R"), hl.dsp.exec_cmd("hyprctl reload && notify-send -t 2000 'hyperctl reloaded'"))
 hl.bind(mod("ALT", "L"),   hl.dsp.exec_cmd("swaylock --color 000000"))
 hl.bind(mod("SHIFT", "F"), hl.dsp.exec_cmd("rofi -show recursivebrowser"))
 hl.bind(mod("SHIFT", "W"), hl.dsp.exec_cmd("rofi -show window"))
