@@ -1,2 +1,2 @@
 (mapc #'disable-theme custom-enabled-themes)
-(load-theme 'doom-outrun-electric t)
+(load-theme 'doom-retro-82 t)
