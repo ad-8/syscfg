@@ -174,6 +174,10 @@ determine the exact padding."
    (magit-section-heading :foreground green :weight 'bold)
    (magit-branch-local    :foreground cyan  :weight 'bold)
    (magit-branch-remote   :foreground teal  :weight 'bold)
+   (magit-diff-added             :foreground green :background (doom-blend green bg 0.15))
+   (magit-diff-added-highlight   :foreground green :background (doom-blend green bg 0.25))
+   (magit-diff-removed           :foreground red   :background (doom-blend red bg 0.15))
+   (magit-diff-removed-highlight :foreground red   :background (doom-blend red bg 0.25))
 
    ;; markdown
    (markdown-markup-face :foreground base5)
@@ -191,6 +195,9 @@ determine the exact padding."
    (org-block-begin-line :foreground dark-cyan :background bg-alt)
    (org-block-end-line   :foreground dark-cyan :background bg-alt)
    (org-meta-line        :foreground dark-blue)
+   (org-todo             :foreground orange :weight 'bold)
+   (org-done             :foreground green  :weight 'bold)
+   (org-headline-done    :foreground base5)
    (org-level-1 :foreground green   :weight 'semi-bold :height 1.4)
    (org-level-2 :foreground cyan    :weight 'semi-bold :height 1.2)
    (org-level-3 :foreground teal    :weight 'semi-bold :height 1.1)
@@ -223,6 +230,11 @@ determine the exact padding."
 
    ;; company
    (company-tooltip-common-selection :foreground bg :background green)
+
+   ;; tree-sitter / built-in
+   (highlight-numbers-number :foreground dark-cyan)
+   (highlight-quoted-quote   :foreground green)
+   (highlight-quoted-symbol  :foreground teal)
    )
 
 

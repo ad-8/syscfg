@@ -187,6 +187,11 @@ determine the exact padding."
    (magit-section-heading :foreground blue :weight 'bold)
    (magit-branch-local    :foreground cyan :weight 'bold)
    (magit-branch-remote   :foreground teal :weight 'bold)
+   ;; vc-added=blue, vc-deleted=fg-alt (lumon's "errors brightest" inversion)
+   (magit-diff-added             :foreground blue   :background (doom-blend blue bg 0.15))
+   (magit-diff-added-highlight   :foreground blue   :background (doom-blend blue bg 0.25))
+   (magit-diff-removed           :foreground fg-alt :background (doom-blend fg-alt bg 0.15))
+   (magit-diff-removed-highlight :foreground fg-alt :background (doom-blend fg-alt bg 0.25))
 
    ;; markdown
    (markdown-markup-face :foreground base5)
@@ -204,6 +209,9 @@ determine the exact padding."
    (org-block-begin-line :foreground dark-cyan :background bg-alt)
    (org-block-end-line   :foreground dark-cyan :background bg-alt)
    (org-meta-line        :foreground dark-blue)
+   (org-todo             :foreground magenta :weight 'bold)
+   (org-done             :foreground blue    :weight 'bold)
+   (org-headline-done    :foreground base5)
    (org-level-1 :foreground blue    :weight 'semi-bold :height 1.4)
    (org-level-2 :foreground teal    :weight 'semi-bold :height 1.2)
    (org-level-3 :foreground cyan    :weight 'semi-bold :height 1.1)
@@ -236,6 +244,11 @@ determine the exact padding."
 
    ;; company
    (company-tooltip-common-selection :foreground bg :background blue)
+
+   ;; tree-sitter / built-in
+   (highlight-numbers-number :foreground violet)
+   (highlight-quoted-quote   :foreground magenta)
+   (highlight-quoted-symbol  :foreground green)
    )
 
 

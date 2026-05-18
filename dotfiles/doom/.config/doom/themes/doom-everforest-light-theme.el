@@ -165,7 +165,7 @@ Defaults to \"material\""
 
 
   ;; --- extra faces ------------------------
-  ((elscreen-tab-other-screen-face :background "#353a42" :foreground "#1e2022")
+  ((elscreen-tab-other-screen-face :background base2 :foreground base6)
 
    (evil-goggles-default-face :inherit 'region :background (doom-blend region bg 0.5))
 
@@ -252,7 +252,7 @@ Defaults to \"material\""
 
    ;; LaTeX-mode
    (font-latex-math-face :foreground (doom-lighten green 0.15))
-   (font-latex-script-char :foreground dark-blue)
+   (font-latex-script-char-face :foreground dark-blue)
 
    ;; lsp
    (lsp-face-highlight-read :foreground fg-alt
@@ -266,6 +266,8 @@ Defaults to \"material\""
 
    ;; magit
    (magit-section-heading :foreground blue :weight 'bold)
+   (magit-branch-local    :foreground cyan  :weight 'bold)
+   (magit-branch-remote   :foreground green :weight 'bold)
 
    ;; markdown-mode
    (markdown-markup-face :foreground base5)
@@ -305,7 +307,11 @@ Defaults to \"material\""
    (rainbow-delimiters-depth-2-face :foreground violet)
    (rainbow-delimiters-depth-3-face :foreground dark-cyan)
    (rainbow-delimiters-depth-4-face :foreground (doom-darken yellow 0.15))
-   (rainbow-delimiters-unmatched-face: :foreground fg :background 'nil)
+   (rainbow-delimiters-depth-5-face :foreground green)
+   (rainbow-delimiters-depth-6-face :foreground blue)
+   (rainbow-delimiters-depth-7-face :foreground red)
+   (rainbow-delimiters-depth-8-face :foreground (doom-darken green 0.15))
+   (rainbow-delimiters-unmatched-face :foreground red)
    (show-paren-match :foreground bg :background (doom-darken red 0.15))
 
    ;; vertico
@@ -313,6 +319,7 @@ Defaults to \"material\""
 
    ;; others
    (isearch :foreground fg :background (doom-lighten magenta 0.5))
+   (lazy-highlight :foreground blue :background base0 :underline blue)
    (selection :foreground bg-alt :background (doom-darken orange 0.15))
    (company-tooltip-common-selection :foreground bg-alt :background dark-blue)
    )
