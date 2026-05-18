@@ -269,8 +269,17 @@ hl.gesture({
 ---------------------
 
 local mainMod = "SUPER"
+
 local function mod(...)
   return mainMod .. " + " .. table.concat({...}, " + ")
+end
+
+-- TODO figure out workspace only version
+-- changes globally, but better than window.fullscreen(maximized), which would un-maximize on mod+J/K
+local function toggle_master_monocle()
+  local current = hl.get_config("general.layout")
+  local new = (current == "master") and "monocle" or "master"
+  hl.config({ general = { layout = new } })
 end
 
 -- dwm-inspired basics
@@ -289,7 +298,7 @@ hl.bind(mod("L"),               hl.dsp.layout("mfact +0.05"))
 hl.bind(mod("U"),               hl.dsp.layout("swapwithmaster master"))
 hl.bind(mod("SHIFT", "RETURN"), hl.dsp.layout("swapwithmaster master"))
 hl.bind(mod("F"),               hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(mod("SPACE"),           hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(mod("SPACE"),           toggle_master_monocle)
 hl.bind(mod("I"),               hl.dsp.layout("addmaster"))
 hl.bind(mod("D"),               hl.dsp.layout("removemaster"))
 hl.bind(mod("TAB"),             hl.dsp.focus( { workspace = "previous" } ))
