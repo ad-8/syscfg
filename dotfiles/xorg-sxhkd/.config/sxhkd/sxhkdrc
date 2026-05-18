@@ -3,85 +3,42 @@
 #
 # --------------------------------------------------------------
 #                       MODE OPEN
-#
-# apps: [a]ppfinder, [f]ile-manager
-super + o ; {a,f}
-      {xfce4-appfinder,thunar}
 
-# apps: [q]utebrowser, bra[v]e, libre[w]olf, firefo[x]
-super + o ; {q,w,x}
-      {qbittorrent,flatpak run io.gitlab.librewolf-community,firefox}
+super + o ; {e, k, x}
+      {emacs, keepassxc, firefox}
 
-# blueman, keepass, pavuctl, system-monitor
-super + o ; {b,k,p,s}
-      {alacritty --title bluetui --command bluetui,keepassxc,pavucontrol,mate-system-monitor}
-
-# calc
-super + o ; c
-      rofi -show calc -modi calc -no-show-match -no-sort
-
-# emacs
-super + o; e
-      emacsclient --create-frame --alternate-editor="vim"
-
-# --------------------------------------------------------------
-
-# rofi-open, rofi-windows
-super + shift + {o, w}
-      {rofi -show drun, rofi -show window}
-
-# show THIS help menu
-alt + space ; h
-     ~/scripts/sxhkd-show-help.sh
+# TODO? show THIS help menu
+super + o ; h
+     notify-send "opening help"; notify-send "2 test"; ~/scripts/sxhkd-show-help.sh
 
 # --------------------------------------------------------------
 #                       MODE CHANGE
-# lulz nice, this just works
-# TODO use prefix for all my wm scripts
-# should be easier to manage and find
-
-# CHANGE [l]icht, [s]creen, [w]allpaper
 
 super + o; l
       ~/syscfg/scripts/openbsd/dmenu-light.sh
 super + o; v
       ~/syscfg/scripts/openbsd/dmenu-sound.sh
 
-alt + space ; c ; {l, s, w}
-     {~/scripts/bb/licht.clj, ~/scripts/bb/screen_config.clj, $HOME/scripts/bb/set_random_wallpaper.clj}
 # --------------------------------------------------------------
 
-# SEARCH all, ddg
-alt + space ; s ; {a,g}
-     {~/scripts/bb/search.clj --select-provider,~/scripts/bb/search.clj}
-
-# RUN emoji, run_script
-alt + space ; r ; {e,r}
-     {~/scripts/dmenuunicode,~/scripts/bb/run_script.clj}
-
-# --------------------------------------------------------------
-#                       TOGGLE
-# toggle notifications on/off
-alt + space; t; n
-     ~/scripts/dwm_toggle_notifications.clj
 
 # --------------------------------------------------------------
 #                       VOLUME
+# OpenBSD already implements these, at least on my Thinkpad -
+# still works when "overloading" by notify-send
 XF86AudioRaiseVolume
-     ~/scripts/legacy-xorg-dwm/volume up
+      notify-send -t 1000 "INC Vol"
 XF86AudioLowerVolume
-     ~/scripts/legacy-xorg-dwm/volume down
+      notify-send -t 1000 "DEC Vol"
 XF86AudioMute
-     ~/scripts/legacy-xorg-dwm/volume mute
-XF86AudioPlay
-    ~/scripts/bb/play_pause.clj
+      notify-send -t 1000 "toggle MUTE"
 
 super + mod1 + Up
-     sndioctl output.level=+0.05
+     sndioctl output.level=+0.05 && notify-send -t 1500 'volume up'
 super + mod1 + Down
-     sndioctl output.level=-0.05
+     sndioctl output.level=-0.05 && notify-send -t 1500 'volume down'
 super + mod1 + Left
-     sndioctl output.mute=!
+     sndioctl output.mute=! && notify-send -t 1500 'volume mute toggled'
 super + mod1 + Right
     xdotool search --name "Picture-in-Picture" key space
 super + mod1 + space
@@ -97,13 +54,10 @@ super + mod1 + k
 super + mod1 + h
       dunstctl history-pop
 
-# get weather info (test)
+# TODO can joker run it?
 super + mod1 + w
       ~/scripts/bb/weather.clj dunst
 
-# display departures
-super + mod1 + t
-      ~/my/code/scripts/mvg.clj
 # --------------------------------------------------------------
 
 # lock screen
@@ -112,15 +66,12 @@ super + mod1 + l
 
 # restart sxhkd
 super + Escape
-      pkill -x sxhkd && notify-send "sxhkd" "restarting sxhkd" && sleep 1 && sxhkd -t 3 &
+      pkill -x sxhkd && notify-send -t 2000 "sxhkd" "restarting sxhkd" && sleep 1 && sxhkd -t 3 &
 
-# powermenu
-alt + space; p
-      ~/scripts/bb/powermenu.clj
 
 # --------------------------------------------------------------
 #                       SCREENSHOTS
-
+# TODO
 # screenshot - everything (on all monitors)
 alt + space; s; e
      ax-screenshot
