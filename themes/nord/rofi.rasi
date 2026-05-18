@@ -31,7 +31,6 @@
 	nord15: #b48ead;
 
     foreground:  @nord9;
-    backlight:   #ccffeedd;
     background-color:  transparent;
     
     highlight:     underline bold #eceff4;
