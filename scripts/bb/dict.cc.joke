@@ -4,42 +4,41 @@
 (require '[joker.string :as str])
 (require '[joker.os :as os])
 (require '[joker.strconv :as strconv])
+(require '[joker.html :as html])
 
-(defn strip-tags [s]
-  (str/replace s #"<[^>]+>" ""))
-
-(defn a-texts [cell]
-  (->> (re-seq #"(?s)<a[^>]*>(.*?)</a>" cell)
-       (map second)
-       (map strip-tags)
-       (map str/trim)
-       (remove str/blank?)
-       (remove #(= " " %))))
+(defn cell-texts [cell]
+  (let [cleaned (-> cell
+                    (str/replace #"(?s)<div[^>]*>.*?</div>" "")
+                    (str/replace #"(?s)<dfn[^>]*>.*?</dfn>" "")
+                    (str/replace #"(?s)<var[^>]*>.*?</var>" "")
+                    (str/replace #"<[^>]+>" " ")
+                    html/unescape)]
+    (->> (re-seq #"\S+" cleaned)
+         (remove #(= " " %)))))
 
 (defn div-upvotes [cell]
   (if-let [m (re-find #"(?s)<div[^>]*>(\d+)</div>" cell)]
     (try (strconv/atoi (second m)) (catch Error _ 0))
     0))
 
-(defn td7nl-blocks [html]
-  (->> (re-seq #"(?s)<td[^>]*class=\"td7nl\"[^>]*>(.*?)</td>" html)
+(defn td7nl-blocks [html-body]
+  (->> (re-seq #"(?s)<td[^>]*class=\"td7nl\"[^>]*>(.*?)</td>" html-body)
        (map second)))
 
 (defn pair->row [[left right]]
   {:upvotes (div-upvotes right)
-   :x       (str/join " " (a-texts left))
-   :y       (str/join " " (a-texts right))})
-
-(defn col-width [k rows]
-  (apply max (count (name k)) (map #(count (str (get % k))) rows)))
+   :x       (str/join " " (cell-texts left))
+   :y       (str/join " " (cell-texts right))})
 
 (defn print-table [ks rows]
-  (let [ws  (map #(col-width % rows) ks)
-        fmt (fn [row] (str/join " | " (map #(str/pad-right (str (get row %1)) " " %2) ks ws)))]
-    (println (str/join " | " (map #(str/pad-right (name %1) " " %2) ks ws)))
-    (println (str/join "-+-" (map #(str/pad-right "" "-" %) ws)))
+  (let [ws    (map (fn [k] (apply max (count (str k)) (map #(count (str (get % k))) rows))) ks)
+        cell  (fn [s w] (str " " (str/pad-left (str s) " " w) " "))
+        row-s (fn [vals] (str "|" (str/join "|" (map cell vals ws)) "|"))
+        sep   (str "|" (str/join "+" (map #(str/pad-right "" "-" (+ % 2)) ws)) "|")]
+    (println (row-s (map str ks)))
+    (println sep)
     (doseq [row rows]
-      (println (fmt row)))))
+      (println (row-s (map #(get row %) ks))))))
 
 (defn translate [word]
   (let [resp   (http/send {:url     (str "https://www.dict.cc/?s=" word)
