@@ -147,7 +147,7 @@ hl.config({
 
       ["col.active"]      = rgb(colors.blue),
       ["col.inactive"]    = rgb(colors.black),
-      text_color          = rgb(colors.white),
+      text_color          = rgb(colors.groupbar_text_active or colors.white),
       text_color_inactive = rgb(colors.white),
     }
   }
