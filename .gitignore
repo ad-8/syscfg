@@ -2,11 +2,10 @@
 /clojure/.clojure/tools/
 /dotfiles/alacritty/.config/alacritty/themes/
 fish/.config/fish/fish_variables
-/.clj-kondo/
-/.lsp/
+**/.clj-kondo/
+**/.lsp/
+**/.calva/
 /dotfiles/foot/.config/foot/themes/
-/dotfiles/.clj-kondo/
-/dotfiles/.lsp/
 /dotfiles/btop/.config/btop/themes/
 /dotfiles/doom/.config/doom/active-theme.el
 /dotfiles/foot/.config/foot/active-theme
