@@ -1,0 +1,136 @@
+# Theming
+font: Hack Nerd Font 15
+background: "#091f2ed0"
+color: "#2aa889"
+border: "#2aa889"
+separator: " ➜ "
+border_width: 2
+corner_r: 10
+padding: 15 # Defaults to corner_r
+rows_per_column: 5 # No limit by default
+column_padding: 25 # Defaults to padding
+
+# Anchor and margin
+anchor: center # One of center, left, right, top, bottom, bottom-left, top-left, etc.
+# Only relevant when anchor is not center
+margin_right: 0
+margin_bottom: 0
+margin_left: 0
+margin_top: 0
+
+# namespace to use for the layer shell surface
+#namespace: "wlr_which_key"
+
+# Permits key bindings that conflict with compositor key bindings.
+# Default is `false`.
+inhibit_compositor_keyboard_shortcuts: true
+
+# Try to guess the correct keyboard layout to use. Default is `false`.
+auto_kbd_layout: true
+
+
+
+menu:
+  - key: "c"
+    desc: Change ...
+    submenu:
+      - key: "b"
+        desc: toggle bluetooth
+        cmd: rfkill toggle bluetooth
+      - key: "w"
+        desc: toggle wifi
+        cmd: rfkill toggle wifi 
+      - key: "l"
+        desc: lights
+        cmd: $HOME/syscfg/scripts/bb/licht.clj
+      - key: "w"
+        desc: set random wallpaper
+        cmd: $HOME/syscfg/scripts/bb/set_random_wallpaper.clj
+
+  - key: "o"
+    desc: Open program ...
+    submenu:
+      - key: "a"
+        desc: Anki
+        cmd: anki
+      - key: "b"
+        desc: Bluetooth (bluetui)
+        cmd: foot -T bluetui bluetui
+      - key: "c"
+        desc: Calculator
+        cmd: qalculate-gtk
+      - key: "e"
+        desc: Emacs
+        cmd: emacs
+      - key: "E"
+        desc: Emacsclient
+        cmd: emacsclient -c
+      - key: "f"
+        desc: File Manager
+        cmd: thunar
+      - key: "k"
+        desc: KeePassXC
+        cmd: keepassxc
+      - key: "m"
+        desc: Emacs EMMS
+        cmd: emacs --name ax-emacs-emms --eval '(ax/open-emms-layout)'
+      - key: "M"
+        desc: Strawberry
+        cmd: strawberry
+      - key: "p"
+        desc: pavucontrol
+        cmd: pavucontrol
+      - key: "q"
+        desc: qBittorrent
+        cmd: qbittorrent
+      - key: "s"
+        desc: Signal
+        cmd: signal-desktop
+      - key: "v"
+        desc: Brave
+        cmd: brave
+      - key: "V"
+        desc: Virt-Manager
+        cmd: virt-manager
+      - key: "w"
+        desc: Wiremix
+        cmd: foot -T wiremix wiremix
+      - key: "W"
+        desc: Waypaper
+        cmd: waypaper
+      - key: "x"
+        desc: Firefox
+        cmd: firefox
+
+  - key: "r"
+    desc: Run stuff ...
+    submenu:
+      - key: "a"
+        desc: about
+        cmd: foot -H -T wiremix echo "howdy sir"
+      - key: "r"
+        desc: runner
+        cmd: foot -H -T wiremix -e clear && /usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj 
+
+  # example for sub-submenu
+  # - key: "l"
+  #   desc: Laptop Screen
+  #   submenu:
+  #     - key: "t"
+  #       desc: Toggle On/Off
+  #       cmd: toggle-laptop-display.sh
+  #     - key: "s"
+  #       desc: Scale
+  #       submenu:
+  #         - key: "1"
+  #           desc: Set Scale to 1.0
+  #           cmd: wlr-randr --output eDP-1 --scale 1
+  #         - key: "2"
+  #           desc: Set Scale to 1.1
+  #           cmd: wlr-randr --output eDP-1 --scale 1.1
+  #         - key: "3"
+  #           desc: Set Scale to 1.2
+  #           cmd: wlr-randr --output eDP-1 --scale 1.2
+  #         - key: "4"
+  #           desc: Set Scale to 1.3
+  #           cmd: wlr-randr --output eDP-1 --scale 1.3
