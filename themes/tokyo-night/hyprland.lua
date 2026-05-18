@@ -1,4 +1,6 @@
 return {
+  groupbar_text_active = "1a1b26",
+
   black         = "414868",
   brightblack   = "565f89",
   red           = "f7768e",
