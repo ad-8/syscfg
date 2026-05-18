@@ -1,0 +1,28 @@
+# Matrix color theme for foot
+# https://github.com/monkeyjunglejuice/matrix-emacs-theme
+# Author's ANSI mapping honored: yellow=green, cyan=magenta (intentional).
+# regular0 lifted from canonical color-dark to color-darker so terminal
+# black stays visible against bg=#000000; bright0 holds color-dark.
+
+[colors]
+background=000000
+foreground=00b25f
+cursor=000000 00e57a
+
+regular0=004022
+regular1=cc0037
+regular2=00e57a
+regular3=00e57a
+regular4=0081c7
+regular5=00cd6d
+regular6=00cd6d
+regular7=00b25f
+
+bright0=00733d
+bright1=cc0037
+bright2=00ff88
+bright3=00ff88
+bright4=0081c7
+bright5=00e57a
+bright6=00e57a
+bright7=00ff88

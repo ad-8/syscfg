@@ -1,0 +1,20 @@
+return {
+  groupbar_text_active = "000000",
+
+  black         = "004022",
+  brightblack   = "00733d",
+  red           = "cc0037",
+  brightred     = "cc0037",
+  green         = "00e57a",
+  brightgreen   = "00ff88",
+  yellow        = "00e57a",
+  brightyellow  = "00ff88",
+  blue          = "0081c7",
+  brightblue    = "0081c7",
+  magenta       = "00cd6d",
+  brightmagenta = "00e57a",
+  cyan          = "00cd6d",
+  brightcyan    = "00e57a",
+  white         = "00b25f",
+  brightwhite   = "00ff88",
+}
