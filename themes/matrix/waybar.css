@@ -53,7 +53,7 @@ tooltip label {
 }
 
 #battery {
-    color: #00e57a;
+    color: #00b25f;
 }
 
 #battery.charging {
@@ -79,11 +79,11 @@ tooltip label {
 }
 
 #cpu {
-    color: #00e57a;
+    color: #00b25f;
 }
 
 #custom-vpn {
-    color: #00e57a;
+    color: #00b25f;
 }
 
 #custom-vpn.down {
@@ -91,7 +91,7 @@ tooltip label {
 }
 
 #custom-cpu {
-    color: #00e57a;
+    color: #00b25f;
 }
 #custom-cpu.warn {
     color: #00ff88;
@@ -101,22 +101,22 @@ tooltip label {
 }
 
 #custom-disk {
-    color: #00e57a;
+    color: #00b25f;
 }
 #custom-disk.low {
     color: #00ff88;
 }
 #custom-memory {
-    color: #00e57a;
+    color: #00b25f;
 }
 #custom-memory.low {
     color: #00ff88;
 }
 #custom-date {
-    color: #00e57a;
+    color: #00b25f;
 }
 #custom-weather {
-    color: #00e57a;
+    color: #00b25f;
 }
 #custom-music-info {
     color: #00cd6d;
@@ -127,13 +127,13 @@ tooltip label {
 }
 
 #custom-licht {
-    color: #00e57a;
+    color: #00b25f;
 }
 #custom-notification-status {
-    color: #00e57a;
+    color: #00b25f;
 }
 #pulseaudio {
-    color: #00e57a;
+    color: #00b25f;
 }
 
 #workspaces button.empty {
