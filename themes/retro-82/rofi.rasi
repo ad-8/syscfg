@@ -3,10 +3,10 @@
  */
 
 * {
-    ret0: #05182e;
+    ret0: #00172e;
     ret1: #00172e;
     ret2: #134e5a;
-    ret3: #082238;
+    ret3: #01204e;
     ret4: #f6dcac;
     ret5: #faa968;
     ret6: #faa968;
@@ -16,7 +16,7 @@
     background-color: transparent;
 
     highlight:   underline bold #faa968;
-    transparent: rgba(5, 24, 46, 0);
+    transparent: rgba(0, 23, 46, 0);
 }
 
 window {
@@ -72,7 +72,7 @@ listview {
     border-radius: 0px 0px 6px 6px;
     border-color: @ret6;
     border: 0px 1px 1px 1px;
-    background-color: rgba(5, 24, 46, 0.9);
+    background-color: rgba(0, 23, 46, 0.9);
     dynamic: false;
 }
 
@@ -87,7 +87,7 @@ element {
 
 element selected.normal {
     background-color: @ret6;
-    text-color: #05182e;
+    text-color: #00172e;
 }
 
 element-text, element-icon {

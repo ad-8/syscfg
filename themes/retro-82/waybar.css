@@ -7,13 +7,13 @@
 }
 
 window#waybar {
-    background: rgba(5, 24, 46, 1);
+    background: rgba(0, 23, 46, 1);
     border-bottom: 0px solid rgba(19, 78, 90, 0.5);
     color: #faa968;
 }
 
 tooltip {
-  background: rgba(5, 24, 46, 0.5);
+  background: rgba(0, 23, 46, 0.5);
   border: 1px solid rgba(19, 78, 90, 0.5);
 }
 tooltip label {
@@ -28,13 +28,13 @@ tooltip label {
 }
 
 #workspaces button.focused {
-    background: #082238;
+    background: #01204e;
     border-bottom: 3px solid #faa968;
 }
 
 #workspaces button.active {
     background-color: #faa968;
-    color: #05182e;
+    color: #00172e;
     border-radius: 3px;
 }
 
@@ -45,7 +45,7 @@ tooltip label {
 #mode {
     background: #faa968;
     border-bottom: 3px solid #faa968;
-    color: #05182e;
+    color: #00172e;
 }
 
 #clock {
@@ -57,7 +57,7 @@ tooltip label {
 }
 
 #battery.charging {
-    color: #05182e;
+    color: #00172e;
     background-color: #8cbfb8;
 }
 
@@ -163,7 +163,7 @@ menuitem {
 
 #submap {
     background-color: #faa968;
-    color: #05182e;
+    color: #00172e;
     padding: 3px 10px;
     font-weight: bold;
     border-radius: 8px;

@@ -1,5 +1,5 @@
 return {
-  black         = "05182e",
+  black         = "00172e",
   brightblack   = "134e5a",
   red           = "f85525",
   brightred     = "f85525",

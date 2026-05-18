@@ -3,13 +3,13 @@
 # Retro-82 color theme for foot
 
 [colors]
-background=05182e
+background=00172e
 foreground=f6dcac
-cursor=05182e f6dcac
+cursor=00172e f6dcac
 selection-background=faa968
 selection-foreground=00172e
 
-regular0=303442
+regular0=00172e
 regular1=f85525
 regular2=028391
 regular3=e97b3c
