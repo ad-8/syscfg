@@ -10,34 +10,6 @@
 
 
 
-#_(defn get-innermost-:content [m]
-    (let [con (:content m)]
-      (if (= clojure.lang.PersistentVector (type con))
-        (if (= java.lang.String (type (first con)))
-          (first con)
-          (get-innermost-:content (first con)))
-        (get-innermost-:content m)))) ; infinite loop if if not met
-
-#_(defn get-innermost-:content [m]
-    (let [con (:content m)]
-      (cond
-        (vector? con) (if (string? (first con))
-                        (first con)
-                        (get-innermost-:content (first con)))
-
-        :else con))) ; else case still isnt useful
-
-;; loop/recur to avoid stack overflows would be better in bigger problem sets
-(defn get-innermost-:content [m]
-  (loop [current m]
-    (let [con (:content current)]
-      (cond
-        (vector? con) (if (string? (first con))
-                        (first con)
-                        (recur (first con)))
-        :else con))))
-
-
 (defn get-inner [elem]
   (loop [current elem]
     (let []
@@ -65,7 +37,7 @@
          (map get-inner)
          (map str/trim)
          (remove str/blank?)
-         (remove #(= " " %)) ;; whatever this is, but its not equal to " "
+         (remove #(= " " %)) ;; U+00A0 non-breaking space, not caught by str/blank?
          )))
 
 
