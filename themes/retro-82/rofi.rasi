@@ -88,6 +88,7 @@ element {
 element selected.normal {
     background-color: @ret6;
     text-color: #00172e;
+    highlight: underline bold #028391;
 }
 
 element-text, element-icon {
