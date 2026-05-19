@@ -1,0 +1,29 @@
+# -*- conf -*-
+#
+# Wilmersdorf color theme for foot
+# https://github.com/doomemacs/themes (doom-wilmersdorf-theme.el)
+
+[colors]
+background=282b33
+foreground=c6c6c6
+cursor=1f2024 eceff4
+selection-background=34373e
+selection-foreground=eceff4
+
+regular0=282b33
+regular1=e1c1ee
+regular2=5b94ab
+regular3=cfcf9c
+regular4=819cd6
+regular5=a6c1e0
+regular6=7289bc
+regular7=c6c6c6
+
+bright0=515462
+bright1=e1c1ee
+bright2=5b94ab
+bright3=cfcf9c
+bright4=90a6db
+bright5=b0a2e7
+bright6=7ebebd
+bright7=eceff4
