@@ -1,6 +1,9 @@
 return {
   accent_fg     = "00172e",
 
+  border_a      = "faa968",
+  border_b      = "028391",
+
   black         = "00172e",
   brightblack   = "134e5a",
   red           = "f85525",

@@ -79,6 +79,8 @@ end
 local colors    = require("active-theme")
 local accent    = colors.accent    or colors.blue
 local accent_fg = colors.accent_fg or colors.white
+local border_a  = colors.border_a  or "33ccff"
+local border_b  = colors.border_b  or "00ff99"
 
 
 hl.config({
@@ -89,8 +91,7 @@ hl.config({
     border_size      = 3,
 
     col              = {
-      -- default
-      active_border   = { colors = { rgba("33ccffee"), rgba("00ff99ee") }, angle = 45 },
+      active_border   = { colors = { rgba(border_a .. "ee"), rgba(border_b .. "ee") }, angle = 45 },
       -- inactive_border = rgba("595959aa"),
       -- gotham
       -- active_border   = rgb(colors.blue),

@@ -1,4 +1,7 @@
 return {
+  border_a      = "509475",
+  border_b      = "2DD5B7",
+
   black         = "111c18",
   brightblack   = "23372B",
   red           = "FF5345",

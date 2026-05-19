@@ -2,6 +2,9 @@ return {
   accent        = "ffffff",
   accent_fg     = "000000",
 
+  border_a      = "ffffff",
+  border_b      = "8d8d8d",
+
   black         = "000000",
   brightblack   = "5c5c5c",
   red           = "a4a4a4",
