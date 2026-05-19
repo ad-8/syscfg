@@ -1,0 +1,34 @@
+# -*- conf -*-
+#
+# Oxocarbon-light color theme for foot
+# https://github.com/nyoom-engineering/oxocarbon.nvim
+#
+# ANSI mapping follows upstream init.lua light branch (terminal_color_1..15
+# resolve against the light palette). Light variant is even more eccentric
+# than dark: ANSI red slot holds IBM blue #0f62fe, ANSI blue slot holds
+# deep pink #ee5396. Honored upstream's authorial intent.
+
+[colors]
+background=ffffff
+foreground=37474F
+cursor=37474F ffffff
+selection-background=dde1e6
+selection-foreground=37474F
+
+regular0=f2f4f8
+regular1=0f62fe
+regular2=be95ff
+regular3=42be65
+regular4=ee5396
+regular5=FFAB91
+regular6=ff7eb6
+regular7=90A4AE
+
+bright0=161616
+bright1=0f62fe
+bright2=be95ff
+bright3=42be65
+bright4=ee5396
+bright5=FFAB91
+bright6=08bdba
+bright7=525252
