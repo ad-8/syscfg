@@ -1,4 +1,7 @@
 return {
+  accent        = "245361",
+  accent_fg     = "d3ebe9",
+
   black         = "0c1014",
   brightblack   = "11151c",
   red           = "c23127",
