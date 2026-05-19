@@ -291,8 +291,8 @@ hl.bind(mod("U"),               hl.dsp.layout("swapwithmaster master"))
 hl.bind(mod("SHIFT", "RETURN"), hl.dsp.layout("swapwithmaster master"))
 hl.bind(mod("F"),               hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(mod("SPACE"),           toggle_master_monocle)
-hl.bind(mod("I"),               hl.dsp.layout("addmaster"))
-hl.bind(mod("D"),               hl.dsp.layout("removemaster"))
+hl.bind(mod("SHIFT", "I"),      hl.dsp.layout("addmaster"))
+hl.bind(mod("SHIFT", "D"),      hl.dsp.layout("removemaster"))
 hl.bind(mod("TAB"),             hl.dsp.focus( { workspace = "previous" } ))
 -- tabs
 hl.bind(mod("M"), hl.dsp.group.next())
@@ -342,9 +342,10 @@ for i = 1, 10 do
 end
 
 -- special workspace (scratchpad)
-hl.bind(mod("S"),          hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mod("SHIFT", "S"), hl.dsp.window.move({ workspace = "special:magic" }))
-hl.bind(mod("T"),          hl.dsp.workspace.toggle_special("todo"))
+hl.bind(mod("S"),                  hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mod("SHIFT", "S"),         hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mod("SHIFT", "CTRL", "S"), hl.dsp.window.move({ workspace = "e+0" })) -- pull focused window out of scratchpad onto current workspace
+hl.bind(mod("D"),                  hl.dsp.workspace.toggle_special("todo"))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mod("mouse_down"), hl.dsp.focus({ workspace = "e+1" }))
