@@ -297,10 +297,10 @@ hl.bind(mod("TAB"),             hl.dsp.focus( { workspace = "previous" } ))
 -- tabs
 hl.bind(mod("M"), hl.dsp.group.next())
 hl.bind(mod("N"), hl.dsp.group.prev())
--- TODO test wlr-which-key
+-- wlr-which-key
 hl.bind(mod("SHIFT", "SPACE"), hl.dsp.exec_cmd("wlr-which-key"))
+hl.bind(mod("C"),              hl.dsp.exec_cmd("wlr-which-key --initial-keys \"c\""))
 hl.bind(mod("O"),              hl.dsp.exec_cmd("wlr-which-key --initial-keys \"o\""))
--- hl.bind(mod("C"),              hl.dsp.exec_cmd("wlr-which-key --initial-keys \"c\""))
 -- multi-monitor keybinds
 hl.bind(mod("PERIOD"),          hl.dsp.focus({ monitor = "+1" }))
 hl.bind(mod("SHIFT", "PERIOD"), hl.dsp.window.move({ monitor = "+1", follow = false }))
