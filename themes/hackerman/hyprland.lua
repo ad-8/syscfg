@@ -1,4 +1,5 @@
 return {
+  accent        = "82fb9c",
   accent_fg     = "0b0c16",
 
   border_a      = "82fb9c",
