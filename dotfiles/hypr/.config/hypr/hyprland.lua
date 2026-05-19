@@ -76,7 +76,9 @@ local function rgba(c)
   return string.format("rgba(%s)", c)
 end
 
-local colors = require("active-theme")
+local colors    = require("active-theme")
+local accent    = colors.accent    or colors.blue
+local accent_fg = colors.accent_fg or colors.white
 
 
 hl.config({
@@ -131,7 +133,7 @@ hl.config({
     enabled = true,
   },
   group = {
-    ["col.border_active"]   = rgb(colors.blue),
+    ["col.border_active"]   = rgb(accent),
     ["col.border_inactive"] = rgb(colors.black),
 
     groupbar                = {
@@ -145,9 +147,9 @@ hl.config({
       font_family         = 'Hack Nerd Font',
       font_size           = 12,
 
-      ["col.active"]      = rgb(colors.blue),
+      ["col.active"]      = rgb(accent),
       ["col.inactive"]    = rgb(colors.black),
-      text_color          = rgb(colors.groupbar_text_active or colors.white),
+      text_color          = rgb(accent_fg),
       text_color_inactive = rgb(colors.white),
     }
   }

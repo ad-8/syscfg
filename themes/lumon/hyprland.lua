@@ -1,5 +1,5 @@
 return {
-  groupbar_text_active = "1b2d40",
+  accent_fg     = "1b2d40",
 
   black         = "1b2d40",
   brightblack   = "4A6B80",
