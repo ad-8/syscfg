@@ -127,6 +127,9 @@ menu:
       - key: "s"
         desc: Signal
         cmd: signal-desktop
+      - key: "t"
+        desc: todo scratchpad
+        cmd: bash -c 'pgrep -f "emacs-scratchpad-todo" || emacs ~/org/todo.org --name emacs-scratchpad-todo'
       - key: "v"
         desc: Brave
         cmd: brave
