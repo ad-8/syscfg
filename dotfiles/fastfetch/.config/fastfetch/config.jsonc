@@ -76,6 +76,12 @@
             "text": "sed -n -E 's/^VERSION_ID=\"([0-9]{4})([0-9]{2})([0-9]{2})\".*/\\1-\\2-\\3/p' /etc/os-release"
   	    },
         {
+	        "type": "command",
+	        "key":  "  ├",
+            "keyColor": "green",
+            "text": "sh ~/syscfg/scripts/nixos-last-updated.sh" 
+        },
+        {
             "type": "kernel",
             "key": "  ├",
             "keyColor": "green"
@@ -109,6 +115,12 @@
             "type": "custom",
             "format": "\u001b[90m┌────────────────────────Misc────────────────────────────┐"
         },
+{
+  "type": "command",
+  "key": "   Date   ",
+  "text": "date '+%d.%m. %H:%M'",
+  "keyColor": "green",
+},
         {
             "type": "command",
             "key": "   OS Age ",
