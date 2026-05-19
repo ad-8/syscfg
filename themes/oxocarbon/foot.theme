@@ -1,0 +1,34 @@
+# -*- conf -*-
+#
+# Oxocarbon color theme for foot
+# https://github.com/nyoom-engineering/oxocarbon.nvim
+#
+# ANSI mapping follows upstream init.lua (terminal_color_1..15):
+# red slot holds light blue (base11), green holds purple (base14),
+# magenta holds sky blue (base15). Reflects oxocarbon's "even the
+# reds contain a hint of blue" philosophy — blues dominate the palette.
+
+[colors]
+background=161616
+foreground=dde1e6
+cursor=161616 dde1e6
+selection-background=393939
+selection-foreground=dde1e6
+
+regular0=262626
+regular1=33b1ff
+regular2=be95ff
+regular3=42be65
+regular4=78a9ff
+regular5=82cfff
+regular6=3ddbd9
+regular7=f2f4f8
+
+bright0=525252
+bright1=33b1ff
+bright2=be95ff
+bright3=42be65
+bright4=78a9ff
+bright5=82cfff
+bright6=08bdba
+bright7=ffffff

@@ -1,0 +1,113 @@
+/**
+ * Oxocarbon rofi theme
+ * https://github.com/nyoom-engineering/oxocarbon.nvim
+ */
+
+* {
+    hbg:     #161616;
+    hbg1:    #262626;
+    hbg2:    #131313;
+    hfg:     #dde1e6;
+    hfgalt:  #f2f4f8;
+    haccent: #78a9ff;
+    hcyan:   #3ddbd9;
+    hpink:   #ff7eb6;
+    hgrey:   #525252;
+
+    foreground:       @hfg;
+    background-color: transparent;
+
+    highlight:   underline bold #ff7eb6;
+    transparent: rgba(22, 22, 22, 0);
+}
+
+window {
+    location: center;
+    anchor:   center;
+    transparency: "screenshot";
+    padding: 10px;
+    border:  0px;
+    border-radius: 6px;
+
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+
+    width: 33%;
+}
+
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
+}
+
+message {
+    color: @hbg;
+    padding: 5;
+    border-color: @foreground;
+    border:  0px 2px 2px 2px;
+    background-color: @hcyan;
+}
+
+inputbar {
+    color: @hfgalt;
+    padding: 11px;
+    background-color: #262626;
+
+    border: 1px;
+    border-radius:  6px 6px 0px 0px;
+    border-color: @haccent;
+}
+
+entry, prompt, case-indicator {
+    text-font: inherit;
+    text-color: inherit;
+}
+
+prompt {
+    margin: 0px 1em 0em 0em;
+}
+
+listview {
+    padding: 8px;
+    border-radius: 0px 0px 6px 6px;
+    border-color: @haccent;
+    border: 0px 1px 1px 1px;
+    background-color: rgba(22, 22, 22, 0.9);
+    dynamic: false;
+}
+
+element {
+    padding: 3px;
+    vertical-align: 0.5;
+    border-radius: 4px;
+    background-color: transparent;
+    color: @foreground;
+    text-color: rgb(221, 225, 230);
+}
+
+element selected.normal {
+    background-color: @haccent;
+    text-color: #161616;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+button {
+    padding: 6px;
+    color: @foreground;
+    horizontal-align: 0.5;
+
+    border: 2px 0px 2px 2px;
+    border-radius: 4px 0px 0px 4px;
+    border-color: @foreground;
+}
+
+button selected normal {
+    border: 2px 0px 2px 2px;
+    border-color: @foreground;
+}
