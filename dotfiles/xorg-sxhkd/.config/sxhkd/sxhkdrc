@@ -1,15 +1,17 @@
-# grouping is nice for readability in this rc file
-# but missing the "mode" display like in i3
-#
 # --------------------------------------------------------------
 #                       MODE OPEN
-
 super + o ; {e, k, x}
       {emacs, keepassxc, firefox}
 
-# TODO? show THIS help menu
-super + o ; h
-     notify-send "opening help"; notify-send "2 test"; ~/scripts/sxhkd-show-help.sh
+# --------------------------------------------------------------
+
+
+# --------------------------------------------------------------
+#                       MODE EXEC
+super + x ; w
+     joker ~/syscfg/scripts/bb/weather.joke dunst
+# --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 #                       MODE CHANGE
@@ -26,6 +28,7 @@ super + o; v
 #                       VOLUME
 # OpenBSD already implements these, at least on my Thinkpad -
 # still works when "overloading" by notify-send
+# (same for XF86 brightness keys - deleted thos from this config)
 XF86AudioRaiseVolume
       notify-send -t 1000 "INC Vol"
 XF86AudioLowerVolume
@@ -39,71 +42,42 @@ super + mod1 + Down
      sndioctl output.level=-0.05 && notify-send -t 1500 'volume down'
 super + mod1 + Left
      sndioctl output.mute=! && notify-send -t 1500 'volume mute toggled'
-super + mod1 + Right
-    xdotool search --name "Picture-in-Picture" key space
-super + mod1 + space
-    xdotool search --name "Picture-in-Picture" key space
+# --------------------------------------------------------------
+ 
 
 # --------------------------------------------------------------
-#                       NOTIFICATIONS
+#                       MISC
 # kill all notifications
 super + mod1 + k
       dunstctl close-all
-
 # pop last notification from history
 super + mod1 + h
       dunstctl history-pop
-
-# TODO can joker run it?
-super + mod1 + w
-      ~/scripts/bb/weather.clj dunst
-
-# --------------------------------------------------------------
-
 # lock screen
 super + mod1 + l
       slock
-
 # restart sxhkd
 super + Escape
       pkill -x sxhkd && notify-send -t 2000 "sxhkd" "restarting sxhkd" && sleep 1 && sxhkd -t 3 &
+# TODO
+super + mod1 + Right
+    xdotool search --name "Picture-in-Picture" key space
+# TODO
+super + mod1 + space
+    xdotool search --name "Picture-in-Picture" key space
+# --------------------------------------------------------------
 
 
 # --------------------------------------------------------------
 #                       SCREENSHOTS
-# TODO
-# screenshot - everything (on all monitors)
-alt + space; s; e
-     ax-screenshot
-# screenshot - everything (on all monitors) + copy to clipboard
-alt + space; s; E
-     ax-screenshot --clipboard
-# screenshot - select (window or rectangle)
-alt + space; s; s
-     ax-screenshot --select
-# screenshot - select (window or rectangle) + copy to clipboard
-alt + space; s; S
-     ax-screenshot --clipboard --select
-
+# screenshot - everything
+super + x; s; e
+     p='/tmp/screenshot_openbsd_'"$(date '+%Y%m%d_%H%M%S')"'.png'; scrot "$p" && notify-send -t 4000 'screenshot everything' "$p"
+# screenshot - select rectangle
+super + x; s; s
+     p='/tmp/screenshot_openbsd_'"$(date '+%Y%m%d_%H%M%S')"'.png'; scrot -s "$p" && notify-send -t 4000 'screenshot selection' "$p"
+# screenshot - window
+super + x; s; w
+     p='/tmp/screenshot_openbsd_'"$(date '+%Y%m%d_%H%M%S')"'.png'; scrot -u "$p" && notify-send -t 4000 'screenshot window' "$p"
 # --------------------------------------------------------------
-#                       MacBook Light Keys
-XF86MonBrightnessUp
-    ~/scripts/brightness screen inc
-XF86MonBrightnessDown
-    ~/scripts/brightness screen dec
-XF86KbdBrightnessUp
-    ~/scripts/brightness keyboard inc
-XF86KbdBrightnessDown
-    ~/scripts/brightness keyboard dec
 
-# --------------------------------------------------------------
-#                       MacBook / Media keys
-XF86LaunchA
-    rofi -show window
-XF86LaunchB
-    xfce4-appfinder
-
-XF86AudioPrev
-    playerctl previous
-XF86AudioNext
-    playerctl next
