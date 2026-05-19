@@ -312,7 +312,7 @@ hl.bind(mod("SHIFT", "COMMA"),  hl.dsp.workspace.move({ monitor = "+1", follow =
 hl.bind(mod("SHIFT", "R"), hl.dsp.exec_cmd("hyprctl reload && notify-send -t 2000 'hyperctl reloaded'"))
 hl.bind(mod("ALT", "L"),   hl.dsp.exec_cmd("swaylock --color 000000"))
 hl.bind(mod("SHIFT", "F"), hl.dsp.exec_cmd("rofi -show recursivebrowser"))
-hl.bind(mod("SHIFT", "W"), hl.dsp.exec_cmd([[n=$(hyprctl clients -j | jq '[.[] | select(.workspace.id > 0)] | length'); rofi -show window -display-window "Windows ($n)"]]) )
+hl.bind(mod("SHIFT", "W"), hl.dsp.exec_cmd([[n=$(hyprctl clients -j | jq length); rofi -show window -display-window "Windows ($n)"]]) )
 hl.bind(mod("B"),          hl.dsp.exec_cmd(scripts .. "/waybar.clj toggle"))
 hl.bind(mod("SHIFT", "B"), hl.dsp.exec_cmd(scripts .. "/waybar.clj toggle-min"))
 -- notifications
