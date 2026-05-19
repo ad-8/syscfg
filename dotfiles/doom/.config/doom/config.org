@@ -38,6 +38,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#org-capture-loop-for-scratchpad][org-capture loop for scratchpad]]
 - [[#eat-terminal][eat terminal]]
 - [[#everywhere][everywhere]]
+- [[#eww-popupwindow-height][eww popup/window height]]
 - [[#clean-up----misc-stuff][clean up -- Misc Stuff]]
 
 * Resources
@@ -531,6 +532,12 @@ replicating its functionality on wayland. it needs =wtype= to be installed.
 		      "wtype" nil
 		      (thanos/wtype-text (buffer-string)))
 		     (delete-frame)))))
+#+end_src
+
+* eww popup/window height
+the default height is same/similar as M-x, so way too small for browsing
+#+begin_src emacs-lisp
+(set-popup-rule! "^\\*eww" :size 0.8 :quit t)
 #+end_src
 
 * TODO clean up -- Misc Stuff

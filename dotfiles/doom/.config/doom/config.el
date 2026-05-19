@@ -288,6 +288,8 @@ Runs indefinitely until the user aborts with `C-g` or similar."
 		      (thanos/wtype-text (buffer-string)))
 		     (delete-frame)))))
 
+(set-popup-rule! "^\\*eww" :size 0.8 :quit t)
+
 ;; AX
 ; doom doctor suggestions
 (setq shell-file-name (executable-find "bash"))
