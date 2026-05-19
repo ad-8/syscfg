@@ -97,6 +97,7 @@ abbr -a ssc 'sha256sum --check --ignore-missing'
 abbr -a tl 'tree -L'
 abbr -a todo 'rg -i todo --stats'
 abbr -a vd nvim -d
+abbr -a startw start-hyprland
 
 
 if test "$XDG_SESSION_TYPE" = "wayland"
