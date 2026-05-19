@@ -40,12 +40,31 @@ menu:
       - key: "l"
         desc: lights
         cmd: $HOME/syscfg/scripts/bb/licht.clj
+      - key: "n"
+        desc: toggle notifications
+        cmd: $HOME/syscfg/scripts/dunst_toggle_and_notify.clj
       - key: "t"
         desc: theme
         cmd: $HOME/syscfg/scripts/bb/switch_theme.clj
       - key: "w"
         desc: toggle wifi
         cmd: rfkill toggle wifi
+
+  - key: "n"
+    desc: Network ...
+    submenu:
+      - key: "m"
+        desc: muc up
+        cmd: nmcli c up muc
+      - key: "M"
+        desc: muc down
+        cmd: nmcli c down muc
+      - key: "v"
+        desc: VPN up (CH-854)
+        cmd: cd $HOME/vpn && sudo wg-quick up ax-bee-CH-854.conf
+      - key: "V"
+        desc: VPN down (CH-854)
+        cmd: cd $HOME/vpn && sudo wg-quick down ax-bee-CH-854.conf
 
   - key: "w"
     desc: Wallpaper ...
