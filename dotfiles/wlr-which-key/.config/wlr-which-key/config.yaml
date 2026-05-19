@@ -37,13 +37,35 @@ menu:
       - key: "b"
         desc: toggle bluetooth
         cmd: rfkill toggle bluetooth
-      - key: "w"
-        desc: toggle wifi
-        cmd: rfkill toggle wifi 
       - key: "l"
         desc: lights
         cmd: $HOME/syscfg/scripts/bb/licht.clj
+      - key: "t"
+        desc: theme
+        cmd: $HOME/syscfg/scripts/bb/switch_theme.clj
       - key: "w"
+        desc: toggle wifi
+        cmd: rfkill toggle wifi
+
+  - key: "w"
+    desc: Wallpaper ...
+    submenu:
+      - key: "b"
+        desc: bing daily - set
+        cmd: bb $HOME/x/bing_wallpaper_cli.clj set-daily
+      - key: "c"
+        desc: bing current - notify
+        cmd: bb $HOME/x/bing_wallpaper_cli.clj notify-current
+      - key: "i"
+        desc: bing daily - notify info
+        cmd: bb $HOME/x/bing_wallpaper_cli.clj notify-daily
+      - key: "k"
+        desc: kill wallpaper background
+        cmd: pkill -f swaybg
+      - key: "o"
+        desc: open bing wallpaper folder
+        cmd: setsid thunar $HOME/sync/wallpapers/bing & disown
+      - key: "r"
         desc: set random wallpaper
         cmd: $HOME/syscfg/scripts/bb/set_random_wallpaper.clj
 
