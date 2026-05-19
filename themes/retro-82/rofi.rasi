@@ -15,7 +15,7 @@
     foreground:       @ret4;
     background-color: transparent;
 
-    highlight:   underline bold #028391;
+    highlight:   underline bold #faa968;
     transparent: rgba(0, 23, 46, 0);
 }
 
@@ -88,6 +88,10 @@ element {
 element selected.normal {
     background-color: @ret6;
     text-color: #00172e;
+}
+
+element-text selected.normal {
+    highlight: underline bold #f6dcac;
 }
 
 element-text, element-icon {
