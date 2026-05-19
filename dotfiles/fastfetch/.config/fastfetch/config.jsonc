@@ -79,7 +79,7 @@
       "type": "command",
       "key": "  ├",
       "keyColor": "green",
-      "text": "sh ~/syscfg/scripts/nixos-last-updated.sh",
+      "text": "~/syscfg/scripts/nixos-last-updated.sh",
     },
     {
       "type": "kernel",
@@ -94,11 +94,6 @@
     {
       "type": "shell",
       "key": "  ├",
-      "keyColor": "green",
-    },
-    {
-      "type": "de",
-      "key": "  ├ DE",
       "keyColor": "green",
     },
     {
@@ -125,7 +120,7 @@
       "type": "command",
       "key": "   OS Age ",
       "keyColor": "green",
-      "text": "birth_install=$(stat -c %W /); current=$(date +%s); time_progression=$((current - birth_install)); days_difference=$((time_progression / 86400)); echo $days_difference days",
+      "text": "b=$(stat -c %W / 2>/dev/null); [ \"${b:-0}\" -gt 0 ] && echo $(( ($(date +%s) - b) / 86400 )) days || echo n/a",
     },
     {
       "type": "uptime",
