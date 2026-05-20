@@ -1,0 +1,29 @@
+# -*- conf -*-
+#
+# Laserwave color theme for foot
+# https://github.com/doomemacs/themes (doom-laserwave-theme.el)
+
+[colors]
+background=27212E
+foreground=FFFFFF
+cursor=1B1720 EB64B9
+selection-background=3E3549
+selection-foreground=ECEFF4
+
+regular0=222228
+regular1=964C7B
+regular2=74DFC4
+regular3=FFE261
+regular4=336A79
+regular5=B381C5
+regular6=6D7E8A
+regular7=ECEFF4
+
+bright0=4E415C
+bright1=FFB85B
+bright2=4D8079
+bright3=FFE261
+bright4=40B4C4
+bright5=EB64B9
+bright6=B4DCE7
+bright7=FFFFFF
