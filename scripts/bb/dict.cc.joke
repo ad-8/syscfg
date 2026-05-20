@@ -5,6 +5,7 @@
 (require '[joker.os :as os])
 (require '[joker.strconv :as strconv])
 (require '[joker.html :as html])
+(require '[joker.url :as url])
 
 (defn cell-texts [cell]
   (let [cleaned (-> cell
@@ -43,7 +44,7 @@
       (println (row-s (map #(get row %) ks))))))
 
 (defn fetch-rows [word]
-  (let [resp   (http/send {:url     (str "https://www.dict.cc/?s=" word)
+  (let [resp   (http/send {:url     (str "https://www.dict.cc/?s=" (url/query-escape word))
                            :method  :get
                            :headers {"User-Agent" "Mozilla/5.0 (Windows NT 6.1;) Gecko/20100101 Firefox/141.0.3"}})
         blocks (td7nl-blocks (:body resp))]

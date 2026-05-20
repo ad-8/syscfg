@@ -76,8 +76,7 @@
 
 (defn translate [word]
   (let [h {"User-Agent" "Mozilla/5.0 (Windows NT 6.1;) Gecko/20100101 Firefox/141.0.3"} ; LUL
-        url (format "https://www.dict.cc/?s=%s" word)
-        resp (http/get url {:headers h})
+        resp (http/get "https://www.dict.cc/" {:headers h :query-params {"s" word}})
         sel (->> resp :body (utils/html->hickory)
                  (s/select (s/and (s/tag "td") (s/class "td7nl")))
                  (map :content))]
