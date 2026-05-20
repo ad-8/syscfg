@@ -24,5 +24,9 @@
         cups-browsed
       ];
     };
+
+    environment.systemPackages = [
+      pkgs.system-config-printer
+    ];
   };
 }
