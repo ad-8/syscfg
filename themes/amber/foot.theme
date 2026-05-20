@@ -1,0 +1,28 @@
+# Amber color theme for foot
+# https://github.com/foxbunny/vim-amber
+# Monochrome amber CRT; collapsed mono mapping for ANSI slots.
+# regular0 lifted from bg #140b05 to bg-overlay #1c1008 so terminal black
+# stays visible; bright0 lifted to fg-dim #c56306 (one tier above).
+
+[colors]
+background=140b05
+foreground=fc9505
+cursor=140b05 fc9505
+
+regular0=1c1008
+regular1=ff0000
+regular2=c56306
+regular3=fc9505
+regular4=c56306
+regular5=c56306
+regular6=c56306
+regular7=c56306
+
+bright0=c56306
+bright1=ff0000
+bright2=fc9505
+bright3=fc9505
+bright4=fc9505
+bright5=fc9505
+bright6=fc9505
+bright7=fc9505
