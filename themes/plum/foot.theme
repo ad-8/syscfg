@@ -1,0 +1,30 @@
+# -*- conf -*-
+#
+# Plum color theme for foot
+# Protesilaos doric-plum — muted pink+purple dark.
+# Palette from upstream doric-plum-theme.el (canonical only).
+
+[colors]
+background=221832
+foreground=e2d7e7
+cursor=c070d0 e2d7e7
+selection-background=501e3e
+selection-foreground=e2d7e7
+
+regular0=6a647e
+regular1=eca28f
+regular2=b9d0aa
+regular3=c0b080
+regular4=9fbfe7
+regular5=c586ba
+regular6=a0c0d0
+regular7=c6c1d3
+
+bright0=a694b1
+bright1=eca28f
+bright2=b9d0aa
+bright3=c0b080
+bright4=9fbfe7
+bright5=cea6d0
+bright6=a0c0d0
+bright7=e2d7e7

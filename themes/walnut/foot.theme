@@ -1,0 +1,30 @@
+# -*- conf -*-
+#
+# Walnut color theme for foot
+# Protesilaos doric-walnut — wooden dark with green fg and tan accent.
+# Palette from upstream doric-walnut-theme.el (canonical only).
+
+[colors]
+background=153227
+foreground=b9d3b0
+cursor=d3b18e b9d3b0
+selection-background=42342f
+selection-foreground=b9d3b0
+
+regular0=596c5e
+regular1=e8a27f
+regular2=82cc7f
+regular3=c4b980
+regular4=8fbae5
+regular5=e9acbf
+regular6=a0c0d0
+regular7=afc2be
+
+bright0=9ba3a2
+bright1=e8a27f
+bright2=63c789
+bright3=c4b980
+bright4=8fbae5
+bright5=e9acbf
+bright6=a0c0d0
+bright7=b9d3b0

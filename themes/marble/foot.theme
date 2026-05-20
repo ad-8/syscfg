@@ -1,0 +1,31 @@
+# -*- conf -*-
+#
+# Marble color theme for foot
+# Protesilaos doric-marble — neutral light-grey + rocky brown accent.
+# Palette from upstream doric-marble-theme.el (canonical fg-* / bg-* /
+# fg-shadow-* values only — no invented intermediates).
+
+[colors]
+background=ededed
+foreground=202020
+cursor=403030 ededed
+selection-background=cdcdcd
+selection-foreground=202020
+
+regular0=595959
+regular1=a01010
+regular2=106710
+regular3=60400f
+regular4=103077
+regular5=700d50
+regular6=005355
+regular7=cdcdcd
+
+bright0=4a4a4a
+bright1=a01010
+bright2=106710
+bright3=60400f
+bright4=103077
+bright5=700d50
+bright6=005355
+bright7=ededed
