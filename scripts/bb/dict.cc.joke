@@ -42,7 +42,7 @@
     (doseq [row rows]
       (println (row-s (map #(get row %) ks))))))
 
-(defn translate [word]
+(defn fetch-rows [word]
   (let [resp   (http/send {:url     (str "https://www.dict.cc/?s=" word)
                            :method  :get
                            :headers {"User-Agent" "Mozilla/5.0 (Windows NT 6.1;) Gecko/20100101 Firefox/141.0.3"}})
@@ -50,8 +50,21 @@
     (->> blocks
          (partition 2)
          (map pair->row)
-         (sort-by :upvotes >)
-         (take 5)
-         (print-table [:x :y :upvotes]))))
+         (sort-by :upvotes >))))
 
-(translate (str/join "+" (drop 2 (os/args))))
+(defn translate-table [word]
+  (->> (fetch-rows word) (take 5) (print-table [:x :y :upvotes])))
+
+(defn translate-edn [word n]
+  (->> (fetch-rows word)
+       (take n)
+       (map (fn [{:keys [x y upvotes]}] {:en x :de y :upvotes upvotes}))
+       pr-str
+       println))
+
+(let [args  (drop 2 (os/args))
+      match (re-matches #"-(\d+)" (first args))
+      n     (when match (strconv/atoi (second match)))]
+  (if n
+    (translate-edn (str/join "+" (rest args)) n)
+    (translate-table (str/join "+" args))))
