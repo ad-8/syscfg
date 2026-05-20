@@ -1,0 +1,31 @@
+# -*- conf -*-
+#
+# Flatwhite color theme for foot
+# https://github.com/biletskyy/flatwhite-syntax
+# Warm-paper light; regular slots use muted *-text variants, bright slots
+# use the vivid fw-* variants. Palette from upstream doom-flatwhite-theme.el.
+
+[colors]
+background=f7f3ee
+foreground=605a52
+cursor=605a52 f7f3ee
+selection-background=dcd3c6
+selection-foreground=605a52
+
+regular0=b9a992
+regular1=5b4343
+regular2=525643
+regular3=5b5143
+regular4=4c5361
+regular5=614c61
+regular6=465953
+regular7=93836c
+
+bright0=93836c
+bright1=f00000
+bright2=84bd00
+bright3=f08c00
+bright4=75a3ff
+bright5=ce5cff
+bright6=00bda4
+bright7=605a52
