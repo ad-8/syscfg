@@ -154,10 +154,18 @@ determine the exact padding."
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive-l)))
 
    ;; Doom modeline
-   (doom-modeline-bar :background (if -modeline-bright modeline-bg fg))
-   (doom-modeline-buffer-file :inherit 'mode-line-buffer-id :weight 'bold)
-   (doom-modeline-buffer-path :inherit 'mode-line-emphasis :weight 'bold)
+   ;; Inverted modeline (amber bg): faces that inherit doom palette colors which
+   ;; resolve to amber (success, strings) or near-amber (warning=fg-dim,
+   ;; comments=fg-dim) become invisible / near-invisible on the amber modeline bg.
+   ;; Force them to bg (dark) to match the inverted-modeline design intent.
+   (doom-modeline-bar                 :background (if -modeline-bright modeline-bg fg))
+   (doom-modeline-buffer-file         :inherit 'mode-line-buffer-id :weight 'bold)
+   (doom-modeline-buffer-path         :inherit 'mode-line-emphasis :weight 'bold)
    (doom-modeline-buffer-project-root :foreground bg :weight 'bold)
+   (doom-modeline-project-dir         :foreground bg :weight 'bold) ;; strings=amber → invisible
+   (doom-modeline-project-parent-dir  :foreground bg :weight 'bold) ;; comments=fg-dim → near-invisible
+   (doom-modeline-info                :foreground bg)               ;; success=amber → invisible (git branch)
+   (doom-modeline-warning             :foreground bg)               ;; warning=fg-dim → near-invisible (buffer state icon)
 
    ;; column indicator
    (fill-column-indicator :foreground bg-alt :background bg-alt)
