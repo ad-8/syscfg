@@ -122,6 +122,9 @@ menu:
         desc: pavucontrol
         cmd: pavucontrol
       - key: "q"
+        desc: qutebrowser
+        cmd: qutebrowser
+      - key: "Q"
         desc: qBittorrent
         cmd: qbittorrent
       - key: "s"

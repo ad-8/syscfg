@@ -492,7 +492,7 @@ hl.window_rule({
   workspace   = "special:todo silent",
   center      = true,
   float       = true,
-  size        = "1200 800",
+  size        = "1440 900",
   border_size = 10,
   opacity     = 0.95,
 })
