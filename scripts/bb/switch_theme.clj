@@ -131,18 +131,21 @@
       str/trim)))
 
 (defn pick-theme-grouped
-  "Opens a fuzzel dmenu picker with themes grouped by category. Category headers are injected as non-theme rows; if one is selected, returns nil (the entry point treats this as a no-op)."
+  "Opens a fuzzel dmenu picker with themes grouped by category. Category headers are injected as non-theme rows; reopens the picker if a header is selected; returns nil if cancelled."
   []
   (let [groups    (for [cat [:dark :light :mono :muted :neon]]
                     [cat (sort (theme-categories cat))])
         lines     (mapcat (fn [[cat themes]]
                             (cons (str "── " (name cat) " ──") themes))
                           groups)
-        theme-set (set (mapcat second groups))]
-    (-> (process ["fuzzel" "--dmenu" "-l" (count lines) "-p" "theme: "]
-                 {:in (str/join "\n" lines) :out :string})
-        deref :out str/trim
-        theme-set)))
+        theme-set (set (mapcat second groups))
+        selection (-> (process ["fuzzel" "--dmenu" "-l" (count lines) "-p" "theme: "]
+                               {:in (str/join "\n" lines) :out :string})
+                      deref :out str/trim)]
+    (cond
+      (theme-set selection)              selection
+      (str/starts-with? selection "── ") (recur)
+      :else                              nil)))
 
 (let [arg   (first *command-line-args*)
       theme (case arg
