@@ -1,2 +1,2 @@
 (mapc #'disable-theme custom-enabled-themes)
-(load-theme 'doom-homage-white t)
+(load-theme 'doom-plain t)
