@@ -139,7 +139,8 @@
                             (cons (str "── " (name cat) " ──") themes))
                           groups)
         theme-set (set (mapcat second groups))
-        selection (-> (process ["fuzzel" "--dmenu" "-l" (count lines) "-p" "theme: "]
+        selection (-> (process ["fuzzel" "--dmenu" "-l" (count lines)
+                                "-p" (str "select theme (" (count theme-set) "): ")]
                                {:in (str/join "\n" lines) :out :string})
                       deref :out str/trim)]
     (cond
