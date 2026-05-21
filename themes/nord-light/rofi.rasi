@@ -1,24 +1,23 @@
 /**
- * Oxocarbon-light rofi theme
- * https://github.com/nyoom-engineering/oxocarbon.nvim (light branch)
+ * Nord Light rofi theme
+ * Derived from doom-nord-light (bundled in doom-themes)
  */
 
 * {
-    hbg:     #ffffff;
-    hbg1:    #f2f4f8;
-    hbg2:    #dde1e6;
-    hfg:     #37474F;
-    hfgalt:  #161616;
-    haccent: #0f62fe;
-    hcyan:   #08bdba;
-    hpink:   #ee5396;
-    hgrey:   #90A4AE;
+    nlbg:    #E5E9F0;
+    nlbg1:   #D8DEE9;
+    nlbg4:   #A1ACC0;
+    nlfg:    #3B4252;
+    nlfg2:   #2E3440;
+    nlblue:  #3B6EA8;
+    nlteal:  #29838D;
+    nlorange: #AC4426;
 
-    foreground:       @hfg;
+    foreground:       @nlfg;
     background-color: transparent;
 
-    highlight:   underline bold #ee5396;
-    transparent: rgba(255, 255, 255, 0);
+    highlight:   underline bold #2E3440;
+    transparent: rgba(229, 233, 240, 0);
 }
 
 window {
@@ -43,21 +42,21 @@ mainbox {
 }
 
 message {
-    color: @hbg;
+    color: @nlbg;
     padding: 5;
     border-color: @foreground;
     border:  0px 2px 2px 2px;
-    background-color: @hcyan;
+    background-color: @nlteal;
 }
 
 inputbar {
-    color: @hfgalt;
+    color: @nlfg2;
     padding: 11px;
-    background-color: #f2f4f8;
+    background-color: #D8DEE9;
 
     border: 1px;
     border-radius:  6px 6px 0px 0px;
-    border-color: @haccent;
+    border-color: @nlblue;
 }
 
 entry, prompt, case-indicator {
@@ -72,9 +71,9 @@ prompt {
 listview {
     padding: 8px;
     border-radius: 0px 0px 6px 6px;
-    border-color: @haccent;
+    border-color: @nlblue;
     border: 0px 1px 1px 1px;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(229, 233, 240, 0.9);
     dynamic: false;
 }
 
@@ -84,12 +83,12 @@ element {
     border-radius: 4px;
     background-color: transparent;
     color: @foreground;
-    text-color: rgb(55, 71, 79);
+    text-color: rgb(59, 66, 82);
 }
 
 element selected.normal {
-    background-color: @haccent;
-    text-color: #ffffff;
+    background-color: @nlteal;
+    text-color: #E5E9F0;
 }
 
 element-text, element-icon {

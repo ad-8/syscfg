@@ -7,34 +7,34 @@
 }
 
 window#waybar {
-    background: rgba(255, 255, 255, 1);
-    border-bottom: 0px solid rgba(144, 164, 174, 0.5);
-    color: #37474F;
+    background: rgba(229, 233, 240, 1);
+    border-bottom: 0px solid rgba(72, 81, 99, 0.5);
+    color: #3B6EA8;
 }
 
 tooltip {
-  background: rgba(242, 244, 248, 0.95);
-  border: 1px solid rgba(144, 164, 174, 0.5);
+  background: rgba(229, 233, 240, 0.5);
+  border: 1px solid rgba(72, 81, 99, 0.5);
 }
 tooltip label {
-  color: #37474F;
+  color: #2E3440;
 }
 
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: #37474F;
+    color: #3B4252;
     border-bottom: 3px solid transparent;
 }
 
 #workspaces button.focused {
-    background: #dde1e6;
-    border-bottom: 3px solid #161616;
+    background: #D8DEE9;
+    border-bottom: 3px solid #29838D;
 }
 
 #workspaces button.active {
-    background-color: #0f62fe;
-    color: #ffffff;
+    background-color: #3B6EA8;
+    color: #E5E9F0;
     border-radius: 3px;
 }
 
@@ -43,34 +43,33 @@ tooltip label {
 }
 
 #mode {
-    background: #FF6F00;
-    color: #ffffff;
-    border-bottom: 3px solid #FF6F00;
+    background: #99324B;
+    border-bottom: 3px solid #99324B;
 }
 
 #clock {
-    color: #673AB7;
+    color: #9A7500;
 }
 
 #battery {
-    color: #0f62fe;
+    color: #99324B;
 }
 
 #battery.charging {
-    color: #ffffff;
-    background-color: #42be65;
+    color: #99324B;
+    background-color: #4F894C;
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #FF6F00;
+        background-color: #2E3440;
+        color: #E5E9F0;
     }
 }
 
 #battery.warning:not(.charging) {
-    background: #FF6F00;
-    color: #ffffff;
+    background: #99324B;
+    color: #99324B;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: steps(12);
@@ -79,84 +78,98 @@ tooltip label {
 }
 
 #cpu {
-    color: #0f62fe;
+    color: #3B6EA8;
 }
 
 #custom-vpn {
-    color: #0f62fe;
+    color: #4F894C;
 }
 
 #custom-vpn.down {
-    color: #90A4AE;
+    color: #99324B;
 }
 
 #custom-cpu {
-    color: #0f62fe;
+    color: #3B6EA8;
 }
 #custom-cpu.warn {
-    color: #673AB7;
+    color: #9A7500;
 }
 #custom-cpu.crit {
-    color: #FF6F00;
+    color: #99324B;
 }
 
 #custom-disk {
-    color: #0f62fe;
+    color: #3B6EA8;
 }
 #custom-disk.low {
-    color: #FF6F00;
+    color: #99324B;
 }
 #custom-memory {
-    color: #0f62fe;
+    color: #3B6EA8;
 }
 #custom-memory.low {
-    color: #FF6F00;
+    color: #99324B;
 }
 #custom-date {
-    color: #0f62fe;
+    color: #3B6EA8;
 }
 #custom-weather {
-    color: #0f62fe;
+    color: #3B6EA8;
 }
 #custom-music-info {
-    color: #ee5396;
+    color: #29838D;
 }
 
 #window {
     margin-left: 8px;
 }
 
+#battery {
+    color: #3B6EA8;
+}
 #custom-licht {
-    color: #0f62fe;
+    color: #3B6EA8;
 }
 #custom-notification-status {
-    color: #0f62fe;
+    color: #3B6EA8;
 }
 #pulseaudio {
-    color: #0f62fe;
+    color: #3B6EA8;
 }
 
 #workspaces button.empty {
-    color: #90A4AE;
+    color: #A1ACC0;
 }
 
+#custom-snowflake {
+    color: #29838D;
+    font-size: 15px;
+    font-weight: bold;
+}
 menu {
     border-radius: 15px;
-    background: #f2f4f8;
-    color: #37474F;
+    background: #E5E9F0;
+    color: #2E3440;
 }
 menuitem {
     border-radius: 15px;
 }
 
 #custom-sep2b {
-    color: #08bdba;
+    color: #3B6EA8;
 }
 
 #submap {
-    background-color: #ee5396;
-    color: #ffffff;
+    background-color: #99324B;
+    color: #E5E9F0;
     padding: 3px 10px;
     font-weight: bold;
     border-radius: 8px;
+}
+
+#tray {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding: 0 4px;
 }

@@ -1,0 +1,25 @@
+# Nord Light color theme for foot
+# Derived from doom-nord-light (bundled in doom-themes)
+
+[colors]
+background=E5E9F0
+foreground=3B4252
+cursor=E5E9F0 3B4252
+
+regular0=3B4252
+regular1=99324B
+regular2=4F894C
+regular3=9A7500
+regular4=3B6EA8
+regular5=97365B
+regular6=29838D
+regular7=485163
+
+bright0=2E3440
+bright1=AC4426
+bright2=4F894C
+bright3=9A7500
+bright4=5272AF
+bright5=842879
+bright6=398EAC
+bright7=E5E9F0
