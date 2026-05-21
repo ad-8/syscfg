@@ -39,6 +39,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#eat-terminal][eat terminal]]
 - [[#everywhere][everywhere]]
 - [[#eww-popupwindow-height][eww popup/window height]]
+- [[#auto-resize-font-on-ax-bee][auto-resize font on =ax-bee=]]
 - [[#clean-up----misc-stuff][clean up -- Misc Stuff]]
 
 * Resources
@@ -538,6 +539,51 @@ replicating its functionality on wayland. it needs =wtype= to be installed.
 the default height is same/similar as M-x, so way too small for browsing
 #+begin_src emacs-lisp
 (set-popup-rule! "^\\*eww" :size 0.8 :quit t)
+#+end_src
+
+* auto-resize font on =ax-bee=
+#+begin_src elisp
+(defvar my/1080p-font-size 12
+  "Font size for 1080p displays.")
+
+(defvar my/4k-font-size 20
+  "Font size for 4K / high-resolution displays.")
+
+(defvar my/monitor-font--timer nil)
+(defvar my/monitor-font--last-size nil)
+
+(defun my/set-font-for-monitor (&optional frame)
+  "Set doom font size based on the current monitor (poll-friendly)."
+  (when (display-graphic-p)
+    (let* ((frame (or frame (selected-frame)))
+           (geometry (frame-monitor-attribute 'geometry frame))
+           (scale (or (frame-monitor-attribute 'scale-factor frame) 1))
+           (width (and geometry (nth 2 geometry)))
+           (size (when width
+                   (let ((effective-width (* width scale)))
+                     (if (> effective-width 3000)
+                         my/4k-font-size
+                       my/1080p-font-size)))))
+
+      (when (and size (not (equal size my/monitor-font--last-size)))
+        (setq my/monitor-font--last-size size)
+        (setq doom-font (font-spec :family "Hack Nerd Font" :size size))
+        (when (fboundp 'doom/reload-font)
+          (doom/reload-font))
+        ;; Show in the echo area (bottom/statusline area)
+        (message "Font changed: %s" size)))))
+
+(let ((hn (string-trim (system-name))))
+  (when (and hn (string-match-p "\\`ax-bee\\'" hn))
+    ;; Apply once right now
+    (when (display-graphic-p)
+      (my/set-font-for-monitor (selected-frame)))
+
+    ;; Poll to detect monitor changes even when focus doesn't change (Hyprland)
+    (when my/monitor-font--timer
+      (cancel-timer my/monitor-font--timer))
+    (setq my/monitor-font--timer
+          (run-with-timer 0 1.0 (lambda () (my/set-font-for-monitor (selected-frame)))))))
 #+end_src
 
 * TODO clean up -- Misc Stuff

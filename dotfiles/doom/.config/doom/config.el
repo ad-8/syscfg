@@ -16,7 +16,20 @@
 
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 16 :weight 'semi-light))
 
-(setq doom-theme 'gotham)
+(defvar ax/doom-active-theme-file (expand-file-name "~/.config/doom/active-theme.el"))
+
+;; Load active theme from symlink if present, else fall back to gotham
+(if (file-exists-p ax/doom-active-theme-file)
+    (load-file ax/doom-active-theme-file)
+  (setq doom-theme 'gotham))
+
+;; Watch doom config dir so symlink swaps are picked up at runtime
+(require 'filenotify)
+(file-notify-add-watch (file-truename (expand-file-name "~/.config/doom/")) '(change)
+  (lambda (event)
+    (when (and (memq (nth 1 event) '(created changed))
+               (string-suffix-p "active-theme.el" (nth 2 event)))
+      (load-file ax/doom-active-theme-file))))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -289,6 +302,48 @@ Runs indefinitely until the user aborts with `C-g` or similar."
 		     (delete-frame)))))
 
 (set-popup-rule! "^\\*eww" :size 0.8 :quit t)
+
+(defvar my/1080p-font-size 12
+  "Font size for 1080p displays.")
+
+(defvar my/4k-font-size 20
+  "Font size for 4K / high-resolution displays.")
+
+(defvar my/monitor-font--timer nil)
+(defvar my/monitor-font--last-size nil)
+
+(defun my/set-font-for-monitor (&optional frame)
+  "Set doom font size based on the current monitor (poll-friendly)."
+  (when (display-graphic-p)
+    (let* ((frame (or frame (selected-frame)))
+           (geometry (frame-monitor-attribute 'geometry frame))
+           (scale (or (frame-monitor-attribute 'scale-factor frame) 1))
+           (width (and geometry (nth 2 geometry)))
+           (size (when width
+                   (let ((effective-width (* width scale)))
+                     (if (> effective-width 3000)
+                         my/4k-font-size
+                       my/1080p-font-size)))))
+
+      (when (and size (not (equal size my/monitor-font--last-size)))
+        (setq my/monitor-font--last-size size)
+        (setq doom-font (font-spec :family "Hack Nerd Font" :size size))
+        (when (fboundp 'doom/reload-font)
+          (doom/reload-font))
+        ;; Show in the echo area (bottom/statusline area)
+        (message "Font changed: %s" size)))))
+
+(let ((hn (string-trim (system-name))))
+  (when (and hn (string-match-p "\\`ax-bee\\'" hn))
+    ;; Apply once right now
+    (when (display-graphic-p)
+      (my/set-font-for-monitor (selected-frame)))
+
+    ;; Poll to detect monitor changes even when focus doesn't change (Hyprland)
+    (when my/monitor-font--timer
+      (cancel-timer my/monitor-font--timer))
+    (setq my/monitor-font--timer
+          (run-with-timer 0 1.0 (lambda () (my/set-font-for-monitor (selected-frame)))))))
 
 ;; AX
 ; doom doctor suggestions
