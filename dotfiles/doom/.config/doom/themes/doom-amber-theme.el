@@ -167,6 +167,19 @@ determine the exact padding."
    (doom-modeline-info                :foreground bg)               ;; success=amber → invisible (git branch)
    (doom-modeline-warning             :foreground bg)               ;; warning=fg-dim → near-invisible (buffer state icon)
 
+   ;; Powerline (elfeed-goodies header + any package using powerline segments)
+   ;; doom-themes-base sets only :background on active0/1 and inactive0/1/2,
+   ;; relying on the inherited mode-line foreground. With our inverted
+   ;; modeline that fg resolves to bg (dark) → dark-on-dark invisible against
+   ;; the lightened-bg backgrounds. Override :foreground explicitly — same
+   ;; pattern upstream already applies to active2 (which is why Tags + the
+   ;; unread count are the only readable segments out-of-the-box).
+   (powerline-active0   :inherit 'mode-line :foreground base8 :background bg)
+   (powerline-active1   :inherit 'mode-line :foreground base8 :background (doom-lighten bg 0.025))
+   (powerline-inactive0 :inherit 'mode-line-inactive :foreground fg-dim :background base2)
+   (powerline-inactive1 :inherit 'mode-line-inactive :foreground fg-dim :background (doom-lighten base2 0.02))
+   (powerline-inactive2 :inherit 'mode-line-inactive :foreground fg-dim :background (doom-lighten base2 0.04))
+
    ;; column indicator
    (fill-column-indicator :foreground bg-alt :background bg-alt)
 
