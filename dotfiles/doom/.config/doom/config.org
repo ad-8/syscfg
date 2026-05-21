@@ -186,6 +186,28 @@ Toggle with ~M-x variable-pitch-font~.
                (string-suffix-p "active-theme.el" (nth 2 event)))
       (load-file ax/doom-active-theme-file))))
 #+end_src
+*** Matrix: elfeed-goodies header colors
+Upstream =the-matrix-theme.el= leaves =mode-line= background unspecified
+and doesn't define any =powerline-*= faces. =elfeed-goodies= draws its
+search + entry header bars with powerline, so those faces fall back to
+powerline's default greys — three ugly grey blocks in the header bar.
+Override them with matrix-palette darks; the 3-step ramp (=color-bg= →
+=color-bg-alt= → =color-darkest=) keeps powerline's separator arrows
+visible. Done as overrides here rather than in the theme file because we
+keep =the-matrix-theme.el= byte-for-byte upstream.
+
+#+begin_src emacs-lisp
+(custom-theme-set-faces!
+ 'the-matrix
+ '(mode-line          :background "#000000" :foreground "#00733d" :box (:color "#00b25f"))
+ '(mode-line-inactive :background "#000000" :foreground "#00733d" :box (:color "#004022"))
+ '(powerline-active0   :inherit mode-line :background "#000000")
+ '(powerline-active1   :inherit mode-line :background "#01120a")
+ '(powerline-active2   :inherit mode-line :background "#011f11")
+ '(powerline-inactive0 :inherit mode-line-inactive :background "#000000")
+ '(powerline-inactive1 :inherit mode-line-inactive :background "#000000")
+ '(powerline-inactive2 :inherit mode-line-inactive :background "#000000"))
+#+end_src
 ** Misc
 #+begin_src emacs-lisp
 ;; This determines the style of line numbers in effect. If set to `nil', line

@@ -31,6 +31,17 @@
                (string-suffix-p "active-theme.el" (nth 2 event)))
       (load-file ax/doom-active-theme-file))))
 
+(custom-theme-set-faces!
+ 'the-matrix
+ '(mode-line          :background "#000000" :foreground "#00733d" :box (:color "#00b25f"))
+ '(mode-line-inactive :background "#000000" :foreground "#00733d" :box (:color "#004022"))
+ '(powerline-active0   :inherit mode-line :background "#000000")
+ '(powerline-active1   :inherit mode-line :background "#01120a")
+ '(powerline-active2   :inherit mode-line :background "#011f11")
+ '(powerline-inactive0 :inherit mode-line-inactive :background "#000000")
+ '(powerline-inactive1 :inherit mode-line-inactive :background "#000000")
+ '(powerline-inactive2 :inherit mode-line-inactive :background "#000000"))
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
