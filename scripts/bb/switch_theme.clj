@@ -9,6 +9,14 @@
 
 (def themes-dir (fs/path (fs/home) "syscfg/themes"))
 
+(def theme-categories
+  {:dark  #{"everforest-dark" "gotham" "gruvbox-dark" "nord" "osaka-jade"
+            "oxocarbon" "solarized-dark" "tokyo-night" "winter-is-coming-dark-blue"}
+   :light #{"everforest-light" "gruvbox-light" "oxocarbon-light" "solarized-light"}
+   :mono  #{"amber" "lumon" "matrix" "vantablack" "white"}
+   :muted #{"doric-marble" "doric-plum" "doric-walnut" "flatwhite" "wilmersdorf"}
+   :neon  #{"hackerman" "laserwave" "matte-black" "retro-82"}})
+
 (defn foot-osc
   "Builds OSC escape sequences from a foot theme file to set terminal foreground, background, cursor, and palette colors."
   [theme-file]
@@ -122,6 +130,24 @@
       :out
       str/trim)))
 
-(let [theme (or (first *command-line-args*) (pick-theme))]
+(defn pick-theme-grouped
+  "Opens a fuzzel dmenu picker with themes grouped by category. Category headers are injected as non-theme rows; if one is selected, returns nil (the entry point treats this as a no-op)."
+  []
+  (let [groups    (for [cat [:dark :light :mono :muted :neon]]
+                    [cat (sort (theme-categories cat))])
+        lines     (mapcat (fn [[cat themes]]
+                            (cons (str "── " (name cat) " ──") themes))
+                          groups)
+        theme-set (set (mapcat second groups))]
+    (-> (process ["fuzzel" "--dmenu" "-l" (count lines) "-p" "theme: "]
+                 {:in (str/join "\n" lines) :out :string})
+        deref :out str/trim
+        theme-set)))
+
+(let [arg   (first *command-line-args*)
+      theme (case arg
+              nil        (pick-theme)
+              "--groups" (pick-theme-grouped)
+              arg)]
   (when-not (str/blank? theme)
     (switch-theme theme)))

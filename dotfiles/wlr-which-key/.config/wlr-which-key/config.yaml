@@ -46,6 +46,9 @@ menu:
       - key: "t"
         desc: theme
         cmd: $HOME/syscfg/scripts/bb/switch_theme.clj
+      - key: "T"
+        desc: theme (grouped)
+        cmd: $HOME/syscfg/scripts/bb/switch_theme.clj --groups
       - key: "w"
         desc: toggle wifi
         cmd: rfkill toggle wifi
