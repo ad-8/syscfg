@@ -315,6 +315,7 @@ hl.bind(mod("SHIFT", "F"), hl.dsp.exec_cmd("rofi -show recursivebrowser"))
 hl.bind(mod("SHIFT", "W"), hl.dsp.exec_cmd([[n=$(hyprctl clients -j | jq length); rofi -show window -display-window "Windows ($n)"]]) )
 hl.bind(mod("B"),          hl.dsp.exec_cmd(scripts .. "/waybar.clj toggle"))
 hl.bind(mod("SHIFT", "B"), hl.dsp.exec_cmd(scripts .. "/waybar.clj toggle-min"))
+hl.bind(mod("question"),   hl.dsp.exec_cmd(scripts .. "/bb/hypr-keybinds.clj"))
 -- notifications
 hl.bind(mod("ALT", "H"), hl.dsp.exec_cmd("dunstctl history-pop"))
 hl.bind(mod("ALT", "K"), hl.dsp.exec_cmd("dunstctl close-all"))
