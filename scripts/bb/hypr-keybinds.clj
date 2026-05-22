@@ -14,19 +14,28 @@
        (map second)
        (str/join "+")))
 
-(defn format-combo [modmask key]
+(defn format-combo [modmask k]
   (let [mods (decode-mods modmask)]
-    (if (empty? mods) key (str mods "+" key))))
+    (if (empty? mods) k (str mods "+" k))))
 
-(let [binds (-> (shell {:out :string} "hyprctl binds -j")
-                :out
-                (json/parse-string true))
-      rows  (->> binds
-                 (filter :has_description)
-                 (map (fn [{:keys [modmask key submap description]}]
-                        (let [combo (format-combo modmask key)
-                              pfx   (if (seq submap) (format "[%-10s]" submap) "           ")]
-                          (format "%s  %-20s  %s" pfx combo description)))))
-      text  (str/join "\n" rows)]
-  (shell {:in text}
-         "rofi -dmenu -i -p keybinds -no-show-icons -theme-str 'window {width: 900px;} listview {lines: 22;}'"))
+(try
+  (let [binds    (-> (shell {:out :string} "hyprctl binds -j")
+                     :out
+                     (json/parse-string true))
+        filtered (->> binds
+                      (filter :has_description)
+                      (map (fn [b] (assoc b :combo (format-combo (:modmask b) (:key b)))))
+                      (sort-by (juxt :submap :combo)))
+        col-w    (reduce max 20 (map (comp count :combo) filtered))
+        fmt      (str "%s  %-" col-w "s  %s")
+        rows     (map (fn [{:keys [combo submap description]}]
+                        (let [pfx (if (seq submap) (format "[%-10.10s]" submap) "            ")]
+                          (format fmt pfx combo description)))
+                      filtered)
+        text     (str/join "\n" rows)]
+    (shell {:in text :continue true}
+           "rofi -dmenu -i -p keybinds -no-show-icons -theme-str 'window {width: 900px;} listview {lines: 22;}'"))
+  (catch Exception e
+    (binding [*out* *err*]
+      (println (str "hypr-keybinds: " (ex-message e))))
+    (System/exit 1)))
