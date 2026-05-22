@@ -439,7 +439,20 @@ Runs indefinitely until the user aborts with `C-g` or similar."
 ;; get rid of the delay after executing delete-pair
 (setq delete-pair-blink-delay 0.1)
 
-;; TODO: wip - ispell aspell hunspell
 (setq ispell-program-name "hunspell")
-(setq ispell-local-dictionary "en_US,de_DE")
-(setq ispell-local-dictionary-alist '(("en_US,de_DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en_US,de_DE") nil utf-8)))
+
+;; ax-x1c = OpenBSD (special case), everything else = NixOS
+(if (string-match-p "ax-x1c" (system-name))
+    ;; === OpenBSD settings ===
+    (progn
+      (setq ispell-dictionary "en-GB,de-DE")
+      (setq ispell-local-dictionary "en-GB,de-DE")
+      (setq ispell-hunspell-dictionary-alist
+            '(("en-GB,de-DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en-GB,de-DE") nil utf-8))))
+
+  ;; === NixOS settings (default) ===
+  (progn
+    (setq ispell-dictionary "en_US,de_DE")
+    (setq ispell-local-dictionary "en_US,de_DE")
+    (setq ispell-hunspell-dictionary-alist
+          '(("en_US,de_DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en_US,de_DE") nil utf-8)))))

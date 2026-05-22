@@ -41,6 +41,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#eww-popupwindow-height][eww popup/window height]]
 - [[#auto-resize-font-on-ax-bee][auto-resize font on =ax-bee=]]
 - [[#clean-up----misc-stuff][clean up -- Misc Stuff]]
+- [[#wip-ispell-aspell-hunspell][(wip) ispell aspell hunspell]]
 
 * Resources
 - https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org
@@ -694,11 +695,27 @@ the default height is same/similar as M-x, so way too small for browsing
 ;; get rid of the delay after executing delete-pair
 (setq delete-pair-blink-delay 0.1)
 
-;; TODO: wip - ispell aspell hunspell
-(setq ispell-program-name "hunspell")
-(setq ispell-local-dictionary "en_US,de_DE")
-(setq ispell-local-dictionary-alist '(("en_US,de_DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en_US,de_DE") nil utf-8)))
 
 
 #+end_src
 
+* (wip) ispell aspell hunspell
+#+begin_src elisp
+(setq ispell-program-name "hunspell")
+
+;; ax-x1c = OpenBSD (special case), everything else = NixOS
+(if (string-match-p "ax-x1c" (system-name))
+    ;; === OpenBSD settings ===
+    (progn
+      (setq ispell-dictionary "en-GB,de-DE")
+      (setq ispell-local-dictionary "en-GB,de-DE")
+      (setq ispell-hunspell-dictionary-alist
+            '(("en-GB,de-DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en-GB,de-DE") nil utf-8))))
+
+  ;; === NixOS settings (default) ===
+  (progn
+    (setq ispell-dictionary "en_US,de_DE")
+    (setq ispell-local-dictionary "en_US,de_DE")
+    (setq ispell-hunspell-dictionary-alist
+          '(("en_US,de_DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en_US,de_DE") nil utf-8)))))
+#+end_src
