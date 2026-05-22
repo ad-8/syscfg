@@ -42,33 +42,36 @@
       (loop [[line & rest] lines
              section "misc"
              submap  nil
+             comment nil
              acc     []]
         (if (nil? line)
           acc
-          (let [section' (or (some-> (re-find #"^-- ([a-zA-Z].+)" line)
-                                     second str/trim)
-                             section)
-                submap'  (cond
-                           (re-find #"hl\.define_submap\(" line)
-                           (some-> (re-find #"hl\.define_submap\(\"([^\"]+)\"" line) second)
-                           (= (str/trim line) "end)") nil
-                           :else submap)
-                mod-m    (re-find #"hl\.bind\(mod\(([^)]+)\)" line)
-                bare-m   (when (and submap (not mod-m))
-                           (re-find #"^[\s]*hl\.bind\(\"([^\"]+)\"" line))]
+          (let [section'    (or (some-> (re-find #"^-- ([a-zA-Z].+)" line)
+                                        second str/trim)
+                                section)
+                submap'     (cond
+                              (re-find #"hl\.define_submap\(" line)
+                              (some-> (re-find #"hl\.define_submap\(\"([^\"]+)\"" line) second)
+                              (= (str/trim line) "end)") nil
+                              :else submap)
+                ind-comment (when (= section' section)
+                              (some-> (re-find #"^\s*--\s+(.+)" line) second str/trim))
+                mod-m       (re-find #"hl\.bind\(mod\(([^)]+)\)" line)
+                bare-m      (when (and submap (not mod-m))
+                              (re-find #"^[\s]*hl\.bind\(\"([^\"]+)\"" line))]
             (cond
               mod-m
               (let [combo (mod-combo (second mod-m))
-                    act   (extract-action line #".*hl\.bind\(mod\([^)]*\),\s*")]
-                (recur rest section' submap'
+                    act   (or comment (extract-action line #".*hl\.bind\(mod\([^)]*\),\s*"))]
+                (recur rest section' submap' nil
                        (if combo (conj acc [submap section' combo act]) acc)))
 
               bare-m
-              (let [act (extract-action line #".*hl\.bind\(\"[^\"]*\",\s*")]
-                (recur rest section' submap'
+              (let [act (or comment (extract-action line #".*hl\.bind\(\"[^\"]*\",\s*"))]
+                (recur rest section' submap' nil
                        (conj acc [submap section' (second bare-m) act])))
 
-              :else (recur rest section' submap' acc)))))
+              :else (recur rest section' submap' ind-comment acc)))))
 
       text (->> rows
                 (map (fn [[sub sect combo act]]
