@@ -168,3 +168,8 @@ menuitem {
     font-weight: bold;
     border-radius: 8px;
 }
+
+#custom-timer {
+    color: #8bc9eb;
+    font-weight: bold;
+}

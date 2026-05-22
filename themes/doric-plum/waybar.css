@@ -165,3 +165,8 @@ menuitem {
     font-weight: bold;
     border-radius: 8px;
 }
+
+#custom-timer {
+    color: #c586ba;
+    font-weight: bold;
+}

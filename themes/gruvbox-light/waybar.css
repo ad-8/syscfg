@@ -173,3 +173,8 @@ menuitem {
     border-radius: 4px;
     padding: 0 4px;
 }
+
+#custom-timer {
+    color: #b57614;
+    font-weight: bold;
+}
