@@ -8,15 +8,18 @@
 
 (def mod-bits
   "X11/Wayland modifier flag values mapped to names. Hyprland encodes the
-  active modifier set as a single integer bitmask in hyprctl JSON output:
-  SHIFT=1, CTRL=4, ALT=8, SUPER=64. A bind like SUPER+SHIFT has modmask=65."
+  active modifier set as a single integer `modmask` in `hyprctl` JSON output:
+  `SHIFT`=1, `CTRL`=4, `ALT`=8, `SUPER`=64. A bind like SUPER+SHIFT has `modmask`=65."
   {1 "SHIFT" 4 "CTRL" 8 "ALT" 64 "SUPER"})
 
 (defn decode-mods
-  "Takes a modmask integer and returns the active modifier names joined with '+'.
-  For each [bit name] in mod-bits, tests (bit-and mask bit); keeps names where
-  the result is positive. Returns \"\" when no bits match (e.g. mask=0).
-  Example: (decode-mods 65) => \"SHIFT+SUPER\"  ; 65 = 1 (SHIFT) + 64 (SUPER)"
+  "Takes a `modmask` integer and returns the active modifier names joined with `+`.
+  For each `[bit name]` in `mod-bits`, tests `(bit-and mask bit)`; keeps names where
+  the result is positive. Returns `\"\"` when no bits match (e.g. `mask`=0).
+  ### Example:
+  ```clojure
+  (decode-mods 65) ;; \"SHIFT+SUPER\"  (65 = 1 (SHIFT) + 64 (SUPER))
+  (decode-mods 0)  ;; \"\"```"
   [mask]
   (->> mod-bits
        (filter (fn [[bit _]] (pos? (bit-and mask bit))))
@@ -24,10 +27,12 @@
        (str/join "+")))
 
 (defn format-combo
-  "Builds a human-readable key combo string from a modmask and key name.
-  Returns just k when the mask has no modifiers (guards against a leading '+').
-  Example: (format-combo 65 \"Return\") => \"SHIFT+SUPER+Return\"
-           (format-combo 0  \"F5\")     => \"F5\""
+  "Builds a human-readable key combo string from a `modmask` and key name.
+  Returns just `k` when the mask has no modifiers (guards against a leading `+`).
+  ### Example:
+  ```clojure
+  (format-combo 65 \"Return\") ;; \"SHIFT+SUPER+Return\"
+  (format-combo 0  \"F5\")     ;; \"F5\"```"
   [modmask k]
   (let [mods (decode-mods modmask)]
     (if (empty? mods) k (str mods "+" k))))
