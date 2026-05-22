@@ -411,18 +411,12 @@ end)
 -- submap screenshot
 hl.bind(mod("CTRL", "S"), hl.dsp.submap("screenshot"))
 hl.define_submap("screenshot", "reset", function()
-    -- screenshot selection, copy to clipboard
-    hl.bind("C",         function() hl.exec_cmd('grim -g "$(slurp)" - | wl-copy && notify-send -t 2500 "Screenshot copied to clipboard"') end)
-    -- screenshot all outputs, save directly to disk
-    hl.bind("P",         function() hl.exec_cmd('NOW="$(date +%Y%m%d-%H%M%S)"; DIR="$HOME/sync/screenshots/${NOW:0:4}"; mkdir -p "$DIR"; FILE="$DIR/${NOW}_screenshot.png"; grim "$FILE" && notify-send "Screenshot saved" "$FILE"') end)
-    -- swappy (annotation tool)
-    -- screenshot all
-    hl.bind("A",         function() hl.exec_cmd("grim - | swappy -f -") end)
-    -- screenshot selection
-    hl.bind("S",         function() hl.exec_cmd('grim -g "$(slurp)" - | swappy -f -') end)
-    -- screenshot window
-    hl.bind("W",         function() hl.exec_cmd("$HOME/x/hypr-screenshot-window.sh") end)
-    hl.bind("ESCAPE",    hl.dsp.submap("reset"))
+    hl.bind("C",      function() hl.exec_cmd('grim -g "$(slurp)" - | wl-copy && notify-send -t 2500 "Screenshot copied to clipboard"') end, { description = "screenshot selection, copy to clipboard" })
+    hl.bind("P",      function() hl.exec_cmd('NOW="$(date +%Y%m%d-%H%M%S)"; DIR="$HOME/sync/screenshots/${NOW:0:4}"; mkdir -p "$DIR"; FILE="$DIR/${NOW}_screenshot.png"; grim "$FILE" && notify-send "Screenshot saved" "$FILE"') end, { description = "screenshot all outputs, save to disk" })
+    hl.bind("A",      function() hl.exec_cmd("grim - | swappy -f -") end,                    { description = "screenshot all (swappy)" })
+    hl.bind("S",      function() hl.exec_cmd('grim -g "$(slurp)" - | swappy -f -') end,      { description = "screenshot selection (swappy)" })
+    hl.bind("W",      function() hl.exec_cmd("$HOME/x/hypr-screenshot-window.sh") end,       { description = "screenshot window" })
+    hl.bind("ESCAPE", hl.dsp.submap("reset"))
 end)
 ------------------------------------------------------------------------------------------
 -- SUBMAP END
