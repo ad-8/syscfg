@@ -176,7 +176,7 @@ switch (uname)
         abbr -a ifc ifconfig
         abbr -a nf 'clear && fastfetch --config neofetch && echo'
     case OpenBSD
-        abbr -a nf 'clear && fastfetch --config neofetch && echo'
+        abbr -a nf 'clear && fastfetch --config neofetch --logo openbsd_small && echo'
     case Linux
     case '*'
 end
