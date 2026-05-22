@@ -12,6 +12,7 @@
     "modules-center": [
         "custom/date",
         "clock",
+        "custom/timer",
         "custom/weather",
     ],
     "modules-right": [
@@ -70,6 +71,12 @@
         "format": "{:%H:%M}",
         "format-alt": "{:%H:%M:%S}",
         "interval": 1
+    },
+    "custom/timer": {
+        "interval": 1,
+        "format": "{}",
+        "return-type": "json",
+        "exec": "$HOME/x/timer-bar.bb"
     },
     "battery": {
         "states": {
