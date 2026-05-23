@@ -42,9 +42,22 @@ in
       2283 # immich
       3000 # forgejo
       5232 # radicale
+      8888 # searxng
       9090 # linkding
     ];
     allowedUDPPorts = [ ];
+  };
+
+  services.searx = {
+    enable = true;
+    redisCreateLocally = true;
+
+    settings.server = {
+      bind_address = "0.0.0.0";
+      port = 8888;
+      # TODO finally a reason to set up agenix?
+      secret_key = "not-commited";
+    };
   };
 
   services = {
