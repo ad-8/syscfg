@@ -69,12 +69,6 @@
     };
 
     # -------------------------------------
-    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/firefox.nix
-    # https://mozilla.github.io/policy-templates/
-    programs.firefox = {
-      enable = true;
-      policies.DisableTelemetry = true;
-    };
     programs.java.enable = true;
     # https://wiki.nixos.org/wiki/Thunar
     programs.thunar.enable = true;

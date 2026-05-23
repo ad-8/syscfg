@@ -11,6 +11,7 @@
   ];
 
   configExtra.enable = true;
+  configFirefox.enable = true;
   configClamav.enable = true;
   configGaming.enable = true;
   configPrinting.enable = true;
