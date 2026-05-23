@@ -501,3 +501,6 @@ Runs indefinitely until the user aborts with `C-g` or similar."
   :after janet-mode
   :config
   (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))
+
+(setq browse-url-browser-function #'browse-url-generic
+      browse-url-generic-program "dillo")

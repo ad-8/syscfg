@@ -45,6 +45,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#clean-up----misc-stuff][clean up -- Misc Stuff]]
 - [[#wip-ispell-aspell-hunspell][(wip) ispell aspell hunspell]]
 - [[#janet][janet]]
+- [[#use-dillo-to-open-urls][Use dillo to open urls]]
 
 * Resources
 - https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org
@@ -790,4 +791,10 @@ the default height is same/similar as M-x, so way too small for browsing
   :after janet-mode
   :config
   (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))
+#+end_src
+
+* Use dillo to open urls
+#+begin_src elisp
+(setq browse-url-browser-function #'browse-url-generic
+      browse-url-generic-program "dillo")
 #+end_src
