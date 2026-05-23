@@ -589,3 +589,6 @@ Also drops the cached nav so nav.html edits are picked up."
   (interactive)
   (setq ax/vps0-nav-cache nil)
   (org-publish "ax-website" t))
+
+(setq browse-url-browser-function #'browse-url-generic
+      browse-url-generic-program "dillo")

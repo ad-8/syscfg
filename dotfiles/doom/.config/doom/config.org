@@ -54,6 +54,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
   - [[#syncing-org-and-calendar-spc-j-c-s][syncing org and calendar =SPC j c s=]]
   - [[#auth-for-both-authinfo][auth for both =~/.authinfo=]]
 - [[#org-publish][org-publish]]
+- [[#use-dillo-to-open-urls][Use dillo to open urls]]
 
 * Resources
 - https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org
@@ -966,4 +967,10 @@ Also drops the cached nav so nav.html edits are picked up."
   (interactive)
   (setq ax/vps0-nav-cache nil)
   (org-publish "ax-website" t))
+#+end_src
+
+* Use dillo to open urls
+#+begin_src elisp
+(setq browse-url-browser-function #'browse-url-generic
+      browse-url-generic-program "dillo")
 #+end_src
