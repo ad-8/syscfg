@@ -1,7 +1,7 @@
 # --------------------------------------------------------------
 #                       MODE OPEN
-super + o ; {e, k, x}
-      {emacs, keepassxc, firefox}
+super + o ; {d, e, k, x}
+      {dillo, emacs, keepassxc, firefox}
 
 # --------------------------------------------------------------
 
