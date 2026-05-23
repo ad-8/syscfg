@@ -1,16 +1,24 @@
 # One Big Beautiful Repository
-Now also includes my NixOS config in `nixos`.
 
-## dotfiles
+## I. dotfiles
 From the root dotfiles folder:  
 `stow -vR --target=$HOME *` or `stow -vR --target=$HOME niri/`  
 To remove all:  
 `stow -D --target=$HOME *`
 
-## scripts
+### After stowing on a new machine
+Run the theme switcher once to create the per-app `active-theme.*` symlinks that the configs include/source:
+
+```sh
+bb ~/syscfg/scripts/bb/switch_theme.clj <theme-name>
+```
+
+Replace `<theme-name>` with whatever theme you want (e.g. `nord`, `gruvbox-dark`). This only needs to be done once.
+
+## II. scripts
 Collection of maintained and long-forgotten scripts.
 
-## nixos
+## III. nixos
 Second time's the charm?
 
 
@@ -39,24 +47,7 @@ Also add `git` and `vim` to `environment.systemPackages` for the next steps.
    boot.initrd.luks.devices... = "/dev/disk/by-uuid/..."
 ```
 
-6. `sudo nixos-rebuild boot --flake ~/syscfg/nixos-config#<host>`, finally reboot and enjoy
+6. `sudo nixos-rebuild boot --flake ~/syscfg/nixos-config#<host>` and reboot
 
-### Overriding a home-manager default from a host
+7. follow the ~5 post-setup steps in `~/org/nixos.org` (stow dotfiles, set up doom emacs and firefox, ...)
 
-Options enabled by default in `home-manager/default.nix` can be overridden per-host with `lib.mkForce`:
-
-```nix
-# hosts/ax-mac/home.nix
-configQt.enable = lib.mkForce false;
-```
-
-### Testing a host config in a VM
-
-Temporarily add `users.users.ax.initialPassword = "test";` to the host's `configuration.nix`, then:
-
-```
-nixos-rebuild build-vm --flake ~/syscfg/nixos-config#ax-bee
-./result/bin/run-ax-bee-vm
-```
-
-Remove `initialPassword` again before committing.
