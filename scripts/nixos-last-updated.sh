@@ -4,7 +4,7 @@ cd ~/syscfg/nixos-config || exit 1
 date=$(git log -1 --pretty=%ci -- flake.lock)
 [ -z "$date" ] && exit 1
 
-echo "$date" | awk '
+echo "$date" | gawk '
 {
   split($1, d, "-")
   dstr = d[3]"."d[2]". "substr($2,1,5)

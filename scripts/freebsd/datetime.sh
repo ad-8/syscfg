@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # split date output into weekday, date and time
-set -- $(date '+%a %d.%m. %H:%M')
+set -- $(LC_ALL=C date '+%a %d.%m. %H:%M')
 
 wd_en=$1
 d=$2
