@@ -65,6 +65,7 @@
           home-manager = null;
         };
         ax-mac = mkConfig { hostname = "ax-mac"; };
+        ax-t14 = mkConfig { hostname = "ax-t14"; };
         ax-vm = mkConfig { hostname = "ax-vm"; };
       };
     };
