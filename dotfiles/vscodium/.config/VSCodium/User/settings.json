@@ -1,12 +1,24 @@
 {
-    // just leave me alone
-    "telemetry.telemetryLevel": "off",
-    // editor
-    "editor.fontSize": 12.5,
-    "editor.fontFamily": "Hack Nerd Font",
-    "editor.lineNumbers": "relative",
-    "editor.minimap.enabled": false,
-    "files.autoSave": "afterDelay",
-    // theme
-    "workbench.colorTheme": "Gotham",
+  // just leave me alone
+  "telemetry.telemetryLevel": "off",
+  // editor
+  "editor.fontSize": 12.5,
+  "editor.fontFamily": "Hack Nerd Font",
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": false,
+  "files.autoSave": "afterDelay",
+  // theme
+  "workbench.colorTheme": "Gotham",
+  // calva
+  "calva.outputDestinations": {
+    "evalResults": [
+      "output-view"
+    ],
+    "evalOutput": [
+      "output-view"
+    ],
+    "otherOutput": [
+      "output-view"
+    ]
+  }
 }
