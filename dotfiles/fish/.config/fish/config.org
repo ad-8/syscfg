@@ -222,7 +222,6 @@ abbr -a flac2mp3 'fd -e flac --exec ffmpeg -loglevel error -i {} -codec:a libmp3
 abbr -a ytdlp-split-audio "yt-dlp --format ba[ext=m4a] --split-chapters URL"
 
 # abbr -a dcc 'steam-run $HOME/syscfg/scripts/bb/dict.cc.clj 2>/dev/null' # get rid of 'Warning: converting markup from :html to :hickory lost 1 form' 
-abbr -a dcc joker $HOME/syscfg/scripts/bb/dict.cc.joke
 abbr -a ff rfv
 abbr -a ffa rfvuuu
 abbr -a rcp 'rclone copy --progress'
@@ -257,6 +256,7 @@ alias x '/usr/bin/env bb ~/x/x.clj'
 alias s 'java -jar $HOME/my/code/clojure/strava/target/uberjar/strava-0.1.0-SNAPSHOT-standalone.jar'
 alias df 'df -h'
 alias free 'free -h'
+alias dcc 'joker $HOME/syscfg/scripts/bb/dict.cc.joke'
 #+end_src
 
 * TODO set in nix? -- export
