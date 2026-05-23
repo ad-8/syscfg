@@ -99,54 +99,56 @@ abbr -a pm 'pacman -S'
 abbr -a pmq 'pacman -Q'
 abbr -a zy zypper
 
-# Extract the distro ID from /etc/os-release, removing any quotes
-#set distro (grep -oP '^ID=\K.*' /etc/os-release | tr -d '"')
-set distro (awk -F= '/^ID=/ { gsub(/["\047]/, "", $2); print $2 }' /etc/os-release)
-
-switch $distro
-    case debian ubuntu linuxmint
-        abbr -a up 'sudo apt update && sudo apt upgrade'
-        alias bat='batcat'
-        alias fd='fdfind'
-        abbr -a nf "clear && fastfetch"
-    case arch
-        abbr -a up 'sudo pacman -Syu'
-        abbr -a nf "clear && fastfetch"
-    case opensuse-tumbleweed
-        abbr -a up 'sudo zypper ref && sudo zypper dup'
-        abbr -a nf "clear && fastfetch --logo opensuse"
-    case nixos
-         abbr -a up "sudo nixos-rebuild switch --flake ~/syscfg/nixos-config#$hostname"
-         abbr -a upb "sudo nixos-rebuild boot --flake ~/syscfg/nixos-config#$hostname"
-         abbr -a upd "nixos-rebuild dry-run --flake ~/syscfg/nixos-config#$hostname"
-         abbr -a up2 "NH_OS_FLAKE=~/syscfg/nixos-config nh os switch --ask --hostname $hostname"
-         abbr -a up2b "NH_OS_FLAKE=~/syscfg/nixos-config nh os boot --ask --hostname $hostname"
-         abbr -a nxup "NH_OS_FLAKE=~/syscfg/nixos-config nh os switch --ask --hostname $hostname"
-         abbr -a nf "clear && fastfetch"
-    case void
-        abbr -a up 'sudo xbps-install -Su'
-        abbr -a nf "clear && fastfetch"
-    case alpine
-         abbr -a up 'doas apk update && doas apk upgrade'
-         abbr -a nf "clear && fastfetch"
-         abbr -a br brightnessctl
-         alias sct xsct
-    case '*'
-        abbr -a up 'Unknown distribution. KEKW'
-        abbr -a nf "clear && fastfetch"
-end
-
-switch $distro
-    case arch
-         #abbr -a cu "checkupdates | sed 's/->//g' | column -t"
-         abbr -a cu $HOME/syscfg/scripts/bb/checkupdates.clj
-    case fedora
-         abbr -a cu "dnf check-update --refresh | wc -l"
-    case nixos
-         abbr -a cu "cd ~/syscfg/nixos-config/ && nix flake update && git status && printf '\n----------\n\n' && nixos-rebuild dry-run --flake ~/syscfg/nixos-config#$hostname"
-         abbr -a lg 'nixos-rebuild list-generations | head'
-    case '*'
-         abbr -a cu "(checkupdate) Don't know how to on $distro"
+if test -f /etc/os-release
+    # Extract the distro ID from /etc/os-release, removing any quotes
+    #set distro (grep -oP '^ID=\K.*' /etc/os-release | tr -d '"')
+    set distro (awk -F= '/^ID=/ { gsub(/["\047]/, "", $2); print $2 }' /etc/os-release)
+    
+    switch $distro
+        case debian ubuntu linuxmint
+            abbr -a up 'sudo apt update && sudo apt upgrade'
+            alias bat='batcat'
+            alias fd='fdfind'
+            abbr -a nf "clear && fastfetch"
+        case arch
+            abbr -a up 'sudo pacman -Syu'
+            abbr -a nf "clear && fastfetch"
+        case opensuse-tumbleweed
+            abbr -a up 'sudo zypper ref && sudo zypper dup'
+            abbr -a nf "clear && fastfetch --logo opensuse"
+        case nixos
+             abbr -a up "sudo nixos-rebuild switch --flake ~/syscfg/nixos-config#$hostname"
+             abbr -a upb "sudo nixos-rebuild boot --flake ~/syscfg/nixos-config#$hostname"
+             abbr -a upd "nixos-rebuild dry-run --flake ~/syscfg/nixos-config#$hostname"
+             abbr -a up2 "NH_OS_FLAKE=~/syscfg/nixos-config nh os switch --ask --hostname $hostname"
+             abbr -a up2b "NH_OS_FLAKE=~/syscfg/nixos-config nh os boot --ask --hostname $hostname"
+             abbr -a nxup "NH_OS_FLAKE=~/syscfg/nixos-config nh os switch --ask --hostname $hostname"
+             abbr -a nf "clear && fastfetch"
+        case void
+            abbr -a up 'sudo xbps-install -Su'
+            abbr -a nf "clear && fastfetch"
+        case alpine
+             abbr -a up 'doas apk update && doas apk upgrade'
+             abbr -a nf "clear && fastfetch"
+             abbr -a br brightnessctl
+             alias sct xsct
+        case '*'
+            abbr -a up 'Unknown distribution. KEKW'
+            abbr -a nf "clear && fastfetch"
+    end
+    
+    switch $distro
+        case arch
+             #abbr -a cu "checkupdates | sed 's/->//g' | column -t"
+             abbr -a cu $HOME/syscfg/scripts/bb/checkupdates.clj
+        case fedora
+             abbr -a cu "dnf check-update --refresh | wc -l"
+        case nixos
+             abbr -a cu "cd ~/syscfg/nixos-config/ && nix flake update && git status && printf '\n----------\n\n' && nixos-rebuild dry-run --flake ~/syscfg/nixos-config#$hostname"
+             abbr -a lg 'nixos-rebuild list-generations | head'
+        case '*'
+             abbr -a cu "(checkupdate) Don't know how to on $distro"
+    end
 end
 
 # update these when devices change
@@ -217,4 +219,7 @@ bind ctrl-t insert_timestamp
 source ~/.config/fish/nnn.fish
 
 starship init fish | source
-zoxide init fish | source
+
+if command -q zoxide
+    zoxide init fish | source
+end
