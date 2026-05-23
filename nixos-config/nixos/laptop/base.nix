@@ -16,6 +16,14 @@
   # (https://wiki.nixos.org/wiki/Systemd/logind)
   services.logind.settings.Login.HandlePowerKey = "ignore"; # started working after a reboot
 
+  services.keyd = {
+    enable = true;
+    keyboards.default = {
+      ids = [ "*" ];
+      settings.main.capslock = "overload(control, esc)";
+    };
+  };
+
   # laptop battery info via `upower --dump`
   services.upower.enable = true;
 }
