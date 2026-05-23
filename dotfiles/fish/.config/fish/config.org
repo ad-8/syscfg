@@ -71,7 +71,7 @@ abbr -a r 'clear && /usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/sc
 if type -q code
    abbr -a c. 'code .'
 else
-   abbr -a c. 'codium .'
+   abbr -a c. 'codium --force-device-scale-factor=1 .'
 end
 
 abbr -a gi 'grep -i'
