@@ -3,18 +3,37 @@
 ------------------
 
 -- use `nwg-displays` to figure out position
-hl.monitor({
-  output   = "DP-1",
-  mode     = "3840x2160",
-  position = "0x0",
-  scale    = 1.25,
-})
-hl.monitor({
-  output   = "HDMI-A-1",
-  mode     = "1920x1080",
-  position = "3072x648",
-  scale    = 1,
-})
+local hostname = io.popen("hostname"):read("*l")
+
+if hostname == "ax-bee" then
+  hl.monitor({
+    output   = "DP-1",
+    mode     = "3840x2160",
+    position = "0x0",
+    scale    = 1.25,
+  })
+  hl.monitor({
+    output   = "HDMI-A-1",
+    mode     = "1920x1080",
+    position = "3072x648",
+    scale    = 1,
+  })
+elseif hostname == "ax-t14" then
+  hl.monitor({
+    output   = "eDP-1",
+    mode     = "1920x1080",
+    position = "0x0",
+    scale    = 1,
+  })
+else
+  -- fallback for unknown hosts: any connected output, sensible defaults
+  hl.monitor({
+    output   = "",
+    mode     = "preferred",
+    position = "auto",
+    scale    = 1,
+  })
+end
 
 -- unscale XWayland (ax: fixes pixelated emacs)
 hl.config({
