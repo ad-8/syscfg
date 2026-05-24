@@ -58,13 +58,15 @@
           # optional: Remove = [ "Amazon.com" "Bing" "eBay" ];
         };
 
-        # Tracking protection — Strict
+        # Tracking protection — Strict (Firefox 142+).
+        # Category="strict" overrides the per-feature toggles and follows whatever
+        # Mozilla bundles into Strict (blocks tracking content + suspected
+        # fingerprinters in all windows, email tracking, etc.) including future
+        # additions. BaselineExceptions defaults on, mitigating major site breakage.
         EnableTrackingProtection = {
           Value = true;
           Locked = true;
-          Cryptomining = true;
-          Fingerprinting = true;
-          # alternative on Firefox 142+: Category = "strict";
+          Category = "strict";
         };
 
         # Permissions — defaults that stop sites from asking
