@@ -63,9 +63,11 @@
         # Mozilla bundles into Strict (blocks tracking content + suspected
         # fingerprinters in all windows, email tracking, etc.) including future
         # additions. BaselineExceptions defaults on, mitigating major site breakage.
+        # Locked=false leaves the URL-bar shield per-site escape hatch available
+        # for when a site breaks under Strict.
         EnableTrackingProtection = {
           Value = true;
-          Locked = true;
+          Locked = false;
           Category = "strict";
         };
 
@@ -113,6 +115,7 @@
       # Allow-listed prefs go in `preferences` (becomes the Preferences policy).
       preferences = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true; # enable userChrome.css
+        "extensions.htmlaboutaddons.recommendations.enabled" = false; # no recommendation cards in about:addons
       };
 
       # Non-allow-listed prefs (e.g. sidebar.*) go via autoConfig / mozilla.cfg.
