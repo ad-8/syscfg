@@ -69,6 +69,9 @@
 
         # Permissions — defaults that stop sites from asking
         Permissions = {
+          Camera.BlockNewRequests = true;
+          Microphone.BlockNewRequests = true;
+          Location.BlockNewRequests = true;
           Notifications.BlockNewRequests = true; # never ask "allow notifications?"
           Autoplay.Default = "block-audio-video"; # silent tabs by default
         };
@@ -94,9 +97,14 @@
           "addon@darkreader.org" = {
             installation_mode = "force_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+            private_browsing = true;
           };
-          # Old Reddit Redirect — TODO: add once extension ID is confirmed
-          # (install manually first, then read ID from about:support).
+          "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = {
+            # Old Reddit Redirect
+            installation_mode = "force_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/old-reddit-redirect/latest.xpi";
+            private_browsing = true;
+          };
         };
       };
 
