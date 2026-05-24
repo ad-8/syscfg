@@ -80,6 +80,19 @@
           Autoplay.Default = "block-audio-video"; # silent tabs by default
         };
 
+        # AI controls (Firefox 149.0.2+) — block everything by default, allow page
+        # translation explicitly (local ML model for foreign-language pages).
+        # Translations is left unlocked so it can be toggled in Settings.
+        AIControls = {
+          Default = {
+            Value = "blocked";
+            Locked = true;
+          };
+          Translations = {
+            Value = "available";
+          };
+        };
+
         # System integration
         HardwareAcceleration = true; # usually default, set explicitly
         # NOTE: DisableAppUpdate is set automatically by the NixOS firefox module.
