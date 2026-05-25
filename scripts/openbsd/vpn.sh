@@ -1,10 +1,14 @@
 #!/usr/bin/env sh
 
-WGIF="$(ifconfig wg0 2>/dev/null | grep -Eo '[A-Z]{2}-[0-9]+|muc')"
+wg0_status="$(ifconfig wg0 2>/dev/null | awk '/description:/ {print $NF}')"
+wg1_status="$(ifconfig wg1 2>/dev/null | awk '/description:/ {print $NF}')"
 
-if [ -z "$WGIF" ]; then
-    echo "NO VPN"
+if [ -n "$wg0_status" ] && [ -n "$wg1_status" ]; then
+    echo " $wg0_status + $wg1_status"
+elif [ -n "$wg0_status" ]; then
+    echo " $wg0_status"
+elif [ -n "$wg1_status" ]; then
+    echo " $wg1_status"
 else
-    echo " $WGIF"
+    echo "NO VPN"
 fi
-
