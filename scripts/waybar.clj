@@ -127,14 +127,13 @@
             (let [status (-> (shell {:out :string} "sh -c 'setsid waybar >/dev/null 2>&1 &'") :exit)]
               (printf "starting waybar, status = %d\n" status)))))))
 
-; match e.g.: ["ProtonVPN DE#316" "DE#316"]
 (defn waybar-vpn []
-  (let [match (->> (shell {:out :string} "nmcli con show --active")
-                   :out
-                   (re-find #"ProtonVPN (\w+#\d+)|([A-Z]{2}-\d+)|muc")
-                   (filter some?))
-        out-str (if (and (some? match) (seq match))
-                  (json/encode {:text (str " " (last match))})
+  (let [interfaces (->> (shell {:out :string :continue true} "wg show interfaces")
+                        :out
+                        (re-seq #"\S+")
+                        (sort-by #(if (= "muc" %) 0 1)))
+        out-str (if (seq interfaces)
+                  (json/encode {:text (str " " (str/join " + " interfaces))})
                   (json/encode {:text "NO VPN CONN" :state "Critical" :class "down"}))]
     (printf "%s" out-str)))
 
