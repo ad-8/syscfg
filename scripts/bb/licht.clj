@@ -11,8 +11,9 @@
 
 (def host-config
   ; ax-bee: IDs are ddcutil display numbers — run `ddcutil detect` to see model names and verify mapping
-  ; LG-4K=2, Acer=1 — ordered LG-first so preset vectors read [LG-val Acer-val]
-  {"ax-bee" {:internal false :displays [2 1] :display-names {2 "LG" 1 "Acer"}}
+  ; LG-4K=display 2/bus 13, Acer=display 1/bus 4 — ordered LG-first so preset vectors read [LG-val Acer-val]
+  ; :buses (when present) selects the --bus fast path; --bus skips display enumeration ddcutil otherwise does per call
+  {"ax-bee" {:internal false :displays [2 1] :display-names {2 "LG" 1 "Acer"} :buses [13 4]}
    "ax-mac" {:internal true  :displays :detect}
    "ax-t14" {:internal true  :displays :detect}})
 
@@ -84,6 +85,43 @@
                          (label row) brightness contrast))))))
 
 
+; --- --bus fast path (used when host-config has :buses) ---
+; ddcutil --bus N skips per-call display enumeration, materially faster than --display
+
+(defn get-buses []
+  (:buses (host-config (get-hostname))))
+
+(defn display-for-bus [bus]
+  (let [{:keys [displays buses]} (host-config (get-hostname))
+        idx (.indexOf buses bus)]
+    (when (>= idx 0) (get displays idx))))
+
+(defn set-ext-vcp-bus [buses vcp-code val]
+  (doseq [[idx b] (map-indexed vector buses)]
+    (when (pos? idx) (Thread/sleep 500))
+    (let [res (shell {:continue true} "ddcutil" "--bus" (str b) "setvcp" (str vcp-code) (str (ext-val-for-display val idx)))]
+      (when (not= 0 (:exit res))
+        (println (format "warn: ddcutil setvcp failed for bus %d (exit %d)" b (:exit res)))))))
+
+(defn get-ext-bus-vals [bus]
+  (let [out (-> (shell {:continue true :out :string} "ddcutil" "--bus" (str bus) "getvcp" "10" "12") :out)]
+    {:bus        bus
+     :brightness (extract-vcp-value out "10")
+     :contrast   (extract-vcp-value out "12")}))
+
+(defn print-ext-bus-vals [buses names]
+  (let [rows  (mapv get-ext-bus-vals buses)
+        label (fn [{:keys [bus]}]
+                (let [d (display-for-bus bus)
+                      n (get names d "")]
+                  (str "Display " d (if (seq n) (str " (" n ")") ""))))
+        w     (apply max (map (comp count label) rows))]
+    (doseq [row rows]
+      (let [{:keys [brightness contrast]} row]
+        (println (format (str "%-" w "s — brightness: %s  contrast: %s")
+                         (label row) brightness contrast))))))
+
+
 (defn get-hyprsunset-temp []
   (let [res (shell {:continue true :out :string} "pgrep" "-a" "hyprsunset")]
     (when (= 0 (:exit res))
@@ -101,13 +139,14 @@
 
 
 (defn print-all-the-light-we-can-see []
-  (let [{:keys [internal display-names]} (host-config (get-hostname))
-        displays (get-displays)]
+  (let [{:keys [internal display-names]} (host-config (get-hostname))]
     (when internal
       (printf "%s\nDisplay:  %s\nKeyboard: %s\n\n"
               (heading "Internal") (get-light-screen) (get-light-keyboard)))
     (println (heading "External"))
-    (print-ext-vals displays display-names)
+    (if-let [buses (get-buses)]
+      (print-ext-bus-vals buses display-names)
+      (print-ext-vals (get-displays) display-names))
     (printf "\nColor temp: %sK\n" (or (get-hyprsunset-temp) "unknown"))))
 
 (defn notify-lights! []
@@ -116,12 +155,15 @@
          "--" "Licht" (with-out-str (print-all-the-light-we-can-see))))
 
 (defn illuminate! [{:keys [internal keyboard ext-b ext-c col-temp]}]
-  (let [displays (get-displays)]
-    (light-screen internal)
-    (light-keyboard keyboard)
-    (set-ext-vcp displays 10 ext-b)
-    (set-ext-vcp displays 12 ext-c)
-    (set-color-temp col-temp)))
+  (light-screen internal)
+  (light-keyboard keyboard)
+  (if-let [buses (get-buses)]
+    (do (set-ext-vcp-bus buses 10 ext-b)
+        (set-ext-vcp-bus buses 12 ext-c))
+    (let [displays (get-displays)]
+      (set-ext-vcp displays 10 ext-b)
+      (set-ext-vcp displays 12 ext-c)))
+  (set-color-temp col-temp))
 
 
 (def settings
