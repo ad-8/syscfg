@@ -1,29 +1,29 @@
-;;; doom-osaka-jade-theme.el --- inspired by osaka-jade (omarchy)
+;;; ax-osaka-jade-theme.el --- inspired by osaka-jade (omarchy)
 ;;; https://github.com/Justikun/omarchy-osaka-jade-theme
 (require 'doom-themes)
 
-(defgroup doom-osaka-jade-theme nil
-  "Options for doom-osaka-jade"
+(defgroup ax-osaka-jade-theme nil
+  "Options for ax-osaka-jade"
   :group 'doom-themes)
 
-(defcustom doom-osaka-jade-brighter-modeline nil
+(defcustom ax-osaka-jade-brighter-modeline nil
   "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'doom-osaka-jade-theme
+  :group 'ax-osaka-jade-theme
   :type 'boolean)
 
-(defcustom doom-osaka-jade-brighter-comments nil
+(defcustom ax-osaka-jade-brighter-comments nil
   "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'doom-osaka-jade-theme
+  :group 'ax-osaka-jade-theme
   :type 'boolean)
 
-(defcustom doom-osaka-jade-padded-modeline doom-themes-padded-modeline
+(defcustom ax-osaka-jade-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'doom-osaka-jade-theme
+  :group 'ax-osaka-jade-theme
   :type '(choice integer boolean))
 
 ;; Colors sourced from omarchy themes/osaka-jade/colors.toml
-(def-doom-theme doom-osaka-jade
+(def-doom-theme ax-osaka-jade
   "A calm dark jade theme inspired by osaka-jade"
   ;; name        default        256       16
   ((bg         '("#111c18"      nil       nil            )) ;; background
@@ -60,7 +60,7 @@ determine the exact padding."
    (vertical-bar   (doom-darken base2 0.1))
    (selection      dark-blue)
    (builtin        teal)
-   (comments       (if doom-osaka-jade-brighter-comments cyan base5))
+   (comments       (if ax-osaka-jade-brighter-comments cyan base5))
    (doc-comments   (doom-lighten teal 0.2))
    (constants      violet)
    (functions      blue)
@@ -81,10 +81,10 @@ determine the exact padding."
 
    ;; custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright doom-osaka-jade-brighter-modeline)
+   (-modeline-bright ax-osaka-jade-brighter-modeline)
    (-modeline-pad
-    (when doom-osaka-jade-padded-modeline
-      (if (integerp doom-osaka-jade-padded-modeline) doom-osaka-jade-padded-modeline 4)))
+    (when ax-osaka-jade-padded-modeline
+      (if (integerp ax-osaka-jade-padded-modeline) ax-osaka-jade-padded-modeline 4)))
 
    (modeline-fg     fg)
    (modeline-fg-alt fg-alt)
@@ -244,4 +244,4 @@ determine the exact padding."
   ()
   )
 
-;;; doom-osaka-jade-theme.el ends here
+;;; ax-osaka-jade-theme.el ends here

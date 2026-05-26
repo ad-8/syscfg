@@ -1,27 +1,27 @@
-;;; doom-oxocarbon-theme.el --- inspired by oxocarbon (IBM Carbon)
+;;; ax-oxocarbon-theme.el --- inspired by oxocarbon (IBM Carbon)
 ;;; Canonical palette source: https://github.com/nyoom-engineering/oxocarbon.nvim
 ;;; All hex values are drawn from upstream init.lua (dark-mode base table
 ;;; + named hex literals in face definitions). No invented intermediates.
 (require 'doom-themes)
 
-(defgroup doom-oxocarbon-theme nil
-  "Options for doom-oxocarbon"
+(defgroup ax-oxocarbon-theme nil
+  "Options for ax-oxocarbon"
   :group 'doom-themes)
 
-(defcustom doom-oxocarbon-brighter-modeline nil
+(defcustom ax-oxocarbon-brighter-modeline nil
   "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'doom-oxocarbon-theme
+  :group 'ax-oxocarbon-theme
   :type 'boolean)
 
-(defcustom doom-oxocarbon-brighter-comments nil
+(defcustom ax-oxocarbon-brighter-comments nil
   "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'doom-oxocarbon-theme
+  :group 'ax-oxocarbon-theme
   :type 'boolean)
 
-(defcustom doom-oxocarbon-padded-modeline doom-themes-padded-modeline
+(defcustom ax-oxocarbon-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'doom-oxocarbon-theme
+  :group 'ax-oxocarbon-theme
   :type '(choice integer boolean))
 
 ;; Signature color is blue #78a9ff (base09 / accent / cursor / modeline-bar /
@@ -38,7 +38,7 @@ determine the exact padding."
 ;; and 3 (16-color X11 name) are inherited from doom-themes defaults and may
 ;; be non-oxocarbon — they never render in GUI emacs. Affected rows are
 ;; tagged "[256/16 non-oxo: inherited]".
-(def-doom-theme doom-oxocarbon
+(def-doom-theme ax-oxocarbon
   "A dark IBM Carbon-inspired theme — vibrant blues on industrial grays"
   ;; name        default        256       16
   ((bg         '("#161616"      nil       nil            )) ;; base00 = canonical background
@@ -75,7 +75,7 @@ determine the exact padding."
    (vertical-bar   (doom-darken base2 0.1))
    (selection      base3)
    (builtin        teal)
-   (comments       (if doom-oxocarbon-brighter-comments (doom-lighten base5 0.2) base5))
+   (comments       (if ax-oxocarbon-brighter-comments (doom-lighten base5 0.2) base5))
    (doc-comments   (doom-lighten base5 0.2))
    (constants      violet)
    (functions      magenta)
@@ -96,10 +96,10 @@ determine the exact padding."
 
    ;; custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright doom-oxocarbon-brighter-modeline)
+   (-modeline-bright ax-oxocarbon-brighter-modeline)
    (-modeline-pad
-    (when doom-oxocarbon-padded-modeline
-      (if (integerp doom-oxocarbon-padded-modeline) doom-oxocarbon-padded-modeline 4)))
+    (when ax-oxocarbon-padded-modeline
+      (if (integerp ax-oxocarbon-padded-modeline) ax-oxocarbon-padded-modeline 4)))
 
    (modeline-fg     fg)
    (modeline-fg-alt fg-alt)
@@ -259,4 +259,4 @@ determine the exact padding."
   ()
   )
 
-;;; doom-oxocarbon-theme.el ends here
+;;; ax-oxocarbon-theme.el ends here

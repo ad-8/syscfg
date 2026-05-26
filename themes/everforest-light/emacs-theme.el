@@ -1,2 +1,2 @@
 (mapc #'disable-theme custom-enabled-themes)
-(load-theme 'doom-everforest-light t)
+(load-theme 'ax-everforest-light t)

@@ -1,25 +1,25 @@
-;;; doom-matte-black-theme.el --- inspired by matte-black (omarchy / tahayvr)
+;;; ax-matte-black-theme.el --- inspired by matte-black (omarchy / tahayvr)
 ;;; Canonical palette source: https://github.com/tahayvr/matte-black-theme
 (require 'doom-themes)
 
-(defgroup doom-matte-black-theme nil
-  "Options for doom-matte-black"
+(defgroup ax-matte-black-theme nil
+  "Options for ax-matte-black"
   :group 'doom-themes)
 
-(defcustom doom-matte-black-brighter-modeline nil
+(defcustom ax-matte-black-brighter-modeline nil
   "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'doom-matte-black-theme
+  :group 'ax-matte-black-theme
   :type 'boolean)
 
-(defcustom doom-matte-black-brighter-comments nil
+(defcustom ax-matte-black-brighter-comments nil
   "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'doom-matte-black-theme
+  :group 'ax-matte-black-theme
   :type 'boolean)
 
-(defcustom doom-matte-black-padded-modeline doom-themes-padded-modeline
+(defcustom ax-matte-black-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'doom-matte-black-theme
+  :group 'ax-matte-black-theme
   :type '(choice integer boolean))
 
 ;; Strict warm-monochrome palette from author sources (alacritty.toml,
@@ -28,7 +28,7 @@ determine the exact padding."
 ;; and greys — no real blues, greens, cyans, magentas, or violets
 ;; exist. Missing doom slots collapse to grey or warm shades;
 ;; semantic distinction is encoded via luminance rather than hue.
-;; Pattern adapted from doom-lumon-theme.el.
+;; Pattern adapted from ax-lumon-theme.el.
 ;;
 ;; Column 1 (GUI hex) is always matte-black. Columns 2 (256-color
 ;; fallback hex) and 3 (16-color X11 name) are inherited from
@@ -38,7 +38,7 @@ determine the exact padding."
 ;; Signature color is orange #e68e0d — applied to cursor, modeline-bar,
 ;; highlight, org-level-1, rainbow-delimiters depth 1, isearch,
 ;; paren-match.
-(def-doom-theme doom-matte-black
+(def-doom-theme ax-matte-black
   "A sleek warm-monochrome dark theme — near-black with burnt orange"
   ;; name        default        256       16
   ((bg         '("#121212"      nil       nil            )) ;; matte-black background
@@ -79,7 +79,7 @@ determine the exact padding."
    (vertical-bar   (doom-darken base2 0.1))
    (selection      base4)
    (builtin        green)
-   (comments       (if doom-matte-black-brighter-comments base6 base5))
+   (comments       (if ax-matte-black-brighter-comments base6 base5))
    (doc-comments   (doom-lighten base5 0.2))
    (constants      red)
    (functions      orange)
@@ -100,10 +100,10 @@ determine the exact padding."
 
    ;; custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright doom-matte-black-brighter-modeline)
+   (-modeline-bright ax-matte-black-brighter-modeline)
    (-modeline-pad
-    (when doom-matte-black-padded-modeline
-      (if (integerp doom-matte-black-padded-modeline) doom-matte-black-padded-modeline 4)))
+    (when ax-matte-black-padded-modeline
+      (if (integerp ax-matte-black-padded-modeline) ax-matte-black-padded-modeline 4)))
 
    (modeline-fg     fg)
    (modeline-fg-alt fg-alt)
@@ -263,4 +263,4 @@ determine the exact padding."
   ()
   )
 
-;;; doom-matte-black-theme.el ends here
+;;; ax-matte-black-theme.el ends here

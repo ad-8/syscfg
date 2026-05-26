@@ -1,2 +1,2 @@
 (mapc #'disable-theme custom-enabled-themes)
-(load-theme 'doom-lumon t)
+(load-theme 'ax-lumon t)

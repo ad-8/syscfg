@@ -1,29 +1,29 @@
-;;; doom-hackerman-theme.el --- inspired by hackerman (omarchy)
+;;; ax-hackerman-theme.el --- inspired by hackerman (omarchy)
 ;;; https://github.com/bjarneo/hackerman.nvim
 (require 'doom-themes)
 
-(defgroup doom-hackerman-theme nil
-  "Options for doom-hackerman"
+(defgroup ax-hackerman-theme nil
+  "Options for ax-hackerman"
   :group 'doom-themes)
 
-(defcustom doom-hackerman-brighter-modeline nil
+(defcustom ax-hackerman-brighter-modeline nil
   "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'doom-hackerman-theme
+  :group 'ax-hackerman-theme
   :type 'boolean)
 
-(defcustom doom-hackerman-brighter-comments nil
+(defcustom ax-hackerman-brighter-comments nil
   "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'doom-hackerman-theme
+  :group 'ax-hackerman-theme
   :type 'boolean)
 
-(defcustom doom-hackerman-padded-modeline doom-themes-padded-modeline
+(defcustom ax-hackerman-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'doom-hackerman-theme
+  :group 'ax-hackerman-theme
   :type '(choice integer boolean))
 
 ;; Colors sourced from omarchy themes/hackerman/colors.toml
-(def-doom-theme doom-hackerman
+(def-doom-theme ax-hackerman
   "A dark cyberpunk theme inspired by hackerman"
   ;; name        default        256       16
   ((bg         '("#0b0c16"      nil       nil            ))
@@ -58,7 +58,7 @@ determine the exact padding."
    (vertical-bar   (doom-darken base2 0.1))
    (selection      dark-blue)
    (builtin        yellow)
-   (comments       (if doom-hackerman-brighter-comments cyan base5))
+   (comments       (if ax-hackerman-brighter-comments cyan base5))
    (doc-comments   (doom-lighten teal 0.2))
    (constants      violet)
    (functions      cyan)
@@ -79,10 +79,10 @@ determine the exact padding."
 
    ;; custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright doom-hackerman-brighter-modeline)
+   (-modeline-bright ax-hackerman-brighter-modeline)
    (-modeline-pad
-    (when doom-hackerman-padded-modeline
-      (if (integerp doom-hackerman-padded-modeline) doom-hackerman-padded-modeline 4)))
+    (when ax-hackerman-padded-modeline
+      (if (integerp ax-hackerman-padded-modeline) ax-hackerman-padded-modeline 4)))
 
    (modeline-fg     fg)
    (modeline-fg-alt fg-alt)
@@ -242,4 +242,4 @@ determine the exact padding."
   ()
   )
 
-;;; doom-hackerman-theme.el ends here
+;;; ax-hackerman-theme.el ends here

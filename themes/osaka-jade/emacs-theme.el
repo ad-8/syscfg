@@ -1,2 +1,2 @@
 (mapc #'disable-theme custom-enabled-themes)
-(load-theme 'doom-osaka-jade t)
+(load-theme 'ax-osaka-jade t)

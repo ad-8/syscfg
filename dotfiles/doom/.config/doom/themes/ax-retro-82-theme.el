@@ -1,26 +1,26 @@
-;;; doom-retro-82-theme.el --- inspired by retro-82 (omarchy)
+;;; ax-retro-82-theme.el --- inspired by retro-82 (omarchy)
 ;;; Canonical palette source: https://github.com/OldJobobo/omarchy-retro-82-theme
 ;;; Editor Base24 extension: https://github.com/OldJobobo/retro-82.nvim
 (require 'doom-themes)
 
-(defgroup doom-retro-82-theme nil
-  "Options for doom-retro-82"
+(defgroup ax-retro-82-theme nil
+  "Options for ax-retro-82"
   :group 'doom-themes)
 
-(defcustom doom-retro-82-brighter-modeline nil
+(defcustom ax-retro-82-brighter-modeline nil
   "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'doom-retro-82-theme
+  :group 'ax-retro-82-theme
   :type 'boolean)
 
-(defcustom doom-retro-82-brighter-comments nil
+(defcustom ax-retro-82-brighter-comments nil
   "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'doom-retro-82-theme
+  :group 'ax-retro-82-theme
   :type 'boolean)
 
-(defcustom doom-retro-82-padded-modeline doom-themes-padded-modeline
+(defcustom ax-retro-82-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'doom-retro-82-theme
+  :group 'ax-retro-82-theme
   :type '(choice integer boolean))
 
 ;; All hex values are drawn from author-published sources:
@@ -36,7 +36,7 @@ determine the exact padding."
 ;; #19a7a8 (success/bright teal) rather than nvim's #f6dcac (cream), which
 ;; would equal fg and make strings invisible against plain text. This is
 ;; the only deviation; everything else follows nvim's palette.lua aliases.
-(def-doom-theme doom-retro-82
+(def-doom-theme ax-retro-82
   "A retro 80s navy + cream + orange theme inspired by retro-82"
   ;; name        default        256       16
   ((bg         '("#00172e"      nil       nil            )) ;; base00 = canonical background
@@ -73,7 +73,7 @@ determine the exact padding."
    (vertical-bar   (doom-darken base2 0.1))
    (selection      base4)
    (builtin        teal)
-   (comments       (if doom-retro-82-brighter-comments (doom-lighten base5 0.2) base4))
+   (comments       (if ax-retro-82-brighter-comments (doom-lighten base5 0.2) base4))
    (doc-comments   (doom-lighten base5 0.2))
    (constants      magenta)
    (functions      orange)
@@ -94,10 +94,10 @@ determine the exact padding."
 
    ;; custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright doom-retro-82-brighter-modeline)
+   (-modeline-bright ax-retro-82-brighter-modeline)
    (-modeline-pad
-    (when doom-retro-82-padded-modeline
-      (if (integerp doom-retro-82-padded-modeline) doom-retro-82-padded-modeline 4)))
+    (when ax-retro-82-padded-modeline
+      (if (integerp ax-retro-82-padded-modeline) ax-retro-82-padded-modeline 4)))
 
    (modeline-fg     fg)
    (modeline-fg-alt fg-alt)
@@ -257,4 +257,4 @@ determine the exact padding."
   ()
   )
 
-;;; doom-retro-82-theme.el ends here
+;;; ax-retro-82-theme.el ends here

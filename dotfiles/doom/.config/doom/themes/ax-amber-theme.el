@@ -1,25 +1,25 @@
-;;; doom-amber-theme.el --- retrofuturistic amber CRT (P3 phosphor, DEC VT220 lineage)
+;;; ax-amber-theme.el --- retrofuturistic amber CRT (P3 phosphor, DEC VT220 lineage)
 ;;; Anchored on foxbunny/vim-amber dark mode (https://github.com/foxbunny/vim-amber).
 (require 'doom-themes)
 
-(defgroup doom-amber-theme nil
-  "Options for doom-amber"
+(defgroup ax-amber-theme nil
+  "Options for ax-amber"
   :group 'doom-themes)
 
-(defcustom doom-amber-brighter-modeline nil
+(defcustom ax-amber-brighter-modeline nil
   "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'doom-amber-theme
+  :group 'ax-amber-theme
   :type 'boolean)
 
-(defcustom doom-amber-brighter-comments nil
+(defcustom ax-amber-brighter-comments nil
   "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'doom-amber-theme
+  :group 'ax-amber-theme
   :type 'boolean)
 
-(defcustom doom-amber-padded-modeline doom-themes-padded-modeline
+(defcustom ax-amber-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'doom-amber-theme
+  :group 'ax-amber-theme
   :type '(choice integer boolean))
 
 ;; Strict 5-color palette from foxbunny/vim-amber dark mode:
@@ -37,7 +37,7 @@ determine the exact padding."
 ;; Column 1 (GUI hex) is always amber. Columns 2 (256-color fallback) and
 ;; 3 (16-color X11 name) are inherited from doom-themes defaults — they
 ;; never render in GUI emacs.
-(def-doom-theme doom-amber
+(def-doom-theme ax-amber
   "Retrofuturistic amber CRT monochrome — P3 phosphor on warm near-black"
   ;; name        default        256       16
   ((bg         '("#140b05"      nil       nil            )) ;; vim-amber s:bg
@@ -79,7 +79,7 @@ determine the exact padding."
    (vertical-bar   base1)
    (selection      base1)
    (builtin        fg)
-   (comments       (if doom-amber-brighter-comments fg base5))
+   (comments       (if ax-amber-brighter-comments fg base5))
    (doc-comments   base5)
    (constants      fg)
    (functions      fg)
@@ -100,10 +100,10 @@ determine the exact padding."
 
    ;; custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright doom-amber-brighter-modeline)
+   (-modeline-bright ax-amber-brighter-modeline)
    (-modeline-pad
-    (when doom-amber-padded-modeline
-      (if (integerp doom-amber-padded-modeline) doom-amber-padded-modeline 4)))
+    (when ax-amber-padded-modeline
+      (if (integerp ax-amber-padded-modeline) ax-amber-padded-modeline 4)))
 
    (modeline-fg     bg)
    (modeline-fg-alt bg)
@@ -281,4 +281,4 @@ determine the exact padding."
   ()
   )
 
-;;; doom-amber-theme.el ends here
+;;; ax-amber-theme.el ends here

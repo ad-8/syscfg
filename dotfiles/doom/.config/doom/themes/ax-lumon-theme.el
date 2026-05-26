@@ -1,25 +1,25 @@
-;;; doom-lumon-theme.el --- inspired by lumon (omarchy / Severance)
+;;; ax-lumon-theme.el --- inspired by lumon (omarchy / Severance)
 ;;; https://github.com/OldJobobo/omarchy-lumon-theme
 (require 'doom-themes)
 
-(defgroup doom-lumon-theme nil
-  "Options for doom-lumon"
+(defgroup ax-lumon-theme nil
+  "Options for ax-lumon"
   :group 'doom-themes)
 
-(defcustom doom-lumon-brighter-modeline nil
+(defcustom ax-lumon-brighter-modeline nil
   "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'doom-lumon-theme
+  :group 'ax-lumon-theme
   :type 'boolean)
 
-(defcustom doom-lumon-brighter-comments nil
+(defcustom ax-lumon-brighter-comments nil
   "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'doom-lumon-theme
+  :group 'ax-lumon-theme
   :type 'boolean)
 
-(defcustom doom-lumon-padded-modeline doom-themes-padded-modeline
+(defcustom ax-lumon-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'doom-lumon-theme
+  :group 'ax-lumon-theme
   :type '(choice integer boolean))
 
 ;; Strict monochrome blue palette from omarchy-lumon-theme.
@@ -30,7 +30,7 @@ determine the exact padding."
 ;; 3 (16-color X11 name) are inherited from doom-themes defaults and may be
 ;; non-lumon — they never render in GUI emacs. Affected rows are tagged
 ;; "[256/16 non-lumon: inherited]".
-(def-doom-theme doom-lumon
+(def-doom-theme ax-lumon
   "A cold corporate Severance-inspired theme — strict monochrome blue"
   ;; name        default        256       16
   ((bg         '("#1b2d40"      nil       nil            )) ;; lumon background
@@ -71,7 +71,7 @@ determine the exact padding."
    (vertical-bar   (doom-darken base2 0.1))
    (selection      base2)
    (builtin        cyan)
-   (comments       (if doom-lumon-brighter-comments magenta base5))
+   (comments       (if ax-lumon-brighter-comments magenta base5))
    (doc-comments   (doom-lighten base5 0.2))
    (constants      violet)
    (functions      blue)
@@ -92,10 +92,10 @@ determine the exact padding."
 
    ;; custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright doom-lumon-brighter-modeline)
+   (-modeline-bright ax-lumon-brighter-modeline)
    (-modeline-pad
-    (when doom-lumon-padded-modeline
-      (if (integerp doom-lumon-padded-modeline) doom-lumon-padded-modeline 4)))
+    (when ax-lumon-padded-modeline
+      (if (integerp ax-lumon-padded-modeline) ax-lumon-padded-modeline 4)))
 
    (modeline-fg     fg)
    (modeline-fg-alt fg-alt)
@@ -256,4 +256,4 @@ determine the exact padding."
   ()
   )
 
-;;; doom-lumon-theme.el ends here
+;;; ax-lumon-theme.el ends here

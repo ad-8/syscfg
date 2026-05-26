@@ -1,2 +1,2 @@
 (mapc #'disable-theme custom-enabled-themes)
-(load-theme 'doom-retro-82 t)
+(load-theme 'ax-retro-82 t)

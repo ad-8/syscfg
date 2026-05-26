@@ -1,54 +1,54 @@
-;;; doom-everforest-theme.el --- inspired by Everforest
+;;; ax-everforest-theme.el --- inspired by Everforest
 ;;; https://github.com/sainnhe/everforest
 (require 'doom-themes)
 
 ;;
-(defgroup doom-everforest-theme nil
-  "Options for doom-everforest"
+(defgroup ax-everforest-theme nil
+  "Options for ax-everforest"
   :group 'doom-themes)
 
-(defcustom doom-everforest-brighter-modeline nil
+(defcustom ax-everforest-brighter-modeline nil
   "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'doom-everforest-theme
+  :group 'ax-everforest-theme
   :type 'boolean)
 
-(defcustom doom-everforest-brighter-comments nil
+(defcustom ax-everforest-brighter-comments nil
   "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'doom-everforest-theme
+  :group 'ax-everforest-theme
   :type 'boolean)
 
-(defcustom doom-everforest-comment-bg doom-everforest-brighter-comments
+(defcustom ax-everforest-comment-bg ax-everforest-brighter-comments
   "If non-nil, comments will have a subtle, darker background. Enhancing their
 legibility."
-  :group 'doom-everforest-theme
+  :group 'ax-everforest-theme
   :type 'boolean)
 
-(defcustom doom-everforest-padded-modeline doom-themes-padded-modeline
+(defcustom ax-everforest-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'doom-everforest-theme
+  :group 'ax-everforest-theme
   :type '(choice integer boolean))
 
-(defcustom doom-everforest-background nil
+(defcustom ax-everforest-background nil
   "Choice between \"soft\", \"medium\" and \"hard\" background contrast.
 Defaults to \"soft\""
-  :group 'doom-everforest-theme
+  :group 'ax-everforest-theme
   :type 'string)
 
-(defcustom doom-everforest-palette nil
+(defcustom ax-everforest-palette nil
   "Choose between \"material\", \"mix\" and \"original\" color palette.
 Defaults to \"material\""
-  :group 'doom-everforest-theme
+  :group 'ax-everforest-theme
   :type 'string)
 
-(defcustom doom-everforest-dired-height 1.15
+(defcustom ax-everforest-dired-height 1.15
   "Font height for dired buffers"
-  :group 'doom-everforest-theme
+  :group 'ax-everforest-theme
   :type 'float)
 ;; colors from
 ;; https://github.com/sainnhe/everforest/blob/master/autoload/everforest.vim
 (cond
- ((equal doom-everforest-background "hard")
+ ((equal ax-everforest-background "hard")
   (setq ef/bg           "#272e33"       ;; bg0
         ef/bg-alt       "#1e2326"       ;; bg1
         ef/base0        "#3a454a"       ;; bg2
@@ -56,7 +56,7 @@ Defaults to \"material\""
         ef/base2        "#4c555b"       ;; bg4
         ef/base3        "#53605c"       ;; bg5
         ef/base4        "#503946"))       ;; bg_visual
- ((equal doom-everforest-background "medium")
+ ((equal ax-everforest-background "medium")
   (setq ef/bg           "#2d353b"       ;; bg0
         ef/bg-alt       "#232a2e"       ;; bg1
         ef/base0        "#404c51"       ;; bg2
@@ -73,7 +73,7 @@ Defaults to \"material\""
         ef/base3        "#5f6d67"       ;; bg5
         ef/base4        "#5d4251")))    ;; bg_visual
 
-(def-doom-theme doom-everforest
+(def-doom-theme ax-everforest
   "A dark theme inspired by Everforest"
   ;; name        default        256       16
   ((bg         `(,ef/bg         nil       nil            ))
@@ -108,9 +108,9 @@ Defaults to \"material\""
    (vertical-bar   (doom-darken base1 0.1))
    (selection      dark-blue)
    (builtin        magenta)
-   (comments       (if doom-everforest-brighter-comments cyan
+   (comments       (if ax-everforest-brighter-comments cyan
                      (doom-blend magenta cyan 0.65)))
-   (doc-comments   (doom-lighten (if doom-everforest-brighter-comments dark-cyan green) 0.2))
+   (doc-comments   (doom-lighten (if ax-everforest-brighter-comments dark-cyan green) 0.2))
    (constants      violet)
    (functions      cyan)
    (keywords       (doom-lighten teal 0.1))
@@ -130,10 +130,10 @@ Defaults to \"material\""
 
    ;; custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright doom-everforest-brighter-modeline)
+   (-modeline-bright ax-everforest-brighter-modeline)
    (-modeline-pad
-    (when doom-everforest-padded-modeline
-      (if (integerp doom-everforest-padded-modeline) doom-everforest-padded-modeline 4)))
+    (when ax-everforest-padded-modeline
+      (if (integerp ax-everforest-padded-modeline) ax-everforest-padded-modeline 4)))
 
    (modeline-fg     fg)
    (modeline-fg-alt fg-alt)
@@ -160,7 +160,7 @@ Defaults to \"material\""
 
    (font-lock-comment-face
     :foreground comments
-    :background (if doom-everforest-comment-bg (doom-lighten bg 0.05)))
+    :background (if ax-everforest-comment-bg (doom-lighten bg 0.05)))
    (font-lock-doc-face
     :inherit 'font-lock-comment-face
     :foreground doc-comments)
@@ -205,21 +205,21 @@ Defaults to \"material\""
    (cursor :foreground fg :background blue)
 
    ;; dired
-   (diredfl-compressed-file-name :height doom-everforest-dired-height
+   (diredfl-compressed-file-name :height ax-everforest-dired-height
                     :foreground yellow)
-   (diredfl-dir-heading :height doom-everforest-dired-height
+   (diredfl-dir-heading :height ax-everforest-dired-height
                         :foreground teal)
-   (diredfl-dir-name :height doom-everforest-dired-height
+   (diredfl-dir-name :height ax-everforest-dired-height
                      :foreground blue)
-   (diredfl-deletion :height doom-everforest-dired-height
+   (diredfl-deletion :height ax-everforest-dired-height
                      :foreground red :background (doom-lighten red 0.55))
    (diredfl-deletion-file-name :foreground red
                                :background (doom-lighten red 0.55))
-   (diredfl-file-name :height doom-everforest-dired-height
+   (diredfl-file-name :height ax-everforest-dired-height
                       :foreground fg)
-   (dired-flagged :height doom-everforest-dired-height
+   (dired-flagged :height ax-everforest-dired-height
                     :foreground red :background (doom-lighten red 0.55))
-   (diredfl-symlink :height doom-everforest-dired-height
+   (diredfl-symlink :height ax-everforest-dired-height
                     :foreground magenta)
 
    ;; ein
@@ -315,4 +315,4 @@ Defaults to \"material\""
   ()
   )
 
-;;; doom-everforest-theme.el ends here
+;;; ax-everforest-theme.el ends here
