@@ -63,12 +63,12 @@
 (defn set-ext-vcp [displays vcp-code val]
   (doseq [[idx d] (map-indexed vector displays)]
     (when (pos? idx) (Thread/sleep 500))
-    (let [res (shell {:continue true} "ddcutil" "--display" (str d) "setvcp" (str vcp-code) (str (ext-val-for-display val idx)))]
+    (let [res (shell {:continue true} "ddcutil" "--skip-ddc-checks" "--display" (str d) "setvcp" (str vcp-code) (str (ext-val-for-display val idx)))]
       (when (not= 0 (:exit res))
         (println (format "warn: ddcutil setvcp failed for display %d (exit %d)" d (:exit res)))))))
 
 (defn get-ext-display-vals [d]
-  (let [out (-> (shell {:continue true :out :string} "ddcutil" "--display" (str d) "getvcp" "10" "12") :out)]
+  (let [out (-> (shell {:continue true :out :string} "ddcutil" "--skip-ddc-checks" "--display" (str d) "getvcp" "10" "12") :out)]
     {:display    d
      :brightness (extract-vcp-value out "10")
      :contrast   (extract-vcp-value out "12")}))
@@ -87,6 +87,7 @@
 
 ; --- --bus fast path (used when host-config has :buses) ---
 ; ddcutil --bus N skips per-call display enumeration, materially faster than --display
+; both paths also pass --skip-ddc-checks (skips per-invocation DDC capability tests, ~40% extra speedup)
 
 (defn get-buses []
   (:buses (host-config (get-hostname))))
@@ -99,12 +100,12 @@
 (defn set-ext-vcp-bus [buses vcp-code val]
   (doseq [[idx b] (map-indexed vector buses)]
     (when (pos? idx) (Thread/sleep 500))
-    (let [res (shell {:continue true} "ddcutil" "--bus" (str b) "setvcp" (str vcp-code) (str (ext-val-for-display val idx)))]
+    (let [res (shell {:continue true} "ddcutil" "--skip-ddc-checks" "--bus" (str b) "setvcp" (str vcp-code) (str (ext-val-for-display val idx)))]
       (when (not= 0 (:exit res))
         (println (format "warn: ddcutil setvcp failed for bus %d (exit %d)" b (:exit res)))))))
 
 (defn get-ext-bus-vals [bus]
-  (let [out (-> (shell {:continue true :out :string} "ddcutil" "--bus" (str bus) "getvcp" "10" "12") :out)]
+  (let [out (-> (shell {:continue true :out :string} "ddcutil" "--skip-ddc-checks" "--bus" (str bus) "getvcp" "10" "12") :out)]
     {:bus        bus
      :brightness (extract-vcp-value out "10")
      :contrast   (extract-vcp-value out "12")}))
