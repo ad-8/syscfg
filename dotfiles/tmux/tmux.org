@@ -26,6 +26,11 @@ set -g pane-border-lines single
 set -g display-time 2000
 set -g message-style 'fg=yellow bg=red bold'
 #+end_src
+** copy+paste w/ st
+#+begin_src shell
+bind -T copy-mode MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -selection clipboard -i"
+bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -selection clipboard -i"
+#+end_src
 ** Statusbar
 #+begin_src shell
 set -g status-position bottom
@@ -126,7 +131,8 @@ set-window-option -g mode-keys vi
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-unbind -T copy-mode-vi MouseDragEnd1Pane
+# commented out so highlight to copy works in st
+# unbind -T copy-mode-vi MouseDragEnd1Pane
 #+end_src
 
 ** Testing
