@@ -259,8 +259,6 @@
         filename "/tmp/plotly-weather-chart.html"
         html-template (html-template width height plot-data)]
 
-    (clojure.pprint/pprint plot-data)
-
     (spit filename html-template)
     (println "Plot saved to" filename ", opening in Firefox...")
     (shell {:out :inherit} (format "firefox %s" filename))))
