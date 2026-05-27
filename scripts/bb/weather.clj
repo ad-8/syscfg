@@ -192,7 +192,7 @@
           [:html
            [:head
             [:title "Wetterplot.clj"]
-            [:script {:src "https://cdn.plot.ly/plotly-3.3.0.min.js"
+            [:script {:src "file:///home/ax/sync/libs/plotly-3.3.0.min.js"
                       :charset "utf-8"}]]
            [:body
             [:div {:id "plotly-div"
