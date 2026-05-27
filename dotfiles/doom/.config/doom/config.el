@@ -430,7 +430,8 @@ Runs indefinitely until the user aborts with `C-g` or similar."
         lsp-ui-doc-position 'top))  ; Position pop-up at top of window
 (after! cider
   (add-hook 'cider-mode-hook #'lsp)
-  (setq cider-doc-view-function #'cider-docview-inline-symbol))  ; Inline docs with examples
+  (setq cider-doc-view-function #'cider-docview-inline-symbol)  ; Inline docs with examples
+  (set-popup-rule! "^\\*cider-repl" :side 'right :size 0.4 :quit nil :ttl nil))
 ; ------------
 
 
