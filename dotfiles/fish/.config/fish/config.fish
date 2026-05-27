@@ -195,6 +195,7 @@ alias s 'java -jar $HOME/my/code/clojure/strava/target/uberjar/strava-0.1.0-SNAP
 alias df 'df -h'
 alias free 'free -h'
 alias dcc 'joker $HOME/syscfg/scripts/bb/dict.cc.joke'
+alias csm '$HOME/my/code/clojure/csm/csm.clj'
 
 # --export -x is the same
 set -Ux RESTIC_PASSWORD_FILE "/home/ax/.restic-std"
