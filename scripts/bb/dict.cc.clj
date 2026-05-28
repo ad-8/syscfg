@@ -10,15 +10,17 @@
 
 
 
-(defn get-inner [elem]
-  (loop [current elem]
-    (cond
-      (string? current) current
-      (map? current) (recur (:content current))
-      (vector? current) (if (string? (first current))
-                          (first current)
-                          (recur (first current)))
-      :else :should-not-happen)))
+(defn get-inner
+  "Concatenate all text within a hickory node (bare string, element map, or
+   content vector). Recurses through nesting like <a><abbr>…</abbr></a> and,
+   crucially, gathers *mixed* content such as [\"(\" {<abbr>sth.</abbr>} \")\"]
+   → \"(sth.)\" — earlier this stopped at the leading \"(\" and dropped the rest."
+  [node]
+  (cond
+    (string? node) node
+    (map? node)    (get-inner (:content node))
+    (vector? node) (apply str (map get-inner node))
+    :else          ""))
 
 ;; with just the *or* as filter
 #_({:a ("to" "dare" "sth."), :div ("to"), :dfn ("to"), :var ("to")}
