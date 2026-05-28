@@ -14,10 +14,13 @@ let
   # via xdg.dataFile, which the Doom config references by that fixed path.
   ispellWordList = pkgs.runCommand "ispell-wordlist" { } ''
     mkdir -p "$out/share/dict"
-    for d in ${pkgs.hunspellDicts.en_US}/share/hunspell/en_US.dic \
-             ${pkgs.hunspellDicts.de_DE}/share/hunspell/de_DE.dic; do
-      tail -n +2 "$d"          # drop the leading word-count line
-    done \
+    {
+      # en_US.dic is UTF-8 already; pass through (tail drops the word-count line).
+      tail -n +2 ${pkgs.hunspellDicts.en_US}/share/hunspell/en_US.dic
+      # de_DE.dic ships as ISO-8859-1; convert so umlauts (ä ö ü ß) are valid UTF-8.
+      tail -n +2 ${pkgs.hunspellDicts.de_DE}/share/hunspell/de_DE.dic \
+        | ${pkgs.glibc.bin}/bin/iconv -f ISO-8859-1 -t UTF-8
+    } \
       | sed -e 's:[/[:space:]].*::' -e '/^$/d' \
       | LC_ALL=C sort -u > "$out/share/dict/words"
   '';
