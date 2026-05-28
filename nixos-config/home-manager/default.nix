@@ -13,6 +13,7 @@
   pkgsWm.enable = true;
 
   configAuthAgent.enable = true;
+  configEmacs.enable = true;
   configGit.enable = true;
   configGtk.enable = true;
   configMegasync.enable = false;
