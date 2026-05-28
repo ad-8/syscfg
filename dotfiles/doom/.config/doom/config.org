@@ -718,5 +718,14 @@ the default height is same/similar as M-x, so way too small for browsing
     (setq ispell-dictionary "en_US,de_DE")
     (setq ispell-local-dictionary "en_US,de_DE")
     (setq ispell-hunspell-dictionary-alist
-          '(("en_US,de_DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en_US,de_DE") nil utf-8)))))
+          '(("en_US,de_DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en_US,de_DE") nil utf-8)))
+    ;; Plain word list for ispell word completion (ispell-completion-at-point,
+    ;; the source of dictionary suggestions in corfu). NixOS has no
+    ;; /usr/share/dict/words, so this file is provisioned by home-manager
+    ;; (pkgs-extra.nix -> ~/.local/share/dict/words). Without it the ispell capf
+    ;; errors and Doom silently disables it, leaving only dabbrev.
+    (setq ispell-alternate-dictionary (expand-file-name "~/.local/share/dict/words"))
+    ;; Use grep instead of `look' so word order / UTF-8 umlauts in the German
+    ;; entries don't break look's binary search. The file is small; speed is fine.
+    (setq ispell-look-p nil)))
 #+end_src
