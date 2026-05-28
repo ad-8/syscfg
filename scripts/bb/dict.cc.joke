@@ -9,7 +9,9 @@
 
 (defn cell-texts [cell]
   (let [cleaned (-> cell
-                    (str/replace #"(?s)<div[^>]*>.*?</div>" "")
+                    ;; only strip the upvote div (digit-only content);
+                    ;; the new elliwrap div wraps translation <a> tags
+                    (str/replace #"(?s)<div[^>]*>\d+</div>" "")
                     (str/replace #"(?s)<dfn[^>]*>.*?</dfn>" "")
                     (str/replace #"(?s)<var[^>]*>.*?</var>" "")
                     (str/replace #"(?s)<sup[^>]*>.*?</sup>" "")

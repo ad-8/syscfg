@@ -49,12 +49,25 @@
    [{:type :element, :attrs {:style "float:right;color:#999;user-select:none;"}, :tag :div, :content ["1470"]}
     {:type :element, :attrs {:href "/?s=skurril"}, :tag :a, :content ["skurril"]}
     " "])
+;; dict.cc now wraps long cells' <a> chain in <div id="elliwrap..."> with
+;; overflow:hidden + JS-driven expand-on-hover. Splice such divs' content
+;; back into the top level so filter-n-get-innermost can see the <a> tags.
+(defn flatten-elliwrap [a-vector]
+  (mapcat (fn [elem]
+            (if (and (map? elem)
+                     (= :div (:tag elem))
+                     (some-> elem :attrs :id (str/starts-with? "elliwrap")))
+              (:content elem)
+              [elem]))
+          a-vector))
+
 (defn extract-from-vec
   "Each vector represents one half of a row in the table (search term or translation).
-   
+
    Above are two corresponding vectors for illustration purposes"
   [a-vector]
-  (let [content-for (partial filter-n-get-innermost a-vector)]
+  (let [a-vector    (flatten-elliwrap a-vector)
+        content-for (partial filter-n-get-innermost a-vector)]
     {:a   (content-for :a)
      :div (content-for :div)
      :dfn (content-for :dfn)
