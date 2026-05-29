@@ -1,0 +1,4 @@
+{:default :video,
+ :classes
+ {:video ["mkv" "mp4" "webm" "avi" "mov"],
+  :audio ["mp3" "flac" "m4a" "wav" "ogg"]}}
