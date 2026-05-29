@@ -72,12 +72,12 @@ menu:
   - key: "w"
     desc: Wallpaper ...
     submenu:
-      - key: "b"
-        desc: bing daily - set
-        cmd: bb $HOME/x/bing_wallpaper_cli.clj set-daily
       - key: "c"
         desc: bing current - notify
         cmd: bb $HOME/x/bing_wallpaper_cli.clj notify-current
+      - key: "d"
+        desc: set daily wallpaper
+        cmd: bb $HOME/x/bing_wallpaper_cli.clj set-daily
       - key: "i"
         desc: bing daily - notify info
         cmd: bb $HOME/x/bing_wallpaper_cli.clj notify-daily
