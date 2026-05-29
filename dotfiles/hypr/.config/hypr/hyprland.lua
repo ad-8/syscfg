@@ -506,7 +506,7 @@ hl.window_rule({
   workspace   = "special:todo silent",
   center      = true,
   float       = true,
-  size        = "1440 900",
+  size        = "1440 1440",
   border_size = 10,
   opacity     = 0.95,
 })
@@ -523,7 +523,7 @@ local rules = {
   { match = { class = "org.strawberrymusicplayer.strawberry" },              workspace = "6" },
   { match = { class = "Emacs", title = "ax-emacs-emms" },                    workspace = "6" },
   { match = { class = "org.qbittorrent.qBittorrent" },                       workspace = "7 silent" },
-  { match = { class = "brave-browser" },                                     workspace = "8 silent" },
+  { match = { class = "brave-browser" },                                     workspace = "2 silent" },
   { match = { class = ".virt-manager-wrapped" },                             workspace = "8 silent" },
   { match = { class = "org.keepassxc.KeePassXC" },                           workspace = "9" },
   -- float + size
