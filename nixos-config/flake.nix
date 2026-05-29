@@ -3,15 +3,15 @@
 
   inputs = {
     nixpkgs-stable.url = "nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    # nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager-stable = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
-    home-manager-unstable = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # home-manager-unstable = {
+    #   url = "github:nix-community/home-manager/master";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
     hyprland.url = "github:hyprwm/Hyprland/v0.55.2";
   };
 
