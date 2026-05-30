@@ -4,6 +4,7 @@
 
 {
   imports = [
+    ./config-audio.nix
     ./config-clamav.nix
     ./config-distrobox.nix
     ./config-extra.nix

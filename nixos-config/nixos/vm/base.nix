@@ -9,14 +9,7 @@
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true; # enable copy and paste between host and guest
 
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
+  configAudio.enable = true;
 
   environment.systemPackages = [ ];
 

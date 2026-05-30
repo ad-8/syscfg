@@ -13,6 +13,7 @@
   configExtra.enable = true;
   configFirefox.enable = true;
   configHyprland.enable = true;
+  configAudio.enable = true;
   configClamav.enable = true;
   configGaming.enable = true;
   configPrinting.enable = true;
