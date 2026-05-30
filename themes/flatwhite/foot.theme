@@ -5,7 +5,7 @@
 # Warm-paper light; regular slots use muted *-text variants, bright slots
 # use the vivid fw-* variants. Palette from upstream doom-flatwhite-theme.el.
 
-[colors]
+[colors-dark]
 background=f7f3ee
 foreground=605a52
 cursor=605a52 f7f3ee

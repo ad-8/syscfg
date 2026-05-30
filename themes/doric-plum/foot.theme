@@ -4,7 +4,7 @@
 # Protesilaos doric-plum — muted pink+purple dark.
 # Palette from upstream doric-plum-theme.el (canonical only).
 
-[colors]
+[colors-dark]
 background=221832
 foreground=e2d7e7
 cursor=c070d0 e2d7e7

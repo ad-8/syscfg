@@ -3,7 +3,7 @@
 # Osaka Jade color theme for foot
 # https://github.com/Justikun/omarchy-osaka-jade-theme
 
-[colors]
+[colors-dark]
 cursor= 111c18 D7C995
 
 background=111c18

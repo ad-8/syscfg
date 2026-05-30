@@ -4,7 +4,7 @@
 # Protesilaos doric-walnut — wooden dark with green fg and tan accent.
 # Palette from upstream doric-walnut-theme.el (canonical only).
 
-[colors]
+[colors-dark]
 background=153227
 foreground=b9d3b0
 cursor=d3b18e b9d3b0

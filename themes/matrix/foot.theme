@@ -4,7 +4,7 @@
 # regular0 lifted from canonical color-dark to color-darker so terminal
 # black stays visible against bg=#000000; bright0 holds color-dark.
 
-[colors]
+[colors-dark]
 background=000000
 foreground=00b25f
 cursor=000000 00e57a

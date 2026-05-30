@@ -1,7 +1,7 @@
 # Nord Light color theme for foot
 # Derived from doom-nord-light (bundled in doom-themes)
 
-[colors]
+[colors-dark]
 background=E5E9F0
 foreground=3B4252
 cursor=E5E9F0 3B4252

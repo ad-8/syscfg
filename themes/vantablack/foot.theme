@@ -2,7 +2,7 @@
 #
 # Vantablack color theme for foot
 
-[colors]
+[colors-dark]
 background=000000
 foreground=ffffff
 cursor=000000 ffffff

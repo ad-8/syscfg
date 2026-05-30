@@ -1,7 +1,7 @@
 # Nord color theme for foot
 # https://www.nordtheme.com
 
-[colors]
+[colors-dark]
 background=2E3440
 foreground=D8DEE9
 cursor=D8DEE9 88C0D0

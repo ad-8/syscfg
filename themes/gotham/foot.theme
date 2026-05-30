@@ -3,7 +3,7 @@
 # Gotham v0.1
 # my own implementation of https://github.com/whatyouhide/vim-gotham for foot
 
-[colors]
+[colors-dark]
 cursor= 091f2e 99d1ce
 
 background=0c1014

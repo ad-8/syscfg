@@ -1,7 +1,7 @@
 # Everforest Light Soft color theme for foot
 # https://github.com/sainnhe/everforest
 
-[colors]
+[colors-dark]
 background=f3ead3
 foreground=5c6a72
 cursor=f3ead3 5c6a72

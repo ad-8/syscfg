@@ -3,7 +3,7 @@
 # Lumon color theme for foot
 # https://github.com/OldJobobo/omarchy-lumon-theme
 
-[colors]
+[colors-dark]
 background=1b2d40
 foreground=d6e2ee
 cursor=071018 f2fcff

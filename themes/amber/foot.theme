@@ -4,7 +4,7 @@
 # regular0 lifted from bg #140b05 to bg-overlay #1c1008 so terminal black
 # stays visible; bright0 lifted to fg-dim #c56306 (one tier above).
 
-[colors]
+[colors-dark]
 background=140b05
 foreground=fc9505
 cursor=140b05 fc9505

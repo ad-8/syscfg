@@ -3,7 +3,7 @@
 # Wilmersdorf color theme for foot
 # https://github.com/doomemacs/themes (doom-wilmersdorf-theme.el)
 
-[colors]
+[colors-dark]
 background=282b33
 foreground=c6c6c6
 cursor=1f2024 eceff4

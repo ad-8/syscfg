@@ -1,7 +1,7 @@
 # Winter is Coming Dark Blue color theme for foot
 # https://github.com/johnpapa/vscode-winteriscoming
 
-[colors]
+[colors-dark]
 background=011627
 foreground=d6deeb
 cursor=d6deeb 219fd5

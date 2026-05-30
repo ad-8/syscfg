@@ -8,7 +8,7 @@
 # magenta holds sky blue (base15). Reflects oxocarbon's "even the
 # reds contain a hint of blue" philosophy — blues dominate the palette.
 
-[colors]
+[colors-dark]
 background=161616
 foreground=dde1e6
 cursor=161616 dde1e6

@@ -5,7 +5,7 @@
 # Palette from upstream doric-marble-theme.el (canonical fg-* / bg-* /
 # fg-shadow-* values only — no invented intermediates).
 
-[colors]
+[colors-dark]
 background=ededed
 foreground=202020
 cursor=403030 ededed

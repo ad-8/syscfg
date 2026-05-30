@@ -2,7 +2,7 @@
 #
 # White color theme for foot
 
-[colors]
+[colors-dark]
 background=ffffff
 foreground=000000
 cursor=ffffff 000000

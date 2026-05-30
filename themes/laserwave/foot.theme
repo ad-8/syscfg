@@ -3,7 +3,7 @@
 # Laserwave color theme for foot
 # https://github.com/doomemacs/themes (doom-laserwave-theme.el)
 
-[colors]
+[colors-dark]
 background=27212E
 foreground=FFFFFF
 cursor=1B1720 EB64B9

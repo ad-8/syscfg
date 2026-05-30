@@ -2,7 +2,7 @@
 #
 # Retro-82 color theme for foot
 
-[colors]
+[colors-dark]
 background=00172e
 foreground=f6dcac
 cursor=00172e f6dcac

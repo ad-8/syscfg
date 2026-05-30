@@ -1,7 +1,7 @@
 # Everforest Dark Hard color theme for foot
 # https://github.com/sainnhe/everforest
 
-[colors]
+[colors-dark]
 background=272e33
 foreground=d3c6aa
 cursor=d3c6aa 83c092

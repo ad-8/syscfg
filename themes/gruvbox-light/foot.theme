@@ -1,7 +1,7 @@
 # Gruvbox Light color theme for foot
 # https://github.com/morhetz/gruvbox
 
-[colors]
+[colors-dark]
 background=fbf1c7
 foreground=3c3836
 cursor=fbf1c7 3c3836

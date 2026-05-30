@@ -1,7 +1,7 @@
 # Tokyo Night (Night) color theme for foot
 # https://github.com/enkia/tokyo-night-vscode-theme
 
-[colors]
+[colors-dark]
 background=1a1b26
 foreground=a9b1d6
 cursor=1a1b26 c0caf5

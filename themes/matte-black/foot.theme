@@ -3,7 +3,7 @@
 # Author's ANSI mapping honored verbatim: green=amber, blue=orange,
 # yellow=red, magenta=red, cyan=grey. See alacritty.toml upstream.
 
-[colors]
+[colors-dark]
 background=121212
 foreground=bebebe
 cursor=121212 eaeaea

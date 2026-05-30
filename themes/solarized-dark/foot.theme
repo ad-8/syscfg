@@ -1,7 +1,7 @@
 # Solarized Dark color theme for foot
 # https://ethanschoonover.com/solarized/
 
-[colors]
+[colors-dark]
 background=002b36
 foreground=839496
 cursor=002b36 93a1a1
