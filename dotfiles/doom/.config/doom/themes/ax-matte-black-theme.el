@@ -240,7 +240,7 @@ determine the exact padding."
    (rainbow-delimiters-unmatched-face :foreground red)
 
    ;; show-paren
-   (show-paren-match :foreground bg :background orange)
+   (show-paren-match :foreground orange :background base0)
 
    ;; vertico
    (vertico-current :foreground fg :background base3)
