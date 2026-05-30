@@ -9,7 +9,9 @@
     ./config-extra.nix
     ./config-firefox.nix
     ./config-gaming.nix
+    ./config-hyprland.nix
     ./config-printing.nix
     ./config-virtman.nix
+    ./config-xorg.nix
   ];
 }

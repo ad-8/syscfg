@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 
@@ -40,36 +39,6 @@
       };
     };
 
-    # use cachix to avoid building hyprland locally
-    nix.settings = {
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
-    };
-
-    # TODO put settings in the following sections in config-<category>.nix files
-    # -------------------------------------
-    services.xserver = {
-      enable = true;
-      autoRepeatDelay = 200;
-      autoRepeatInterval = 35;
-    };
-    # services.displayManager.ly.enable = true;
-    systemd.services.display-manager.enable = false; # disables all display managers. NixOS defaults to LightDM when no display-manager is explicitly enabled
-    programs.hyprland = {
-      enable = true;
-
-      # set the flake package
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      # make sure to also set the portal package, so that they are in sync
-      portalPackage =
-        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-
-      withUWSM = false;
-      xwayland.enable = true;
-    };
-
-    # -------------------------------------
     programs.java.enable = true;
     # https://wiki.nixos.org/wiki/Thunar
     programs.thunar.enable = true;
