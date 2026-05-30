@@ -312,7 +312,7 @@ Defaults to \"material\""
    (rainbow-delimiters-depth-7-face :foreground red)
    (rainbow-delimiters-depth-8-face :foreground (doom-darken green 0.15))
    (rainbow-delimiters-unmatched-face :foreground red)
-   (show-paren-match :foreground (doom-darken red 0.15) :background base0)
+   (show-paren-match :foreground (doom-darken red 0.15) :background base0 :weight 'bold)
 
    ;; vertico
    (vertico-current :foreground fg :background (doom-darken bg 0.1))
