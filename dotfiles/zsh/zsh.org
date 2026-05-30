@@ -24,6 +24,7 @@ Lets try to keep this "minimal".
   - [[#syntax-highlighting][syntax highlighting]]
   - [[#autosuggestions][autosuggestions]]
   - [[#nnn][nnn]]
+  - [[#zsh][z.sh]]
 
 * useful info, links, etc 
 list available options: =set -o=
@@ -128,5 +129,9 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 export NNN_PLUG='p:preview-tabbed;F:fzcd;f:fzopen;'
 
 export NNN_BMS=".:$HOME/.config;d:$HOME/Downloads/;h:$HOME;o:$HOME/org;s:$HOME/sync"
+#+end_src
+** z.sh
+#+begin_src sh
+source ~/x/z.sh
 #+end_src
 
