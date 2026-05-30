@@ -50,3 +50,5 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 export NNN_PLUG='p:preview-tabbed;F:fzcd;f:fzopen;'
 
 export NNN_BMS=".:$HOME/.config;d:$HOME/Downloads/;h:$HOME;o:$HOME/org;s:$HOME/sync"
+
+source ~/x/z.sh
