@@ -156,8 +156,11 @@
          "--" "Licht" (with-out-str (print-all-the-light-we-can-see))))
 
 (defn illuminate! [{:keys [internal keyboard ext-b ext-c col-temp]}]
-  (light-screen internal)
-  (light-keyboard keyboard)
+  ; only touch the internal backlight on hosts that have one (e.g. ax-bee is
+  ; external-only); skips brillo entirely so a missing binary can't crash here
+  (when (:internal (host-config (get-hostname)))
+    (light-screen internal)
+    (light-keyboard keyboard))
   (if-let [buses (get-buses)]
     (do (set-ext-vcp-bus buses 10 ext-b)
         (set-ext-vcp-bus buses 12 ext-c))
