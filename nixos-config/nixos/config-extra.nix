@@ -25,8 +25,9 @@
 
     # https://wiki.nixos.org/wiki/Backlight
     hardware.i2c.enable = true;
-    # thanks https://mynixos.com/nixpkgs/option/programs.light.enable
-    programs.light.enable = true;
+    # brillo replaces light (removed from nixpkgs in 26.05, unmaintained upstream);
+    # same udev + video-group model, no setuid. licht.clj calls `brillo` now.
+    hardware.brillo.enable = true;
 
     services = {
       syncthing = {
