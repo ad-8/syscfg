@@ -134,6 +134,13 @@ determine the exact padding."
     :inherit 'font-lock-comment-face
     :foreground doc-comments)
 
+   ;; Matrix-style box behind strings so a string arg stands out from the
+   ;; surrounding fn name in this mono palette (everything else is fg).
+   ;; bg-alt was too faint to read, so blend toward fg for a warmer, more
+   ;; visible amber-tinted box (like the region/magit blends the theme
+   ;; already computes); base0/bg is unusable since base0 == bg.
+   ((font-lock-string-face &override) :background (doom-blend fg bg 0.12))
+
    ;; Modeline inverted (vim-amber StatusLine: bg on fg)
    (mode-line
     :background modeline-bg :foreground modeline-fg :weight 'bold
@@ -257,8 +264,8 @@ determine the exact padding."
    (rainbow-delimiters-depth-8-face  :foreground fg-dim)
    (rainbow-delimiters-unmatched-face :foreground red)
 
-   ;; show-paren
-   (show-paren-match :foreground fg :background base0 :weight 'bold)
+   ;; show-paren (bg-alt, not base0: base0 == bg so that box is invisible)
+   (show-paren-match :foreground fg :background bg-alt :weight 'bold)
 
    ;; vertico
    (vertico-current :foreground bg :background fg)
