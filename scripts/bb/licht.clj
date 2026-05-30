@@ -19,23 +19,23 @@
 
 
 (defn light-screen [brightness]
-  (let [res (shell {:continue true :err :string} "light" "-S" (str brightness))]
+  (let [res (shell {:continue true :err :string} "brillo" "-S" (str brightness))]
     (when (not= 0 (:exit res))
       (println "warn: light-screen failed (device may not exist)"))))
 
-; light -L lists available devices
-; :err :string suppresses light's device-not-found warnings so only our warn: line shows
+; brillo -Lk lists available keyboard controllers
+; :err :string suppresses brillo's device-not-found warnings so only our warn: line shows
 (defn light-keyboard [brightness]
-  (let [res (shell {:continue true :err :string} "light" "-s" "sysfs/leds/smc::kbd_backlight" "-S" (str brightness))]
+  (let [res (shell {:continue true :err :string} "brillo" "-k" "-s" "smc::kbd_backlight" "-S" (str brightness))]
     (when (not= 0 (:exit res))
       (println "warn: light-keyboard failed (device may not exist)"))))
 
 (defn get-light-screen []
-  (let [res (shell {:continue true :out :string} "light" "-G")]
+  (let [res (shell {:continue true :out :string} "brillo" "-G")]
     (if (= 0 (:exit res)) (str/trim (:out res)) "err")))
 
 (defn get-light-keyboard []
-  (let [res (shell {:continue true :out :string} "light" "-s" "sysfs/leds/smc::kbd_backlight" "-G")]
+  (let [res (shell {:continue true :out :string} "brillo" "-k" "-s" "smc::kbd_backlight" "-G")]
     (if (= 0 (:exit res)) (str/trim (:out res)) "err")))
 
 
