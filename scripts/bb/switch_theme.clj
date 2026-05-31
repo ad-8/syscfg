@@ -12,7 +12,7 @@
 (def theme-categories
   {:dark  #{"everforest-dark" "gotham" "gruvbox-dark" "nord" "osaka-jade"
             "oxocarbon" "solarized-dark" "tokyo-night" "winter-is-coming-dark-blue"}
-   :light #{"doric-marble" "flatwhite" "gruvbox-light" "nord-light" "solarized-light" "white"}
+   :light #{"doric-marble" "flatwhite" "gruvbox-light" "nord-light" "solarized-light"}
    :mono  #{"amber" "lumon" "matrix" "vantablack"}
    :muted #{"doric-plum" "doric-walnut" "wilmersdorf"}
    :neon  #{"hackerman" "laserwave" "matte-black" "retro-82"}})
