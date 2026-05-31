@@ -8,7 +8,6 @@ separate rows here.
 | Theme name                 | Upstream variant      | Upstream source                                  | Repo                                                                                         |
 |----------------------------|-----------------------|--------------------------------------------------|----------------------------------------------------------------------------------------------|
 | everforest-dark            | everforest-dark-hard  | sainnhe/everforest                               | https://github.com/sainnhe/everforest                                                        |
-| everforest-light           | everforest-light-soft | sainnhe/everforest                               | https://github.com/sainnhe/everforest                                                        |
 | amber                      | —                     | foxbunny/vim-amber                               | https://github.com/foxbunny/vim-amber                                                        |
 | doric-marble               | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-plum                 | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
