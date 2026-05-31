@@ -7,10 +7,10 @@
 
 {
   options = {
-    configExtra.enable = lib.mkEnableOption "Enable extra config";
+    configWorkstation.enable = lib.mkEnableOption "Enable the desktop/GUI support layer (networking, bluetooth, keyring, fonts, file manager) above the minimal core";
   };
 
-  config = lib.mkIf config.configExtra.enable {
+  config = lib.mkIf config.configWorkstation.enable {
     networking.networkmanager.enable = true;
 
     security.polkit.enable = true;

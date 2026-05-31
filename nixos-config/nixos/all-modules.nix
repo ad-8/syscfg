@@ -7,7 +7,7 @@
     ./config-audio.nix
     ./config-clamav.nix
     ./config-distrobox.nix
-    ./config-extra.nix
+    ./config-workstation.nix
     ./config-firefox.nix
     ./config-gaming.nix
     ./config-hyprland.nix

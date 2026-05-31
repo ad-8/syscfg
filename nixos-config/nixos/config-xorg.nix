@@ -27,8 +27,9 @@
     };
     # services.displayManager.ly.enable = true;
     # No display-manager is set explicitly: NixOS then defaults to LightDM, which is
-    # exactly what we want here. (On the Wayland path config-extra used to force this
-    # off via `systemd.services.display-manager.enable = false`; that hack is gone now
+    # exactly what we want here. (On the Wayland path config-workstation, formerly
+    # config-extra, used to force this off via
+    # `systemd.services.display-manager.enable = false`; that hack is gone now
     # that X is opt-in.)
     # LightDM auto-enables; pick XFCE or Hyprland at the greeter.
     services.displayManager.defaultSession = "xfce";

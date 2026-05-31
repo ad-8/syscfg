@@ -10,7 +10,7 @@
     ../../nixos/all-modules.nix
   ];
 
-  configExtra.enable = true;
+  configWorkstation.enable = true;
   configFirefox.enable = true;
   configHyprland.enable = true;
   configAudio.enable = true;
