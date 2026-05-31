@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 
@@ -40,10 +41,11 @@
   services.resolved.enable = true;
 
   # android adb setup
-  programs.adb.enable = true;
+  # 26.05: programs.adb removed (systemd 258 handles uaccess rules
+  # automatically); just install the tool and the adbusers group is gone
+  environment.systemPackages = [ pkgs.android-tools ];
 
   users.users.ax.extraGroups = [
-    "adbusers"
     "i2c"
   ];
 
