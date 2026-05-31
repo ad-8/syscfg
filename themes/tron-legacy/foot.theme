@@ -1,0 +1,29 @@
+# -*- conf -*-
+#
+# Tron Legacy color theme for foot
+# https://github.com/ianpan870102/tron-legacy-emacs-theme
+
+[colors-dark]
+background=000000
+foreground=B0CCDC
+cursor=000000 8FD4FF
+selection-background=2B4255
+selection-foreground=CBECFF
+
+regular0=1B324B
+regular1=B62D66
+regular2=4BB5BE
+regular3=DEB45B
+regular4=387AAA
+regular5=B62D66
+regular6=4BB5BE
+regular7=BBCCDD
+
+bright0=5A7387
+bright1=FF7DBB
+bright2=BBF0EF
+bright3=DEB45B
+bright4=8FD4FF
+bright5=FF7DBB
+bright6=A0DCFF
+bright7=CBECFF

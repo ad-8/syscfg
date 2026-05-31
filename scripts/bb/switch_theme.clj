@@ -15,7 +15,7 @@
    :light #{"doric-marble" "flatwhite" "gruvbox-light" "nord-light" "solarized-light"}
    :mono  #{"amber" "lumon" "matrix" "vantablack"}
    :muted #{"doric-plum" "doric-walnut" "wilmersdorf"}
-   :neon  #{"hackerman" "laserwave" "matte-black" "retro-82"}})
+   :neon  #{"hackerman" "laserwave" "matte-black" "retro-82" "tron-legacy"}})
 
 (defn foot-osc
   "Builds OSC escape sequences from a foot theme file to set terminal foreground, background, cursor, and palette colors."
