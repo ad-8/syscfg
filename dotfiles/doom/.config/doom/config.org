@@ -427,32 +427,17 @@ A custom function to toggle between standard =markdown-mode= and =markdown-view-
 #+end_src
 
 ** set different heading sizes
+Apply one scale to every theme via the =user= pseudo-theme. Only =:height= is set, so
+each theme keeps its own heading colors/weights; =custom-set-faces!= re-applies on every
+theme switch.
 #+begin_src emacs-lisp
-(custom-theme-set-faces!
-'doom-nord
-'(org-level-8 :inherit outline-3 :height 1.0)
-'(org-level-7 :inherit outline-3 :height 1.0)
-'(org-level-6 :inherit outline-3 :height 1.1)
-'(org-level-5 :inherit outline-3 :height 1.2)
-'(org-level-4 :inherit outline-3 :height 1.3)
-'(org-level-3 :inherit outline-3 :height 1.4)
-'(org-level-2 :inherit outline-2 :height 1.5)
-'(org-level-1 :inherit outline-1 :height 1.6)
-'(org-document-title  :height 1.8 :bold t :underline nil))
-#+end_src
-
-#+begin_src emacs-lisp
-(custom-theme-set-faces!
-'gotham
-'(org-level-8 :inherit outline-3 :height 1.0)
-'(org-level-7 :inherit outline-3 :height 1.0)
-'(org-level-6 :inherit outline-3 :height 1.1)
-'(org-level-5 :inherit outline-3 :height 1.2)
-'(org-level-4 :inherit outline-3 :height 1.3)
-'(org-level-3 :inherit outline-3 :height 1.4)
-'(org-level-2 :inherit outline-2 :height 1.5)
-'(org-level-1 :inherit outline-1 :height 1.6)
-'(org-document-title  :height 1.8 :bold t :underline nil))
+(custom-set-faces!
+  '(org-level-1 :height 1.5)
+  '(org-level-2 :height 1.4)
+  '(org-level-3 :height 1.3)
+  '(org-level-4 :height 1.2)
+  '(org-level-5 :height 1.1)
+  '(org-document-title :height 1.7))
 #+end_src
 
 * org-capture loop for scratchpad
