@@ -12,9 +12,9 @@
 (def theme-categories
   {:dark  #{"everforest-dark" "gotham" "gruvbox-dark" "nord" "osaka-jade"
             "oxocarbon" "solarized-dark" "tokyo-night" "winter-is-coming-dark-blue"}
-   :light #{"gruvbox-light" "nord-light" "solarized-light"}
-   :mono  #{"amber" "lumon" "matrix" "vantablack" "white"}
-   :muted #{"doric-marble" "doric-plum" "doric-walnut" "flatwhite" "wilmersdorf"}
+   :light #{"doric-marble" "flatwhite" "gruvbox-light" "nord-light" "solarized-light" "white"}
+   :mono  #{"amber" "lumon" "matrix" "vantablack"}
+   :muted #{"doric-plum" "doric-walnut" "wilmersdorf"}
    :neon  #{"hackerman" "laserwave" "matte-black" "retro-82"}})
 
 (defn foot-osc
