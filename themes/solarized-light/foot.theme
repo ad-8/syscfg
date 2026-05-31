@@ -15,7 +15,8 @@ regular5=d33682
 regular6=2aa198
 regular7=eee8d5
 
-bright0=002b36
+# bright0 is base1, not canonical base03: keep brblack a light grey so fish autosuggestions read as dim hints, not bold near-black
+bright0=93a1a1
 bright1=cb4b16
 bright2=93a1a1
 bright3=839496
