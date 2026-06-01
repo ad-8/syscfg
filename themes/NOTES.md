@@ -17,6 +17,7 @@ separate rows here.
 | gruvbox-dark               | gruvbox-dark-medium   | morhetz/gruvbox                                  | https://github.com/morhetz/gruvbox                                                           |
 | gruvbox-light              | gruvbox-light-medium  | morhetz/gruvbox                                  | https://github.com/morhetz/gruvbox                                                           |
 | hackerman                  | —                     | bjarneo/hackerman.nvim                           | https://github.com/bjarneo/hackerman.nvim                                                    |
+| iceberg                    | iceberg-dark          | cocopon/iceberg.vim                              | https://github.com/cocopon/iceberg.vim                                                       |
 | laserwave                  | —                     | doomemacs/themes (doom-laserwave)                | https://github.com/doomemacs/themes                                                          |
 | lumon                      | —                     | OldJobobo/omarchy-lumon-theme                    | https://github.com/OldJobobo/omarchy-lumon-theme                                             |
 | matrix                     | —                     | monkeyjunglejuice/matrix-emacs-theme (Dan Dee)   | https://github.com/monkeyjunglejuice/matrix-emacs-theme                                      |
