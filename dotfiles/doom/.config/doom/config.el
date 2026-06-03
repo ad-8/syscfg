@@ -450,3 +450,22 @@ Runs indefinitely until the user aborts with `C-g` or similar."
     ;; Use grep instead of `look' so word order / UTF-8 umlauts in the German
     ;; entries don't break look's binary search. The file is small; speed is fine.
     (setq ispell-look-p nil)))
+
+(after! lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(janet-mode . "janet"))
+  (lsp-register-client
+    (make-lsp-client
+      :new-connection (lsp-stdio-connection "janet-lsp")
+      :activation-fn (lsp-activate-on "janet")
+      :server-id 'janet-lsp)))
+
+(use-package! janet-mode
+  :mode "\\.janet\\'"
+  :config
+  (add-hook 'janet-mode-hook (lambda () (setq indent-tabs-mode nil)))
+  (add-hook 'janet-mode-hook #'lsp))
+
+(use-package! ajrepl
+  :after janet-mode
+  :config
+  (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))

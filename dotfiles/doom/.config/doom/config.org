@@ -42,6 +42,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#auto-resize-font-on-ax-bee][auto-resize font on =ax-bee=]]
 - [[#clean-up----misc-stuff][clean up -- Misc Stuff]]
 - [[#wip-ispell-aspell-hunspell][(wip) ispell aspell hunspell]]
+- [[#janet][janet]]
 
 * Resources
 - https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org
@@ -713,4 +714,26 @@ the default height is same/similar as M-x, so way too small for browsing
     ;; Use grep instead of `look' so word order / UTF-8 umlauts in the German
     ;; entries don't break look's binary search. The file is small; speed is fine.
     (setq ispell-look-p nil)))
+#+end_src
+
+* janet
+#+begin_src elisp
+(after! lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(janet-mode . "janet"))
+  (lsp-register-client
+    (make-lsp-client
+      :new-connection (lsp-stdio-connection "janet-lsp")
+      :activation-fn (lsp-activate-on "janet")
+      :server-id 'janet-lsp)))
+
+(use-package! janet-mode
+  :mode "\\.janet\\'"
+  :config
+  (add-hook 'janet-mode-hook (lambda () (setq indent-tabs-mode nil)))
+  (add-hook 'janet-mode-hook #'lsp))
+
+(use-package! ajrepl
+  :after janet-mode
+  :config
+  (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))
 #+end_src
