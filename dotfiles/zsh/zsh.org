@@ -21,8 +21,8 @@ Lets try to keep this "minimal".
   - [[#3-init][3. init]]
 - [[#fzf-for-searching-history-ctrl-r][fzf for searching history (=ctrl-r=)]]
 - [[#stuff-to-load-at-the-end-eg-plugins][stuff to load at the end, e.g. plugins]]
-  - [[#hold-autosuggestions][HOLD autosuggestions]]
   - [[#syntax-highlighting][syntax highlighting]]
+  - [[#autosuggestions][autosuggestions]]
   - [[#nnn][nnn]]
 
 * useful info, links, etc 
@@ -114,13 +114,14 @@ source <(fzf --zsh)
 #+end_src
 
 * stuff to load at the end, e.g. plugins
-** HOLD autosuggestions
-managing fine w/o so far
 ** syntax highlighting
 OpenBSD pkg: =zsh-syntax-highlighting= 
-
 #+begin_src sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#+end_src
+** autosuggestions
+#+begin_src sh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 #+end_src
 ** nnn
 #+begin_src sh
