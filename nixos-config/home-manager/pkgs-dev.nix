@@ -18,6 +18,7 @@
       geckodriver
       gh
       helix
+      janet
       joker
       jq
       leiningen
