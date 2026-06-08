@@ -149,7 +149,7 @@ layout {
 
 include optional=true "active-theme.kdl"
 
-spawn-at-startup "waybar"
+spawn-sh-at-startup "~/syscfg/scripts/waybar.clj launch"
 spawn-at-startup "nm-applet"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "emacs" "--daemon"

@@ -1,0 +1,12 @@
+// -*- mode: jsonc -*-
+// Hyprland-specific left modules. Symlinked to as active-compositor.json by
+// waybar.clj when running under Hyprland; see config / config-minimal include.
+{
+    "modules-left": [
+        "custom/snowflake",
+        "hyprland/workspaces",
+        "hyprland/submap",
+        "hyprland/windowcount",
+        "hyprland/window"
+    ]
+}

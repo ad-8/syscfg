@@ -2,13 +2,11 @@
 {
     "height": 30, // Waybar height (to be removed for auto height)
     "spacing": 10, // Gaps between modules [px]
-    "modules-left": [
-        "custom/snowflake",
-        "hyprland/workspaces",
-        "hyprland/submap",
-        "hyprland/windowcount",
-        "hyprland/window",
-    ],
+    // modules-left is compositor-specific: the active-compositor.json symlink is
+    // repointed by waybar.clj (compositor-hypr.json / compositor-niri.json) based
+    // on whether Hyprland or niri is running. Keep modules-left out of this file
+    // (waybar's include is main-wins, so a value here would shadow the fragment).
+    "include": ["~/.config/waybar/active-compositor.json"],
     "modules-center": [
         "custom/date",
         "clock",
@@ -54,6 +52,33 @@
             "urgent": "!   !",
             //   "focused": "",
             //   "default": ""
+        }
+    },
+    // niri equivalents (referenced only when running under niri; inert otherwise).
+    "niri/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "  ",
+            "2": "  ",
+            "3": " 3 ",
+            "4": " 4 ",
+            "5": " 5 ",
+            "6": " 6 ",
+            "7": " 7 ",
+            "8": "  ",
+            "9": "  ",
+            "urgent": "!   !",
+            //   "focused": "",
+            //   "default": ""
+        }
+    },
+    "niri/window": {
+        "format": "{title}",
+        "icon": false,
+        "rewrite": {
+            "(.*) - Mozilla Firefox": "$1",
+            "(.*) — Mozilla Firefox": "$1",
+            "(.*) - Brave": "$1"
         }
     },
     "tray": {

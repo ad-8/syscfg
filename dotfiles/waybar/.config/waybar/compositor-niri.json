@@ -1,0 +1,11 @@
+// -*- mode: jsonc -*-
+// niri-specific left modules. Symlinked to as active-compositor.json by
+// waybar.clj when running under niri; see config / config-minimal include.
+// niri has no submap/windowcount module, so the left block is leaner.
+{
+    "modules-left": [
+        "custom/snowflake",
+        "niri/workspaces",
+        "niri/window"
+    ]
+}

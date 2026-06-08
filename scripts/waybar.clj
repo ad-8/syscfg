@@ -113,6 +113,37 @@
           (print-curr-playing)
           (printf "err-usp"))))))
 
+(defn compositor
+  "Detect the running Wayland compositor. Both waybar launch paths (compositor
+  autostart + keybind exec) are spawned by the compositor and inherit its env, so
+  the per-compositor IPC socket vars are the strong signal; XDG_CURRENT_DESKTOP is
+  a weaker fallback. Defaults to :hypr (the common case)."
+  []
+  (cond
+    (System/getenv "NIRI_SOCKET")                  :niri
+    (System/getenv "HYPRLAND_INSTANCE_SIGNATURE")  :hypr
+    (= "niri" (System/getenv "XDG_CURRENT_DESKTOP")) :niri
+    :else                                          :hypr))
+
+(defn point-compositor-symlink!
+  "Repoint ~/.config/waybar/active-compositor.json at the fragment matching the
+  running compositor, so config / config-minimal include the right modules-left."
+  []
+  (let [dir    (fs/expand-home "~/.config/waybar")
+        target (fs/file dir (case (compositor)
+                              :niri "compositor-niri.json"
+                              "compositor-hypr.json"))
+        link   (fs/file dir "active-compositor.json")]
+    (fs/delete-if-exists link)
+    (fs/create-sym-link link target)
+    (printf "active-compositor.json -> %s\n" (fs/file-name target))))
+
+(defn waybar-launch
+  "Set the compositor symlink, then start waybar. Used by compositor autostart."
+  []
+  (point-compositor-symlink!)
+  (shell {:out :string} "sh -c 'setsid waybar >/dev/null 2>&1 &'"))
+
 (defn waybar-toggle [minimal?]
   ;; `:continue true` prevents the exception on non-zero exit codes.
   (let [status (-> (shell {:out :string :continue true} "sh -c 'pgrep waybar >/dev/null'") :exit)]
@@ -121,6 +152,7 @@
           (let [status (-> (shell {:out :string} "sh -c 'pkill -f waybar'") :exit)]
             (printf "killing waybar, status = %d\n" status)))
       (do (println "not runnin'")
+          (point-compositor-symlink!)
           (if minimal?
             (let [status (-> (shell {:out :string} "sh -c 'setsid waybar -c ~/.config/waybar/config-minimal -s ~/.config/waybar/style.css >/dev/null 2>&1 &'") :exit)]
               (printf "starting waybar, status = %d\n" status))
@@ -149,6 +181,7 @@
 (let [action (first *command-line-args*)]
   (case action
     "date" (waybar-date)
+    "launch" (waybar-launch)
     "disk" (waybar-disk)
     "licht" (waybar-licht)
     "load" (waybar-load)

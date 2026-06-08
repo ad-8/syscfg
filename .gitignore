@@ -11,5 +11,6 @@ fish/.config/fish/fish_variables
 /dotfiles/foot/.config/foot/active-theme
 /dotfiles/hypr/.config/hypr/active-theme.lua
 /dotfiles/waybar/.config/waybar/active-theme.css
+/dotfiles/waybar/.config/waybar/active-compositor.json
 /dotfiles/dunst/.config/dunst/active-theme.conf
 /dotfiles/rofi/.config/rofi/active-theme.rasi
