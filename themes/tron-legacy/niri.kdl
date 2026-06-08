@@ -1,0 +1,22 @@
+// tron-legacy
+// Themed via switch_theme.clj. Colors sourced from themes/tron-legacy/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#000000"
+
+    border {
+        active-color   "#8fd4ff"
+        inactive-color "#1b324b"
+        urgent-color   "#b62d66" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#8fd4ff"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#000000"
+}

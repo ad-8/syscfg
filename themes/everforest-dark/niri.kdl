@@ -1,0 +1,22 @@
+// everforest-dark
+// Themed via switch_theme.clj. Colors sourced from themes/everforest-dark/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#272e33"
+
+    border {
+        active-color   "#7fbbb3"
+        inactive-color "#2e383c"
+        urgent-color   "#e67e80" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#7fbbb3"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#272e33"
+}

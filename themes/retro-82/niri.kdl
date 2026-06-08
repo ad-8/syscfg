@@ -1,0 +1,22 @@
+// retro-82
+// Themed via switch_theme.clj. Colors sourced from themes/retro-82/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#00172e"
+
+    border {
+        active-color   "#faa968"
+        inactive-color "#00172e"
+        urgent-color   "#f85525" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#faa968"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#00172e"
+}

@@ -1,0 +1,22 @@
+// flatwhite
+// Themed via switch_theme.clj. Colors sourced from themes/flatwhite/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#f7f3ee"
+
+    border {
+        active-color   "#6a4dff"
+        inactive-color "#f1ece4"
+        urgent-color   "#5b4343" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#6a4dff"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#f7f3ee"
+}

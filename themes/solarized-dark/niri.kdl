@@ -1,0 +1,22 @@
+// solarized-dark
+// Themed via switch_theme.clj. Colors sourced from themes/solarized-dark/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#002b36"
+
+    border {
+        active-color   "#b58900"
+        inactive-color "#073642"
+        urgent-color   "#dc322f" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#b58900"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#002b36"
+}

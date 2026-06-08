@@ -1,0 +1,22 @@
+// winter-is-coming-dark-blue
+// Themed via switch_theme.clj. Colors sourced from themes/winter-is-coming-dark-blue/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#011627"
+
+    border {
+        active-color   "#219fd5"
+        inactive-color "#122d42"
+        urgent-color   "#ef5350" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#219fd5"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#011627"
+}

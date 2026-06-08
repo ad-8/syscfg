@@ -1,0 +1,22 @@
+// lumon
+// Themed via switch_theme.clj. Colors sourced from themes/lumon/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#1b2d40"
+
+    border {
+        active-color   "#6fb8e3"
+        inactive-color "#1b2d40"
+        urgent-color   "#4d86b0" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#6fb8e3"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#1b2d40"
+}

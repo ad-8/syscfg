@@ -117,23 +117,18 @@ output "eDP-1" {
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
     position x=0 y=0
-
-    // visible between workspaces or in the overview
-    backdrop-color "#0c1014" 
 }
 // LG 
 output "DP-1" {
        mode "3840x2160"
        scale 1.25
        position x=0 y=0
-       backdrop-color "#0c1014"
 }
 // Acer
 output "HDMI-A-1" {
        mode "1920x1080"
        scale 1
        position x=3072 y=648
-       backdrop-color "#0c1014"
 }
 #+end_src
 
@@ -161,9 +156,6 @@ layout {
     border {
         on
         width 2
-        active-color "#d26937"
-        inactive-color "#4e5166" 
-        urgent-color "#c23127" // for windows that request your attention.
     }
 
     shadow {
@@ -178,19 +170,26 @@ layout {
         // bottom 64
     }
 
-    background-color "#0c1014" 
-
     tab-indicator {
         on
         position "top"
         width 8
-        active-color "#2aa889"
         place-within-column // avoid overlaying adjacent columns
     }
 }
 #+end_src
 
-* Autostart 
+* Theme
+Window/UI colors (border, tab indicator, workspace background, overview backdrop) are
+supplied by the theme switcher (=scripts/bb/switch_theme.clj=), which symlinks
+=active-theme.kdl= to the active theme's =niri.kdl=. The include is positional and merges
+per-property over the =layout= block above. =optional=true= keeps niri loading even if no
+theme has been applied yet (e.g. fresh checkout before first switch).
+#+begin_src shell
+include optional=true "active-theme.kdl"
+#+end_src
+
+* Autostart
 Note that running niri as a session supports =xdg-desktop-autostart=, which may be more convenient to use.
 #+begin_src shell
 spawn-at-startup "waybar"
@@ -199,8 +198,7 @@ spawn-at-startup "blueman-applet"
 spawn-at-startup "emacs" "--daemon"
 spawn-at-startup "emacs" 
 spawn-at-startup "firefox" 
-spawn-sh-at-startup "foot -e btop" 
-spawn-sh-at-startup "foot --server"
+spawn-sh-at-startup "foot -e btop"
 spawn-sh-at-startup "syncthing serve --no-browser"
 #+end_src
 
@@ -223,7 +221,7 @@ Most actions that you can bind here can also be invoked programmatically with
 binds {
     Mod+Shift+X { show-hotkey-overlay; }
 
-    Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "footclient"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Super+Shift+O hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --show-failed-attempts --color 0c1014"; }
 

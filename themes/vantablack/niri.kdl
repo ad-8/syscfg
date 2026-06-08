@@ -1,0 +1,22 @@
+// vantablack
+// Themed via switch_theme.clj. Colors sourced from themes/vantablack/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#000000"
+
+    border {
+        active-color   "#ffffff"
+        inactive-color "#000000"
+        urgent-color   "#a4a4a4" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#ffffff"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#000000"
+}

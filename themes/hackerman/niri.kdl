@@ -1,0 +1,22 @@
+// hackerman
+// Themed via switch_theme.clj. Colors sourced from themes/hackerman/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#0b0c16"
+
+    border {
+        active-color   "#82fb9c"
+        inactive-color "#0b0c16"
+        urgent-color   "#50f872" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#82fb9c"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#0b0c16"
+}

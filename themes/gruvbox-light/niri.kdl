@@ -1,0 +1,22 @@
+// gruvbox-light
+// Themed via switch_theme.clj. Colors sourced from themes/gruvbox-light/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#fbf1c7"
+
+    border {
+        active-color   "#b57614"
+        inactive-color "#3c3836"
+        urgent-color   "#9d0006" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#b57614"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#fbf1c7"
+}

@@ -1,0 +1,22 @@
+// iceberg
+// Themed via switch_theme.clj. Colors sourced from themes/iceberg/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#161821"
+
+    border {
+        active-color   "#84a0c6"
+        inactive-color "#1e2132"
+        urgent-color   "#e27878" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#84a0c6"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#161821"
+}

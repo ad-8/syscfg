@@ -1,0 +1,22 @@
+// doric-plum
+// Themed via switch_theme.clj. Colors sourced from themes/doric-plum/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#221832"
+
+    border {
+        active-color   "#c586ba"
+        inactive-color "#6a647e"
+        urgent-color   "#eca28f" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#c586ba"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#221832"
+}

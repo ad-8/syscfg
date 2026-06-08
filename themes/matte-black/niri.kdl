@@ -1,0 +1,22 @@
+// matte-black
+// Themed via switch_theme.clj. Colors sourced from themes/matte-black/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#121212"
+
+    border {
+        active-color   "#e68e0d"
+        inactive-color "#333333"
+        urgent-color   "#d35f5f" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#e68e0d"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#121212"
+}

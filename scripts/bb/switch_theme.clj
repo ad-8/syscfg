@@ -71,6 +71,9 @@
    {:file    "hyprland.lua"
     :symlink (fs/path (fs/xdg-config-home) "hypr/active-theme.lua")
     :reload  (fn [_] (shell ["hyprctl" "reload"]))}
+   {:file    "niri.kdl"
+    :symlink (fs/path (fs/xdg-config-home) "niri/active-theme.kdl")
+    :reload  (fn [_] (shell ["niri" "msg" "action" "load-config-file"]))}
    {:file    "emacs-theme.el"
     :symlink (fs/path (fs/xdg-config-home) "doom/active-theme.el")
     :reload  no-reload}

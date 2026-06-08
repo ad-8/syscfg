@@ -1,0 +1,22 @@
+// doric-marble
+// Themed via switch_theme.clj. Colors sourced from themes/doric-marble/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#ededed"
+
+    border {
+        active-color   "#603d3a"
+        inactive-color "#595959"
+        urgent-color   "#a01010" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#603d3a"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#ededed"
+}

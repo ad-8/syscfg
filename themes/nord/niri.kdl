@@ -1,0 +1,24 @@
+// nord
+// Themed via switch_theme.clj. Active/urgent/inactive borders from
+// themes/nord/hyprland.lua (accent / red / black); background + backdrop
+// from the true base (foot.theme background = nord0). inactive border is
+// nord1 (#3b4252), a notch lighter than the nord0 bg, so it stays visible.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#2e3440"
+
+    border {
+        active-color   "#81a1c1"
+        inactive-color "#3b4252"
+        urgent-color   "#bf616a" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#81a1c1"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#2e3440"
+}

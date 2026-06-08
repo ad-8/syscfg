@@ -1,0 +1,22 @@
+// gotham
+// Themed via switch_theme.clj. Colors sourced from themes/gotham/hyprland.lua
+// (accent / black / red), matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#0c1014"
+
+    border {
+        active-color   "#245361"
+        inactive-color "#0c1014"
+        urgent-color   "#c23127" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#245361"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#0c1014"
+}

@@ -1,0 +1,22 @@
+// nord-light
+// Themed via switch_theme.clj. Colors sourced from themes/nord-light/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#e5e9f0"
+
+    border {
+        active-color   "#3b6ea8"
+        inactive-color "#3b4252"
+        urgent-color   "#99324b" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#3b6ea8"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#e5e9f0"
+}

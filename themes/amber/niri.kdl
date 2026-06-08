@@ -1,0 +1,22 @@
+// amber
+// Themed via switch_theme.clj. Colors sourced from themes/amber/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#140b05"
+
+    border {
+        active-color   "#fc9505"
+        inactive-color "#140b05"
+        urgent-color   "#ff0000" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#fc9505"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#140b05"
+}

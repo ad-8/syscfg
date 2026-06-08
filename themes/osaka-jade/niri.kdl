@@ -1,0 +1,22 @@
+// osaka-jade
+// Themed via switch_theme.clj. Colors sourced from themes/osaka-jade/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#111c18"
+
+    border {
+        active-color   "#509475"
+        inactive-color "#111c18"
+        urgent-color   "#ff5345" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#509475"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#111c18"
+}
