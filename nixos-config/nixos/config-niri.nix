@@ -19,8 +19,10 @@
   config = lib.mkIf config.configNiri.enable {
     programs.niri.enable = true;
 
-    # The niri module builds with enableXWayland = false; xwayland-satellite
-    # provides X11 app support (not auto-spawned - start it from niri autostart).
+    # niri builds with enableXWayland = false; install xwayland-satellite (>= 0.7)
+    # so niri's built-in integration (since niri 25.08) spawns it on-demand and
+    # exports $DISPLAY for X11 clients - only needs the binary on PATH, no
+    # spawn-at-startup. Both version thresholds are met by nixpkgs 26.05.
     environment.systemPackages = [ pkgs.xwayland-satellite ];
   };
 }

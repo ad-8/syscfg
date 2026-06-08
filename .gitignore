@@ -14,3 +14,4 @@ fish/.config/fish/fish_variables
 /dotfiles/waybar/.config/waybar/active-compositor.json
 /dotfiles/dunst/.config/dunst/active-theme.conf
 /dotfiles/rofi/.config/rofi/active-theme.rasi
+/dotfiles/niri/.config/niri/active-theme.kdl
