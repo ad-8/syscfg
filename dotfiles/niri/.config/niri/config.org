@@ -223,6 +223,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Super+Shift+O hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
+    Super+O hotkey-overlay-title="Open: wlr-which-key" { spawn "wlr-which-key" "--initial-keys" "o"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --show-failed-attempts --color 0c1014"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
