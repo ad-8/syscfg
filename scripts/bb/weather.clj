@@ -264,16 +264,15 @@
     (shell {:out :inherit} (format "firefox %s" filename))))
 
 
-(let [action (first *command-line-args*)
-      resp (make-request url query-params)
-      data (-> resp :body json/decode keywordize-keys)
-      output (case action
-               "dunst" (forecast data)
-               "dwm" (dwmblocks data "dwm")
-               "i3" (dwmblocks data "i3")
-               "plot" (plot-next-3-days data)
-               ":invalid-argument")]
-  (println output))
+(let [action (first *command-line-args*)]
+  (if-not (#{"dunst" "dwm" "i3" "plot"} action)
+    (println ":invalid-argument")
+    (let [data (-> (make-request url query-params) :body json/decode keywordize-keys)]
+      (println (case action
+                 "dunst" (forecast data)
+                 "dwm" (dwmblocks data "dwm")
+                 "i3" (dwmblocks data "i3")
+                 "plot" (plot-next-3-days data))))))
 
 
 (comment 
