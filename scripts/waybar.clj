@@ -89,10 +89,11 @@
   (-> (shell {:out :string} cmd) :out str/trim))
 
 (defn- print-curr-playing []
-  (let [status (stdout! "playerctl status")
-        track-number (stdout! "playerctl metadata xesam:trackNumber")
-        title (stdout! "playerctl metadata xesam:title")
-        out-str (format "%s. %s" track-number title)]
+  (let [out (stdout! "playerctl metadata --format '{{status}}|{{xesam:trackNumber}}|{{xesam:title}}'")
+        [status track-number title] (str/split out #"\|" 3)
+        out-str (if (str/blank? track-number)
+                  title
+                  (format "%s. %s" track-number title))]
     (case status
       "Playing" (printf "%s" out-str)
       "Paused" (printf "PAUSED %s" out-str)
