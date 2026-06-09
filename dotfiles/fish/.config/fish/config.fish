@@ -206,9 +206,6 @@ export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -nw"
 export VISUAL="emacsclient -c"
 
-export TERMINAL='alacritty'
-export MAN_POSIXLY_CORRECT 1
-
 set -Ux fish_greeting "" # disable default welcome message
 
 function insert_timestamp --description 'Insert literal date command'

@@ -276,18 +276,6 @@ export EDITOR="emacsclient -nw"
 export VISUAL="emacsclient -c"
 #+end_src
 
-** TERMINAL
-For man pages, Tumbleweed set MAN_POSIXLY_CORRECT to avoid choosing which man page to display each time
-- tee(1): User Commands
-- tee(2): System Calls Manual
-- ...
-
-#+begin_src shell
-export TERMINAL='alacritty'
-export MAN_POSIXLY_CORRECT 1
-#+end_src
-
-
 * greeting
 #+begin_src shell
 set -Ux fish_greeting "" # disable default welcome message
