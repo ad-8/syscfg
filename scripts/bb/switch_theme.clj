@@ -114,7 +114,7 @@
         (try (reload src) (catch Exception _)))
       (do
         (binding [*out* *err*] (println "switch_theme: missing" (str src)))
-        (shell {:continue true} ["notify-send" "-u" "critical" "switch_theme" (str "missing: " (fs/file-name src))])))))
+        (shell {:continue true} "notify-send" "-u" "critical" "switch_theme" (str "missing: " (fs/file-name src)))))))
 
 (defn switch-theme
   "Validates that theme exists in themes-dir, then applies it to all configured apps."
