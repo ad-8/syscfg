@@ -240,7 +240,6 @@ binds {
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
     Mod+W     repeat=false { toggle-overview; }
-    Mod+Space repeat=false { toggle-overview; }
 
     Mod+Q { close-window; }
 
@@ -368,9 +367,9 @@ binds {
     Mod+R       { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R  { reset-window-height; }
-    Mod+F       { maximize-column; }
+    Mod+Alt+F   { maximize-column; }
     Mod+Ctrl+F  { expand-column-to-available-width; }
-    Mod+Shift+F { fullscreen-window; }
+    Mod+F       { fullscreen-window; }
     Mod+Ctrl+Shift+F { toggle-windowed-fullscreen; }
 
     Mod+C       { center-column; }
@@ -411,13 +410,15 @@ binds {
 
     // ax: dwm-like keybinds
     // general
+    Mod+Space repeat=false { spawn-sh "wlr-which-key"; }
     Mod+Shift+Y { spawn-sh "~/syscfg/scripts/bb/licht.clj"; }
     Mod+E { spawn-sh "emacsclient -c"; }
     Mod+Shift+E { spawn-sh "emacs"; }
     Mod+O { spawn-sh "bb ~/syscfg/scripts/launcher.clj main"; } // TODO hopefully replace w// niri keychords someday
     Mod+P { spawn-sh "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\" -s \"d3ebe9\""; }
     Mod+S { spawn-sh "kitten quick-access-terminal"; }
-    Mod+Shift+W { spawn-sh "bb ~/syscfg/scripts/niri.clj select-window-from-all";}
+    Mod+Shift+F { spawn-sh "rofi -show recursivebrowser";}
+    Mod+Shift+W { spawn-sh "rofi -show window";}
     Mod+X { spawn-sh "emacsclient --eval '(thanos/type)'"; }
 
     // toggle waybar
@@ -442,7 +443,6 @@ binds {
     // linkding (bookmarks)
     Mod+Alt+B { spawn-sh "bb ~/x/ax_bookmarks.clj std"; }
     Mod+Alt+N { spawn-sh "bb ~/x/ax_bookmarks.clj archived"; }
-    Mod+Alt+F { spawn-sh "rofi -show recursivebrowser"; }
     Mod+Y     { spawn-sh "foot -T ax-command-runner -e fish -C '/usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'"; }
 
     // Screenshots
