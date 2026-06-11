@@ -36,21 +36,7 @@
     },
     // niri equivalents (referenced only when running under niri; inert otherwise).
     "niri/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-            "1": "  ",
-            "2": "  ",
-            "3": " 3 ",
-            "4": " 4 ",
-            "5": " 5 ",
-            "6": " 6 ",
-            "7": " 7 ",
-            "8": "  ",
-            "9": "  ",
-            "urgent": "!   !",
-            //   "focused": "",
-            //   "default": ""
-        }
+        "format": "{value}"
     },
     "niri/window": {
         "format": "{title}",
