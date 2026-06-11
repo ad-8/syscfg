@@ -6,11 +6,13 @@
 - [[#input][Input]]
 - [[#output][Output]]
 - [[#layout][Layout]]
+- [[#theme][Theme]]
 - [[#autostart][Autostart]]
 - [[#keybindings][Keybindings]]
 - [[#window-rules][Window Rules]]
   - [[#open-specific-windows-maximized-full-width][open specific windows maximized (full width)]]
   - [[#misc][misc]]
+  - [[#blur][blur]]
 - [[#screenshot-settings][Screenshot settings]]
 - [[#misc-1][Misc]]
 
@@ -527,6 +529,16 @@ window-rule {
     open-floating true
     min-width 1250
     min-height 900  
+}
+#+end_src
+** blur
+#+begin_src shell 
+window-rule {
+    match app-id="^foot$"
+
+    background-effect {
+        blur true
+    }
 }
 #+end_src
 * Screenshot settings

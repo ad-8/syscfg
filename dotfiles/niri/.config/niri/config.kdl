@@ -466,6 +466,14 @@ window-rule {
     min-height 900  
 }
 
+window-rule {
+    match app-id="^foot$"
+
+    background-effect {
+        blur true
+    }
+}
+
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
 // The path is formatted with strftime(3) to give you the screenshot date and time.
