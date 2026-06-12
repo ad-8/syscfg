@@ -517,6 +517,13 @@ hl.window_rule({
   float = true,
 })
 
+hl.window_rule({
+  name         = "warn when ssh'ed into server",
+  match        = { title = ".*ax-fuji.*" },
+  border_size  = 18,
+  border_color = { colors = { rgba("b48eadff") } },
+})
+
 local rules = {
   -- workspace assignments
   { match = { class = "firefox" },                                           workspace = "2 silent" },

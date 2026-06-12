@@ -530,6 +530,16 @@ window-rule {
     min-width 1250
     min-height 900  
 }
+
+// warn when ssh'ed into server
+window-rule {
+    match title=".*ax-fuji.*"
+    border {
+        active-color "#b48ead" // nord aurora lilac
+        // inactive-color "#885500"
+        width 8
+    }
+}
 #+end_src
 ** blur
 #+begin_src shell 
