@@ -37,11 +37,19 @@ XF86AudioMute
       notify-send -t 1000 "toggle MUTE"
 
 super + mod1 + Up
-     sndioctl output.level=+0.05 && notify-send -t 1500 'volume up'
+    vol=$(sndioctl -n output.level=+0.05 | awk '\{printf "%.0f", $1*100\}'); \
+    notify-send -t 1500 -h int:value:"$vol" -h string:x-canonical-private-synchronous:volume "Volume: $vol%"
+
 super + mod1 + Down
-     sndioctl output.level=-0.05 && notify-send -t 1500 'volume down'
+    vol=$(sndioctl -n output.level=-0.05 | awk '\{printf "%.0f", $1*100\}'); \
+    notify-send -t 1500 -h int:value:"$vol" -h string:x-canonical-private-synchronous:volume "Volume: $vol%"
+
 super + mod1 + Left
-     sndioctl output.mute=! && notify-send -t 1500 'volume mute toggled'
+    if [ "$(sndioctl -n output.mute=!)" = 1 ]; \
+      then dunstify -t 1500 -h int:value:-1 -h string:x-canonical-private-synchronous:volume "Volume: muted"; \
+    else \
+      vol=$(printf '%.0f' "$(echo "$(sndioctl -n output.level)*100" | bc)"); \
+      notify-send -t 1500 -h int:value:"$vol" -h string:x-canonical-private-synchronous:volume "Volume unmuted: $vol%"; fi
 # --------------------------------------------------------------
  
 
