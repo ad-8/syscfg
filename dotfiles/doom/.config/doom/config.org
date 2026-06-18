@@ -226,7 +226,7 @@ keep =the-matrix-theme.el= byte-for-byte upstream.
 By default elfeed-search-filter is set to @2-weeks-ago and makes the last 2 weeks of entries visible.
 #+begin_src emacs-lisp
 (after! elfeed
-  (setq elfeed-search-filter "@3-days-ago +unread"))
+  (setq-default elfeed-search-filter "@3-days-ago +unread"))
 #+end_src
 
 * Emms - Emacs Multimedia System

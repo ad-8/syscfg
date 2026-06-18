@@ -49,7 +49,7 @@
 ;; (setq elfeed-db-directory (expand-file-name "~/sync/emacs/elfeed"))
 
 (after! elfeed
-  (setq elfeed-search-filter "@3-days-ago +unread"))
+  (setq-default elfeed-search-filter "@3-days-ago +unread"))
 
 ;; https://lucidmanager.org/productivity/configure-emms/
 (use-package emms
