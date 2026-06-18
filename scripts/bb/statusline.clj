@@ -2,6 +2,7 @@
 
 (ns statusline
   (:require [cheshire.core :as json]
+            [babashka.process :as process]
             [clojure.string :as str])
   (:import [java.time Instant]
            [java.time.temporal ChronoUnit]))
@@ -34,12 +35,27 @@
       (= \/ (.charAt dir (count home)))             (str "~" (subs dir (count home)))
       :else                                         dir)))
 
+(defn git-branch [dir]
+  "Returns the current git branch for dir, truncated to 20 chars, or nil if not a git repo."
+  (when dir
+    (try
+      (let [branch (-> (process/sh "git" "-C" dir "branch" "--show-current")
+                       :out str/trim)]
+        (when (seq branch)
+          (let [max 20]
+            (if (> (count branch) max)
+              (str (subs branch 0 (- max 1)) "…")
+              branch))))
+      (catch Exception _ nil))))
+
 (let [input     (json/parse-string (slurp *in*) true)
       five-pct  (get-in input [:rate_limits :five_hour :used_percentage])
       week-pct  (get-in input [:rate_limits :seven_day :used_percentage])
       five-eta  (eta-str (get-in input [:rate_limits :five_hour :resets_at]))
       week-eta  (eta-str (get-in input [:rate_limits :seven_day :resets_at]))
-      dir       (some-> (get-in input [:workspace :current_dir]) shorten-dir)
+      raw-dir   (get-in input [:workspace :current_dir])
+      dir       (some-> raw-dir shorten-dir)
+      branch    (git-branch raw-dir)
       model     (get-in input [:model :display_name])
       effort    (get-in input [:effort :level])
       ctx-tok   (get-in input [:context_window :total_input_tokens])
@@ -61,7 +77,7 @@
                          (when eta (str " (resets " eta ")")))))
       parts     (remove nil?
                   [(str user "@" host)
-                   dir
+                   (if branch (str dir " (" branch ")") dir)
                    (when model (str model (when effort (str " - " effort))))
                    (when (and effort (not model)) effort)
                    (when ctx (str "ctx: " ctx))
