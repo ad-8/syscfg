@@ -296,6 +296,59 @@ local function toggle_master_monocle()
   hl.config({ general = { layout = new } })
 end
 
+-- Implements dwm-style zoom for the master layout.
+local function dwm_zoom()
+  -- Find the focused window. If nothing is focused, or the window is floating or in
+  -- another layout (like monocle), there's nothing to zoom, so just return.
+  local win = hl.get_active_window()
+  if not win then return end
+  local layout = win.layout
+  if not layout or layout.is_master == nil then return end
+
+  -- Go through the windows to find the focused window's place in the layout.
+  -- Windows grouped into tabs sit in the same spot, so we count each spot once
+  -- instead of counting every tab.
+  local win_y = win.at.y
+  local seen_master_y, seen_stack_y = {}, {}
+  local total_masters, total_stack, masters_above, stack_above = 0, 0, 0, 0
+  for _, w in ipairs(hl.get_workspace_windows(win.workspace)) do
+    local w_layout = w.layout
+    if w_layout and w_layout.is_master == true then
+      if not seen_master_y[w.at.y] then
+        seen_master_y[w.at.y] = true
+        total_masters = total_masters + 1
+        if w.at.y < win_y then masters_above = masters_above + 1 end
+      end
+    elseif w_layout and w_layout.is_master == false then
+      if not seen_stack_y[w.at.y] then
+        seen_stack_y[w.at.y] = true
+        total_stack = total_stack + 1
+        if w.at.y < win_y then stack_above = stack_above + 1 end
+      end
+    end
+  end
+
+  -- The focused window's position counting from the top (where 0 is the topmost
+  -- spot). Master windows always come before the stack windows.
+  local pos = layout.is_master and masters_above or (total_masters + stack_above)
+
+  -- Now do the zoom: move the correct window to the top, based on where the
+  -- focused window turned out to be in the layout.
+  if pos > 0 then
+    -- The focused window isn't at the top, so move it up one spot at a time
+    -- until it gets there.
+    for _ = 1, pos do
+      hl.dispatch(hl.dsp.layout("swapprev noloop"))
+    end
+  elseif total_masters + total_stack > 1 then
+    -- It's already at the top. Like dwm, we zoom the next window instead: focus
+    -- it, then move it up one spot to take the top.
+    hl.dispatch(hl.dsp.layout("cyclenext"))
+    hl.dispatch(hl.dsp.layout("swapprev noloop"))
+  end
+  -- Otherwise there's only one window, so there's nothing to zoom.
+end
+
 -- dwm-inspired basics
 hl.bind(mod("RETURN"),          hl.dsp.exec_cmd(terminal))
 hl.bind(mod("Q"),               hl.dsp.window.close())
@@ -309,8 +362,8 @@ hl.bind(mod("SHIFT", "J"),      hl.dsp.layout("swapnext"))
 hl.bind(mod("SHIFT", "K"),      hl.dsp.layout("swapprev"))
 hl.bind(mod("H"),               hl.dsp.layout("mfact -0.05"))
 hl.bind(mod("L"),               hl.dsp.layout("mfact +0.05"))
-hl.bind(mod("U"),               hl.dsp.layout("swapwithmaster master"))
-hl.bind(mod("SHIFT", "RETURN"), hl.dsp.layout("swapwithmaster master"))
+hl.bind(mod("U"),               dwm_zoom)
+hl.bind(mod("SHIFT", "RETURN"), dwm_zoom)
 hl.bind(mod("F"),               hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(mod("SPACE"),           toggle_master_monocle)
 hl.bind(mod("SHIFT", "I"),      hl.dsp.layout("addmaster"))
