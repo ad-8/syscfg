@@ -9,13 +9,14 @@
 #   weather.janet hours-dunst [n]  next n hours as a notification (Pango)
 #   weather.janet plot          3-day Plotly chart opened in Firefox
 #
-# Janet has no JSON in its stdlib and the bare interpreter ships without spork,
-# so JSON is handled by the small pure-janet decoder/encoder below. The rest of
-# the script only touches it through `json-decode` / `json-encode`, so swapping
-# in spork/json later is a two-line change.
+# JSON comes from spork/json (one-time `jpm install spork`; its native module
+# builds fine on OpenBSD, where cc is in base). `utf8-encode` below stays
+# hand-rolled — it also renders Nerd Font weather glyphs, not just JSON escapes.
+
+(import spork/json)
 
 
-### --- UTF-8 + JSON -----------------------------------------------------------
+### --- UTF-8 ------------------------------------------------------------------
 
 (defn utf8-encode
   "Encode a Unicode codepoint to a UTF-8 string (1-4 bytes)."
@@ -32,146 +33,6 @@
                         (bor 0x80 (band (brshift cp 12) 0x3F))
                         (bor 0x80 (band (brshift cp 6) 0x3F))
                         (bor 0x80 (band cp 0x3F))))
-  (string b))
-
-(defn json-decode
-  "Minimal JSON parser. With `keywords?` truthy, object keys become keywords.
-  JSON null -> nil (dropped from objects, kept in arrays)."
-  [s &opt keywords?]
-  (def n (length s))
-  (var i 0)
-  (defn err [msg] (errorf "json: %s at byte %d" msg i))
-  (defn skip-ws []
-    (while (and (< i n)
-                (let [c (in s i)] (or (= c 0x20) (= c 0x09) (= c 0x0a) (= c 0x0d))))
-      (++ i)))
-  (defn parse-string []
-    (++ i) # opening quote
-    (def b @"")
-    (var go true)
-    (while go
-      (when (>= i n) (err "unterminated string"))
-      (def c (in s i))
-      (cond
-        (= c 0x22) (do (++ i) (set go false))
-        (= c 0x5c) (do
-                     (++ i)
-                     (case (in s i)
-                       0x22 (buffer/push-byte b 0x22)
-                       0x5c (buffer/push-byte b 0x5c)
-                       0x2f (buffer/push-byte b 0x2f)
-                       0x62 (buffer/push-byte b 0x08)
-                       0x66 (buffer/push-byte b 0x0c)
-                       0x6e (buffer/push-byte b 0x0a)
-                       0x72 (buffer/push-byte b 0x0d)
-                       0x74 (buffer/push-byte b 0x09)
-                       0x75 (do
-                              (var cp (scan-number (string "0x" (string/slice s (+ i 1) (+ i 5)))))
-                              (set i (+ i 4))
-                              # combine a UTF-16 surrogate pair if present
-                              (when (and (>= cp 0xD800) (<= cp 0xDBFF)
-                                         (< (+ i 2) n) (= (in s (+ i 1)) 0x5c) (= (in s (+ i 2)) 0x75))
-                                (def lo (scan-number (string "0x" (string/slice s (+ i 3) (+ i 7)))))
-                                (set cp (+ 0x10000 (blshift (- cp 0xD800) 10) (- lo 0xDC00)))
-                                (set i (+ i 6)))
-                              (buffer/push-string b (utf8-encode cp)))
-                       (err "bad escape"))
-                     (++ i))
-        (do (buffer/push-byte b c) (++ i))))
-    (string b))
-  (defn parse-number []
-    (def start i)
-    (when (= (in s i) 0x2d) (++ i))
-    (while (and (< i n)
-                (let [c (in s i)]
-                  (or (and (>= c 0x30) (<= c 0x39))
-                      (= c 0x2e) (= c 0x65) (= c 0x45) (= c 0x2b) (= c 0x2d))))
-      (++ i))
-    (scan-number (string/slice s start i)))
-  (var parse-value nil)
-  (defn parse-object []
-    (++ i)
-    (def t @{})
-    (skip-ws)
-    (if (= (in s i) 0x7d)
-      (++ i)
-      (forever
-        (skip-ws)
-        (def k (parse-string))
-        (skip-ws)
-        (when (not= (in s i) 0x3a) (err "expected ':'"))
-        (++ i)
-        (put t (if keywords? (keyword k) k) (parse-value))
-        (skip-ws)
-        (def c (in s i))
-        (++ i)
-        (cond (= c 0x2c) nil (= c 0x7d) (break) (err "expected ',' or '}'"))))
-    t)
-  (defn parse-array []
-    (++ i)
-    (def a @[])
-    (skip-ws)
-    (if (= (in s i) 0x5d)
-      (++ i)
-      (forever
-        (array/push a (parse-value))
-        (skip-ws)
-        (def c (in s i))
-        (++ i)
-        (cond (= c 0x2c) nil (= c 0x5d) (break) (err "expected ',' or ']'"))))
-    a)
-  (set parse-value
-       (fn []
-         (skip-ws)
-         (when (>= i n) (err "unexpected end of input"))
-         (def c (in s i))
-         (cond
-           (= c 0x7b) (parse-object)
-           (= c 0x5b) (parse-array)
-           (= c 0x22) (parse-string)
-           (= c 0x74) (do (+= i 4) true)   # true
-           (= c 0x66) (do (+= i 5) false)  # false
-           (= c 0x6e) (do (+= i 4) nil)    # null
-           (parse-number))))
-  (skip-ws)
-  (parse-value))
-
-(defn json-encode
-  "Serialize a janet value (struct/table/array/tuple/string/keyword/number/
-  boolean/nil) to a JSON string. Keywords and symbols become JSON strings."
-  [x]
-  (def b @"")
-  (defn enc-string [v]
-    (buffer/push-byte b 0x22)
-    (each c v
-      (cond
-        (= c 0x22) (buffer/push-string b "\\\"")
-        (= c 0x5c) (buffer/push-string b "\\\\")
-        (= c 0x0a) (buffer/push-string b "\\n")
-        (= c 0x0d) (buffer/push-string b "\\r")
-        (= c 0x09) (buffer/push-string b "\\t")
-        (< c 0x20) (buffer/push-string b (string/format "\\u%04x" c))
-        (buffer/push-byte b c)))
-    (buffer/push-byte b 0x22))
-  (defn enc [v]
-    (cond
-      (nil? v)     (buffer/push-string b "null")
-      (boolean? v) (buffer/push-string b (if v "true" "false"))
-      (number? v)  (buffer/push-string b (string v))
-      (or (string? v) (buffer? v))    (enc-string v)
-      (or (keyword? v) (symbol? v))   (enc-string (string v))
-      (indexed? v) (do (buffer/push-byte b 0x5b)
-                       (var first true)
-                       (each e v (unless first (buffer/push-byte b 0x2c)) (set first false) (enc e))
-                       (buffer/push-byte b 0x5d))
-      (dictionary? v) (do (buffer/push-byte b 0x7b)
-                          (var first true)
-                          (eachp [k val] v
-                            (unless first (buffer/push-byte b 0x2c)) (set first false)
-                            (enc-string (string k)) (buffer/push-byte b 0x3a) (enc val))
-                          (buffer/push-byte b 0x7d))
-      (errorf "cannot json-encode %p" v)))
-  (enc x)
   (string b))
 
 
@@ -204,7 +65,7 @@
 # weather.edn uses only EDN syntax that is also valid janet data, so `parse`
 # reads it directly (keywords, maps, vectors, strings, numbers).
 (def settings (parse (slurp settings-file)))
-(def weather-codes (json-decode (slurp weather-codes-file) true))
+(def weather-codes (json/decode (slurp weather-codes-file) true))
 (def current-place (get-in settings [:locations (settings :curr-loc)]))
 
 (def url "https://api.open-meteo.com/v1/forecast")
@@ -434,7 +295,7 @@
   (def weather (print-for-i3bar-short 200 curr-temp curr-desc))
   (case wm
     "dwm" (string/format "%s %s" weather location)
-    "i3"  (json-encode {:text (string/format "%s°C %s" curr-temp curr-desc)})))
+    "i3"  (json/encode {:text (string/format "%s°C %s" curr-temp curr-desc)})))
 
 
 ### --- plot ------------------------------------------------------------------
@@ -451,7 +312,7 @@
     "<script src=\"file:///home/ax/sync/libs/plotly-3.3.0.min.js\" charset=\"utf-8\"></script>\n"
     "</head>\n<body>\n"
     (string/format "<div id=\"plotly-div\" style=\"width:%dpx;height:%dpx;\"></div>\n" w h)
-    "<script>const plotData = " (json-encode plot-data) ";"
+    "<script>const plotData = " (json/encode plot-data) ";"
     "Plotly.newPlot('plotly-div', plotData.data, plotData.layout);</script>\n"
     "</body>\n</html>"))
 
@@ -507,4 +368,4 @@
     (do (eprint (string/format "usage: weather.janet {%s} [n]"
                                (string/join (sorted (keys actions)) "|")))
         (os/exit 1))
-    (handler (json-decode (make-request url query-params) true) n)))
+    (handler (json/decode (make-request url query-params) true true) n)))
