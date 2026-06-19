@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -11,15 +11,21 @@
 
   configAudio.enable = true;
 
-  environment.systemPackages = [ ];
+  environment.systemPackages = with pkgs; [
+    alacritty
+    dmenu
+  ];
 
   services.xserver = {
     enable = true;
-    desktopManager = {
-      xterm.enable = false;
-      xfce.enable = true;
-    };
+    windowManager.oxwm.enable = true;
+    # `oxwm` from tty does not work -> `exec oxwm` in `.xinitrc`
+    displayManager.startx.enable = true;
   };
-  services.displayManager.defaultSession = "xfce";
+
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.hack
+  ];
 
 }
