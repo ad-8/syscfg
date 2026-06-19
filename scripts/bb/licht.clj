@@ -123,15 +123,33 @@
                          (label row) brightness contrast))))))
 
 
-(defn get-hyprsunset-temp []
-  (let [res (shell {:continue true :out :string} "pgrep" "-a" "hyprsunset")]
+; hyprsunset speaks Hyprland's proprietary hyprland-ctm-control-v1, which niri
+; doesn't implement (it errors "Compositor doesn't support hyprland-ctm-control-v1"),
+; so on niri we use gammastep, which speaks the standard wlr-gamma-control-v1.
+; Both hold the temperature only while resident, so set-color-temp kills the old
+; instance and spawns a fresh background one (gammastep -O likewise stays running
+; on Wayland; the gamma resets if it exits). -P resets stale gamma ramps first.
+; color-temp-tool is the single source for the active compositor's setter:
+; [binary temp-flag & extra-flags] — both get and set destructure it.
+(defn on-hyprland? []
+  (some? (System/getenv "HYPRLAND_INSTANCE_SIGNATURE")))
+
+(defn color-temp-tool []
+  (if (on-hyprland?)
+    ["hyprsunset" "-t"]
+    ["gammastep" "-O" "-P"]))
+
+(defn get-color-temp []
+  (let [[proc flag] (color-temp-tool)
+        res (shell {:continue true :out :string} "pgrep" "-a" proc)]
     (when (= 0 (:exit res))
-      (second (re-find #"-t\s+(\d+)" (:out res))))))
+      (second (re-find (re-pattern (str flag "\\s+(\\d+)")) (:out res))))))
 
 (defn set-color-temp [n]
-  (shell {:continue true} "pkill" "-f" "hyprsunset")
-  (Thread/sleep 500)
-  (process ["hyprsunset" "-t" (str n)]))
+  (let [[proc flag & extra] (color-temp-tool)]
+    (shell {:continue true} "pkill" "-f" proc)
+    (Thread/sleep 500)
+    (process (into [proc flag (str n)] extra))))
 
 
 (defn heading [s]
@@ -148,10 +166,10 @@
     (if-let [buses (get-buses)]
       (print-ext-bus-vals buses display-names)
       (print-ext-vals (get-displays) display-names))
-    (printf "\nColor temp: %sK\n" (or (get-hyprsunset-temp) "unknown"))))
+    (printf "\nColor temp: %sK\n" (or (get-color-temp) "unknown"))))
 
 (defn notify-lights! []
-  (shell "notify-send" "--app-name" "dwm-licht" "--expire-time" "8000"
+  (shell {:continue true} "notify-send" "--app-name" "dwm-licht" "--expire-time" "8000"
          "--icon" "brightness-high-symbolic" "--replace-id" "127"
          "--" "Licht" (with-out-str (print-all-the-light-we-can-see))))
 
@@ -246,7 +264,7 @@
     (when ct
       (illuminate! {:internal 0 :keyboard 0 :ext-b [lg acer] :ext-c [lg acer] :col-temp ct})
       (spit "/tmp/licht-curr-val" "cust\n")
-      (shell "notify-send" "Licht" (format "Custom %d/%d %dK" lg acer ct)
+      (shell {:continue true} "notify-send" "Licht" (format "Custom %d/%d %dK" lg acer ct)
              "--app-name" "dwm-licht" "--expire-time" "4000"
              "--icon" "brightness-high-symbolic" "--replace-id" "126"))))
 
@@ -272,7 +290,7 @@
         (let [selected-value (get settings user-choice)]
           (illuminate! (:vals selected-value))
           (spit "/tmp/licht-curr-val" (str user-choice "\n"))
-          (shell "notify-send" "Licht" (:name selected-value)
+          (shell {:continue true} "notify-send" "Licht" (:name selected-value)
                  "--app-name" "dwm-licht" "--expire-time" "4000"
                  "--icon" "brightness-high-symbolic" "--replace-id" "126"))))))
 
