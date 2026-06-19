@@ -1,101 +1,45 @@
 input {
     keyboard {
-
-        repeat-rate 35
-        repeat-delay 200
-
         xkb {
-            // You can set rules, model, layout, variant and options.
-            // For more information, see xkeyboard-config(7).
-            // For example:
-            // layout "us,ru"
-            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
 	        layout "de"
         }
-
+        repeat-rate 35
+        repeat-delay 200
         numlock
     }
 
-    // Next sections include libinput settings.
-    // Omitting settings disables them, or leaves them at their default values.
-    touchpad {
-        // off
-        tap
-        // dwt
-        // dwtp
-        // drag false
-        // drag-lock
-        natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "two-finger"
-        // disabled-on-external-mouse
-    }
-
     mouse {
-        // off
-        // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "no-scroll"
+        accel-speed 0.8
+    }
+    
+    touchpad {
+        tap
+        natural-scroll
     }
 
     trackpoint {
-        // off
-        // natural-scroll
         accel-speed 1.0
-        // accel-profile "flat"
-        // scroll-method "on-button-down"
-        // scroll-button 273
-        // middle-emulation
     }
 
+    focus-follows-mouse max-scroll-amount="0%" // 0% makes it work only on windows already fully on screen
     warp-mouse-to-focus // puts mouse in center of newly focused window
-
-    focus-follows-mouse max-scroll-amount="0%" // 0%" makes it work only on windows already fully on screen
-
     workspace-auto-back-and-forth
 }
 
 // ThinkPad
 output "eDP-1" {
-    // Uncomment this line to disable this output.
-    // off
-
-    // Resolution and, optionally, refresh rate of the output.
-    // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
-    // If the refresh rate is omitted, niri will pick the highest refresh rate
-    // for the resolution.
-    // If the mode is omitted altogether or is invalid, niri will pick one automatically.
-    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    //mode "1920x1080@120.030"
-    //mode "2560x1600@60.972"
     mode "1920x1080@60"
-
-    // You can use integer or fractional scale, for example use 1.5 for 150% scale.
     scale 1.0
-
-    // Transform allows to rotate the output counter-clockwise, valid values are:
-    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-    transform "normal"
-
-    // Position of the output in the global coordinate space.
-    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-    // The cursor can only move between directly adjacent outputs.
-    // Output scale and rotation has to be taken into account for positioning:
-    // outputs are sized in logical, or scaled, pixels.
-    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-    // so to put another output directly adjacent to it on the right, set its x to 1920.
-    // If the position is unset or results in an overlap, the output is instead placed
-    // automatically.
     position x=0 y=0
 }
+
 // LG 
 output "DP-1" {
        mode "3840x2160"
        scale 1.25
        position x=0 y=0
 }
+
 // Acer
 output "HDMI-A-1" {
        mode "1920x1080"
@@ -133,14 +77,6 @@ layout {
         off
     }
 
-    // Struts shrink the area occupied by windows [...] You can think of them as a kind of outer gaps. 
-    struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
-    }
-
     tab-indicator {
         on
         position "top"
@@ -152,12 +88,12 @@ layout {
 include optional=true "active-theme.kdl"
 
 spawn-sh-at-startup "~/syscfg/scripts/waybar.clj launch"
-spawn-at-startup "dunst"
-spawn-at-startup "nm-applet"
 spawn-at-startup "blueman-applet"
-spawn-at-startup "emacs" "--daemon"
+spawn-at-startup "dunst"
 spawn-at-startup "emacs" 
+spawn-at-startup "emacs" "--daemon"
 spawn-at-startup "firefox" 
+spawn-at-startup "nm-applet"
 spawn-sh-at-startup "foot -e btop"
 spawn-sh-at-startup "syncthing serve --no-browser"
 
