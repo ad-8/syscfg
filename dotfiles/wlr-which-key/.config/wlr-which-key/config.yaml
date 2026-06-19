@@ -99,7 +99,7 @@ menu:
         cmd: anki
       - key: "b"
         desc: Bluetooth (bluetui)
-        cmd: foot -T bluetui bluetui
+        cmd: foot -T ax-bluetui -e bluetui
       - key: "c"
         desc: Calculator
         cmd: qalculate-gtk
@@ -144,7 +144,7 @@ menu:
         cmd: virt-manager
       - key: "w"
         desc: Wiremix
-        cmd: foot -T wiremix wiremix
+        cmd: foot -T ax-bluetui -e wiremix
       - key: "W"
         desc: Waypaper
         cmd: waypaper
