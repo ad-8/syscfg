@@ -35,8 +35,8 @@
     origin = top-center
 
     # Offset from the origin
-    #offset = 20x40
-    offset = 0x40
+    #offset = (20, 40)
+    offset = (0, 40)
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
