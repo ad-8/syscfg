@@ -31,5 +31,10 @@
       withUWSM = false;
       xwayland.enable = true;
     };
+
+    environment.systemPackages = with pkgs; [
+      hypridle
+      hyprsunset
+    ];
   };
 }

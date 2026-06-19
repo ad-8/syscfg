@@ -18,8 +18,6 @@
       dunst
       fuzzel
       grim
-      hypridle
-      hyprsunset
       libnotify
       networkmanagerapplet
       playerctl
