@@ -14,6 +14,7 @@
     programs.niri.enable = true;
 
     environment.systemPackages = with pkgs; [
+      gammastep
       swayidle
       xwayland-satellite
     ];
