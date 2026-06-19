@@ -195,6 +195,7 @@ include optional=true "active-theme.kdl"
 Note that running niri as a session supports =xdg-desktop-autostart=, which may be more convenient to use.
 #+begin_src shell
 spawn-sh-at-startup "~/syscfg/scripts/waybar.clj launch"
+spawn-at-startup "dunst"
 spawn-at-startup "nm-applet"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "emacs" "--daemon"
