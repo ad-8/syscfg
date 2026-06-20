@@ -134,6 +134,7 @@ include optional=true "active-theme.kdl"
 
 * Autostart
 Note that running niri as a session supports =xdg-desktop-autostart=, which may be more convenient to use.
+Launching =niri-session= instead of bare =niri= from TTY sets up a proper D-Bus session and activates =graphical-session.target=, which portals and auth agents rely on. The =spawn-at-startup= entries below work either way. Switch only if you hit a concrete breakage (screensharing, auth dialogs, systemd user services).
 #+begin_src shell
 spawn-sh-at-startup "~/syscfg/scripts/waybar.clj launch"
 spawn-at-startup "blueman-applet"
