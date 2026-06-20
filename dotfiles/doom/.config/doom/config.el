@@ -46,6 +46,29 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
+(after! centaur-tabs
+  (custom-set-faces!
+   '(centaur-tabs-default             :inherit mode-line-inactive :box nil)
+   '(centaur-tabs-unselected          :inherit mode-line-inactive :box nil)
+   '(centaur-tabs-unselected-modified :inherit mode-line-inactive :box nil)
+   '(centaur-tabs-selected            :inherit mode-line :box nil)
+   '(centaur-tabs-selected-modified   :inherit mode-line :box nil)
+   '(centaur-tabs-active-bar-face     :inherit highlight))
+
+  ;; `centaur-tabs-background-color' is frozen at package load and paints the
+  ;; right-side filler; refresh it + redraw the strip on every theme switch.
+  (defun ax/centaur-tabs-refresh (&rest _)
+    (when (bound-and-true-p centaur-tabs-mode)
+      (setq centaur-tabs-background-color
+            (face-background 'centaur-tabs-default nil 'default))
+      (centaur-tabs-headline-match)
+      (centaur-tabs-refill-tabs)))
+  (add-hook 'doom-load-theme-hook #'ax/centaur-tabs-refresh)
+  ;; On first startup the theme loads before centaur-tabs (deferred to the
+  ;; first file), so doom-load-theme-hook fires while the mode is still off and
+  ;; the filler color stays frozen. Refresh once when the mode actually enables.
+  (add-hook 'centaur-tabs-mode-hook #'ax/centaur-tabs-refresh))
+
 (after! magit
   (setq magit-section-initial-visibility-alist
         '((unpulled . show)

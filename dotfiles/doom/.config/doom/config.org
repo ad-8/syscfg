@@ -14,6 +14,8 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
   - [[#font][Font]]
   - [[#theme][Theme]]
   - [[#misc][Misc]]
+- [[#centaur-tabs][Centaur Tabs]]
+- [[#magit][Magit]]
 - [[#elfeed---atom-and-rss-reader][Elfeed - Atom and RSS Reader]]
   - [[#database-syncthing-seems-to-corrupt-it][Database (syncthing seems to corrupt it)]]
   - [[#default-search-filter][Default Search Filter]]
@@ -215,6 +217,44 @@ keep =the-matrix-theme.el= byte-for-byte upstream.
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
+#+end_src
+
+* Centaur Tabs
+Doom only supplies the =centaur-tabs-*= faces through =doom-themes-base.el=,
+which is injected exclusively into =def-doom-theme= themes. Plain =deftheme=
+themes (=the-matrix=, =gotham=, the Protesilaos =doric-*=, ...) get nothing,
+so centaur-tabs falls back to its hardcoded greys/black and a stale pale
+filler bar. Override the faces globally to inherit from the modeline faces
+every theme defines, and refresh the frozen filler color on each theme switch.
+This also re-points the =def-doom-theme= themes from their =tab-bar=-derived
+faces onto the modeline — uniform styling, accepted on purpose.
+
+=amber= is the only inverted-modeline theme, so its tab strip will be solid
+bright amber until a per-theme override is added.
+
+#+begin_src emacs-lisp
+(after! centaur-tabs
+  (custom-set-faces!
+   '(centaur-tabs-default             :inherit mode-line-inactive :box nil)
+   '(centaur-tabs-unselected          :inherit mode-line-inactive :box nil)
+   '(centaur-tabs-unselected-modified :inherit mode-line-inactive :box nil)
+   '(centaur-tabs-selected            :inherit mode-line :box nil)
+   '(centaur-tabs-selected-modified   :inherit mode-line :box nil)
+   '(centaur-tabs-active-bar-face     :inherit highlight))
+
+  ;; `centaur-tabs-background-color' is frozen at package load and paints the
+  ;; right-side filler; refresh it + redraw the strip on every theme switch.
+  (defun ax/centaur-tabs-refresh (&rest _)
+    (when (bound-and-true-p centaur-tabs-mode)
+      (setq centaur-tabs-background-color
+            (face-background 'centaur-tabs-default nil 'default))
+      (centaur-tabs-headline-match)
+      (centaur-tabs-refill-tabs)))
+  (add-hook 'doom-load-theme-hook #'ax/centaur-tabs-refresh)
+  ;; On first startup the theme loads before centaur-tabs (deferred to the
+  ;; first file), so doom-load-theme-hook fires while the mode is still off and
+  ;; the filler color stays frozen. Refresh once when the mode actually enables.
+  (add-hook 'centaur-tabs-mode-hook #'ax/centaur-tabs-refresh))
 #+end_src
 
 * Magit
