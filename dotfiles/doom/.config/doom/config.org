@@ -217,6 +217,16 @@ keep =the-matrix-theme.el= byte-for-byte upstream.
 (setq display-line-numbers-type 'relative)
 #+end_src
 
+* Magit
+Show the unpulled/unpushed commit lists expanded by default instead of
+collapsed, so a fetch reveals the incoming commits inline without TAB.
+#+begin_src emacs-lisp
+(after! magit
+  (setq magit-section-initial-visibility-alist
+        '((unpulled . show)
+          (unpushed . show))))
+#+end_src
+
 * Elfeed - Atom and RSS Reader
 ** TODO Database (syncthing seems to corrupt it)
 #+begin_src emacs-lisp

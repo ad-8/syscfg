@@ -46,6 +46,11 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
+(after! magit
+  (setq magit-section-initial-visibility-alist
+        '((unpulled . show)
+          (unpushed . show))))
+
 ;; (setq elfeed-db-directory (expand-file-name "~/sync/emacs/elfeed"))
 
 (after! elfeed
