@@ -15,6 +15,7 @@
 
     environment.systemPackages = with pkgs; [
       gammastep
+      kitty # kitten quick-access-terminal as scratchpad replacement
       swayidle
       xwayland-satellite
     ];
