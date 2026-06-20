@@ -326,6 +326,22 @@ oxwm.key.chord({
     { {},         "T" }
 }, oxwm.spawn_terminal())
 
+-- Bind multiple keys under a shared prefix chord.
+local function with_prefix(prefix, bindings)
+    for key, action in pairs(bindings) do
+        oxwm.key.chord({
+            prefix,
+            { {}, key }
+        }, action)
+    end
+end
+
+with_prefix({ { modkey }, "o" }, {
+    x = oxwm.spawn("firefox"),
+    e = oxwm.spawn("emacs"),
+    t = oxwm.spawn_terminal(),
+})
+
 -------------------------------------------------------------------------------
 -- Autostart
 -------------------------------------------------------------------------------
