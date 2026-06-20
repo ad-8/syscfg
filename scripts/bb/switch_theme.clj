@@ -52,6 +52,20 @@
     (doseq [pty (foot-ptys)]
       (try (spit pty osc :append true) (catch Exception _)))))
 
+(defn kitty-sockets
+  "Returns remote-control socket paths of running kitty instances. listen_on unix:/tmp/kitty appends -<pid>, so each instance has its own /tmp/kitty-<pid> socket."
+  []
+  (try (map str (fs/glob "/tmp" "kitty-*")) (catch Exception _ nil)))
+
+(defn reload-kitty
+  "Live-updates colors in every running kitty instance via remote control, reading the active theme file. --all recolors open windows, --configured makes new windows in the instance inherit it too."
+  [src]
+  (doseq [sock (kitty-sockets)]
+    (try
+      (shell {:continue true} "kitten" "@" "--to" (str "unix:" sock)
+             "set-colors" "--all" "--configured" (str src))
+      (catch Exception _))))
+
 (defn no-reload
   "Placeholder reload for apps that don't require an explicit restart."
   [_] nil)
@@ -63,6 +77,9 @@
    {:file    "foot.theme"
     :symlink (fs/path (fs/xdg-config-home) "foot/active-theme")
     :reload  reload-foot}
+   {:file    "kitty.conf"
+    :symlink (fs/path (fs/xdg-config-home) "kitty/active-theme.conf")
+    :reload  reload-kitty}
    {:file    "waybar.css"
     :symlink (fs/path (fs/xdg-config-home) "waybar/active-theme.css")
     ;; Restart via `waybar.clj launch` (not bare `waybar`) so the gitignored

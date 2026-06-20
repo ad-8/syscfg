@@ -15,3 +15,4 @@ fish/.config/fish/fish_variables
 /dotfiles/dunst/.config/dunst/active-theme.conf
 /dotfiles/rofi/.config/rofi/active-theme.rasi
 /dotfiles/niri/.config/niri/active-theme.kdl
+/dotfiles/kitty/.config/kitty/active-theme.conf
