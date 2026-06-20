@@ -97,6 +97,12 @@ bind - split-window -v -c "#{pane_current_path}"
 bind-key < swap-window -t -1 \; select-window -t -1
 bind-key > swap-window -t +1 \; select-window -t +1
 #+end_src
+** New Window
+=-a= inserts the new window immediately after the current one instead of appending
+at the far right. =-c= inherits the current pane's working directory.
+#+begin_src shell
+bind c new-window -a -c "#{pane_current_path}"
+#+end_src
 ** vim copy-paste
 use =prefix [= to enter copy mode, then navigate with vim keys, enter or y to yank/copy
 use =preifx ]= to paste
