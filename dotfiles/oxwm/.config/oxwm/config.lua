@@ -66,7 +66,7 @@ local blocks = {
     oxwm.bar.block.shell({
         format = "{}",
         command = "uname -r",
-        interval = 999999999,
+        interval = 600, -- does not show up in NixOS VM with 999999999
         color = colors.red,
         underline = true,
     }),
@@ -78,7 +78,7 @@ local blocks = {
     }),
     oxwm.bar.block.datetime({
         format = "{}",
-        date_format = "%a, %b %d - %-I:%M %P",
+        date_format = "%a, %d %b - %H:%M",
         interval = 1,
         color = colors.cyan,
         underline = true,
@@ -226,7 +226,8 @@ oxwm.key.bind({ modkey, "Shift" }, "Space", oxwm.client.toggle_floating())
 
 -- Layout management
 oxwm.key.bind({ modkey }, "F", oxwm.layout.set("normie"))
-oxwm.key.bind({ modkey }, "C", oxwm.layout.set("tiling"))
+oxwm.key.bind({ modkey }, "T", oxwm.layout.set("tiling"))
+oxwm.key.bind({ modkey }, "M", oxwm.layout.set("monocle"))
 -- Cycle through layouts
 oxwm.key.bind({ modkey }, "N", oxwm.layout.cycle())
 
@@ -335,3 +336,4 @@ oxwm.key.chord({
 -- oxwm.autostart("feh --bg-scale ~/wallpaper.jpg")
 -- oxwm.autostart("dunst")
 -- oxwm.autostart("nm-applet")
+oxwm.autostart("xrandr --output Virtual-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal")
