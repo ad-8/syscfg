@@ -11,6 +11,9 @@
 
   configAudio.enable = true;
 
+  # without this, home-manager fails to start on boot (oxwm, unlike xfce, doesn't pull it in)
+  programs.dconf.enable = true;
+
   environment.systemPackages = with pkgs; [
     alacritty
     dmenu
