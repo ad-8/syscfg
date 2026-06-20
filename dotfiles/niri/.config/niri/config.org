@@ -434,7 +434,8 @@ window-rule {
 ** float windows 1280
 #+begin_src shell
 window-rule {
-    match app-id="waypaper$" 
+    match app-id="waypaper"
+    match app-id="anki"
     
     open-floating true
     min-width 1280
@@ -480,12 +481,6 @@ window-rule {
     // thanos/type (emacs everywhere for wayland)
     match app-id=r#"Emacs$"# title="^emacs-float$"
     open-floating true
-}
-window-rule {
-    match app-id="anki"
-    open-floating true
-    min-width 1250
-    min-height 900  
 }
 
 // warn when ssh'ed into server
