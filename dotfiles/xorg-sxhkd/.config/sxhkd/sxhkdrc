@@ -9,7 +9,7 @@ super + o ; {d, e, k, x}
 # --------------------------------------------------------------
 #                       MODE EXEC
 super + x ; w
-     joker ~/syscfg/scripts/bb/weather.joke dunst
+     janet ~/syscfg/scripts/bb/weather.janet dunst
 # --------------------------------------------------------------
 
 
