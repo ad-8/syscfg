@@ -16,11 +16,12 @@
   (matching the shell versions, which keyed off empty output, not status).``
   [& args]
   (try
-    (let [proc (os/spawn args :p {:out :pipe :err :pipe})
-          out (ev/read (proc :out) :all)]
-      (ev/read (proc :err) :all)
-      (os/proc-wait proc)
-      (if out (string/trim out) ""))
+    (with [proc (os/spawn args :p {:out :pipe :err :pipe})]
+      (let [[out] (ev/gather
+                    (ev/read (proc :out) :all)
+                    (ev/read (proc :err) :all)
+                    (os/proc-wait proc))]
+        (if out (string/trim out) "")))
     ([_] "")))
 
 (defn volume []

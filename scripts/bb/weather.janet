@@ -38,17 +38,28 @@
 
 ### --- shelling out ----------------------------------------------------------
 
-(defn run
-  "Run a command vector; return [stdout exit-code]. stderr is swallowed."
-  [args]
-  (def proc (os/spawn args :p {:out :pipe :err :pipe}))
-  (def out (ev/read (proc :out) :all))
-  (ev/read (proc :err) :all)
-  (def code (os/proc-wait proc))
-  [(if out (string out) "") code])
+# Lifted verbatim from spork/sh.janet (MIT, (c) 2022 Calvin Rose). Both read
+# pipes via ev/gather (no deadlock) and wrap the process in `with` for fd
+# cleanup. Kept inline so this script stays self-contained.
 
-(defn spawn-wait [args]
-  (os/proc-wait (os/spawn args :p)))
+(defn exec
+  "Execute command specified by args returning its exit code"
+  [& args]
+  (os/execute args :p))
+
+(defn exec-slurp-all
+  ``Execute args with `os/spawn`; return {:out :err :status} (trimmed stdout,
+  trimmed stderr, exit code). Never raises on a non-zero exit.``
+  [& args]
+  (with [proc (os/spawn args :p {:out :pipe :err :pipe})]
+    (let [[out err status]
+          (ev/gather
+            (ev/read (proc :out) :all)
+            (ev/read (proc :err) :all)
+            (os/proc-wait proc))]
+      {:out (if out (string/trimr out) "")
+       :err (if err (string/trimr err) "")
+       :status status})))
 
 
 ### --- config ----------------------------------------------------------------
@@ -89,17 +100,17 @@
   (eachp [k v] params
     (def vs (if (indexed? v) (string/join (map string v) ",") (string v)))
     (array/push args "--data-urlencode" (string k "=" vs)))
-  (def [body code] (run args))
+  (def {:out body :status code} (exec-slurp-all ;args))
   (if (= 0 code) body (os/exit 1)))
 
 (defn download-icon [icon-url path]
-  (spawn-wait ["curl" "-sLfo" path icon-url]))
+  (exec "curl" "-sLfo" path icon-url))
 
 (defn notify [title body]
   # separate args (not a shell string) -> robust quoting; body is one arg, so a
   # leading "-3°C" can't be parsed as a flag.
-  (spawn-wait ["notify-send" "--app-name" "dunst-weather"
-               "--icon" (settings :icon-path) title body]))
+  (exec "notify-send" "--app-name" "dunst-weather"
+        "--icon" (settings :icon-path) title body))
 
 
 ### --- weather codes ---------------------------------------------------------
@@ -347,7 +358,7 @@
   (def filename "/tmp/plotly-weather-chart.html")
   (spit filename (html-template width height plot-data))
   (print "Plot saved to " filename ", opening in Firefox...")
-  (spawn-wait ["firefox" filename]))
+  (exec "firefox" filename))
 
 
 ### --- dispatch --------------------------------------------------------------
