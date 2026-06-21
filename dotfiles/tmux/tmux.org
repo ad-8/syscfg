@@ -47,6 +47,17 @@ setw -g window-status-format ' #I #[fg=white]#W #[fg=yellow]#F '
 
 setw -g window-status-bell-style 'fg=yellow bg=red bold'
 #+end_src
+** Theme
+Per-theme colors managed by =switch_theme.clj=; overrides the default styles
+above. ~-q~ silently skips the file before the first theme pick, so tmux still
+starts clean.
+
+The default styles above are intentional fallbacks: on servers or minimal
+installs where =switch_theme= is not available, tmux still gets a usable
+(if garish) appearance from this config alone.
+#+begin_src shell
+source-file -q ~/.config/tmux/active-theme.conf
+#+end_src
 ** Disable bell
 don't do anything when a 'bell' rings
 (*not used any of those settings so far* after a few month of using tmux (30.04.26))

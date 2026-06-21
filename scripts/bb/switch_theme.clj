@@ -66,6 +66,13 @@
              "set-colors" "--all" "--configured" (str src))
       (catch Exception _))))
 
+(defn reload-tmux
+  "Re-sources the active tmux theme file into the running tmux server, if any.
+   Guarded by list-sessions so we don't spawn a server when none is running."
+  [src]
+  (shell {:continue true} "sh" "-c"
+         (str "tmux list-sessions >/dev/null 2>&1 && tmux source-file " src)))
+
 (defn no-reload
   "Placeholder reload for apps that don't require an explicit restart."
   [_] nil)
@@ -80,6 +87,9 @@
    {:file    "kitty.conf"
     :symlink (fs/path (fs/xdg-config-home) "kitty/active-theme.conf")
     :reload  reload-kitty}
+   {:file    "tmux.conf"
+    :symlink (fs/path (fs/xdg-config-home) "tmux/active-theme.conf")
+    :reload  reload-tmux}
    {:file    "waybar.css"
     :symlink (fs/path (fs/xdg-config-home) "waybar/active-theme.css")
     ;; Restart via `waybar.clj launch` (not bare `waybar`) so the gitignored
