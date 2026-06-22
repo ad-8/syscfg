@@ -34,6 +34,12 @@
         exec = "${pkgs.chromium}/bin/chromium --app=\"https://search.nixos.org/packages\"";
         terminal = false;
       };
+      claude = {
+        name = "Claude";
+        genericName = "Claude";
+        exec = "${pkgs.chromium}/bin/chromium --app=\"https://claude.ai\"";
+        terminal = false;
+      };
     };
   };
 }
