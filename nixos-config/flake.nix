@@ -13,6 +13,11 @@
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";
     # };
     hyprland.url = "github:hyprwm/Hyprland/v0.55.4";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.darwin.follows = "";
+    };
   };
 
   outputs =
@@ -53,6 +58,7 @@
           specialArgs = { inherit inputs; }; # makes inputs available to all modules, needed to reference inputs.hyprland directly
           modules = [
             ./hosts/${hostname}/configuration.nix
+            inputs.agenix.nixosModules.default
           ]
           ++ hm;
         };
