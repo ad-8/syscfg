@@ -9,6 +9,9 @@
 #   weather.janet hours-dunst [n]  next n hours as a notification (Pango)
 #   weather.janet plot          3-day Plotly chart opened in Firefox
 #
+# HTTPS shells out to curl on purpose: Janet core has no TLS/HTTP, and every
+# client lib is just a libcurl binding needing a native build per platform.
+#
 # JSON comes from spork/json (one-time `jpm install spork`; its native module
 # builds fine on OpenBSD, where cc is in base). `utf8-encode` below stays
 # hand-rolled — it also renders Nerd Font weather glyphs, not just JSON escapes.
