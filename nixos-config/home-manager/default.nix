@@ -18,7 +18,7 @@
   configGtk.enable = true;
   configMegasync.enable = false;
   configMime.enable = true;
-  configQt.enable = true;
+  configQt.enable = false;
   configSecretService.enable = false;
   configWebApps.enable = true;
 
