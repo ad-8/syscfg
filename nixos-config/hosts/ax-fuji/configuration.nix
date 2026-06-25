@@ -29,6 +29,7 @@ in
     restic
     ruby_3_4
     vlock
+    yt-dlp
   ];
 
   users.users.ax = {
