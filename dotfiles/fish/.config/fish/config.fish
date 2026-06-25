@@ -72,8 +72,9 @@ abbr -a tn 'tmux new-session -s'
 abbr -a tls 'tmux list-sessions'
 abbr -a ta 'tmux attach-session'
 
-abbr -a nxr nix run #e.g. 'nix run nixpkgs#hello'
-abbr -a nxs nix shell
+abbr -a nxr nix run
+abbr -a nxsh nix shell
+abbr -a nxs du -hsc /nix/store
 abbr -a nxd "nix develop --command fish"
 abbr -a nxdu "NIXPKGS_ALLOW_UNFREE=1 nix develop --impure --command fish"
 abbr -a nxfu nix flake update

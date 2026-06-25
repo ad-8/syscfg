@@ -22,7 +22,6 @@
 - [[#set-in-nix----export][set in nix? -- export]]
   - [[#export-env-vars][export ENV vars]]
   - [[#editor--visual][EDITOR / VISUAL]]
-  - [[#terminal][TERMINAL]]
 - [[#greeting][greeting]]
 - [[#test-timestamp-and-keybinding][test timestamp and keybinding]]
 - [[#stuff-that-should-be-at-the-end][stuff that should be at the end]]
@@ -117,8 +116,9 @@ abbr -a ta 'tmux attach-session'
 ** nix 
 When using `nix shell`, `nix build`, `nix develop`, etc with a flake, then pass `--impure` in order to allow use of environment variables.
 #+begin_src shell
-abbr -a nxr nix run #e.g. 'nix run nixpkgs#hello'
-abbr -a nxs nix shell
+abbr -a nxr nix run
+abbr -a nxsh nix shell
+abbr -a nxs du -hsc /nix/store
 abbr -a nxd "nix develop --command fish"
 abbr -a nxdu "NIXPKGS_ALLOW_UNFREE=1 nix develop --impure --command fish"
 abbr -a nxfu nix flake update
