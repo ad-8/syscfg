@@ -10,7 +10,7 @@
 
   configWorkstation.enable = true;
   configFirefox.enable = true;
-  configHyprland.enable = true;
+  configNiri.enable = true;
   configAudio.enable = true;
   configPrinting.enable = true;
 
