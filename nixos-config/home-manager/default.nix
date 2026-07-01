@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./all-modules.nix
+    ./home-base.nix
   ];
 
   # https://github.com/vimjoyer/modularize-video (as seen in https://www.youtube.com/watch?v=vYc6IzKvAJQ)
@@ -21,16 +21,4 @@
   configQt.enable = false;
   configSecretService.enable = false;
   configWebApps.enable = true;
-
-  home.stateVersion = "25.05";
-  home.username = "ax";
-  home.homeDirectory = "/home/ax";
-  home.packages = [ ];
-
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      btw = "echo 'home-manager seems to be working :)'";
-    };
-  };
 }

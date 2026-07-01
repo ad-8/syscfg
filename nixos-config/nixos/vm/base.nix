@@ -16,7 +16,11 @@
 
   environment.systemPackages = with pkgs; [
     alacritty
+    btop
     dmenu
+    maim
+    unzip
+    xclip
   ];
 
   services.xserver = {
