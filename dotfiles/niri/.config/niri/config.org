@@ -17,6 +17,7 @@
   - [[#blur][blur]]
 - [[#screenshot-settings][Screenshot settings]]
 - [[#misc-1][Misc]]
+  - [[#gestures][Gestures]]
 
 * About this config
 This config is in the KDL format: https://kdl.dev
@@ -530,3 +531,12 @@ hotkey-overlay {
 }
 #+end_src
 
+** Gestures
+// prevent the default top-left corner from showing the overview
+#+begin_src shell
+gestures {
+    hot-corners {
+        off
+    }
+}
+#+end_src
