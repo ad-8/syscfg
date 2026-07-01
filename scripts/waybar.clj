@@ -150,7 +150,7 @@
   (let [status (-> (shell {:out :string :continue true} "sh -c 'pgrep waybar >/dev/null'") :exit)]
     (if (= 0 status)
       (do (println "waybar is running -> killing it")
-          (let [status (-> (shell {:out :string} "sh -c 'pkill -f waybar'") :exit)]
+          (let [status (-> (shell {:out :string} "sh -c 'pkill waybar'") :exit)]
             (printf "killing waybar, status = %d\n" status)))
       (do (println "not runnin'")
           (point-compositor-symlink!)
