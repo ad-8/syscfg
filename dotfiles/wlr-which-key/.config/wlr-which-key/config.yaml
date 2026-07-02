@@ -34,9 +34,6 @@ menu:
   - key: "c"
     desc: Change ...
     submenu:
-      - key: "b"
-        desc: toggle bluetooth
-        cmd: rfkill toggle bluetooth
       - key: "l"
         desc: lights
         cmd: $HOME/syscfg/scripts/bb/licht.clj
@@ -49,9 +46,6 @@ menu:
       - key: "T"
         desc: theme (flat)
         cmd: $HOME/syscfg/scripts/bb/switch_theme.clj
-      - key: "w"
-        desc: toggle wifi
-        cmd: rfkill toggle wifi
 
   - key: "n"
     desc: Network ...
@@ -152,6 +146,16 @@ menu:
         desc: Firefox
         cmd: firefox
 
+  - key: "t"
+    desc: Toggle
+    submenu:
+      - key: "b"
+        desc: toggle bluetooth
+        cmd: rfkill toggle bluetooth
+      - key: "w"
+        desc: toggle wifi
+        cmd: rfkill toggle wifi
+ 
   - key: "r"
     desc: Run stuff ...
     submenu:
