@@ -16,3 +16,6 @@ fish/.config/fish/fish_variables
 /dotfiles/rofi/.config/rofi/active-theme.rasi
 /dotfiles/niri/.config/niri/active-theme.kdl
 /dotfiles/kitty/.config/kitty/active-theme.conf
+/dotfiles/fuzzel/.config/fuzzel/active-theme.ini
+/dotfiles/clojure/.clojure/tools/
+/dotfiles/clojure/.clojure/.cpcache/
