@@ -13,6 +13,12 @@
   config = lib.mkIf config.configWorkstation.enable {
     networking.networkmanager.enable = true;
 
+    # https://wiki.nixos.org/wiki/WireGuard#wg-quick_issues_with_NetworkManager
+    # didn't have this problem, but for me,
+    # prevents DNS leaks and works well with `wg-quick up`
+    networking.networkmanager.dns = "systemd-resolved";
+    services.resolved.enable = true;
+
     security.polkit.enable = true;
     services.gnome.gnome-keyring.enable = true;
     # seahorse is a GUI to manage secrets.

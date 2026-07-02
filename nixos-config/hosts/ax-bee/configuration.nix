@@ -33,13 +33,6 @@
     };
   };
 
-  # https://wiki.nixos.org/wiki/WireGuard#wg-quick_issues_with_NetworkManager
-  # didn't have this problem, but for me,
-  # prevents DNS leaks and works well with `wg-quick up`
-  # TODO for all machines?
-  networking.networkmanager.dns = "systemd-resolved";
-  services.resolved.enable = true;
-
   # android adb setup
   # 26.05: programs.adb removed (systemd 258 handles uaccess rules
   # automatically); just install the tool and the adbusers group is gone
