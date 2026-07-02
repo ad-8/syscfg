@@ -68,7 +68,7 @@ layout {
 
     border {
         on
-        width 2
+        width 3
     }
 
     shadow {
