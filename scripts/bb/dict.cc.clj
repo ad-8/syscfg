@@ -30,7 +30,7 @@
    {:a ("etw." "wagen"), :div ("4994"), :dfn (), :var ()})
 (defn filter-n-get-innermost [a-vector tag]
   (let [filter-fn (if (= :a tag)
-                    #(or (= tag (:tag %)) (= :b (:tag %)) (string? %)) ; stuff like "to" is just a str, not nested; bare <b> for unlinked headwords
+                    #(or (= tag (:tag %)) (= :b (:tag %)) (= :kbd (:tag %)) (string? %)) ; stuff like "to" is just a str, not nested; bare <b> for unlinked headwords; bare <kbd> for unlinked bracket-annotation words
                     #(= tag (:tag %)))]
 
     (->> a-vector
