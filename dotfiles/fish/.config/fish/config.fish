@@ -189,7 +189,6 @@ alias dcc 'joker $HOME/syscfg/scripts/bb/dict.cc.joke'
 alias csm '$HOME/my/code/clojure/csm/csm.clj'
 
 # --export -x is the same
-set -Ux RESTIC_PASSWORD_FILE "/home/ax/.restic-std"
 set -g theme_color_scheme "nord"
 set -Ux PAGER less
 
