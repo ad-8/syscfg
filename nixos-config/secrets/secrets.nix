@@ -25,5 +25,6 @@ in
   # if not installed: nix run github:ryantm/agenix -- --help
  "testuser-password.age".publicKeys = [ ax ax-bee ];
  "searx-secret-key.age".publicKeys  = [ ax ax-fuji ];
+ "ax-bee-restic-b2.age".publicKeys  = [ ax ax-bee ];
 }
 

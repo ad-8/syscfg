@@ -9,15 +9,20 @@
     };
   };
 
+  age.secrets.ax-bee-restic-b2 = {
+    file = ../../secrets/ax-bee-restic-b2.age;
+    owner = "ax";
+  };
+
   systemd.services."ax-restic-b2" = {
     description = "Restic B2 backup service";
     path = [
-      pkgs.bash
       pkgs.restic
     ];
     serviceConfig = {
       Type = "oneshot";
       User = "ax";
+      EnvironmentFile = config.age.secrets.ax-bee-restic-b2.path;
       ExecStart = "${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/backup/ax_bee_restic_b2.clj";
     };
   };
