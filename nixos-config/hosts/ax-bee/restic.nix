@@ -37,6 +37,11 @@
     };
   };
 
+  age.secrets.ax-bee-restic-mega = {
+    file = ../../secrets/ax-bee-restic-mega.age;
+    owner = "ax";
+  };
+
   systemd.services."ax-restic" = {
     description = "Restic backup service";
     # the $PATH is almost empty when running a systemd service, so we add to it
@@ -46,6 +51,7 @@
     serviceConfig = {
       Type = "oneshot";
       User = "ax";
+      Environment = "RESTIC_PASSWORD_FILE=${config.age.secrets.ax-bee-restic-mega.path}";
       ExecStart = "${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/backup/ax_bee_restic_mega.clj";
     };
   };

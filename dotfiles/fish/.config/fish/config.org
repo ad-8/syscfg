@@ -254,7 +254,6 @@ alias csm '$HOME/my/code/clojure/csm/csm.clj'
 ** export ENV vars
 #+begin_src shell
 # --export -x is the same
-set -Ux RESTIC_PASSWORD_FILE "/home/ax/.restic-std"
 set -g theme_color_scheme "nord"
 set -Ux PAGER less
 #+end_src
