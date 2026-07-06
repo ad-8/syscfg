@@ -42,6 +42,7 @@ in
     allowedTCPPorts = [
       2283 # immich
       3000 # forgejo
+      3388 # TODOmacs
       5232 # radicale
       8888 # searxng
       9090 # linkding
