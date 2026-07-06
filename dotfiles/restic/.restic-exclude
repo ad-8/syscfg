@@ -11,6 +11,7 @@ qbit
 **/clojure/**/resources/public/js
 **/rails/**/tmp
 **/rails/store/vendor
+**/jpm_tree
 
 **/.calva/
 **/.ruby-lsp
