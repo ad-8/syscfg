@@ -4,9 +4,9 @@ qbit
 *.dmg
 **/rust/**/target
 **/code-v2/**/target
-**/clojure/**/.clj-kondo
+**/.clj-kondo
 **/clojure/**/.shadow-cljs
-**/clojure/**/.lsp
+**/.lsp
 **/clojure/**/node_modules
 **/clojure/**/resources/public/js
 **/rails/**/tmp
