@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./restic.nix
+    ./networkmanager-muc.nix
     ../../nixos/config-core.nix
     ../../nixos/all-modules.nix
   ];

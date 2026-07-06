@@ -27,5 +27,6 @@ in
  "searx-secret-key.age".publicKeys  = [ ax ax-fuji ];
  "ax-bee-restic-b2.age".publicKeys  = [ ax ax-bee ];
  "ax-bee-restic-mega.age".publicKeys = [ ax ax-bee ];
+ "ax-bee-networkmanager-muc.age".publicKeys = [ ax ax-bee ];
 }
 
