@@ -56,6 +56,11 @@ in
     owner = "ax";
   };
 
+  age.secrets.ax-bee-restic-b2 = {
+    file = ../../secrets/ax-bee-restic-b2.age;
+    owner = "ax";
+  };
+
   services.searx = {
     enable = true;
     redisCreateLocally = true;
