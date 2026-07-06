@@ -51,6 +51,11 @@ in
 
   age.secrets.searx-secret-key.file = ../../secrets/searx-secret-key.age;
 
+  age.secrets.ax-fuji-restic-immich = {
+    file = ../../secrets/ax-fuji-restic-immich.age;
+    owner = "ax";
+  };
+
   services.searx = {
     enable = true;
     redisCreateLocally = true;
