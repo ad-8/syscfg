@@ -85,6 +85,11 @@ layout {
 
 include optional=true "active-theme.kdl"
 
+cursor {
+    xcursor-theme "Numix-Cursor"
+    xcursor-size 24
+}
+
 spawn-sh-at-startup "~/syscfg/scripts/waybar.clj launch"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "dunst"

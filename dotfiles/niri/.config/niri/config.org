@@ -7,6 +7,7 @@
 - [[#output][Output]]
 - [[#layout][Layout]]
 - [[#theme][Theme]]
+- [[#cursor][Cursor]]
 - [[#autostart][Autostart]]
 - [[#keybindings][Keybindings]]
 - [[#window-rules][Window Rules]]
@@ -129,6 +130,19 @@ per-property over the =layout= block above. =optional=true= keeps niri loading e
 theme has been applied yet (e.g. fresh checkout before first switch).
 #+begin_src shell
 include optional=true "active-theme.kdl"
+#+end_src
+
+* Cursor
+Without this block niri looks for an xcursor theme literally named "default", which no
+host provides, and falls back to an oversized cursor built into the niri binary (64x64
+bitmap). Numix-Cursor at size 24 matches what GTK (home-manager =gtk.cursorTheme=) and
+X11 (=.Xresources=) already use. This also exports =XCURSOR_THEME= and =XCURSOR_SIZE=
+to apps spawned by niri.
+#+begin_src shell
+cursor {
+    xcursor-theme "Numix-Cursor"
+    xcursor-size 24
+}
 #+end_src
 
 * Autostart
