@@ -14,6 +14,7 @@ Lets try to keep this "minimal".
   - [[#doom-emacs][doom emacs]]
 - [[#misc][misc]]
 - [[#alias][alias]]
+  - [[#git][git]]
 - [[#hold-abbr][HOLD abbr]]
 - [[#prompt][prompt]]
   - [[#1-add-to-fpath][1. add to fpath]]
@@ -82,6 +83,15 @@ alias l='eza -l --group-directories-first --icons'
 alias lll='eza -al --group-directories-first --icons'
 alias v=nvim
 alias vim=nvim
+#+end_src
+
+** git
+#+begin_src sh
+alias gb='git --no-pager branch'
+alias gd='git --no-pager diff'
+alias gs='git status'
+alias gsw='git show'
+alias gin='clear && git status && echo && git --no-pager log --oneline -10 && echo && git --no-pager branch'
 #+end_src
 
 * HOLD abbr

@@ -27,6 +27,12 @@ alias lll='eza -al --group-directories-first --icons'
 alias v=nvim
 alias vim=nvim
 
+alias gb='git --no-pager branch'
+alias gd='git --no-pager diff'
+alias gs='git status'
+alias gsw='git show'
+alias gin='clear && git status && echo && git --no-pager log --oneline -10 && echo && git --no-pager branch'
+
 fpath+=($HOME/.zsh/pure)
 
 export PURE_PROMPT_SYMBOL='λ'
