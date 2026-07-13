@@ -54,7 +54,7 @@
 
 
 (defn determine-memory
-  "returns total and used memory [GiB] as reported by `free -m`"
+  "Returns total and used memory [GiB] as reported by `free -m`."
   []
   (let [[_full-match total used]
         (re-find #"Mem:\s+(\d+)\s+(\d+)" (:out (shell {:out :string} "free -m")))]
@@ -69,7 +69,7 @@
 (defn- print-memory-info [output-fmt]
   (let [[total used] (determine-memory)
         class (determine-css-class total used)
-        fmt (format "󰍛 %.1f/%.1f" used total)
+        fmt (format "󰍛 %.0f%%" (* (/ used total) 100))
         json (json/encode {:text fmt :class class})]
     (if (= "json" output-fmt)
       (println json)
