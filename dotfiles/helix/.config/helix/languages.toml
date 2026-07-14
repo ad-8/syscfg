@@ -5,3 +5,11 @@ language-servers = ["nixd"]
 
 [language-server.nixd]
 command = "nixd"
+
+[[language]]
+name = "clojure"
+language-servers = ["clojure-lsp"]
+auto-format = true
+
+[language-server.clojure-lsp]
+command = "clojure-lsp"
