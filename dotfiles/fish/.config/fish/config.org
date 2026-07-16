@@ -86,7 +86,7 @@ abbr -a db distrobox
 
 abbr -a lt 'll -th'
 # by default, when in nnn, `e` opens a file with $VISUAL
-abbr -a n "VISUAL='emacsclient -nw' nnn"
+abbr -a n "VISUAL='hx' nnn"
 abbr -a o. 'xdg-open .'
 abbr -a pnc "protonvpn-cli ks --off && protonvpn-cli ks --permanent && protonvpn-cli c --protocol tcp --fastest" # RIP nice cli 
 abbr -a rc rclone
