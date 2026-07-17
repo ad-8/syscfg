@@ -87,6 +87,16 @@ in
         "0 9,10,11 * * *     ax     . /etc/profile; /usr/bin/env bb $HOME/x/bing_wallpaper_dl.clj >> $HOME/bing.log 2>&1"
       ];
     };
+
+    services.audiobookshelf = {
+      enable = true;
+      host = "0.0.0.0";
+      port = 8000;
+      user = "ax";
+      group = "users";
+      openFirewall = true;
+    };
+ 
     forgejo = {
       enable = true;
       settings = {
