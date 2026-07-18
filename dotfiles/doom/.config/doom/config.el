@@ -443,7 +443,11 @@ Runs indefinitely until the user aborts with `C-g` or similar."
 (after! cider
   (add-hook 'cider-mode-hook #'lsp)
   (setq cider-doc-view-function #'cider-docview-inline-symbol)  ; Inline docs with examples
-  (set-popup-rule! "^\\*cider-repl" :side 'right :size 0.4 :quit nil :ttl nil))
+  (set-popup-rule! "^\\*cider-repl" :side 'right :size 0.4 :quit nil :ttl nil)
+  (map! :map cider-mode-map
+        :localleader
+        (:prefix ("e" . "eval")
+         :desc "Eval defun up to point" "p" #'cider-eval-defun-up-to-point)))
 ; ------------
 
 
