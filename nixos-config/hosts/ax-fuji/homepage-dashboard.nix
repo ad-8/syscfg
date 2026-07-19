@@ -74,6 +74,14 @@ in
               siteMonitor = "http://${serverIp}:8096";
             };
           }
+          {
+            Audiobookshelf = {
+              href = "http://${serverIp}:8000";
+              icon = "audiobookshelf.png";
+              description = "Audiobooks & Podcasts";
+              siteMonitor = "http://${serverIp}:8000";
+            };
+          }
         ];
       }
       {
@@ -92,6 +100,14 @@ in
               icon = "radicale.png";
               description = "CalDAV and CardDAV Server";
               siteMonitor = "http://${serverIp}:5232";
+            };
+          }
+          {
+            TODOmacs = {
+              href = "http://${serverIp}:3388";
+              icon = "emacs.png";
+              description = "Todos";
+              siteMonitor = "http://${serverIp}:3388";
             };
           }
         ];
