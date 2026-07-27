@@ -138,7 +138,7 @@ menu:
         cmd: virt-manager
       - key: "w"
         desc: Wiremix
-        cmd: foot -T ax-bluetui -e wiremix
+        cmd: foot -T ax-wiremix -e wiremix
       - key: "W"
         desc: Waypaper
         cmd: waypaper

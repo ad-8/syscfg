@@ -589,7 +589,7 @@ local rules = {
   -- float + size
   { match = { class = "^anki$" },                                            float = true, size = "1200 800" },
   { match = { class = "qalculate-gtk" },                                     float = true, size = "800 600" },
-  { match = { class = "foot", title = "^(bluetui|wiremix)$" },               float = true, size = "1024 768" },
+  { match = { class = "foot", title = "^(ax-bluetui|ax-wiremix)$" },         float = true, size = "1024 768" },
   { match = { class = "waypaper" },                                          float = true, size = "1024 768" },
   { match = { class = ".virt-manager-wrapped", title = "Locate ISO media" }, float = true, size = "1024 768" },
   -- float only
