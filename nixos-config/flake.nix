@@ -12,7 +12,7 @@
     #   url = "github:nix-community/home-manager/master";
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";
     # };
-    hyprland.url = "github:hyprwm/Hyprland/v0.55.4";
+    hyprland.url = "github:hyprwm/Hyprland/v0.56.0";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs-stable";
