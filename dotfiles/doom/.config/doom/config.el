@@ -145,6 +145,9 @@
        (:desc "visually select a window" "w" #'ace-window)
        (:desc "open terminal (eat)" "RET" #'eat)
        ;; nested
+       (:prefix ("c" . "calendar")
+        :desc "org-caldav sync" "s" #'org-caldav-sync
+        :desc "open calendar view" "c" #'ax/open-calendar)
        (:prefix ("d" . "dirvish / delete")
         :desc "dirvish-fd" "f" #'dirvish-fd
         :desc "dirvish-move" "m" #'dirvish-move
@@ -448,3 +451,31 @@
   :after janet-mode
   :config
   (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))
+
+(defun ax/open-calendar ()
+  (interactive)
+  (require 'calfw)
+  (require 'calfw-ical)
+  (calfw-ical-data-cache-clear-all)
+  (calfw-open-calendar-buffer
+   :contents-sources
+   (list (calfw-ical-create-source
+          "http://192.168.178.8:5232/ax/d27112e9-c0d8-fdf1-bb05-25bf09c03643/"
+          "test-cal"
+          "IndianRed"))))
+
+(use-package! org-caldav
+  :defer t
+  :config
+  (setq org-caldav-url "http://192.168.178.8:5232/ax"
+        org-caldav-calendar-id "d27112e9-c0d8-fdf1-bb05-25bf09c03643"
+        org-caldav-inbox "~/org/caldav-inbox.org"
+        org-caldav-files '("~/org/todo.org")
+        org-caldav-sync-direction 'twoway
+        org-caldav-save-directory "~/.local/share/org-caldav/"
+        org-caldav-backup-file "~/.local/share/org-caldav/backup.org"))
+
+(set-popup-rule! "^\\*org caldav sync result" :size 0.3 :quit t :select nil)
+
+(setq org-icalendar-use-scheduled
+      '(todo-start event-if-not-todo event-if-todo-not-done))

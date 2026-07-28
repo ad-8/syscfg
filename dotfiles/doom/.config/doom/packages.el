@@ -68,3 +68,5 @@
 (package! ajrepl
   :recipe (:type git :host github :repo "sogaiu/ajrepl"
            :files (:defaults ("ajrepl/" "ajrepl/*"))))
+
+(package! org-caldav)

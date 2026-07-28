@@ -185,7 +185,7 @@
        ;;(wanderlust +gmail)
 
        :app
-       ;;calendar
+       calendar
        emms                ; Emacs Multimedia System
        ;;everywhere        ; *leave* Emacs!? You must be joking
        ;;irc               ; how neckbeards socialize
