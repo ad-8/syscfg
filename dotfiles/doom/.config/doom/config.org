@@ -25,7 +25,6 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
   - [[#scrobble-to-lastfm][scrobble to last.fm]]
 - [[#functions][Functions]]
   - [[#keep][keep]]
-  - [[#delete-sometime-in-the-future][delete sometime in the future]]
 - [[#keybindings][Keybindings]]
   - [[#ax-1][ax-1]]
   - [[#ax-custom-prefix-spc-j][ax-custom-prefix: SPC j]]
@@ -36,7 +35,6 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#org-stuff][Org Stuff]]
   - [[#org-directory][org-directory]]
   - [[#set-different-heading-sizes][set different heading sizes]]
-- [[#org-capture-loop-for-scratchpad][org-capture loop for scratchpad]]
 - [[#eat-terminal][eat terminal]]
 - [[#everywhere][everywhere]]
 - [[#eww-popupwindow-height][eww popup/window height]]
@@ -328,27 +326,6 @@ my custom functions, prefixed with =ax/= to find them effortlessly using =M-x=
       (when (org-at-item-p)
         (org-cycle)))))
 #+end_src
-** TODO delete sometime in the future
-keeping 'em for now to learn how to do things with elisp
-#+begin_src emacs-lisp
-(defun ax/open-trixie ()
-  "Open trixie.org in dired"
-  (interactive)
-  (dired "~/sync/0-from-MEGAsync/debian-trixie.org"))
-
-(defun ax/open-trixie-x ()
-  "Open trixie.org in editor"
-  (interactive)
-  (find-file "~/sync/0-from-MEGAsync/debian-trixie.org"))
-
-(defun ax/my-hello-message ()
-  (interactive)
-  (message "Hello World from Doom!"))
-
-(defun ax/my-run-date ()
-  (interactive)
-  (message "Date is: %s" (string-trim (shell-command-to-string "date +%F_%T"))))
-#+end_src
 * Keybindings
 ** ax-1
 #+begin_src emacs-lisp
@@ -383,8 +360,6 @@ why =j=? because its a convenient key to type and surprisingly the namespace was
         :desc "consult-git-grep" "g" #'consult-git-grep
         :desc "consult-ripgrep" "r" #'consult-ripgrep)
        (:prefix ("t" . "testing stuff")
-        :desc "hello world" "h" #'ax/my-hello-message
-        :desc "print date" "d" #'ax/my-run-date
         :desc "org-babel-tangle" "t" #'org-babel-tangle)))
 #+end_src
 ** toggle
@@ -454,26 +429,6 @@ theme switch.
   '(org-document-title :height 1.7))
 #+end_src
 
-* org-capture loop for scratchpad
-#+begin_src emacs-lisp
-(defun ax/org-capture-loop ()
-  "Continuously open `org-capture` after each capture is finalized.
-Runs indefinitely until the user aborts with `C-g` or similar."
-  (interactive)
-  (add-hook 'org-capture-after-finalize-hook #'ax/org-capture--restart)
-  (org-capture))
-
-(defun ax/org-capture--restart ()
-  "Restart `org-capture` automatically after finalizing a capture."
-  ;; Temporarily remove the hook to prevent nested recursion.
-  (remove-hook 'org-capture-after-finalize-hook #'ax/org-capture--restart)
-  ;; Delay restart slightly so Org finishes cleanup first.
-  (run-at-time
-   0.1 nil
-   (lambda ()
-     (add-hook 'org-capture-after-finalize-hook #'ax/org-capture--restart)
-     (org-capture))))
-#+end_src
 * eat terminal
 https://codeberg.org/akib/emacs-eat
 
