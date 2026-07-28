@@ -114,15 +114,21 @@
   (message "Number of commits: %s"
            (string-trim (shell-command-to-string "git log --oneline | wc -l"))))
 
-;; TODO doesn't work for nested list items, if those have a second line
 (defun ax/org-fold-all-list-items ()
-  "Fold all multi-line list items in the current Org buffer."
+  "Fold every plain-list item in the current Org buffer."
   (interactive)
   (save-excursion
     (goto-char (point-min))
-    (while (re-search-forward org-list-full-item-re nil t)
-      (when (org-at-item-p)
-        (org-cycle)))))
+    (while (re-search-forward (org-item-beginning-re) nil t)
+      (forward-line 0)
+      (if (org-at-item-p)
+          (let* ((struct (org-list-struct))
+                 (end (org-list-get-bottom-point struct)))
+            (dolist (item (org-list-get-all-items
+                           (point) struct (org-list-prevs-alist struct)))
+              (org-list-set-item-visibility item struct 'folded))
+            (goto-char end))
+        (forward-line 1)))))
 
 (map! :leader
       :desc "(Un)comment line" "-" #'comment-line)
