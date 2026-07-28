@@ -204,6 +204,8 @@
        :desc "Toggle line highlight globally" "H" #'global-hl-line-mode
        :desc "Toggle markdown-view-mode"      "M" #'ax/toggle-markdown-mode
        :desc "Toggle truncate lines"          "T" #'toggle-truncate-lines
+       :desc "Toggle zen"                     "z" #'+zen/toggle
+       :desc "Toggle zen"                     "Z" #'+zen/toggle-fullscreen
        :desc "Toggle treemacs"                "t" #'+treemacs/toggle))
 
 ;; (map! :leader
