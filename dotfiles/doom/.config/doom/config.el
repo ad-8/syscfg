@@ -472,7 +472,7 @@
         org-caldav-inbox "~/org/caldav-inbox.org"
         org-caldav-files '("~/org/todo.org")
         org-caldav-sync-direction 'twoway
-        org-caldav-save-directory "~/.local/share/org-caldav/"
+        org-caldav-save-directory "~/org/.org-caldav/"
         org-caldav-backup-file "~/.local/share/org-caldav/backup.org"))
 
 (set-popup-rule! "^\\*org caldav sync result" :size 0.3 :quit t :select nil)
