@@ -42,7 +42,10 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#clean-up----misc-stuff][clean up -- Misc Stuff]]
 - [[#wip-ispell-aspell-hunspell][(wip) ispell aspell hunspell]]
 - [[#janet][janet]]
-- [[#calendar-test][calendar test]]
+- [[#calendar-setup-to-interact-with-radicale][Calendar setup to interact with radicale]]
+  - [[#viewing-the-calendar-spc-j-c-c][viewing the calendar =SPC j c c=]]
+  - [[#syncing-org-and-calendar-spc-j-c-s][syncing org and calendar =SPC j c s=]]
+  - [[#auth-for-both-authinfo][auth for both =~/.authinfo=]]
 
 * Resources
 - https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org
@@ -720,10 +723,24 @@ the default height is same/similar as M-x, so way too small for browsing
   (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))
 #+end_src
 
-* calendar test
-only view 
-#+begin_src elisp
+* Calendar setup to interact with radicale
+*TL;DR* — =SPC j c c= opens a read-only month view of what is on the server.
+=SPC j c s= syncs org and the calendar both ways. Events can be created
+anywhere (emacs, thunderbird, phone) and all meet on radicale. Only sync from a
+machine whose org files are current, or it can push stale text back and undo
+edits made elsewhere.
 
+Calendar on the radicale server, same account as the contacts. calfw only views
+it, org-caldav does the two-way editing. Both read the password from
+=~/.authinfo=.
+
+** viewing the calendar =SPC j c c=
+Opens a read-only month grid. Clearing the cache first means every call fetches
+fresh, otherwise calfw keeps showing stale events even after the buffer is
+killed.
+
+The source arguments are =(url name color)=, in that order.
+#+begin_src elisp
 (defun ax/open-calendar ()
   (interactive)
   (require 'calfw)
@@ -739,7 +756,18 @@ only view
 #+end_src
 
 
-for create/edit
+** syncing org and calendar =SPC j c s=
+Syncs both ways. It stays manual because it writes in both directions.
+
+=org-caldav-url= is the base address, =org-caldav-calendar-id= the collection
+href. New server events land in the inbox, and the listed files are read and
+exported. =org-caldav-save-directory= holds the sync state and sits in ~/org so
+syncthing shares it between machines.
+
+With two machines the sync state has to match the org files it describes. If
+emacs has =todo.org= open with stale text (doom only reverts on focus), the
+sync pushes the old version back and undoes edits made elsewhere. Press
+=SPC b r= first.
 #+begin_src elisp
 (use-package! org-caldav
   :defer t
@@ -750,15 +778,17 @@ for create/edit
         org-caldav-files '("~/org/todo.org")
         org-caldav-sync-direction 'twoway
         org-caldav-save-directory "~/org/.org-caldav/"
-        org-caldav-backup-file "~/.local/share/org-caldav/backup.org"))
+        org-caldav-backup-file "~/org/.org-caldav/backup.org"))
 #+end_src
 
 
+Without this the sync result buffer takes over the whole frame.
 #+begin_src elisp
 (set-popup-rule! "^\\*org caldav sync result" :size 0.3 :quit t :select nil)
 #+end_src
 
-To make dated TODOs become calendar events, add event-if-todo-not-done:
+org-caldav exports via org's icalendar exporter, so these settings decide what
+syncs. The default =(todo-start)= alone creates no event at all.
 
 #+begin_src elisp
 (setq org-icalendar-use-scheduled
@@ -766,6 +796,9 @@ To make dated TODOs become calendar events, add event-if-todo-not-done:
 #+end_src
 
 
+** auth for both =~/.authinfo=
+=port http= is not a typo: url.el matches on the url scheme, not the tcp port.
+Changing it to =port 5232= silently returns 401.
 
 #+begin_src sh :tangle no
 λ cat .authinfo
