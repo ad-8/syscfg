@@ -46,6 +46,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
   - [[#viewing-the-calendar-spc-j-c-c][viewing the calendar =SPC j c c=]]
   - [[#syncing-org-and-calendar-spc-j-c-s][syncing org and calendar =SPC j c s=]]
   - [[#auth-for-both-authinfo][auth for both =~/.authinfo=]]
+- [[#org-publish][org-publish]]
 
 * Resources
 - https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org
@@ -803,4 +804,26 @@ Changing it to =port 5232= silently returns 401.
 #+begin_src sh :tangle no
 λ cat .authinfo
  machine 192.168.178.8:5232 port http login ax password <radicale-pw>
+#+end_src
+
+* org-publish
+#+begin_src elisp
+(defvar ax/vps0-site-nav
+  (concat "<nav>"
+          "<a href=\"index.html\">Home</a> | "
+          "<a href=\"vps.html\">About this VPS</a> | "
+          "<a href=\"freebsd-vps-setup.html\">FreeBSD VPS Setup</a> | " 
+          "<a href=\"pictures.html\">Pictures</a> | "
+          "<a href=\"about.html\">About</a>"
+          "</nav>"))
+
+(setq org-publish-project-alist
+      `(("vps0"
+         :base-directory "/ssh:vps:/usr/local/www/mysite-src/"
+         :base-extension "org"
+         :publishing-directory "/ssh:vps:/usr/local/www/mysite/"
+         :publishing-function org-html-publish-to-html
+         :recursive t
+         :section-numbers nil
+         :html-preamble ,ax/vps0-site-nav)))
 #+end_src

@@ -479,3 +479,22 @@
 
 (setq org-icalendar-use-scheduled
       '(todo-start event-if-not-todo event-if-todo-not-done))
+
+(defvar ax/vps0-site-nav
+  (concat "<nav>"
+          "<a href=\"index.html\">Home</a> | "
+          "<a href=\"vps.html\">About this VPS</a> | "
+          "<a href=\"freebsd-vps-setup.html\">FreeBSD VPS Setup</a> | " 
+          "<a href=\"pictures.html\">Pictures</a> | "
+          "<a href=\"about.html\">About</a>"
+          "</nav>"))
+
+(setq org-publish-project-alist
+      `(("vps0"
+         :base-directory "/ssh:vps:/usr/local/www/mysite-src/"
+         :base-extension "org"
+         :publishing-directory "/ssh:vps:/usr/local/www/mysite/"
+         :publishing-function org-html-publish-to-html
+         :recursive t
+         :section-numbers nil
+         :html-preamble ,ax/vps0-site-nav)))
