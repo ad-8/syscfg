@@ -478,8 +478,11 @@
 
 (set-popup-rule! "^\\*org caldav sync result" :size 0.3 :quit t :select nil)
 
+(setq org-icalendar-timezone "Europe/Berlin")
 (setq org-icalendar-use-scheduled
-      '(todo-start event-if-not-todo event-if-todo-not-done))
+      '(event-if-not-todo event-if-todo-not-done))
+(setq org-icalendar-use-deadline
+      '(event-if-not-todo event-if-todo-not-done))
 
 (defvar ax/vps0-src-dir "/ssh:vps:/usr/local/www/mysite-src/")
 

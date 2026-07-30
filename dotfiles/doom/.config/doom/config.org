@@ -790,11 +790,25 @@ Without this the sync result buffer takes over the whole frame.
 #+end_src
 
 org-caldav exports via org's icalendar exporter, so these settings decide what
-syncs. The default =(todo-start)= alone creates no event at all.
+syncs. The default =(todo-start)= alone creates no event at all. A scheduled
+time or a deadline on a TODO only becomes an event when the list holds
+=event-if-todo-not-done=, and without it a sync reports success while pushing
+nothing.
+
+The timezone has to be set by hand. Its default reads the =TZ= environment
+variable, which is unset on these machines, and org-caldav then writes the
+times with no timezone attached and leaves every client to guess.
+
+If task sync is ever turned on, =todo-start= and =todo-due= have to go back
+into these two lists, or a task arrives without a start and without a due
+date.
 
 #+begin_src elisp
+(setq org-icalendar-timezone "Europe/Berlin")
 (setq org-icalendar-use-scheduled
-      '(todo-start event-if-not-todo event-if-todo-not-done))
+      '(event-if-not-todo event-if-todo-not-done))
+(setq org-icalendar-use-deadline
+      '(event-if-not-todo event-if-todo-not-done))
 #+end_src
 
 
