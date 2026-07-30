@@ -808,27 +808,42 @@ Changing it to =port 5232= silently returns 401.
 #+end_src
 
 * org-publish
+The nav bar lives in =nav.html= in the source directory on the VPS — edit it there, no
+config change or tangle needed.
+
+Publish with =SPC j v= (=ax/publish-site=), which forces a rebuild and drops the cached
+nav. Nothing else picks up a nav edit: org republishes a page based on its own mtime and
+never looks at =nav.html=, so a plain =M-x org-publish= silently keeps the old one.
+
+Keep the links root-relative (=/index.html=) — pages under =freebsd/= get this same nav.
 #+begin_src elisp
-(defvar ax/vps0-site-nav
-  (concat "<nav>"
-          "<a href=\"index.html\">Home</a> | "
-          "<a href=\"vps.html\">About this VPS</a> | "
-          "<a href=\"freebsd-vps-setup.html\">FreeBSD VPS Setup</a> | " 
-          "<a href=\"pictures.html\">Pictures</a> | "
-          "<a href=\"about.html\">About</a>"
-          "</nav>"))
+(defvar ax/vps0-src-dir "/ssh:vps:/usr/local/www/mysite-src/")
+
+(defvar ax/vps0-nav-cache nil
+  "Cached contents of nav.html, reset at the start of each publish run.")
+
+(defun ax/vps0-nav-preamble (_info)
+  "Return the site nav HTML, read from nav.html in `ax/vps0-src-dir'."
+  (or ax/vps0-nav-cache
+      (setq ax/vps0-nav-cache
+            (let ((f (expand-file-name "nav.html" ax/vps0-src-dir)))
+              (unless (file-readable-p f)
+                (user-error "ax: nav.html not readable at %s" f))
+              (with-temp-buffer
+                (insert-file-contents f)
+                (buffer-string))))))
 
 (setq org-publish-project-alist
       `(("ax-vps0"
-         :base-directory "/ssh:vps:/usr/local/www/mysite-src/"
+         :base-directory ,ax/vps0-src-dir
          :base-extension "org"
          :publishing-directory "/ssh:vps:/usr/local/www/mysite/"
          :publishing-function org-html-publish-to-html
          :recursive t
          :section-numbers nil
-         :html-preamble ,ax/vps0-site-nav)
+         :html-preamble ax/vps0-nav-preamble)
         ("ax-images"
-         :base-directory "/ssh:vps:/usr/local/www/mysite-src/assets/"
+         :base-directory ,(concat ax/vps0-src-dir "assets/")
          :base-extension "png\\|jpg\\|jpeg\\|gif\\|svg\\|webp"
          :publishing-directory "/ssh:vps:/usr/local/www/mysite/assets/"
          :recursive t
@@ -837,7 +852,9 @@ Changing it to =port 5232= silently returns 401.
          :components ("ax-vps0" "ax-images"))))
 
 (defun ax/publish-site ()
-  "Publish the whole ax-website project (HTML + images), forcing a full rebuild."
+  "Publish the whole ax-website project (HTML + images), forcing a full rebuild.
+Also drops the cached nav so nav.html edits are picked up."
   (interactive)
+  (setq ax/vps0-nav-cache nil)
   (org-publish "ax-website" t))
 #+end_src

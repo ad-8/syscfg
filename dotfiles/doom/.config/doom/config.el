@@ -481,26 +481,33 @@
 (setq org-icalendar-use-scheduled
       '(todo-start event-if-not-todo event-if-todo-not-done))
 
-(defvar ax/vps0-site-nav
-  (concat "<nav>"
-          "<a href=\"index.html\">Home</a> | "
-          "<a href=\"vps.html\">About this VPS</a> | "
-          "<a href=\"freebsd-vps-setup.html\">FreeBSD VPS Setup</a> | " 
-          "<a href=\"pictures.html\">Pictures</a> | "
-          "<a href=\"about.html\">About</a>"
-          "</nav>"))
+(defvar ax/vps0-src-dir "/ssh:vps:/usr/local/www/mysite-src/")
+
+(defvar ax/vps0-nav-cache nil
+  "Cached contents of nav.html, reset at the start of each publish run.")
+
+(defun ax/vps0-nav-preamble (_info)
+  "Return the site nav HTML, read from nav.html in `ax/vps0-src-dir'."
+  (or ax/vps0-nav-cache
+      (setq ax/vps0-nav-cache
+            (let ((f (expand-file-name "nav.html" ax/vps0-src-dir)))
+              (unless (file-readable-p f)
+                (user-error "ax: nav.html not readable at %s" f))
+              (with-temp-buffer
+                (insert-file-contents f)
+                (buffer-string))))))
 
 (setq org-publish-project-alist
       `(("ax-vps0"
-         :base-directory "/ssh:vps:/usr/local/www/mysite-src/"
+         :base-directory ,ax/vps0-src-dir
          :base-extension "org"
          :publishing-directory "/ssh:vps:/usr/local/www/mysite/"
          :publishing-function org-html-publish-to-html
          :recursive t
          :section-numbers nil
-         :html-preamble ,ax/vps0-site-nav)
+         :html-preamble ax/vps0-nav-preamble)
         ("ax-images"
-         :base-directory "/ssh:vps:/usr/local/www/mysite-src/assets/"
+         :base-directory ,(concat ax/vps0-src-dir "assets/")
          :base-extension "png\\|jpg\\|jpeg\\|gif\\|svg\\|webp"
          :publishing-directory "/ssh:vps:/usr/local/www/mysite/assets/"
          :recursive t
@@ -509,6 +516,8 @@
          :components ("ax-vps0" "ax-images"))))
 
 (defun ax/publish-site ()
-  "Publish the whole ax-website project (HTML + images), forcing a full rebuild."
+  "Publish the whole ax-website project (HTML + images), forcing a full rebuild.
+Also drops the cached nav so nav.html edits are picked up."
   (interactive)
+  (setq ax/vps0-nav-cache nil)
   (org-publish "ax-website" t))
