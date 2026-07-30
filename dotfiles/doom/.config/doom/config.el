@@ -142,6 +142,7 @@
        ;; non-nested
        (:desc "org-capture" "j" #'org-capture)
        (:desc "Toggle Dired Preview (global)" "p" #'dired-preview-global-mode)
+       (:desc "org-publish to vps" "v" #'ax/publish-site)
        (:desc "visually select a window" "w" #'ace-window)
        (:desc "open terminal (eat)" "RET" #'eat)
        ;; nested
@@ -506,3 +507,8 @@
          :publishing-function org-publish-attachment)
         ("ax-website"
          :components ("ax-vps0" "ax-images"))))
+
+(defun ax/publish-site ()
+  "Publish the whole ax-website project (HTML + images), forcing a full rebuild."
+  (interactive)
+  (org-publish "ax-website" t))
