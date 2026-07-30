@@ -490,11 +490,19 @@
           "</nav>"))
 
 (setq org-publish-project-alist
-      `(("vps0"
+      `(("ax-vps0"
          :base-directory "/ssh:vps:/usr/local/www/mysite-src/"
          :base-extension "org"
          :publishing-directory "/ssh:vps:/usr/local/www/mysite/"
          :publishing-function org-html-publish-to-html
          :recursive t
          :section-numbers nil
-         :html-preamble ,ax/vps0-site-nav)))
+         :html-preamble ,ax/vps0-site-nav)
+        ("ax-images"
+         :base-directory "/ssh:vps:/usr/local/www/mysite-src/assets/"
+         :base-extension "png\\|jpg\\|jpeg\\|gif\\|svg\\|webp"
+         :publishing-directory "/ssh:vps:/usr/local/www/mysite/assets/"
+         :recursive t
+         :publishing-function org-publish-attachment)
+        ("ax-website"
+         :components ("ax-vps0" "ax-images"))))
