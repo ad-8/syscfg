@@ -43,13 +43,6 @@
     "i2c"
   ];
 
-  # TODO remove once more familiar with agenix
-  age.secrets.testuser-password.file = ../../secrets/testuser-password.age;
-  users.users.testuser = {
-    isNormalUser = true;
-    hashedPasswordFile = config.age.secrets.testuser-password.path;
-  };
-
   services.openssh = {
     enable = true;
     # ports = [ 5432 ];

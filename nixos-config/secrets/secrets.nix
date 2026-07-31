@@ -21,9 +21,8 @@ in
   # corresponding .age file has to exist before rebuild:
   # 1) cd /home/ax/syscfg/nixos-config/secrets
   # 2) makepasswd                        # copy the hash
-  # 3) agenix -e testuser-password.age   # paste the hash, save+quit
+  # 3) agenix -e your-secret.age         # paste the hash, save+quit
   # if not installed: nix run github:ryantm/agenix -- --help
- "testuser-password.age".publicKeys = [ ax ax-bee ];
  "searx-secret-key.age".publicKeys  = [ ax ax-fuji ];
  "ax-fuji-restic-immich.age".publicKeys = [ ax ax-fuji ];
  "ax-bee-restic-b2.age".publicKeys  = [ ax ax-bee ax-fuji ];
