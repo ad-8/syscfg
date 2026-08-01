@@ -141,6 +141,7 @@
       (:prefix-map ("j" . "ax custom binds")
        ;; non-nested
        (:desc "org-capture" "j" #'org-capture)
+       (:desc "toggle the calm doom buffer" "k" #'ax/toggle-dashboard)
        (:desc "Toggle Dired Preview (global)" "p" #'dired-preview-global-mode)
        (:desc "org-publish to vps" "v" #'ax/publish-site)
        (:desc "visually select a window" "w" #'ace-window)
@@ -406,6 +407,12 @@
 
 ;; get rid of the delay after executing delete-pair
 (setq delete-pair-blink-delay 0.1)
+
+(defun ax/toggle-dashboard ()
+  (interactive)
+  (if (string= (buffer-name) "*doom*")
+      (switch-to-buffer (other-buffer (current-buffer) t))
+    (switch-to-buffer "*doom*")))
 
 (setq ispell-program-name "hunspell")
 

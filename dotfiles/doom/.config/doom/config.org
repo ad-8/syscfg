@@ -40,6 +40,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#eww-popupwindow-height][eww popup/window height]]
 - [[#auto-resize-font-on-ax-bee][auto-resize font on =ax-bee=]]
 - [[#clean-up----misc-stuff][clean up -- Misc Stuff]]
+- [[#ax--functions][ax-* functions]]
 - [[#wip-ispell-aspell-hunspell][(wip) ispell aspell hunspell]]
 - [[#janet][janet]]
 - [[#calendar-setup-to-interact-with-radicale][Calendar setup to interact with radicale]]
@@ -354,6 +355,7 @@ why =j=? because its a convenient key to type and surprisingly the namespace was
       (:prefix-map ("j" . "ax custom binds")
        ;; non-nested
        (:desc "org-capture" "j" #'org-capture)
+       (:desc "toggle the calm doom buffer" "k" #'ax/toggle-dashboard)
        (:desc "Toggle Dired Preview (global)" "p" #'dired-preview-global-mode)
        (:desc "org-publish to vps" "v" #'ax/publish-site)
        (:desc "visually select a window" "w" #'ace-window)
@@ -671,6 +673,14 @@ the default height is same/similar as M-x, so way too small for browsing
 
 
 
+#+end_src
+* ax-* functions
+#+begin_src sh
+(defun ax/toggle-dashboard ()
+  (interactive)
+  (if (string= (buffer-name) "*doom*")
+      (switch-to-buffer (other-buffer (current-buffer) t))
+    (switch-to-buffer "*doom*")))
 #+end_src
 
 * (wip) ispell aspell hunspell
