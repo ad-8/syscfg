@@ -83,6 +83,7 @@ this variable to ‘nil’, Emacs only saves bookmarks if you explicitly use
 * abbrev-mode
 #+begin_src elisp
 (setq abbrev-file-name "~/sync/emacs/abbrev_defs")
+(setq save-abbrevs 'silently)
 #+end_src
 
 * Consult - Live previews

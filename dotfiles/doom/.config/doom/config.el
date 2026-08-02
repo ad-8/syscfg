@@ -6,6 +6,7 @@
 (setq bookmark-save-flag 1)
 
 (setq abbrev-file-name "~/sync/emacs/abbrev_defs")
+(setq save-abbrevs 'silently)
 
 (after! consult
 (consult-customize
