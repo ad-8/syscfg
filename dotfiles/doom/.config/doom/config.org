@@ -8,6 +8,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#bookmarks][Bookmarks]]
   - [[#where-to-save][where to save]]
   - [[#when-to-save][when to save]]
+- [[#abbrev-mode][abbrev-mode]]
 - [[#consult---live-previews][Consult - Live previews]]
 - [[#doom][Doom]]
   - [[#info-from-the-original-configel][Info from the original config.el]]
@@ -77,6 +78,11 @@ this variable to ‘nil’, Emacs only saves bookmarks if you explicitly use
 ‘M-x bookmark-save’.
 #+begin_src emacs-lisp
 (setq bookmark-save-flag 1)
+#+end_src
+
+* abbrev-mode
+#+begin_src elisp
+(setq abbrev-file-name "~/sync/emacs/abbrev_defs")
 #+end_src
 
 * Consult - Live previews

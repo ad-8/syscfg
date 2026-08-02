@@ -5,6 +5,8 @@
 
 (setq bookmark-save-flag 1)
 
+(setq abbrev-file-name "~/sync/emacs/abbrev_defs")
+
 (after! consult
 (consult-customize
    consult-theme :preview-key '(:debounce 0.2 any)
