@@ -47,12 +47,11 @@ abbr -a db distrobox
 
 abbr -a lt 'll -th'
 # by default, when in nnn, `e` opens a file with $VISUAL
-abbr -a n "VISUAL='hx' nnn"
+abbr -a n "VISUAL='vim' nnn"
 abbr -a o. 'xdg-open .'
 abbr -a pnc "protonvpn-cli ks --off && protonvpn-cli ks --permanent && protonvpn-cli c --protocol tcp --fastest" # RIP nice cli 
 abbr -a rc rclone
 abbr -a rd 'rm -rf'
-abbr -a rl 'RUST_LOG=debug'
 abbr -a ssa 'sha256sum'
 abbr -a ssc 'sha256sum --check --ignore-missing'
 abbr -a tl 'tree -L'
@@ -166,7 +165,6 @@ abbr -a rct 'rclone tree --level 2'
 switch (uname)
     case FreeBSD
         abbr -a ifc ifconfig
-        abbr -a nf 'clear && fastfetch --config neofetch && echo'
     case OpenBSD
         abbr -a nf 'clear && fastfetch --config neofetch --logo openbsd_small && echo'
     case Linux
@@ -178,7 +176,7 @@ fish_add_path ~/.config/emacs/bin/
 fish_add_path ~/.local/bin
 
 alias e "emacsclient -nw"
-alias v nvim
+alias v vim
 alias l 'eza -l --group-directories-first --icons'
 alias lll 'eza -al --group-directories-first --icons'
 alias x '/usr/bin/env bb ~/x/x.clj'

@@ -19,7 +19,7 @@
   - [[#freebsd-and-openbsd-abbrs][FreeBSD and OpenBSD abbrs]]
 - [[#add-to-path][add to $PATH]]
 - [[#alias][alias]]
-- [[#set-in-nix----export][set in nix? -- export]]
+- [[#---export][-- export]]
   - [[#export-env-vars][export ENV vars]]
   - [[#editor--visual][EDITOR / VISUAL]]
 - [[#greeting][greeting]]
@@ -86,12 +86,11 @@ abbr -a db distrobox
 
 abbr -a lt 'll -th'
 # by default, when in nnn, `e` opens a file with $VISUAL
-abbr -a n "VISUAL='hx' nnn"
+abbr -a n "VISUAL='vim' nnn"
 abbr -a o. 'xdg-open .'
 abbr -a pnc "protonvpn-cli ks --off && protonvpn-cli ks --permanent && protonvpn-cli c --protocol tcp --fastest" # RIP nice cli 
 abbr -a rc rclone
 abbr -a rd 'rm -rf'
-abbr -a rl 'RUST_LOG=debug'
 abbr -a ssa 'sha256sum'
 abbr -a ssc 'sha256sum --check --ignore-missing'
 abbr -a tl 'tree -L'
@@ -222,7 +221,6 @@ abbr -a rct 'rclone tree --level 2'
 switch (uname)
     case FreeBSD
         abbr -a ifc ifconfig
-        abbr -a nf 'clear && fastfetch --config neofetch && echo'
     case OpenBSD
         abbr -a nf 'clear && fastfetch --config neofetch --logo openbsd_small && echo'
     case Linux
@@ -239,7 +237,7 @@ fish_add_path ~/.local/bin
 * alias
 #+begin_src shell
 alias e "emacsclient -nw"
-alias v nvim
+alias v vim
 alias l 'eza -l --group-directories-first --icons'
 alias lll 'eza -al --group-directories-first --icons'
 alias x '/usr/bin/env bb ~/x/x.clj'
@@ -250,7 +248,7 @@ alias dcc 'joker $HOME/syscfg/scripts/bb/dict.cc.joke'
 alias csm '$HOME/my/code/clojure/csm/csm.clj'
 #+end_src
 
-* TODO set in nix? -- export
+* -- export
 ** export ENV vars
 #+begin_src shell
 # --export -x is the same
