@@ -471,15 +471,15 @@
   (calfw-open-calendar-buffer
    :contents-sources
    (list (calfw-ical-create-source
-          "http://192.168.178.8:5232/ax/d27112e9-c0d8-fdf1-bb05-25bf09c03643/"
-          "test-cal"
+          "http://192.168.178.8:5232/ax/calendar/"
+          "calendar"
           "IndianRed"))))
 
 (use-package! org-caldav
   :defer t
   :config
   (setq org-caldav-url "http://192.168.178.8:5232/ax"
-        org-caldav-calendar-id "d27112e9-c0d8-fdf1-bb05-25bf09c03643"
+        org-caldav-calendar-id "calendar"
         org-caldav-inbox "~/org/caldav-inbox.org"
         org-caldav-files '("~/org/todo.org")
         org-caldav-sync-direction 'twoway
