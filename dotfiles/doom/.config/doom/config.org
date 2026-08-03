@@ -9,6 +9,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
   - [[#where-to-save][where to save]]
   - [[#when-to-save][when to save]]
 - [[#abbrev-mode][abbrev-mode]]
+- [[#calendar][calendar]]
 - [[#consult---live-previews][Consult - Live previews]]
 - [[#doom][Doom]]
   - [[#info-from-the-original-configel][Info from the original config.el]]
@@ -84,6 +85,11 @@ this variable to ‘nil’, Emacs only saves bookmarks if you explicitly use
 #+begin_src elisp
 (setq abbrev-file-name "~/sync/emacs/abbrev_defs")
 (setq save-abbrevs 'silently)
+#+end_src
+* calendar
+Start week on monday.
+#+begin_src elisp
+(setq calendar-week-start-day 1)
 #+end_src
 
 * Consult - Live previews

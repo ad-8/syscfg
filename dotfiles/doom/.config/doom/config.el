@@ -8,6 +8,8 @@
 (setq abbrev-file-name "~/sync/emacs/abbrev_defs")
 (setq save-abbrevs 'silently)
 
+(setq calendar-week-start-day 1)
+
 (after! consult
 (consult-customize
    consult-theme :preview-key '(:debounce 0.2 any)
