@@ -212,6 +212,26 @@
   '(org-level-5 :height 1.1)
   '(org-document-title :height 1.7))
 
+(defun ax/org-collapse-except-dashed ()
+  "Collapse all; show child headings of level-1 headings starting with \"-- \"."
+  (interactive)
+  (if (fboundp 'org-cycle-overview) (org-cycle-overview) (org-overview))
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward "^\\* -- " nil t)
+      (when (org-at-heading-p)
+        (if (fboundp 'org-fold-show-children)
+            (org-fold-show-children)
+          (org-show-children))))))
+
+(defun ax/org-maybe-collapse-except-dashed ()
+  "Apply `ax/org-collapse-except-dashed' when visiting ~/org/todo.org."
+  (when (and buffer-file-name
+             (file-equal-p buffer-file-name (expand-file-name "~/org/todo.org")))
+    (ax/org-collapse-except-dashed)))
+
+(add-hook 'find-file-hook #'ax/org-maybe-collapse-except-dashed)
+
 (after! eat
   (setq shell-file-name "/run/current-system/sw/bin/fish"
         explicit-shell-file-name "/run/current-system/sw/bin/fish"
