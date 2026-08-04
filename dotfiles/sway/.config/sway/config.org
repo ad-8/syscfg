@@ -73,7 +73,7 @@ Note: pass the final command to swaymsg so that the resulting window can be open
 on the original workspace that the command was run on.
 #+begin_src shell
 set $menu wmenu-run
-set $menu2 i3-dmenu-desktop --dmenu='dmenu -i -fn "HackNerdFont 12" -nb "#3b4252" -nf "#d8dee9" -sb "#d08770" -sf "#000000"'
+set $menu2 i3-dmenu-desktop --dmenu='dmenu -i -fn "HackNerdFont 12" -nb "#0c1014" -nf "#99d1ce" -sb "#33859e" -sf "#000000"'
 #+end_src
 
 ** Nord Colors
@@ -172,12 +172,12 @@ Other than ~client.focused~, all values are the default ones.
 
 #+begin_src shell
 
-# class                 border  backgr. text    indicator child_border
-client.focused          $frost4 $frost4 $snow2  $frost4   $frost4
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+# class                 border               backgr.              text                 indicator            child_border
+client.focused          $gotham_brightyellow $gotham_brightyellow $gotham_brightwhite  $gotham_brightyellow $gotham_brightyellow
+client.focused_inactive #333333              #5f676a              #ffffff              #484e50              #5f676a
+client.unfocused        #333333              #222222              #888888              #292d2e              #222222
+client.urgent           #2f343a              #900000              #ffffff              #900000              #900000
+client.placeholder      #000000              #0c0c0c              #ffffff              #000000              #0c0c0c
 
 client.background       #ffffff
 
