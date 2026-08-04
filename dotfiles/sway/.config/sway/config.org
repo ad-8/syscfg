@@ -751,7 +751,7 @@ for_window [class="Emacs"] opacity 0.97
 * GAPS
 ** global
 #+begin_src shell
-set $my-inner 10
+set $my-inner 0
 gaps inner $my-inner
 #+end_src
 

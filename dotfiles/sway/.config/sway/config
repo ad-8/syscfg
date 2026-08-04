@@ -465,7 +465,7 @@ mode "webapp" {
     bindsym Return mode "default"; exec dunstctl close
 }
 
-set $my-inner 10
+set $my-inner 0
 gaps inner $my-inner
 
 # workspace $ws1 gaps horizontal 100
