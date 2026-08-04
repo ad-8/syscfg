@@ -180,6 +180,24 @@ in
       ExecStart = "${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/backup/ax_srv_forgejo.clj";
     };
   };
+
+  systemd.timers.gatus-push = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "1m";
+      OnUnitActiveSec = "60s";
+      Unit = "gatus-push.service";
+    };
+  };
+
+  systemd.services.gatus-push = {
+    description = "Push service health to the Gatus status page";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "ax";
+      ExecStart = "${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/srv/gatus_push.clj";
+    };
+  };
   # -----------------------------------------------------------------------------------------------
 
   system.stateVersion = "25.05";
