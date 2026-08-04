@@ -499,24 +499,26 @@ bindsym $mod+minus scratchpad show
 ** Scratchpad custom
 =exec= instead of =exec_always= should prolly used for all here - else multiple scratchpad after a cfg reload
 
-also apparently wayland does *not* have window titles - only X11 - so not sure how filtering by it works here
+wayland *does* have titles, but the shell rewrites them (fish sets one via OSC), so =[title=...]= goes
+stale right after the window opens - match on =app_id= instead, no escape sequence can change that.
+=[class=...]= is the xwayland-only one.
 
 *** main one
 gpt says resize and move position only work when floating is enabled
 #+begin_src shell
 # the main scratchpad like on dwm; so i don't have to manually move it first and then cycle through the stack if multiple pads
-for_window [title="dwm-scratchpad"] floating enable, move to scratchpad
-exec_always foot --title "dwm-scratchpad"
+for_window [app_id="dwm-scratchpad"] floating enable, move to scratchpad
+exec_always foot --app-id=dwm-scratchpad
 # Show only that specific scratchpad terminal
-bindsym $mod+s [title="dwm-scratchpad"] scratchpad show, resize set 1024 768, move position center
+bindsym $mod+s [app_id="dwm-scratchpad"] scratchpad show, resize set 1024 768, move position center
 #+end_src
 *** org-capture
 #+begin_src shell
 # the main scratchpad like on dwm; so i don't have to manually move it first and then cycle through the stack if multiple pads
-for_window [title="ax-org-capture"] floating enable, move to scratchpad
-exec_always foot --title "ax-org-capture" --command emacs --no-window-system
+for_window [app_id="ax-org-capture"] floating enable, move to scratchpad
+exec_always foot --app-id=ax-org-capture emacs --no-window-system
 # Show only that specific scratchpad terminal
-bindsym $mod+u [title="ax-org-capture"] scratchpad show, resize set 1024 768, move position center
+bindsym $mod+u [app_id="ax-org-capture"] scratchpad show, resize set 1024 768, move position center
 #+end_src
 *** htop
 #+begin_src shell
