@@ -1872,7 +1872,7 @@ c.fonts.default_size = '12pt'
 ## Valid values:
 ##   - top
 ##   - bottom
-# c.statusbar.position = 'bottom'
+c.statusbar.position = 'top'
 
 ## When to show the statusbar.
 ## Type: String
@@ -2029,7 +2029,7 @@ c.fonts.default_size = '12pt'
 ##   - bottom
 ##   - left
 ##   - right
-c.tabs.position = 'left'
+c.tabs.position = 'top'
 
 ## Which tab to select when the focused tab is removed.
 ## Type: SelectOnRemove
