@@ -531,6 +531,17 @@
                 },
             },
             .{
+                .keysym = "u",
+                .modifiers = .{ .mod4 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .zoom = .{ .swap = true },
+                        },
+                    },
+                },
+            },
+            .{
                 .keysym = "h",
                 .modifiers = .{ .mod4 = true, .ctrl = true },
                 .event = .{
@@ -801,7 +812,7 @@
             //    },
             //},
             .{
-                .keysym = "u",
+                .keysym = "c",
                 .modifiers = .{ .mod4 = true },
                 .event = .{
                     .click = .{
