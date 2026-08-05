@@ -23,7 +23,7 @@ margin_top: 0
 
 # Permits key bindings that conflict with compositor key bindings.
 # Default is `false`.
-inhibit_compositor_keyboard_shortcuts: true
+inhibit_compositor_keyboard_shortcuts: false
 
 # Try to guess the correct keyboard layout to use. Default is `false`.
 auto_kbd_layout: true
