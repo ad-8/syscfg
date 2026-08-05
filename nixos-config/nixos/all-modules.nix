@@ -13,6 +13,7 @@
     ./config-hyprland.nix
     ./config-niri.nix
     ./config-printing.nix
+    ./config-river.nix
     ./config-virtman.nix
     ./config-xorg.nix
   ];
