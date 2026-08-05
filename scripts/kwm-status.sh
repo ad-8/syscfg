@@ -10,11 +10,31 @@ ico_ram=$(printf '\363\260\215\233')   # U+F035B
 sep=$(printf ' \342\200\242 ')         # U+2022
 
 status_fifo="${1:-$XDG_RUNTIME_DIR/kwm-status}"
+weather_cache="${XDG_RUNTIME_DIR:-/tmp}/kwm-weather"
 
 if [ ! -e "$status_fifo" ]; then
 	echo "kwm-status: $status_fifo does not exist, is river's init running?" >&2
 	exit 1
 fi
+
+# weather.clj hits the network, so it never runs inline -- a slow request would
+# stall the whole bar, clock included. refresh detached, publish only on
+# success: weather.clj prints its errors to stdout, and a failed fetch should
+# leave the last good reading standing.
+weather_refresh() {
+	tmp="$weather_cache.new"
+	if timeout 30 /home/ax/syscfg/scripts/bb/weather.clj dwm > "$tmp" 2>/dev/null &&
+		[ -s "$tmp" ]; then
+		mv "$tmp" "$weather_cache"
+	else
+		rm -f "$tmp"
+	fi
+}
+
+weather() {
+	val=$(cat "$weather_cache" 2>/dev/null)
+	printf '%s' "${val:-"--"}"
+}
 
 volume() {
 	# [MUTED] is a glob, so keep pathname expansion off while splitting
@@ -51,6 +71,13 @@ ram() {
 tick=0
 prev=
 while :; do
+	# 600s matches waybar's custom/weather; retry each 60s until the first
+	# fetch lands, so a login that beats the network isn't blank for 10min
+	if [ $((tick % 300)) -eq 0 ] ||
+		{ [ ! -s "$weather_cache" ] && [ $((tick % 30)) -eq 0 ]; }; then
+		weather_refresh &
+	fi
+
 	if [ $((tick % 3)) -eq 0 ]; then
 		load_s=$(load)
 	fi
@@ -60,7 +87,7 @@ while :; do
 		ram_s=$(ram)
 	fi
 
-	line="$(volume)$sep$(licht)$sep$load_s$sep$disk_s$sep$ram_s$sep$(/home/ax/syscfg/scripts/freebsd/datetime.sh)"
+	line="$(weather)$sep$(volume)$sep$(licht)$sep$load_s$sep$disk_s$sep$ram_s$sep$(/home/ax/syscfg/scripts/freebsd/datetime.sh)"
 	if [ "$line" != "$prev" ]; then
 		printf '%s\n' "$line" > "$status_fifo"
 		prev=$line
