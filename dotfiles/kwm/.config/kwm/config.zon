@@ -738,9 +738,10 @@
                     },
                 },
             },
+            // TODO solve all the f (float + fullscreen) overlaps (put two i'll rarely use on 'x')
             .{
-                .keysym = "m",
-                .modifiers = .{ .mod4 = true, .shift = true },
+                .keysym = "f",
+                .modifiers = .{ .mod4 = true, .mod1 = true },
                 .event = .{
                     .click = .{
                         .pressed = .{
@@ -751,7 +752,7 @@
             },
             .{
                 .keysym = "f",
-                .modifiers = .{ .mod4 = true, .shift = true },
+                .modifiers = .{ .mod4 = true },
                 .event = .{
                     .click = .{
                         .pressed = .{
@@ -779,7 +780,7 @@
                 },
             },
             .{
-                .keysym = "f",
+                .keysym = "x",
                 .modifiers = .{ .mod4 = true },
                 .event = .{
                     .click = .{
@@ -806,7 +807,7 @@
                 },
             },
             .{
-                .keysym = "f",
+                .keysym = "x",
                 .modifiers = .{ .mod4 = true, .mod1 = true },
                 .event = .{
                     .click = .{
