@@ -24,15 +24,6 @@ status_fifo="$XDG_RUNTIME_DIR/kwm-status"
 rm -f "$status_fifo"
 mkfifo "$status_fifo"
 
-while :; do
-  set -- Mo Di Mi Do Fr Sa So
-  eval "wd=\${$(date +%u)}"
-  date "+$wd %d.%m. %H:%M"
-  sleep $((60 - $(date +%S)))
-done > "$status_fifo" &
-
-
-
 sleep 2
 
 exec /home/ax/git/kwm/zig-out/bin/kwm
