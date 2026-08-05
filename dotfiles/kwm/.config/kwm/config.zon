@@ -12,9 +12,8 @@
       .startup_cmds = .{
           .{ "blueman-applet" },
           .{ "dunst" },
-          .{ "waybar" },
           .{ "nm-applet" },
- //         .{ "emacs" },
+          .{ "emacs" },
  //         .{ "emacs", "--daemon" },
           .{ "firefox" },
           .{ "foot", "-e", "btop" },
@@ -126,7 +125,8 @@
         },
         // set null to disable status part
         .status = .{
-            .data = .{ .text = "^#ff0000ffk^#00ff00ffw^#0000ffffm" }, // .stdin or .{ .fifo = "fifo file path" }, could use ^#RGBA to switch text color, and use ^#! to switch back to default color
+//            .data = .{ .text = "^#ff0000ffk^#00ff00ffw^#0000ffffm" }, // .stdin or .{ .fifo = "fifo file path" }, could use ^#RGBA to switch text color, and use ^#! to switch back to default color
+            .data = .{ .fifo = "${XDG_RUNTIME_DIR}/kwm-status" },
 
             .click = .{
                 .middle = .{ .spawn = .{ .argv = .{ "foot" } } },

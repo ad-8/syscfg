@@ -20,7 +20,18 @@ wlr-randr \
   --output DP-1     --mode 3840x2160 --pos 0,0      --scale 1.25 \
   --output HDMI-A-1 --mode 1920x1080 --pos 3072,648 --scale 1
 
-#exec /home/ax/git/rijan/zig-out/bin/rijan
+status_fifo="$XDG_RUNTIME_DIR/kwm-status"
+rm -f "$status_fifo"
+mkfifo "$status_fifo"
+
+while :; do
+  set -- Mo Di Mi Do Fr Sa So
+  eval "wd=\${$(date +%u)}"
+  date "+$wd %d.%m. %H:%M"
+  sleep $((60 - $(date +%S)))
+done > "$status_fifo" &
+
+
 
 sleep 2
 
