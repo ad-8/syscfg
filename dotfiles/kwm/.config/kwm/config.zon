@@ -411,6 +411,107 @@
     },
 },
 
+            // ax: ported from hyprland/niri (super+alt binds)
+            .{
+                .keysym = "l",
+                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .spawn = .{ .argv = .{ "swaylock", "--color", "000000" } },
+                        },
+                    },
+                },
+            },
+            .{
+                .keysym = "h",
+                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .spawn = .{ .argv = .{ "dunstctl", "history-pop" } },
+                        },
+                    },
+                },
+            },
+            .{
+                .keysym = "k",
+                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .spawn = .{ .argv = .{ "dunstctl", "close-all" } },
+                        },
+                    },
+                },
+            },
+            .{
+                .keysym = "w",
+                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .spawn = .{ .argv = .{ "/home/ax/syscfg/scripts/bb/weather.clj", "dunst" } },
+                        },
+                    },
+                },
+            },
+            .{
+                .keysym = "Left",
+                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .spawn = .{ .argv = .{ "/home/ax/syscfg/scripts/wayland.clj", "volume-mute" } },
+                        },
+                    },
+                },
+            },
+            .{
+                .keysym = "Up",
+                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .spawn = .{ .argv = .{ "/home/ax/syscfg/scripts/wayland.clj", "volume-up" } },
+                        },
+                    },
+                },
+            },
+            .{
+                .keysym = "Down",
+                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .spawn = .{ .argv = .{ "/home/ax/syscfg/scripts/wayland.clj", "volume-down" } },
+                        },
+                    },
+                },
+            },
+            .{
+                .keysym = "Right",
+                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .spawn = .{ .argv = .{ "/home/ax/syscfg/scripts/bb/play_pause.clj" } },
+                        },
+                    },
+                },
+            },
+            .{
+                .keysym = "space",
+                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .spawn = .{ .argv = .{ "/home/ax/syscfg/scripts/bb/play_pause.clj" } },
+                        },
+                    },
+                },
+            },
+
             // -------------------------
 
             // floating
@@ -1007,7 +1108,7 @@
             },
             .{
                 .keysym = "j",
-                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .modifiers = .{ .mod4 = true, .ctrl = true, .shift = true },
                 .event = .{
                     .click = .{
                         .pressed = .{
@@ -1018,7 +1119,7 @@
             },
             .{
                 .keysym = "k",
-                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .modifiers = .{ .mod4 = true, .ctrl = true, .shift = true },
                 .event = .{
                     .click = .{
                         .pressed = .{
@@ -1029,7 +1130,7 @@
             },
             .{
                 .keysym = "l",
-                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .modifiers = .{ .mod4 = true, .ctrl = true, .shift = true },
                 .event = .{
                     .click = .{
                         .pressed = .{
@@ -1040,7 +1141,7 @@
             },
             .{
                 .keysym = "h",
-                .modifiers = .{ .mod4 = true, .mod1 = true },
+                .modifiers = .{ .mod4 = true, .ctrl = true, .shift = true },
                 .event = .{
                     .click = .{
                         .pressed = .{
