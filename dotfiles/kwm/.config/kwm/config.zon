@@ -173,9 +173,10 @@
     },
 
     // TODO see what's better for me, it's interesting too
-    .single_tagset = false,
+    .single_tagset = true,
 
-    .sloppy_focus = false,
+    // focus window on mouse hover
+    .sloppy_focus = true,
 
     // .none
     // .on_focus_changed: warp cursor to the center of window focused
@@ -740,6 +741,7 @@
                 },
             },
             // TODO solve all the f (float + fullscreen) overlaps (put two i'll rarely use on 'x')
+            // fake fullscreen
             .{
                 .keysym = "f",
                 .modifiers = .{ .mod4 = true, .mod1 = true },
@@ -751,6 +753,7 @@
                     },
                 },
             },
+            // real fullscreen
             .{
                 .keysym = "f",
                 .modifiers = .{ .mod4 = true },
