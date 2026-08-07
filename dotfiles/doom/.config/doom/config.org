@@ -40,6 +40,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
   - [[#collapse-todoorg-on-open][collapse todo.org on open]]
 - [[#denote][denote]]
 - [[#tmr][tmr]]
+- [[#openbsd-use-gnu-ls-and-diff-if-installed][OpenBSD: use GNU ls and diff if installed]]
 - [[#eat-terminal][eat terminal]]
 - [[#everywhere][everywhere]]
 - [[#eww-popupwindow-height][eww popup/window height]]
@@ -515,7 +516,20 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   (add-hook 'tmr-timer-finished-functions #'ax-tmr-notify-send))
 #+end_src
 
+* OpenBSD: use GNU ls and diff if installed
+Should've done this long ago, directories first alone is worth it.
 
+#+begin_src elisp
+(when-let* ((gdiff (executable-find "gdiff")))
+  (setq diff-command gdiff))
+
+(when-let* ((gls (executable-find "gls")))
+  (setq insert-directory-program gls))
+#+end_src
+
+How to verify which ls/diff is used? =SPC h v= or =C-h v=, then:
+=insert-directory-program= path should be gls
+=diff-command= ... gdiff
 
 * eat terminal
 https://codeberg.org/akib/emacs-eat

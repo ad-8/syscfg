@@ -259,6 +259,12 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   (remove-hook 'tmr-timer-finished-functions #'tmr-notification-notify)
   (add-hook 'tmr-timer-finished-functions #'ax-tmr-notify-send))
 
+(when-let* ((gdiff (executable-find "gdiff")))
+  (setq diff-command gdiff))
+
+(when-let* ((gls (executable-find "gls")))
+  (setq insert-directory-program gls))
+
 (after! eat
   (setq shell-file-name "/run/current-system/sw/bin/fish"
         explicit-shell-file-name "/run/current-system/sw/bin/fish"
