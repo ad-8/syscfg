@@ -1321,6 +1321,14 @@
         .{ .app_id = .{ .str = "DesktopEditors" }, .floating = true },
         .{ .app_id = .{ .str = "xdg-desktop-portal-gtk" }, .floating = true },
         .{ .app_id = .{ .str = "chromium" }, .tag = 0b10, .scroller_mfact = 0.9 },
+        .{ .app_id = .{ .str = "anki" }, .floating = true, .dimension = .{ .width = 1280, .height = 1024 } },
+        .{ .app_id = .{ .str = "foot" }, .title = .{ .str = "bluetui", .regex = true }, .floating = true, .dimension = .{ .width = 1024, .height = 768 } },
+        .{ .app_id = .{ .str = "foot" }, .title = .{ .str = "wiremix", .regex = true }, .floating = true, .dimension = .{ .width = 1024, .height = 768 } },
+        .{ .app_id = .{ .str = "org.pulseaudio.pavucontrol" }, .floating = true, .dimension = .{ .width = 1024, .height = 768 } },
+        .{ .app_id = .{ .str = "qalculate-gtk" }, .floating = true, .dimension = .{ .width = 1024, .height = 768 } },
+        .{ .app_id = .{ .str = "firefox" }, .title = .{ .str = "About Mozilla Firefox" }, .floating = true, .dimension = .{ .width = 1024, .height = 768 } },
+        .{ .app_id = .{ .str = "waypaper" }, .floating = true, .dimension = .{ .width = 1280, .height = 1024 } },
+        // general foot rule -- put other foot rules above!
         .{ .app_id = .{ .str = "foot" }, .is_terminal = true, .scroller_mfact = 0.8 },
     },
 
