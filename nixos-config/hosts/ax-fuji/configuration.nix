@@ -115,6 +115,15 @@ in
       openFirewall = true;
       user = "ax";
     };
+    navidrome = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        Address = "0.0.0.0";
+        MusicFolder = "/nas/tmp/music-discographies";
+        Scanner.Enabled = false;
+      };
+    };
     openssh = {
       enable = true;
       # ports = [ 5432 ];
@@ -198,6 +207,9 @@ in
       ExecStart = "${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/srv/gatus_push.clj";
     };
   };
+
+  # don't start navidrome before the NAS music share is mounted, or it serves an empty library
+  systemd.services.navidrome.unitConfig.RequiresMountsFor = [ "/nas/tmp/music-discographies" ];
   # -----------------------------------------------------------------------------------------------
 
   system.stateVersion = "25.05";
