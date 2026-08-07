@@ -232,6 +232,12 @@
 
 (add-hook 'find-file-hook #'ax/org-maybe-collapse-except-dashed)
 
+(use-package! denote
+  :hook (dired-mode . denote-dired-mode)
+  :config
+  (setq denote-directory (expand-file-name "~/org/notes/"))
+  (denote-rename-buffer-mode 1))
+
 (after! eat
   (setq shell-file-name "/run/current-system/sw/bin/fish"
         explicit-shell-file-name "/run/current-system/sw/bin/fish"

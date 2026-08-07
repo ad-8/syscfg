@@ -38,6 +38,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
   - [[#org-directory][org-directory]]
   - [[#set-different-heading-sizes][set different heading sizes]]
   - [[#collapse-todoorg-on-open][collapse todo.org on open]]
+- [[#denote][denote]]
 - [[#eat-terminal][eat terminal]]
 - [[#everywhere][everywhere]]
 - [[#eww-popupwindow-height][eww popup/window height]]
@@ -480,6 +481,14 @@ theme switch.
     (ax/org-collapse-except-dashed)))
 
 (add-hook 'find-file-hook #'ax/org-maybe-collapse-except-dashed)
+#+end_src
+* denote
+#+begin_src elisp
+(use-package! denote
+  :hook (dired-mode . denote-dired-mode)
+  :config
+  (setq denote-directory (expand-file-name "~/org/notes/"))
+  (denote-rename-buffer-mode 1))
 #+end_src
 
 

@@ -70,3 +70,5 @@
            :files (:defaults ("ajrepl/" "ajrepl/*"))))
 
 (package! org-caldav)
+
+(package! denote)
