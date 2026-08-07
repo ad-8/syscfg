@@ -238,6 +238,27 @@
   (setq denote-directory (expand-file-name "~/org/notes/"))
   (denote-rename-buffer-mode 1))
 
+(defun ax-tmr-notify-send (timer)
+  "Announce finished TIMER via notify-send.
+Fall back to `tmr-notification-notify' if notify-send is unavailable."
+  (if (executable-find "notify-send")
+      (call-process "notify-send" nil 0 nil
+                    "-a" "Emacs TMR"
+                    "-u" (symbol-name tmr-notification-urgency)
+                    "TMR May Ring"
+                    (or (tmr--timer-description timer) "Time is up!"))
+    (tmr-notification-notify timer)))
+
+(use-package! tmr
+  :defer t
+  :init
+  (define-key global-map (kbd "C-c t") #'tmr-prefix-map)
+  :config
+  (setq tmr-sound-file (expand-file-name "sounds/alarm.ogg" doom-user-dir)
+        tmr-notification-urgency 'normal)
+  (remove-hook 'tmr-timer-finished-functions #'tmr-notification-notify)
+  (add-hook 'tmr-timer-finished-functions #'ax-tmr-notify-send))
+
 (after! eat
   (setq shell-file-name "/run/current-system/sw/bin/fish"
         explicit-shell-file-name "/run/current-system/sw/bin/fish"

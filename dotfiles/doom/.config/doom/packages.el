@@ -72,3 +72,5 @@
 (package! org-caldav)
 
 (package! denote)
+
+(package! tmr)
