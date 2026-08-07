@@ -9,7 +9,8 @@ ico_disk=$(printf '\363\260\213\212')  # U+F02CA
 ico_ram=$(printf '\363\260\215\233')   # U+F035B
 sep=$(printf ' \342\200\242 ')         # U+2022
 
-status_fifo="${1:-$XDG_RUNTIME_DIR/kwm-status}"
+scripts=/home/ax/syscfg/scripts
+status_fifo="${1:-${XDG_RUNTIME_DIR:-/tmp}/kwm-status}"
 weather_cache="${XDG_RUNTIME_DIR:-/tmp}/kwm-weather"
 
 if [ ! -e "$status_fifo" ]; then
@@ -23,7 +24,7 @@ fi
 # leave the last good reading standing.
 weather_refresh() {
 	tmp="$weather_cache.new"
-	if timeout 30 /home/ax/syscfg/scripts/bb/weather.clj dwm > "$tmp" 2>/dev/null &&
+	if timeout 30 "$scripts/bb/weather.clj" dwm > "$tmp" 2>/dev/null &&
 		[ -s "$tmp" ]; then
 		mv "$tmp" "$weather_cache"
 	else
@@ -40,9 +41,10 @@ volume() {
 	# [MUTED] is a glob, so keep pathname expansion off while splitting
 	set -f
 	set -- $(wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null)
+	set +f
 
 	if [ -z "$2" ]; then
-		printf '%s  --' "$ico_vol_mute"
+		printf '%s  --' "$ico_vol"
 	elif [ "$3" = '[MUTED]' ]; then
 		printf '%s  MUTED' "$ico_vol_mute"
 	else
@@ -61,7 +63,7 @@ load() {
 }
 
 disk() {
-	printf '%s %s' "$ico_disk" "$(df -h / --output=avail | tail -n1 | tr -d ' ')"
+	df -h / --output=avail | awk -v ico="$ico_disk" 'NR == 2 { printf "%s %s", ico, $1 }'
 }
 
 ram() {
@@ -82,12 +84,18 @@ while :; do
 		load_s=$(load)
 	fi
 
+	if [ $((tick % 5)) -eq 0 ]; then
+		weather_s=$(weather)
+		vpn_s=$("$scripts/freebsd/vpn.sh")
+	fi
+
 	if [ $((tick % 15)) -eq 0 ]; then
 		disk_s=$(disk)
 		ram_s=$(ram)
 	fi
 
-	line="$(weather)$sep$(volume)$sep$(licht)$sep$load_s$sep$disk_s$sep$ram_s$sep$(/home/ax/syscfg/scripts/freebsd/datetime.sh)"
+	line="$weather_s$sep$(volume)$sep$(licht)$sep$load_s"
+	line="$line$sep$disk_s$sep$ram_s$sep$vpn_s$sep$("$scripts/freebsd/datetime.sh")"
 	if [ "$line" != "$prev" ]; then
 		printf '%s\n' "$line" > "$status_fifo"
 		prev=$line
