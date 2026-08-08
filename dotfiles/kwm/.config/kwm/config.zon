@@ -1328,6 +1328,7 @@
         .{ .app_id = .{ .str = "qalculate-gtk" }, .floating = true, .dimension = .{ .width = 1024, .height = 768 } },
         .{ .app_id = .{ .str = "firefox" }, .title = .{ .str = "About Mozilla Firefox" }, .floating = true, .dimension = .{ .width = 1024, .height = 768 } },
         .{ .app_id = .{ .str = "waypaper" }, .floating = true, .dimension = .{ .width = 1280, .height = 1024 } },
+        .{ .app_id = .{ .str = "thunar" }, .title = .{ .str = "File Operation Progress" }, .floating = true },
         // general foot rule -- put other foot rules above!
         .{ .app_id = .{ .str = "foot" }, .is_terminal = true, .scroller_mfact = 0.8 },
     },

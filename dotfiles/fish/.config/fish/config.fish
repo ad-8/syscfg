@@ -78,6 +78,8 @@ abbr -a nxd "nix develop --command fish"
 abbr -a nxdu "NIXPKGS_ALLOW_UNFREE=1 nix develop --impure --command fish"
 abbr -a nxfu nix flake update
 
+abbr -a nxn nix shell nixpkgs#
+
 abbr -a nxclean 'nh clean all --keep 3 -n'
 abbr -a nxcleanb 'nh clean all --keep 3 --nogcroots -n'
 abbr -a nxclean2 'nh clean all --keep-since 7d3h --nogcroots -n'

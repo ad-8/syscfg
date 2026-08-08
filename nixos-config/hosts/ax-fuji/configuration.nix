@@ -121,6 +121,7 @@ in
       settings = {
         Address = "0.0.0.0";
         MusicFolder = "/nas/tmp/music-discographies";
+        # verify with `journalctl -u navidrome -b | grep -E "DISABLED|scan"`
         Scanner.Enabled = false;
       };
     };
