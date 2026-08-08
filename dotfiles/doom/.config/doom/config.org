@@ -3,14 +3,13 @@
 This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 
 * Table of Contents :toc:
-- [[#resources][Resources]]
 - [[#lexical-binding][lexical-binding]]
 - [[#bookmarks][Bookmarks]]
   - [[#where-to-save][where to save]]
   - [[#when-to-save][when to save]]
 - [[#abbrev-mode][abbrev-mode]]
 - [[#calendar][calendar]]
-- [[#consult---live-previews][Consult - Live previews]]
+- [[#consult---live-previews-for-grep-ripgrep-and-others][Consult - Live previews for grep, ripgrep and others]]
 - [[#doom][Doom]]
   - [[#info-from-the-original-configel][Info from the original config.el]]
   - [[#font][Font]]
@@ -25,11 +24,10 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
   - [[#format-of-title-in-the-emms-playlist-buffer][format of ~title~ in the /EMMS Playlist/ buffer]]
   - [[#layout][layout]]
   - [[#scrobble-to-lastfm][scrobble to last.fm]]
-- [[#functions][Functions]]
-  - [[#keep][keep]]
+- [[#functions---ax][Functions - ax/*]]
 - [[#keybindings][Keybindings]]
-  - [[#ax-1][ax-1]]
-  - [[#ax-custom-prefix-spc-j][ax-custom-prefix: SPC j]]
+  - [[#basic][basic]]
+  - [[#spc-j-prefix-map][=SPC j= prefix map]]
   - [[#toggle][toggle]]
 - [[#markdown][Markdown]]
   - [[#headers][Headers]]
@@ -42,23 +40,20 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#tmr][tmr]]
 - [[#openbsd-use-gnu-ls-and-diff-if-installed][OpenBSD: use GNU ls and diff if installed]]
 - [[#eat-terminal][eat terminal]]
-- [[#everywhere][everywhere]]
+- [[#removal-candiate----everywhere][removal candiate -- everywhere]]
 - [[#eww-popupwindow-height][eww popup/window height]]
 - [[#auto-resize-font-on-ax-bee][auto-resize font on =ax-bee=]]
 - [[#clean-up----misc-stuff][clean up -- Misc Stuff]]
-- [[#ax--functions][ax-* functions]]
-- [[#wip-ispell-aspell-hunspell][(wip) ispell aspell hunspell]]
+- [[#clojure][Clojure]]
+- [[#dired][dired]]
+- [[#fzf][fzf]]
+- [[#ispell-aspell-hunspell][ispell aspell hunspell]]
 - [[#janet][janet]]
 - [[#calendar-setup-to-interact-with-radicale][Calendar setup to interact with radicale]]
-  - [[#viewing-the-calendar-spc-j-c-c][viewing the calendar =SPC j c c=]]
-  - [[#syncing-org-and-calendar-spc-j-c-s][syncing org and calendar =SPC j c s=]]
+  - [[#viewing-the-calendar-read-only-spc-j-c-c][viewing the calendar (read only): =SPC j c c=]]
+  - [[#syncing-org-and-calendar-spc-j-c-s][syncing org and calendar: =SPC j c s=]]
   - [[#auth-for-both-authinfo][auth for both =~/.authinfo=]]
 - [[#org-publish][org-publish]]
-
-* Resources
-- https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/doom/config.org
-- https://joshblais.com/blog/living-in-emacs/
-
 
 * lexical-binding
 Without this line, we get a "soft" error in ~config.el~.
@@ -96,17 +91,22 @@ Start week on monday.
 (setq calendar-week-start-day 1)
 #+end_src
 
-* Consult - Live previews
+* Consult - Live previews for grep, ripgrep and others
 https://github.com/minad/consult?tab=readme-ov-file#use-package-example
-#+begin_src emacs-lisp
-(after! consult
-(consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep consult-man
-   consult-bookmark consult-recent-file consult-xref
-   ;; :preview-key "M-."
-   :preview-key '(:debounce 0.4 any)
-))
+#+begin_src elisp
+(after!
+ consult
+ (consult-customize
+  consult-theme :preview-key '(:debounce 0.2 any)
+  consult-ripgrep
+  consult-git-grep
+  consult-grep
+  consult-man
+  consult-bookmark
+  consult-recent-file
+  consult-xref
+  ;; :preview-key "M-."
+  :preview-key '(:debounce 0.4 any)))
 #+end_src
 
 * Doom
@@ -241,7 +241,7 @@ keep =the-matrix-theme.el= byte-for-byte upstream.
 
 * Magit
 Show the unpulled/unpushed commit lists expanded by default instead of
-collapsed, so a fetch reveals the incoming commits inline without TAB.
+collapsed, so a fetch reveals the incoming commits without TAB.
 #+begin_src emacs-lisp
 (after! magit
   (setq magit-section-initial-visibility-alist
@@ -264,8 +264,8 @@ By default elfeed-search-filter is set to @2-weeks-ago and makes the last 2 week
 * Emms - Emacs Multimedia System
 https://www.gnu.org/software/emms/
 ** basic setup
+https://lucidmanager.org/productivity/configure-emms/
 #+begin_src emacs-lisp
-;; https://lucidmanager.org/productivity/configure-emms/
 (use-package emms
   :config
   (require 'emms-setup)
@@ -295,7 +295,7 @@ https://www.gnu.org/software/emms/
 ** layout
 #+begin_src emacs-lisp
 (defun ax/open-emms-layout ()
-  "Open EMMS browser on the left and playlist on the right."
+  "Open the EMMS browser on the left and a playlist on the right."
   (interactive)
   (delete-other-windows)
   (split-window-right)
@@ -328,10 +328,10 @@ https://www.gnu.org/software/emms/
           (lambda () (ax/trigger-scrobble 'started)))
 #+end_src
 
-* Functions
+* Functions - ax/*
 my custom functions, prefixed with =ax/= to find them effortlessly using =M-x=
-** keep
-#+begin_src emacs-lisp
+
+#+begin_src elisp
 (defun ax/git-count-commits ()
   "Count the number of commits in the current Git repository
    using \='git log --oneline | wc -l\='."
@@ -354,19 +354,26 @@ my custom functions, prefixed with =ax/= to find them effortlessly using =M-x=
               (org-list-set-item-visibility item struct 'folded))
             (goto-char end))
         (forward-line 1)))))
+
+(defun ax/toggle-dashboard ()
+  (interactive)
+  (if (string= (buffer-name) "*doom*")
+      (switch-to-buffer (other-buffer (current-buffer) t))
+    (switch-to-buffer "*doom*")))
 #+end_src
+
 * Keybindings
-** ax-1
+** basic
 #+begin_src emacs-lisp
 (map! :leader
-      :desc "(Un)comment line" "-" #'comment-line)
+      :desc "Toggle line comment" "-" #'comment-line)
 
 (map! :leader
       :prefix "w"
       :desc "Horizontal split" "z" #'evil-window-split)
 #+end_src
-** ax-custom-prefix: SPC j
-why =j=? because its a convenient key to type and surprisingly the namespace was completely empty
+** =SPC j= prefix map
+why =j=? on homerow + namespace was unused
 #+begin_src emacs-lisp
 (map! :leader
       (:prefix-map ("j" . "ax custom binds")
@@ -393,15 +400,13 @@ why =j=? because its a convenient key to type and surprisingly the namespace was
         :desc "Starts fzf session in dir" "f" #'fzf-directory
         :desc "consult-git-grep" "g" #'consult-git-grep
         :desc "consult-ripgrep" "r" #'consult-ripgrep)
-       (:prefix ("t" . "testing stuff")
+       (:prefix ("t" . "t bindings")
         :desc "org-babel-tangle" "t" #'org-babel-tangle)))
 #+end_src
 ** toggle
-originally taken from DT's config
 #+begin_src emacs-lisp
 (map! :leader
       (:prefix ("t" . "toggle")
-       :desc "Toggle eshell split"            "e" #'+eshell/toggle
        :desc "Toggle line highlight in frame" "h" #'hl-line-mode
        :desc "Toggle line highlight globally" "H" #'global-hl-line-mode
        :desc "Toggle markdown-view-mode"      "M" #'ax/toggle-markdown-mode
@@ -409,11 +414,6 @@ originally taken from DT's config
        :desc "Toggle zen"                     "z" #'+zen/toggle
        :desc "Toggle zen"                     "Z" #'+zen/toggle-fullscreen
        :desc "Toggle treemacs"                "t" #'+treemacs/toggle))
-
-;; (map! :leader
-;;       (:prefix ("o" . "open here")
-;;        :desc "Open eshell here"    "e" #'+eshell/here
-;;        :desc "Open vterm here"     "v" #'+vterm/here))
 #+end_src
 
 * Markdown
@@ -559,7 +559,7 @@ https://elpa.nongnu.org/nongnu-devel/doc/eat.html
   (set-face-foreground 'eat-term-color-14  "#599cab")
   (set-face-foreground 'eat-term-color-15  "#d3ebe9"))
 #+end_src
-* everywhere
+* TODO removal candiate -- everywhere
 seems not to run on wayland (yet?)
 
 here is a script https://thanosapollo.org/posts/use-emacs-everywhere/
@@ -666,55 +666,48 @@ the default height is same/similar as M-x, so way too small for browsing
 #+end_src
 
 * TODO clean up -- Misc Stuff
-
 #+begin_src emacs-lisp
-;; AX
-; doom doctor suggestions
+;; doom doctor suggestions
 (setq shell-file-name (executable-find "bash"))
 (setq-default vterm-shell "/usr/bin/fish")
 (setq-default explicit-shell-file-name "/usr/bin/fish")
 
-
-
-;; activate rainbow mode for org documents and all programming modes
-; (add-hook! org-mode 'rainbow-mode)
-; (add-hook! prog-mode 'rainbow-mode)
-
-
-(setenv "FZF_DEFAULT_COMMAND" "fd -u")
-;(use-package! fzf)
-(use-package! fzf
-  :bind
-    ;; Don't forget to set keybinds!
-  :config
-  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
-        fzf/executable "fzf"
-        fzf/git-grep-args "-i --line-number %s"
-        ;; command used for `fzf-grep-*` functions
-        ;; example usage for ripgrep:
-        ;; fzf/grep-command "rg --no-heading -nH"
-        fzf/grep-command "grep -nrH"
-        ;; If nil, the fzf buffer will appear at the top of the window
-        fzf/position-bottom t
-        fzf/window-height 35))
-
 ;; Prevent Doom from forcing vterm into a bottom popup window.
 ;; This lets vterm open in the current or split window like any normal buffer.
-(after! vterm
-  (set-popup-rule! "^\\*vterm\\*" :ignore t))
+;; (after! vterm
+;;   (set-popup-rule! "^\\*vterm\\*" :ignore t))
 
 (after! org
   (require 'ox-twbs))
 
+;; get rid of the delay after executing delete-pair
+(setq delete-pair-blink-delay 0.1)
+#+end_src
+
+* Clojure
+#+begin_src elisp
+(after! lsp-mode
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-position 'top))  ; Position pop-up at top of window
+
+(after! cider
+  (add-hook 'cider-mode-hook #'lsp)
+  (setq cider-doc-view-function #'cider-docview-inline-symbol)  ; Inline docs with examples
+  (set-popup-rule! "^\\*cider-repl" :side 'right :size 0.4 :quit nil :ttl nil)
+  (map! :map cider-mode-map
+        :localleader
+        (:prefix ("e" . "eval")
+         :desc "Eval defun up to point" "p" #'cider-eval-defun-up-to-point)))
+
+;; (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+#+end_src
+
+* dired
+#+begin_src elisp
 (setq image-dired-thumb-size 128)
 
 (setq image-dired-external-viewer "nsxiv")
-
-;; TOOD find a better solution
-;; ever since rubocop installed via gem, ruby-lsp is gone =lsp-describe-session=
-;; Disable rubocop-ls
-;;(after! lsp-mode
-;;  (setq lsp-disabled-clients '(rubocop-ls)))
 
 ;; https://protesilaos.com/emacs/dired-preview
 (setq dired-preview-delay 0.1) ;; default 0.7
@@ -730,45 +723,27 @@ the default height is same/similar as M-x, so way too small for browsing
                 "iso\\|"
                 "epub"
                 "\\)"))
-
-
-
-
-; ------------
-;; clojure those seem to work
-(after! lsp-mode
-  (setq lsp-ui-doc-enable t
-        lsp-ui-doc-show-with-cursor t
-        lsp-ui-doc-position 'top))  ; Position pop-up at top of window
-(after! cider
-  (add-hook 'cider-mode-hook #'lsp)
-  (setq cider-doc-view-function #'cider-docview-inline-symbol)  ; Inline docs with examples
-  (set-popup-rule! "^\\*cider-repl" :side 'right :size 0.4 :quit nil :ttl nil)
-  (map! :map cider-mode-map
-        :localleader
-        (:prefix ("e" . "eval")
-         :desc "Eval defun up to point" "p" #'cider-eval-defun-up-to-point)))
-; ------------
-
-
-;(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-
-;; get rid of the delay after executing delete-pair
-(setq delete-pair-blink-delay 0.1)
-
-
-
 #+end_src
-* ax-* functions
-#+begin_src sh
-(defun ax/toggle-dashboard ()
-  (interactive)
-  (if (string= (buffer-name) "*doom*")
-      (switch-to-buffer (other-buffer (current-buffer) t))
-    (switch-to-buffer "*doom*")))
+* fzf
+#+begin_src elisp
+(setenv "FZF_DEFAULT_COMMAND" "fd -u")
+(use-package! fzf
+  :bind
+    ;; Don't forget to set keybinds!
+  :config
+  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+        fzf/executable "fzf"
+        fzf/git-grep-args "-i --line-number %s"
+        ;; command used for `fzf-grep-*` functions
+        ;; example usage for ripgrep:
+        ;; fzf/grep-command "rg --no-heading -nH"
+        fzf/grep-command "grep -nrH"
+        ;; If nil, the fzf buffer will appear at the top of the window
+        fzf/position-bottom t
+        fzf/window-height 35))
 #+end_src
 
-* (wip) ispell aspell hunspell
+* TODO ispell aspell hunspell
 #+begin_src elisp
 (setq ispell-program-name "hunspell")
 
@@ -823,22 +798,18 @@ the default height is same/similar as M-x, so way too small for browsing
 * Calendar setup to interact with radicale
 *TL;DR* — =SPC j c c= opens a read-only month view of what is on the server.
 =SPC j c s= syncs org and the calendar both ways. Events can be created
-anywhere (emacs, thunderbird, phone) and all meet on radicale. Only sync from a
+anywhere (emacs, thunderbird, phone) and all sync to radicale. Only sync from a
 machine whose org files are current, or it can push stale text back and undo
 edits made elsewhere.
 
-Calendar on the radicale server, same account as the contacts. calfw only views
-it, org-caldav does the two-way editing. Both read the password from
+Calendar on the radicale server, same account as the contacts. =calfw= only views
+it, =org-caldav= does the two-way editing. Both read the password from
 =~/.authinfo=.
 
-** viewing the calendar =SPC j c c=
-Opens a read-only month grid. Clearing the cache first means every call fetches
-fresh, otherwise calfw keeps showing stale events even after the buffer is
-killed.
-
-The source arguments are =(url name color)=, in that order.
+** viewing the calendar (read only): =SPC j c c=
 #+begin_src elisp
 (defun ax/open-calendar ()
+  "Open a read-only view of the calendar on radicale."
   (interactive)
   (require 'calfw)
   (require 'calfw-ical)
@@ -849,22 +820,18 @@ The source arguments are =(url name color)=, in that order.
           "http://192.168.178.8:5232/ax/calendar/"
           "calendar"
           "IndianRed"))))
-
 #+end_src
 
-
-** syncing org and calendar =SPC j c s=
+** syncing org and calendar: =SPC j c s=
 Syncs both ways. It stays manual because it writes in both directions.
-
-=org-caldav-url= is the base address, =org-caldav-calendar-id= the collection
-href. New server events land in the inbox, and the listed files are read and
-exported. =org-caldav-save-directory= holds the sync state and sits in ~/org so
+=org-caldav-url= is the base address, =org-caldav-calendar-id= the collection href.
+New server events land in the inbox, and the listed files are read and exported.
+=org-caldav-save-directory= holds the sync state and sits in ~/org so
 syncthing shares it between machines.
-
 With two machines the sync state has to match the org files it describes. If
-emacs has =todo.org= open with stale text (doom only reverts on focus), the
-sync pushes the old version back and undoes edits made elsewhere. Press
-=SPC b r= first.
+emacs has =todo.org= open with stale text (doom only reverts on focus),
+the sync pushes the old version back and undoes edits made elsewhere.
+Run =SPC b r= first.
 #+begin_src elisp
 (use-package! org-caldav
   :defer t
@@ -878,26 +845,21 @@ sync pushes the old version back and undoes edits made elsewhere. Press
         org-caldav-backup-file "~/org/.org-caldav/backup.org"))
 #+end_src
 
-
 Without this the sync result buffer takes over the whole frame.
 #+begin_src elisp
 (set-popup-rule! "^\\*org caldav sync result" :size 0.3 :quit t :select nil)
 #+end_src
 
-org-caldav exports via org's icalendar exporter, so these settings decide what
-syncs. The default =(todo-start)= alone creates no event at all. A scheduled
-time or a deadline on a TODO only becomes an event when the list holds
+org-caldav exports via org's icalendar exporter, so these settings decide what syncs.
+The default =(todo-start)= alone creates no event at all. A scheduled time
+or a deadline on a TODO only becomes an event when the list holds
 =event-if-todo-not-done=, and without it a sync reports success while pushing
 nothing.
-
 The timezone has to be set by hand. Its default reads the =TZ= environment
 variable, which is unset on these machines, and org-caldav then writes the
 times with no timezone attached and leaves every client to guess.
-
 If task sync is ever turned on, =todo-start= and =todo-due= have to go back
-into these two lists, or a task arrives without a start and without a due
-date.
-
+into these two lists, or a task arrives without a start and without a due date.
 #+begin_src elisp
 (setq org-icalendar-timezone "Europe/Berlin")
 (setq org-icalendar-use-scheduled
@@ -906,11 +868,7 @@ date.
       '(event-if-not-todo event-if-todo-not-done))
 #+end_src
 
-
 ** auth for both =~/.authinfo=
-=port http= is not a typo: url.el matches on the url scheme, not the tcp port.
-Changing it to =port 5232= silently returns 401.
-
 #+begin_src sh :tangle no
 λ cat .authinfo
  machine 192.168.178.8:5232 port http login ax password <radicale-pw>
@@ -920,8 +878,8 @@ Changing it to =port 5232= silently returns 401.
 The nav bar lives in =nav.html= in the source directory on the VPS — edit it there, no
 config change or tangle needed.
 
-Publish with =SPC j v= (=ax/publish-site=), which forces a rebuild and drops the cached
-nav. Nothing else picks up a nav edit: org republishes a page based on its own mtime and
+Publish with =SPC j v= (=ax/publish-site=), which forces a rebuild and drops the cached nav.
+Nothing else picks up a nav edit: org republishes a page based on its own mtime and
 never looks at =nav.html=, so a plain =M-x org-publish= silently keeps the old one.
 
 Keep the links root-relative (=/index.html=) — pages under =freebsd/= get this same nav.
@@ -967,3 +925,4 @@ Also drops the cached nav so nav.html edits are picked up."
   (setq ax/vps0-nav-cache nil)
   (org-publish "ax-website" t))
 #+end_src
+

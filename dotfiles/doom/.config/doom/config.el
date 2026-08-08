@@ -10,14 +10,19 @@
 
 (setq calendar-week-start-day 1)
 
-(after! consult
-(consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep consult-man
-   consult-bookmark consult-recent-file consult-xref
-   ;; :preview-key "M-."
-   :preview-key '(:debounce 0.4 any)
-))
+(after!
+ consult
+ (consult-customize
+  consult-theme :preview-key '(:debounce 0.2 any)
+  consult-ripgrep
+  consult-git-grep
+  consult-grep
+  consult-man
+  consult-bookmark
+  consult-recent-file
+  consult-xref
+  ;; :preview-key "M-."
+  :preview-key '(:debounce 0.4 any)))
 
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 16 :weight 'semi-light))
 
@@ -61,7 +66,6 @@
 (after! elfeed
   (setq-default elfeed-search-filter "@3-days-ago +unread"))
 
-;; https://lucidmanager.org/productivity/configure-emms/
 (use-package emms
   :config
   (require 'emms-setup)
@@ -82,7 +86,7 @@
 (setq emms-browser-playlist-info-title-format "%T. %t")
 
 (defun ax/open-emms-layout ()
-  "Open EMMS browser on the left and playlist on the right."
+  "Open the EMMS browser on the left and a playlist on the right."
   (interactive)
   (delete-other-windows)
   (split-window-right)
@@ -135,8 +139,14 @@
             (goto-char end))
         (forward-line 1)))))
 
+(defun ax/toggle-dashboard ()
+  (interactive)
+  (if (string= (buffer-name) "*doom*")
+      (switch-to-buffer (other-buffer (current-buffer) t))
+    (switch-to-buffer "*doom*")))
+
 (map! :leader
-      :desc "(Un)comment line" "-" #'comment-line)
+      :desc "Toggle line comment" "-" #'comment-line)
 
 (map! :leader
       :prefix "w"
@@ -167,12 +177,11 @@
         :desc "Starts fzf session in dir" "f" #'fzf-directory
         :desc "consult-git-grep" "g" #'consult-git-grep
         :desc "consult-ripgrep" "r" #'consult-ripgrep)
-       (:prefix ("t" . "testing stuff")
+       (:prefix ("t" . "t bindings")
         :desc "org-babel-tangle" "t" #'org-babel-tangle)))
 
 (map! :leader
       (:prefix ("t" . "toggle")
-       :desc "Toggle eshell split"            "e" #'+eshell/toggle
        :desc "Toggle line highlight in frame" "h" #'hl-line-mode
        :desc "Toggle line highlight globally" "H" #'global-hl-line-mode
        :desc "Toggle markdown-view-mode"      "M" #'ax/toggle-markdown-mode
@@ -180,11 +189,6 @@
        :desc "Toggle zen"                     "z" #'+zen/toggle
        :desc "Toggle zen"                     "Z" #'+zen/toggle-fullscreen
        :desc "Toggle treemacs"                "t" #'+treemacs/toggle))
-
-;; (map! :leader
-;;       (:prefix ("o" . "open here")
-;;        :desc "Open eshell here"    "e" #'+eshell/here
-;;        :desc "Open vterm here"     "v" #'+vterm/here))
 
 (custom-set-faces
  '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "variable-pitch"))))
@@ -378,53 +382,41 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
     (setq my/monitor-font--timer
           (run-with-timer 0 1.0 (lambda () (my/set-font-for-monitor (selected-frame)))))))
 
-;; AX
-; doom doctor suggestions
+;; doom doctor suggestions
 (setq shell-file-name (executable-find "bash"))
 (setq-default vterm-shell "/usr/bin/fish")
 (setq-default explicit-shell-file-name "/usr/bin/fish")
 
-
-
-;; activate rainbow mode for org documents and all programming modes
-; (add-hook! org-mode 'rainbow-mode)
-; (add-hook! prog-mode 'rainbow-mode)
-
-
-(setenv "FZF_DEFAULT_COMMAND" "fd -u")
-;(use-package! fzf)
-(use-package! fzf
-  :bind
-    ;; Don't forget to set keybinds!
-  :config
-  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
-        fzf/executable "fzf"
-        fzf/git-grep-args "-i --line-number %s"
-        ;; command used for `fzf-grep-*` functions
-        ;; example usage for ripgrep:
-        ;; fzf/grep-command "rg --no-heading -nH"
-        fzf/grep-command "grep -nrH"
-        ;; If nil, the fzf buffer will appear at the top of the window
-        fzf/position-bottom t
-        fzf/window-height 35))
-
 ;; Prevent Doom from forcing vterm into a bottom popup window.
 ;; This lets vterm open in the current or split window like any normal buffer.
-(after! vterm
-  (set-popup-rule! "^\\*vterm\\*" :ignore t))
+;; (after! vterm
+;;   (set-popup-rule! "^\\*vterm\\*" :ignore t))
 
 (after! org
   (require 'ox-twbs))
 
+;; get rid of the delay after executing delete-pair
+(setq delete-pair-blink-delay 0.1)
+
+(after! lsp-mode
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-position 'top))  ; Position pop-up at top of window
+
+(after! cider
+  (add-hook 'cider-mode-hook #'lsp)
+  (setq cider-doc-view-function #'cider-docview-inline-symbol)  ; Inline docs with examples
+  (set-popup-rule! "^\\*cider-repl" :side 'right :size 0.4 :quit nil :ttl nil)
+  (map! :map cider-mode-map
+        :localleader
+        (:prefix ("e" . "eval")
+         :desc "Eval defun up to point" "p" #'cider-eval-defun-up-to-point)))
+
+;; (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+
 (setq image-dired-thumb-size 128)
 
 (setq image-dired-external-viewer "nsxiv")
-
-;; TOOD find a better solution
-;; ever since rubocop installed via gem, ruby-lsp is gone =lsp-describe-session=
-;; Disable rubocop-ls
-;;(after! lsp-mode
-;;  (setq lsp-disabled-clients '(rubocop-ls)))
 
 ;; https://protesilaos.com/emacs/dired-preview
 (setq dired-preview-delay 0.1) ;; default 0.7
@@ -441,36 +433,21 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
                 "epub"
                 "\\)"))
 
-
-
-
-; ------------
-;; clojure those seem to work
-(after! lsp-mode
-  (setq lsp-ui-doc-enable t
-        lsp-ui-doc-show-with-cursor t
-        lsp-ui-doc-position 'top))  ; Position pop-up at top of window
-(after! cider
-  (add-hook 'cider-mode-hook #'lsp)
-  (setq cider-doc-view-function #'cider-docview-inline-symbol)  ; Inline docs with examples
-  (set-popup-rule! "^\\*cider-repl" :side 'right :size 0.4 :quit nil :ttl nil)
-  (map! :map cider-mode-map
-        :localleader
-        (:prefix ("e" . "eval")
-         :desc "Eval defun up to point" "p" #'cider-eval-defun-up-to-point)))
-; ------------
-
-
-;(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-
-;; get rid of the delay after executing delete-pair
-(setq delete-pair-blink-delay 0.1)
-
-(defun ax/toggle-dashboard ()
-  (interactive)
-  (if (string= (buffer-name) "*doom*")
-      (switch-to-buffer (other-buffer (current-buffer) t))
-    (switch-to-buffer "*doom*")))
+(setenv "FZF_DEFAULT_COMMAND" "fd -u")
+(use-package! fzf
+  :bind
+    ;; Don't forget to set keybinds!
+  :config
+  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+        fzf/executable "fzf"
+        fzf/git-grep-args "-i --line-number %s"
+        ;; command used for `fzf-grep-*` functions
+        ;; example usage for ripgrep:
+        ;; fzf/grep-command "rg --no-heading -nH"
+        fzf/grep-command "grep -nrH"
+        ;; If nil, the fzf buffer will appear at the top of the window
+        fzf/position-bottom t
+        fzf/window-height 35))
 
 (setq ispell-program-name "hunspell")
 
@@ -519,6 +496,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))
 
 (defun ax/open-calendar ()
+  "Open a read-only view of the calendar on radicale."
   (interactive)
   (require 'calfw)
   (require 'calfw-ical)
