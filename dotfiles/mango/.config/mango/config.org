@@ -1,8 +1,33 @@
+#+title: Mango WM Config
+#+PROPERTY: header-args:shell :tangle config.conf
+
+More option see https://github.com/DreamMaoMao/mango/wiki/
+
+* Table of Contents :toc:
+- [[#animations-and-other-eye-candy][Animations and other eye candy]]
+  - [[#other][other]]
+  - [[#animations][animations]]
+  - [[#blur][blur]]
+  - [[#shadows][shadows]]
+- [[#input][Input]]
+- [[#keybindings][Keybindings]]
+- [[#layout-settings][Layout Settings]]
+  - [[#master][Master]]
+  - [[#overview][Overview]]
+  - [[#misc][Misc]]
+  - [[#appearance][Appearance]]
+- [[#evaluate][evaluate]]
+
+* Animations and other eye candy
+** other
+#+begin_src shell
 border_radius=6
 no_radius_when_single=0
 focused_opacity=1.0
 unfocused_opacity=1.0
-
+#+end_src
+** animations
+#+begin_src shell
 # Animation Configuration(support type:zoom,slide)
 # tag_animation_direction: 1-horizontal,0-vertical
 animations=1
@@ -28,7 +53,9 @@ animation_curve_close=0.08,0.92,0,1
 animation_curve_focus=0.46,1.0,0.29,1
 animation_curve_opafadeout=0.5,0.5,0.5,0.5
 animation_curve_opafadein=0.46,1.0,0.29,1
-
+#+end_src
+** blur
+#+begin_src shell
 blur=0
 blur_layer=0
 blur_optimized=1
@@ -38,7 +65,9 @@ blur_params_noise = 0.02
 blur_params_brightness = 0.9
 blur_params_contrast = 0.9
 blur_params_saturation = 1.2
-
+#+end_src
+** shadows
+#+begin_src shell
 shadows = 0
 layer_shadows = 0
 shadow_only_floating = 1
@@ -47,7 +76,10 @@ shadows_blur = 15
 shadows_position_x = 0
 shadows_position_y = 0
 shadowscolor= 0x000000ff
+#+end_src
 
+* Input 
+#+begin_src shell
 # keyboard
 repeat_rate=35
 repeat_delay=200
@@ -69,7 +101,9 @@ swipe_min_threshold=1
 # mouse
 # need relogin to make it apply
 mouse_natural_scrolling=0
-
+#+end_src
+* Keybindings
+#+begin_src shell
 # reload config
 bind=SUPER+SHIFT,r,reload_config
 
@@ -188,21 +222,28 @@ mousebind=SUPER,btn_right,moveresize,curresize
 # Axis Bindings
 axisbind=SUPER,UP,viewtoleft_have_client
 axisbind=SUPER,DOWN,viewtoright_have_client
-
+#+end_src
+* Layout Settings
+** Master
+#+begin_src shell
 # Master-Stack Layout Setting
 new_is_master=1
 default_mfact=0.55
 default_nmaster=1
 tag_num=9
 smartgaps=0
-
+#+end_src
+** Overview
+#+begin_src shell
 # Overview Setting
 hotarea_size=10
 enable_hotarea=0
 ov_tab_mode=1
 overviewgappi=5
 overviewgappo=30
-
+#+end_src
+** Misc
+#+begin_src shell
 # Misc
 no_border_when_single=0
 axis_bind_apply_timeout=100
@@ -217,7 +258,9 @@ snap_distance=30
 cursor_size=24
 drag_tile_to_tile=1
 drag_tile_small=1
-
+#+end_src
+** Appearance
+#+begin_src shell
 # Appearance
 gappih=5
 gappiv=5
@@ -236,3 +279,28 @@ urgentcolor=0xad401fff
 scratchpadcolor=0x516c93ff
 globalcolor=0xb153a7ff
 overlaycolor=0x14a57cff
+#+end_src
+* TODO evaluate
+#+begin_src shell :tangle no
+# layout support:
+# tile,scroller,grid,deck,monocle,center_tile,vertical_tile,vertical_scroller
+tagrule=id:1,layout_name:tile
+tagrule=id:2,layout_name:tile
+tagrule=id:3,layout_name:tile
+tagrule=id:4,layout_name:tile
+tagrule=id:5,layout_name:tile
+tagrule=id:6,layout_name:tile
+tagrule=id:7,layout_name:tile
+tagrule=id:8,layout_name:tile
+tagrule=id:9,layout_name:tile
+
+# Key Bindings
+# key name refer to `xev` or `wev` command output,
+# mod keys name: super,ctrl,alt,shift,none
+
+
+
+# layer rule
+layerrule=animation_type_open:zoom,layer_name:rofi
+layerrule=animation_type_close:zoom,layer_name:rofi
+#+end_src
