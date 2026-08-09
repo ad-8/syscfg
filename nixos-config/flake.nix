@@ -13,6 +13,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";
     # };
     hyprland.url = "github:hyprwm/Hyprland/v0.56.1";
+    mangowm = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -59,6 +63,7 @@
           modules = [
             ./hosts/${hostname}/configuration.nix
             inputs.agenix.nixosModules.default
+            inputs.mangowm.nixosModules.mango
           ]
           ++ hm;
         };
