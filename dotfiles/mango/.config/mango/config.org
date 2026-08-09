@@ -9,6 +9,7 @@ More option see https://github.com/DreamMaoMao/mango/wiki/
   - [[#animations][animations]]
   - [[#blur][blur]]
   - [[#shadows][shadows]]
+- [[#autostart][Autostart]]
 - [[#input][Input]]
 - [[#keybindings][Keybindings]]
   - [[#dwm-like][dwm-like]]
@@ -31,7 +32,7 @@ unfocused_opacity=1.0
 #+begin_src shell
 # Animation Configuration(support type:zoom,slide)
 # tag_animation_direction: 1-horizontal,0-vertical
-animations=1
+animations=0
 layer_animations=1
 animation_type_open=slide
 animation_type_close=slide
@@ -57,7 +58,7 @@ animation_curve_opafadein=0.46,1.0,0.29,1
 #+end_src
 ** blur
 #+begin_src shell
-blur=0
+blur=1
 blur_layer=0
 blur_optimized=1
 blur_params_num_passes = 2
@@ -77,6 +78,18 @@ shadows_blur = 15
 shadows_position_x = 0
 shadows_position_y = 0
 shadowscolor= 0x000000ff
+#+end_src
+* Autostart
+#+begin_src shell
+exec-once=blueman-applet
+exec-once=dunst
+exec-once=nm-applet
+exec-once=syncthing serve --no-browser
+exec-once=waybar
+
+exec-once=/usr/bin/env sh ~/syscfg/scripts/river-idle.sh
+exec-once=/usr/bin/env sh ~/x/river-set-monitors.sh
+exec-once=/usr/bin/env sh ~/syscfg/scripts/niri-set-wallpaper.sh
 #+end_src
 
 * Input 
