@@ -1,14 +1,225 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+(setq abbrev-file-name "~/sync/emacs/abbrev_defs")
+(setq save-abbrevs 'silently)
+
+(defvar my/1080p-font-size 12
+  "Font size for 1080p displays.")
+
+(defvar my/4k-font-size 20
+  "Font size for 4K / high-resolution displays.")
+
+(defvar my/monitor-font--timer nil)
+(defvar my/monitor-font--last-size nil)
+
+(defun my/set-font-for-monitor (&optional frame)
+  "Set doom font size based on the current monitor (poll-friendly)."
+  (when (display-graphic-p)
+    (let* ((frame (or frame (selected-frame)))
+           (geometry (frame-monitor-attribute 'geometry frame))
+           (scale (or (frame-monitor-attribute 'scale-factor frame) 1))
+           (width (and geometry (nth 2 geometry)))
+           (size (when width
+                   (let ((effective-width (* width scale)))
+                     (if (> effective-width 3000)
+                         my/4k-font-size
+                       my/1080p-font-size)))))
+
+      (when (and size (not (equal size my/monitor-font--last-size)))
+        (setq my/monitor-font--last-size size)
+        (setq doom-font (font-spec :family "Hack Nerd Font" :size size))
+        (when (fboundp 'doom/reload-font)
+          (doom/reload-font))
+        ;; Show in the echo area (bottom/statusline area)
+        (message "Font changed: %s" size)))))
+
+(let ((hn (string-trim (system-name))))
+  (when (and hn (string-match-p "\\`ax-bee\\'" hn))
+    ;; Apply once right now
+    (when (display-graphic-p)
+      (my/set-font-for-monitor (selected-frame)))
+
+    ;; Poll to detect monitor changes even when focus doesn't change (Hyprland)
+    (when my/monitor-font--timer
+      (cancel-timer my/monitor-font--timer))
+    (setq my/monitor-font--timer
+          (run-with-timer 0 1.0 (lambda () (my/set-font-for-monitor (selected-frame)))))))
+
 (setq bookmark-default-file
       (expand-file-name "~/sync/emacs/bookmark-default-file"))
 
 (setq bookmark-save-flag 1)
 
-(setq abbrev-file-name "~/sync/emacs/abbrev_defs")
-(setq save-abbrevs 'silently)
-
 (setq calendar-week-start-day 1)
+
+(defun ax/open-calendar ()
+  "Open a read-only view of the calendar on radicale."
+  (interactive)
+  (require 'calfw)
+  (require 'calfw-ical)
+  (calfw-ical-data-cache-clear-all)
+  (calfw-open-calendar-buffer
+   :contents-sources
+   (list (calfw-ical-create-source
+          "http://192.168.178.8:5232/ax/calendar/"
+          "calendar"
+          "IndianRed"))))
+
+(use-package! org-caldav
+  :defer t
+  :config
+  (setq org-caldav-url "http://192.168.178.8:5232/ax"
+        org-caldav-calendar-id "calendar"
+        org-caldav-inbox "~/org/caldav-inbox.org"
+        org-caldav-files '("~/org/todo.org")
+        org-caldav-sync-direction 'twoway
+        org-caldav-save-directory "~/org/.org-caldav/"
+        org-caldav-backup-file "~/org/.org-caldav/backup.org"))
+
+(set-popup-rule! "^\\*org caldav sync result" :size 0.3 :quit t :select nil)
+
+(setq org-icalendar-timezone "Europe/Berlin")
+(setq org-icalendar-use-scheduled
+      '(event-if-not-todo event-if-todo-not-done))
+(setq org-icalendar-use-deadline
+      '(event-if-not-todo event-if-todo-not-done))
+
+(set-popup-rule! "^\\*eww" :size 0.8 :quit t)
+
+;; doom doctor suggestions
+(setq shell-file-name (executable-find "bash"))
+(setq-default vterm-shell "/usr/bin/fish")
+(setq-default explicit-shell-file-name "/usr/bin/fish")
+
+;; Prevent Doom from forcing vterm into a bottom popup window.
+;; This lets vterm open in the current or split window like any normal buffer.
+;; (after! vterm
+;;   (set-popup-rule! "^\\*vterm\\*" :ignore t))
+
+(after! org
+  (require 'ox-twbs))
+
+;; get rid of the delay after executing delete-pair
+(setq delete-pair-blink-delay 0.1)
+
+(use-package! denote
+  :hook (dired-mode . denote-dired-mode)
+  :config
+  (setq denote-directory (expand-file-name "~/org/notes/"))
+  (denote-rename-buffer-mode 1))
+
+(setq image-dired-thumb-size 128)
+
+(setq image-dired-external-viewer "nsxiv")
+
+;; https://protesilaos.com/emacs/dired-preview
+(setq dired-preview-delay 0.1) ;; default 0.7
+(setq dired-preview-max-size (expt 2 20))
+(setq dired-preview-ignored-extensions-regexp
+        (concat "\\."
+                "\\(gz\\|"
+                "zst\\|"
+                "tar\\|"
+                "xz\\|"
+                "rar\\|"
+                "zip\\|"
+                "iso\\|"
+                "epub"
+                "\\)"))
+
+(after! eat
+  (setq shell-file-name "/run/current-system/sw/bin/fish"
+        explicit-shell-file-name "/run/current-system/sw/bin/fish"
+        eat-shell "/run/current-system/sw/bin/fish"
+        eat-term-name "xterm-256color")
+  (set-face-foreground 'eat-term-color-0   "#0c1014")
+  (set-face-foreground 'eat-term-color-1   "#c23127")
+  (set-face-foreground 'eat-term-color-2   "#2aa889")
+  (set-face-foreground 'eat-term-color-3   "#edb443")
+  (set-face-foreground 'eat-term-color-4   "#195466")
+  (set-face-foreground 'eat-term-color-5   "#4e5166")
+  (set-face-foreground 'eat-term-color-6   "#33859e")
+  (set-face-foreground 'eat-term-color-7   "#99d1ce")
+  (set-face-foreground 'eat-term-color-8   "#11151c")
+  (set-face-foreground 'eat-term-color-9   "#d26937")
+  (set-face-foreground 'eat-term-color-10  "#091f2e")
+  (set-face-foreground 'eat-term-color-11  "#245361")
+  (set-face-foreground 'eat-term-color-12  "#0a3749")
+  (set-face-foreground 'eat-term-color-13  "#888ca6")
+  (set-face-foreground 'eat-term-color-14  "#599cab")
+  (set-face-foreground 'eat-term-color-15  "#d3ebe9"))
+
+(setenv "FZF_DEFAULT_COMMAND" "fd -u")
+(use-package! fzf
+  :bind
+    ;; Don't forget to set keybinds!
+  :config
+  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+        fzf/executable "fzf"
+        fzf/git-grep-args "-i --line-number %s"
+        ;; command used for `fzf-grep-*` functions
+        ;; example usage for ripgrep:
+        ;; fzf/grep-command "rg --no-heading -nH"
+        fzf/grep-command "grep -nrH"
+        ;; If nil, the fzf buffer will appear at the top of the window
+        fzf/position-bottom t
+        fzf/window-height 35))
+
+(defun ax-tmr-notify-send (timer)
+  "Announce finished TIMER via notify-send.
+Fall back to `tmr-notification-notify' if notify-send is unavailable."
+  (if (executable-find "notify-send")
+      (call-process "notify-send" nil 0 nil
+                    "-a" "Emacs TMR"
+                    "-u" (symbol-name tmr-notification-urgency)
+                    "TMR May Ring"
+                    (or (tmr--timer-description timer) "Time is up!"))
+    (tmr-notification-notify timer)))
+
+(use-package! tmr
+  :defer t
+  :init
+  (define-key global-map (kbd "C-c t") #'tmr-prefix-map)
+  :config
+  (setq tmr-sound-file (expand-file-name "sounds/alarm.ogg" doom-user-dir)
+        tmr-notification-urgency 'normal)
+  (remove-hook 'tmr-timer-finished-functions #'tmr-notification-notify)
+  (add-hook 'tmr-timer-finished-functions #'ax-tmr-notify-send))
+
+(after! lsp-mode
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-position 'top))  ; Position pop-up at top of window
+
+(after! cider
+  (add-hook 'cider-mode-hook #'lsp)
+  (setq cider-doc-view-function #'cider-docview-inline-symbol)  ; Inline docs with examples
+  (set-popup-rule! "^\\*cider-repl" :side 'right :size 0.4 :quit nil :ttl nil)
+  (map! :map cider-mode-map
+        :localleader
+        (:prefix ("e" . "eval")
+         :desc "Eval defun up to point" "p" #'cider-eval-defun-up-to-point)))
+
+;; (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+
+(after! lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(janet-mode . "janet"))
+  (lsp-register-client
+    (make-lsp-client
+      :new-connection (lsp-stdio-connection "janet-lsp")
+      :activation-fn (lsp-activate-on "janet")
+      :server-id 'janet-lsp)))
+
+(use-package! janet-mode
+  :mode "\\.janet\\'"
+  :config
+  (add-hook 'janet-mode-hook (lambda () (setq indent-tabs-mode nil)))
+  (add-hook 'janet-mode-hook #'lsp))
+
+(use-package! ajrepl
+  :after janet-mode
+  :config
+  (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))
 
 (after!
  consult
@@ -55,11 +266,6 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
-
-(after! magit
-  (setq magit-section-initial-visibility-alist
-        '((unpulled . show)
-          (unpushed . show))))
 
 ;; (setq elfeed-db-directory (expand-file-name "~/sync/emacs/elfeed"))
 
@@ -115,6 +321,53 @@
 
 (add-hook 'emms-player-started-hook
           (lambda () (ax/trigger-scrobble 'started)))
+
+(defun thanos/wtype-text (text)
+  "Process TEXT for wtype, handling newlines properly."
+  (let* ((has-final-newline (string-match-p "\n$" text))
+         (lines (split-string text "\n"))
+         (last-idx (1- (length lines))))
+    (string-join
+     (cl-loop for line in lines
+              for i from 0
+              collect (cond
+                       ;; Last line without final newline
+                       ((and (= i last-idx) (not has-final-newline))
+                        (format "wtype -s 350 \"%s\"" 
+                                (replace-regexp-in-string "\"" "\\\\\"" line)))
+                       ;; Any other line
+                       (t
+                        (format "wtype -s 350 \"%s\" && wtype -k Return" 
+                                (replace-regexp-in-string "\"" "\\\\\"" line)))))
+     " && ")))
+
+(defun thanos/type ()
+  "Launch a temporary frame with a clean buffer for typing."
+  (interactive)
+  (let ((frame (make-frame '((name . "emacs-float")
+                             (fullscreen . 0)
+                             (undecorated . t)
+                             (width . 70)
+                             (height . 20))))
+        (buf (get-buffer-create "emacs-float")))
+    (select-frame frame)
+    (switch-to-buffer buf)
+    (erase-buffer)
+    (org-mode)
+    (setq-local header-line-format
+                (format " %s to insert text or %s to cancel."
+                        (propertize "C-c C-c" 'face 'help-key-binding)
+			(propertize "C-c C-k" 'face 'help-key-binding)))
+    (local-set-key (kbd "C-c C-k")
+		   (lambda () (interactive)
+		     (kill-new (buffer-string))
+		     (delete-frame)))
+    (local-set-key (kbd "C-c C-c")
+		   (lambda () (interactive)
+		     (start-process-shell-command
+		      "wtype" nil
+		      (thanos/wtype-text (buffer-string)))
+		     (delete-frame)))))
 
 (defun ax/git-count-commits ()
   "Count the number of commits in the current Git repository
@@ -190,6 +443,11 @@
        :desc "Toggle zen"                     "Z" #'+zen/toggle-fullscreen
        :desc "Toggle treemacs"                "t" #'+treemacs/toggle))
 
+(after! magit
+  (setq magit-section-initial-visibility-alist
+        '((unpulled . show)
+          (unpushed . show))))
+
 (custom-set-faces
  '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "variable-pitch"))))
  '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.6))))
@@ -205,6 +463,12 @@
   (if (eq major-mode 'markdown-view-mode)
       (markdown-mode)
     (markdown-view-mode)))
+
+(when-let* ((gdiff (executable-find "gdiff")))
+  (setq diff-command gdiff))
+
+(when-let* ((gls (executable-find "gls")))
+  (setq insert-directory-program gls))
 
 (setq org-directory "~/org/")
 
@@ -235,297 +499,6 @@
     (ax/org-collapse-except-dashed)))
 
 (add-hook 'find-file-hook #'ax/org-maybe-collapse-except-dashed)
-
-(use-package! denote
-  :hook (dired-mode . denote-dired-mode)
-  :config
-  (setq denote-directory (expand-file-name "~/org/notes/"))
-  (denote-rename-buffer-mode 1))
-
-(defun ax-tmr-notify-send (timer)
-  "Announce finished TIMER via notify-send.
-Fall back to `tmr-notification-notify' if notify-send is unavailable."
-  (if (executable-find "notify-send")
-      (call-process "notify-send" nil 0 nil
-                    "-a" "Emacs TMR"
-                    "-u" (symbol-name tmr-notification-urgency)
-                    "TMR May Ring"
-                    (or (tmr--timer-description timer) "Time is up!"))
-    (tmr-notification-notify timer)))
-
-(use-package! tmr
-  :defer t
-  :init
-  (define-key global-map (kbd "C-c t") #'tmr-prefix-map)
-  :config
-  (setq tmr-sound-file (expand-file-name "sounds/alarm.ogg" doom-user-dir)
-        tmr-notification-urgency 'normal)
-  (remove-hook 'tmr-timer-finished-functions #'tmr-notification-notify)
-  (add-hook 'tmr-timer-finished-functions #'ax-tmr-notify-send))
-
-(when-let* ((gdiff (executable-find "gdiff")))
-  (setq diff-command gdiff))
-
-(when-let* ((gls (executable-find "gls")))
-  (setq insert-directory-program gls))
-
-(after! eat
-  (setq shell-file-name "/run/current-system/sw/bin/fish"
-        explicit-shell-file-name "/run/current-system/sw/bin/fish"
-        eat-shell "/run/current-system/sw/bin/fish"
-        eat-term-name "xterm-256color")
-  (set-face-foreground 'eat-term-color-0   "#0c1014")
-  (set-face-foreground 'eat-term-color-1   "#c23127")
-  (set-face-foreground 'eat-term-color-2   "#2aa889")
-  (set-face-foreground 'eat-term-color-3   "#edb443")
-  (set-face-foreground 'eat-term-color-4   "#195466")
-  (set-face-foreground 'eat-term-color-5   "#4e5166")
-  (set-face-foreground 'eat-term-color-6   "#33859e")
-  (set-face-foreground 'eat-term-color-7   "#99d1ce")
-  (set-face-foreground 'eat-term-color-8   "#11151c")
-  (set-face-foreground 'eat-term-color-9   "#d26937")
-  (set-face-foreground 'eat-term-color-10  "#091f2e")
-  (set-face-foreground 'eat-term-color-11  "#245361")
-  (set-face-foreground 'eat-term-color-12  "#0a3749")
-  (set-face-foreground 'eat-term-color-13  "#888ca6")
-  (set-face-foreground 'eat-term-color-14  "#599cab")
-  (set-face-foreground 'eat-term-color-15  "#d3ebe9"))
-
-(defun thanos/wtype-text (text)
-  "Process TEXT for wtype, handling newlines properly."
-  (let* ((has-final-newline (string-match-p "\n$" text))
-         (lines (split-string text "\n"))
-         (last-idx (1- (length lines))))
-    (string-join
-     (cl-loop for line in lines
-              for i from 0
-              collect (cond
-                       ;; Last line without final newline
-                       ((and (= i last-idx) (not has-final-newline))
-                        (format "wtype -s 350 \"%s\"" 
-                                (replace-regexp-in-string "\"" "\\\\\"" line)))
-                       ;; Any other line
-                       (t
-                        (format "wtype -s 350 \"%s\" && wtype -k Return" 
-                                (replace-regexp-in-string "\"" "\\\\\"" line)))))
-     " && ")))
-
-(defun thanos/type ()
-  "Launch a temporary frame with a clean buffer for typing."
-  (interactive)
-  (let ((frame (make-frame '((name . "emacs-float")
-                             (fullscreen . 0)
-                             (undecorated . t)
-                             (width . 70)
-                             (height . 20))))
-        (buf (get-buffer-create "emacs-float")))
-    (select-frame frame)
-    (switch-to-buffer buf)
-    (erase-buffer)
-    (org-mode)
-    (setq-local header-line-format
-                (format " %s to insert text or %s to cancel."
-                        (propertize "C-c C-c" 'face 'help-key-binding)
-			(propertize "C-c C-k" 'face 'help-key-binding)))
-    (local-set-key (kbd "C-c C-k")
-		   (lambda () (interactive)
-		     (kill-new (buffer-string))
-		     (delete-frame)))
-    (local-set-key (kbd "C-c C-c")
-		   (lambda () (interactive)
-		     (start-process-shell-command
-		      "wtype" nil
-		      (thanos/wtype-text (buffer-string)))
-		     (delete-frame)))))
-
-(set-popup-rule! "^\\*eww" :size 0.8 :quit t)
-
-(defvar my/1080p-font-size 12
-  "Font size for 1080p displays.")
-
-(defvar my/4k-font-size 20
-  "Font size for 4K / high-resolution displays.")
-
-(defvar my/monitor-font--timer nil)
-(defvar my/monitor-font--last-size nil)
-
-(defun my/set-font-for-monitor (&optional frame)
-  "Set doom font size based on the current monitor (poll-friendly)."
-  (when (display-graphic-p)
-    (let* ((frame (or frame (selected-frame)))
-           (geometry (frame-monitor-attribute 'geometry frame))
-           (scale (or (frame-monitor-attribute 'scale-factor frame) 1))
-           (width (and geometry (nth 2 geometry)))
-           (size (when width
-                   (let ((effective-width (* width scale)))
-                     (if (> effective-width 3000)
-                         my/4k-font-size
-                       my/1080p-font-size)))))
-
-      (when (and size (not (equal size my/monitor-font--last-size)))
-        (setq my/monitor-font--last-size size)
-        (setq doom-font (font-spec :family "Hack Nerd Font" :size size))
-        (when (fboundp 'doom/reload-font)
-          (doom/reload-font))
-        ;; Show in the echo area (bottom/statusline area)
-        (message "Font changed: %s" size)))))
-
-(let ((hn (string-trim (system-name))))
-  (when (and hn (string-match-p "\\`ax-bee\\'" hn))
-    ;; Apply once right now
-    (when (display-graphic-p)
-      (my/set-font-for-monitor (selected-frame)))
-
-    ;; Poll to detect monitor changes even when focus doesn't change (Hyprland)
-    (when my/monitor-font--timer
-      (cancel-timer my/monitor-font--timer))
-    (setq my/monitor-font--timer
-          (run-with-timer 0 1.0 (lambda () (my/set-font-for-monitor (selected-frame)))))))
-
-;; doom doctor suggestions
-(setq shell-file-name (executable-find "bash"))
-(setq-default vterm-shell "/usr/bin/fish")
-(setq-default explicit-shell-file-name "/usr/bin/fish")
-
-;; Prevent Doom from forcing vterm into a bottom popup window.
-;; This lets vterm open in the current or split window like any normal buffer.
-;; (after! vterm
-;;   (set-popup-rule! "^\\*vterm\\*" :ignore t))
-
-(after! org
-  (require 'ox-twbs))
-
-;; get rid of the delay after executing delete-pair
-(setq delete-pair-blink-delay 0.1)
-
-(after! lsp-mode
-  (setq lsp-ui-doc-enable t
-        lsp-ui-doc-show-with-cursor t
-        lsp-ui-doc-position 'top))  ; Position pop-up at top of window
-
-(after! cider
-  (add-hook 'cider-mode-hook #'lsp)
-  (setq cider-doc-view-function #'cider-docview-inline-symbol)  ; Inline docs with examples
-  (set-popup-rule! "^\\*cider-repl" :side 'right :size 0.4 :quit nil :ttl nil)
-  (map! :map cider-mode-map
-        :localleader
-        (:prefix ("e" . "eval")
-         :desc "Eval defun up to point" "p" #'cider-eval-defun-up-to-point)))
-
-;; (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-
-(setq image-dired-thumb-size 128)
-
-(setq image-dired-external-viewer "nsxiv")
-
-;; https://protesilaos.com/emacs/dired-preview
-(setq dired-preview-delay 0.1) ;; default 0.7
-(setq dired-preview-max-size (expt 2 20))
-(setq dired-preview-ignored-extensions-regexp
-        (concat "\\."
-                "\\(gz\\|"
-                "zst\\|"
-                "tar\\|"
-                "xz\\|"
-                "rar\\|"
-                "zip\\|"
-                "iso\\|"
-                "epub"
-                "\\)"))
-
-(setenv "FZF_DEFAULT_COMMAND" "fd -u")
-(use-package! fzf
-  :bind
-    ;; Don't forget to set keybinds!
-  :config
-  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
-        fzf/executable "fzf"
-        fzf/git-grep-args "-i --line-number %s"
-        ;; command used for `fzf-grep-*` functions
-        ;; example usage for ripgrep:
-        ;; fzf/grep-command "rg --no-heading -nH"
-        fzf/grep-command "grep -nrH"
-        ;; If nil, the fzf buffer will appear at the top of the window
-        fzf/position-bottom t
-        fzf/window-height 35))
-
-(setq ispell-program-name "hunspell")
-
-;; ax-x1c = OpenBSD (special case), everything else = NixOS
-(if (string-match-p "ax-x1c" (system-name))
-    ;; === OpenBSD settings ===
-    (progn
-      (setq ispell-dictionary "en-GB,de-DE")
-      (setq ispell-local-dictionary "en-GB,de-DE")
-      (setq ispell-hunspell-dictionary-alist
-            '(("en-GB,de-DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en-GB,de-DE") nil utf-8))))
-
-  ;; === NixOS settings (default) ===
-  (progn
-    (setq ispell-dictionary "en_US,de_DE")
-    (setq ispell-local-dictionary "en_US,de_DE")
-    (setq ispell-hunspell-dictionary-alist
-          '(("en_US,de_DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en_US,de_DE") nil utf-8)))
-    ;; Plain word list for ispell word completion (ispell-completion-at-point,
-    ;; the source of dictionary suggestions in corfu). NixOS has no
-    ;; /usr/share/dict/words, so this file is provisioned by home-manager
-    ;; (pkgs-extra.nix -> ~/.local/share/dict/words). Without it the ispell capf
-    ;; errors and Doom silently disables it, leaving only dabbrev.
-    (setq ispell-alternate-dictionary (expand-file-name "~/.local/share/dict/words"))
-    ;; Use grep instead of `look' so word order / UTF-8 umlauts in the German
-    ;; entries don't break look's binary search. The file is small; speed is fine.
-    (setq ispell-look-p nil)))
-
-(after! lsp-mode
-  (add-to-list 'lsp-language-id-configuration '(janet-mode . "janet"))
-  (lsp-register-client
-    (make-lsp-client
-      :new-connection (lsp-stdio-connection "janet-lsp")
-      :activation-fn (lsp-activate-on "janet")
-      :server-id 'janet-lsp)))
-
-(use-package! janet-mode
-  :mode "\\.janet\\'"
-  :config
-  (add-hook 'janet-mode-hook (lambda () (setq indent-tabs-mode nil)))
-  (add-hook 'janet-mode-hook #'lsp))
-
-(use-package! ajrepl
-  :after janet-mode
-  :config
-  (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))
-
-(defun ax/open-calendar ()
-  "Open a read-only view of the calendar on radicale."
-  (interactive)
-  (require 'calfw)
-  (require 'calfw-ical)
-  (calfw-ical-data-cache-clear-all)
-  (calfw-open-calendar-buffer
-   :contents-sources
-   (list (calfw-ical-create-source
-          "http://192.168.178.8:5232/ax/calendar/"
-          "calendar"
-          "IndianRed"))))
-
-(use-package! org-caldav
-  :defer t
-  :config
-  (setq org-caldav-url "http://192.168.178.8:5232/ax"
-        org-caldav-calendar-id "calendar"
-        org-caldav-inbox "~/org/caldav-inbox.org"
-        org-caldav-files '("~/org/todo.org")
-        org-caldav-sync-direction 'twoway
-        org-caldav-save-directory "~/org/.org-caldav/"
-        org-caldav-backup-file "~/org/.org-caldav/backup.org"))
-
-(set-popup-rule! "^\\*org caldav sync result" :size 0.3 :quit t :select nil)
-
-(setq org-icalendar-timezone "Europe/Berlin")
-(setq org-icalendar-use-scheduled
-      '(event-if-not-todo event-if-todo-not-done))
-(setq org-icalendar-use-deadline
-      '(event-if-not-todo event-if-todo-not-done))
 
 (defvar ax/vps0-src-dir "/ssh:vps:/usr/local/www/mysite-src/")
 
@@ -567,3 +540,30 @@ Also drops the cached nav so nav.html edits are picked up."
   (interactive)
   (setq ax/vps0-nav-cache nil)
   (org-publish "ax-website" t))
+
+(setq ispell-program-name "hunspell")
+
+;; ax-x1c = OpenBSD (special case), everything else = NixOS
+(if (string-match-p "ax-x1c" (system-name))
+    ;; === OpenBSD settings ===
+    (progn
+      (setq ispell-dictionary "en-GB,de-DE")
+      (setq ispell-local-dictionary "en-GB,de-DE")
+      (setq ispell-hunspell-dictionary-alist
+            '(("en-GB,de-DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en-GB,de-DE") nil utf-8))))
+
+  ;; === NixOS settings (default) ===
+  (progn
+    (setq ispell-dictionary "en_US,de_DE")
+    (setq ispell-local-dictionary "en_US,de_DE")
+    (setq ispell-hunspell-dictionary-alist
+          '(("en_US,de_DE" "[[:alpha:]]" "[^[:alpha:]]" "'" nil ("-d" "en_US,de_DE") nil utf-8)))
+    ;; Plain word list for ispell word completion (ispell-completion-at-point,
+    ;; the source of dictionary suggestions in corfu). NixOS has no
+    ;; /usr/share/dict/words, so this file is provisioned by home-manager
+    ;; (pkgs-extra.nix -> ~/.local/share/dict/words). Without it the ispell capf
+    ;; errors and Doom silently disables it, leaving only dabbrev.
+    (setq ispell-alternate-dictionary (expand-file-name "~/.local/share/dict/words"))
+    ;; Use grep instead of `look' so word order / UTF-8 umlauts in the German
+    ;; entries don't break look's binary search. The file is small; speed is fine.
+    (setq ispell-look-p nil)))
