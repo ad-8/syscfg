@@ -11,6 +11,7 @@ More option see https://github.com/DreamMaoMao/mango/wiki/
   - [[#shadows][shadows]]
 - [[#input][Input]]
 - [[#keybindings][Keybindings]]
+  - [[#dwm-like][dwm-like]]
 - [[#layout-settings][Layout Settings]]
   - [[#master][Master]]
   - [[#overview][Overview]]
@@ -222,6 +223,25 @@ mousebind=SUPER,btn_right,moveresize,curresize
 # Axis Bindings
 axisbind=SUPER,UP,viewtoleft_have_client
 axisbind=SUPER,DOWN,viewtoright_have_client
+#+end_src
+** dwm-like
+#+begin_src shell
+# Toggle tag 1-9 on top of current view
+bind=SUPER+CTRL,1,toggleview,1
+bind=SUPER+CTRL,2,toggleview,2
+bind=SUPER+CTRL,3,toggleview,3
+bind=SUPER+CTRL,4,toggleview,4
+bind=SUPER+CTRL,5,toggleview,5
+bind=SUPER+CTRL,6,toggleview,6
+bind=SUPER+CTRL,7,toggleview,7
+bind=SUPER+CTRL,8,toggleview,8
+bind=SUPER+CTRL,9,toggleview,9   
+
+# Toggle between current and previous tag selection
+bind=SUPER,Tab,view,-1   
+
+# Show all tags - does not work with super+tab (yet?)
+bind=SUPER,0,view,0   
 #+end_src
 * Layout Settings
 ** Master
