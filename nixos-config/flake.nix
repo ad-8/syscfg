@@ -22,6 +22,10 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
       inputs.darwin.follows = "";
     };
+    waybar = {
+      url = "github:alexays/waybar";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
   };
 
   outputs =
@@ -29,6 +33,7 @@
       self,
       nixpkgs-stable,
       home-manager-stable,
+      waybar,
       ...
     }@inputs:
     let
@@ -64,6 +69,16 @@
             ./hosts/${hostname}/configuration.nix
             inputs.agenix.nixosModules.default
             inputs.mangowm.nixosModules.mango
+
+            # replace stable waybar with latest master via overlay
+             ({ pkgs, ... }: {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  waybar = waybar.packages.${system}.default;
+                })
+              ];
+            })
+            
           ]
           ++ hm;
         };
