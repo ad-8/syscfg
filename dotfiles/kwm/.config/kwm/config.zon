@@ -512,6 +512,18 @@
                 },
             },
 
+            .{
+                .keysym = "s",
+                .modifiers = .{ .mod4 = true },
+                .event = .{
+                    .click = .{
+                        .pressed = .{
+                            .spawn = .{ .argv = .{ "kitten", "quick-access-terminal" } },
+                        },
+                    },
+                },
+            },
+
             // -------------------------
 
             // floating
