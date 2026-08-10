@@ -54,6 +54,8 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
   - [[#collapse-todoorg-on-open][collapse todo.org on open]]
   - [[#org-publish][org-publish]]
 - [[#spellchecking-ispell-aspell-hunspell][Spellchecking: ispell aspell hunspell]]
+- [[#testing-file-for-my-custom-interactive-functions][testing file for my custom interactive functions]]
+- [[#testing-cljbang][testing cljbang]]
 
 * 0 - lexical-binding
 Without this line, we get a "soft" error in ~config.el~.
@@ -930,3 +932,17 @@ Also drops the cached nav so nav.html edits are picked up."
     (setq ispell-look-p nil)))
 #+end_src
 
+
+* TODO testing file for my custom interactive functions
+This way, we don't have to update the config every time we make changes
+or quickly want to try out a new idea.
+
+#+begin_src elisp
+(load-file "/home/ax/x/ax.el")   
+#+end_src
+
+* TODO testing cljbang
+Also t quickly write custom functionality, but partly in Clojure.
+#+begin_src elisp
+(load-file "/home/ax/x/cljbang/axc.el")   
+#+end_src

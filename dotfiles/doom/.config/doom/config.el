@@ -570,3 +570,7 @@ Also drops the cached nav so nav.html edits are picked up."
     ;; Use grep instead of `look' so word order / UTF-8 umlauts in the German
     ;; entries don't break look's binary search. The file is small; speed is fine.
     (setq ispell-look-p nil)))
+
+(load-file "/home/ax/x/ax.el")
+
+(load-file "/home/ax/x/cljbang/axc.el")
