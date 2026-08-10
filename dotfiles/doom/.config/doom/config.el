@@ -411,6 +411,8 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
        (:desc "org-capture" "j" #'org-capture)
        (:desc "toggle the calm doom buffer" "k" #'ax/toggle-dashboard)
        (:desc "Toggle Dired Preview (global)" "p" #'dired-preview-global-mode)
+       (:desc "winner-undo" "u" #'winner-undo)
+       (:desc "winner-redo" "U" #'winner-redo)
        (:desc "org-publish to vps" "v" #'ax/publish-site)
        (:desc "visually select a window" "w" #'ace-window)
        (:desc "open terminal (eat)" "RET" #'eat)
@@ -420,6 +422,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
         :desc "open calendar view" "c" #'ax/open-calendar)
        (:prefix ("d" . "dirvish / delete")
         :desc "dirvish-fd" "f" #'dirvish-fd
+        :desc "dired-do-kill-lines" "k" #'dired-do-kill-lines
         :desc "dirvish-move" "m" #'dirvish-move
         :desc "dirvish-narrow" "n" #'dirvish-narrow
         :desc "delete-pair" "p" #'delete-pair)

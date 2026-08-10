@@ -74,3 +74,8 @@
 (package! denote)
 
 (package! tmr)
+
+(package! elisp-autofmt)
+
+(package! cljbang
+  :recipe (:host github :repo "borkdude/cljbang.el"))
