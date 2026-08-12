@@ -397,13 +397,30 @@ otherwise leave the buffer with no completion at all, and silently."
                 (ax/joker--lines ax/joker--completions-expr))))
     ax/joker--completions))
 
+(defun ax/joker--doc-buffer (candidate)
+  "Return a buffer holding joker's documentation for CANDIDATE.
+Corfu reads this through the `company-doc-buffer' metadata property, so
+`corfu-popupinfo-mode' — which Doom already enables everywhere — shows
+the docs of whichever candidate is selected, the way CIDER does."
+  (let* ((sym (substring-no-properties candidate))
+         (res (ax/joker--run
+               (ax/joker--with-ns (format "(joker.repl/doc %s)" sym)))))
+    (when (and (zerop (car res)) (not (string-empty-p (cdr res))))
+      (with-current-buffer (get-buffer-create " *joker-capf-doc*")
+        (erase-buffer)
+        ;; Drop joker's leading rule of dashes; it costs a line of a popup
+        ;; that is only a few lines tall to begin with.
+        (insert (replace-regexp-in-string "\\`-+\n" "" (cdr res)))
+        (current-buffer)))))
+
 (defun ax/joker-complete-at-point ()
   "Complete the joker symbol at point.
 `:exclusive' stays no, so dabbrev and friends still get a turn."
   (when-let* ((bounds (bounds-of-thing-at-point 'symbol)))
     (list (car bounds) (cdr bounds)
           (ax/joker--completions)
-          :exclusive 'no)))
+          :exclusive 'no
+          :company-doc-buffer #'ax/joker--doc-buffer)))
 
 (add-hook! 'joker-mode-hook
   (defun ax/joker-init-capf-h ()
