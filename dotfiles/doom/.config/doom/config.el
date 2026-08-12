@@ -488,6 +488,23 @@ than at the start of the defun."
         (setq-local comint-prompt-read-only t)))
     buf))
 
+(defun ax/joker-repl-send-region (beg end)
+  "Send the region between BEG and END to the joker REPL in one piece.
+Without this Doom falls back to typing the region into the REPL line by
+line — which it flags itself as a last resort — and a multi-line form
+never arrives whole."
+  (interactive "r")
+  (let ((text (string-trim (buffer-substring-no-properties beg end)))
+        (proc (get-buffer-process (ax/joker-repl))))
+    (unless proc (user-error "No joker REPL process"))
+    (unless (string-empty-p text)
+      (comint-send-string proc (concat text "\n")))))
+
+(defun ax/joker-repl-send-buffer ()
+  "Send the whole buffer to the joker REPL."
+  (interactive)
+  (ax/joker-repl-send-region (point-min) (point-max)))
+
 (defun ax/joker-format-buffer ()
   "Reformat the current buffer with `joker --format'."
   (interactive)
@@ -506,7 +523,10 @@ than at the start of the defun."
   (set-lookup-handlers! 'joker-mode
     :documentation #'ax/joker-doc)
   (set-eval-handler! 'joker-mode #'ax/joker-eval-region)
-  (set-repl-handler! 'joker-mode #'ax/joker-repl :persist t)
+  (set-repl-handler! 'joker-mode #'ax/joker-repl
+    :persist t
+    :send-region #'ax/joker-repl-send-region
+    :send-buffer #'ax/joker-repl-send-buffer)
 
   ;; Without this `C-x C-e' stays `eval-last-sexp', which would quietly read the
   ;; form as Emacs Lisp instead of joker.

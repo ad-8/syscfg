@@ -704,6 +704,14 @@ the same overlay everything else uses, since =:tools (eval +overlay)= is on.
 
 Joker prints every non-nil result, so a multi-form region reports each one.
 Empty output means the region evaluated to nil.
+
+Note the split in behaviour. =gr=, =C-x C-e= and the eval commands each spawn a
+fresh process holding only the =ns= form, so a =def= from one never exists in
+the next. The REPL is the stateful half: =SPC m r b= sends into a process that
+persists, which is where a =def= followed by a =println= of it works.
+
+Doom only calls a =:send-region= if the REPL window is *visible*; with the
+buffer alive but its window closed it silently does nothing.
 #+begin_src elisp
 (defun ax/joker-eval-region (beg end)
   "Evaluate the region between BEG and END with joker."
@@ -753,6 +761,23 @@ than at the start of the defun."
         (setq-local comint-prompt-regexp "^[^>\n]*=> *")
         (setq-local comint-prompt-read-only t)))
     buf))
+
+(defun ax/joker-repl-send-region (beg end)
+  "Send the region between BEG and END to the joker REPL in one piece.
+Without this Doom falls back to typing the region into the REPL line by
+line — which it flags itself as a last resort — and a multi-line form
+never arrives whole."
+  (interactive "r")
+  (let ((text (string-trim (buffer-substring-no-properties beg end)))
+        (proc (get-buffer-process (ax/joker-repl))))
+    (unless proc (user-error "No joker REPL process"))
+    (unless (string-empty-p text)
+      (comint-send-string proc (concat text "\n")))))
+
+(defun ax/joker-repl-send-buffer ()
+  "Send the whole buffer to the joker REPL."
+  (interactive)
+  (ax/joker-repl-send-region (point-min) (point-max)))
 #+end_src
 
 *** reformatting
@@ -788,7 +813,10 @@ Kept in one =after!= block because =joker-mode-map= only exists once
   (set-lookup-handlers! 'joker-mode
     :documentation #'ax/joker-doc)
   (set-eval-handler! 'joker-mode #'ax/joker-eval-region)
-  (set-repl-handler! 'joker-mode #'ax/joker-repl :persist t)
+  (set-repl-handler! 'joker-mode #'ax/joker-repl
+    :persist t
+    :send-region #'ax/joker-repl-send-region
+    :send-buffer #'ax/joker-repl-send-buffer)
 
   ;; Without this `C-x C-e' stays `eval-last-sexp', which would quietly read the
   ;; form as Emacs Lisp instead of joker.
