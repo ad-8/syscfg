@@ -369,7 +369,7 @@ binds {
 
     // ax: dwm-like keybinds
     // general
-    Mod+Space repeat=false { spawn-sh "wlr-which-key"; }
+    Mod+Shift+Space repeat=false { spawn-sh "wlr-which-key"; }
     Mod+Shift+Y { spawn-sh "~/syscfg/scripts/bb/licht.clj"; }
     Mod+E { spawn-sh "emacsclient -c"; }
     Mod+Shift+E { spawn-sh "emacs"; }
