@@ -499,11 +499,11 @@
         "scenefx": "scenefx"
       },
       "locked": {
-        "lastModified": 1786253736,
-        "narHash": "sha256-Yxe1uA289oZ9hBqVM9OmEDbvv/x/sO7lZ4PSaQCCeD4=",
+        "lastModified": 1786506723,
+        "narHash": "sha256-MFFxNdaNF++FKvFDDkOwweI86DEQwPFHgGnAHxK/LbI=",
         "owner": "mangowm",
         "repo": "mango",
-        "rev": "2b9e98fb0972d425daf04a4674ad87faf6e646a1",
+        "rev": "a4ff3b501f9dfc24f0455d9b66dca73b56a99329",
         "type": "github"
       },
       "original": {
@@ -545,11 +545,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1786089803,
-        "narHash": "sha256-iDLHbagLeTbQwI79zkbPdsUbwPvsk6nCJNSep+l1BRk=",
-        "rev": "ee48b147c18c7de1e6ec97dc74792be42724bed1",
+        "lastModified": 1786430034,
+        "narHash": "sha256-1MqAfG80fHLnWolvR3ULsMsXwMKFIJaWob8OI9yRcB0=",
+        "rev": "70cc4559b10a6062b05ff1af17e0add065ccaed9",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.7201.ee48b147c18c/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.7443.70cc4559b10a/nixexprs.tar.xz"
       },
       "original": {
         "id": "nixpkgs",
