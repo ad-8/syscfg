@@ -23,6 +23,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#configuration-of-programming-languages][Configuration of programming languages]]
   - [[#clojure][Clojure]]
   - [[#janet][Janet]]
+  - [[#joker][Joker]]
 - [[#consult---live-previews-for-grep-ripgrep-and-others][Consult - Live previews for grep, ripgrep and others]]
 - [[#doom][Doom]]
   - [[#info-from-the-original-configel][Info from the original config.el]]
@@ -381,6 +382,410 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   :after janet-mode
   :config
   (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))
+#+end_src
+
+** Joker
+[[https://github.com/candid82/joker][Joker]] is a small Clojure interpreter, so none of the CIDER machinery above
+applies — there is no nREPL to connect to. What it does have is a =joker.repl=
+namespace holding =doc=, =apropos= and =dir=, a =--lint= mode, and a 9ms
+startup. That last number is what keeps this section simple: every command below
+shells out to =joker= and throws the process away. No session, no daemon, no
+cache to invalidate.
+
+Nothing needs installing. =clojure-mode= already ships =joker-mode= (derived
+from =clojure-mode=, bound to =*.joke= and to the =#!/usr/bin/env joker=
+shebang), and Doom builds its =MODE-local-vars-hook= names from the exact
+=major-mode= — so a =.joke= buffer picks up neither CIDER nor =clojure-lsp=, and
+nothing here can leak into the Clojure setup above.
+
+*** helpers
+Every joker namespace is preloaded, so fully-qualified symbols resolve without a
+=require=. Aliases are the interesting case: re-evaluating the buffer's own =ns=
+form inside the subprocess is what makes =s/join= resolve to
+=joker.string/join=. That is safe — an =ns= form only runs requires, it never
+touches the script body.
+
+It can still fail, on a =:require= of a sibling file. Hence two things: =--run=
+starts joker in the file's own directory, because joker resolves local requires
+relative to =cwd=, and the callers retry without the prelude when it errors
+anyway.
+#+begin_src elisp
+(defvar ax/joker-executable "joker"
+  "Name or path of the joker binary.")
+
+(defvar ax/joker--namespace-cache nil
+  "Cached list of namespace names known to joker.")
+
+(defun ax/joker--ns-form ()
+  "Return the buffer's leading (ns ...) form as a string, or nil."
+  (save-excursion
+    (goto-char (point-min))
+    (when (re-search-forward "^(ns\\_>" nil t)
+      (goto-char (match-beginning 0))
+      (let ((beg (point)))
+        (when (ignore-errors (forward-sexp) t)
+          (buffer-substring-no-properties beg (point)))))))
+
+(defun ax/joker--with-ns (expr)
+  "Prefix EXPR with the buffer's ns form, so namespace aliases resolve."
+  (let ((ns (ax/joker--ns-form)))
+    (if ns (concat ns " " expr) expr)))
+
+(defun ax/joker--symbol-at-point ()
+  "Return the joker symbol at point as a string, or nil.
+Numbers, keywords and reader macros are rejected, and so is a half-typed
+name like \"os/\": joker reads a dangling slash as an error rather than a
+symbol, and while you are still typing that is the common case."
+  (let ((sym (thing-at-point 'symbol t)))
+    (and sym
+         (string-match-p "\\`[^0-9:#/][^/]*\\(/[^/]+\\)?\\'" sym)
+         sym)))
+
+(defun ax/joker--run (expr)
+  "Evaluate EXPR with joker, from the current file's directory.
+Return a cons cell of (EXIT-CODE . TRIMMED-OUTPUT)."
+  (let ((dir (or (and buffer-file-name (file-name-directory buffer-file-name))
+                 default-directory)))
+    (with-temp-buffer
+      (setq default-directory dir)
+      (let ((exit (call-process ax/joker-executable nil t nil "--eval" expr)))
+        (cons exit (string-trim (buffer-string)))))))
+
+(defun ax/joker--lines (expr)
+  "Return the lines EXPR prints, as a list, or nil if joker errored."
+  (let ((res (ax/joker--run expr)))
+    (and (zerop (car res)) (split-string (cdr res) "\n" t))))
+
+(defun ax/joker--run-async (expr callback)
+  "Evaluate EXPR with joker without blocking, then CALLBACK with its output."
+  (when (executable-find ax/joker-executable)
+    (let* ((default-directory
+            (or (and buffer-file-name (file-name-directory buffer-file-name))
+                default-directory))
+           (out (generate-new-buffer " *joker-async*")))
+      (make-process
+       :name "joker" :buffer out :noquery t :connection-type 'pipe
+       :command (list ax/joker-executable "--eval" expr)
+       :sentinel
+       ;; The process buffer catches stderr too, so a joker error would
+       ;; otherwise be handed to the caller as if it were documentation.
+       ;; Gate on the exit status and stay silent on failure.
+       (lambda (proc _event)
+         (unless (process-live-p proc)
+           (let ((text (with-current-buffer out (string-trim (buffer-string))))
+                 (ok (zerop (process-exit-status proc))))
+             (kill-buffer out)
+             (when ok (funcall callback text)))))))))
+
+(defun ax/joker--popup (name text)
+  "Show TEXT in a popup buffer called NAME."
+  (let ((buf (get-buffer-create name)))
+    (with-current-buffer buf
+      (let ((inhibit-read-only t))
+        (erase-buffer)
+        (insert text)
+        (goto-char (point-min)))
+      (unless (derived-mode-p 'special-mode) (special-mode)))
+    (display-buffer buf)
+    buf))
+
+(set-popup-rule! "^\\*joker-doc\\*" :size 0.3 :quit t :select t)
+#+end_src
+
+*** documentation: =K=
+=K= is not bound by hand. Doom's =+lookup/documentation= consults the handlers
+registered for the major mode, so registering one is all it takes.
+
+=doc= is silent on an unknown symbol and still exits 0, so empty output is the
+"nothing found" signal, and returning nil lets =+lookup/documentation= fall
+through to its online search. Special forms (=if=, =recur=) document fine;
+=source= and =find-doc= do not exist in joker.
+
+Returning ='deferred= rather than =t= is load-bearing. =t= means "I moved the
+cursor", and =+lookup--run-handlers= responds by restoring the window
+configuration it saved beforehand — which closes the popup we just opened.
+='deferred= is the value for handlers that display their own buffer.
+
+=apropos= and =dir= feed =completing-read= rather than dumping a list into a
+buffer, so vertico filters them live and =RET= goes straight to the docs. Only
+=doc= gets a popup; a read-only list you cannot select from is a dead end.
+#+begin_src elisp
+(defun ax/joker-doc (&optional symbol)
+  "Show joker's documentation for SYMBOL, or for the symbol at point."
+  (interactive)
+  (let ((sym (or symbol (ax/joker--symbol-at-point))))
+    (unless sym (user-error "No joker symbol at point"))
+    (let* ((expr (format "(joker.repl/doc %s)" sym))
+           (res (ax/joker--run (ax/joker--with-ns expr))))
+      ;; An unreachable :require aborts the whole expression, prelude included;
+      ;; retry bare so fully-qualified lookups still work.
+      (unless (zerop (car res))
+        (setq res (ax/joker--run expr)))
+      (if (or (not (zerop (car res))) (string-empty-p (cdr res)))
+          (ignore (message "No joker docs for %s" sym))
+        (ax/joker--popup "*joker-doc*" (cdr res))
+        'deferred))))
+
+(defun ax/joker-apropos (pattern)
+  "Pick one of the joker vars matching PATTERN and document it."
+  (interactive "sJoker apropos: ")
+  (if-let* ((matches (ax/joker--lines
+                      (format "(doseq [s (joker.repl/apropos %S)] (println s))"
+                              pattern))))
+      (ax/joker-doc (completing-read "Joker symbol: " matches nil t))
+    (message "Nothing in joker matches %s" pattern)))
+
+(defun ax/joker--namespaces ()
+  "Return every namespace joker knows about. Cached; joker's set is fixed."
+  (or ax/joker--namespace-cache
+      (setq ax/joker--namespace-cache
+            (ax/joker--lines
+             "(doseq [n (sort (map str (all-ns)))] (println n))"))))
+
+(defun ax/joker-dir (ns)
+  "Pick one of the public vars of joker namespace NS and document it.
+`joker.repl/dir' prints bare names, so NS goes back on before the lookup."
+  (interactive (list (completing-read "Joker namespace: "
+                                      (ax/joker--namespaces) nil t)))
+  (if-let* ((vars (ax/joker--lines (format "(joker.repl/dir %s)" ns))))
+      (ax/joker-doc (concat ns "/" (completing-read (format "%s/" ns) vars nil t)))
+    (message "No public vars in %s" ns)))
+#+end_src
+
+*** arglists in the echo area
+Same subprocess as =K=, but this one fires on every idle pause, so it has to be
+async or it stutters the cursor. Unresolvable symbols print nothing and the
+callback is simply never invoked, which is what eldoc wants.
+#+begin_src elisp
+(defun ax/joker-eldoc-function (callback &rest _)
+  "Eldoc backend for the joker symbol at point.
+Returns the signature followed by the docstring."
+  (when-let* ((sym (ax/joker--symbol-at-point)))
+    (ax/joker--run-async
+     (ax/joker--with-ns
+      (format (concat "(let [m (meta (resolve '%s))]"
+                      " (when m"
+                      "   (println (str (:ns m) \"/\" (:name m)"
+                      "                 \" \" (:arglists m)))"
+                      "   (when (:doc m) (println (:doc m)))))")
+              sym))
+     (lambda (out)
+       (unless (string-empty-p out)
+         (funcall callback out))))
+    t))
+
+(add-hook! 'joker-mode-hook
+  (defun ax/joker-init-eldoc-h ()
+    (add-hook 'eldoc-documentation-functions #'ax/joker-eldoc-function nil t)
+    (eldoc-mode +1)))
+#+end_src
+
+A childframe package such as =eldoc-box= would render this in a floating box
+instead, and was tried here. It buys presentation only, works in graphical
+frames alone, and would be the single thing in this section needing a package.
+The echo area carries the same text everywhere, and =K= already opens a real
+popup on demand.
+
+*** completion
+Typing =os/= offers nothing on its own — corfu has no source for joker, so it
+falls back to dabbrev and shows whatever words happen to be in the buffer.
+
+One joker call produces every candidate in four shapes: namespace names, every
+var fully qualified (=joker.string/join=), the =joker.core= vars that need no
+prefix at all, and — via =ns-aliases= on the buffer's own =ns= form — every var
+of every aliased namespace pre-written as =os/env=, =s/join=. Both the aliased
+and the fully-qualified spelling have to be there; typing either one is normal
+and a list holding only aliases silently offers nothing for =joker.string/=.
+
+That is around 1030 strings fetched in 48ms, once.
+
+The cache key is the =ns= form itself, so adding a =:require= refreshes the
+candidates on the next completion and nothing else does.
+#+begin_src elisp
+(defvar-local ax/joker--completions nil)
+(defvar-local ax/joker--completions-key nil)
+
+(defconst ax/joker--completions-expr
+  (concat "(doseq [n (all-ns)]"
+          "  (println (str n))"
+          "  (doseq [[k _] (ns-publics n)] (println (str n \"/\" k))))"
+          " (doseq [[k _] (ns-publics 'joker.core)] (println (str k)))")
+  "Candidates that need no namespace context: namespaces, every var fully
+qualified, and the bare `joker.core' names.")
+
+(defconst ax/joker--aliases-expr
+  (concat " (doseq [[a n] (ns-aliases *ns*)]"
+          "   (doseq [[k _] (ns-publics n)] (println (str a \"/\" k))))")
+  "Alias-qualified candidates. Needs the buffer's ns form to have run.")
+
+(defun ax/joker--completions ()
+  "Return joker completion candidates for this buffer, cached per ns form.
+Falls back to the context-free candidates when the ns form does not
+evaluate — a `:require' of a sibling file that joker cannot reach would
+otherwise leave the buffer with no completion at all, and silently."
+  (let ((key (ax/joker--ns-form)))
+    (unless (and ax/joker--completions
+                 (equal key ax/joker--completions-key))
+      (setq ax/joker--completions-key key
+            ax/joker--completions
+            (or (ax/joker--lines
+                 (ax/joker--with-ns (concat ax/joker--completions-expr
+                                            ax/joker--aliases-expr)))
+                (ax/joker--lines ax/joker--completions-expr))))
+    ax/joker--completions))
+
+(defun ax/joker-complete-at-point ()
+  "Complete the joker symbol at point.
+`:exclusive' stays no, so dabbrev and friends still get a turn."
+  (when-let* ((bounds (bounds-of-thing-at-point 'symbol)))
+    (list (car bounds) (cdr bounds)
+          (ax/joker--completions)
+          :exclusive 'no)))
+
+(add-hook! 'joker-mode-hook
+  (defun ax/joker-init-capf-h ()
+    (add-hook 'completion-at-point-functions #'ax/joker-complete-at-point nil t)))
+#+end_src
+
+*** linting
+=.joke= buffers have no checker otherwise: =flycheck-clj-kondo= is disabled by
+the =+lsp= flag on the clojure module, and no language server attaches here.
+=global-flycheck-mode= is already on, so defining the checker is enough.
+
+The dialect matters. Under the default =clj= dialect joker's own namespaces are
+reported as unresolvable symbols — =joker.os/env= alone produces a false error.
+
+Not using the =flycheck-joker= package on purpose: it still calls =--lintcljs=
+and =--lintedn=, flags joker dropped in favour of =--dialect=, and it registers
+for =clojure-mode= only, never =joker-mode=.
+#+begin_src elisp
+(after! flycheck
+  (flycheck-define-checker joker
+    "A Joker syntax and lint checker, using `joker --lint'."
+    :command ("joker" "--dialect" "joker" "--lint" "-")
+    :standard-input t
+    :error-patterns
+    ((error   line-start "<stdin>:" line ":" column ": "
+              (0+ not-newline) (or "error: " "Exception: ") (message) line-end)
+     (warning line-start "<stdin>:" line ":" column ": "
+              (0+ not-newline) "warning: " (message) line-end))
+    :modes (joker-mode))
+  (add-to-list 'flycheck-checkers 'joker))
+#+end_src
+
+*** evaluating, and the repl
+Registering the handlers is what wires up Doom's existing keys: =gr= over a
+selection and =SPC c e= for evaluation, =SPC o r= for the repl. Results land in
+the same overlay everything else uses, since =:tools (eval +overlay)= is on.
+
+Joker prints every non-nil result, so a multi-form region reports each one.
+Empty output means the region evaluated to nil.
+#+begin_src elisp
+(defun ax/joker-eval-region (beg end)
+  "Evaluate the region between BEG and END with joker."
+  (let ((res (ax/joker--run
+              (ax/joker--with-ns (buffer-substring-no-properties beg end)))))
+    (+eval-display-results (if (string-empty-p (cdr res)) "nil" (cdr res))
+                           (current-buffer))
+    t))
+
+(defun ax/joker--sexp-end ()
+  "Return the position just past the form before point.
+Evil's normal state leaves point ON the closing paren rather than after
+it. Taking `point' as-is there makes `backward-sexp' walk back over the
+last inner form instead, so (reduce + [1 2 3]) evaluates to [1 2 3]."
+  (if (and (bound-and-true-p evil-local-mode)
+           (not (memq (bound-and-true-p evil-state) '(insert emacs)))
+           (not (eobp)))
+      (1+ (point))
+    (point)))
+
+(defun ax/joker-eval-last-sexp ()
+  "Evaluate the form before point with joker."
+  (interactive)
+  (let* ((end (ax/joker--sexp-end))
+         (beg (save-excursion (goto-char end) (backward-sexp) (point))))
+    (ax/joker-eval-region beg end)))
+
+(defun ax/joker-eval-defun ()
+  "Evaluate the top-level form around point with joker.
+The bounds are taken first so the result overlay lands at point, rather
+than at the start of the defun."
+  (interactive)
+  (let ((bounds (save-excursion
+                  (end-of-defun)
+                  (let ((end (point)))
+                    (beginning-of-defun)
+                    (cons (point) end)))))
+    (ax/joker-eval-region (car bounds) (cdr bounds))))
+
+(defun ax/joker-repl ()
+  "Open a joker REPL in a comint buffer."
+  (interactive)
+  (let ((buf (get-buffer-create "*joker-repl*")))
+    (unless (comint-check-proc buf)
+      (make-comint-in-buffer "joker" buf ax/joker-executable nil "--no-readline")
+      (with-current-buffer buf
+        (setq-local comint-prompt-regexp "^[^>\n]*=> *")
+        (setq-local comint-prompt-read-only t)))
+    buf))
+#+end_src
+
+*** reformatting
+=joker --format= is joker's own formatter, not cljfmt, and it reflows the whole
+file — so the first run on an existing script makes a big diff. That is why it
+stays a manual command rather than a format-on-save hook. Doom's
+=:editor format= module is disabled anyway, which would make =set-formatter!= a
+silent no-op.
+
+=replace-buffer-contents= keeps point and markers where they were, and a
+non-zero exit leaves the buffer untouched.
+#+begin_src elisp
+(defun ax/joker-format-buffer ()
+  "Reformat the current buffer with `joker --format'."
+  (interactive)
+  (let ((tmp (generate-new-buffer " *joker-format*")))
+    (unwind-protect
+        (let ((exit (call-process-region (point-min) (point-max)
+                                         ax/joker-executable nil tmp nil
+                                         "--format" "-")))
+          (if (and (integerp exit) (zerop exit) (> (buffer-size tmp) 0))
+              (replace-buffer-contents tmp)
+            (message "joker --format failed: %s"
+                     (with-current-buffer tmp (string-trim (buffer-string))))))
+      (kill-buffer tmp))))
+#+end_src
+
+*** wiring it up
+Kept in one =after!= block because =joker-mode-map= only exists once
+=clojure-mode= has loaded.
+#+begin_src elisp
+(after! clojure-mode
+  (set-lookup-handlers! 'joker-mode
+    :documentation #'ax/joker-doc)
+  (set-eval-handler! 'joker-mode #'ax/joker-eval-region)
+  (set-repl-handler! 'joker-mode #'ax/joker-repl :persist t)
+
+  ;; Without this `C-x C-e' stays `eval-last-sexp', which would quietly read the
+  ;; form as Emacs Lisp instead of joker.
+  (map! :map joker-mode-map
+        "C-x C-e" #'ax/joker-eval-last-sexp)
+
+  (map! :map joker-mode-map
+        :localleader
+        :desc "Format buffer" "=" #'ax/joker-format-buffer
+        (:prefix ("e" . "eval")
+         :desc "Eval buffer"    "b" #'+eval/buffer
+         :desc "Eval defun"     "d" #'ax/joker-eval-defun
+         :desc "Eval last sexp" "e" #'ax/joker-eval-last-sexp
+         :desc "Eval region"    "r" #'+eval/region)
+        (:prefix ("h" . "help")
+         :desc "Doc for symbol"   "d" #'ax/joker-doc
+         :desc "Apropos"          "a" #'ax/joker-apropos
+         :desc "Browse namespace" "n" #'ax/joker-dir)
+        (:prefix ("r" . "repl")
+         :desc "Open repl"      "r" #'+eval/open-repl-other-window
+         :desc "Send to repl"   "b" #'+eval/buffer-or-region-in-repl)))
 #+end_src
 
 * Consult - Live previews for grep, ripgrep and others
