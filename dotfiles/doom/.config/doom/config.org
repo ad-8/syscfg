@@ -798,6 +798,12 @@ Kept in one =after!= block because =joker-mode-map= only exists once
   (map! :map joker-mode-map
         :localleader
         :desc "Format buffer" "=" #'ax/joker-format-buffer
+        ;; jet and neil ride in from Doom's clojure module, because
+        ;; `joker-mode-map' inherits `clojure-mode-map'. jet converts
+        ;; JSON/EDN/Transit and neil edits deps.edn — a joker script has
+        ;; neither, so drop both rather than leave dead keys in the menu.
+        "j" nil
+        "f" nil
         (:prefix ("e" . "eval")
          :desc "Eval buffer"    "b" #'+eval/buffer
          :desc "Eval defun"     "d" #'ax/joker-eval-defun
