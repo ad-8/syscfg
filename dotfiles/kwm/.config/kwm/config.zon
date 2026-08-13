@@ -20,7 +20,7 @@
           .{ "syncthing", "serve", "--no-browser" },
           .{ "/home/ax/syscfg/scripts/river-idle.sh" },
           .{ "/home/ax/syscfg/scripts/river-bg.sh" },
-          .{ "/home/ax/syscfg/scripts/bb/kwm-status.clj" },
+          .{ "/home/ax/syscfg/scripts/bb/kwm_status.clj" },
       },
 
 
