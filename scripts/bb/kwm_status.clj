@@ -240,4 +240,5 @@
       (Thread/sleep (* tick-secs 1000))
       (recur (inc tick) line cache))))
 
-(run)
+(when (= *file* (System/getProperty "babashka.file"))
+  (run))
