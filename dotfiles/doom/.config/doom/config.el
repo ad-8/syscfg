@@ -313,7 +313,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
     ;; (shell-command (format "notify-send '%s' '%s'" status-text message-text))
     
     (shell-command
-     (format "nix develop ~/my/scripts/lastfm --command python ~/my/scripts/lastfm/scrobble.py %s %s %s"
+     (format "nix develop ~/x/lastfm --command python ~/x/lastfm/scrobble.py %s %s %s"
          ;; shell-quote-argument helps when eg title is multiple words, so we only pass exactly 3 args to python
          (shell-quote-argument (or artist "Unknown artist"))
          (shell-quote-argument (or album "Unknown album"))
