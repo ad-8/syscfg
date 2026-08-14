@@ -296,7 +296,10 @@
     (when (and (not= line prev) (write-line status-fifo line))
       (set prev line))
 
-    (ev/sleep tick-secs)
+    (def now (os/clock :realtime))
+    (ev/sleep (- (* tick-secs
+                    (+ 1 (math/floor (/ now tick-secs))))
+                 now))
     (++ tick)))
 
 (defn main [& args]
