@@ -330,7 +330,7 @@
 
             // passthrough
             .{
-                .keysym = "Escape",
+                .keysym = "P",
                 .modifiers = .{ .mod4 = true, .shift = true },
                 .event = .{
                     .click = .{
@@ -342,7 +342,7 @@
             },
             .{
                 .mode = "passthrough",
-                .keysym = "Escape",
+                .keysym = "P",
                 .modifiers = .{ .mod4 = true, .shift = true },
                 .event = .{
                     .click = .{
