@@ -51,6 +51,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#org-mode][Org Mode]]
   - [[#org-directory][org-directory]]
   - [[#set-different-heading-sizes][set different heading sizes]]
+  - [[#enable-org-habit][enable org-habit]]
   - [[#collapse-todoorg-on-open][collapse todo.org on open]]
   - [[#org-publish][org-publish]]
 - [[#spellchecking-ispell-aspell-hunspell][Spellchecking: ispell aspell hunspell]]
@@ -826,6 +827,12 @@ theme switch.
   '(org-level-4 :height 1.10)
   '(org-level-5 :height 1.05)
   '(org-document-title :height 1.5))
+#+end_src
+** enable org-habit
+#+begin_src elisp
+(after! org
+  (add-to-list 'org-modules 'org-habit t)
+  (setq org-habit-show-all-today t))
 #+end_src
 ** collapse todo.org on open
 #+begin_src elisp

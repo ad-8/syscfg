@@ -483,6 +483,10 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   '(org-level-5 :height 1.05)
   '(org-document-title :height 1.5))
 
+(after! org
+  (add-to-list 'org-modules 'org-habit t)
+  (setq org-habit-show-all-today t))
+
 (defun ax/org-collapse-except-dashed ()
   "Collapse all; show child headings of level-1 headings starting with \"-- \"."
   (interactive)
