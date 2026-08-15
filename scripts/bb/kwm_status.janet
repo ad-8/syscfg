@@ -27,7 +27,7 @@
 
 (def supported-players {"strawberry" true "fooyin" true "emms" true})
 (def music-width 35)
-(def tick-secs 2)
+(def tick-secs 5)
 
 # kwm's status buffer is 256 bytes and only gets terminated when the read comes
 # up short, so a line filling it exactly is read past the end (bar.zig:29).
@@ -189,10 +189,10 @@
   []
   # os/date gives :week-day 0=Sun, and 0-based :month-day/:month
   (def d (os/date (os/time) true))
-  (string/format "%s %s %02d.%02d. %s %02d:%02d"
+  (string/format "%s %s %02d.%02d. %s %02d:%02d:%02d"
                  (icons :cal) (weekdays-de (d :week-day))
                  (inc (d :month-day)) (inc (d :month))
-                 (icons :clock) (d :hours) (d :minutes)))
+                 (icons :clock) (d :hours) (d :minutes) (d :seconds)))
 
 (defn due?
   ``True when a field refreshing every secs is due on this tick. max 1 so a
@@ -206,14 +206,14 @@
    {:render weather  :secs 10}
    {:render volume   :secs tick-secs}
    {:render licht    :secs tick-secs}
-   {:render load-avg :secs 6}
+   {:render load-avg :secs tick-secs}
    {:render disk     :secs 30}
    {:render ram      :secs 30}
    {:render vpn      :secs 10}
    {:render datetime :secs tick-secs}])
 
 (comment
-  # tick -- loop counter, one per tick-secs, so 15 is 30s in
+  # tick -- loop counter, one per tick-secs, so 15 is 75s in
   15
 
   # cache -- one string per entry in fields, same order and length.
@@ -226,7 +226,7 @@
    "<disk> 29G"
    "<ram> 28%"
    "<vpn> muc"
-   "Mi 12.08.  19:38"]
+   "Mi 12.08.  19:38:05"]
 
   # back comes the same shape: fields that are due get re-rendered, the rest
   # carry their previous string through. music is "" when nothing is playing,
