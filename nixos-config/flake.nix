@@ -13,18 +13,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs-unstable";
     # };
     hyprland.url = "github:hyprwm/Hyprland/v0.56.1";
-    mangowm = {
-      url = "github:mangowm/mango";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs-stable";
       inputs.darwin.follows = "";
-    };
-    waybar = {
-      url = "github:alexays/waybar";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
   };
 
@@ -33,7 +25,6 @@
       self,
       nixpkgs-stable,
       home-manager-stable,
-      waybar,
       ...
     }@inputs:
     let
@@ -68,17 +59,6 @@
           modules = [
             ./hosts/${hostname}/configuration.nix
             inputs.agenix.nixosModules.default
-            inputs.mangowm.nixosModules.mango
-
-            # replace stable waybar with latest master via overlay
-             ({ pkgs, ... }: {
-              nixpkgs.overlays = [
-                (final: prev: {
-                  waybar = waybar.packages.${system}.default;
-                })
-              ];
-            })
-            
           ]
           ++ hm;
         };
