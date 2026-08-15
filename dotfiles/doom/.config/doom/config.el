@@ -476,12 +476,12 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 (setq org-directory "~/org/")
 
 (custom-set-faces!
-  '(org-level-1 :height 1.5)
-  '(org-level-2 :height 1.4)
-  '(org-level-3 :height 1.3)
-  '(org-level-4 :height 1.2)
-  '(org-level-5 :height 1.1)
-  '(org-document-title :height 1.7))
+  '(org-level-1 :height 1.25)
+  '(org-level-2 :height 1.20)
+  '(org-level-3 :height 1.15)
+  '(org-level-4 :height 1.10)
+  '(org-level-5 :height 1.05)
+  '(org-document-title :height 1.5))
 
 (defun ax/org-collapse-except-dashed ()
   "Collapse all; show child headings of level-1 headings starting with \"-- \"."
