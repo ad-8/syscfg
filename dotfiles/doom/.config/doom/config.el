@@ -488,6 +488,8 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   (add-to-list 'org-modules 'org-habit t)
   (setq org-habit-show-all-today t))
 
+(setq org-log-into-drawer t)
+
 (defun ax/org-collapse-except-dashed ()
   "Collapse all; show child headings of level-1 headings starting with \"-- \"."
   (interactive)
