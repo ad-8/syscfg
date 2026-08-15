@@ -413,6 +413,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
        (:desc "Toggle Dired Preview (global)" "p" #'dired-preview-global-mode)
        (:desc "winner-undo" "u" #'winner-undo)
        (:desc "winner-redo" "U" #'winner-redo)
+       (:desc "show amount of git commits" "#" #'ax/git-count-commits)
        (:desc "org-publish to vps" "v" #'ax/publish-site)
        (:desc "visually select a window" "w" #'ace-window)
        (:desc "open terminal (eat)" "RET" #'eat)
