@@ -263,6 +263,21 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
  '(powerline-inactive1 :inherit mode-line-inactive :background "#000000")
  '(powerline-inactive2 :inherit mode-line-inactive :background "#000000"))
 
+(custom-theme-set-faces!
+ 'gotham
+ '(org-agenda-done :foreground "#245361"))
+
+(custom-theme-set-faces!
+ 'gotham
+ '(org-habit-alert-face   :background "#edb443" :foreground "#0c1014")
+ '(org-habit-ready-face   :background "#2aa889" :foreground "#0c1014")
+ '(org-habit-overdue-face :background "#c23127" :foreground "#d3ebe9")
+ '(org-habit-clear-face   :background "#195466" :foreground "#d3ebe9"))
+
+(custom-theme-set-faces!
+ 'gotham
+ '(org-headline-done :foreground "#245361"))
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
