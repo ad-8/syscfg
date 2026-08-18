@@ -50,6 +50,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#openbsd-use-gnu-ls-and-diff-if-installed][OpenBSD: use GNU ls and diff if installed]]
 - [[#org-mode][Org Mode]]
   - [[#org-directory][org-directory]]
+  - [[#agenda-files][agenda files]]
   - [[#set-different-heading-sizes][set different heading sizes]]
   - [[#enable-org-habit][enable org-habit]]
   - [[#logging][logging]]
@@ -836,6 +837,17 @@ How to verify which ls/diff is used? =SPC h v= or =C-h v=, then:
 ** org-directory
 #+begin_src emacs-lisp
 (setq org-directory "~/org/")
+#+end_src
+
+** agenda files
+Doom's default is =(list org-directory)=, which only expands to the =.org= files
+directly in ~/org. This walks the tree instead, skipping dot-dirs.
+#+begin_src elisp
+(after! org
+  (setq org-agenda-files
+        (directory-files-recursively
+         org-directory "\\.org\\'" nil
+         (lambda (dir) (not (string-prefix-p "." (file-name-nondirectory dir)))))))
 #+end_src
 
 ** set different heading sizes

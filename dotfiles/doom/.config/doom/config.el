@@ -491,6 +491,12 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 
 (setq org-directory "~/org/")
 
+(after! org
+  (setq org-agenda-files
+        (directory-files-recursively
+         org-directory "\\.org\\'" nil
+         (lambda (dir) (not (string-prefix-p "." (file-name-nondirectory dir)))))))
+
 (custom-set-faces!
   '(org-level-1 :height 1.25)
   '(org-level-2 :height 1.20)
