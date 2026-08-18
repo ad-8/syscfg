@@ -339,7 +339,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   :init
   (define-key global-map (kbd "C-c t") #'tmr-prefix-map)
   :config
-  (setq tmr-sound-file (expand-file-name "sounds/alarm.ogg" doom-user-dir)
+  (setq tmr-sound-file (expand-file-name "~/sync/emacs/alarm.ogg")
         tmr-notification-urgency 'normal)
   (remove-hook 'tmr-timer-finished-functions #'tmr-notification-notify)
   (add-hook 'tmr-timer-finished-functions #'ax-tmr-notify-send))
