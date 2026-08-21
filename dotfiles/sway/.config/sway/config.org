@@ -493,7 +493,7 @@ bindsym $mod+s [app_id="dwm-scratchpad"] scratchpad show, resize set 1024 768, m
 for_window [app_id="ax-org-capture"] floating enable, move to scratchpad
 exec foot --app-id=ax-org-capture emacs --no-window-system
 # Show only that specific scratchpad terminal
-bindsym $mod+u [app_id="ax-org-capture"] scratchpad show, resize set 1024 768, move position center
+bindsym $mod+u [app_id="ax-org-capture"] scratchpad show, resize set 1500 1000, move position center
 #+end_src
 *** htop
 #+begin_src shell
