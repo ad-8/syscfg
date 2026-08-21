@@ -96,8 +96,9 @@
     ;; active-compositor.json include target is (re)created first; a missing one
     ;; is a fatal config-load error that kills the whole bar.
     :reload  (fn [_]
-               (shell {:continue true} "sh -c 'pkill -f waybar'")
-               (shell {:continue true} (str "bb " (fs/path (fs/home) "syscfg/scripts/waybar.clj") " launch")))}
+               (when (zero? (:exit (shell {:continue true} "sh -c 'pgrep waybar >/dev/null'")))
+                 (shell {:continue true} "sh -c 'pkill waybar'")
+                 (shell {:continue true} (str "bb " (fs/path (fs/home) "syscfg/scripts/waybar.clj") " launch"))))}
    {:file    "hyprland.lua"
     :symlink (fs/path (fs/xdg-config-home) "hypr/active-theme.lua")
     :reload  (fn [_] (shell ["hyprctl" "reload"]))}
