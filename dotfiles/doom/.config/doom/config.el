@@ -287,6 +287,10 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 (after! elfeed
   (setq-default elfeed-search-filter "@3-days-ago +unread"))
 
+(after! elfeed-show
+  (map! :map elfeed-show-mode-map
+        :n "q" #'+rss/delete-pane))
+
 (use-package emms
   :config
   (require 'emms-setup)

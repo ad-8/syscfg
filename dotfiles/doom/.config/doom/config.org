@@ -32,6 +32,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#elfeed---atom-and-rss-reader][Elfeed - Atom and RSS Reader]]
   - [[#database-syncthing-seems-to-corrupt-it][Database (syncthing seems to corrupt it)]]
   - [[#default-search-filter][Default Search Filter]]
+  - [[#quit-an-entry-with-q][Quit an entry with q]]
 - [[#emms---emacs-multimedia-system][Emms - Emacs Multimedia System]]
   - [[#basic-setup][basic setup]]
   - [[#format-of-title-in-the-emms-playlist-buffer][format of ~title~ in the /EMMS Playlist/ buffer]]
@@ -565,6 +566,15 @@ By default elfeed-search-filter is set to @2-weeks-ago and makes the last 2 week
 #+begin_src emacs-lisp
 (after! elfeed
   (setq-default elfeed-search-filter "@3-days-ago +unread"))
+#+end_src
+** Quit an entry with q
+Elfeed 4.0 deprecated =elfeed-kill-buffer= for =kill-current-buffer=, so
+evil-collection rebound =q= to it, and doom's advice on that command leaves
+a stray window behind.
+#+begin_src emacs-lisp
+(after! elfeed-show
+  (map! :map elfeed-show-mode-map
+        :n "q" #'+rss/delete-pane))
 #+end_src
 
 * Emms - Emacs Multimedia System
