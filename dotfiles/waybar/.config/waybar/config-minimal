@@ -34,6 +34,44 @@
             //   "default": ""
         }
     },
+    // sway equivalents (referenced only when running under sway; inert otherwise).
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "  ",
+            "2": "  ",
+            "3": " 3 ",
+            "4": " 4 ",
+            "5": " 5 ",
+            "6": " 6 ",
+            "7": " 7 ",
+            "8": "  ",
+            "9": "  ",
+            "urgent": "!   !",
+            //   "focused": "",
+            //   "default": ""
+        }
+    },
+    "sway/mode": {
+        "format": "{}"
+    },
+    "sway/scratchpad": {
+        "format": "[{count}]",
+        "show-empty": false,
+        "tooltip-format": "{app}: {title}"
+    },
+    "sway/window": {
+        "format": "{title}",
+        "icon": false,
+        "rewrite": {
+            "(.*) - Mozilla Firefox": "$1",
+            "(.*) — Mozilla Firefox": "$1",
+            "(.*) - Brave": "$1"
+        }
+    },
     // niri equivalents (referenced only when running under niri; inert otherwise).
     "niri/workspaces": {
         "format": "{value}"

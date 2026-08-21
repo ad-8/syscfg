@@ -1,0 +1,12 @@
+// -*- mode: jsonc -*-
+// sway-specific left modules. Symlinked to as active-compositor.json by
+// waybar.clj when running under sway; see config / config-minimal include.
+// sway has no windowcount module, so the scratchpad count takes that slot.
+{
+    "modules-left": [
+        "custom/snowflake",
+        "sway/workspaces",
+        "sway/mode",
+        "sway/window"
+    ]
+}

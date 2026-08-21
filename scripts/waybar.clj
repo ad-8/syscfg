@@ -123,7 +123,9 @@
   (cond
     (System/getenv "NIRI_SOCKET")                  :niri
     (System/getenv "HYPRLAND_INSTANCE_SIGNATURE")  :hypr
+    (System/getenv "SWAYSOCK")                     :sway
     (= "niri" (System/getenv "XDG_CURRENT_DESKTOP")) :niri
+    (= "sway" (System/getenv "XDG_CURRENT_DESKTOP")) :sway
     :else                                          :hypr))
 
 (defn point-compositor-symlink!
@@ -133,6 +135,7 @@
   (let [dir    (fs/expand-home "~/.config/waybar")
         target (fs/file dir (case (compositor)
                               :niri "compositor-niri.json"
+                              :sway "compositor-sway.json"
                               "compositor-hypr.json"))
         link   (fs/file dir "active-compositor.json")]
     (fs/delete-if-exists link)
