@@ -14,6 +14,7 @@
     ./config-niri.nix
     ./config-printing.nix
     ./config-river.nix
+    ./config-sway.nix
     ./config-virtman.nix
     ./config-xorg.nix
   ];
