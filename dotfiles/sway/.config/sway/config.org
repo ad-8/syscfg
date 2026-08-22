@@ -324,8 +324,9 @@ Based on the example in =man swayidle=.
 
 #+begin_src shell
 exec swayidle -w \
-         timeout 3600 'swaylock -f -c 000000 -F' \
-         timeout 3700 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 1180 'notify-send locking-screen in-10-seconds' \
+         timeout 1200 'swaylock -f -c 000000 -F' \
+         timeout 1250 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000 -F'
 #+end_src
 
