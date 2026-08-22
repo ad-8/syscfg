@@ -247,13 +247,11 @@ bindsym $mod+minus scratchpad show
 for_window [app_id="dwm-scratchpad"] floating enable, move to scratchpad
 exec foot --app-id=dwm-scratchpad
 # Show only that specific scratchpad terminal
-bindsym $mod+s [app_id="dwm-scratchpad"] scratchpad show, resize set 1024 768, move position center
+bindsym $mod+s [app_id="dwm-scratchpad"] scratchpad show, resize set 1280 900, move position center
 
-# the main scratchpad like on dwm; so i don't have to manually move it first and then cycle through the stack if multiple pads
-for_window [app_id="ax-org-capture"] floating enable, move to scratchpad
-exec foot --app-id=ax-org-capture emacs --no-window-system
-# Show only that specific scratchpad terminal
-bindsym $mod+u [app_id="ax-org-capture"] scratchpad show, resize set 1500 1000, move position center
+for_window [instance="ax-org-capture"] floating enable, move to scratchpad
+exec emacs --name ax-org-capture
+bindsym $mod+u [instance="ax-org-capture"] scratchpad show, resize set 1500 1000, move position center
 
 for_window [title="htop-scratchpad"] floating enable, move to scratchpad
 exec foot --title "htop-scratchpad" -e htop
