@@ -15,7 +15,7 @@
   configWorkstation.enable = true;
   configFirefox.enable = true;
   configRiver.enable = true;
-  configNiri.enable = true;
+  configHyprland.enable = true;
   configAudio.enable = true;
   configClamav.enable = true;
   configGaming.enable = true;
