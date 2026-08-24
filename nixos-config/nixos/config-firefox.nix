@@ -93,6 +93,9 @@
           };
         };
 
+        # Built-in VPN / "IP Protection" (Firefox 149+) — not available at all.
+        IPProtectionAvailable = false;
+
         # System integration
         HardwareAcceleration = true; # usually default, set explicitly
         # NOTE: DisableAppUpdate is set automatically by the NixOS firefox module.
