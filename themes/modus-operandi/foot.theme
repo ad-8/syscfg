@@ -1,0 +1,25 @@
+# Modus Operandi color theme for foot
+# https://protesilaos.com/emacs/modus-themes
+
+[colors-dark]
+background=FFFFFF
+foreground=000000
+cursor=FFFFFF 005E8B
+
+regular0=000000
+regular1=A60000
+regular2=006800
+regular3=6F5500
+regular4=0031A9
+regular5=721045
+regular6=005E8B
+regular7=A6A6A6
+
+bright0=595959
+bright1=972500
+bright2=00663F
+bright3=884900
+bright4=3548CF
+bright5=531AB6
+bright6=005F5F
+bright7=FFFFFF

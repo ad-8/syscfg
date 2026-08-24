@@ -1,0 +1,181 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: HackNerdFont;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(255, 255, 255, 1);
+    border-bottom: 0px solid rgba(159, 159, 159, 0.5);
+    color: #005E8B;
+}
+
+tooltip {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(159, 159, 159, 0.5);
+}
+tooltip label {
+  color: #000000;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: #000000;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background: #F2F2F2;
+    border-bottom: 3px solid #005E8B;
+}
+
+#workspaces button.active {
+    background-color: #0031A9;
+    color: #FFFFFF;
+    border-radius: 3px;
+}
+
+#mode, #clock, #battery {
+    padding: 0 10px;
+}
+
+#mode {
+    background: #A60000;
+    border-bottom: 3px solid #A60000;
+    color: #FFFFFF;
+}
+
+#clock {
+    color: #0031A9;
+}
+
+#battery {
+    color: #005E8B;
+}
+
+#battery.charging {
+    color: #FFFFFF;
+    background-color: #006800;
+}
+
+@keyframes blink {
+    to {
+        background-color: #000000;
+        color: #FFFFFF;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #A60000;
+    color: #FFFFFF;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+    color: #005E8B;
+}
+
+#custom-vpn {
+    color: #006800;
+}
+
+#custom-vpn.down {
+    color: #A60000;
+}
+
+#custom-cpu {
+    color: #005E8B;
+}
+#custom-cpu.warn {
+    color: #6F5500;
+}
+#custom-cpu.crit {
+    color: #A60000;
+}
+
+#custom-disk {
+    color: #005E8B;
+}
+#custom-disk.low {
+    color: #A60000;
+}
+#custom-memory {
+    color: #005E8B;
+}
+#custom-memory.low {
+    color: #A60000;
+}
+#custom-date {
+    color: #005E8B;
+}
+#custom-weather {
+    color: #005E8B;
+}
+#custom-music-info {
+    color: #005E8B;
+}
+
+#window {
+    margin-left: 8px;
+}
+
+#battery {
+    color: #005E8B;
+}
+#custom-licht {
+    color: #005E8B;
+}
+#custom-notification-status {
+    color: #005E8B;
+}
+#pulseaudio {
+    color: #005E8B;
+}
+
+#workspaces button.empty {
+    color: #9F9F9F;
+}
+
+#custom-snowflake {
+    color: #005E8B;
+    font-size: 15px;
+    font-weight: bold;
+}
+menu {
+    border-radius: 15px;
+    background: #FFFFFF;
+    color: #000000;
+}
+menuitem {
+    border-radius: 15px;
+}
+
+#custom-sep2b {
+    color: #005E8B;
+}
+
+#submap {
+    background-color: #A60000;
+    color: #FFFFFF;
+    padding: 3px 10px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+#tray {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding: 0 4px;
+}
+
+#custom-timer {
+    color: #0031A9;
+    font-weight: bold;
+}

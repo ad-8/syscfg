@@ -10,9 +10,9 @@
 (def themes-dir (fs/path (fs/home) "syscfg/themes"))
 
 (def theme-categories
-  {:dark  #{"everforest-dark" "gotham" "gruvbox-dark" "iceberg" "nord" "osaka-jade"
-            "oxocarbon" "solarized-dark" "tokyo-night" "winter-is-coming-dark-blue"}
-   :light #{"doric-marble" "flatwhite" "gruvbox-light" "nord-light" "solarized-light"}
+  {:dark  #{"everforest-dark" "gotham" "gruvbox-dark" "iceberg" "modus-vivendi" "nord"
+            "osaka-jade" "oxocarbon" "solarized-dark" "tokyo-night" "winter-is-coming-dark-blue"}
+   :light #{"doric-marble" "flatwhite" "gruvbox-light" "modus-operandi" "nord-light" "solarized-light"}
    :mono  #{"amber" "lumon" "matrix" "vantablack"}
    :muted #{"doric-plum" "doric-walnut" "wilmersdorf"}
    :neon  #{"hackerman" "laserwave" "matte-black" "retro-82" "tron-legacy"}})

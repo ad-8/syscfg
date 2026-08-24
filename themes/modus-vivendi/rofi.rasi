@@ -1,0 +1,116 @@
+/**
+ * Modus Vivendi rofi theme
+ * Colors from https://protesilaos.com/emacs/modus-themes (modus-vivendi-palette)
+ */
+
+* {
+    mvbg:     #000000;
+    mvbgdim:  #1e1e1e;
+    mvbgact:  #535353;
+    mvfg:     #ffffff;
+    mvfgdim:  #989898;
+    mvblue:   #00bcff;
+    mvcyan:   #6ae4b9;
+    mvline:   #646464;
+
+    foreground:       @mvfg;
+    background-color: transparent;
+
+    highlight:   underline bold #00bcff;
+    transparent: rgba(0, 0, 0, 0);
+}
+
+window {
+    location: center;
+    anchor:   center;
+    transparency: "screenshot";
+    padding: 10px;
+    border:  0px;
+    border-radius: 6px;
+
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+
+    width: 33%;
+}
+
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
+}
+
+message {
+    color: @mvbg;
+    padding: 5;
+    border-color: @foreground;
+    border:  0px 2px 2px 2px;
+    background-color: @mvcyan;
+}
+
+inputbar {
+    color: @mvfg;
+    padding: 11px;
+    background-color: #1e1e1e;
+
+    border: 1px;
+    border-radius:  6px 6px 0px 0px;
+    border-color: @mvblue;
+}
+
+entry, prompt, case-indicator {
+    text-font: inherit;
+    text-color: inherit;
+}
+
+prompt {
+    margin: 0px 1em 0em 0em;
+}
+
+listview {
+    padding: 8px;
+    border-radius: 0px 0px 6px 6px;
+    border-color: @mvblue;
+    border: 0px 1px 1px 1px;
+    background-color: rgba(0, 0, 0, 0.9);
+    dynamic: false;
+}
+
+element {
+    padding: 3px;
+    vertical-align: 0.5;
+    border-radius: 4px;
+    background-color: transparent;
+    color: @foreground;
+    text-color: rgb(255, 255, 255);
+}
+
+element selected.normal {
+    background-color: @mvcyan;
+    text-color: #000000;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element-text selected.normal {
+    highlight: underline bold #000000;
+}
+
+button {
+    padding: 6px;
+    color: @foreground;
+    horizontal-align: 0.5;
+
+    border: 2px 0px 2px 2px;
+    border-radius: 4px 0px 0px 4px;
+    border-color: @foreground;
+}
+
+button selected normal {
+    border: 2px 0px 2px 2px;
+    border-color: @foreground;
+}

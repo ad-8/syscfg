@@ -1,0 +1,25 @@
+# Modus Vivendi color theme for foot
+# https://protesilaos.com/emacs/modus-themes
+
+[colors-dark]
+background=000000
+foreground=FFFFFF
+cursor=000000 6AE4B9
+
+regular0=000000
+regular1=FF5F59
+regular2=44BC44
+regular3=D0BC00
+regular4=2FAFFF
+regular5=FEACD0
+regular6=00D3D0
+regular7=A6A6A6
+
+bright0=595959
+bright1=FF6B55
+bright2=00C06F
+bright3=FEC43F
+bright4=79A8FF
+bright5=B6A0FF
+bright6=6AE4B9
+bright7=FFFFFF

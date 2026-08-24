@@ -1,0 +1,23 @@
+// modus-operandi
+// Themed via switch_theme.clj. Colors sourced from themes/modus-operandi/hyprland.lua
+// (accent / red) + foot.theme background; inactive-color uses modus's own `border`
+// semantic color (#9f9f9f), already designed to be visible-but-subtle against bg-main.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#ffffff"
+
+    border {
+        active-color   "#0031a9"
+        inactive-color "#9f9f9f"
+        urgent-color   "#a60000" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#0031a9"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#ffffff"
+}

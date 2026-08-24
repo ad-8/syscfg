@@ -1,0 +1,23 @@
+// modus-vivendi
+// Themed via switch_theme.clj. Colors sourced from themes/modus-vivendi/hyprland.lua
+// (accent / red) + foot.theme background; inactive-color uses modus's own `border`
+// semantic color (#646464), already designed to be visible-but-subtle against bg-main.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#000000"
+
+    border {
+        active-color   "#00bcff"
+        inactive-color "#646464"
+        urgent-color   "#ff5f59" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#00bcff"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#000000"
+}

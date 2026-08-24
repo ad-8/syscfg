@@ -22,6 +22,8 @@ separate rows here.
 | lumon                      | —                     | OldJobobo/omarchy-lumon-theme                    | https://github.com/OldJobobo/omarchy-lumon-theme                                             |
 | matrix                     | —                     | monkeyjunglejuice/matrix-emacs-theme (Dan Dee)   | https://github.com/monkeyjunglejuice/matrix-emacs-theme                                      |
 | matte-black                | —                     | tahayvr/matte-black-theme                        | https://github.com/tahayvr/matte-black-theme                                                 |
+| modus-operandi             | —                     | protesilaos/modus-themes (bundled with Emacs 30) | https://github.com/protesilaos/modus-themes                                                  |
+| modus-vivendi              | —                     | protesilaos/modus-themes (bundled with Emacs 30) | https://github.com/protesilaos/modus-themes                                                  |
 | nord                       | —                     | nordtheme/nord                                   | https://github.com/nordtheme/nord                                                            |
 | nord-light                 | —                     | doom-nord-light (doom-themes)                    | https://github.com/doomemacs/themes                                                          |
 | osaka-jade                 | —                     | Justikun/omarchy-osaka-jade-theme                | https://github.com/Justikun/omarchy-osaka-jade-theme                                         |
