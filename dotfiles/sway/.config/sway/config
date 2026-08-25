@@ -377,7 +377,8 @@ set $mode_launcher Open:\n\n[b]luetooth [c]alc [e]macs [E]macsclient [f]ile-mana
 
 set $mode_screenshot Screenshot: [a]ll outputs [s]elect region [w]indow
 
-bindsym $mod+o exec notify-send -t 30000 -u low -i keyboard "$mode_launcher"; mode "$mode_launcher"
+# bindsym $mod+o exec notify-send -t 30000 -u low -i keyboard "$mode_launcher"; mode "$mode_launcher"
+bindsym $mod+o exec wlr-which-key --initial-keys o
 
 mode "$mode_launcher" {
     bindsym b exec foot --title bluetui --command bluetui; mode "default"; exec dunstctl close
