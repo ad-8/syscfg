@@ -194,20 +194,89 @@
   (let [cp (get-in weather-glyph [code (if day? :day :night)] 0xe374)]
     (str (char cp))))
 
+(defn- hex->rgb [hex]
+  (let [h (subs hex 1)]
+    (mapv #(Integer/parseInt (subs h % (+ % 2)) 16) [0 2 4])))
+
+(def ^:private active-foot-theme
+  (fs/path (fs/xdg-config-home) "foot" "active-theme"))
+
+(defn- relative-luminance
+  "WCAG relative luminance of a #rrggbb hex: 0.0 is black, 1.0 is white."
+  [hex]
+  (let [lin (fn [c] (let [s (/ c 255.0)]
+                      (if (<= s 0.03928)
+                        (/ s 12.92)
+                        (Math/pow (/ (+ s 0.055) 1.055) 2.4))))
+        [r g b] (map lin (hex->rgb hex))]
+    (+ (* 0.2126 r) (* 0.7152 g) (* 0.0722 b))))
+
+(defn- bg-light?
+  "True when the active theme's background is light. Reads foot's active-theme
+  symlink (maintained by switch_theme.clj) -- the same `background=` value the
+  rest of the theme set treats as a theme's true base. Anything that goes wrong
+  reading it means dark, i.e. the palette every theme used before this existed.
+  Measured across all 29 themes the split is wide: dark tops out at 0.034, light
+  starts at 0.812, so 0.5 is nowhere near either cluster."
+  ([] (bg-light? active-foot-theme))
+  ([theme-file]
+   (try
+     (if-let [bg (->> (str/split-lines (slurp (str theme-file)))
+                      (keep #(second (re-find #"(?i)^\s*background\s*=\s*#?(\p{XDigit}{6})" %)))
+                      first)]
+       (> (relative-luminance (str "#" bg)) 0.5)
+       false)
+     (catch Exception _ false))))
+
+;; one-shot script rendering up to 12 glyph rows -> read the theme file once,
+;; and not at all on the dwm/i3 paths, which emit no color.
+(def ^:private light-bg? (delay (bg-light?)))
+
+(defn- code-family
+  "WMO weather code -> condition family keyword."
+  [code]
+  (cond
+    (#{0 1} code)                        :clear
+    (#{2 3} code)                        :cloudy
+    (#{45 48} code)                      :fog
+    (#{56 57 66 67} code)                :freezing
+    (#{51 53 55 61 63 65 80 81 82} code) :rain
+    (#{71 73 75 77 85 86} code)          :snow
+    (#{95 96 99} code)                   :thunder
+    :else                                :default))
+
+(def ^:private palette-dark
+  {:clear    "#f9d71c"  ;; gold
+   :cloudy   "#9aa0a6"  ;; grey
+   :fog      "#b0b0b0"  ;; pale grey
+   :freezing "#7fd4d4"  ;; icy cyan
+   :rain     "#5a9bd4"  ;; blue
+   :snow     "#cfe8ff"  ;; pale blue
+   :thunder  "#b08cff"  ;; violet
+   :default  "#cccccc"})
+
+;; same hue families pulled down until they clear 5:1 on the palest light theme
+;; (nord-light #e5e9f0) -- not on pure white, which is the easiest of the six and
+;; would leave the others short. The three greys keep the dark palette's ordering
+;; (cloudy quietest, default loudest) so they stay tellable apart.
+(def ^:private palette-light
+  {:clear    "#6f5500"  ;; gold
+   :cloudy   "#576069"  ;; grey
+   :fog      "#565656"  ;; pale grey
+   :freezing "#005f5f"  ;; icy cyan
+   :rain     "#1f5f9f"  ;; blue
+   :snow     "#33648a"  ;; pale blue
+   :thunder  "#5b3fb0"  ;; violet
+   :default  "#383838"})
+
 (defn code-color
   "WMO weather code -> RGB hex for the glyph, grouped by condition family.
   Applied as a zero-width color wrapper (ANSI for foot, Pango span for dunst),
-  so it restores color without disturbing column alignment."
+  so it restores color without disturbing column alignment. Both wrappers set an
+  explicit foreground that wins over the one dunst/foot would otherwise use, so
+  the palette has to follow the active theme's background itself."
   [code]
-  (cond
-    (#{0 1} code)                        "#f9d71c"  ;; clear        - gold
-    (#{2 3} code)                        "#9aa0a6"  ;; cloudy       - grey
-    (#{45 48} code)                      "#b0b0b0"  ;; fog          - pale grey
-    (#{56 57 66 67} code)                "#7fd4d4"  ;; freezing     - icy cyan
-    (#{51 53 55 61 63 65 80 81 82} code) "#5a9bd4"  ;; rain         - blue
-    (#{71 73 75 77 85 86} code)          "#cfe8ff"  ;; snow         - pale blue
-    (#{95 96 99} code)                   "#b08cff"  ;; thunderstorm - violet
-    :else                                "#cccccc"))
+  (get (if @light-bg? palette-light palette-dark) (code-family code)))
 
 (defn current-hour-index
   "Index into the :hourly arrays for the current local hour. open-meteo returns
@@ -238,10 +307,6 @@
        :pop    (nth (:precipitation_probability h) i)
        :precip (nth (:precipitation h) i)
        :cloud  (nth (:cloud_cover h) i)})))
-
-(defn- hex->rgb [hex]
-  (let [h (subs hex 1)]
-    (mapv #(Integer/parseInt (subs h % (+ % 2)) 16) [0 2 4])))
 
 (defn- colorize
   "Wrap the glyph in a zero-width color escape for the given target: an ANSI
@@ -489,6 +554,35 @@
                              :precipitation-sum 57.6
                              :wind_gusts_10m_max 42.1
                              :wind_speed_10m_max 18.0}))
+
+  (deftest test-code-family
+    (are
+     [code expected]
+     (= expected (code-family code))
+      0    :clear
+      3    :cloudy
+      48   :fog
+      66   :freezing
+      82   :rain
+      75   :snow
+      99   :thunder
+      4711 :default))
+
+  (deftest test-palettes
+    (is (= (set (keys palette-dark)) (set (keys palette-light)))
+        "both palettes must cover every condition family"))
+
+  (deftest test-bg-light?
+    ;; classify every theme from its foot.theme background= line
+    (let [light #{"modus-operandi" "nord-light" "solarized-light"
+                  "gruvbox-light" "flatwhite" "doric-marble"}]
+      (doseq [d (fs/list-dir (fs/path (fs/home) "syscfg" "themes"))
+              :when (fs/directory? d)]
+        (is (= (contains? light (fs/file-name d))
+               (bg-light? (fs/path d "foot.theme")))
+            (str (fs/file-name d) " misclassified"))))
+    ;; unreadable -> dark, i.e. what every theme rendered before this branch
+    (is (false? (bg-light? "/nonexistent"))))
 
   (run-tests)
   ;;
