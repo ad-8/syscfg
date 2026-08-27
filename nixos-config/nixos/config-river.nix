@@ -32,6 +32,7 @@
         };
 
         environment.systemPackages = with pkgs; [
+          kitty # use kitten thing as scratchpad replacement
           river
           gammastep
           swayidle
