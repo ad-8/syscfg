@@ -11,6 +11,7 @@
   configWorkstation.enable = true;
   configFirefox.enable = true;
   configSway.enable = true;
+  configRiver.enable = true;
   configAudio.enable = true;
 
   # ignore short presses of the power button entirely. Long-pressing your power button (5 seconds or longer)
