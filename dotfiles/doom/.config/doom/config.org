@@ -60,6 +60,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#spellchecking-ispell-aspell-hunspell][Spellchecking: ispell aspell hunspell]]
 - [[#testing-file-for-my-custom-interactive-functions][testing file for my custom interactive functions]]
 - [[#testing-cljbang][testing cljbang]]
+- [[#zig][zig]]
 
 * 0 - lexical-binding
 Without this line, we get a "soft" error in ~config.el~.
@@ -1001,4 +1002,9 @@ or quickly want to try out a new idea.
 Also t quickly write custom functionality, but partly in Clojure.
 #+begin_src elisp
 (load-file "/home/ax/x/cljbang/axc.el")   
+#+end_src
+* zig
+#+begin_src elisp
+(after! lsp-zig
+  (setq lsp-zig-enable-argument-placeholders nil))
 #+end_src

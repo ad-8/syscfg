@@ -118,7 +118,7 @@
        (sh +fish)          ; she sells {ba,z,fi}sh shells on the C xor
        ;;web               ; the tubes
        yaml                ; JSON, but readable
-       ;;zig               ; C, but simpler
+       (zig +lsp)          ; C, but simpler
 
        :email
        ;;(mu4e +org +gmail)
