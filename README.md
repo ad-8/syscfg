@@ -18,7 +18,10 @@ Replace `<theme-name>` with whatever theme you want (e.g. `nord`, `gruvbox-dark`
 ## II. scripts
 Collection of maintained and long-forgotten scripts.
 
-## III. nixos
+## III. themes
+Per-app color palettes; picked up by the theme switcher (see above) to populate the `active-theme.*` symlinks.
+
+## IV. nixos
 Second time's the charm?
 
 
