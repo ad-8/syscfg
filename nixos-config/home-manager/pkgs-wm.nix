@@ -12,7 +12,7 @@
 
   config = lib.mkIf config.pkgsWm.enable {
     home.packages = with pkgs; [
-      # light # enabled in configuration.nix
+      # light (or now brillo) enabled in config-workstation.nix
       bluetui
       ddcutil
       dunst

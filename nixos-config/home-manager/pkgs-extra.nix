@@ -18,7 +18,6 @@
       gum
       imagemagick
       inxi # Full featured CLI system information tool
-      iotop-c
       lm_sensors # provides `sensors` cmd to show cpu temp etc.
       pciutils # lspci and more
       pdftk
