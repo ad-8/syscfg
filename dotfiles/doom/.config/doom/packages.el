@@ -57,9 +57,6 @@
 (package! rainbow-delimiters)
 (package! gotham-theme)
 
-(package! eat
-  :recipe (:host codeberg :repo "akib/emacs-eat"))
-
 (package! doric-themes)
 (package! tron-legacy-theme)
 

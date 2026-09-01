@@ -127,28 +127,6 @@
                 "epub"
                 "\\)"))
 
-(after! eat
-  (setq shell-file-name "/run/current-system/sw/bin/fish"
-        explicit-shell-file-name "/run/current-system/sw/bin/fish"
-        eat-shell "/run/current-system/sw/bin/fish"
-        eat-term-name "xterm-256color")
-  (set-face-foreground 'eat-term-color-0   "#0c1014")
-  (set-face-foreground 'eat-term-color-1   "#c23127")
-  (set-face-foreground 'eat-term-color-2   "#2aa889")
-  (set-face-foreground 'eat-term-color-3   "#edb443")
-  (set-face-foreground 'eat-term-color-4   "#195466")
-  (set-face-foreground 'eat-term-color-5   "#4e5166")
-  (set-face-foreground 'eat-term-color-6   "#33859e")
-  (set-face-foreground 'eat-term-color-7   "#99d1ce")
-  (set-face-foreground 'eat-term-color-8   "#11151c")
-  (set-face-foreground 'eat-term-color-9   "#d26937")
-  (set-face-foreground 'eat-term-color-10  "#091f2e")
-  (set-face-foreground 'eat-term-color-11  "#245361")
-  (set-face-foreground 'eat-term-color-12  "#0a3749")
-  (set-face-foreground 'eat-term-color-13  "#888ca6")
-  (set-face-foreground 'eat-term-color-14  "#599cab")
-  (set-face-foreground 'eat-term-color-15  "#d3ebe9"))
-
 (setenv "FZF_DEFAULT_COMMAND" "fd -u")
 (use-package! fzf
   :bind
@@ -435,7 +413,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
        (:desc "show amount of git commits" "#" #'ax/git-count-commits)
        (:desc "org-publish to vps" "v" #'ax/publish-site)
        (:desc "visually select a window" "w" #'ace-window)
-       (:desc "open terminal (eat)" "RET" #'eat)
+       (:desc "open terminal (ghostel)" "RET" #'ghostel)
        ;; nested
        (:prefix ("c" . "calendar")
         :desc "org-caldav sync" "s" #'org-caldav-sync
