@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   ...
 }:
@@ -9,6 +10,24 @@
     "flakes"
   ];
   nixpkgs.config.allowUnfree = true;
+
+  programs.nh = {
+    enable = true;
+    flake = "${config.users.users.ax.home}/syscfg/nixos-config";
+    clean.enable = true;
+    # keep everything from the last 4 days, and always the newest 3
+    # generations even if they are older than that
+    clean.extraArgs = "--keep-since 4d --keep 3";
+  };
+
+  # nh clean deletes old generations but not their boot entries.
+  # this cleans those up, like `nixos-rebuild boot` does.
+  # the `-` ignores failures, e.g. a rebuild holding the lock -- next run fixes it.
+  systemd.services.nh-clean.serviceConfig.ExecStartPost =
+    "-/nix/var/nix/profiles/system/bin/switch-to-configuration boot";
+  systemd.timers.nh-clean.timerConfig.RandomizedDelaySec = "45min";
+
+  nix.optimise.automatic = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -47,7 +66,6 @@
     git
     htop
     ncdu
-    nh
     (nnn.override { withNerdIcons = true; })
     psmisc # provides killall
     ripgrep
