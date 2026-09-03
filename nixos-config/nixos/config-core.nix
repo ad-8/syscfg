@@ -27,6 +27,8 @@
     "-/nix/var/nix/profiles/system/bin/switch-to-configuration boot";
   systemd.timers.nh-clean.timerConfig.RandomizedDelaySec = "45min";
 
+  # both timers are persistent, so they run after the next boot if the machine
+  # was off -- check with `systemctl show -p Persistent <unit>.timer`.
   nix.optimise.automatic = true;
 
   boot.loader.systemd-boot.enable = true;
