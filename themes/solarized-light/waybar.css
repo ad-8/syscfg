@@ -69,6 +69,11 @@ tooltip label {
 
 #battery.warning:not(.charging) {
     background: #dc322f;
+    color: #fdf6e3;
+}
+
+#battery.critical:not(.charging) {
+    background: #dc322f;
     color: #dc322f;
     animation-name: blink;
     animation-duration: 0.5s;
