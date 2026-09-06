@@ -46,8 +46,8 @@ determine the exact padding."
    (base1      '("#011935"      "#1e1e1e" "brightblack"  )) ;; base11 = surface_deeper
    (base2      '("#01204e"      "#2e2e2e" "brightblack"  )) ;; base01
    (base3      '("#0a3a45"      "#262626" "brightblack"  )) ;; base02 = surface
-   (base4      '("#134e5a"      "#3f3f3f" "brightblack"  )) ;; base03 = comment / color8 / selection
-   (base5      '("#2a6a73"      "#525252" "brightblack"  )) ;; base04 = muted
+   (base4      '("#2a6a73"      "#3f3f3f" "brightblack"  )) ;; base04 = muted
+   (base5      '("#57898a"      "#525252" "brightblack"  )) ;; base03 = comment / color8 / inactive
    (base6      '("#5f8f96"      "#6b6b6b" "brightblack"  )) ;; base05 = fg_dim
    (base7      '("#a7c9c6"      "#979797" "brightblack"  )) ;; base06 = fg0 / color7
    (base8      '("#fff1da"      "#dfdfdf" "white"        )) ;; base07 = sand (brightest)
@@ -55,7 +55,7 @@ determine the exact padding."
    (fg         '("#f6dcac"      "#bfbfbf" "brightwhite"  )) ;; cream (color15)
    (fg-alt     '("#fff1da"      "#2d2d2d" "white"        )) ;; brightest sand
 
-   (grey       base5)
+   (grey       base4)
    (red        '("#f85525"      "#ff6655" "red"          )) ;; base08 = error / color1
    (orange     '("#faa968"      "#dd8844" "brightred"    )) ;; base0A = function / keyword / accent (SIGNATURE)
    (green      '("#19a7a8"      "#99bb66" "green"        )) ;; base14 = success / string
@@ -71,9 +71,9 @@ determine the exact padding."
    ;; face categories -- required for all themes
    (highlight      orange)
    (vertical-bar   (doom-darken base2 0.1))
-   (selection      base4)
+   (selection      base3)
    (builtin        teal)
-   (comments       (if ax-retro-82-brighter-comments (doom-lighten base5 0.2) base4))
+   (comments       (if ax-retro-82-brighter-comments (doom-lighten base5 0.2) base5))
    (doc-comments   (doom-lighten base5 0.2))
    (constants      magenta)
    (functions      orange)

@@ -8,13 +8,13 @@
 
 window#waybar {
     background: rgba(0, 23, 46, 1);
-    border-bottom: 0px solid rgba(19, 78, 90, 0.5);
+    border-bottom: 0px solid rgba(87, 137, 138, 0.5);
     color: #faa968;
 }
 
 tooltip {
   background: rgba(0, 23, 46, 0.5);
-  border: 1px solid rgba(19, 78, 90, 0.5);
+  border: 1px solid rgba(87, 137, 138, 0.5);
 }
 tooltip label {
   color: #f6dcac;
@@ -145,7 +145,7 @@ tooltip label {
 }
 
 #workspaces button.empty {
-    color: #134e5a;
+    color: #57898a;
 }
 
 #custom-snowflake {
