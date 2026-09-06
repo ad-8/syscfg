@@ -1,0 +1,22 @@
+// doric-oak
+// Themed via switch_theme.clj. Colors sourced from themes/doric-oak/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#e0d8c7"
+
+    border {
+        active-color   "#0f5420"
+        inactive-color "#6b5225"
+        urgent-color   "#982500" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#0f5420"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#e0d8c7"
+}

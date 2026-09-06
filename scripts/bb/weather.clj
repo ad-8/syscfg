@@ -216,8 +216,8 @@
   symlink (maintained by switch_theme.clj) -- the same `background=` value the
   rest of the theme set treats as a theme's true base. Anything that goes wrong
   reading it means dark, i.e. the palette every theme used before this existed.
-  Measured across all 29 themes the split is wide: dark tops out at 0.034, light
-  starts at 0.812, so 0.5 is nowhere near either cluster."
+  Measured across all 30 themes the split is wide: dark tops out at 0.034, light
+  starts at 0.691, so 0.5 is nowhere near either cluster."
   ([] (bg-light? active-foot-theme))
   ([theme-file]
    (try
@@ -255,17 +255,17 @@
    :thunder  "#b08cff"  ;; violet
    :default  "#cccccc"})
 
-;; same hue families pulled down until they clear 5:1 on the palest light theme
-;; (nord-light #e5e9f0) -- not on pure white, which is the easiest of the six and
+;; same hue families pulled down until they clear 5:1 on the darkest light theme
+;; (doric-oak #e0d8c7) -- not on pure white, which is the easiest of the seven and
 ;; would leave the others short. The three greys keep the dark palette's ordering
 ;; (cloudy quietest, default loudest) so they stay tellable apart.
 (def ^:private palette-light
-  {:clear    "#6f5500"  ;; gold
-   :cloudy   "#576069"  ;; grey
+  {:clear    "#6e5400"  ;; gold
+   :cloudy   "#515962"  ;; grey
    :fog      "#565656"  ;; pale grey
    :freezing "#005f5f"  ;; icy cyan
-   :rain     "#1f5f9f"  ;; blue
-   :snow     "#33648a"  ;; pale blue
+   :rain     "#1d5a97"  ;; blue
+   :snow     "#2f5c7f"  ;; pale blue
    :thunder  "#5b3fb0"  ;; violet
    :default  "#383838"})
 
@@ -575,7 +575,7 @@
   (deftest test-bg-light?
     ;; classify every theme from its foot.theme background= line
     (let [light #{"modus-operandi" "nord-light" "solarized-light"
-                  "gruvbox-light" "flatwhite" "doric-marble"}]
+                  "gruvbox-light" "flatwhite" "doric-marble" "doric-oak"}]
       (doseq [d (fs/list-dir (fs/path (fs/home) "syscfg" "themes"))
               :when (fs/directory? d)]
         (is (= (contains? light (fs/file-name d))

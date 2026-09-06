@@ -10,6 +10,7 @@ separate rows here.
 | everforest-dark            | everforest-dark-hard  | sainnhe/everforest                               | https://github.com/sainnhe/everforest                                                        |
 | amber                      | —                     | foxbunny/vim-amber                               | https://github.com/foxbunny/vim-amber                                                        |
 | doric-marble               | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
+| doric-oak                  | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-plum                 | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-walnut               | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | flatwhite                  | —                     | biletskyy/flatwhite-syntax (via doom-flatwhite)  | https://github.com/biletskyy/flatwhite-syntax                                                |

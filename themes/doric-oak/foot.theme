@@ -1,0 +1,31 @@
+# -*- conf -*-
+#
+# Oak color theme for foot
+# Protesilaos doric-oak — warm oatmeal ground with deep forest-green accent.
+# Palette from upstream doric-oak-theme.el (canonical fg-* / bg-* /
+# fg-shadow-* values only — no invented intermediates).
+
+[colors-dark]
+background=e0d8c7
+foreground=3a2018
+cursor=e0d8c7 497020
+selection-background=c2b19e
+selection-foreground=3a2018
+
+regular0=6b5225
+regular1=982500
+regular2=226700
+regular3=595000
+regular4=103077
+regular5=700054
+regular6=005460
+regular7=c2b19e
+
+bright0=53402f
+bright1=982500
+bright2=226700
+bright3=595000
+bright4=103077
+bright5=700054
+bright6=005460
+bright7=e0d8c7
