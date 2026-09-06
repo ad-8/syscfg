@@ -8,7 +8,7 @@
 [colors-dark]
 background=f7f3ee
 foreground=605a52
-cursor=605a52 f7f3ee
+cursor=f7f3ee 605a52
 selection-background=dcd3c6
 selection-foreground=605a52
 

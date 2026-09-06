@@ -44,7 +44,7 @@ setw -g window-status-current-style 'fg=black bg=red'
 setw -g window-status-current-format ' #I #W #F '
 
 setw -g window-status-style 'fg=red bg=black'
-setw -g window-status-format ' #I #[fg=white]#W #[fg=yellow]#F '
+setw -g window-status-format ' #I #[bold]#W#[nobold] #[fg=yellow]#F '
 
 setw -g window-status-bell-style 'fg=yellow bg=red bold'
 #+end_src

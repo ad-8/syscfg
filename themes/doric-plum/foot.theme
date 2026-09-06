@@ -7,7 +7,7 @@
 [colors-dark]
 background=221832
 foreground=e2d7e7
-cursor=c070d0 e2d7e7
+cursor=e2d7e7 c070d0
 selection-background=501e3e
 selection-foreground=e2d7e7
 

@@ -91,7 +91,7 @@ element selected.normal {
 }
 
 element-text selected.normal {
-    highlight: underline bold #f6dcac;
+    highlight: underline bold #00172e;
 }
 
 element-text, element-icon {

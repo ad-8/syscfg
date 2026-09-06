@@ -96,6 +96,10 @@ element-text, element-icon {
     text-color:       inherit;
 }
 
+element-text selected.normal {
+    highlight: underline bold #f7f3ee;
+}
+
 button {
     padding: 6px;
     color: @foreground;

@@ -8,7 +8,7 @@
 [colors-dark]
 background=ededed
 foreground=202020
-cursor=403030 ededed
+cursor=ededed 403030
 selection-background=cdcdcd
 selection-foreground=202020
 
