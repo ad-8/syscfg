@@ -141,11 +141,12 @@
        sort))
 
 (defn apply-app-theme
-  "Points dest at the app's theme file and calls its reload fn; prints a warning and sends a notification if the file is missing.
+  "Points dest at the app's theme file and calls its reload fn; prints a warning and sends a notification for every input file that is missing, and skips the app rather than throwing — an uncaught throw here would abandon every app after this one in `apps`.
    Normally dest becomes a symlink to src. With :base, dest is instead written as src concatenated onto the base file — via a temp file and an atomic rename, so a reader can never catch a half-written config."
   [theme-dir {:keys [file dest base reload]}]
-  (let [src (fs/path theme-dir file)]
-    (if (fs/exists? src)
+  (let [src     (fs/path theme-dir file)
+        missing (remove fs/exists? (cond-> [src] base (conj base)))]
+    (if (empty? missing)
       (do
         (fs/create-dirs (fs/parent dest))
         (if base
@@ -156,9 +157,9 @@
             (fs/delete-if-exists dest)
             (fs/create-sym-link dest src)))
         (try (reload src) (catch Exception _)))
-      (do
-        (binding [*out* *err*] (println "switch_theme: missing" (str src)))
-        (shell {:continue true} "notify-send" "-u" "critical" "switch_theme" (str "missing: " (fs/file-name src)))))))
+      (doseq [m missing]
+        (binding [*out* *err*] (println "switch_theme: missing" (str m)))
+        (shell {:continue true} "notify-send" "-u" "critical" "switch_theme" (str "missing: " (fs/file-name m)))))))
 
 (defn switch-theme
   "Validates that theme exists in themes-dir, then applies it to all configured apps."
