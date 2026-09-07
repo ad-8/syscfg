@@ -14,15 +14,23 @@
                      str/trim)]
     (println date-str)))
 
+(def disk-low-bytes (* 25 1024 1024 1024))
+
+(defn- df-avail-bytes []
+  (let [res (shell {:out :string :continue true} "df -B1 / --output=avail")]
+    (when (zero? (:exit res))
+      (some-> res :out str/split-lines last str/trim parse-long))))
+
+(defn- human-avail [b]
+  (let [gib (quot b (* 1024 1024 1024))]
+    (if (>= gib 1024)
+      (format "%.1fT" (/ (double gib) 1024))
+      (format "%dG" gib))))
+
 (defn- print-free-space [output-fmt]
-  (let [free-space-on-root (->> (shell {:out :string} "df -h / --output=avail")
-                                :out
-                                str/split-lines
-                                last
-                                str/trim)
-        fmt (format "󰋊 %s" free-space-on-root)
-        free-space-int (or (some-> (re-find #"\d+" free-space-on-root) Integer/parseInt) 0)
-        class (if (< free-space-int 25) :low :ok)
+  (let [avail (df-avail-bytes)
+        fmt (format "󰋊 %s" (if avail (human-avail avail) "--"))
+        class (if (and avail (>= avail disk-low-bytes)) :ok :low)
         json (json/encode {:text fmt :class class})]
 
     (if (= "json" output-fmt)
