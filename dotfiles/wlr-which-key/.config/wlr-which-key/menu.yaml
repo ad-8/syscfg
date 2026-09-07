@@ -1,8 +1,7 @@
-# Theming
+# Theming. background/color/border are NOT here — switch_theme.clj prepends
+# them from themes/<name>/wlr-which-key.yaml and writes the result to
+# config.yaml, which is what wlr-which-key actually reads.
 font: Hack Nerd Font 15
-background: "#091f2ed0"
-color: "#2aa889"
-border: "#2aa889"
 separator: " ➜ "
 border_width: 2
 corner_r: 10
