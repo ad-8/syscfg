@@ -1,0 +1,4 @@
+# oxocarbon — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#161616d0"
+color: "#dde1e6"
+border: "#78a9ff"

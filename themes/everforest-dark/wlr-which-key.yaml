@@ -1,0 +1,4 @@
+# everforest-dark — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#272e33d0"
+color: "#d3c6aa"
+border: "#7fbbb3"

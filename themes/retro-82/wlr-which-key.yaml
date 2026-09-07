@@ -1,0 +1,4 @@
+# retro-82 — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#00172ed0"
+color: "#f6dcac"
+border: "#faa968"

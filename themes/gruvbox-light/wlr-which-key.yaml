@@ -1,0 +1,4 @@
+# gruvbox-light — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#fbf1c7d0"
+color: "#3c3836"
+border: "#b57614"

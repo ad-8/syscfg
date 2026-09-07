@@ -1,0 +1,4 @@
+# hackerman — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#0b0c16d0"
+color: "#ddf7ff"
+border: "#82fb9c"

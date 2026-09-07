@@ -1,0 +1,4 @@
+# iceberg — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#161821d0"
+color: "#c6c8d1"
+border: "#84a0c6"

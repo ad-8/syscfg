@@ -1,0 +1,4 @@
+# gotham — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#0c1014d0"
+color: "#99d1ce"
+border: "#245361"

@@ -1,0 +1,4 @@
+# osaka-jade — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#111c18d0"
+color: "#C1C497"
+border: "#509475"

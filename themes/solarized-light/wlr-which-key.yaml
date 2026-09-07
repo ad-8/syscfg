@@ -1,0 +1,4 @@
+# solarized-light — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#fdf6e3d0"
+color: "#657b83"
+border: "#b58900"

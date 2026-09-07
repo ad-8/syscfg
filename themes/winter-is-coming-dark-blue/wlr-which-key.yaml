@@ -1,0 +1,4 @@
+# winter-is-coming-dark-blue — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#011627d0"
+color: "#d6deeb"
+border: "#219fd5"

@@ -1,0 +1,4 @@
+# doric-plum — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#221832d0"
+color: "#e2d7e7"
+border: "#c586ba"
