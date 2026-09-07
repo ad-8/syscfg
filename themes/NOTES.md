@@ -37,3 +37,26 @@ separate rows here.
 | vantablack                 | —                     | basecamp/omarchy (bundled)                       | https://github.com/basecamp/omarchy                                                          |
 | wilmersdorf                | —                     | doomemacs/themes (doom-wilmersdorf)              | https://github.com/doomemacs/themes                                                          |
 | winter-is-coming-dark-blue | —                     | johnpapa/vscode-winteriscoming                   | https://github.com/johnpapa/vscode-winteriscoming                                            |
+
+## The phosphor group
+
+Monochrome CRTs came in three phosphor colours, and all three are in the
+catalog: green P1/P31 (`matrix`), amber P3 (`amber`), white P4
+(`vantablack`). Digital Equipment Corporation sold the VT220 (1983) with
+a choice of exactly those three. Other phosphors existed, but none of
+them were suited to text.
+
+Dozens of phosphors were catalogued (P1, P3, P4, P11, …), each a different
+compound emitting a fixed colour — you pick a chemistry, not a hue. Only
+three suited continuous text. Green won on efficiency: the eye peaks near
+555 nm, so a green tube looks brightest for the same beam power. White was
+a hand-me-down from television, where volume made P4 cheap. Amber came
+last, sold on eye comfort. The rest failed for reading — blue (P11) looks
+dim and was used for exposing film, the long-persistence blends smear, red
+is inefficient.
+
+The foreground is the phosphor; the black background is just an unlit
+tube, which is why matrix and vantablack both sit on #000000. `amber`
+deviates with a warm near-black #140b05, inherited from vim-amber.
+`vantablack` fills the white slot but its greys are dead neutral
+(R=G=B throughout), so it reads as modern minimal rather than P4 paper-white.

@@ -10,13 +10,14 @@
 (def themes-dir (fs/path (fs/home) "syscfg/themes"))
 
 (def theme-categories
-  {:dark  #{"everforest-dark" "gotham" "gruvbox-dark" "iceberg" "modus-vivendi" "nord"
-            "osaka-jade" "oxocarbon" "solarized-dark" "tokyo-night" "winter-is-coming-dark-blue"}
-   :light #{"doric-marble" "doric-oak" "flatwhite" "gruvbox-light" "modus-operandi"
-            "nord-light" "solarized-light"}
-   :mono  #{"amber" "lumon" "matrix" "vantablack"}
-   :muted #{"doric-plum" "doric-walnut" "wilmersdorf"}
-   :neon  #{"hackerman" "laserwave" "matte-black" "retro-82" "tron-legacy"}})
+  {:dark     #{"everforest-dark" "gotham" "gruvbox-dark" "iceberg" "lumon" "modus-vivendi"
+               "nord" "osaka-jade" "oxocarbon" "solarized-dark" "tokyo-night"
+               "winter-is-coming-dark-blue"}
+   :light    #{"doric-marble" "doric-oak" "flatwhite" "gruvbox-light" "modus-operandi"
+               "nord-light" "solarized-light"}
+   :muted    #{"doric-plum" "doric-walnut" "wilmersdorf"}
+   :neon     #{"hackerman" "laserwave" "matte-black" "retro-82" "tron-legacy"}
+   :phosphor #{"amber" "matrix" "vantablack"}})
 
 (defn foot-osc
   "Builds OSC escape sequences from a foot theme file to set terminal foreground, background, cursor, and palette colors."
@@ -168,7 +169,7 @@
 (defn pick-theme-grouped
   "Opens a fuzzel dmenu picker with themes grouped by category. Category headers are injected as non-theme rows; reopens the picker if a header is selected; returns nil if cancelled."
   []
-  (let [groups    (for [cat [:dark :light :mono :muted :neon]]
+  (let [groups    (for [cat [:dark :light :muted :neon :phosphor]]
                     [cat (sort (theme-categories cat))])
         lines     (mapcat (fn [[cat themes]]
                             (cons (str "── " (name cat) " ──") themes))
