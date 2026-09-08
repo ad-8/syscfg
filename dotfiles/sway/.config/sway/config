@@ -336,11 +336,6 @@ bindsym $mod+$alt+left exec ~/syscfg/scripts/wayland.clj volume-mute
 bindsym $mod+$alt+right exec ~/syscfg/scripts/bb/play_pause.clj
 bindsym $mod+$alt+space exec ~/syscfg/scripts/bb/play_pause.clj
 
-bindsym XF86MonBrightnessUp exec ~/syscfg/scripts/brightness screen inc
-bindsym XF86MonBrightnessDown exec ~/syscfg/scripts/brightness screen dec
-bindsym XF86KbdBrightnessUp exec ~/syscfg/scripts/brightness keyboard inc
-bindsym XF86KbdBrightnessDown exec ~/syscfg/scripts/brightness keyboard dec
-
 workspace_auto_back_and_forth yes
 
 bindsym $mod+Tab workspace back_and_forth

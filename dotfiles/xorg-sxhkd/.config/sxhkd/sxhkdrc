@@ -129,17 +129,6 @@ alt + space; s; S
      ax-screenshot --clipboard --select
 
 # --------------------------------------------------------------
-#                       MacBook Light Keys
-XF86MonBrightnessUp
-    ~/scripts/brightness screen inc
-XF86MonBrightnessDown
-    ~/scripts/brightness screen dec
-XF86KbdBrightnessUp
-    ~/scripts/brightness keyboard inc
-XF86KbdBrightnessDown
-    ~/scripts/brightness keyboard dec
-
-# --------------------------------------------------------------
 #                       MacBook / Media keys
 XF86LaunchA
     rofi -show window
