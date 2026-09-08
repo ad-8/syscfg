@@ -126,9 +126,6 @@ menu:
       - key: "s"
         desc: Signal
         cmd: signal-desktop
-      - key: "t"
-        desc: todo scratchpad
-        cmd: bash -c 'if hyprctl clients -j | grep -q "emacs-scratchpad-todo"; then notify-send "todo scratchpad" "already open — use mod+T"; else notify-send "todo scratchpad" "launching..."; emacs ~/org/todo.org --name emacs-scratchpad-todo & fi'
       - key: "v"
         desc: Brave
         cmd: brave
@@ -154,36 +151,3 @@ menu:
       - key: "w"
         desc: toggle wifi
         cmd: rfkill toggle wifi
- 
-  - key: "r"
-    desc: Run stuff ...
-    submenu:
-      - key: "a"
-        desc: about
-        cmd: foot -H -T wiremix echo "howdy sir"
-      - key: "r"
-        desc: runner
-        cmd: foot -H -T wiremix -e clear && /usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj 
-
-  # example for sub-submenu
-  # - key: "l"
-  #   desc: Laptop Screen
-  #   submenu:
-  #     - key: "t"
-  #       desc: Toggle On/Off
-  #       cmd: toggle-laptop-display.sh
-  #     - key: "s"
-  #       desc: Scale
-  #       submenu:
-  #         - key: "1"
-  #           desc: Set Scale to 1.0
-  #           cmd: wlr-randr --output eDP-1 --scale 1
-  #         - key: "2"
-  #           desc: Set Scale to 1.1
-  #           cmd: wlr-randr --output eDP-1 --scale 1.1
-  #         - key: "3"
-  #           desc: Set Scale to 1.2
-  #           cmd: wlr-randr --output eDP-1 --scale 1.2
-  #         - key: "4"
-  #           desc: Set Scale to 1.3
-  #           cmd: wlr-randr --output eDP-1 --scale 1.3
