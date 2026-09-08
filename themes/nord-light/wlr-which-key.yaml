@@ -1,0 +1,4 @@
+# nord-light — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#E5E9F0d0"
+color: "#3B4252"
+border: "#3B6EA8"

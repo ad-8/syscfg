@@ -1,0 +1,4 @@
+# modus-operandi — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#FFFFFFd0"
+color: "#000000"
+border: "#0031a9"

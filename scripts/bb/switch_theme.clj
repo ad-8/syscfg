@@ -81,19 +81,19 @@
 
 (def apps
   [{:file    "btop.theme"
-    :symlink (fs/path (fs/xdg-config-home) "btop/themes/active.theme")
+    :dest    (fs/path (fs/xdg-config-home) "btop/themes/active.theme")
     :reload  (fn [_] (shell ["pkill" "-SIGUSR2" "btop"]))}
    {:file    "foot.theme"
-    :symlink (fs/path (fs/xdg-config-home) "foot/active-theme")
+    :dest    (fs/path (fs/xdg-config-home) "foot/active-theme")
     :reload  reload-foot}
    {:file    "kitty.conf"
-    :symlink (fs/path (fs/xdg-config-home) "kitty/active-theme.conf")
+    :dest    (fs/path (fs/xdg-config-home) "kitty/active-theme.conf")
     :reload  reload-kitty}
    {:file    "tmux.conf"
-    :symlink (fs/path (fs/xdg-config-home) "tmux/active-theme.conf")
+    :dest    (fs/path (fs/xdg-config-home) "tmux/active-theme.conf")
     :reload  reload-tmux}
    {:file    "waybar.css"
-    :symlink (fs/path (fs/xdg-config-home) "waybar/active-theme.css")
+    :dest    (fs/path (fs/xdg-config-home) "waybar/active-theme.css")
     ;; Restart via `waybar.clj launch` (not bare `waybar`) so the gitignored
     ;; active-compositor.json include target is (re)created first; a missing one
     ;; is a fatal config-load error that kills the whole bar.
@@ -102,27 +102,35 @@
                  (shell {:continue true} "sh -c 'pkill waybar'")
                  (shell {:continue true} (str "bb " (fs/path (fs/home) "syscfg/scripts/waybar.clj") " launch"))))}
    {:file    "hyprland.lua"
-    :symlink (fs/path (fs/xdg-config-home) "hypr/active-theme.lua")
+    :dest    (fs/path (fs/xdg-config-home) "hypr/active-theme.lua")
     :reload  (fn [_] (shell ["hyprctl" "reload"]))}
    {:file    "niri.kdl"
-    :symlink (fs/path (fs/xdg-config-home) "niri/active-theme.kdl")
+    :dest    (fs/path (fs/xdg-config-home) "niri/active-theme.kdl")
     :reload  (fn [_] (shell ["niri" "msg" "action" "load-config-file"]))}
    {:file    "emacs-theme.el"
-    :symlink (fs/path (fs/xdg-config-home) "doom/active-theme.el")
+    :dest    (fs/path (fs/xdg-config-home) "doom/active-theme.el")
     :reload  no-reload}
    {:file    "rofi.rasi"
-    :symlink (fs/path (fs/xdg-config-home) "rofi/active-theme.rasi")
+    :dest    (fs/path (fs/xdg-config-home) "rofi/active-theme.rasi")
     :reload  no-reload}
    {:file    "fuzzel.ini"
-    :symlink (fs/path (fs/xdg-config-home) "fuzzel/active-theme.ini")
+    :dest    (fs/path (fs/xdg-config-home) "fuzzel/active-theme.ini")
     :reload  no-reload}
    {:file    "dunst.conf"
-    :symlink (fs/path (fs/xdg-config-home) "dunst/active-theme.conf")
+    :dest    (fs/path (fs/xdg-config-home) "dunst/active-theme.conf")
     :reload  (fn [_]
                (shell {:continue true}
                       (str "dunstctl reload "
                            (fs/path (fs/xdg-config-home) "dunst/dunstrc") " "
-                           (fs/path (fs/xdg-config-home) "dunst/active-theme.conf"))))}])
+                           (fs/path (fs/xdg-config-home) "dunst/active-theme.conf"))))}
+   ;; wlr-which-key reads exactly one file and has no include directive, so the
+   ;; theme fragment can't sit beside the menu as its own symlink — :base makes
+   ;; this entry generate config.yaml instead. No reload: every binding spawns a
+   ;; fresh process, so the next menu open already has the new colors.
+   {:file    "wlr-which-key.yaml"
+    :dest    (fs/path (fs/xdg-config-home) "wlr-which-key/config.yaml")
+    :base    (fs/path (fs/home) "syscfg/dotfiles/wlr-which-key/.config/wlr-which-key/menu.yaml")
+    :reload  no-reload}])
 
 (defn available-themes
   "Returns a sorted list of theme names (directory names) found in themes-dir."
@@ -133,27 +141,45 @@
        sort))
 
 (defn apply-app-theme
-  "Symlinks the app's theme file from theme-dir and calls its reload fn; prints a warning and sends a notification if the file is missing."
-  [theme-dir {:keys [file symlink reload]}]
-  (let [src (fs/path theme-dir file)]
-    (if (fs/exists? src)
+  "Points dest at the app's theme file and calls its reload fn; prints a warning and sends a notification for every input file that is missing, and skips the app. Failures that are not a missing input propagate to switch-theme, which guards each app.
+   Normally dest becomes a symlink to src. With :base, dest is instead written as src concatenated onto the base file — via a temp file and an atomic rename, so a reader can never catch a half-written config."
+  [theme-dir {:keys [file dest base reload]}]
+  (let [src     (fs/path theme-dir file)
+        missing (remove fs/exists? (cond-> [src] base (conj base)))]
+    (if (empty? missing)
       (do
-        (fs/create-dirs (fs/parent symlink))
-        (fs/delete-if-exists symlink)
-        (fs/create-sym-link symlink src)
-        (try (reload src) (catch Exception _)))
-      (do
-        (binding [*out* *err*] (println "switch_theme: missing" (str src)))
-        (shell {:continue true} "notify-send" "-u" "critical" "switch_theme" (str "missing: " (fs/file-name src)))))))
+        (fs/create-dirs (fs/parent dest))
+        (if base
+          (let [tmp (fs/path (fs/parent dest) (str (fs/file-name dest) ".tmp"))]
+            (spit (str tmp) (str (slurp (str src)) "\n" (slurp (str base))))
+            (fs/move tmp dest {:replace-existing true :atomic-move true}))
+          (do
+            (fs/delete-if-exists dest)
+            (fs/create-sym-link dest src)))
+        (try (reload (if base dest src)) (catch Exception _)))
+      (doseq [m missing]
+        (binding [*out* *err*] (println "switch_theme: missing" (str m)))
+        ;; :continue covers a non-zero exit but not an absent binary, which still
+        ;; throws IOException — the try keeps a host without libnotify from losing
+        ;; the warnings for the remaining missing files.
+        (try (shell {:continue true} "notify-send" "-u" "critical" "switch_theme" (str "missing: " (fs/file-name m)))
+             (catch Exception _))))))
 
 (defn switch-theme
-  "Validates that theme exists in themes-dir, then applies it to all configured apps."
+  "Validates that theme exists in themes-dir, then applies it to all configured apps.
+   Each app is applied inside a try so that one failure — an unwritable config dir, a vanished file, a reload that blows up — leaves the remaining apps on the new theme instead of stranding them on the old one."
   [theme]
   (let [theme-dir (fs/path themes-dir theme)]
     (when-not (fs/directory? theme-dir)
       (binding [*out* *err*] (println "Unknown theme:" theme))
       (System/exit 1))
-    (run! #(apply-app-theme theme-dir %) apps)))
+    (run! (fn [{:keys [file] :as app}]
+            (try
+              (apply-app-theme theme-dir app)
+              (catch Exception e
+                (binding [*out* *err*]
+                  (println "switch_theme:" file "failed —" (.getMessage e))))))
+          apps)))
 
 (defn pick-theme
   "Opens a fuzzel dmenu picker populated with available themes and returns the selected theme name."

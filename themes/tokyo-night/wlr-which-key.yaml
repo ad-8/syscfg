@@ -1,0 +1,4 @@
+# tokyo-night — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#1a1b26d0"
+color: "#a9b1d6"
+border: "#7aa2f7"

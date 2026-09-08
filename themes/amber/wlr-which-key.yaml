@@ -1,0 +1,4 @@
+# amber — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#140b05d0"
+color: "#fc9505"
+border: "#fc9505"

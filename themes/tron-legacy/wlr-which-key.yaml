@@ -1,0 +1,4 @@
+# tron-legacy — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#000000d0"
+color: "#B0CCDC"
+border: "#8fd4ff"

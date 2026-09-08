@@ -1,0 +1,4 @@
+# nord — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#2E3440d0"
+color: "#D8DEE9"
+border: "#81a1c1"

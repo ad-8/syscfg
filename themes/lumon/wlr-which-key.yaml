@@ -1,0 +1,4 @@
+# lumon — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#1b2d40d0"
+color: "#d6e2ee"
+border: "#6fb8e3"

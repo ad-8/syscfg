@@ -1,0 +1,4 @@
+# flatwhite — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#f7f3eed0"
+color: "#605a52"
+border: "#6a4dff"

@@ -1,0 +1,4 @@
+# vantablack — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#000000d0"
+color: "#ffffff"
+border: "#ffffff"

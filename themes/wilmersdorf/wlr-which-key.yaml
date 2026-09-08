@@ -1,0 +1,4 @@
+# wilmersdorf — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#282b33d0"
+color: "#c6c6c6"
+border: "#819cd6"

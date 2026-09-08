@@ -1,0 +1,4 @@
+# modus-vivendi — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#000000d0"
+color: "#FFFFFF"
+border: "#00bcff"

@@ -19,3 +19,5 @@ fish/.config/fish/fish_variables
 /dotfiles/fuzzel/.config/fuzzel/active-theme.ini
 /dotfiles/clojure/.clojure/tools/
 /dotfiles/clojure/.clojure/.cpcache/
+/dotfiles/wlr-which-key/.config/wlr-which-key/config.yaml
+/dotfiles/wlr-which-key/.config/wlr-which-key/config.yaml.tmp

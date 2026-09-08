@@ -1,0 +1,4 @@
+# matte-black — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#121212d0"
+color: "#bebebe"
+border: "#e68e0d"

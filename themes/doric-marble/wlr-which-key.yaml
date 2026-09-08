@@ -1,0 +1,4 @@
+# doric-marble — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#edededd0"
+color: "#202020"
+border: "#603d3a"

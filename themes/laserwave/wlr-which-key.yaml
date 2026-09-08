@@ -1,0 +1,4 @@
+# laserwave — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#27212Ed0"
+color: "#FFFFFF"
+border: "#eb64b9"
