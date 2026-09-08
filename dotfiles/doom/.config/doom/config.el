@@ -88,13 +88,7 @@
 
 ;; doom doctor suggestions
 (setq shell-file-name (executable-find "bash"))
-(setq-default vterm-shell "/usr/bin/fish")
-(setq-default explicit-shell-file-name "/usr/bin/fish")
-
-;; Prevent Doom from forcing vterm into a bottom popup window.
-;; This lets vterm open in the current or split window like any normal buffer.
-;; (after! vterm
-;;   (set-popup-rule! "^\\*vterm\\*" :ignore t))
+(setq-default explicit-shell-file-name (executable-find "fish"))
 
 (after! org
   (require 'ox-twbs))
