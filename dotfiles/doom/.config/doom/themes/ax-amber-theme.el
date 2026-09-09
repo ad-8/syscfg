@@ -127,6 +127,12 @@ determine the exact padding."
    ((line-number &override) :foreground base5)
    ((line-number-current-line &override) :foreground fg)
 
+   ;; Current line: underline like matrix / meltbus (vantablack). Doom's
+   ;; default fill is bg-alt, which is invisible against bg. fg-dim is
+   ;; vim-amber s:subbg — dim phosphor, not the cursor/isearch fg.
+   (hl-line :underline fg-dim :extend t)
+   (solaire-hl-line-face :inherit 'hl-line :background 'unspecified :extend t)
+
    (font-lock-comment-face
     :foreground comments
     :slant 'italic)
