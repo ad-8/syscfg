@@ -142,6 +142,16 @@ menu:
         desc: Firefox
         cmd: firefox
 
+  - key: "s"
+    desc: Screenshot ...
+    submenu:
+      - key: "a"
+        desc: all outputs
+        cmd: grim - | swappy -f -
+      - key: "s"
+        desc: select region
+        cmd: grim -g "$(slurp)" - | swappy -f -
+
   - key: "t"
     desc: Toggle
     submenu:

@@ -35,8 +35,7 @@
   (println "se=" search-engine "q=" query "qempty?" (empty? query))
   (if (empty? query)
     (prn "foo")
-    (do (shell "firefox" (str (last search-engine) query))
-        (shell "i3 workspace number 2"))))
+    (shell "firefox" (str (last search-engine) query))))
 
 
 (let [arg1 (first *command-line-args*)]

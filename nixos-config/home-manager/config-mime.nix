@@ -35,14 +35,12 @@ in
         "image/jpeg" = imageViewer;
         "image/png" = imageViewer;
         "image/webp" = imageViewer;
-        "image/*" = imageViewer;
         # Documents
         "application/json" = browser;
         "application/pdf" = pdfReader;
         "text/plain" = simpleTextEditor;
         "text/markdown" = emacs;
         "text/org" = emacs;
-        "text/*" = simpleTextEditor;
         # Audio
         "audio/mpeg" = audioPlayer; # .mp3
         "audio/ogg" = audioPlayer;
@@ -52,7 +50,6 @@ in
         "audio/aac" = audioPlayer;
         "audio/mp4" = audioPlayer; # .m4a
         "audio/x-m4a" = audioPlayer;
-        "audio/*" = audioPlayer;
         # Video
         "video/mp4" = videoPlayer;
         "video/webm" = videoPlayer;
@@ -61,7 +58,6 @@ in
         "video/x-msvideo" = videoPlayer; # .avi
         "video/x-ms-wmv" = videoPlayer; # .wmv
         "video/ogg" = videoPlayer; # .ogv (Ogg video)
-        "video/*" = videoPlayer;
       };
     };
   };
