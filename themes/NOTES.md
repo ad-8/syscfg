@@ -36,7 +36,6 @@ separate rows here.
 | tokyo-night                | tokyo-night-night     | tokyo-night/tokyo-night-vscode-theme             | https://github.com/tokyo-night/tokyo-night-vscode-theme                                      |
 | tron-legacy                | —                     | ianpan870102/tron-legacy-emacs-theme             | https://github.com/ianpan870102/tron-legacy-emacs-theme                                      |
 | vantablack                 | —                     | basecamp/omarchy (bundled)                       | https://github.com/basecamp/omarchy                                                          |
-| wilmersdorf                | —                     | doomemacs/themes (doom-wilmersdorf)              | https://github.com/doomemacs/themes                                                          |
 | winter-is-coming-dark-blue | —                     | johnpapa/vscode-winteriscoming                   | https://github.com/johnpapa/vscode-winteriscoming                                            |
 
 ## The phosphor group
