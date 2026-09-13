@@ -14,8 +14,8 @@
 
   configWorkstation.enable = true;
   configFirefox.enable = true;
+  configNiri.enable = true;
   configRiver.enable = true;
-  configSway.enable = true;
   configAudio.enable = true;
   configClamav.enable = true;
   configGaming.enable = true;
