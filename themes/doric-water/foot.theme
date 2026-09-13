@@ -1,0 +1,30 @@
+# -*- conf -*-
+#
+# Water color theme for foot
+# Protesilaos doric-water — dark navy with blue+teal hues.
+# Palette from upstream doric-water-theme.el (canonical only).
+
+[colors-dark]
+background=2a283d
+foreground=edf0f8
+cursor=edf0f8 99ddee
+selection-background=403f75
+selection-foreground=edf0f8
+
+regular0=8d8c9e
+regular1=eca28f
+regular2=a0d0ba
+regular3=c0b080
+regular4=9fbfe7
+regular5=e9acbf
+regular6=a0c0d0
+regular7=d4d9dc
+
+bright0=aea6b8
+bright1=eca28f
+bright2=a0d0ba
+bright3=c0b080
+bright4=c0ddf2
+bright5=e9acbf
+bright6=a0c0d0
+bright7=edf0f8

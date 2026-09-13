@@ -1,0 +1,4 @@
+# doric-water — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#2a283dd0"
+color: "#edf0f8"
+border: "#adade0"

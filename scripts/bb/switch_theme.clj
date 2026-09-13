@@ -15,7 +15,7 @@
                "winter-is-coming-dark-blue"}
    :light    #{"doric-marble" "doric-oak" "flatwhite" "gruvbox-light" "modus-operandi"
                "nord-light" "solarized-light"}
-   :muted    #{"doric-plum" "doric-walnut" "wilmersdorf"}
+   :muted    #{"doric-plum" "doric-walnut" "doric-water" "wilmersdorf"}
    :neon     #{"hackerman" "laserwave" "matte-black" "retro-82" "tron-legacy"}
    :phosphor #{"amber" "matrix" "vantablack"}})
 

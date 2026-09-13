@@ -13,6 +13,7 @@ separate rows here.
 | doric-oak                  | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-plum                 | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-walnut               | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
+| doric-water                | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | flatwhite                  | —                     | biletskyy/flatwhite-syntax (via doom-flatwhite)  | https://github.com/biletskyy/flatwhite-syntax                                                |
 | gotham                     | —                     | whatyouhide/vim-gotham                           | https://github.com/whatyouhide/vim-gotham and https://depp.brause.cc/gotham-theme/ for emacs |
 | gruvbox-dark               | gruvbox-dark-medium   | morhetz/gruvbox                                  | https://github.com/morhetz/gruvbox                                                           |

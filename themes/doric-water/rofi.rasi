@@ -1,0 +1,116 @@
+/**
+ * Water rofi theme
+ * Protesilaos doric-water
+ */
+
+* {
+    water0: #2a283d;
+    water1: #3a3c4c;
+    water2: #403f75;
+    water3: #8d8c9e;
+    water4: #aea6b8;
+    water5: #edf0f8;
+    water6: #adade0;
+    water7: #c0ddf2;
+
+    foreground:       @water5;
+    background-color: transparent;
+
+    highlight:   underline bold #adade0;
+    transparent: rgba(42, 40, 61, 0);
+}
+
+window {
+    location: center;
+    anchor:   center;
+    transparency: "screenshot";
+    padding: 10px;
+    border:  0px;
+    border-radius: 6px;
+
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+
+    width: 33%;
+}
+
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
+}
+
+message {
+    color: @water0;
+    padding: 5;
+    border-color: @foreground;
+    border:  0px 2px 2px 2px;
+    background-color: @water6;
+}
+
+inputbar {
+    color: @water5;
+    padding: 11px;
+    background-color: #3a3c4c;
+
+    border: 1px;
+    border-radius:  6px 6px 0px 0px;
+    border-color: @water6;
+}
+
+entry, prompt, case-indicator {
+    text-font: inherit;
+    text-color: inherit;
+}
+
+prompt {
+    margin: 0px 1em 0em 0em;
+}
+
+listview {
+    padding: 8px;
+    border-radius: 0px 0px 6px 6px;
+    border-color: @water6;
+    border: 0px 1px 1px 1px;
+    background-color: rgba(42, 40, 61, 0.95);
+    dynamic: false;
+}
+
+element {
+    padding: 3px;
+    vertical-align: 0.5;
+    border-radius: 4px;
+    background-color: transparent;
+    color: @foreground;
+    text-color: rgb(237, 240, 248);
+}
+
+element selected.normal {
+    background-color: @water6;
+    text-color: #2a283d;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element-text selected.normal {
+    highlight: underline bold #2a283d;
+}
+
+button {
+    padding: 6px;
+    color: @foreground;
+    horizontal-align: 0.5;
+
+    border: 2px 0px 2px 2px;
+    border-radius: 4px 0px 0px 4px;
+    border-color: @foreground;
+}
+
+button selected normal {
+    border: 2px 0px 2px 2px;
+    border-color: @foreground;
+}

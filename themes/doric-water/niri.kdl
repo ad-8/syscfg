@@ -1,0 +1,22 @@
+// doric-water
+// Themed via switch_theme.clj. Colors sourced from themes/doric-water/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#2a283d"
+
+    border {
+        active-color   "#adade0"
+        inactive-color "#8d8c9e"
+        urgent-color   "#eca28f" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#adade0"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#2a283d"
+}
