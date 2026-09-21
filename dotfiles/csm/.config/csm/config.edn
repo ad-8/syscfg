@@ -1,4 +1,11 @@
 {:default :video,
  :classes
- {:video ["mkv" "mp4" "webm" "avi" "mov"],
-  :audio ["mp3" "flac" "m4a" "wav" "ogg"]}}
+ {:video ["mp4" "mkv" "webm"],
+  :v     ["mp4" "mkv" "webm"],
+  :audio ["mp3" "flac" "m4a" "m4b"],
+  :a     ["mp3" "flac" "m4a" "m4b"],
+  :text  ["txt" "md" "csv" "json"],
+  :t     ["txt" "md" "csv" "json"],
+  :pic   ["png" "jpg" "jpeg" "gif" "webp" "heic" "tif" "tiff" "bmp"],
+  :media ["png" "jpg" "jpeg" "gif" "webp" "heic" "tif" "tiff" "bmp"
+          "mov" "xmp" "aae"]}}
