@@ -599,12 +599,16 @@ https://lucidmanager.org/productivity/configure-emms/
     (message "%s: %s" status-text message-text)
     ;; (shell-command (format "notify-send '%s' '%s'" status-text message-text))
     
-    (shell-command
-     (format "nix develop ~/x/lastfm --command python ~/x/lastfm/scrobble.py %s %s %s"
-         ;; shell-quote-argument helps when eg title is multiple words, so we only pass exactly 3 args to python
-         (shell-quote-argument (or artist "Unknown artist"))
-         (shell-quote-argument (or album "Unknown album"))
-         (shell-quote-argument (or title "Unknown title"))))))
+    (make-process
+     :name "ax-scrobble"
+     :buffer " *ax-scrobble*"
+     :noquery t
+     :command (list "nix" "develop" (expand-file-name "~/x/lastfm")
+                    "--command" "python" (expand-file-name "~/x/lastfm/scrobble.py")
+                    ;; each list element is one argv entry, even when eg title is multiple words, so we only pass exactly 3 args to python
+                    (or artist "Unknown artist")
+                    (or album "Unknown album")
+                    (or title "Unknown title")))))
 
 (add-hook 'emms-player-started-hook
           (lambda () (ax/trigger-scrobble 'started)))
