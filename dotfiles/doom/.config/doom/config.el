@@ -236,6 +236,15 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
  '(powerline-inactive2 :inherit mode-line-inactive :background "#000000"))
 
 (custom-theme-set-faces!
+ 'the-matrix
+ '(org-agenda-done                  :foreground "#00733d")
+ '(elfeed-search-title-face         :foreground "#00733d")
+ '(elfeed-goodies-show-header-title :foreground "#00b25f")
+ '(org-agenda-structure             :foreground "#00cd6d")
+ '(org-agenda-date-weekend          :foreground "#00733d" :weight bold)
+ '(org-agenda-date-today            :foreground "#00ff88" :weight bold :slant italic))
+
+(custom-theme-set-faces!
  'gotham
  '(org-agenda-done :foreground "#245361"))
 
