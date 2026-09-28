@@ -613,8 +613,8 @@ keep =the-matrix-theme.el= byte-for-byte upstream.
  '(dirvish-file-time            :foreground "#00733d")
  '(dirvish-narrow-match-face-0  :weight bold :foreground "#00e57a")
  '(dirvish-narrow-match-face-1  :weight bold :foreground "#00cd6d")
- '(dirvish-narrow-match-face-2  :weight bold :foreground "#00cd6d")
- '(dirvish-narrow-match-face-3  :weight bold :foreground "#00cd6d")
+ '(dirvish-narrow-match-face-2  :weight bold :foreground "#00b25f")
+ '(dirvish-narrow-match-face-3  :weight bold :foreground "#00ff88")
  '(dirvish-vc-needs-merge-face  :background "#30000c"))
 #+end_src
 **** magit, transient, diff, smerge
@@ -661,10 +661,10 @@ keep =the-matrix-theme.el= byte-for-byte upstream.
  '(magit-signature-untrusted    :foreground "#0081c7")
  '(magit-signature-expired      :foreground "#0081c7")
  '(magit-signature-revoked      :foreground "#cc0037")
- '(magit-signature-error        :foreground "#cc0037")
+ '(magit-signature-error        :foreground "#0081c7")
  '(transient-key-exit           :inherit transient-key :foreground "#00b25f")
  '(transient-key-return         :inherit transient-key :foreground "#00e57a")
- '(transient-key-recurse        :inherit transient-key :foreground "#0081c7")
+ '(transient-key-recurse        :inherit transient-key :foreground "#00ff88")
  '(transient-key-stack          :inherit transient-key :foreground "#00cd6d")
  '(transient-key-noop           :inherit transient-key :foreground "#00733d")
  '(transient-enabled-suffix     :background "#00cd6d" :foreground "#000000" :weight bold)
