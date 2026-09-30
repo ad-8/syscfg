@@ -29,6 +29,7 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = nixpkgs-stable.legacyPackages.${system};
       mkConfig =
         {
           hostname,
@@ -73,6 +74,21 @@
         ax-mac = mkConfig { hostname = "ax-mac"; };
         ax-t14 = mkConfig { hostname = "ax-t14"; };
         ax-vm = mkConfig { hostname = "ax-vm"; };
+      };
+
+      # Build shell for kwm. From the kwm tree:
+      #   nix develop ~/syscfg/nixos-config#kwm
+      devShells.${system}.kwm = pkgs.mkShell {
+        packages = with pkgs; [
+          zig_0_16
+          pkg-config
+          wayland
+          wayland-scanner
+          wayland-protocols
+          libxkbcommon
+          pixman
+          fcft
+        ];
       };
     };
 }
