@@ -25,9 +25,10 @@
 # three missed 600s fetches; past this the reading is too old to trust
 (def weather-max-age 1800)
 
-(def supported-players {"strawberry" true "fooyin" true "emms" true})
+(def players "strawberry,fooyin,emms")
 (def music-width 35)
 (def tick-secs 5)
+(def cmd-timeout "2")
 
 # kwm's status buffer is 256 bytes and only gets terminated when the read comes
 # up short, so a line filling it exactly is read past the end (bar.zig:29).
@@ -94,18 +95,17 @@
 ### --- fields ----------------------------------------------------------------
 
 (defn music
-  ``Playing track as N. Title, prefixed PAUSED when paused. Blank when nothing
-  is playing or the player is not one of ours.``
+  ``Playing track as N. Title, prefixed PAUSED when paused. Blank when none of
+  our players is running or playing.``
   []
   # playerctl is optional: missing means no field, not a dead loop
   (def {:out out :status status}
     (try
-      (sh-quiet "playerctl" "metadata" "--format"
-                "{{playerName}}|{{status}}|{{xesam:trackNumber}}|{{xesam:title}}")
+      (sh-quiet "timeout" cmd-timeout "playerctl" "-p" players "metadata" "--format"
+                "{{status}}|{{xesam:trackNumber}}|{{xesam:title}}")
       ([_] {:out "" :status 1})))
-  (def [player state track title] (string/split "|" (string/trim out) 0 4))
+  (def [state track title] (string/split "|" (string/trim out) 0 3))
   (if (or (pos? status)
-          (not (supported-players player))
           (= "Stopped" state)
           (blank? title))
     ""
@@ -126,18 +126,23 @@
     (spit tmp out)
     (os/rename tmp weather-cache)))
 
+(defn weather-stale?
+  "True when there is no cached reading or it is older than weather-max-age."
+  []
+  (def m (os/stat weather-cache :modified))
+  (or (nil? m) (>= (- (os/time) m) weather-max-age)))
+
 (defn weather
   "Last cached weather reading, or -- when there is none or it went stale."
   []
-  (def age (when-let [m (os/stat weather-cache :modified)] (- (os/time) m)))
-  (let [v (when (and age (< age weather-max-age)) (first-line weather-cache))]
+  (let [v (unless (weather-stale?) (first-line weather-cache))]
     (if (blank? v) "--" v)))
 
 (defn volume
   ``Default sink volume as a percentage, MUTED when muted, -- when pipewire
   does not answer.``
   []
-  (def w (words ((sh-quiet "wpctl" "get-volume" "@DEFAULT_AUDIO_SINK@") :out)))
+  (def w (words ((sh-quiet "timeout" cmd-timeout "wpctl" "get-volume" "@DEFAULT_AUDIO_SINK@") :out)))
   (def n (when-let [v (get w 1)] (scan-number v)))
   (cond
     (nil? n)                    (string/format "%s  --" (icons :vol))
@@ -158,7 +163,7 @@
 (defn disk
   "Space available on /, blank when df fails."
   []
-  (def out ((sh "df" "-h" "/" "--output=avail") :out))
+  (def out ((sh "timeout" cmd-timeout "df" "-h" "/" "--output=avail") :out))
   (if-let [avail (get (string/split "\n" out) 1)]
     (string/format "%s %s" (icons :disk) (string/trim avail))
     ""))
@@ -167,7 +172,7 @@
   "Memory in use as a percentage of total, blank when free fails."
   []
   (def line (find |(string/has-prefix? "Mem:" $)
-                  (string/split "\n" ((sh "free" "-m") :out))))
+                  (string/split "\n" ((sh "timeout" cmd-timeout "free" "-m") :out))))
   (def [_ total used] (words (or line "")))
   (if (and total used)
     (string/format "%s %d%%" (icons :ram)
@@ -179,7 +184,7 @@
   []
   # wg is optional the same way playerctl is: absent reads as no tunnel
   (def {:out out :status status}
-    (try (sh-quiet "wg" "show" "interfaces") ([_] {:out "" :status 1})))
+    (try (sh-quiet "timeout" cmd-timeout "wg" "show" "interfaces") ([_] {:out "" :status 1})))
   (if (or (pos? status) (blank? out))
     "NO VPN"
     (string/format "%s %s" (icons :vpn) (string/join (words out) " "))))
@@ -286,9 +291,9 @@
   (var prev nil)
   (var cache (array/new-filled (length fields) ""))
   (forever
-    # 600s matches waybar; retry at 60s until the first fetch lands
+    # 600s matches waybar; retry at 60s while the reading is missing or stale
     (when (or (due? tick 600)
-              (and (not (os/stat weather-cache :mode)) (due? tick 60)))
+              (and (due? tick 60) (weather-stale?)))
       (ev/spawn (try (weather-refresh) ([_] nil))))
 
     (set cache (refresh tick cache))
