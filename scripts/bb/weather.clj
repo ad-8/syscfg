@@ -42,7 +42,7 @@
 
 
 (defn make-request [url query-params]
-  (let [params {:query-params query-params}
+  (let [params {:query-params query-params :timeout 20000}
         resp (try (http/get url params)
                   (catch Exception e (println (.getMessage e))))]
     (if (= 200 (:status resp))
@@ -82,9 +82,13 @@
 
 
 (defn download-icon [url filename]
-  (io/copy
-   (:body (http/get url {:as :stream}))
-   (io/file filename)))
+  (try
+    (io/copy
+     (:body (http/get url {:as :stream :timeout 20000}))
+     (io/file filename))
+    (catch Exception e
+      (fs/delete-if-exists filename)
+      (println (.getMessage e)))))
 
 
 (defn find-code [code]

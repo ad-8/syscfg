@@ -35,7 +35,7 @@
   (println "se=" search-engine "q=" query "qempty?" (empty? query))
   (if (empty? query)
     (prn "foo")
-    (shell "firefox" (str (last search-engine) query))))
+    (shell "firefox" (str (last search-engine) (str/replace (java.net.URLEncoder/encode query "UTF-8") "+" "%20")))))
 
 
 (let [arg1 (first *command-line-args*)]

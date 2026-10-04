@@ -78,7 +78,7 @@
         label (fn [{:keys [display]}]
                 (let [n (get names display "")]
                   (str "Display " display (if (seq n) (str " (" n ")") ""))))
-        w     (apply max (map (comp count label) rows))]
+        w     (apply max 0 (map (comp count label) rows))]
     (doseq [row rows]
       (let [{:keys [brightness contrast]} row]
         (println (format (str "%-" w "s — brightness: %s  contrast: %s")
@@ -116,7 +116,7 @@
                 (let [d (display-for-bus bus)
                       n (get names d "")]
                   (str "Display " d (if (seq n) (str " (" n ")") ""))))
-        w     (apply max (map (comp count label) rows))]
+        w     (apply max 0 (map (comp count label) rows))]
     (doseq [row rows]
       (let [{:keys [brightness contrast]} row]
         (println (format (str "%-" w "s — brightness: %s  contrast: %s")

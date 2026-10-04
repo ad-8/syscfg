@@ -212,7 +212,7 @@
     "custom/music-info": {
         "interval": 5,
         "tooltip": false,
-        "on-click": "playerctl play-pause",
+        "on-click": "playerctl -p strawberry,fooyin,emms play-pause",
         "format": "{}",
         "return-type": "text",
         "exec": "$HOME/syscfg/scripts/waybar.clj music"

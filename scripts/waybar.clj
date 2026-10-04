@@ -2,7 +2,7 @@
 (ns waybar
   (:require [clojure.string :as str]
             [babashka.fs :as fs]
-            [babashka.process :refer [shell]]
+            [babashka.process :refer [sh shell]]
             [cheshire.core :as json]))
 
 (defn err-unknow-action []
@@ -93,34 +93,22 @@
 (defn waybar-memory []
   (print-memory-info "json"))
 
-(defn- stdout! [cmd]
-  (-> (shell {:out :string} cmd) :out str/trim))
-
-(defn- print-curr-playing []
-  (let [out (stdout! "playerctl metadata --format '{{status}}|{{xesam:trackNumber}}|{{xesam:title}}'")
-        [status track-number title] (str/split out #"\|" 3)
+(defn- print-curr-playing [out]
+  (let [[status track-number title] (str/split out #"\|" 3)
         out-str (if (str/blank? track-number)
                   title
                   (format "%s. %s" track-number title))]
     (case status
       "Playing" (printf "%s" out-str)
       "Paused" (printf "PAUSED %s" out-str)
-      "Stopped" (printf "") ;; does not show up on waybar
-      (println "TODO: default case"))))
+      (printf "")))) ;; does not show up on waybar
 
-(def supported-players #{"strawberry" "fooyin" "emms"})
-
-(defn supported-player? [metadata]
-  (let [line (-> metadata str/split-lines first)]
-    (some #(str/starts-with? line %) supported-players)))
+(def players "strawberry,fooyin,emms")
 
 (defn waybar-music []
-  (let [proc (shell {:out :string :err :string :continue true} "playerctl metadata")]
+  (let [proc (sh "timeout" "2" "playerctl" "-p" players "metadata" "--format" "{{status}}|{{xesam:trackNumber}}|{{xesam:title}}")]
     (when (zero? (:exit proc))
-      (let [metadata (-> proc :out str/trim)]
-        (if (supported-player? metadata)
-          (print-curr-playing)
-          (printf "err-usp"))))))
+      (print-curr-playing (-> proc :out str/trim)))))
 
 (defn compositor
   "Detect the running Wayland compositor. Both waybar launch paths (compositor
