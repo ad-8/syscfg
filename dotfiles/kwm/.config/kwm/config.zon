@@ -41,7 +41,7 @@
         .position = .top,
 
         //.font = "monospace:size=10",
-        .font = "Hack Nerd Font:size=9",
+        .font = "Hack Nerd Font:size=10",
 
         .scheme = .{
             .normal = .{
