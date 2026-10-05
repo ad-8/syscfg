@@ -15,20 +15,21 @@
     ],
     "modules-right": [
         "custom/music-info",
+        "custom/sep3",
         "pulseaudio",
-        "custom/sep2",
+        "custom/sep3",
         "custom/notification-status",
-        "custom/sep2",
+        "custom/sep3",
         "custom/licht",
-        "custom/sep2",
+        "custom/sep3",
         "custom/cpu",
         "custom/disk",
         "custom/memory",
         "battery",
         "battery#bat2",
-        "custom/sep2",
+        "custom/sep3",
         "custom/vpn",
-        "custom/sep2",
+        "custom/sep3",
         "tray",
         "custom/sepempty"
     ],
@@ -271,6 +272,10 @@
     },
     "custom/sep2b": {
         "format": "•",
+        "tooltip": false
+    },
+    "custom/sep3": {
+        "format": " | ",
         "tooltip": false
     },
     "custom/sepempty": {
