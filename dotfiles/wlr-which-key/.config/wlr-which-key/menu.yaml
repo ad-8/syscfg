@@ -101,7 +101,7 @@ menu:
         cmd: emacs
       - key: "E"
         desc: Emacsclient
-        cmd: emacsclient -c
+        cmd: emacsclient -c -a emacs
       - key: "f"
         desc: File Manager
         cmd: thunar
