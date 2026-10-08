@@ -209,15 +209,6 @@ binds {
     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
     Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
-    // Similarly, you can bind touchpad scroll "ticks".
-    // Touchpad scrolling is continuous, so for these binds it is split into
-    // discrete intervals.
-    // These binds are also affected by touchpad's natural-scroll, so these
-    // example binds are "inverted", since we have natural-scroll enabled for
-    // touchpads by default.
-    // Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
-    // Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
-
 
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
@@ -267,14 +258,6 @@ binds {
 
     Mod+T { toggle-column-tabbed-display; }
 
-    // Actions to switch layouts.
-    // Note: if you uncomment these, make sure you do NOT have
-    // a matching layout switch hotkey configured in xkb options above.
-    // Having both at once on the same hotkey will break the switching,
-    // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-    // Mod+Space       { switch-layout "next"; }
-    // Mod+Shift+Space { switch-layout "prev"; }
-
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
     // so they may, for example, forward the key presses as-is to a remote machine.
@@ -292,18 +275,17 @@ binds {
 
     // ax: dwm-like keybinds
     // general
-    Mod+Shift+Space repeat=false { spawn-sh "wlr-which-key"; }
-    Mod+Shift+Y { spawn-sh "~/syscfg/scripts/bb/licht.clj"; }
-    Mod+E { spawn-sh "emacsclient -c -a emacs"; }
-    Mod+Shift+E { spawn-sh "emacs"; }
     Mod+P { spawn-sh "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\" -s \"d3ebe9\""; }
     Mod+S { spawn-sh "kitten quick-access-terminal"; }
+    Mod+X { spawn-sh "emacsclient --eval '(thanos/type)'"; }
+    Mod+Y { spawn-sh "foot -T ax-command-runner -e fish -C '/usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'"; }
+
     Mod+Shift+F { spawn-sh "rofi -show recursivebrowser";}
     Mod+Shift+W { spawn-sh "rofi -show window";}
-    Mod+X { spawn-sh "emacsclient --eval '(thanos/type)'"; }
+    Mod+Shift+Space repeat=false { spawn-sh "wlr-which-key"; }
 
     // toggle waybar
-    Mod+B { spawn-sh "~/syscfg/scripts/waybar.clj toggle";}
+    Mod+B       { spawn-sh "~/syscfg/scripts/waybar.clj toggle";}
     Mod+Shift+B { spawn-sh "~/syscfg/scripts/waybar.clj toggle-min";}
 
     // notifications
@@ -318,13 +300,9 @@ binds {
     Mod+Alt+Space { spawn-sh "~/syscfg/scripts/bb/play_pause.clj" ; }
     Mod+Alt+Right { spawn-sh "~/syscfg/scripts/bb/play_pause.clj" ; }
 
-    // TODO - need keychords ...
-    Mod+Ctrl+B { spawn-sh "foot -T ax-bluetui -e bluetui";}
-    Mod+Ctrl+Shift+B { spawn-sh "foot -T ax-bluetui -e wiremix";}
     // linkding (bookmarks)
     Mod+Alt+B { spawn-sh "bb ~/x/ax_bookmarks.clj std"; }
     Mod+Alt+N { spawn-sh "bb ~/x/ax_bookmarks.clj archived"; }
-    Mod+Y     { spawn-sh "foot -T ax-command-runner -e fish -C '/usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'"; }
 
     // Screenshots
     // put into swappy for annotations
