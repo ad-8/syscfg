@@ -61,7 +61,7 @@ You can configure outputs by their name, which you can find by running =niri msg
 // ThinkPad
 output "eDP-1" {
     mode "1920x1080@60"
-    scale 1.0
+    scale 1
     position x=0 y=0
 }
 
@@ -120,21 +120,16 @@ layout {
 #+end_src
 
 * Theme
-Window/UI colors (border, tab indicator, workspace background, overview backdrop) are
-supplied by the theme switcher (=scripts/bb/switch_theme.clj=), which symlinks
-=active-theme.kdl= to the active theme's =niri.kdl=. The include is positional and merges
-per-property over the =layout= block above. =optional=true= keeps niri loading even if no
-theme has been applied yet (e.g. fresh checkout before first switch).
+Colors come from the theme switcher (=scripts/bb/switch_theme.clj=), which points
+=active-theme.kdl= at the current theme. It's included after =layout=, so its colors
+win. =optional=true= lets niri start before any theme has been picked.
 #+begin_src js
 include optional=true "active-theme.kdl"
 #+end_src
 
 * Cursor
-Without this block niri looks for an xcursor theme literally named "default", which no
-host provides, and falls back to an oversized cursor built into the niri binary (64x64
-bitmap). Numix-Cursor at size 24 matches what GTK (home-manager =gtk.cursorTheme=) and
-X11 (=.Xresources=) already use. This also exports =XCURSOR_THEME= and =XCURSOR_SIZE=
-to apps spawned by niri.
+Without this, niri falls back to its own oversized cursor. Same theme and size as
+GTK and X11, so the cursor looks the same everywhere.
 #+begin_src js
 cursor {
     xcursor-theme "Numix-Cursor"
@@ -154,11 +149,10 @@ spawn-at-startup "firefox"
 spawn-at-startup "nm-applet"
 spawn-sh-at-startup "foot -e btop"
 spawn-sh-at-startup "syncthing serve --no-browser"
+spawn-sh-at-startup "swaybg -i ~/sync/wallpapers/default.jpg"
 #+end_src
 
-Somehow, could not get =swaybg= to work with =spawn-at-startup= directly ...
 #+begin_src js
-spawn-at-startup "~/syscfg/scripts/niri-set-wallpaper.sh"
 spawn-sh-at-startup "swayidle -w timeout 1180 'notify-send locking-screen in-10-seconds' timeout 1200 'swaylock -f -c 000000 -F' timeout 1250 'niri msg action power-off-monitors' before-sleep 'swaylock -f -c 000000 -F'"
 #+end_src
 
@@ -171,10 +165,10 @@ Most actions that you can bind here can also be invoked programmatically with =n
 binds {
     Mod+Shift+X { show-hotkey-overlay; }
 
-    Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
+    Mod+Return  hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+Shift+O hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
-    Mod+O hotkey-overlay-title="Open: wlr-which-key" { spawn "wlr-which-key" "--initial-keys" "o"; }
-    Mod+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --show-failed-attempts --color 0c1014"; }
+    Mod+O       hotkey-overlay-title="Open: wlr-which-key" { spawn "wlr-which-key" "--initial-keys" "o"; }
+    Mod+Alt+L   hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --show-failed-attempts --color 0c1014"; }
 
     // The allow-when-locked=true property makes them work even when the session is locked.
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
@@ -228,9 +222,9 @@ binds {
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
     // ax: All we need for a two monitor setup
-    Mod+Period { focus-monitor-next; }
-    Mod+Shift+Period { move-column-to-monitor-next; } // or move-window-to-monitor-left
-    Mod+Shift+Comma { move-workspace-to-monitor-next; }
+    Mod+Period       { focus-monitor-next; }
+    Mod+Shift+Period { move-column-to-monitor-next; }
+    Mod+Shift+Comma  { move-workspace-to-monitor-next; }
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
@@ -296,12 +290,12 @@ binds {
     Mod+Shift+N { consume-window-into-column; }
     Mod+Shift+M { expel-window-from-column; }
 
-    Mod+R       { switch-preset-column-width; }
-    Mod+Shift+R { switch-preset-window-height; }
-    Mod+Ctrl+R  { reset-window-height; }
-    Mod+Alt+F   { toggle-windowed-fullscreen; }
-    Mod+Ctrl+F  { expand-column-to-available-width; }
-    Mod+F       { fullscreen-window; }
+    Mod+R            { switch-preset-column-width; }
+    Mod+Shift+R      { switch-preset-window-height; }
+    Mod+Ctrl+R       { reset-window-height; }
+    Mod+Alt+F        { toggle-windowed-fullscreen; }
+    Mod+Ctrl+F       { expand-column-to-available-width; }
+    Mod+F            { fullscreen-window; }
     Mod+Ctrl+Shift+F { maximize-column; }
 
     Mod+C       { center-column; }
@@ -337,25 +331,26 @@ binds {
     Mod+X { spawn-sh "emacsclient --eval '(thanos/type)'"; }
     Mod+Y { spawn-sh "foot -T ax-command-runner -e fish -C '/usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'"; }
 
-    Mod+Shift+F { spawn-sh "rofi -show recursivebrowser";}
-    Mod+Shift+W { spawn-sh "rofi -show window";}
+    Mod+Shift+F { spawn-sh "rofi -show recursivebrowser"; }
+    Mod+Shift+W { spawn-sh "rofi -show window"; }
+
     Mod+Shift+Space repeat=false { spawn-sh "wlr-which-key"; }
 
     // toggle waybar
-    Mod+B       { spawn-sh "~/syscfg/scripts/waybar.clj toggle";}
-    Mod+Shift+B { spawn-sh "~/syscfg/scripts/waybar.clj toggle-min";}
+    Mod+B       { spawn-sh "~/syscfg/scripts/waybar.clj toggle"; }
+    Mod+Shift+B { spawn-sh "~/syscfg/scripts/waybar.clj toggle-min"; }
 
     // notifications
     Mod+Alt+H { spawn-sh "dunstctl history-pop"; }
     Mod+Alt+K { spawn-sh "dunstctl close-all"; }
-    Mod+Alt+W { spawn "~/syscfg/scripts/bb/weather.clj" "dunst" ; }
+    Mod+Alt+W { spawn "~/syscfg/scripts/bb/weather.clj" "dunst"; }
 
     // volume
-    Mod+Alt+Left  { spawn-sh "~/syscfg/scripts/wayland.clj volume-mute" ; }
-    Mod+Alt+Up    { spawn-sh "~/syscfg/scripts/wayland.clj volume-up" ; }
-    Mod+Alt+Down  { spawn-sh "~/syscfg/scripts/wayland.clj volume-down" ; }
-    Mod+Alt+Space { spawn-sh "~/syscfg/scripts/bb/play_pause.clj" ; }
-    Mod+Alt+Right { spawn-sh "~/syscfg/scripts/bb/play_pause.clj" ; }
+    Mod+Alt+Left  { spawn-sh "~/syscfg/scripts/wayland.clj volume-mute"; }
+    Mod+Alt+Up    { spawn-sh "~/syscfg/scripts/wayland.clj volume-up"; }
+    Mod+Alt+Down  { spawn-sh "~/syscfg/scripts/wayland.clj volume-down"; }
+    Mod+Alt+Space { spawn-sh "~/syscfg/scripts/bb/play_pause.clj"; }
+    Mod+Alt+Right { spawn-sh "~/syscfg/scripts/bb/play_pause.clj"; }
 
     // linkding (bookmarks)
     Mod+Alt+B { spawn-sh "bb ~/x/ax_bookmarks.clj std"; }
@@ -505,7 +500,7 @@ hotkey-overlay {
 #+end_src
 
 * Gestures
-prevent the default top-left corner from showing the overview
+Turn off the top-left hot corner, which opens the overview.
 #+begin_src js
 gestures {
     hot-corners {
