@@ -1,10 +1,18 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }:
 
 {
+  # TODO: remove once nixos stable ships babashka >= 1.13.219, likely with the 26.11 upgrade (needed by csm)
+  nixpkgs.overlays = [
+    (final: prev: {
+      babashka = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.babashka;
+    })
+  ];
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
