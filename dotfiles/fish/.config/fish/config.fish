@@ -66,7 +66,7 @@ else
     abbr -a pwdc 'pwd | xclip -selection clipboard'
 end
 
-abbr -a t tmux
+# abbr -a t tmux
 abbr -a tn 'tmux new-session -s'
 abbr -a tls 'tmux list-sessions'
 abbr -a ta 'tmux attach-session'
@@ -120,8 +120,14 @@ if test -f /etc/os-release
             abbr -a up 'sudo pacman -Syu'
             abbr -a cu "checkupdates | sed 's/->//g' | column -t"
         case fedora rocky almalinux
-            abbr -a up 'sudo dnf upgrade --refresh'
-            abbr -a cu "dnf check-update --refresh | wc -l"
+            # abbr -a up 'sudo dnf upgrade --refresh'
+            # abbr -a cu "dnf check-update --refresh | wc -l"
+            abbr -a cu "rpm-ostree upgrade --check"
+            abbr -a cu2 "rpm-ostree upgrade --preview"
+            abbr -a lg "rpm-ostree status"
+            abbr -a up "rpm-ostree upgrade"
+            abbr -a te "toolbox enter arch"
+            abbr -a tr "toolbox run -c arch"
         case opensuse-tumbleweed
             abbr -a up 'sudo zypper ref && sudo zypper dup'
             abbr -a nf "clear && fastfetch --logo opensuse"
@@ -207,7 +213,9 @@ bind ctrl-t insert_timestamp
 
 source ~/.config/fish/nnn.fish
 
-starship init fish | source
+if status is-interactive; and command -q starship
+    starship init fish | source
+end
 
 if command -q zoxide
     zoxide init fish | source
