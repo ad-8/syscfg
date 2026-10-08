@@ -1,5 +1,5 @@
 #+title: Config
-#+PROPERTY: header-args:shell :tangle config.kdl
+#+PROPERTY: header-args:js :tangle config.kdl
 
 * ToC :toc:
 - [[#about-this-config][About this config]]
@@ -28,7 +28,7 @@ Check the wiki for a full description of the configuration:
 https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
 * Input
-#+begin_src shell
+#+begin_src js
 input {
     keyboard {
         xkb {
@@ -60,7 +60,7 @@ input {
 
 * Output 
 You can configure outputs by their name, which you can find by running =niri msg outputs= while inside a niri instance.
-#+begin_src shell
+#+begin_src js
 // ThinkPad
 output "eDP-1" {
     mode "1920x1080@60"
@@ -84,7 +84,7 @@ output "HDMI-A-1" {
 #+end_src
 
 * Layout
-#+begin_src shell
+#+begin_src js
 layout {
     gaps 8
 
@@ -128,7 +128,7 @@ supplied by the theme switcher (=scripts/bb/switch_theme.clj=), which symlinks
 =active-theme.kdl= to the active theme's =niri.kdl=. The include is positional and merges
 per-property over the =layout= block above. =optional=true= keeps niri loading even if no
 theme has been applied yet (e.g. fresh checkout before first switch).
-#+begin_src shell
+#+begin_src js
 include optional=true "active-theme.kdl"
 #+end_src
 
@@ -138,7 +138,7 @@ host provides, and falls back to an oversized cursor built into the niri binary 
 bitmap). Numix-Cursor at size 24 matches what GTK (home-manager =gtk.cursorTheme=) and
 X11 (=.Xresources=) already use. This also exports =XCURSOR_THEME= and =XCURSOR_SIZE=
 to apps spawned by niri.
-#+begin_src shell
+#+begin_src js
 cursor {
     xcursor-theme "Numix-Cursor"
     xcursor-size 24
@@ -151,7 +151,7 @@ Launching =niri-session= instead of bare =niri= from TTY sets up a proper D-Bus 
 
 2026-06: independent of the autostart topic, use =niri-session= instead of =niri= when starting from TTY - =thunar= did not open when just =niri= was used.
 
-#+begin_src shell
+#+begin_src js
 spawn-sh-at-startup "~/syscfg/scripts/waybar.clj launch"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "dunst"
@@ -163,7 +163,7 @@ spawn-sh-at-startup "syncthing serve --no-browser"
 #+end_src
 
 Somehow, could not get =swaybg= to work with =spawn-at-startup= directly ...
-#+begin_src shell
+#+begin_src js
 spawn-at-startup "~/syscfg/scripts/niri-set-wallpaper.sh"
 spawn-sh-at-startup "swayidle -w timeout 1180 'notify-send locking-screen in-10-seconds' timeout 1200 'swaylock -f -c 000000 -F' timeout 1250 'niri msg action power-off-monitors' before-sleep 'swaylock -f -c 000000 -F'"
 #+end_src
@@ -173,7 +173,7 @@ Keys consist of modifiers separated by + signs, followed by an XKB key name in t
 "Mod" is a special modifier equal to Super when running on a TTY, and to Alt when running as a winit window.
 Most actions that you can bind here can also be invoked programmatically with `niri msg action do-something`.
 
-#+begin_src shell
+#+begin_src js
 binds {
     Mod+Shift+X { show-hotkey-overlay; }
 
@@ -396,7 +396,7 @@ binds {
 
 * Window Rules
 ** open windows at 2/3 width
-#+begin_src shell
+#+begin_src js
 window-rule {
     match app-id="firefox"
     match app-id="brave-browser"
@@ -405,7 +405,7 @@ window-rule {
 }
 #+end_src
 ** float windows 1024
-#+begin_src shell
+#+begin_src js
 window-rule {
     match app-id=r#"foot$"# title="^ax-bluetui$"
     match app-id=r#"foot$"# title="^ax-wiremix$"
@@ -422,7 +422,7 @@ window-rule {
 }
 #+end_src
 ** float windows 1280
-#+begin_src shell
+#+begin_src js
 window-rule {
     match app-id="waypaper"
     match app-id="anki"
@@ -435,7 +435,7 @@ window-rule {
 }
 #+end_src
 ** misc
-#+begin_src shell
+#+begin_src js
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
@@ -484,7 +484,7 @@ window-rule {
 }
 #+end_src
 ** blur
-#+begin_src shell 
+#+begin_src js 
 window-rule {
     match app-id="^foot$"
 
@@ -494,7 +494,7 @@ window-rule {
 }
 #+end_src
 * Screenshot settings
-#+begin_src shell
+#+begin_src js
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
 // The path is formatted with strftime(3) to give you the screenshot date and time.
@@ -504,7 +504,7 @@ screenshot-path "~/sync/screenshots/%Y/Screenshot_from_%Y-%m-%d_%H-%M-%S.png"
 // screenshot-path null
 #+end_src
 * Misc
-#+begin_src shell
+#+begin_src js
 prefer-no-csd // ask the clients to omit their client-side decorations if possible
 
 animations {
@@ -518,7 +518,7 @@ hotkey-overlay {
 
 ** Gestures
 // prevent the default top-left corner from showing the overview
-#+begin_src shell
+#+begin_src js
 gestures {
     hot-corners {
         off
