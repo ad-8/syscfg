@@ -438,6 +438,7 @@ determine the exact padding."
    (dirvish-narrow-match-face-2 :weight 'bold :foreground bg :background fg-dim)
    (dirvish-narrow-match-face-3 :weight 'bold :foreground bg :background fg-dim)
    (dirvish-vc-needs-merge-face :background tint-red)
+   (ax/dirvish-modeline         :foreground bg)
 
    ;; emms
    (emms-playlist-track-face            :foreground fg-dim)

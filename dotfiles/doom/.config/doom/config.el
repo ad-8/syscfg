@@ -121,6 +121,18 @@
                 "epub"
                 "\\)"))
 
+(defface ax/dirvish-modeline '((t))
+  "Laid over dirvish's modeline segments; empty unless a theme sets it.")
+
+(defun ax/dirvish-ml-face (str)
+  (when (stringp str) (add-face-text-property 0 (length str) 'ax/dirvish-modeline nil str))
+  str)
+
+(after! dirvish
+  (dolist (seg (append (plist-get dirvish-mode-line-format :left)
+                       (plist-get dirvish-mode-line-format :right)))
+    (advice-add (intern (format "dirvish-%s-ml" seg)) :filter-return #'ax/dirvish-ml-face)))
+
 (setenv "FZF_DEFAULT_COMMAND" "fd -u")
 (use-package! fzf
   :bind
