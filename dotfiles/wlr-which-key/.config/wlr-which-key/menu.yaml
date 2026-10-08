@@ -125,7 +125,7 @@ menu:
         cmd: signal-desktop
       - key: "v"
         desc: Brave
-        cmd: brave
+        cmd: brave || flatpak run com.brave.Browser
       - key: "V"
         desc: Virt-Manager
         cmd: virt-manager
