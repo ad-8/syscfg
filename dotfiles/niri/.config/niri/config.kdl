@@ -143,11 +143,10 @@ binds {
     Mod+Shift+K     { move-window-up; }
     Mod+Shift+L     { move-column-right; }
 
-    // TODO test those binds
-    Mod+Home { focus-column-first; }
-    Mod+End  { focus-column-last; }
-    Mod+Ctrl+Home { move-column-to-first; }
-    Mod+Ctrl+End  { move-column-to-last; }
+    Mod+G            { focus-column-first; }
+    Mod+Shift+G      { focus-column-last; }
+    Mod+Ctrl+G       { move-column-to-first; }
+    Mod+Ctrl+Shift+G { move-column-to-last; }
 
     Mod+Ctrl+Left  { focus-monitor-left; }
     Mod+Ctrl+Down  { focus-monitor-down; }
@@ -409,13 +408,7 @@ window-rule {
     }
 }
 
-// You can change the path where screenshots are saved.
-// A ~ at the front will be expanded to the home directory.
-// The path is formatted with strftime(3) to give you the screenshot date and time.
 screenshot-path "~/sync/screenshots/%Y/Screenshot_from_%Y-%m-%d_%H-%M-%S.png"
-
-// You can also set this to null to disable saving screenshots to disk.
-// screenshot-path null
 
 prefer-no-csd // ask the clients to omit their client-side decorations if possible
 
