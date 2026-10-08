@@ -879,6 +879,19 @@ keep =the-matrix-theme.el= byte-for-byte upstream.
  '(treemacs-on-success-pulse-face    :foreground "#000000" :background "#00cd6d" :extend t)
  '(treemacs-on-failure-pulse-face    :foreground "#000000" :background "#cc0037" :extend t))
 #+end_src
+**** eww
+#+begin_src emacs-lisp
+(custom-theme-set-faces!
+ 'the-matrix
+ '(eww-form-text           :inherit widget-field :box (:line-width 1 :color "#00733d"))
+ '(eww-form-textarea       :inherit widget-field :box (:line-width 1 :color "#00733d"))
+ '(eww-form-submit         :inherit custom-button)
+ '(eww-form-file           :inherit custom-button)
+ '(eww-form-checkbox       :inherit custom-button)
+ '(eww-form-select         :inherit custom-button)
+ '(eww-valid-certificate   :foreground "#00b25f" :weight bold)
+ '(eww-invalid-certificate :foreground "#cc0037" :weight bold))
+#+end_src
 *** Gotham: org-agenda done items
 #+begin_src emacs-lisp
 (custom-theme-set-faces!

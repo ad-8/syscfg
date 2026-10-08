@@ -406,6 +406,8 @@ determine the exact padding."
                            :box (list :line-width '(3 . -1) :color fg-dim :style 'flat-button))
    (minibuffer-nonselected :background fg-dim :foreground bg :weight 'bold)
    (header-line            :foreground fg :background tint)
+   (eww-valid-certificate  :foreground fg :weight 'bold)
+   (eww-form-text          :box (list :line-width 1 :color fg-dim) :background bg :foreground fg :distant-foreground bg)
    (tab-bar-tab-highlight  :box (list :line-width 1 :style 'released-button) :background fg-dim :foreground bg)
    (pulse-highlight-start-face :background tint-strong)
    (pulse-highlight-face       :background tint-strong)

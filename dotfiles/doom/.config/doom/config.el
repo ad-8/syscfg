@@ -592,6 +592,17 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
  '(treemacs-on-failure-pulse-face    :foreground "#000000" :background "#cc0037" :extend t))
 
 (custom-theme-set-faces!
+ 'the-matrix
+ '(eww-form-text           :inherit widget-field :box (:line-width 1 :color "#00733d"))
+ '(eww-form-textarea       :inherit widget-field :box (:line-width 1 :color "#00733d"))
+ '(eww-form-submit         :inherit custom-button)
+ '(eww-form-file           :inherit custom-button)
+ '(eww-form-checkbox       :inherit custom-button)
+ '(eww-form-select         :inherit custom-button)
+ '(eww-valid-certificate   :foreground "#00b25f" :weight bold)
+ '(eww-invalid-certificate :foreground "#cc0037" :weight bold))
+
+(custom-theme-set-faces!
  'gotham
  '(org-agenda-done :foreground "#245361"))
 
