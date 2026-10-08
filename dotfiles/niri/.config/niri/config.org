@@ -24,15 +24,12 @@
 This config is in the KDL format: https://kdl.dev
 =/-= comments out the following node.
 
-Check the wiki for a full description of the configuration:
-https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
-
 * Input
 #+begin_src js
 input {
     keyboard {
         xkb {
-	        layout "de"
+            layout "de"
         }
         repeat-rate 35
         repeat-delay 200
@@ -42,7 +39,7 @@ input {
     mouse {
         accel-speed 0.8
     }
-    
+
     touchpad {
         tap
         natural-scroll
@@ -58,7 +55,7 @@ input {
 }
 #+end_src
 
-* Output 
+* Output
 You can configure outputs by their name, which you can find by running =niri msg outputs= while inside a niri instance.
 #+begin_src js
 // ThinkPad
@@ -68,18 +65,18 @@ output "eDP-1" {
     position x=0 y=0
 }
 
-// LG 
+// LG
 output "DP-1" {
-       mode "3840x2160"
-       scale 1.25
-       position x=0 y=0
+    mode "3840x2160"
+    scale 1.25
+    position x=0 y=0
 }
 
 // Acer
 output "HDMI-A-1" {
-       mode "1920x1080"
-       scale 1
-       position x=3072 y=648
+    mode "1920x1080"
+    scale 1
+    position x=3072 y=648
 }
 #+end_src
 
@@ -146,17 +143,14 @@ cursor {
 #+end_src
 
 * Autostart
-Note that running niri as a session supports =xdg-desktop-autostart=, which may be more convenient to use.
-Launching =niri-session= instead of bare =niri= from TTY sets up a proper D-Bus session and activates =graphical-session.target=, which portals and auth agents rely on. The =spawn-at-startup= entries below work either way. Switch only if you hit a concrete breakage (screensharing, auth dialogs, systemd user services).
-
-2026-06: independent of the autostart topic, use =niri-session= instead of =niri= when starting from TTY - =thunar= did not open when just =niri= was used.
+Start niri from TTY with =niri-session=, not bare =niri=: it sets up a proper D-Bus session and activates =graphical-session.target=, which portals and auth agents rely on. With bare =niri=, =thunar= did not open (2026-06).
 
 #+begin_src js
 spawn-sh-at-startup "~/syscfg/scripts/waybar.clj launch"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "dunst"
 spawn-at-startup "emacs"
-spawn-at-startup "firefox" 
+spawn-at-startup "firefox"
 spawn-at-startup "nm-applet"
 spawn-sh-at-startup "foot -e btop"
 spawn-sh-at-startup "syncthing serve --no-browser"
@@ -171,22 +165,17 @@ spawn-sh-at-startup "swayidle -w timeout 1180 'notify-send locking-screen in-10-
 * Keybindings
 Keys consist of modifiers separated by + signs, followed by an XKB key name in the end. To find an XKB name for a particular key, you may use a program like wev.
 "Mod" is a special modifier equal to Super when running on a TTY, and to Alt when running as a winit window.
-Most actions that you can bind here can also be invoked programmatically with `niri msg action do-something`.
+Most actions that you can bind here can also be invoked programmatically with =niri msg action do-something=.
 
 #+begin_src js
 binds {
     Mod+Shift+X { show-hotkey-overlay; }
 
     Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
-    Super+Shift+O hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
-    Super+O hotkey-overlay-title="Open: wlr-which-key" { spawn "wlr-which-key" "--initial-keys" "o"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --show-failed-attempts --color 0c1014"; }
+    Mod+Shift+O hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
+    Mod+O hotkey-overlay-title="Open: wlr-which-key" { spawn "wlr-which-key" "--initial-keys" "o"; }
+    Mod+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --show-failed-attempts --color 0c1014"; }
 
-    // You can also use a shell. Do this if you need pipes, multiple commands, etc.
-    // Note: the entire command goes as a single argument in the end.
-    // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
-
-    // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
@@ -240,7 +229,7 @@ binds {
 
     // ax: All we need for a two monitor setup
     Mod+Period { focus-monitor-next; }
-    Mod+Shift+Period { move-column-to-monitor-next; } // or move-window-to-monitor-left 
+    Mod+Shift+Period { move-column-to-monitor-next; } // or move-window-to-monitor-left
     Mod+Shift+Comma { move-workspace-to-monitor-next; }
 
     Mod+Page_Down      { focus-workspace-down; }
@@ -249,7 +238,7 @@ binds {
     Mod+U              { focus-workspace-up; }
     Mod+Ctrl+Page_Down { move-column-to-workspace-down; } // or move-window-to-workspace-down
     Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Shift+I        { move-column-to-workspace-down; } 
+    Mod+Shift+I        { move-column-to-workspace-down; }
     Mod+Shift+U        { move-column-to-workspace-up; }
 
     Mod+Shift+Page_Down { move-workspace-down; }
@@ -279,7 +268,6 @@ binds {
     Mod+Shift+WheelScrollUp        { focus-column-left; }
     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
     Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
-
 
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
@@ -339,10 +327,8 @@ binds {
     // which ensures niri always processes them, even when an inhibitor is active.
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    
     Mod+Shift+P { power-off-monitors; }
     Mod+Shift+Q { quit; }
-
 
     // ax: dwm-like keybinds
     // general
@@ -387,13 +373,14 @@ binds {
         sleep 0.1
         swappy -f "$f"
     "#; }
+
     // niri native
     Print      { screenshot; }
     Mod+Ctrl+S { screenshot; }
-    
+
     Ctrl+Print { screenshot-screen; }
     Mod+Ctrl+A { screenshot-screen; }
-    
+
     Alt+Print  { screenshot-window; }
     Mod+Ctrl+W { screenshot-window; }
 }
@@ -418,12 +405,12 @@ window-rule {
     match app-id=r#"org.pulseaudio.pavucontrol$"# title="^Volume Control$"
     match app-id=r#"firefox$"# title="^About Mozilla Firefox$"
     match app-id=r#"qalculate-gtk$"# title="^Qalculate!$"
-    
+
     open-floating true
     min-width 1024
     max-width 1024
-    min-height 768  
-    max-height 768  
+    min-height 768
+    max-height 768
 }
 #+end_src
 ** float windows 1280
@@ -431,26 +418,21 @@ window-rule {
 window-rule {
     match app-id="waypaper"
     match app-id="anki"
-    
+
     open-floating true
     min-width 1280
     max-width 1280
-    min-height 1024  
-    max-height 1024  
+    min-height 1024
+    max-height 1024
 }
 #+end_src
 ** misc
 #+begin_src js
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
-    // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
-
-
 
 // block out KeePassXC from screen capture.
 window-rule {
@@ -489,7 +471,7 @@ window-rule {
 }
 #+end_src
 ** blur
-#+begin_src js 
+#+begin_src js
 window-rule {
     match app-id="^foot$"
 
