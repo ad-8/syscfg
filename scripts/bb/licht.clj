@@ -15,20 +15,20 @@
   ; :buses (when present) selects the --bus fast path; --bus skips display enumeration ddcutil otherwise does per call
   {"ax-bee" {:internal false :displays [2 1] :display-names {2 "LG" 1 "Acer"} :buses [13 4]}
    "ax-mac" {:internal true  :displays :detect}
+   "ax-lat" {:internal true  :displays []}
    "ax-t14" {:internal true  :displays :detect}})
 
 
 (defn light-screen [brightness]
-  (let [res (shell {:continue true :err :string} "brillo" "-S" (str brightness))]
+  (let [res (shell {:continue true :err :string} "light" "-S" (str brightness))]
     (when (not= 0 (:exit res))
       (println "warn: light-screen failed (device may not exist)"))))
 
 ; brillo -Lk lists available keyboard controllers
 ; :err :string suppresses brillo's device-not-found warnings so only our warn: line shows
 (defn light-keyboard [brightness]
-  (let [res (shell {:continue true :err :string} "brillo" "-k" "-s" "smc::kbd_backlight" "-S" (str brightness))]
-    (when (not= 0 (:exit res))
-      (println "warn: light-keyboard failed (device may not exist)"))))
+  (println brightness)
+  nil)
 
 (defn get-light-screen []
   (let [res (shell {:continue true :out :string} "brillo" "-G")]
