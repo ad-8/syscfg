@@ -379,8 +379,14 @@ binds {
     // put into swappy for annotations
     Mod+Ctrl+Shift+A { spawn-sh "grim - | swappy -f -"; }
     Mod+Ctrl+Shift+S { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
-    // Mod+Ctrl+Shift+W { spawn-sh "TODO"; }
-
+    Mod+Ctrl+Shift+W { spawn-sh r#"
+        f=$XDG_RUNTIME_DIR/niri-window.png
+        rm -f "$f"
+        niri msg action screenshot-window --path "$f" || exit
+        for i in $(seq 42); do [ -s "$f" ] && break; sleep 0.05; done
+        sleep 0.1
+        swappy -f "$f"
+    "#; }
     // niri native
     Print      { screenshot; }
     Mod+Ctrl+S { screenshot; }
