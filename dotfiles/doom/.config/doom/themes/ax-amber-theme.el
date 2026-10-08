@@ -249,6 +249,7 @@ determine the exact padding."
    (magit-diff-hunk-heading           :foreground fg-dim :background bg :overline fg-dim :extend t)
    (magit-diff-hunk-heading-selection :extend t :inherit 'magit-diff-hunk-heading-highlight :background fg :foreground bg)
    (magit-diff-file-heading-selection :foreground bg :background fg :weight 'bold :extend t)
+   (magit-section-heading-selection   :foreground bg :background fg :weight 'bold :extend t)
    (magit-diff-lines-heading          :foreground bg :background fg :weight 'bold :extend t)
    (magit-diff-lines-boundary         :background fg)
    (magit-header-line                 :background fg-dim :foreground bg :weight 'bold :box (list :line-width 3 :color fg-dim))
