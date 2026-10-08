@@ -178,7 +178,7 @@ determine the exact padding."
    ;; resolve to amber (success, strings) or near-amber (warning=fg-dim,
    ;; comments=fg-dim) become invisible / near-invisible on the amber modeline bg.
    ;; Force them to bg (dark) to match the inverted-modeline design intent.
-   (doom-modeline-bar                 :background (if -modeline-bright modeline-bg fg))
+   (doom-modeline-bar                 :background fg-dim)
    (doom-modeline-buffer-file         :inherit 'mode-line-buffer-id :weight 'bold)
    (doom-modeline-buffer-path         :inherit 'mode-line-emphasis :weight 'bold)
    (doom-modeline-buffer-project-root :foreground bg :weight 'bold)
@@ -200,19 +200,6 @@ determine the exact padding."
    (compilation-mode-line-run               :inherit 'compilation-warning :foreground bg)
    (lsp-modeline-code-actions-face          :inherit 'homoglyph :foreground bg)
    (lsp-modeline-code-actions-preferred-face :foreground bg :weight 'bold)
-
-   ;; Powerline (elfeed-goodies header + any package using powerline segments)
-   ;; doom-themes-base sets only :background on active0/1 and inactive0/1/2,
-   ;; relying on the inherited mode-line foreground. With our inverted
-   ;; modeline that fg resolves to bg (dark) → dark-on-dark invisible against
-   ;; the lightened-bg backgrounds. Override :foreground explicitly — same
-   ;; pattern upstream already applies to active2 (which is why Tags + the
-   ;; unread count are the only readable segments out-of-the-box).
-   (powerline-active0   :inherit 'mode-line :foreground base8 :background bg)
-   (powerline-active1   :inherit 'mode-line :foreground base8 :background (doom-lighten bg 0.025))
-   (powerline-inactive0 :inherit 'mode-line-inactive :foreground fg-dim :background base2)
-   (powerline-inactive1 :inherit 'mode-line-inactive :foreground fg-dim :background (doom-lighten base2 0.02))
-   (powerline-inactive2 :inherit 'mode-line-inactive :foreground fg-dim :background (doom-lighten base2 0.04))
 
    ;; column indicator
    (fill-column-indicator :foreground bg-alt :background bg-alt)
@@ -261,6 +248,9 @@ determine the exact padding."
    (magit-diff-removed-highlight :foreground red    :background (doom-blend red bg 0.25) :weight 'bold :extend t)
    (magit-diff-hunk-heading           :foreground fg-dim :background bg :overline fg-dim :extend t)
    (magit-diff-hunk-heading-selection :extend t :inherit 'magit-diff-hunk-heading-highlight :background fg :foreground bg)
+   (magit-diff-file-heading-selection :foreground bg :background fg :weight 'bold :extend t)
+   (magit-diff-lines-heading          :foreground bg :background fg :weight 'bold :extend t)
+   (magit-diff-lines-boundary         :background fg)
    (magit-header-line                 :background fg-dim :foreground bg :weight 'bold :box (list :line-width 3 :color fg-dim))
    (magit-blame-highlight             :extend t :background tint :foreground fg)
    (magit-diff-added-indicator        :foreground fg)
@@ -326,11 +316,11 @@ determine the exact padding."
    (rainbow-delimiters-depth-8-face  :foreground fg-dim)
    (rainbow-delimiters-unmatched-face :foreground red)
 
-   ;; show-paren (bg-alt, not base0: base0 == bg so that box is invisible)
-   (show-paren-match :foreground fg :background bg-alt :weight 'bold)
+   ;; show-paren (tint-strong: base0 == bg and bg-alt are too faint to see the box)
+   (show-paren-match :foreground fg :background tint-strong :weight 'bold)
 
    ;; vertico
-   (vertico-current :foreground bg :background fg)
+   (vertico-current :background tint-strong :extend t)
 
    ;; isearch (vim-amber IncSearch is reverse-video, ours is inverted)
    (isearch        :foreground bg :background fg)
@@ -399,6 +389,10 @@ determine the exact padding."
    (vertico-quick2                   :background fg-dim :foreground bg :inherit 'bold)
    (which-key-group-description-face :foreground fg :weight 'bold)
    (completions-common-part          :weight 'bold)
+   (orderless-match-face-0           :weight 'bold :underline t)
+   (orderless-match-face-1           :weight 'bold :underline t)
+   (orderless-match-face-2           :weight 'bold :underline t)
+   (orderless-match-face-3           :weight 'bold :underline t)
    (help-key-binding                 :inherit 'fixed-pitch :background bg-alt :foreground fg
                                      :box (list :line-width '(-1 . -1) :color fg-dim))
 
@@ -410,9 +404,12 @@ determine the exact padding."
    (icon-button            :inherit 'icon :background fg-dim :foreground bg
                            :box (list :line-width '(3 . -1) :color fg-dim :style 'flat-button))
    (minibuffer-nonselected :background fg-dim :foreground bg :weight 'bold)
+   (header-line            :foreground fg :background tint)
    (tab-bar-tab-highlight  :box (list :line-width 1 :style 'released-button) :background fg-dim :foreground bg)
    (pulse-highlight-start-face :background tint-strong)
    (pulse-highlight-face       :background tint-strong)
+   (secondary-selection    :background tint-strong :extend t)
+   (wgrep-face             :foreground fg :background tint-strong :weight 'bold)
    (isearch-group-1        :background tint-strong :foreground fg :weight 'bold)
    (isearch-group-2        :background tint :foreground fg)
    (dired-broken-symlink   :foreground bg :background red :weight 'bold)
