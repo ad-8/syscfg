@@ -146,7 +146,7 @@ Start niri from TTY with =niri-session=, not bare =niri=: it sets up a proper D-
 spawn-sh-at-startup "~/syscfg/scripts/waybar.clj launch"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "dunst"
-spawn-at-startup "emacs"
+spawn-at-startup "toolbox run --container arch emacs" 
 spawn-at-startup "firefox"
 spawn-at-startup "nm-applet"
 spawn-sh-at-startup "swaybg -i ~/sync/wallpapers/default.jpg"
@@ -165,10 +165,11 @@ Most actions that you can bind here can also be invoked programmatically with =n
 binds {
     Mod+Shift+X { show-hotkey-overlay; }
 
-    Mod+Return  hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
-    Mod+Shift+O hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
-    Mod+O       hotkey-overlay-title="Open: wlr-which-key" { spawn "wlr-which-key" "--initial-keys" "o"; }
-    Mod+Alt+L   hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --show-failed-attempts --color 0c1014"; }
+    Mod+Return       hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
+    Mod+Shift+Return hotkey-overlay-title="Open a Terminal in toolbox: foot" { spawn "foot" "toolbox" "enter" "arch"; }
+    Mod+Shift+O      hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
+    Mod+O            hotkey-overlay-title="Open: wlr-which-key" { spawn "wlr-which-key" "--initial-keys" "o"; }
+    Mod+Alt+L        hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock --show-failed-attempts --color 0c1014"; }
 
     // The allow-when-locked=true property makes them work even when the session is locked.
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1.0" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
