@@ -1,7 +1,8 @@
 input {
     keyboard {
         xkb {
-            layout "de"
+            layout "mykeys"
+            options "caps:escape"
         }
         repeat-rate 35
         repeat-delay 200
