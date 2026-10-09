@@ -24,11 +24,13 @@ This config is in the KDL format: https://kdl.dev
 =/-= comments out the following node.
 
 * Input
+=mykeys= is a config file: =$HOME/.config/xkb/symbols/mykeys=
 #+begin_src js
 input {
     keyboard {
         xkb {
-            layout "de"
+            layout "mykeys"
+            options "caps:escape"
         }
         repeat-rate 35
         repeat-delay 200
