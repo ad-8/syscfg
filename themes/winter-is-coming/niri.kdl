@@ -1,5 +1,5 @@
-// winter-is-coming-dark-blue
-// Themed via switch_theme.clj. Colors sourced from themes/winter-is-coming-dark-blue/hyprland.lua
+// winter-is-coming
+// Themed via switch_theme.clj. Colors sourced from themes/winter-is-coming/hyprland.lua
 // (accent / black / red) + foot.theme background, matching hyprland's border convention.
 // Merged per-property over config.kdl's layout block via `include`.
 layout {

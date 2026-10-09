@@ -12,7 +12,7 @@
 (def theme-categories
   {:dark     #{"everforest-dark" "gotham" "gruvbox-dark" "lumon" "modus-vivendi"
                "nord" "osaka-jade" "oxocarbon" "solarized-dark" "tokyo-night"
-               "winter-is-coming-dark-blue"}
+               "winter-is-coming"}
    :light    #{"doric-oak" "gruvbox-light" "modus-operandi"
                "nord-light" "solarized-light"}
    :muted    #{"doric-walnut" "doric-water"}
