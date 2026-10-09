@@ -13,10 +13,10 @@
   {:dark     #{"everforest-dark" "gotham" "gruvbox-dark" "lumon" "modus-vivendi"
                "nord" "osaka-jade" "oxocarbon" "solarized-dark" "tokyo-night"
                "winter-is-coming-dark-blue"}
-   :light    #{"doric-marble" "doric-oak" "flatwhite" "gruvbox-light" "modus-operandi"
+   :light    #{"doric-oak" "flatwhite" "gruvbox-light" "modus-operandi"
                "nord-light" "solarized-light"}
    :muted    #{"doric-plum" "doric-walnut" "doric-water"}
-   :neon     #{"hackerman" "laserwave" "matte-black" "retro-82" "tron-legacy"}
+   :neon     #{"hackerman" "laserwave" "retro-82" "tron-legacy"}
    :phosphor #{"amber" "matrix" "vantablack"}})
 
 (defn foot-osc

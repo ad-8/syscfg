@@ -9,7 +9,6 @@ separate rows here.
 |----------------------------|-----------------------|--------------------------------------------------|----------------------------------------------------------------------------------------------|
 | everforest-dark            | everforest-dark-hard  | sainnhe/everforest                               | https://github.com/sainnhe/everforest                                                        |
 | amber                      | —                     | foxbunny/vim-amber                               | https://github.com/foxbunny/vim-amber                                                        |
-| doric-marble               | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-oak                  | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-plum                 | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-walnut               | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
@@ -22,7 +21,6 @@ separate rows here.
 | laserwave                  | —                     | doomemacs/themes (doom-laserwave)                | https://github.com/doomemacs/themes                                                          |
 | lumon                      | —                     | OldJobobo/omarchy-lumon-theme                    | https://github.com/OldJobobo/omarchy-lumon-theme                                             |
 | matrix                     | —                     | monkeyjunglejuice/matrix-emacs-theme (Dan Dee)   | https://github.com/monkeyjunglejuice/matrix-emacs-theme                                      |
-| matte-black                | —                     | tahayvr/matte-black-theme                        | https://github.com/tahayvr/matte-black-theme                                                 |
 | modus-operandi             | —                     | protesilaos/modus-themes (bundled with Emacs 30) | https://github.com/protesilaos/modus-themes                                                  |
 | modus-vivendi              | —                     | protesilaos/modus-themes (bundled with Emacs 30) | https://github.com/protesilaos/modus-themes                                                  |
 | nord                       | —                     | nordtheme/nord                                   | https://github.com/nordtheme/nord                                                            |
