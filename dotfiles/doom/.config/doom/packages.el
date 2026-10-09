@@ -71,5 +71,6 @@
 
 (package! cljbang
   :recipe (:host github :repo "borkdude/cljbang.el"))
-
 (package! gleam-ts-mode)
+
+(package! spacious-padding)
