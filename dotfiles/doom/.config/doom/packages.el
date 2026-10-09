@@ -76,3 +76,5 @@
 
 (package! cljbang
   :recipe (:host github :repo "borkdude/cljbang.el"))
+
+(package! spacious-padding)
