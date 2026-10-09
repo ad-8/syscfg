@@ -166,19 +166,13 @@ binds {
     Mod+Shift+Period { move-column-to-monitor-next; }
     Mod+Shift+Comma  { move-workspace-to-monitor-next; }
 
-    Mod+Page_Down      { focus-workspace-down; }
-    Mod+Page_Up        { focus-workspace-up; }
-    Mod+I              { focus-workspace-down; }
-    Mod+U              { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; } // or move-window-to-workspace-down
-    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Shift+I        { move-column-to-workspace-down; }
-    Mod+Shift+U        { move-column-to-workspace-up; }
+    Mod+I       { focus-workspace-down; }
+    Mod+U       { focus-workspace-up; }
+    Mod+Shift+I { move-column-to-workspace-down; }
+    Mod+Shift+U { move-column-to-workspace-up; }
 
-    Mod+Shift+Page_Down { move-workspace-down; }
-    Mod+Shift+Page_Up   { move-workspace-up; }
-    Mod+Ctrl+I          { move-workspace-down; }
-    Mod+Ctrl+U          { move-workspace-up; }
+    Mod+Ctrl+I { move-workspace-down; }
+    Mod+Ctrl+U { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -392,14 +386,6 @@ window-rule {
         active-color "#b48ead" // nord aurora lilac
         // inactive-color "#885500"
         width 8
-    }
-}
-
-window-rule {
-    match app-id="^foot$"
-
-    background-effect {
-        blur true
     }
 }
 
