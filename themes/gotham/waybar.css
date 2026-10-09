@@ -147,7 +147,7 @@ tooltip label {
     color: #195466;
 }
 
-#workspaces button.empty {
+#workspaces button.empty:not(.focused):not(.active) {
     color: #4e5166;
 }
 
