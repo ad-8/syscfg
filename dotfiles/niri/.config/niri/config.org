@@ -85,14 +85,13 @@ layout {
     gaps 8
 
     center-focused-column "never"
+    always-center-single-column
 
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
     }
-
-    // preset-window-heights { }
 
     default-column-width { proportion 0.5; }
 
@@ -102,7 +101,7 @@ layout {
 
     border {
         on
-        width 3
+        width 4
     }
 
     shadow {
@@ -111,9 +110,11 @@ layout {
 
     tab-indicator {
         on
-        position "top"
+        place-within-column
         width 8
-        place-within-column // avoid overlaying adjacent columns
+        position "top"
+        gaps-between-tabs 4
+        corner-radius 4
     }
 }
 #+end_src
