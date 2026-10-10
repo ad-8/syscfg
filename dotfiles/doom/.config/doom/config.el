@@ -581,6 +581,9 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
  '(treemacs-marked-file-face         :foreground "#00ff88" :background "#004022" :bold t)
  '(treemacs-peek-mode-indicator-face :background "#004022")
  '(treemacs-fringe-indicator-face    :foreground "#00e57a")
+ '(treemacs-git-modified-face        :foreground "#00733d")
+ '(treemacs-git-ignored-face         :foreground "#00733d" :slant italic)
+ '(treemacs-git-renamed-face         :foreground "#00733d")
  '(treemacs-on-success-pulse-face    :foreground "#000000" :background "#00cd6d" :extend t)
  '(treemacs-on-failure-pulse-face    :foreground "#000000" :background "#cc0037" :extend t))
 
