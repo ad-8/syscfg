@@ -3,6 +3,7 @@
 ;;; All hex values are drawn from upstream init.lua (dark-mode base table
 ;;; + named hex literals in face definitions); the greys base01-05 are
 ;;; upstream's blend_hex values (colorutils.lua). No invented intermediates.
+;;; Exception: the org-habit graph borrows org's gold (no yellow upstream).
 (require 'doom-themes)
 
 (defgroup ax-oxocarbon-theme nil
@@ -222,7 +223,7 @@ determine the exact padding."
    (org-habit-clear-future-face   :background (doom-blend blue bg-alt 0.3))
    (org-habit-ready-face          :background green  :foreground bg)
    (org-habit-ready-future-face   :background (doom-blend green bg-alt 0.3))
-   (org-habit-alert-face          :background "gold" :foreground bg)
+   (org-habit-alert-face          :background "#ffd700" :foreground bg)
    (org-habit-alert-future-face   :background (doom-blend "#ffd700" bg-alt 0.3))
    (org-habit-overdue-face        :background red    :foreground bg)
    (org-habit-overdue-future-face :background (doom-blend red bg-alt 0.3))

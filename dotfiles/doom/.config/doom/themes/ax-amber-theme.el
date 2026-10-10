@@ -337,7 +337,7 @@ determine the exact padding."
 
    ;; org agenda
    (org-agenda-done             :foreground fg-dim)
-   (org-imminent-deadline       :inherit 'org-warning :foreground red)
+   (org-warning                 :foreground fg :weight 'bold)
    (org-upcoming-deadline       :foreground fg)
    (org-upcoming-distant-deadline :foreground fg)
    (org-agenda-clocking         :background tint-strong)

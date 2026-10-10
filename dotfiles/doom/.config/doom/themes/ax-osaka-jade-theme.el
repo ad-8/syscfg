@@ -23,6 +23,7 @@ determine the exact padding."
   :type '(choice integer boolean))
 
 ;; Colors sourced from omarchy themes/osaka-jade/colors.toml
+;; Exception: the org-habit graph borrows org's blue (the blue slot is jade).
 (def-doom-theme ax-osaka-jade
   "A calm dark jade theme inspired by osaka-jade"
   ;; name        default        256       16
@@ -202,7 +203,7 @@ determine the exact padding."
    (org-headline-done    :foreground base5)
    (org-agenda-done      :foreground base5)
    ;; org-habit graph: org's four meaning colours, osaka-jade's own where it has one
-   (org-habit-clear-face          :background "blue" :foreground fg)
+   (org-habit-clear-face          :background "#0000ff" :foreground fg)
    (org-habit-clear-future-face   :background (doom-blend "#0000ff" bg-alt 0.3))
    (org-habit-ready-face          :background green  :foreground bg)
    (org-habit-ready-future-face   :background (doom-blend green bg-alt 0.3))

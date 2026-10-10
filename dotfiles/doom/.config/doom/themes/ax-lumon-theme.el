@@ -25,6 +25,7 @@ determine the exact padding."
 ;; Strict monochrome blue palette from omarchy-lumon-theme.
 ;; Semantic distinction is encoded via luminance steps, not hue:
 ;; comments dim, functions accent, error brightest.
+;; Exception: the org-habit graph borrows org's green, gold and firebrick.
 ;;
 ;; Column 1 (GUI hex) is always lumon. Columns 2 (256-color fallback hex) and
 ;; 3 (16-color X11 name) are inherited from doom-themes defaults and may be
@@ -214,13 +215,13 @@ determine the exact padding."
    (org-headline-done    :foreground base5)
    (org-agenda-done      :foreground base5)
    ;; org-habit graph: org's four meaning colours, lumon's own where it has one
-   (org-habit-clear-face          :background blue          :foreground bg)
+   (org-habit-clear-face          :background blue      :foreground bg)
    (org-habit-clear-future-face   :background (doom-blend blue bg-alt 0.3))
-   (org-habit-ready-face          :background "forestgreen" :foreground bg)
+   (org-habit-ready-face          :background "#228b22" :foreground bg)
    (org-habit-ready-future-face   :background (doom-blend "#228b22" bg-alt 0.3))
-   (org-habit-alert-face          :background "gold"        :foreground bg)
+   (org-habit-alert-face          :background "#ffd700" :foreground bg)
    (org-habit-alert-future-face   :background (doom-blend "#ffd700" bg-alt 0.3))
-   (org-habit-overdue-face        :background "firebrick"   :foreground fg)
+   (org-habit-overdue-face        :background "#b22222" :foreground fg)
    (org-habit-overdue-future-face :background (doom-blend "#b22222" bg-alt 0.3))
    (org-level-1 :foreground blue    :weight 'semi-bold)
    (org-level-2 :foreground teal    :weight 'semi-bold)
