@@ -273,6 +273,7 @@ Defaults to \"material\""
                          :background bg-alt)
    (org-block :foreground fg :background bg-alt)
    (org-meta-line :foreground dark-cyan)
+   (org-agenda-done :foreground base5)
    (org-level-1 :foreground magenta :weight 'semi-bold)
    (org-level-2 :foreground cyan :weight 'semi-bold)
    (org-level-3 :foreground green :weight 'semi-bold)

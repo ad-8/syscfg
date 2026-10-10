@@ -239,19 +239,12 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 (custom-theme-set-faces!
  'the-matrix
  '(mode-line          :background "#000000" :foreground "#00733d" :box (:color "#00b25f"))
- '(mode-line-inactive :background "#000000" :foreground "#00733d" :box (:color "#004022"))
- '(powerline-active0   :inherit mode-line :background "#000000")
- '(powerline-active1   :inherit mode-line :background "#01120a")
- '(powerline-active2   :inherit mode-line :background "#011f11")
- '(powerline-inactive0 :inherit mode-line-inactive :background "#000000")
- '(powerline-inactive1 :inherit mode-line-inactive :background "#000000")
- '(powerline-inactive2 :inherit mode-line-inactive :background "#000000"))
+ '(mode-line-inactive :background "#000000" :foreground "#00733d" :box (:color "#004022")))
 
 (custom-theme-set-faces!
  'the-matrix
  '(org-agenda-done                  :foreground "#00733d")
  '(elfeed-search-title-face         :foreground "#00733d")
- '(elfeed-goodies-show-header-title :foreground "#00b25f")
  '(org-agenda-structure             :foreground "#00cd6d")
  '(org-agenda-date-weekend          :foreground "#00733d" :weight bold)
  '(org-agenda-date-today            :foreground "#00ff88" :weight bold :slant italic))

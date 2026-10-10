@@ -212,6 +212,7 @@ determine the exact padding."
    (org-todo             :foreground magenta :weight 'bold)
    (org-done             :foreground blue    :weight 'bold)
    (org-headline-done    :foreground base5)
+   (org-agenda-done      :foreground base5)
    (org-level-1 :foreground blue    :weight 'semi-bold)
    (org-level-2 :foreground teal    :weight 'semi-bold)
    (org-level-3 :foreground cyan    :weight 'semi-bold)
