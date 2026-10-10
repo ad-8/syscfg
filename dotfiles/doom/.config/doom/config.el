@@ -680,25 +680,6 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 (add-hook 'emms-player-started-hook
           (lambda () (ax/trigger-scrobble 'started)))
 
-(defun thanos/wtype-text (text)
-  "Process TEXT for wtype, handling newlines properly."
-  (let* ((has-final-newline (string-match-p "\n$" text))
-         (lines (split-string text "\n"))
-         (last-idx (1- (length lines))))
-    (string-join
-     (cl-loop for line in lines
-              for i from 0
-              collect (cond
-                       ;; Last line without final newline
-                       ((and (= i last-idx) (not has-final-newline))
-                        (format "wtype -s 350 \"%s\"" 
-                                (replace-regexp-in-string "\"" "\\\\\"" line)))
-                       ;; Any other line
-                       (t
-                        (format "wtype -s 350 \"%s\" && wtype -k Return" 
-                                (replace-regexp-in-string "\"" "\\\\\"" line)))))
-     " && ")))
-
 (defun thanos/type ()
   "Launch a temporary frame with a clean buffer for typing."
   (interactive)
@@ -722,9 +703,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 		     (delete-frame)))
     (local-set-key (kbd "C-c C-c")
 		   (lambda () (interactive)
-		     (start-process-shell-command
-		      "wtype" nil
-		      (thanos/wtype-text (buffer-string)))
+		     (start-process "wtype" nil "wtype" "-s" "350" "--" (buffer-string))
 		     (delete-frame)))))
 
 (defun ax/git-count-commits ()
