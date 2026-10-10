@@ -1218,17 +1218,16 @@ directly in ~/org. This walks the tree instead, skipping dot-dirs.
 #+end_src
 
 ** set different heading sizes
-Apply one scale to every theme via the =user= pseudo-theme. Only =:height= is set, so
-each theme keeps its own heading colors/weights; =custom-set-faces!= re-applies on every
-theme switch.
+Same heading scale and non-bold done agenda items in every theme. Override specs merge on
+top of whatever the theme sets and survive theme switches; a =custom-set-faces!= spec would
+replace org's own definition, so headings in themes that don't style them lose their outline
+colors.
 #+begin_src emacs-lisp
-(custom-set-faces!
-  '(org-level-1 :height 1.25)
-  '(org-level-2 :height 1.20)
-  '(org-level-3 :height 1.15)
-  '(org-level-4 :height 1.10)
-  '(org-level-5 :height 1.05)
-  '(org-document-title :height 1.5))
+(dolist (spec '((org-level-1 :height 1.25) (org-level-2 :height 1.20)
+                (org-level-3 :height 1.15) (org-level-4 :height 1.10)
+                (org-level-5 :height 1.05) (org-document-title :height 1.5)
+                (org-agenda-done :weight normal)))
+  (face-spec-set (car spec) `((t ,@(cdr spec))) 'face-override-spec))
 #+end_src
 ** enable org-habit
 #+begin_src elisp

@@ -837,13 +837,11 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
          org-directory "\\.org\\'" nil
          (lambda (dir) (not (string-prefix-p "." (file-name-nondirectory dir)))))))
 
-(custom-set-faces!
-  '(org-level-1 :height 1.25)
-  '(org-level-2 :height 1.20)
-  '(org-level-3 :height 1.15)
-  '(org-level-4 :height 1.10)
-  '(org-level-5 :height 1.05)
-  '(org-document-title :height 1.5))
+(dolist (spec '((org-level-1 :height 1.25) (org-level-2 :height 1.20)
+                (org-level-3 :height 1.15) (org-level-4 :height 1.10)
+                (org-level-5 :height 1.05) (org-document-title :height 1.5)
+                (org-agenda-done :weight normal)))
+  (face-spec-set (car spec) `((t ,@(cdr spec))) 'face-override-spec))
 
 (after! org
   (add-to-list 'org-modules 'org-habit t)
