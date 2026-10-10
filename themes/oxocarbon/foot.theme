@@ -10,10 +10,10 @@
 
 [colors-dark]
 background=161616
-foreground=dde1e6
-cursor=161616 dde1e6
+foreground=d0d0d0
+cursor=161616 d0d0d0
 selection-background=393939
-selection-foreground=dde1e6
+selection-foreground=d0d0d0
 
 regular0=262626
 regular1=33b1ff
@@ -22,7 +22,7 @@ regular3=42be65
 regular4=78a9ff
 regular5=82cfff
 regular6=3ddbd9
-regular7=f2f4f8
+regular7=f2f2f2
 
 bright0=525252
 bright1=33b1ff

@@ -9,7 +9,7 @@
 window#waybar {
     background: rgba(22, 22, 22, 1);
     border-bottom: 0px solid rgba(82, 82, 82, 0.5);
-    color: #dde1e6;
+    color: #d0d0d0;
 }
 
 tooltip {
@@ -17,19 +17,19 @@ tooltip {
   border: 1px solid rgba(82, 82, 82, 0.5);
 }
 tooltip label {
-  color: #dde1e6;
+  color: #d0d0d0;
 }
 
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: #dde1e6;
+    color: #d0d0d0;
     border-bottom: 3px solid transparent;
 }
 
 #workspaces button.focused {
     background: #262626;
-    border-bottom: 3px solid #f2f4f8;
+    border-bottom: 3px solid #f2f2f2;
 }
 
 #workspaces button.active {
@@ -148,7 +148,7 @@ tooltip label {
 menu {
     border-radius: 15px;
     background: #262626;
-    color: #dde1e6;
+    color: #d0d0d0;
 }
 menuitem {
     border-radius: 15px;

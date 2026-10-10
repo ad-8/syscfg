@@ -7,8 +7,8 @@
     hbg:     #161616;
     hbg1:    #262626;
     hbg2:    #131313;
-    hfg:     #dde1e6;
-    hfgalt:  #f2f4f8;
+    hfg:     #d0d0d0;
+    hfgalt:  #f2f2f2;
     haccent: #78a9ff;
     hcyan:   #3ddbd9;
     hpink:   #ff7eb6;
@@ -84,7 +84,7 @@ element {
     border-radius: 4px;
     background-color: transparent;
     color: @foreground;
-    text-color: rgb(221, 225, 230);
+    text-color: rgb(208, 208, 208);
 }
 
 element selected.normal {

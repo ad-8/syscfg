@@ -1,7 +1,8 @@
 ;;; ax-oxocarbon-theme.el --- inspired by oxocarbon (IBM Carbon)
 ;;; Canonical palette source: https://github.com/nyoom-engineering/oxocarbon.nvim
 ;;; All hex values are drawn from upstream init.lua (dark-mode base table
-;;; + named hex literals in face definitions). No invented intermediates.
+;;; + named hex literals in face definitions); the greys base01-05 are
+;;; upstream's blend_hex values (colorutils.lua). No invented intermediates.
 (require 'doom-themes)
 
 (defgroup ax-oxocarbon-theme nil
@@ -51,11 +52,11 @@ determine the exact padding."
    (base4      '("#525252"      "#3f3f3f" "brightblack"  )) ;; base03 = comments / muted [256/16 non-oxo: inherited]
    (base5      '("#525252"      "#525252" "brightblack"  )) ;; base03 = grey/comments alias
    (base6      '("#adadad"      "#6b6b6b" "brightblack"  )) ;; CmpItemAbbr (upstream mid-grey) [256/16 non-oxo: inherited]
-   (base7      '("#dde1e6"      "#979797" "brightblack"  )) ;; base04 = fg [256/16 non-oxo: inherited]
-   (base8      '("#f2f4f8"      "#dfdfdf" "white"        )) ;; base05 = brighter fg [256 non-oxo: inherited]
+   (base7      '("#d0d0d0"      "#979797" "brightblack"  )) ;; base04 = fg [256/16 non-oxo: inherited]
+   (base8      '("#f2f2f2"      "#dfdfdf" "white"        )) ;; base05 = brighter fg [256 non-oxo: inherited]
 
-   (fg         '("#dde1e6"      "#bfbfbf" "brightwhite"  )) ;; base04 [256 non-oxo: inherited]
-   (fg-alt     '("#f2f4f8"      "#2d2d2d" "white"        )) ;; base05 [256 non-oxo: inherited]
+   (fg         '("#d0d0d0"      "#bfbfbf" "brightwhite"  )) ;; base04 [256 non-oxo: inherited]
+   (fg-alt     '("#f2f2f2"      "#2d2d2d" "white"        )) ;; base05 [256 non-oxo: inherited]
 
    (grey       base5)
    (red        '("#ee5396"      "#ff6655" "red"          )) ;; base10 = Error / pink-red [256/16 non-oxo: inherited]
