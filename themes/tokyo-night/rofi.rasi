@@ -82,8 +82,7 @@ element {
     vertical-align: 0.5;
     border-radius: 4px;
     background-color: transparent;
-    color: @foreground;
-    text-color: rgb(169, 177, 214);
+    text-color: @foreground;
 }
 
 element selected.normal {
