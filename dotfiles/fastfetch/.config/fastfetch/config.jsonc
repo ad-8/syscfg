@@ -134,12 +134,6 @@
       "text": "awk '{print $1,$2,$3}' /proc/loadavg",
     },
     {
-      "type": "command",
-      "key": "   IPs    ",
-      "keyColor": "green",
-      "text": "$HOME/scripts/bb/ip_addr.clj",
-    },
-    {
       "type": "custom",
       "format": "\u001b[90m└────────────────────────────────────────────────────────┘",
     },

@@ -21,6 +21,9 @@
         init = {
           defaultBranch = "master";
         };
+        log = {
+          date = "rfc";
+        };
         # -------------------------------------------------------------------------------------------------------------------------
         # settings for [delta](https://github.com/dandavison/delta)
         core = {
@@ -45,6 +48,9 @@
         # -------------------------------------------------------------------------------------------------------------------------
         credential."https://github.com".helper = "!${pkgs.gh}/bin/gh auth git-credential";
         credential."https://gist.github.com".helper = "!${pkgs.gh}/bin/gh auth git-credential";
+        safe = {
+          directory = "/nas/code/*";
+        };
       };
     };
   };

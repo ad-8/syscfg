@@ -240,6 +240,7 @@
         "on-click": "playerctl -p strawberry,fooyin,emms play-pause",
         "format": "{}",
         "return-type": "text",
+        "escape": true,
         "exec": "$HOME/syscfg/scripts/waybar.clj music"
     },
     "custom/notification-status": {

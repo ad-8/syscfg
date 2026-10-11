@@ -3,7 +3,7 @@
 	email = arthurfleck8@proton.me
 
 [init]
-	defaultBranch = main
+	defaultBranch = master
 
 [log]
 	date = rfc

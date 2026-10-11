@@ -40,10 +40,6 @@
   # automatically); just install the tool and the adbusers group is gone
   environment.systemPackages = [ pkgs.android-tools ];
 
-  users.users.ax.extraGroups = [
-    "i2c"
-  ];
-
   services.openssh = {
     enable = true;
     # ports = [ 5432 ];

@@ -30,6 +30,9 @@
 
     # https://wiki.nixos.org/wiki/Backlight
     hardware.i2c.enable = true;
+    users.users.ax.extraGroups = [
+      config.hardware.i2c.group
+    ];
     # brillo replaces light (removed from nixpkgs in 26.05, unmaintained upstream);
     # same udev + video-group model, no setuid. licht.clj calls `brillo` now.
     hardware.brillo.enable = true;
