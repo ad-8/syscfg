@@ -171,9 +171,8 @@ binds {
     Mod+U       { focus-workspace-up; }
     Mod+Shift+I { move-column-to-workspace-down; }
     Mod+Shift+U { move-column-to-workspace-up; }
-
-    Mod+Ctrl+I { move-workspace-down; }
-    Mod+Ctrl+U { move-workspace-up; }
+    Mod+Ctrl+I  { move-workspace-down; }
+    Mod+Ctrl+U  { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -292,6 +291,13 @@ binds {
     Mod+Alt+N { spawn-sh "bb ~/x/ax_bookmarks.clj archived"; }
 
     // Screenshots
+    // niri native
+    Print      { screenshot; }
+    Mod+Ctrl+S { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Mod+Ctrl+A { screenshot-screen; }
+    Alt+Print  { screenshot-window; }
+    Mod+Ctrl+W { screenshot-window; }
     // put into swappy for annotations
     Mod+Ctrl+Shift+A { spawn-sh "grim - | swappy -f -"; }
     Mod+Ctrl+Shift+S { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
@@ -303,16 +309,6 @@ binds {
         sleep 0.1
         swappy -f "$f"
     "#; }
-
-    // niri native
-    Print      { screenshot; }
-    Mod+Ctrl+S { screenshot; }
-
-    Ctrl+Print { screenshot-screen; }
-    Mod+Ctrl+A { screenshot-screen; }
-
-    Alt+Print  { screenshot-window; }
-    Mod+Ctrl+W { screenshot-window; }
 }
 
 window-rule {
@@ -348,20 +344,14 @@ window-rule {
     max-height 1024
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
 
-// block out KeePassXC from screen capture.
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-
     block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
 }
 
 // enable rounded corners for all windows
@@ -374,6 +364,7 @@ window-rule {
     match app-id=r#"thunar$"# title="^File Operation Progress$"
     open-floating true
 }
+
 window-rule {
     // thanos/type (emacs everywhere for wayland)
     match app-id=r#"Emacs$"# title="^emacs-float$"
