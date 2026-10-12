@@ -52,6 +52,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#org-mode][Org Mode]]
   - [[#org-directory][org-directory]]
   - [[#agenda-files][agenda files]]
+  - [[#all-todos-across-org-spc-o-a-a][all todos across ~/org: =SPC o A A=]]
   - [[#set-different-heading-sizes][set different heading sizes]]
   - [[#enable-org-habit][enable org-habit]]
   - [[#logging][logging]]
@@ -1189,14 +1190,23 @@ How to verify which ls/diff is used? =SPC h v= or =C-h v=, then:
 #+end_src
 
 ** agenda files
-Doom's default is =(list org-directory)=, which only expands to the =.org= files
-directly in ~/org. This walks the tree instead, skipping dot-dirs.
+Only the =.org= files directly in ~/org, no subdirs. Same as Doom's default,
+set explicitly so a saved list in custom.el can't override it. Subdirs are
+reachable through =SPC o A A=.
 #+begin_src elisp
 (after! org
-  (setq org-agenda-files
-        (directory-files-recursively
-         org-directory "\\.org\\'" nil
-         (lambda (dir) (not (string-prefix-p "." (file-name-nondirectory dir)))))))
+  (setq org-agenda-files (list org-directory)))
+#+end_src
+
+** all todos across ~/org: =SPC o A A=
+#+begin_src elisp
+(after! org-agenda
+  (add-to-list 'org-agenda-custom-commands
+               '("A" "All TODO entries in ~/org (ax)" alltodo ""
+                 ((org-agenda-files
+                   (directory-files-recursively
+                    org-directory org-agenda-file-regexp nil
+                    (lambda (dir) (not (string-prefix-p "." (file-name-nondirectory dir))))))))))
 #+end_src
 
 ** set different heading sizes

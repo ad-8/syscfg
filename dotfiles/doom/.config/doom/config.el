@@ -814,10 +814,15 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 (setq org-directory "~/org/")
 
 (after! org
-  (setq org-agenda-files
-        (directory-files-recursively
-         org-directory "\\.org\\'" nil
-         (lambda (dir) (not (string-prefix-p "." (file-name-nondirectory dir)))))))
+  (setq org-agenda-files (list org-directory)))
+
+(after! org-agenda
+  (add-to-list 'org-agenda-custom-commands
+               '("A" "All TODO entries in ~/org (ax)" alltodo ""
+                 ((org-agenda-files
+                   (directory-files-recursively
+                    org-directory org-agenda-file-regexp nil
+                    (lambda (dir) (not (string-prefix-p "." (file-name-nondirectory dir))))))))))
 
 (dolist (spec '((org-level-1 :height 1.25) (org-level-2 :height 1.20)
                 (org-level-3 :height 1.15) (org-level-4 :height 1.10)
