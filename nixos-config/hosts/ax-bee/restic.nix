@@ -24,6 +24,7 @@
       User = "ax";
       EnvironmentFile = config.age.secrets.ax-bee-restic-b2.path;
       ExecStart = "${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/backup/ax_bee_restic_b2.clj";
+      ExecStopPost = "-${pkgs.babashka}/bin/bb ${config.users.users.ax.home}/x/backup/report.clj backup-pc/ax-bee-b2";
     };
   };
 
