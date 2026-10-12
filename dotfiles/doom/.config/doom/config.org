@@ -19,6 +19,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
   - [[#dired-preview][dired-preview]]
   - [[#dirvish-modeline-faces][dirvish modeline faces]]
   - [[#fzf][fzf]]
+  - [[#projectile][projectile]]
   - [[#tmr][tmr]]
 - [[#configuration-of-programming-languages][Configuration of programming languages]]
   - [[#clojure][Clojure]]
@@ -307,6 +308,11 @@ segment that a theme can set; other themes look the same.
         ;; If nil, the fzf buffer will appear at the top of the window
         fzf/position-bottom t
         fzf/window-height 35))
+#+end_src
+** projectile
+#+begin_src elisp
+(after! projectile
+  (setq projectile-enable-caching nil))
 #+end_src
 ** tmr
 #+begin_src elisp

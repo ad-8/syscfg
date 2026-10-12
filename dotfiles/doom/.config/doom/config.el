@@ -149,6 +149,9 @@
         fzf/position-bottom t
         fzf/window-height 35))
 
+(after! projectile
+  (setq projectile-enable-caching nil))
+
 (defun ax-tmr-notify-send (timer)
   "Announce finished TIMER via notify-send.
 Fall back to `tmr-notification-notify' if notify-send is unavailable."
