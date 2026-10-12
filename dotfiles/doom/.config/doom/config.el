@@ -771,6 +771,9 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
         :desc "Starts fzf session in dir" "f" #'fzf-directory
         :desc "consult-git-grep" "g" #'consult-git-grep
         :desc "consult-ripgrep" "r" #'consult-ripgrep)
+       (:prefix ("o" . "org")
+        :desc "agenda exit (kill its buffers)" "q" #'org-agenda-exit
+        :desc "revert all org buffers" "r" #'org-revert-all-org-buffers)
        (:prefix ("t" . "t bindings")
         :desc "org-babel-tangle" "t" #'org-babel-tangle)))
 
