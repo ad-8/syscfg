@@ -6,7 +6,7 @@
 (defvar ax/1080p-font-size 12
   "Font size for 1080p displays.")
 
-(defvar ax/4k-font-size 18
+(defvar ax/4k-font-size 21
   "Font size for 4K / high-resolution displays.")
 
 (defvar ax/monitor-font--timer nil)
