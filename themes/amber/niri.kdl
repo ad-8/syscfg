@@ -1,6 +1,7 @@
 // amber
 // Themed via switch_theme.clj. Colors sourced from themes/amber/hyprland.lua
 // (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Inactive tab-indicator from foot.theme bright0 (the inactive border is hidden).
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#140b05"
@@ -13,6 +14,7 @@ layout {
 
     tab-indicator {
         active-color "#fc9505"
+        inactive-color "#c56306"
     }
 }
 

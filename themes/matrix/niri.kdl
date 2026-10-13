@@ -1,6 +1,7 @@
 // matrix
 // Themed via switch_theme.clj. Colors sourced from themes/matrix/hyprland.lua
 // (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Inactive tab-indicator from foot.theme bright0 (the inactive border is hidden).
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#000000"
@@ -13,6 +14,7 @@ layout {
 
     tab-indicator {
         active-color "#00ff88"
+        inactive-color "#00733d"
     }
 }
 

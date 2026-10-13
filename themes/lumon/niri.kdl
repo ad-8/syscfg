@@ -1,6 +1,7 @@
 // lumon
 // Themed via switch_theme.clj. Colors sourced from themes/lumon/hyprland.lua
 // (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Inactive tab-indicator from foot.theme bright0 (the inactive border is hidden).
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#1b2d40"
@@ -13,6 +14,7 @@ layout {
 
     tab-indicator {
         active-color "#6fb8e3"
+        inactive-color "#304860"
     }
 }
 
