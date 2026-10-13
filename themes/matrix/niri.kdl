@@ -1,14 +1,14 @@
 // matrix
 // Themed via switch_theme.clj. Colors sourced from themes/matrix/hyprland.lua
-// (accent / black / red) + foot.theme background, matching hyprland's border convention.
-// Inactive tab-indicator from foot.theme bright0 (the inactive border is hidden).
+// (accent / red) + foot.theme background, matching hyprland's border convention.
+// Inactive tab-indicator from foot.theme bright0; inactive border one step dimmer, from foot.theme regular0.
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#000000"
 
     border {
         active-color   "#00ff88"
-        inactive-color "#000000"
+        inactive-color "#004022"
         urgent-color   "#cc0037" // windows requesting attention
     }
 

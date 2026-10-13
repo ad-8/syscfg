@@ -1,14 +1,14 @@
 // laserwave
 // Themed via switch_theme.clj. Colors sourced from themes/laserwave/hyprland.lua
-// (accent / black / red) + foot.theme background, matching hyprland's border convention.
-// Inactive tab-indicator from foot.theme bright0 (the inactive border is hidden).
+// (accent / red) + foot.theme background, matching hyprland's border convention.
+// Inactive tab-indicator from foot.theme bright0; inactive border one step dimmer, from foot.theme selection-background.
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#27212e"
 
     border {
         active-color   "#eb64b9"
-        inactive-color "#222228"
+        inactive-color "#3e3549"
         urgent-color   "#964c7b" // windows requesting attention
     }
 

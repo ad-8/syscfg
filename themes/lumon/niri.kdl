@@ -1,14 +1,14 @@
 // lumon
 // Themed via switch_theme.clj. Colors sourced from themes/lumon/hyprland.lua
-// (accent / black / red) + foot.theme background, matching hyprland's border convention.
-// Inactive tab-indicator from foot.theme bright0 (the inactive border is hidden).
+// (accent / red) + foot.theme background, matching hyprland's border convention.
+// Inactive tab-indicator from foot.theme bright0; inactive border the same (nothing dimmer stays visible).
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#1b2d40"
 
     border {
         active-color   "#6fb8e3"
-        inactive-color "#1b2d40"
+        inactive-color "#304860"
         urgent-color   "#4d86b0" // windows requesting attention
     }
 

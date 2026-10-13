@@ -1,14 +1,14 @@
 // osaka-jade
 // Themed via switch_theme.clj. Colors sourced from themes/osaka-jade/hyprland.lua
-// (accent / black / red) + foot.theme background, matching hyprland's border convention.
-// Inactive tab-indicator from foot.theme bright0 (the inactive border is hidden).
+// (accent / red) + foot.theme background, matching hyprland's border convention.
+// Inactive tab-indicator from foot.theme bright0; inactive border one step dimmer, from btop.theme selected_bg.
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#111c18"
 
     border {
         active-color   "#509475"
-        inactive-color "#111c18"
+        inactive-color "#364538"
         urgent-color   "#ff5345" // windows requesting attention
     }
 
