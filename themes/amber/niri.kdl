@@ -1,7 +1,7 @@
 // amber
 // Themed via switch_theme.clj. Colors sourced from themes/amber/hyprland.lua
 // (accent / red) + foot.theme background, matching hyprland's border convention.
-// Inactive tab-indicator from foot.theme bright0; inactive border one step dimmer, from tmux.conf surface.
+// Inactive border and tab-indicator from tmux.conf surface.
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#140b05"
@@ -14,7 +14,7 @@ layout {
 
     tab-indicator {
         active-color "#fc9505"
-        inactive-color "#c56306"
+        inactive-color "#372005"
     }
 }
 

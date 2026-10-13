@@ -1,7 +1,7 @@
 // gotham
 // Themed via switch_theme.clj. Colors sourced from themes/gotham/hyprland.lua
 // (accent / red), matching hyprland's border convention.
-// Inactive tab-indicator from foot.theme bright0; inactive border one step dimmer, from foot.theme bright2.
+// Inactive border and tab-indicator from foot.theme bright2.
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#0c1014"
@@ -14,7 +14,7 @@ layout {
 
     tab-indicator {
         active-color "#245361"
-        inactive-color "#0a3749"
+        inactive-color "#091f2e"
     }
 }
 

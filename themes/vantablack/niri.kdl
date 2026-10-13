@@ -1,7 +1,7 @@
 // vantablack
 // Themed via switch_theme.clj. Colors sourced from themes/vantablack/hyprland.lua
 // (accent / red) + foot.theme background, matching hyprland's border convention.
-// Inactive tab-indicator from foot.theme bright0; inactive border one step dimmer, from omarchy vantablack colors.toml dark_foreground.
+// Inactive border and tab-indicator from omarchy vantablack colors.toml dark_foreground.
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#000000"
@@ -14,7 +14,7 @@ layout {
 
     tab-indicator {
         active-color "#ffffff"
-        inactive-color "#5c5c5c"
+        inactive-color "#505050"
     }
 }
 

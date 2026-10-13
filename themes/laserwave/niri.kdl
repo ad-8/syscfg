@@ -1,7 +1,7 @@
 // laserwave
 // Themed via switch_theme.clj. Colors sourced from themes/laserwave/hyprland.lua
 // (accent / red) + foot.theme background, matching hyprland's border convention.
-// Inactive tab-indicator from foot.theme bright0; inactive border one step dimmer, from foot.theme selection-background.
+// Inactive border and tab-indicator from foot.theme selection-background.
 // Merged per-property over config.kdl's layout block via `include`.
 layout {
     background-color "#27212e"
@@ -14,7 +14,7 @@ layout {
 
     tab-indicator {
         active-color "#eb64b9"
-        inactive-color "#4e415c"
+        inactive-color "#3e3549"
     }
 }
 
