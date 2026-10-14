@@ -22,3 +22,11 @@ layout {
 overview {
     backdrop-color "#27212e"
 }
+
+// alt-tab switcher highlight behind the focused preview
+recent-windows {
+    highlight {
+        active-color "#eb64b9"
+        urgent-color "#964c7b"
+    }
+}
