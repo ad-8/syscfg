@@ -119,10 +119,13 @@
    {:file    "dunst.conf"
     :dest    (fs/path (fs/xdg-config-home) "dunst/active-theme.conf")
     :reload  (fn [_]
-               (shell {:continue true}
-                      (str "dunstctl reload "
-                           (fs/path (fs/xdg-config-home) "dunst/dunstrc") " "
-                           (fs/path (fs/xdg-config-home) "dunst/active-theme.conf"))))}
+               (let [paused? (= "true" (str/trim (:out (shell {:continue true :out :string} "dunstctl is-paused"))))]
+                 (shell {:continue true}
+                        (str "dunstctl reload "
+                             (fs/path (fs/xdg-config-home) "dunst/dunstrc") " "
+                             (fs/path (fs/xdg-config-home) "dunst/active-theme.conf")))
+                 (when paused?
+                   (shell {:continue true} "dunstctl set-paused true"))))}
    ;; wlr-which-key reads exactly one file and has no include directive, so the
    ;; theme fragment can't sit beside the menu as its own symlink — :base makes
    ;; this entry generate config.yaml instead. No reload: every binding spawns a
