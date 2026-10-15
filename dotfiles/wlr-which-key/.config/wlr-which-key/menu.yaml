@@ -36,9 +36,6 @@ menu:
       - key: "l"
         desc: lights
         cmd: $HOME/syscfg/scripts/bb/licht.clj
-      - key: "n"
-        desc: toggle notifications
-        cmd: $HOME/syscfg/scripts/dunst_toggle_and_notify.clj
       - key: "t"
         desc: theme (grouped)
         cmd: $HOME/syscfg/scripts/bb/switch_theme.clj --groups
@@ -158,6 +155,9 @@ menu:
       - key: "b"
         desc: toggle bluetooth
         cmd: rfkill toggle bluetooth
+      - key: "n"
+        desc: toggle notifications
+        cmd: $HOME/syscfg/scripts/dunst_toggle_and_notify.clj
       - key: "w"
         desc: toggle wifi
         cmd: rfkill toggle wifi
