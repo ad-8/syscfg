@@ -4,38 +4,17 @@
   inputs = {
     nixpkgs-stable.url = "nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    home-manager-stable = {
-      url = "github:nix-community/home-manager/release-26.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-    # home-manager-unstable = {
-    #   url = "github:nix-community/home-manager/master";
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
+    home-manager-stable = { url = "github:nix-community/home-manager/release-26.05"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
+    # home-manager-unstable = { url = "github:nix-community/home-manager/master"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
     hyprland.url = "github:hyprwm/Hyprland/v0.56.2";
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
+    agenix = { url = "github:ryantm/agenix"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs-stable,
-      home-manager-stable,
-      ...
-    }@inputs:
+  outputs = { self, nixpkgs-stable, home-manager-stable, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs-stable.legacyPackages.${system};
-      mkConfig =
-        {
-          hostname,
-          username ? "ax",
-          nixpkgs ? nixpkgs-stable,
-          home-manager ? home-manager-stable,
-        }:
+      mkConfig = { hostname, username ? "ax", nixpkgs ? nixpkgs-stable, home-manager ? home-manager-stable, }:
         let
           hm =
             if home-manager != null then
@@ -66,17 +45,13 @@
     {
       nixosConfigurations = {
         ax-bee = mkConfig { hostname = "ax-bee"; };
-        ax-fuji = mkConfig {
-          hostname = "ax-fuji";
-          home-manager = null;
-        };
+        ax-fuji = mkConfig { hostname = "ax-fuji"; home-manager = null; };
         ax-mac = mkConfig { hostname = "ax-mac"; };
         ax-t14 = mkConfig { hostname = "ax-t14"; };
         ax-vm = mkConfig { hostname = "ax-vm"; };
       };
 
-      # Build shell for kwm. From the kwm tree:
-      #   nix develop ~/syscfg/nixos-config#kwm
+      # Build shell for kwm. From the kwm repo: nix develop ~/syscfg/nixos-config#kwm
       devShells.${system}.kwm = pkgs.mkShell {
         packages = with pkgs; [
           zig_0_16
