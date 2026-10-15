@@ -174,9 +174,8 @@
                       :out
                       str/trim
                       Boolean/parseBoolean)]
-    (if is-paused
-      (printf " ")
-      (printf " "))))
+    (when is-paused
+      (printf " "))))
 
 (let [action (first *command-line-args*)]
   (case action
