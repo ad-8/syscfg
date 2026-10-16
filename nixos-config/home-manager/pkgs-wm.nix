@@ -16,7 +16,6 @@
       bluetui
       ddcutil
       dunst
-      fuzzel
       grim
       libnotify
       networkmanagerapplet
@@ -30,7 +29,6 @@
       wiremix
       wl-clipboard
       wlr-which-key
-      wmenu
     ];
   };
 }

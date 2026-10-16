@@ -319,7 +319,7 @@ binds {
 
     // ax: dwm-like keybinds
     // general
-    Mod+P { spawn-sh "wmenu-run -i -l 25 -N \"0c1014\" -n \"99d1ce\" -S \"195466\" -s \"d3ebe9\""; }
+    Mod+P { spawn-sh "rofi -show run -theme-str 'window {width: 30ch;}'"; }
     Mod+S { spawn-sh "kitten quick-access-terminal"; }
     Mod+X { spawn-sh "emacsclient --eval '(thanos/type)'"; }
     Mod+Y { spawn-sh "foot -T ax-command-runner -e fish -C '/usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'"; }

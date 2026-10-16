@@ -23,12 +23,14 @@
 
 
 (defn get-query []
-  (-> (process {:in "" :out :string} "wmenu" "-p" "Enter search term")
+  (-> (process {:in "" :out :string} "rofi" "-dmenu" "-p" "Enter search term"
+               "-theme-str" "window {width: 30ch;}")
       deref :out str/trim))
 
 (defn get-search-engine []
   (-> (process "echo" "-e" (str/join "\n" (sort-by key all)))
-      (process {:out :string} "wmenu" "-i" "-l" "25" "-p" "Select search engine")
+      (process {:out :string} "rofi" "-dmenu" "-i" "-l" "25" "-p" "Select search engine"
+               "-theme-str" "window {width: 30ch;}")
       deref :out str/trim clojure.edn/read-string))
 
 (defn search! [search-engine query]

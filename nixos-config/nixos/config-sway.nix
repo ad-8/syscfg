@@ -15,7 +15,8 @@
       enable = true;
       wrapperFeatures.gtk = true;
       # upstream default also pulls brightnessctl + pulseaudio (we use brillo +
-      # wiremix) and foot/grim/swaylock/wmenu (already in pkgs-core / pkgs-wm)
+      # wiremix), foot/grim/swaylock (already in pkgs-core / pkgs-wm) and wmenu
+      # (unused, rofi instead)
       extraPackages = with pkgs; [ swayidle ];
     };
 

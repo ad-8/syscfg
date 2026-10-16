@@ -71,7 +71,7 @@ Your preferred application launcher
 Note: pass the final command to swaymsg so that the resulting window can be opened
 on the original workspace that the command was run on.
 #+begin_src shell
-set $menu wmenu-run
+set $menu rofi -show run -theme-str 'window {width: 30ch;}'
 #+end_src
 
 ** Nord Colors

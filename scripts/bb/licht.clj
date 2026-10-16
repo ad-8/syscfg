@@ -215,32 +215,12 @@
    "get"  {:name "Get current values"}})
 
 
-(def nord
-  {:polar1 "#2e3440"
-   :polar2 "#3b4252"
-   :polar3 "#434c5e"
-   :polar4 "#4c566a"
-   :snow1  "#d8dee9"
-   :snow2  "#e5e9f0"
-   :snow3  "#eceff4"
-   :frost1 "#8fbcbb"
-   :frost2 "#88c0d0"
-   :frost3 "#81a1c1"
-   :frost4 "#5e81ac"
-   :red    "#bf616a"
-   :orange "#d08770"
-   :yellow "#ebcb8b"
-   :green  "#a3be8c"
-   :lila   "#b48ead"})
-
-
 (defn ask-value [prompt options]
   (let [echo-proc (process ["echo" "-e" (str/join "\n" options)])
         result    (-> (process {:prev echo-proc
                                 :out :string
-                                :cmd ["wmenu" "-i" "-l" (str (count options)) "-p" prompt
-                                      "-f" "HackNerdFont 15" "-N" (:polar1 nord) "-M" (:orange nord)
-                                      "-m" (:snow3 nord) "-S" (:orange nord) "-s" (:snow3 nord)]})
+                                :cmd ["rofi" "-dmenu" "-i" "-l" (str (count options)) "-p" prompt
+                                      "-theme-str" "window {width: 30ch;}"]})
                       deref :out str/trim)]
     (when-not (str/blank? result)
       (parse-long result))))
@@ -262,9 +242,8 @@
   (let [echo-proc (process ["echo" "-e" (str/join "\n" (into (sorted-map) settings))])]
     (-> (process {:prev echo-proc
                   :out :string
-                  :cmd ["wmenu" "-i" "-l" (str (count settings)) "-p" "licht"
-                        "-f" "HackNerdFont 15" "-N" (:polar1 nord) "-M" (:orange nord)
-                        "-m" (:snow3 nord) "-S" (:orange nord) "-s" (:snow3 nord)]})
+                  :cmd ["rofi" "-dmenu" "-i" "-l" (str (count settings)) "-p" "licht"
+                        "-theme-str" "window {width: 30ch;}"]})
         deref :out str/trim clojure.edn/read-string first)))
 
 

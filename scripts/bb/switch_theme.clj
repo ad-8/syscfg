@@ -1,6 +1,6 @@
 #!/usr/bin/env bb
 ;; Usage: switch_theme.clj [theme]
-;; Without args, opens wmenu picker. With arg, switches directly.
+;; Without args, opens rofi picker. With arg, switches directly.
 
 (ns switch-theme
   (:require [babashka.process :refer [shell process]]
@@ -113,9 +113,6 @@
    {:file    "rofi.rasi"
     :dest    (fs/path (fs/xdg-config-home) "rofi/active-theme.rasi")
     :reload  no-reload}
-   {:file    "fuzzel.ini"
-    :dest    (fs/path (fs/xdg-config-home) "fuzzel/active-theme.ini")
-    :reload  no-reload}
    {:file    "dunst.conf"
     :dest    (fs/path (fs/xdg-config-home) "dunst/active-theme.conf")
     :reload  (fn [_]
@@ -185,18 +182,19 @@
           apps)))
 
 (defn pick-theme
-  "Opens a fuzzel dmenu picker populated with available themes and returns the selected theme name."
+  "Opens a rofi dmenu picker populated with available themes and returns the selected theme name."
   []
   (let [themes (available-themes)
         n-themes (count themes)]
-    (-> (process ["fuzzel" "--dmenu" "-l" n-themes "-p" (str "select theme (" n-themes "): ")]
+    (-> (process ["rofi" "-dmenu" "-l" n-themes "-p" (str "select theme (" n-themes "): ")
+                  "-theme-str" "window {width: 30ch;}"]
                {:in (str/join "\n" themes) :out :string})
       deref
       :out
       str/trim)))
 
 (defn pick-theme-grouped
-  "Opens a fuzzel dmenu picker with themes grouped by category. Category headers are injected as non-theme rows; reopens the picker if a header is selected; returns nil if cancelled."
+  "Opens a rofi dmenu picker with themes grouped by category. Category headers are injected as non-theme rows; reopens the picker if a header is selected; returns nil if cancelled."
   []
   (let [groups    (for [cat [:dark :light :muted :neon :phosphor]]
                     [cat (sort (theme-categories cat))])
@@ -204,8 +202,9 @@
                             (cons (str "── " (name cat) " ──") themes))
                           groups)
         theme-set (set (mapcat second groups))
-        selection (-> (process ["fuzzel" "--dmenu" "-l" (count lines)
-                                "-p" (str "select theme (" (count theme-set) "): ")]
+        selection (-> (process ["rofi" "-dmenu" "-l" (count lines)
+                                "-p" (str "select theme (" (count theme-set) "): ")
+                                "-theme-str" "window {width: 30ch;}"]
                                {:in (str/join "\n" lines) :out :string})
                       deref :out str/trim)]
     (cond

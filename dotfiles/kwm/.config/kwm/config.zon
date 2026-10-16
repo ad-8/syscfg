@@ -1240,7 +1240,7 @@
                 .event = .{
                     .click = .{
                         .pressed = .{
-                            .spawn_shell = .{ .cmd = "wmenu-run" },
+                            .spawn_shell = .{ .cmd = "rofi -show run -theme-str 'window {width: 30ch;}'" },
                         },
                     },
                 },
