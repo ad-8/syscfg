@@ -44,25 +44,17 @@
     in
     {
       nixosConfigurations = {
-        ax-bee = mkConfig { hostname = "ax-bee"; };
+        ax-bee  = mkConfig { hostname = "ax-bee"; };
         ax-fuji = mkConfig { hostname = "ax-fuji"; home-manager = null; };
-        ax-mac = mkConfig { hostname = "ax-mac"; };
-        ax-t14 = mkConfig { hostname = "ax-t14"; };
-        ax-vm = mkConfig { hostname = "ax-vm"; };
+        ax-mac  = mkConfig { hostname = "ax-mac"; };
+        ax-t14  = mkConfig { hostname = "ax-t14"; };
+        ax-vm   = mkConfig { hostname = "ax-vm"; };
       };
 
       # Build shell for kwm. From the kwm repo: nix develop ~/syscfg/nixos-config#kwm
       devShells.${system}.kwm = pkgs.mkShell {
-        packages = with pkgs; [
-          zig_0_16
-          pkg-config
-          wayland
-          wayland-scanner
-          wayland-protocols
-          libxkbcommon
-          pixman
-          fcft
-        ];
+        packages = with pkgs; [ zig_0_16 pkg-config wayland wayland-scanner wayland-protocols libxkbcommon pixman fcft ];
       };
     };
 }
+
