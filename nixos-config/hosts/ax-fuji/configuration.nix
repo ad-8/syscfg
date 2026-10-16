@@ -35,9 +35,20 @@ in
 
   users.users.ax = {
     packages = [ ];
-    extraGroups = [ "podman" ];
+    extraGroups = [
+      "podman"
+      "render"
+    ];
     # start ax's user services at boot, without a login (for podman-restart)
     linger = true;
+  };
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-compute-runtime-legacy1
+    ];
   };
 
   networking.firewall = {
@@ -116,6 +127,24 @@ in
       enable = true;
       openFirewall = true;
       user = "ax";
+      hardwareAcceleration = {
+        enable = true;
+        type = "vaapi";
+        device = "/dev/dri/renderD128";
+      };
+      forceEncodingConfig = true;
+      transcoding = {
+        enableHardwareEncoding = true;
+        hardwareDecodingCodecs = {
+          h264 = true;
+          hevc = true;
+          hevc10bit = true;
+          vp8 = true;
+          vp9 = true;
+          mpeg2 = true;
+          vc1 = true;
+        };
+      };
     };
     navidrome = {
       enable = true;
