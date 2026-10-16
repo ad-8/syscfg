@@ -175,7 +175,7 @@
                       str/trim
                       Boolean/parseBoolean)]
     (when is-paused
-      (printf " "))))
+      (printf "  "))))
 
 (let [action (first *command-line-args*)]
   (case action
