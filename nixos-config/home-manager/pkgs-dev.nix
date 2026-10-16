@@ -17,7 +17,6 @@
       direnv
       geckodriver
       gh
-      helix
       janet
       joker
       jq

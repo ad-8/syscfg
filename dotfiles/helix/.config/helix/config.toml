@@ -1,5 +1,0 @@
-theme = "solarized_dark"
-
-[editor]
-cursorline = true
-line-number = "relative"
