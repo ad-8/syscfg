@@ -239,9 +239,9 @@
     ### Misc/Advanced ###
 
     # dmenu path.
-    # Quoted and without spaces in the theme string: dunst cuts unquoted
-    # values at ";" and splits the command on spaces, ignoring single quotes.
-    dmenu = "rofi -dmenu -p dunst: -theme-str window{width:30ch;}"
+    # dunst cuts unquoted values at ";" and splits the command on spaces,
+    # ignoring single quotes.
+    dmenu = rofi -dmenu -p dunst: -theme picker
 
     # Browser for opening urls in context menu.
     browser = xdg-open

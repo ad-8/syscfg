@@ -1,0 +1,3 @@
+@import "~/.config/rofi/active-theme.rasi"
+window  { width: 45ch; }
+element { padding: 1px 3px; }

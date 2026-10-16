@@ -220,7 +220,7 @@
         result    (-> (process {:prev echo-proc
                                 :out :string
                                 :cmd ["rofi" "-dmenu" "-i" "-l" (str (count options)) "-p" prompt
-                                      "-theme-str" "window {width: 30ch;}"]})
+                                      "-theme" "picker"]})
                       deref :out str/trim)]
     (when-not (str/blank? result)
       (parse-long result))))
@@ -243,7 +243,7 @@
     (-> (process {:prev echo-proc
                   :out :string
                   :cmd ["rofi" "-dmenu" "-i" "-l" (str (count settings)) "-p" "licht"
-                        "-theme-str" "window {width: 30ch;}"]})
+                        "-theme" "picker" "-theme-str" "window {width: 110ch;}"]})
         deref :out str/trim clojure.edn/read-string first)))
 
 

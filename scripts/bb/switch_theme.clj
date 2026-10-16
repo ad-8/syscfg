@@ -187,7 +187,7 @@
   (let [themes (available-themes)
         n-themes (count themes)]
     (-> (process ["rofi" "-dmenu" "-l" n-themes "-p" (str "select theme (" n-themes "): ")
-                  "-theme-str" "window {width: 30ch;}"]
+                  "-theme" "picker"]
                {:in (str/join "\n" themes) :out :string})
       deref
       :out
@@ -204,7 +204,7 @@
         theme-set (set (mapcat second groups))
         selection (-> (process ["rofi" "-dmenu" "-l" (count lines)
                                 "-p" (str "select theme (" (count theme-set) "): ")
-                                "-theme-str" "window {width: 30ch;}"]
+                                "-theme" "picker"]
                                {:in (str/join "\n" lines) :out :string})
                       deref :out str/trim)]
     (cond
