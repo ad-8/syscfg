@@ -78,9 +78,6 @@
       "video"
       "wheel"
     ];
-    packages = with pkgs; [
-      neovim
-    ];
   };
 
   programs.fish.enable = true;

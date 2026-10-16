@@ -20,12 +20,11 @@ export LANG=en_US.UTF-8
 alias dcc='joker /home/ax/syscfg/scripts/bb/dict.cc.joke'
 alias df='df -h'
 alias e='emacs -nw'
-alias n="VISUAL='nvim' nnn -a -e"
+alias n="VISUAL='vim' nnn -a -e"
 alias nf='clear && fastfetch --config neofetch --logo openbsd_small'
 alias l='eza -l --group-directories-first --icons'
 alias lll='eza -al --group-directories-first --icons'
-alias v=nvim
-alias vim=nvim
+alias v=vim
 
 alias gb='git --no-pager branch'
 alias gd='git --no-pager diff'
