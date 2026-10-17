@@ -3,48 +3,6 @@
 (setq abbrev-file-name "~/sync/emacs/abbrev_defs")
 (setq save-abbrevs 'silently)
 
-(defvar ax/1080p-font-size 12
-  "Font size for 1080p displays.")
-
-(defvar ax/4k-font-size 21
-  "Font size for 4K / high-resolution displays.")
-
-(defvar ax/monitor-font--timer nil)
-(defvar ax/monitor-font--last-size nil)
-
-(defun ax/set-font-for-monitor (&optional frame)
-  "Set doom font size based on the current monitor (poll-friendly)."
-  (when (display-graphic-p)
-    (let* ((frame (or frame (selected-frame)))
-           (geometry (frame-monitor-attribute 'geometry frame))
-           (scale (or (frame-monitor-attribute 'scale-factor frame) 1))
-           (width (and geometry (nth 2 geometry)))
-           (size (when width
-                   (let ((effective-width (* width scale)))
-                     (if (> effective-width 3000)
-                         ax/4k-font-size
-                       ax/1080p-font-size)))))
-
-      (when (and size (not (equal size ax/monitor-font--last-size)))
-        (setq ax/monitor-font--last-size size)
-        (setq doom-font (font-spec :family "Hack Nerd Font" :size size))
-        (when (fboundp 'doom/reload-font)
-          (doom/reload-font))
-        ;; Show in the echo area (bottom/statusline area)
-        (message "Font changed: %s" size)))))
-
-(let ((hn (string-trim (system-name))))
-  (when (and hn (string-match-p "\\`ax-bee\\'" hn))
-    ;; Apply once right now
-    (when (display-graphic-p)
-      (ax/set-font-for-monitor (selected-frame)))
-
-    ;; Poll to detect monitor changes even when focus doesn't change (Hyprland)
-    (when ax/monitor-font--timer
-      (cancel-timer ax/monitor-font--timer))
-    (setq ax/monitor-font--timer
-          (run-with-timer 0 1.0 (lambda () (ax/set-font-for-monitor (selected-frame)))))))
-
 (setq bookmark-default-file
       (expand-file-name "~/sync/emacs/bookmark-default-file"))
 
@@ -223,6 +181,48 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   :preview-key '(:debounce 0.4 any)))
 
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 16 :weight 'semi-light))
+
+(defvar ax/1080p-font-size 12
+  "Font size for 1080p displays.")
+
+(defvar ax/4k-font-size 21
+  "Font size for 4K / high-resolution displays.")
+
+(defvar ax/monitor-font--timer nil)
+(defvar ax/monitor-font--last-size nil)
+
+(defun ax/set-font-for-monitor (&optional frame)
+  "Set doom font size based on the current monitor (poll-friendly)."
+  (when (display-graphic-p)
+    (let* ((frame (or frame (selected-frame)))
+           (geometry (frame-monitor-attribute 'geometry frame))
+           (scale (or (frame-monitor-attribute 'scale-factor frame) 1))
+           (width (and geometry (nth 2 geometry)))
+           (size (when width
+                   (let ((effective-width (* width scale)))
+                     (if (> effective-width 3000)
+                         ax/4k-font-size
+                       ax/1080p-font-size)))))
+
+      (when (and size (not (equal size ax/monitor-font--last-size)))
+        (setq ax/monitor-font--last-size size)
+        (setq doom-font (font-spec :family "Hack Nerd Font" :size size))
+        (when (fboundp 'doom/reload-font)
+          (doom/reload-font))
+        ;; Show in the echo area (bottom/statusline area)
+        (message "Font changed: %s" size)))))
+
+(let ((hn (string-trim (system-name))))
+  (when (and hn (string-match-p "\\`ax-bee\\'" hn))
+    ;; Apply once right now
+    (when (display-graphic-p)
+      (ax/set-font-for-monitor (selected-frame)))
+
+    ;; Poll to detect monitor changes even when focus doesn't change (Hyprland)
+    (when ax/monitor-font--timer
+      (cancel-timer ax/monitor-font--timer))
+    (setq ax/monitor-font--timer
+          (run-with-timer 0 1.0 (lambda () (ax/set-font-for-monitor (selected-frame)))))))
 
 (defvar ax/doom-active-theme-file (expand-file-name "~/.config/doom/active-theme.el"))
 
