@@ -1,5 +1,5 @@
 {
-  pkgs, config,
+  pkgs, config, inputs,
   ...
 }:
 
@@ -10,6 +10,13 @@
     ./networkmanager-muc.nix
     ../../nixos/config-core.nix
     ../../nixos/all-modules.nix
+  ];
+
+  # TODO: remove once nixos stable ships emacs >= 31.1, likely with the 26.11 upgrade (fixes the save-place tramp error)
+  nixpkgs.overlays = [
+    (final: prev: {
+      emacs = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.emacs;
+    })
   ];
 
   configWorkstation.enable = true;
