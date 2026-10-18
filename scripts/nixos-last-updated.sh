@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+[ -e /etc/NIXOS ] || exit 1
 cd ~/syscfg/nixos-config || exit 1
 date=$(git log -1 --pretty=%ci -- flake.lock)
 [ -z "$date" ] && exit 1
