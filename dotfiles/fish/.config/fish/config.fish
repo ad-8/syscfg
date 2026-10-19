@@ -182,7 +182,8 @@ alias v vim
 alias l 'eza -l --group-directories-first --icons'
 alias lll 'eza -al --group-directories-first --icons'
 alias x '/usr/bin/env bb ~/x/x.clj'
-alias s 'java -jar $HOME/my/code/clojure/strava/target/uberjar/strava-0.1.0-SNAPSHOT-standalone.jar'
+alias s s-rs
+alias sj 'java -jar $HOME/my/code/clojure/strava/target/uberjar/strava-0.1.0-SNAPSHOT-standalone.jar'
 alias df 'df -hT'
 alias free 'free -h'
 alias dcc 'joker $HOME/syscfg/scripts/bb/dict.cc.joke'
