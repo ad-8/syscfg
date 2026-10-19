@@ -54,10 +54,10 @@ menu:
         cmd: nmcli c down muc
       - key: "v"
         desc: VPN up (CH-854)
-        cmd: sudo wg-quick up ax-bee-CH-854
+        cmd: sudo wg-quick up CH-854
       - key: "V"
         desc: VPN down (CH-854)
-        cmd: sudo wg-quick down ax-bee-CH-854
+        cmd: sudo wg-quick down CH-854
 
   - key: "w"
     desc: Wallpaper ...
