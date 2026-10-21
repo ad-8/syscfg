@@ -616,6 +616,11 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
  'gotham
  '(org-headline-done :foreground "#245361"))
 
+(custom-theme-set-faces!
+ 'doom-winter-is-coming-dark-blue
+ '(org-block            :background "#0b2942" :extend t)
+ '(org-block-begin-line :background "#0b2942" :foreground "#5f7e97" :extend t))
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
