@@ -27,6 +27,15 @@
       sqlitebrowser
       vscodium
       youplot # cli plots
+
+      # TODO evaluate rust pkgs
+      cargo
+      cargo-outdated
+      clippy
+      gcc
+      rust-analyzer
+      rustc
+      rustfmt
     ];
   };
 }
