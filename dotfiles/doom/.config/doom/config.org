@@ -911,6 +911,13 @@ we keep =the-matrix-theme.el= byte-for-byte upstream.
  'gotham
  '(org-headline-done :foreground "#245361"))
 #+end_src
+*** Tokyo Night: done items
+#+begin_src emacs-lisp
+(custom-theme-set-faces!
+ 'doom-tokyo-night
+ '(org-agenda-done   :foreground "#61698b")
+ '(org-headline-done :foreground "#61698b"))
+#+end_src
 *** Winter: org code blocks
 #+begin_src emacs-lisp
 (custom-theme-set-faces!
