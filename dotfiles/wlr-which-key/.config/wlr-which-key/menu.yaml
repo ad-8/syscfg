@@ -89,13 +89,13 @@ menu:
         cmd: anki
       - key: "b"
         desc: Bluetooth (bluetui)
-        cmd: foot -T ax-bluetui -e bluetui
+        cmd: foot -T ax-bluetui -e t bluetui
       - key: "c"
         desc: Calculator
         cmd: qalculate-gtk
       - key: "e"
         desc: Emacs
-        cmd: emacs
+        cmd: t emacs
       - key: "E"
         desc: Emacsclient
         cmd: emacsclient -c -a emacs
