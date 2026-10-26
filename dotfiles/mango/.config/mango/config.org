@@ -141,6 +141,8 @@ bind=SUPER,q,killclient,
 
 bind=SUPER,l,setmfact,+0.05
 bind=SUPER,h,setmfact,-0.05
+bind=SUPER+CTRL,j,resizewin,+0,+50
+bind=SUPER+CTRL,k,resizewin,+0,-50
 
 # switch window focus
 bind=SUPER,j,focusstack,next
@@ -169,7 +171,7 @@ bind=SUPER,s,toggle_scratchpad
 
 scratchpad_cross_monitor=1
 
-# switch layout
+# layout settings and keybinds
 circle_layout=tile,monocle
 bind=SUPER,SPACE,switch_layout
 bind=SUPER,t,setlayout,tile
@@ -180,6 +182,9 @@ bind=SUPER,d,setlayout,deck
 bind=SUPER,g,setlayout,grid
 bind=SUPER,x,setlayout,fair
 bind=SUPER,y,setlayout,dwindle
+
+deck_tab_mode=1
+monocle_tab_mode=0
 
 # tag switch
 bind=SUPER,Left,viewtoleft,0
