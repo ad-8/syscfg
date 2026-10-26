@@ -17,6 +17,10 @@
     (final: prev: {
       emacs = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.emacs;
     })
+    # replace stable waybar with latest master via overlay
+    (final: prev: {
+      waybar = inputs.waybar.packages.${prev.stdenv.hostPlatform.system}.default;
+    })
   ];
 
   configWorkstation.enable = true;
@@ -42,6 +46,7 @@
     };
   };
 
+  programs.mango.enable = true;
   # android adb setup
   # 26.05: programs.adb removed (systemd 258 handles uaccess rules
   # automatically); just install the tool and the adbusers group is gone

@@ -7,7 +7,9 @@
     home-manager-stable = { url = "github:nix-community/home-manager/release-26.05"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
     # home-manager-unstable = { url = "github:nix-community/home-manager/master"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
     hyprland.url = "github:hyprwm/Hyprland/v0.56.2";
+    mangowm = { url = "github:mangowm/mango/0.18.3"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
     agenix = { url = "github:ryantm/agenix"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
+    waybar = { url = "github:alexays/waybar"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
   };
 
   outputs = { self, nixpkgs-stable, home-manager-stable, ... }@inputs:
@@ -38,6 +40,7 @@
           modules = [
             ./hosts/${hostname}/configuration.nix
             inputs.agenix.nixosModules.default
+            inputs.mangowm.nixosModules.mango
           ]
           ++ hm;
         };
