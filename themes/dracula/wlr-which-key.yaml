@@ -1,0 +1,4 @@
+# dracula — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#282a36d0"
+color: "#f8f8f2"
+border: "#bd93f9"

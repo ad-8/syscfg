@@ -1,0 +1,30 @@
+// dracula
+// Themed via switch_theme.clj. Colors sourced from themes/dracula/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#282a36"
+
+    border {
+        active-color   "#bd93f9"
+        inactive-color "#44475a"
+        urgent-color   "#ff5555" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#bd93f9"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#282a36"
+}
+
+// alt-tab switcher highlight behind the focused preview
+recent-windows {
+    highlight {
+        active-color "#bd93f9"
+        urgent-color "#ff5555"
+    }
+}

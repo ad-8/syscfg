@@ -12,6 +12,7 @@ separate rows here.
 | doric-oak                  | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-walnut               | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-water                | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
+| dracula                    | —                     | dracula/dracula-theme                            | https://github.com/dracula/dracula-theme                                                     |
 | gotham                     | —                     | whatyouhide/vim-gotham                           | https://github.com/whatyouhide/vim-gotham and https://depp.brause.cc/gotham-theme/ for emacs |
 | gruvbox-dark               | gruvbox-dark-medium   | morhetz/gruvbox                                  | https://github.com/morhetz/gruvbox                                                           |
 | gruvbox-light              | gruvbox-light-medium  | morhetz/gruvbox                                  | https://github.com/morhetz/gruvbox                                                           |

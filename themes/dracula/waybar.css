@@ -1,0 +1,175 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: HackNerdFont;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(40, 42, 54, 1);
+    border-bottom: 0px solid rgba(98, 114, 164, 0.3);
+    color: #f8f8f2;
+}
+
+tooltip {
+  background: rgba(68, 71, 90, 0.5);
+  border: 1px solid rgba(98, 114, 164, 0.5);
+}
+tooltip label {
+  color: #f8f8f2;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: #f8f8f2;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background: #44475a;
+    border-bottom: 3px solid #bd93f9;
+}
+
+#workspaces button.active {
+    background-color: #bd93f9;
+    color: #282a36;
+    border-radius: 3px;
+}
+
+#mode, #clock, #battery {
+    padding: 0 10px;
+}
+
+#mode {
+    background: #ff5555;
+    color: #282a36;
+    border-bottom: 3px solid #ff5555;
+}
+
+#clock {
+    color: #bd93f9;
+}
+
+#battery {
+    color: #ff5555;
+}
+
+#battery.charging {
+    color: #282a36;
+    background-color: #50fa7b;
+}
+
+@keyframes blink {
+    to {
+        background-color: #282a36;
+        color: #f8f8f2;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #ff5555;
+    color: #282a36;
+}
+
+#battery.critical:not(.charging) {
+    background: #ff5555;
+    color: #282a36;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+    color: #8be9fd;
+}
+
+#custom-vpn {
+    color: #50fa7b;
+}
+
+#custom-vpn.down {
+    color: #6272a4;
+}
+
+#custom-cpu {
+    color: #8be9fd;
+}
+#custom-cpu.warn {
+    color: #ffb86c;
+}
+#custom-cpu.crit {
+    color: #ff5555;
+}
+
+#custom-disk {
+    color: #8be9fd;
+}
+#custom-disk.low {
+    color: #ff5555;
+}
+#custom-memory {
+    color: #8be9fd;
+}
+#custom-memory.low {
+    color: #ff5555;
+}
+#custom-date {
+    color: #8be9fd;
+}
+#custom-weather {
+    color: #8be9fd;
+}
+#custom-music-info {
+    color: #50fa7b;
+}
+
+#window {
+    margin-left: 8px;
+}
+
+#battery {
+    color: #8be9fd;
+}
+#custom-licht {
+    color: #8be9fd;
+}
+#custom-notification-status {
+    color: #ffb86c;
+}
+#pulseaudio {
+    color: #8be9fd;
+}
+
+#workspaces button.empty:not(.focused):not(.active) {
+    color: #6272a4;
+}
+
+menu {
+    border-radius: 15px;
+    background: #44475a;
+    color: #f8f8f2;
+}
+menuitem {
+    border-radius: 15px;
+}
+
+#custom-sep2b {
+    color: #bd93f9;
+}
+
+#submap {
+    background-color: #ff5555;
+    color: #282a36;
+    padding: 3px 10px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+#custom-timer {
+    color: #bd93f9;
+    font-weight: bold;
+}
