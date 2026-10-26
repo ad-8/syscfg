@@ -70,19 +70,19 @@ white, everforest-light and oxocarbon-light predate the kitty, niri, tmux and
 wlr-which-key theme files; write those four, or those apps keep the previous
 theme and the switcher reports them missing.
 
-| Theme            | Removed    | Commit     | Doom theme file (in `dotfiles/doom/.config/doom/themes/`) |
-|------------------|------------|------------|-----------------------------------------------------------|
-| doric-plum       | 2026-10-09 | `17a32dd4` | —                                                         |
-| flatwhite        | 2026-10-09 | `17a32dd4` | —                                                         |
-| hackerman        | 2026-10-09 | `17a32dd4` | `ax-hackerman-theme.el`                                   |
-| retro-82         | 2026-10-09 | `17a32dd4` | `ax-retro-82-theme.el`                                    |
-| doric-marble     | 2026-10-09 | `9b78cdfd` | —                                                         |
-| matte-black      | 2026-10-09 | `9b78cdfd` | `ax-matte-black-theme.el`                                 |
-| iceberg          | 2026-09-13 | `6a5726c5` | `ax-iceberg-theme.el`                                     |
-| wilmersdorf      | 2026-09-13 | `817eedb5` | —                                                         |
-| white            | 2026-05-31 | `48c3d5aa` | —                                                         |
-| everforest-light | 2026-05-31 | `2fa2b9a5` | `ax-everforest-light-theme.el`                            |
-| oxocarbon-light  | 2026-05-21 | `bfebbdae` | `doom-oxocarbon-light-theme.el`                           |
+| Theme            | Removed    | Commit     | Doom theme file (in `dotfiles/doom/.config/doom/themes/`) | Emacs theme source                      |
+|------------------|------------|------------|-----------------------------------------------------------|-----------------------------------------|
+| doric-plum       | 2026-10-09 | `17a32dd4` | —                                                         | upstream, doric-themes (`doric-plum`)   |
+| flatwhite        | 2026-10-09 | `17a32dd4` | —                                                         | doom-themes (`doom-flatwhite`)          |
+| hackerman        | 2026-10-09 | `17a32dd4` | `ax-hackerman-theme.el`                                   | custom                                  |
+| retro-82         | 2026-10-09 | `17a32dd4` | `ax-retro-82-theme.el`                                    | custom                                  |
+| doric-marble     | 2026-10-09 | `9b78cdfd` | —                                                         | upstream, doric-themes (`doric-marble`) |
+| matte-black      | 2026-10-09 | `9b78cdfd` | `ax-matte-black-theme.el`                                 | custom                                  |
+| iceberg          | 2026-09-13 | `6a5726c5` | `ax-iceberg-theme.el`                                     | custom                                  |
+| wilmersdorf      | 2026-09-13 | `817eedb5` | —                                                         | doom-themes (`doom-wilmersdorf`)        |
+| white            | 2026-05-31 | `48c3d5aa` | —                                                         | doom-themes (`doom-plain`, stand-in)    |
+| everforest-light | 2026-05-31 | `2fa2b9a5` | `ax-everforest-light-theme.el`                            | custom                                  |
+| oxocarbon-light  | 2026-05-21 | `bfebbdae` | `doom-oxocarbon-light-theme.el`                           | custom, despite the `doom-` name        |
 
 oxocarbon-light was swapped for nord-light: `bfebbdae` turned some of its
 files into nord-light's, so restoring it leaves nord-light as it is.
