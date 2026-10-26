@@ -49,7 +49,7 @@ output "HDMI-A-1" {
 }
 
 layout {
-    gaps 8
+    gaps 0
 
     center-focused-column "never"
     always-center-single-column
@@ -68,7 +68,7 @@ layout {
 
     border {
         on
-        width 4
+        width 2
     }
 
     shadow {
@@ -356,7 +356,7 @@ window-rule {
 
 // enable rounded corners for all windows
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 0
     clip-to-geometry true
 }
 
