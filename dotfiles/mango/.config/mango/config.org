@@ -41,8 +41,8 @@ animation_fade_out=1
 tag_animation_direction=1
 zoom_initial_ratio=0.4
 zoom_end_ratio=0.8
-fadein_begin_opacity=0.5
-fadeout_begin_opacity=0.8
+fade_in_begin_opacity=0.5
+fade_out_begin_opacity=0.8
 animation_duration_move=500
 animation_duration_open=400
 animation_duration_tag=350
@@ -53,8 +53,8 @@ animation_curve_move=0.46,1.0,0.29,1
 animation_curve_tag=0.46,1.0,0.29,1
 animation_curve_close=0.08,0.92,0,1
 animation_curve_focus=0.46,1.0,0.29,1
-animation_curve_opafadeout=0.5,0.5,0.5,0.5
-animation_curve_opafadein=0.46,1.0,0.29,1
+animation_curve_opacity_fade_out=0.5,0.5,0.5,0.5
+animation_curve_opacity_fade_in=0.46,1.0,0.29,1
 #+end_src
 ** blur
 #+begin_src shell
@@ -77,19 +77,19 @@ shadows_size = 10
 shadows_blur = 15
 shadows_position_x = 0
 shadows_position_y = 0
-shadowscolor= 0x000000ff
+shadows_color= 0x000000ff
 #+end_src
 * Autostart
 #+begin_src shell
-exec-once=blueman-applet
-exec-once=dunst
-exec-once=nm-applet
-exec-once=syncthing serve --no-browser
-exec-once=waybar
+exec_once=blueman-applet
+exec_once=dunst
+exec_once=nm-applet
+exec_once=syncthing serve --no-browser
+exec_once=waybar
 
-exec-once=/usr/bin/env sh ~/syscfg/scripts/river-idle.sh
-exec-once=/usr/bin/env sh ~/x/river-set-monitors.sh
-exec-once=/usr/bin/env sh ~/syscfg/scripts/niri-set-wallpaper.sh
+exec_once=/usr/bin/env sh ~/syscfg/scripts/river-idle.sh
+exec_once=/usr/bin/env sh ~/x/river-set-monitors.sh
+exec_once=/usr/bin/env sh ~/syscfg/scripts/niri-set-wallpaper.sh
 #+end_src
 
 * Input 
@@ -97,7 +97,7 @@ exec-once=/usr/bin/env sh ~/syscfg/scripts/niri-set-wallpaper.sh
 # keyboard
 repeat_rate=35
 repeat_delay=200
-numlockon=1
+numlock_on=1
 xkb_rules_layout=de
 
 # Trackpad
@@ -107,9 +107,9 @@ tap_to_click=1
 tap_and_drag=1
 drag_lock=1
 trackpad_natural_scrolling=0
-disable_while_typing=1
-left_handed=0
-middle_button_emulation=0
+trackpad_disable_while_typing=1
+trackpad_left_handed=0
+trackpad_middle_button_emulation=0
 swipe_min_threshold=1
 
 # mouse
@@ -152,7 +152,7 @@ bind=SUPER+SHIFT,k,exchange_stack_client,previous
 
 # switch window status
 bind=SUPER,g,toggleglobal,
-bind=ALT,Tab,toggleoverview,
+bind=ALT,Tab,overcircle,next
 bind=SUPER,x,togglefloating,
 bind=ALT,a,togglemaximizescreen,
 
@@ -261,19 +261,18 @@ bind=SUPER,0,view,0
 #+begin_src shell
 # Master-Stack Layout Setting
 new_is_master=1
-default_mfact=0.55
-default_nmaster=1
+default_master_factor=0.55
+default_master_count=1
 tag_num=9
-smartgaps=0
+smart_gaps=0
 #+end_src
 ** Overview
 #+begin_src shell
 # Overview Setting
 hotarea_size=10
 enable_hotarea=0
-ov_tab_mode=1
-overviewgappi=5
-overviewgappo=30
+overview_gap_inner=5
+overview_gap_outer=30
 #+end_src
 ** Misc
 #+begin_src shell
@@ -281,9 +280,9 @@ overviewgappo=30
 no_border_when_single=0
 axis_bind_apply_timeout=100
 focus_on_activate=1
-idleinhibit_ignore_visible=0
-sloppyfocus=1
-warpcursor=1
+idle_inhibit_ignore_visible=0
+sloppy_focus=1
+warp_cursor=1
 focus_cross_monitor=0
 focus_cross_tag=0
 enable_floating_snap=0
@@ -295,23 +294,23 @@ drag_tile_small=1
 ** Appearance
 #+begin_src shell
 # Appearance
-gappih=5
-gappiv=5
-gappoh=10
-gappov=10
+gap_inner_horizontal=5
+gap_inner_vertical=5
+gap_outer_horizontal=10
+gap_outer_vertical=10
 scratchpad_width_ratio=0.8
 scratchpad_height_ratio=0.9
-borderpx=4
-rootcolor=0x201b14ff
-bordercolor=0x444444ff
-dropcolor=0x8FBA7C55
-splitcolor=0xEB441EFF
-focuscolor=0xc9b890ff
-maximizescreencolor=0x89aa61ff
-urgentcolor=0xad401fff
-scratchpadcolor=0x516c93ff
-globalcolor=0xb153a7ff
-overlaycolor=0x14a57cff
+border_px=4
+root_color=0x201b14ff
+border_color=0x444444ff
+drop_color=0x8FBA7C55
+split_color=0xEB441EFF
+focus_color=0xc9b890ff
+maximized_screen_color=0x89aa61ff
+urgent_color=0xad401fff
+scratchpad_color=0x516c93ff
+global_color=0xb153a7ff
+overlay_color=0x14a57cff
 #+end_src
 * TODO evaluate
 #+begin_src shell :tangle no
