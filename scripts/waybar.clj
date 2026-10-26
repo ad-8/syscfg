@@ -5,29 +5,34 @@
             [babashka.process :refer [sh shell]]
             [cheshire.core :as json]))
 
-(defn err-unknow-action []
-  (println "error-unknown-action"))
-
-(defn waybar-date []
+(defn waybar-date
+  "Prints today's date as `Mo 26.10.`."
+  []
   (let [date-str (-> (shell {:out :string} "date '+%a %d.%m.'")
                      :out
                      str/trim)]
     (println date-str)))
 
-(def disk-low-bytes (* 25 1024 1024 1024))
+(def ^:private disk-low-bytes (* 25 1024 1024 1024))
 
-(defn- df-avail-bytes []
+(defn- df-avail-bytes
+  "Returns the free bytes on `/`, or nil if `df` fails."
+  []
   (let [res (shell {:out :string :continue true} "df -B1 / --output=avail")]
     (when (zero? (:exit res))
       (some-> res :out str/split-lines last str/trim parse-long))))
 
-(defn- human-avail [b]
+(defn- human-avail
+  "Formats `b` bytes as GiB (`42G`), or as TiB from 1024 GiB up (`1.2T`)."
+  [b]
   (let [gib (quot b (* 1024 1024 1024))]
     (if (>= gib 1024)
       (format "%.1fT" (/ (double gib) 1024))
       (format "%dG" gib))))
 
-(defn- print-free-space [output-fmt]
+(defn- print-free-space
+  "Prints the free space on `/`, as waybar JSON when `output-fmt` is \"json\"."
+  [output-fmt]
   (let [avail (df-avail-bytes)
         fmt (format "󰋊 %s" (if avail (human-avail avail) "--"))
         class (if (and avail (>= avail disk-low-bytes)) :ok :low)
@@ -37,16 +42,22 @@
       (println json)
       (println fmt))))
 
-(defn waybar-disk []
+(defn waybar-disk
+  "Prints the free space on `/` as waybar JSON."
+  []
   (print-free-space "json"))
 
-(defn waybar-licht []
+(defn waybar-licht
+  "Prints the licht icon and the contents of `/tmp/licht-curr-val`, or `--`."
+  []
   (let [path "/tmp/licht-curr-val"
         licht-val (if (fs/exists? path) (slurp path) "--")]
     (printf " %s" licht-val)))
 
 
-(defn waybar-load []
+(defn waybar-load
+  "Prints the 1-minute load average as waybar JSON, classed by core count."
+  []
   (let [num-cores (.availableProcessors (Runtime/getRuntime))
         loadavg (-> (shell {:out :string} "sh -c 'cat /proc/loadavg'")
                     :out
@@ -61,7 +72,7 @@
                            :class class}))))
 
 
-(defn determine-memory
+(defn- determine-memory
   "Returns total and used memory [GiB] as reported by `free -m`."
   []
   (let [[_full-match total used]
@@ -69,12 +80,16 @@
     [(/ (parse-long total) 1024.0)
      (/ (parse-long used) 1024.0)]))
 
-(defn- determine-css-class [total used]
+(defn- determine-css-class
+  "Returns :low when `used` is above 80% of `total`, else :ok."
+  [total used]
   (if (> used (* 0.8 total))
     :low
     :ok))
 
-(defn- print-memory-info [output-fmt]
+(defn- print-memory-info
+  "Prints used memory in percent, as waybar JSON when `output-fmt` is \"json\"."
+  [output-fmt]
   (let [[total used] (determine-memory)
         class (determine-css-class total used)
         fmt (format "󰍛 %.0f%%" (* (/ used total) 100))
@@ -90,10 +105,14 @@
   ;;
   )
 
-(defn waybar-memory []
+(defn waybar-memory
+  "Prints used memory as waybar JSON."
+  []
   (print-memory-info "json"))
 
-(defn- print-curr-playing [out]
+(defn- print-curr-playing
+  "Prints the track in `out` (`status|number|title`), or nothing when stopped."
+  [out]
   (let [[status track-number title] (str/split out #"\|" 3)
         out-str (if (str/blank? track-number)
                   title
@@ -103,15 +122,17 @@
       "Paused" (printf "PAUSED %s" out-str)
       (printf "")))) ;; does not show up on waybar
 
-(def players "strawberry,fooyin,emms")
+(def ^:private players "strawberry,fooyin,emms")
 
-(defn waybar-music []
+(defn waybar-music
+  "Prints the current track of the first running player in `players`."
+  []
   (let [proc (sh "timeout" "2" "playerctl" "-p" players "metadata" "--format" "{{status}}|{{xesam:trackNumber}}|{{xesam:title}}")]
     (when (zero? (:exit proc))
       (print-curr-playing (-> proc :out str/trim)))))
 
-(defn compositor
-  "Detect the running Wayland compositor. Both waybar launch paths (compositor
+(defn- compositor
+  "Detects the running Wayland compositor. Both waybar launch paths (compositor
   autostart + keybind exec) are spawned by the compositor and inherit its env, so
   the per-compositor IPC socket vars are the strong signal; XDG_CURRENT_DESKTOP is
   a weaker fallback. Defaults to :hypr (the common case)."
@@ -124,8 +145,8 @@
     (= "sway" (System/getenv "XDG_CURRENT_DESKTOP")) :sway
     :else                                          :hypr))
 
-(defn point-compositor-symlink!
-  "Repoint ~/.config/waybar/active-compositor.json at the fragment matching the
+(defn- point-compositor-symlink!
+  "Repoints ~/.config/waybar/active-compositor.json at the fragment matching the
   running compositor, so config / config-minimal include the right modules-left."
   []
   (let [dir    (fs/expand-home "~/.config/waybar")
@@ -139,12 +160,14 @@
     (printf "active-compositor.json -> %s\n" (fs/file-name target))))
 
 (defn waybar-launch
-  "Set the compositor symlink, then start waybar. Used by compositor autostart."
+  "Sets the compositor symlink and starts waybar. Used by compositor autostart."
   []
   (point-compositor-symlink!)
   (shell {:out :string} "sh -c 'setsid waybar >/dev/null 2>&1 &'"))
 
-(defn waybar-toggle [minimal?]
+(defn waybar-toggle
+  "Kills a running waybar, else starts it, with config-minimal when `minimal?`."
+  [minimal?]
   ;; `:continue true` prevents the exception on non-zero exit codes.
   (let [status (-> (shell {:out :string :continue true} "sh -c 'pgrep waybar >/dev/null'") :exit)]
     (if (= 0 status)
@@ -159,7 +182,9 @@
             (let [status (-> (shell {:out :string} "sh -c 'setsid waybar >/dev/null 2>&1 &'") :exit)]
               (printf "starting waybar, status = %d\n" status)))))))
 
-(defn waybar-vpn []
+(defn waybar-vpn
+  "Prints the active WireGuard interfaces as waybar JSON, or `NO VPN CONN`."
+  []
   (let [interfaces (->> (shell {:out :string :continue true} "wg show interfaces")
                         :out
                         (re-seq #"\S+")
@@ -169,7 +194,9 @@
                   (json/encode {:text "NO VPN CONN" :state "Critical" :class "down"}))]
     (printf "%s" out-str)))
 
-(defn waybar-notification-status []
+(defn waybar-notification-status
+  "Prints an icon while dunst notifications are paused."
+  []
   (let [is-paused (-> (shell {:out :string} "dunstctl is-paused")
                       :out
                       str/trim
@@ -177,17 +204,30 @@
     (when is-paused
       (printf "  "))))
 
-(let [action (first *command-line-args*)]
-  (case action
-    "date" (waybar-date)
-    "launch" (waybar-launch)
-    "disk" (waybar-disk)
-    "licht" (waybar-licht)
-    "load" (waybar-load)
-    "memory" (waybar-memory)
-    "music" (waybar-music)
-    "notification-status" (waybar-notification-status)
-    "toggle" (waybar-toggle false)
-    "toggle-min" (waybar-toggle true)
-    "vpn" (waybar-vpn)
-    (err-unknow-action)))
+(def actions
+  {"date"                waybar-date
+   "launch"              waybar-launch
+   "disk"                waybar-disk
+   "licht"               waybar-licht
+   "load"                waybar-load
+   "memory"              waybar-memory
+   "music"               waybar-music
+   "notification-status" waybar-notification-status
+   "toggle"              #(waybar-toggle false)
+   "toggle-min"          #(waybar-toggle true)
+   "vpn"                 waybar-vpn})
+
+(defn- err-unknown-action
+  "Reports an unknown or missing `action`; the available actions go to stderr."
+  [action]
+  (if action
+    (println (format "unknown action: %s" action))
+    (println "no action given"))
+  (binding [*out* *err*]
+    (println "available:" (str/join ", " (sort (keys actions))))))
+
+(when (= *file* (System/getProperty "babashka.file"))
+  (let [action (first *command-line-args*)]
+    (if-let [f (get actions action)]
+      (f)
+      (err-unknown-action action))))
