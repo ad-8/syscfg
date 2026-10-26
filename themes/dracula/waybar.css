@@ -29,7 +29,7 @@ tooltip label {
 
 #workspaces button.focused {
     background: #44475a;
-    border-bottom: 3px solid #bd93f9;
+    border-bottom: 3px solid #ff79c6;
 }
 
 #workspaces button.active {
