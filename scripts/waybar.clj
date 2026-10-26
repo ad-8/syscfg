@@ -16,9 +16,9 @@
 (def ^:private disk-low-bytes (* 25 1024 1024 1024))
 
 (defn- df-avail-bytes
-  "Returns the free bytes on `/`, or nil if `df` fails."
+  "Returns the free bytes on `/` (`/var` on Silverblue), or nil if `df` fails."
   []
-  (let [res (shell {:out :string :continue true} "df -B1 / --output=avail")]
+  (let [res (shell {:out :string :continue true} "df -B1 /var --output=avail")]
     (when (zero? (:exit res))
       (some-> res :out str/split-lines last str/trim parse-long))))
 
