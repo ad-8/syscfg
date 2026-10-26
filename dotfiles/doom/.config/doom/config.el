@@ -182,10 +182,10 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 16 :weight 'semi-light))
 
-(defvar ax/1080p-font-size 12
+(defvar ax/1080p-font-size 14
   "Font size for 1080p displays.")
 
-(defvar ax/4k-font-size 21
+(defvar ax/4k-font-size 18
   "Font size for 4K / high-resolution displays.")
 
 (defvar ax/monitor-font--timer nil)

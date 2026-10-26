@@ -430,10 +430,10 @@ Toggle with ~M-x variable-pitch-font~.
 #+end_src
 *** auto-resize Emacs font size on =ax-bee= with 4k/1080 monitors
 #+begin_src elisp
-(defvar ax/1080p-font-size 12
+(defvar ax/1080p-font-size 14
   "Font size for 1080p displays.")
 
-(defvar ax/4k-font-size 21
+(defvar ax/4k-font-size 18
   "Font size for 4K / high-resolution displays.")
 
 (defvar ax/monitor-font--timer nil)
