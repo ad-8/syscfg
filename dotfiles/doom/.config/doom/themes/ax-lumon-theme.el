@@ -1,4 +1,4 @@
-;;; ax-lumon-theme.el --- inspired by lumon (omarchy / Severance)
+;;; ax-lumon-theme.el --- inspired by lumon (omarchy / Severance) -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;; https://github.com/OldJobobo/omarchy-lumon-theme
 (require 'doom-themes)
 

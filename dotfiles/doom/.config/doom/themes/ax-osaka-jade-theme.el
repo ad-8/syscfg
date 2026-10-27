@@ -1,4 +1,4 @@
-;;; ax-osaka-jade-theme.el --- inspired by osaka-jade (omarchy)
+;;; ax-osaka-jade-theme.el --- inspired by osaka-jade (omarchy) -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;; https://github.com/Justikun/omarchy-osaka-jade-theme
 (require 'doom-themes)
 

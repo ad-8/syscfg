@@ -1,4 +1,4 @@
-;;; ax-amber-theme.el --- retrofuturistic amber CRT (P3 phosphor, DEC VT220 lineage)
+;;; ax-amber-theme.el --- retrofuturistic amber CRT (P3 phosphor, DEC VT220 lineage) -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;; Anchored on foxbunny/vim-amber dark mode (https://github.com/foxbunny/vim-amber).
 (require 'doom-themes)
 

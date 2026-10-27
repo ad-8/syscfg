@@ -1,4 +1,4 @@
-;;; ax-everforest-theme.el --- inspired by Everforest
+;;; ax-everforest-theme.el --- inspired by Everforest -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;; https://github.com/sainnhe/everforest
 (require 'doom-themes)
 
@@ -31,13 +31,7 @@ determine the exact padding."
 
 (defcustom ax-everforest-background nil
   "Choice between \"soft\", \"medium\" and \"hard\" background contrast.
-Defaults to \"soft\""
-  :group 'ax-everforest-theme
-  :type 'string)
-
-(defcustom ax-everforest-palette nil
-  "Choose between \"material\", \"mix\" and \"original\" color palette.
-Defaults to \"material\""
+Defaults to \"hard\""
   :group 'ax-everforest-theme
   :type 'string)
 
@@ -48,79 +42,87 @@ Defaults to \"material\""
 ;; colors from
 ;; https://github.com/sainnhe/everforest/blob/master/autoload/everforest.vim
 (cond
- ((equal ax-everforest-background "hard")
-  (setq ef/bg           "#272e33"       ;; bg0
-        ef/bg-alt       "#1e2326"       ;; bg1
-        ef/base0        "#3a454a"       ;; bg2
-        ef/base1        "#445055"       ;; bg3
-        ef/base2        "#4c555b"       ;; bg4
-        ef/base3        "#53605c"       ;; bg5
-        ef/base4        "#503946"))       ;; bg_visual
+ ((equal ax-everforest-background "soft")
+  (setq ef/bg           "#333c43"       ;; bg0
+        ef/bg-alt       "#293136"       ;; bg_dim
+        ef/base1        "#3a464c"       ;; bg1
+        ef/base2        "#434f55"       ;; bg2
+        ef/base3        "#4d5960"       ;; bg3
+        ef/base4        "#555f66"       ;; bg4
+        ef/bg-blue      "#3f5865"       ;; bg_blue
+        ef/bg-visual    "#5c3f4f"       ;; bg_visual
+        ef/bg-red       "#59464c"))     ;; bg_red
  ((equal ax-everforest-background "medium")
   (setq ef/bg           "#2d353b"       ;; bg0
-        ef/bg-alt       "#232a2e"       ;; bg1
-        ef/base0        "#404c51"       ;; bg2
-        ef/base1        "#4a555b"       ;; bg3
-        ef/base2        "#525c62"       ;; bg4
-        ef/base3        "#596763"       ;; bg5
-        ef/base4        "#573e4c"))     ;; bg_visual
+        ef/bg-alt       "#232a2e"       ;; bg_dim
+        ef/base1        "#343f44"       ;; bg1
+        ef/base2        "#3d484d"       ;; bg2
+        ef/base3        "#475258"       ;; bg3
+        ef/base4        "#4f585e"       ;; bg4
+        ef/bg-blue      "#3a515d"       ;; bg_blue
+        ef/bg-visual    "#543a48"       ;; bg_visual
+        ef/bg-red       "#514045"))     ;; bg_red
  (t
-  (setq ef/bg           "#333c43"       ;; bg0
-        ef/bg-alt       "#293136"       ;; bg1
-        ef/base0        "#465258"       ;; bg2
-        ef/base1        "#505a60"       ;; bg3
-        ef/base2        "#576268"       ;; bg4
-        ef/base3        "#5f6d67"       ;; bg5
-        ef/base4        "#5d4251")))    ;; bg_visual
+  (setq ef/bg           "#272e33"       ;; bg0
+        ef/bg-alt       "#1e2326"       ;; bg_dim
+        ef/base1        "#2e383c"       ;; bg1
+        ef/base2        "#374145"       ;; bg2
+        ef/base3        "#414b50"       ;; bg3
+        ef/base4        "#495156"       ;; bg4
+        ef/bg-blue      "#384b55"       ;; bg_blue
+        ef/bg-visual    "#4c3743"       ;; bg_visual
+        ef/bg-red       "#493b40")))    ;; bg_red
 
 (def-doom-theme ax-everforest
   "A dark theme inspired by Everforest"
   ;; name        default        256       16
   ((bg         `(,ef/bg         nil       nil            ))
    (bg-alt     `(,ef/bg-alt     nil       nil            ))
-   (base0      `(,ef/base0      "black"   "black"        ))
+   (base0      `(,ef/bg-alt     "black"   "black"        )) ;; bg_dim
    (base1      `(,ef/base1      "#1e1e1e" "brightblack"  ))
    (base2      `(,ef/base2      "#2e2e2e" "brightblack"  ))
    (base3      `(,ef/base3      "#262626" "brightblack"  ))
    (base4      `(,ef/base4      "#3f3f3f" "brightblack"  ))
-   (base5      '("#7a8478"       "#525252" "brightblack"  ))
-   (base6      '("#859289"       "#6b6b6b" "brightblack"  ))
-   (base7      '("#9da9a0"       "#979797" "brightblack"  ))
-   (base8      '("#7a8478"       "#dfdfdf" "white"        ))
+   (base5      '("#7a8478"       "#525252" "brightblack"  )) ;; grey0
+   (base6      '("#859289"       "#6b6b6b" "brightblack"  )) ;; grey1
+   (base7      '("#9da9a0"       "#979797" "brightblack"  )) ;; grey2
+   (base8      '("#d3c6aa"       "#dfdfdf" "white"        )) ;; fg
    (fg         '("#d3c6aa"      "#bfbfbf" "brightwhite"  ))
-   (fg-alt     '("#b9c0ab"      "#2d2d2d" "white"        )) ;; bg5 light soft
+   (fg-alt     '("#859289"      "#2d2d2d" "white"        )) ;; grey1
 
-   (grey       base8)
+   (grey       base5) ;; grey0
    (red        '("#e67e80"      "#ff6655" "red"          ))
    (orange     '("#e69875"      "#dd8844" "brightred"    ))
    (green      '("#a7c080"      "#99bb66" "green"        ))
    (teal       '("#83c092"      "#44b9b1" "brightgreen"  )) ;; aqua
    (yellow     '("#dbbc7f"      "#ECBE7B" "yellow"       ))
    (blue       '("#7fbbb3"      "#51afef" "brightblue"   ))
-   (dark-blue  `("#60948d"      "#2257A0" "blue"         )) ;; own
+   (dark-blue  blue)
    (magenta    '("#d699b6"      "#c678dd" "brightmagenta")) ;; purple
    (violet     '("#d699b6"      "#a9a1e1" "magenta"      )) ;; purple
    (cyan       '("#83c092"      "#46D9FF" "brightcyan"   )) ;; aqua
-   (dark-cyan  `("#74ab82"      "#5699AF" "cyan"         )) ;; own
+   (dark-cyan  cyan)
+   (bg-visual  `(,ef/bg-visual  "#262626" "brightblack"  ))
+   (bg-red     `(,ef/bg-red     "#5f0000" "red"          ))
+   (bg-blue    `(,ef/bg-blue    "#005f87" "blue"         ))
 
    ;; face categories -- required for all themes
    (highlight      cyan)
-   (vertical-bar   (doom-darken base1 0.1))
-   (selection      dark-blue)
+   (vertical-bar   base4)
+   (selection      bg-visual)
    (builtin        magenta)
-   (comments       (if ax-everforest-brighter-comments cyan
-                     (doom-blend magenta cyan 0.65)))
-   (doc-comments   (doom-lighten (if ax-everforest-brighter-comments dark-cyan green) 0.2))
+   (comments       (if ax-everforest-brighter-comments base7 base6))
+   (doc-comments   teal)
    (constants      violet)
-   (functions      cyan)
-   (keywords       (doom-lighten teal 0.1))
-   (methods        cyan)
-   (operators      blue)
-   (type           orange)
-   (strings        green)
+   (functions      green)
+   (keywords       red)
+   (methods        green)
+   (operators      orange)
+   (type           yellow)
+   (strings        teal)
    (variables      blue)
    (numbers        magenta)
-   (region         `(,(doom-lighten (car bg-alt) 0.15) ,@(doom-lighten (cdr base1) 0.35)))
+   (region         bg-visual)
    (error          red)
    (warning        yellow)
    (success        green)
@@ -160,6 +162,7 @@ Defaults to \"material\""
 
    (font-lock-comment-face
     :foreground comments
+    :slant 'italic
     :background (if ax-everforest-comment-bg (doom-lighten bg 0.05)))
    (font-lock-doc-face
     :inherit 'font-lock-comment-face
@@ -189,9 +192,6 @@ Defaults to \"material\""
    (doom-modeline-buffer-path :inherit 'mode-line-emphasis :weight 'bold)
    (doom-modeline-buffer-project-root :foreground green :weight 'bold)
 
-   ;; ivy-mode
-   (ivy-current-match :background dark-blue :distant-foreground base0 :weight 'normal)
-
    ;; --- major-mode faces -------------------
    ;; column indicator
    (fill-column-indicator :foreground bg-alt :background bg-alt)
@@ -212,13 +212,13 @@ Defaults to \"material\""
    (diredfl-dir-name :height ax-everforest-dired-height
                      :foreground blue)
    (diredfl-deletion :height ax-everforest-dired-height
-                     :foreground red :background (doom-lighten red 0.55))
+                     :foreground red :background bg-red)
    (diredfl-deletion-file-name :foreground red
-                               :background (doom-lighten red 0.55))
+                               :background bg-red)
    (diredfl-file-name :height ax-everforest-dired-height
                       :foreground fg)
    (dired-flagged :height ax-everforest-dired-height
-                    :foreground red :background (doom-lighten red 0.55))
+                    :foreground red :background bg-red)
    (diredfl-symlink :height ax-everforest-dired-height
                     :foreground magenta)
 
@@ -229,7 +229,7 @@ Defaults to \"material\""
    (+eshell-prompt-git-branch :foreground cyan)
 
    ;; evil
-   (evil-ex-lazy-highlight :foreground fg :background (doom-darken orange 0.3))
+   (evil-ex-search :foreground bg :background red :weight 'bold)
    (evil-snipe-first-match-face :foreground bg :background orange)
 
 
@@ -242,18 +242,16 @@ Defaults to \"material\""
    (font-latex-script-char-face :foreground (doom-lighten dark-blue 0.15))
 
    ;; lsp
-   (lsp-face-highlight-read :foreground fg-alt
-                           :background (doom-darken dark-blue 0.3))
-   (lsp-face-highlight-textual :foreground fg-alt
-                           :background (doom-lighten dark-blue 0.3))
-   (lsp-face-highlight-write :foreground fg-alt
-                             :background (doom-darken dark-blue 0.3))
+   (lsp-face-highlight-textual :background base2)
    (lsp-lsp-flycheck-info-unnecessary-face :foreground (doom-lighten yellow 0.12))
 
    ;; magit
    (magit-section-heading :foreground blue :weight 'bold)
    (magit-branch-local    :foreground cyan  :weight 'bold)
    (magit-branch-remote   :foreground green :weight 'bold)
+   ((magit-diff-file-heading-selection &override) :background bg-blue)
+   ((magit-header-line &override) :background bg-blue
+    :box `(:line-width 3 :color ,bg-blue))
 
    ;; markdown-mode
    (markdown-markup-face :foreground base5)
@@ -265,14 +263,14 @@ Defaults to \"material\""
    (solaire-org-hide-face :foreground hidden)
    (org-drawer :foreground (doom-darken yellow 0.15))
    (org-document-info :foreground blue)
-   (org-document-info-keyword :foreground dark-blue)
+   (org-document-info-keyword :foreground base6)
    (org-document-title :foreground blue)
-   (org-block-begin-line :foreground dark-cyan
+   (org-block-begin-line :foreground base6
                          :background bg-alt)
-   (org-block-end-line :foreground dark-cyan
+   (org-block-end-line :foreground base6
                          :background bg-alt)
    (org-block :foreground fg :background bg-alt)
-   (org-meta-line :foreground dark-cyan)
+   (org-meta-line :foreground base6)
    (org-agenda-done :foreground base5)
    ;; org-habit graph: org's four meaning colours, everforest's own where it has one
    (org-habit-clear-face          :background blue   :foreground bg)
@@ -288,7 +286,7 @@ Defaults to \"material\""
    (org-level-3 :foreground green :weight 'semi-bold)
    (org-level-4 :foreground yellow :weight 'semi-bold)
    (org-level-5 :foreground violet :weight 'semi-bold)
-   (org-level-6 :foreground dark-cyan :weight 'semi-bold)
+   (org-level-6 :foreground blue :weight 'semi-bold)
    (org-level-7 :foreground (doom-darken green 0.15) :weight 'semi-bold)
    (org-level-8 :foreground (doom-darken yellow 0.15) :weight 'semi-bold)
 
@@ -301,22 +299,22 @@ Defaults to \"material\""
    ;; rainbow and parenthesis
    (rainbow-delimiters-depth-1-face :foreground orange)
    (rainbow-delimiters-depth-2-face :foreground violet)
-   (rainbow-delimiters-depth-3-face :foreground dark-cyan)
+   (rainbow-delimiters-depth-3-face :foreground cyan)
    (rainbow-delimiters-depth-4-face :foreground (doom-darken yellow 0.15))
    (rainbow-delimiters-depth-5-face :foreground green)
    (rainbow-delimiters-depth-6-face :foreground blue)
    (rainbow-delimiters-depth-7-face :foreground red)
    (rainbow-delimiters-depth-8-face :foreground (doom-darken green 0.15))
    (rainbow-delimiters-unmatched-face :foreground red)
-   (show-paren-match :foreground (doom-darken red 0.15) :background base0 :weight 'bold)
+   (show-paren-match :foreground (doom-darken red 0.15) :background base4 :weight 'bold)
 
    ;; vertico
    (vertico-current :foreground fg :background (doom-lighten bg 0.1))
 
    ;; others
-   (isearch :foreground fg :background violet)
-   (lazy-highlight :foreground cyan :background base0 :underline cyan)
-   (selection :foreground bg-alt :background (doom-darken orange 0.15))
+   (secondary-selection :background base4 :extend t)
+   (isearch :foreground bg :background red)
+   (lazy-highlight :foreground bg :background green)
    (company-tooltip-common-selection :foreground bg-alt :background dark-blue)
    )
 
