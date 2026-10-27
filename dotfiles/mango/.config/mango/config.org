@@ -11,7 +11,20 @@ More option see https://github.com/DreamMaoMao/mango/wiki/
   - [[#shadows][shadows]]
 - [[#autostart][Autostart]]
 - [[#input][Input]]
+  - [[#keyboard][Keyboard]]
+  - [[#trackpad][Trackpad]]
+  - [[#mouse][Mouse]]
 - [[#keybindings][Keybindings]]
+  - [[#general][General]]
+  - [[#window-focus-and-size][Window focus and size]]
+  - [[#window-state][Window state]]
+  - [[#scratchpad][Scratchpad]]
+  - [[#layouts][Layouts]]
+  - [[#tags][Tags]]
+  - [[#monitors][Monitors]]
+  - [[#gaps][Gaps]]
+  - [[#move-and-resize][Move and resize]]
+  - [[#mouse-and-scroll][Mouse and scroll]]
   - [[#dwm-like][dwm-like]]
 - [[#layout-settings][Layout Settings]]
   - [[#master][Master]]
@@ -93,13 +106,16 @@ exec_once=/usr/bin/env sh ~/x/river-set-monitors.sh
 #+end_src
 
 * Input 
+** Keyboard
 #+begin_src shell
 # keyboard
 repeat_rate=35
 repeat_delay=200
 numlock_on=1
 xkb_rules_layout=de
-
+#+end_src
+** Trackpad
+#+begin_src shell
 # Trackpad
 # need relogin to make it apply
 disable_trackpad=0
@@ -111,12 +127,15 @@ trackpad_disable_while_typing=1
 trackpad_left_handed=0
 trackpad_middle_button_emulation=0
 swipe_min_threshold=1
-
+#+end_src
+** Mouse
+#+begin_src shell
 # mouse
 # need relogin to make it apply
 mouse_natural_scrolling=0
 #+end_src
 * Keybindings
+** General
 #+begin_src shell
 # reload config
 bind=SUPER+SHIFT,r,reload_config
@@ -138,7 +157,9 @@ bind=SUPER+SHIFT,return,zoom
 
 bind=SUPER+SHIFT,q,quit
 bind=SUPER,q,killclient,
-
+#+end_src
+** Window focus and size
+#+begin_src shell
 bind=SUPER,l,setmfact,+0.05
 bind=SUPER,h,setmfact,-0.05
 bind=SUPER+CTRL,j,resizewin,+0,+50
@@ -151,7 +172,9 @@ bind=SUPER,k,focusstack,previous
 # swap window
 bind=SUPER+SHIFT,j,exchange_stack_client,next
 bind=SUPER+SHIFT,k,exchange_stack_client,previous
-
+#+end_src
+** Window state
+#+begin_src shell
 # switch window status
 bind=SUPER+SHIFT,g,toggleglobal,
 bind=ALT,Tab,overcircle,next
@@ -161,7 +184,9 @@ bind=ALT,a,togglemaximizescreen,
 # ax
 bind=SUPER,f,togglefullscreen,
 bind=SUPER+ALT,f,togglefakefullscreen,
-
+#+end_src
+** Scratchpad
+#+begin_src shell
 # ax scratchpad
 # send to scratchpad
 bind=SUPER+SHIFT,s,minimized,
@@ -170,7 +195,9 @@ bind=SUPER+CTRL+SHIFT,s,restore_minimized
 bind=SUPER,s,toggle_scratchpad
 
 scratchpad_cross_monitor=1
-
+#+end_src
+** Layouts
+#+begin_src shell
 # layout settings and keybinds
 circle_layout=tile,monocle
 bind=SUPER,SPACE,switch_layout
@@ -185,7 +212,9 @@ bind=SUPER,y,setlayout,dwindle
 
 deck_tab_mode=1
 monocle_tab_mode=0
-
+#+end_src
+** Tags
+#+begin_src shell
 # tag switch
 bind=SUPER,Left,viewtoleft,0
 bind=CTRL,Left,viewtoleft_have_client,0
@@ -216,18 +245,24 @@ bind=SUPER+SHIFT,6,tagsilent,6,0
 bind=SUPER+SHIFT,7,tagsilent,7,0
 bind=SUPER+SHIFT,8,tagsilent,8,0
 bind=SUPER+SHIFT,9,tagsilent,9,0
-
+#+end_src
+** Monitors
+#+begin_src shell
 # monitor switch
 bind=SUPER,comma,focusmon,left
 bind=SUPER,period,focusmon,right
 bind=SUPER+SHIFT,comma,tagmon,left
 bind=SUPER+SHIFT,period,tagmon,right
-
+#+end_src
+** Gaps
+#+begin_src shell
 # gaps
 bind=ALT+SHIFT,X,incgaps,1
 bind=ALT+SHIFT,Z,incgaps,-1
 bind=ALT+SHIFT,R,togglegaps
-
+#+end_src
+** Move and resize
+#+begin_src shell
 # movewin
 bind=CTRL+SHIFT,Up,movewin,+0,-50
 bind=CTRL+SHIFT,Down,movewin,+0,+50
@@ -239,7 +274,9 @@ bind=CTRL+ALT,Up,resizewin,+0,-50
 bind=CTRL+ALT,Down,resizewin,+0,+50
 bind=CTRL+ALT,Left,resizewin,-50,+0
 bind=CTRL+ALT,Right,resizewin,+50,+0
-
+#+end_src
+** Mouse and scroll
+#+begin_src shell
 # Mouse Button Bindings
 # btn_left and btn_right can't bind none mod key
 mousebind=SUPER,btn_left,moveresize,curmove
