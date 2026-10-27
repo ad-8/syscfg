@@ -602,6 +602,15 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
  '(eww-invalid-certificate :foreground "#cc0037" :weight bold))
 
 (custom-theme-set-faces!
+ 'doom-ayu-dark
+ '(org-scheduled-today         :foreground "#bfbdb6")
+ '(org-scheduled-previously    :foreground "#ffffff")
+ '(org-time-grid               :foreground "#5a6673")
+ '(org-agenda-dimmed-todo-face :foreground "#5a6673")
+ '(org-habit-clear-face        :weight bold :background "#475266")
+ '(org-habit-clear-future-face :weight bold :background "#1b1f29"))
+
+(custom-theme-set-faces!
  'gotham
  '(org-agenda-done :foreground "#245361"))
 

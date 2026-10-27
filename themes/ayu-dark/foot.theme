@@ -1,0 +1,26 @@
+# Ayu Dark color theme for foot
+# https://github.com/ayu-theme/ayu-colors/blob/master/themes/dark.yaml (ayu 9.1.0)
+# bright0 is the comment grey; upstream's 0a0000 is invisible on the background
+
+[colors-dark]
+background=0d1017
+foreground=bfbdb6
+cursor=0d1017 e6b450
+
+regular0=0a0000
+regular1=e6495a
+regular2=97c142
+regular3=e89d37
+regular4=17acf2
+regular5=c385fe
+regular6=84ceb5
+regular7=ffffff
+
+bright0=5a6673
+bright1=f07178
+bright2=aad94c
+bright3=ffb454
+bright4=59c2ff
+bright5=d2a6ff
+bright6=95e6cb
+bright7=ffffff

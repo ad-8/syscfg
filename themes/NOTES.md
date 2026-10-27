@@ -9,6 +9,7 @@ separate rows here.
 |----------------------------|-----------------------|--------------------------------------------------|----------------------------------------------------------------------------------------------|
 | everforest-dark            | everforest-dark-hard  | sainnhe/everforest                               | https://github.com/sainnhe/everforest                                                        |
 | amber                      | —                     | foxbunny/vim-amber                               | https://github.com/foxbunny/vim-amber                                                        |
+| ayu-dark                   | dark                  | ayu-theme/ayu-colors (9.1.0)                     | https://github.com/ayu-theme/ayu-colors and doom-ayu-dark (doom-themes) for emacs            |
 | doric-oak                  | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-walnut               | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-water                | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
@@ -71,6 +72,7 @@ theme and the switcher reports them missing.
 
 | Theme            | Removed    | Commit     | Doom theme file (in `dotfiles/doom/.config/doom/themes/`) | Emacs theme source                      |
 |------------------|------------|------------|-----------------------------------------------------------|-----------------------------------------|
+| oxocarbon        | 2026-10-27 | `774088a5` | `ax-oxocarbon-theme.el`                                   | custom                                  |
 | doric-plum       | 2026-10-09 | `17a32dd4` | —                                                         | upstream, doric-themes (`doric-plum`)   |
 | flatwhite        | 2026-10-09 | `17a32dd4` | —                                                         | doom-themes (`doom-flatwhite`)          |
 | hackerman        | 2026-10-09 | `17a32dd4` | `ax-hackerman-theme.el`                                   | custom                                  |

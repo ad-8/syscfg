@@ -10,8 +10,8 @@
 (def themes-dir (fs/path (fs/home) "syscfg/themes"))
 
 (def theme-categories
-  {:dark     #{"dracula" "everforest-dark" "gotham" "gruvbox-dark" "lumon" "modus-vivendi"
-               "nord" "osaka-jade" "solarized-dark" "tokyo-night"
+  {:dark     #{"ayu-dark" "dracula" "everforest-dark" "gotham" "gruvbox-dark" "lumon"
+               "modus-vivendi" "nord" "osaka-jade" "solarized-dark" "tokyo-night"
                "winter-is-coming"}
    :light    #{"doric-oak" "gruvbox-light" "modus-operandi"
                "nord-light" "solarized-light"}

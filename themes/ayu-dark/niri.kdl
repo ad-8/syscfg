@@ -1,0 +1,30 @@
+// ayu-dark
+// Themed via switch_theme.clj. Colors sourced from themes/ayu-dark/hyprland.lua
+// (accent / black / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#0d1017"
+
+    border {
+        active-color   "#e6b450"
+        inactive-color "#475266"
+        urgent-color   "#e6495a" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#e6b450"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#0d1017"
+}
+
+// alt-tab switcher highlight behind the focused preview
+recent-windows {
+    highlight {
+        active-color "#e6b450"
+        urgent-color "#e6495a"
+    }
+}
