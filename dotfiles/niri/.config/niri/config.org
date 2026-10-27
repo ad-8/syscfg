@@ -148,7 +148,6 @@ spawn-at-startup "emacs"
 spawn-at-startup "firefox"
 spawn-at-startup "nm-applet"
 spawn-sh-at-startup "foot -e btop"
-spawn-sh-at-startup "syncthing serve --no-browser"
 spawn-sh-at-startup "swaybg -i ~/sync/wallpapers/default.jpg"
 #+end_src
 
