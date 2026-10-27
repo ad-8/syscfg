@@ -27,6 +27,7 @@
   configFirefox.enable = true;
   configNiri.enable = true;
   configRiver.enable = true;
+  configMango.enable = true;
   configAudio.enable = true;
   configClamav.enable = true;
   configGaming.enable = true;
@@ -46,7 +47,6 @@
     };
   };
 
-  programs.mango.enable = true;
   # android adb setup
   # 26.05: programs.adb removed (systemd 258 handles uaccess rules
   # automatically); just install the tool and the adbusers group is gone
