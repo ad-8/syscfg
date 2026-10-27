@@ -184,6 +184,7 @@ into these two lists, or a task arrives without a start and without a due date.
 the default height is same/similar as M-x, so way too small for browsing
 #+begin_src emacs-lisp
 (set-popup-rule! "^\\*eww" :size 0.8 :quit t)
+(setq browse-url-browser-function #'eww-browse-url)
 #+end_src
 
 ** TODO clean up -- Misc Stuff

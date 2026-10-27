@@ -43,6 +43,7 @@
       '(event-if-not-todo event-if-todo-not-done))
 
 (set-popup-rule! "^\\*eww" :size 0.8 :quit t)
+(setq browse-url-browser-function #'eww-browse-url)
 
 ;; doom doctor suggestions
 (setq shell-file-name (executable-find "bash"))
