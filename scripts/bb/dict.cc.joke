@@ -61,7 +61,15 @@
        (map ->row)
        (sort-by :upvotes >)))
 
+(defn search-term
+  "Joins the words in `args` with `+`, splitting arguments that hold several words."
+  [args]
+  (->> args
+       (mapcat #(str/split % #"\s+"))
+       (remove str/blank?)
+       (str/join "+")))
+
 (let [[flag & words :as args] (drop 2 (os/args))]
   (if-let [[_ n] (re-matches #"-(\d+)" flag)]
-    (prn (take (strconv/atoi n) (lookup (str/join "+" words))))
-    (print-table (take 5 (lookup (str/join "+" args))))))
+    (prn (take (strconv/atoi n) (lookup (search-term words))))
+    (print-table (take 5 (lookup (search-term args))))))

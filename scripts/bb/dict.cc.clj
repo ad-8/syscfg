@@ -105,7 +105,10 @@
          (clojure.pprint/print-table))))
 
 
-(translate (str/join "+" *command-line-args*))
+(translate (->> *command-line-args*
+                (mapcat #(str/split % #"\s+"))
+                (remove str/blank?)
+                (str/join "+")))
 
 
 
