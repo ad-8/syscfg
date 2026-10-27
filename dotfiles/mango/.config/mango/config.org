@@ -5,7 +5,7 @@ More option see https://github.com/DreamMaoMao/mango/wiki/
 
 * Table of Contents :toc:
 - [[#animations-and-other-eye-candy][Animations and other eye candy]]
-  - [[#other][other]]
+  - [[#borders-and-opacity][Borders and opacity]]
   - [[#animations][animations]]
   - [[#blur][blur]]
   - [[#shadows][shadows]]
@@ -15,6 +15,9 @@ More option see https://github.com/DreamMaoMao/mango/wiki/
   - [[#trackpad][Trackpad]]
   - [[#mouse][Mouse]]
 - [[#window-rules][Window rules]]
+  - [[#floating][Floating]]
+  - [[#scratchpads][Scratchpads]]
+  - [[#privacy][Privacy]]
 - [[#keybindings][Keybindings]]
   - [[#general][General]]
   - [[#audio][Audio]]
@@ -32,12 +35,14 @@ More option see https://github.com/DreamMaoMao/mango/wiki/
 - [[#layout-settings][Layout Settings]]
   - [[#master][Master]]
   - [[#overview][Overview]]
+  - [[#focus][Focus]]
+  - [[#drag-and-snap][Drag and snap]]
   - [[#misc][Misc]]
   - [[#appearance][Appearance]]
 - [[#evaluate][evaluate]]
 
 * Animations and other eye candy
-** other
+** Borders and opacity
 #+begin_src shell
 border_radius=6
 no_radius_when_single=0
@@ -112,7 +117,6 @@ exec_once=/usr/bin/env sh ~/x/river-set-monitors.sh
 * Input 
 ** Keyboard
 #+begin_src shell
-# keyboard
 repeat_rate=35
 repeat_delay=200
 numlock_on=1
@@ -120,7 +124,6 @@ xkb_rules_layout=de
 #+end_src
 ** Trackpad
 #+begin_src shell
-# Trackpad
 # need relogin to make it apply
 disable_trackpad=0
 tap_to_click=1
@@ -134,25 +137,46 @@ swipe_min_threshold=1
 #+end_src
 ** Mouse
 #+begin_src shell
-# mouse
 # need relogin to make it apply
 mouse_natural_scrolling=0
 mouse_accel_speed=0.8
+cursor_size=24
+cursor_theme=Numix-Cursor
 #+end_src
 * Window rules
+** Floating
+*** Tools
 #+begin_src shell
 window_rule=is_floating:1,width:1024,height:768,app_id:foot$,title:^ax-bluetui$
 window_rule=is_floating:1,width:1024,height:768,app_id:foot$,title:^ax-wiremix$
 window_rule=is_floating:1,width:1024,height:768,app_id:foot$,title:^ax-command-runner$
+#+end_src
+*** Apps
+#+begin_src shell
 window_rule=is_floating:1,width:1024,height:768,app_id:org.pulseaudio.pavucontrol$,title:^Volume Control$
-window_rule=is_floating:1,width:1024,height:768,app_id:firefox$,title:^About Mozilla Firefox$
 window_rule=is_floating:1,width:1024,height:768,app_id:qalculate-gtk$,title:^Qalculate!$
 window_rule=is_floating:1,width:1280,height:1024,app_id:waypaper
 window_rule=is_floating:1,width:1280,height:1024,app_id:anki
-window_rule=is_floating:1,app_id:firefox$,title:^Picture-in-Picture$
+#+end_src
+*** Dialogs
+#+begin_src shell
+window_rule=is_floating:1,width:1024,height:768,app_id:firefox$,title:^About Mozilla Firefox$
 window_rule=is_floating:1,app_id:thunar$,title:^File Operation Progress$
+#+end_src
+*** Without size
+#+begin_src shell
+window_rule=is_floating:1,app_id:firefox$,title:^Picture-in-Picture$
 window_rule=is_floating:1,app_id:Emacs$,title:^emacs-float$
+#+end_src
+** Scratchpads
+#+begin_src shell
 window_rule=is_named_scratchpad:1,width:0.5,height:0.6,app_id:^ax-scratchpad$
+scratchpad_cross_monitor=1
+scratchpad_width_ratio=0.8
+scratchpad_height_ratio=0.9
+#+end_src
+** Privacy
+#+begin_src shell
 window_rule=shield_when_capture:1,app_id:^org\.keepassxc\.KeePassXC$
 #+end_src
 * Keybindings
@@ -241,7 +265,6 @@ bind=SUPER+SHIFT,k,exchange_stack_client,previous
 #+end_src
 ** Window state
 #+begin_src shell
-# switch window status
 bind=SUPER+SHIFT,g,toggleglobal,
 bind=ALT,Tab,overcircle,next
 bind=SUPER,v,togglefloating,
@@ -253,18 +276,14 @@ bind=SUPER+ALT,f,togglefakefullscreen,
 #+end_src
 ** Scratchpad
 #+begin_src shell
-# ax scratchpad
 # send to scratchpad
 bind=SUPER+SHIFT,s,minimized,
 # retrieve from scratchpad
 bind=SUPER+ALT,s,restore_minimized
 bind=SUPER,s,toggle_named_scratchpad,ax-scratchpad,none,foot --app-id ax-scratchpad -e ~/syscfg/scripts/tmux-scratchpad.sh
-
-scratchpad_cross_monitor=1
 #+end_src
 ** Layouts
 #+begin_src shell
-# layout settings and keybinds
 circle_layout=tile,monocle
 bind=SUPER,SPACE,switch_layout
 bind=SUPER,t,setlayout,tile
@@ -281,7 +300,6 @@ monocle_tab_mode=0
 #+end_src
 ** Tags
 #+begin_src shell
-# tag switch
 bind=SUPER,Left,viewtoleft,0
 bind=CTRL,Left,viewtoleft_have_client,0
 bind=SUPER,Right,viewtoright,0
@@ -314,7 +332,6 @@ bind=SUPER+SHIFT,9,tagsilent,9,0
 #+end_src
 ** Monitors
 #+begin_src shell
-# monitor switch
 bind=SUPER,comma,focusmon,left
 bind=SUPER,period,focusmon,right
 bind=SUPER+SHIFT,comma,tagmon,left
@@ -322,7 +339,6 @@ bind=SUPER+SHIFT,period,tagmon,right
 #+end_src
 ** Gaps
 #+begin_src shell
-# gaps
 bind=ALT+SHIFT,X,incgaps,1
 bind=ALT+SHIFT,Z,incgaps,-1
 bind=ALT+SHIFT,R,togglegaps
@@ -343,7 +359,6 @@ bind=CTRL+ALT,Right,resizewin,+50,+0
 #+end_src
 ** Mouse and scroll
 #+begin_src shell
-# Mouse Button Bindings
 # btn_left and btn_right can't bind none mod key
 mousebind=SUPER,btn_left,moveresize,curmove
 # mousebind=NONE,btn_middle,togglemaximizescreen,0
@@ -376,7 +391,6 @@ bind=SUPER,0,view,00
 * Layout Settings
 ** Master
 #+begin_src shell
-# Master-Stack Layout Setting
 new_is_master=1
 default_master_factor=0.55
 default_master_count=1
@@ -385,40 +399,39 @@ smart_gaps=0
 #+end_src
 ** Overview
 #+begin_src shell
-# Overview Setting
 hotarea_size=10
 enable_hotarea=0
 overview_gap_inner=5
 overview_gap_outer=30
 #+end_src
-** Misc
+** Focus
 #+begin_src shell
-# Misc
-no_border_when_single=0
-axis_bind_apply_timeout=100
 focus_on_activate=1
-idle_inhibit_ignore_visible=0
 sloppy_focus=1
 warp_cursor=1
 focus_cross_monitor=0
 focus_cross_tag=0
+#+end_src
+** Drag and snap
+#+begin_src shell
 enable_floating_snap=0
 snap_distance=30
-cursor_size=24
-cursor_theme=Numix-Cursor
-view_current_to_back=1
 drag_tile_to_tile=1
 drag_tile_small=1
 #+end_src
+** Misc
+#+begin_src shell
+no_border_when_single=0
+axis_bind_apply_timeout=100
+idle_inhibit_ignore_visible=0
+view_current_to_back=1
+#+end_src
 ** Appearance
 #+begin_src shell
-# Appearance
 gap_inner_horizontal=5
 gap_inner_vertical=5
 gap_outer_horizontal=10
 gap_outer_vertical=10
-scratchpad_width_ratio=0.8
-scratchpad_height_ratio=0.9
 border_px=4
 source_optional=./active-theme.conf
 #+end_src
