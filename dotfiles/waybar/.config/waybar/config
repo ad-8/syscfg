@@ -1,10 +1,10 @@
 // -*- mode: jsonc -*-
 {
-    "height": 23, // Waybar height (to be removed for auto height)
+    "height": 24, // Waybar height (to be removed for auto height)
     "spacing": 5, // Gaps between modules [px]
     // modules-left is compositor-specific: the active-compositor.json symlink is
-    // repointed by waybar.clj (compositor-hypr.json / compositor-niri.json / compositor-sway.json) based
-    // on which of Hyprland, niri or sway is running. Keep modules-left out of this file
+    // repointed by waybar.clj (compositor-hypr.json / compositor-niri.json / compositor-sway.json /
+    // compositor-mango.json) based on which of Hyprland, niri, sway or mango is running. Keep modules-left out of this file
     // (waybar's include is main-wins, so a value here would shadow the fragment).
     "include": ["~/.config/waybar/active-compositor.json"],
     "modules-center": [
@@ -97,6 +97,41 @@
         "format": "{value}"
     },
     "niri/window": {
+        "format": "{title}",
+        "icon": false,
+        "rewrite": {
+            "(.*) - Mozilla Firefox": "$1",
+            "(.*) — Mozilla Firefox": "$1",
+            "(.*) - Brave": "$1"
+        }
+    },
+    // mango equivalents (referenced only when running under mango; inert otherwise).
+    "mango/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "1": "  ",
+            "2": "  ",
+            "3": " 3 ",
+            "4": " 4 ",
+            "5": " 5 ",
+            "6": " 6 ",
+            "7": " 7 ",
+            "8": "  ",
+            "9": "  ",
+            "urgent": "!   !",
+            //   "focused": "",
+            //   "default": ""
+        }
+    },
+    "mango/keymode": {
+        "format": "{mode}",
+        "format-default": ""
+    },
+    "mango/layout": {
+        "format": "[{symbol}]"
+    },
+    "mango/window": {
         "format": "{title}",
         "icon": false,
         "rewrite": {

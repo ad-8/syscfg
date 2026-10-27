@@ -1,6 +1,6 @@
 // -*- mode: jsonc -*-
 {
-    "height": 23, // Waybar height (to be removed for auto height)
+    "height": 24, // Waybar height (to be removed for auto height)
     "spacing": 5, // Gaps between modules [px]
     // modules-left is compositor-specific; see config for the rationale. The
     // active-compositor.json symlink is repointed by waybar.clj.
@@ -79,6 +79,41 @@
         "format": "{value}"
     },
     "niri/window": {
+        "format": "",
+        "icon": false,
+        "rewrite": {
+            "(.*) - Mozilla Firefox": "$1",
+            "(.*) — Mozilla Firefox": "$1",
+            "(.*) - Brave": "$1"
+        }
+    },
+    // mango equivalents (referenced only when running under mango; inert otherwise).
+    "mango/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "1": "  ",
+            "2": "  ",
+            "3": " 3 ",
+            "4": " 4 ",
+            "5": " 5 ",
+            "6": " 6 ",
+            "7": " 7 ",
+            "8": "  ",
+            "9": "  ",
+            "urgent": "!   !",
+            //   "focused": "",
+            //   "default": ""
+        }
+    },
+    "mango/keymode": {
+        "format": "{mode}",
+        "format-default": ""
+    },
+    "mango/layout": {
+        "format": "[{symbol}]"
+    },
+    "mango/window": {
         "format": "",
         "icon": false,
         "rewrite": {

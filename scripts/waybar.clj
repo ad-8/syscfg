@@ -141,8 +141,10 @@
     (System/getenv "NIRI_SOCKET")                  :niri
     (System/getenv "HYPRLAND_INSTANCE_SIGNATURE")  :hypr
     (System/getenv "SWAYSOCK")                     :sway
+    (System/getenv "MANGO_INSTANCE_SIGNATURE")     :mango
     (= "niri" (System/getenv "XDG_CURRENT_DESKTOP")) :niri
     (= "sway" (System/getenv "XDG_CURRENT_DESKTOP")) :sway
+    (= "mango" (System/getenv "XDG_CURRENT_DESKTOP")) :mango
     :else                                          :hypr))
 
 (defn- point-compositor-symlink!
@@ -153,6 +155,7 @@
         target (fs/file dir (case (compositor)
                               :niri "compositor-niri.json"
                               :sway "compositor-sway.json"
+                              :mango "compositor-mango.json"
                               "compositor-hypr.json"))
         link   (fs/file dir "active-compositor.json")]
     (fs/delete-if-exists link)

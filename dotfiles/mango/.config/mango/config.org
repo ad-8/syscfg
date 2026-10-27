@@ -100,7 +100,7 @@ exec_once=blueman-applet
 exec_once=dunst
 exec_once=nm-applet
 exec_once=syncthing serve --no-browser
-exec_once=waybar
+exec_once=~/syscfg/scripts/waybar.clj launch
 exec_once=swaybg -i ~/sync/wallpapers/default.jpg
 
 exec_once=/usr/bin/env sh ~/syscfg/scripts/river-idle.sh
@@ -162,6 +162,10 @@ bind=SUPER,q,killclient,
 
 bind=SUPER,p,spawn,rofi -show run -theme picker
 bind=SUPER+ALT,l,spawn,swaylock --show-failed-attempts --color 0c1014
+
+# toggle waybar
+bind=SUPER,b,spawn,~/syscfg/scripts/waybar.clj toggle
+bind=SUPER+SHIFT,b,spawn,~/syscfg/scripts/waybar.clj toggle-min
 
 # notifications
 bind=SUPER+ALT,h,spawn,dunstctl history-pop
