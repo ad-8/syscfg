@@ -11,7 +11,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#calendar][calendar]]
   - [[#calendar-setup-to-interact-with-radicale][Calendar setup to interact with radicale]]
 - [[#configuration-of-basic-interal-settings][Configuration of basic interal settings]]
-  - [[#eww-popupwindow-height][eww popup/window height]]
+  - [[#eww-popup-height-and-default-browser][eww popup height and default browser]]
   - [[#clean-up----misc-stuff][clean up -- Misc Stuff]]
 - [[#configurations-of-external-packages][Configurations of external packages]]
   - [[#denote][denote]]
@@ -180,11 +180,15 @@ into these two lists, or a task arrives without a start and without a due date.
 #+end_src
 
 * Configuration of basic interal settings
-** eww popup/window height
+** eww popup height and default browser
 the default height is same/similar as M-x, so way too small for browsing
 #+begin_src emacs-lisp
 (set-popup-rule! "^\\*eww" :size 0.8 :quit t)
 (setq browse-url-browser-function #'eww-browse-url)
+(when (file-exists-p "/run/.toolbxenv")
+  (setq browse-url-secondary-browser-function #'browse-url-generic
+        browse-url-generic-program "flatpak-spawn"
+        browse-url-generic-args '("--host" "xdg-open")))
 #+end_src
 
 ** TODO clean up -- Misc Stuff
