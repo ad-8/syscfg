@@ -16,3 +16,5 @@ end
 
 # preview-tui img program
 set --export NNN_PREVIEWIMGPROG "chafa"
+
+set --export NNN_FCOLORS "0a03040200050608090b0d01"
