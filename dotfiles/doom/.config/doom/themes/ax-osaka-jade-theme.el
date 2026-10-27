@@ -22,7 +22,8 @@ determine the exact padding."
   :group 'ax-osaka-jade-theme
   :type '(choice integer boolean))
 
-;; Colors sourced from omarchy themes/osaka-jade/colors.toml
+;; Colors sourced from omarchy themes/osaka-jade/colors.toml, colorN format
+;; (last at b1505a08^; omarchy replaced the theme with Jade Horse 2026-10-25, a1ea6096)
 ;; Exception: the org-habit graph borrows org's blue (the blue slot is jade).
 (def-doom-theme ax-osaka-jade
   "A calm dark jade theme inspired by osaka-jade"
@@ -41,11 +42,12 @@ determine the exact padding."
    (base8      '("#F6F5DD"      "#dfdfdf" "white"        )) ;; color7
 
    (fg         '("#C1C497"      "#bfbfbf" "brightwhite"  )) ;; foreground
-   (fg-alt     '("#D6D5BC"      "#2d2d2d" "white"        )) ;; btop title
+   (fg-alt     base6) ;; dark_foreground
+   (fg-light   '("#D6D5BC"      "#2d2d2d" "white"        )) ;; light_foreground / btop title
 
    (grey       base5)
    (red        '("#FF5345"      "#ff6655" "red"          )) ;; color1
-   (orange     '("#E67D64"      "#dd8844" "brightred"    )) ;; btop hi_fg; no real orange in palette
+   (orange     '("#E67D64"      "#dd8844" "brightred"    )) ;; btop hi_fg; brighter than omarchy's later orange #a2734b
    (green      '("#549E6A"      "#99bb66" "green"        )) ;; color2
    (teal       '("#2DD5B7"      "#44b9b1" "cyan"         )) ;; color6
    (yellow     '("#E5C736"      "#ECBE7B" "yellow"       )) ;; color11 (real gold; color3 is mis-slotted green)
@@ -67,7 +69,7 @@ determine the exact padding."
    (functions      blue)
    (keywords       red)
    (methods        blue)
-   (operators      fg-alt)
+   (operators      fg-light)
    (type           yellow)
    (strings        green)
    (variables      cyan)
@@ -155,13 +157,11 @@ determine the exact padding."
    (diredfl-dir-name    :foreground cyan)
    (diredfl-file-name   :foreground fg)
    (diredfl-symlink     :foreground teal)
-   (diredfl-deletion    :foreground red :background (doom-lighten red 0.55))
 
    ;; eshell
    (+eshell-prompt-git-branch :foreground blue)
 
    ;; evil
-   (evil-ex-lazy-highlight      :foreground fg :background (doom-darken teal 0.3))
    (evil-snipe-first-match-face :foreground bg :background blue)
 
    ;; ivy
@@ -169,9 +169,9 @@ determine the exact padding."
    (ivy-minibuffer-match-face-2 :foreground blue :background bg)
 
    ;; lsp
-   (lsp-face-highlight-read    :foreground fg-alt :background (doom-darken dark-blue 0.3))
-   (lsp-face-highlight-textual :foreground fg-alt :background (doom-lighten dark-blue 0.3))
-   (lsp-face-highlight-write   :foreground fg-alt :background (doom-darken dark-blue 0.3))
+   (lsp-face-highlight-read    :foreground fg-light :background (doom-darken dark-blue 0.3))
+   (lsp-face-highlight-textual :foreground fg-light :background (doom-lighten dark-blue 0.3))
+   (lsp-face-highlight-write   :foreground fg-light :background (doom-darken dark-blue 0.3))
 
    ;; magit
    (magit-section-heading :foreground blue :weight 'bold)
