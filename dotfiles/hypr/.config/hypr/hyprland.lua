@@ -69,7 +69,7 @@ hl.on("hyprland.start", function()
 
   hl.exec_cmd(scripts .. "/bb/licht.clj hi &")
 
-  hl.exec_cmd("[workspace special:magic silent] foot --title hypr-scratchpad-01 -e sh -c '~/x/hyprland-tmux-scratchpad.sh'")
+  hl.exec_cmd("[workspace special:magic silent] foot --title hypr-scratchpad-01 -e ~/syscfg/scripts/tmux-scratchpad.sh")
 end)
 
 
