@@ -44,7 +44,7 @@
 
 (set-popup-rule! "^\\*eww" :size 0.8 :quit t)
 (setq browse-url-browser-function #'eww-browse-url)
-(when (file-exists-p "/run/.toolbxenv")
+(when (file-exists-p "/run/.toolboxenv")
   (setq browse-url-secondary-browser-function #'browse-url-generic
         browse-url-generic-program "flatpak-spawn"
         browse-url-generic-args '("--host" "xdg-open")))
