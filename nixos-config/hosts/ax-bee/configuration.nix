@@ -24,10 +24,8 @@
   ];
 
   configWorkstation.enable = true;
-  configFirefox.enable = true;
-  configNiri.enable = true;
-  configRiver.enable = true;
   configMango.enable = true;
+  configFirefox.enable = true;
   configAudio.enable = true;
   configClamav.enable = true;
   configGaming.enable = true;
