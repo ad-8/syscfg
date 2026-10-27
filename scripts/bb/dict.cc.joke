@@ -6,68 +6,62 @@
 (require '[joker.strconv :as strconv])
 (require '[joker.html :as html])
 (require '[joker.url :as url])
+(require '[joker.pprint :refer [print-table]])
 
-(defn cell-texts [cell]
-  (let [cleaned (-> cell
-                    ;; only strip the upvote div (digit-only content);
-                    ;; the new elliwrap div wraps translation <a> tags
-                    (str/replace #"(?s)<div[^>]*>\d+</div>" "")
-                    (str/replace #"(?s)<dfn[^>]*>.*?</dfn>" "")
-                    (str/replace #"(?s)<var[^>]*>.*?</var>" "")
-                    (str/replace #"(?s)<sup[^>]*>.*?</sup>" "")
-                    (str/replace #"<[^>]+>" " ")
-                    html/unescape)]
-    (->> (re-seq #"\S+" cleaned)
-         (remove #(= " " %)))))
+(def user-agent "Mozilla/5.0 (Windows NT 6.1;) Gecko/20100101 Firefox/141.0.3")
 
-(defn div-upvotes [cell]
-  (if-let [m (re-find #"(?s)<div[^>]*>(\d+)</div>" cell)]
-    (strconv/atoi (second m))
+(defn fetch-page
+  "Fetches dict.cc's result page for `word` and returns its HTML."
+  [word]
+  (:body (http/send {:url     (str "https://www.dict.cc/?s=" (url/query-escape word))
+                     :method  :get
+                     :headers {"User-Agent" user-agent}})))
+
+(defn result-cells
+  "Extracts the inner HTML of each result cell in `page`, English and German alternating."
+  [page]
+  (map second (re-seq #"(?s)<td[^>]*class=\"td7nl\"[^>]*>(.*?)</td>" page)))
+
+(defn upvotes
+  "Returns the upvote count in `cell`, or 0 if it has none."
+  [cell]
+  (if-let [[_ n] (re-find #"(?s)<div[^>]*>(\d+)</div>" cell)]
+    (strconv/atoi n)
     0))
 
-(defn td7nl-blocks [html-body]
-  (->> (re-seq #"(?s)<td[^>]*class=\"td7nl\"[^>]*>(.*?)</td>" html-body)
-       (map second)))
+(defn cell-text
+  "Strips `cell` to its plain text, without upvotes, subject labels, word classes and case markers."
+  [cell]
+  (let [plain (-> cell
+                  ;; only strip the upvote div (digit-only content);
+                  ;; the new elliwrap div wraps translation <a> tags
+                  (str/replace #"(?s)<div[^>]*>\d+</div>" "")
+                  (str/replace #"(?s)<dfn[^>]*>.*?</dfn>" "")
+                  (str/replace #"(?s)<var[^>]*>.*?</var>" "")
+                  (str/replace #"(?s)<sup[^>]*>.*?</sup>" "")
+                  (str/replace #"<[^>]+>" " ")
+                  html/unescape)]
+    (->> (re-seq #"\S+" plain)
+         (remove #(= " " %))
+         (str/join " "))))
 
-(defn pair->row [[left right]]
-  {:upvotes (div-upvotes right)
-   :x       (str/join " " (cell-texts left))
-   :y       (str/join " " (cell-texts right))})
+(defn ->row
+  "Builds a row map with `:en`, `:de` and `:upvotes` from an English and a German cell."
+  [[en de]]
+  {:en      (cell-text en)
+   :de      (cell-text de)
+   :upvotes (upvotes de)})
 
-(defn print-table [ks rows]
-  (let [ws    (map (fn [k] (apply max (count (str k)) (map #(count (str (get % k))) rows))) ks)
-        cell  (fn [s w] (str " " (str/pad-left (str s) " " w) " "))
-        row-s (fn [vals] (str "|" (str/join "|" (map cell vals ws)) "|"))
-        sep   (str "|" (str/join "+" (map #(str/pad-right "" "-" (+ % 2)) ws)) "|")]
-    (println)
-    (println (row-s (map str ks)))
-    (println sep)
-    (doseq [row rows]
-      (println (row-s (map #(get row %) ks))))))
+(defn lookup
+  "Looks up `word` on dict.cc and returns its rows, most upvoted first."
+  [word]
+  (->> (fetch-page word)
+       result-cells
+       (partition 2)
+       (map ->row)
+       (sort-by :upvotes >)))
 
-(defn fetch-rows [word]
-  (let [resp   (http/send {:url     (str "https://www.dict.cc/?s=" (url/query-escape word))
-                           :method  :get
-                           :headers {"User-Agent" "Mozilla/5.0 (Windows NT 6.1;) Gecko/20100101 Firefox/141.0.3"}})
-        blocks (td7nl-blocks (:body resp))]
-    (->> blocks
-         (partition 2)
-         (map pair->row)
-         (sort-by :upvotes >))))
-
-(defn translate-table [word]
-  (->> (fetch-rows word) (take 5) (print-table [:x :y :upvotes])))
-
-(defn translate-edn [word n]
-  (->> (fetch-rows word)
-       (take n)
-       (map (fn [{:keys [x y upvotes]}] {:en x :de y :upvotes upvotes}))
-       pr-str
-       println))
-
-(let [args  (drop 2 (os/args))
-      match (re-matches #"-(\d+)" (first args))
-      n     (when match (strconv/atoi (second match)))]
-  (if n
-    (translate-edn (str/join "+" (rest args)) n)
-    (translate-table (str/join "+" args))))
+(let [[flag & words :as args] (drop 2 (os/args))]
+  (if-let [[_ n] (re-matches #"-(\d+)" flag)]
+    (prn (take (strconv/atoi n) (lookup (str/join "+" words))))
+    (print-table (take 5 (lookup (str/join "+" args))))))
