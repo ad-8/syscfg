@@ -16,6 +16,11 @@
       {
         programs.mango.enable = true;
 
+        xdg.portal.wlr.settings.screencast = {
+          chooser_type = "dmenu";
+          chooser_cmd = "${lib.getExe pkgs.rofi} -dmenu -p share";
+        };
+
         environment.systemPackages = with pkgs; [
           gammastep
           swayidle
