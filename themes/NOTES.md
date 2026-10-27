@@ -24,7 +24,6 @@ separate rows here.
 | nord                       | —                     | nordtheme/nord                                   | https://github.com/nordtheme/nord                                                            |
 | nord-light                 | —                     | doom-nord-light (doom-themes)                    | https://github.com/doomemacs/themes                                                          |
 | osaka-jade                 | —                     | Justikun/omarchy-osaka-jade-theme                | https://github.com/Justikun/omarchy-osaka-jade-theme                                         |
-| oxocarbon                  | —                     | nyoom-engineering/oxocarbon.nvim                 | https://github.com/nyoom-engineering/oxocarbon.nvim                                          |
 | solarized-dark             | —                     | altercation/solarized                            | https://github.com/altercation/solarized                                                     |
 | solarized-light            | —                     | altercation/solarized                            | https://github.com/altercation/solarized                                                     |
 | tokyo-night                | tokyo-night-night     | tokyo-night/tokyo-night-vscode-theme             | https://github.com/tokyo-night/tokyo-night-vscode-theme                                      |
