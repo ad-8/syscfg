@@ -34,11 +34,6 @@ determine the exact padding."
 Defaults to \"hard\""
   :group 'ax-everforest-theme
   :type 'string)
-
-(defcustom ax-everforest-dired-height 1.15
-  "Font height for dired buffers"
-  :group 'ax-everforest-theme
-  :type 'float)
 ;; colors from
 ;; https://github.com/sainnhe/everforest/blob/master/autoload/everforest.vim
 (cond
@@ -205,22 +200,14 @@ Defaults to \"hard\""
    (cursor :foreground fg :background blue)
 
    ;; dired
-   (diredfl-compressed-file-name :height ax-everforest-dired-height
-                    :foreground yellow)
-   (diredfl-dir-heading :height ax-everforest-dired-height
-                        :foreground teal)
-   (diredfl-dir-name :height ax-everforest-dired-height
-                     :foreground blue)
-   (diredfl-deletion :height ax-everforest-dired-height
-                     :foreground red :background bg-red)
-   (diredfl-deletion-file-name :foreground red
-                               :background bg-red)
-   (diredfl-file-name :height ax-everforest-dired-height
-                      :foreground fg)
-   (dired-flagged :height ax-everforest-dired-height
-                    :foreground red :background bg-red)
-   (diredfl-symlink :height ax-everforest-dired-height
-                    :foreground magenta)
+   (diredfl-compressed-file-name :foreground yellow)
+   (diredfl-dir-heading :foreground teal)
+   (diredfl-dir-name :foreground blue)
+   (diredfl-deletion :foreground red :background bg-red)
+   (diredfl-deletion-file-name :foreground red :background bg-red)
+   (diredfl-file-name :foreground fg)
+   (dired-flagged :foreground red :background bg-red)
+   (diredfl-symlink :foreground magenta)
 
    ;; ein
    (ein:basecell-input-area-face :background bg)
