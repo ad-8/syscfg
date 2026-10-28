@@ -285,9 +285,9 @@ binds {
     Mod+Shift+R      { switch-preset-window-height; }
     Mod+Ctrl+R       { reset-window-height; }
     Mod+Alt+F        { toggle-windowed-fullscreen; }
-    Mod+Ctrl+F       { expand-column-to-available-width; }
+    Mod+Ctrl+F       { maximize-column; }
     Mod+F            { fullscreen-window; }
-    Mod+Ctrl+Shift+F { maximize-column; }
+    Mod+Ctrl+Shift+F { expand-column-to-available-width; }
 
     Mod+C       { center-column; }
     Mod+Shift+C { center-visible-columns; }
