@@ -20,9 +20,10 @@
     (execute-commands commands)
     :error))
 
-(let [res (sh "timeout" "2" "playerctl" "-p" players "status")]
-  (when (zero? (:exit res))
-    (case (str/trim (:out res))
-      "Playing" (set-player :pause)
-      ("Paused" "Stopped") (set-player :play)
-      :unknown-status)))
+(when (= *file* (System/getProperty "babashka.file"))
+  (let [res (sh "timeout" "2" "playerctl" "-p" players "status")]
+    (when (zero? (:exit res))
+      (case (str/trim (:out res))
+        "Playing" (set-player :pause)
+        ("Paused" "Stopped") (set-player :play)
+        :unknown-status))))

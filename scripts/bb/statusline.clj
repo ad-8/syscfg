@@ -35,52 +35,54 @@
       (= \/ (.charAt dir (count home)))             (str "~" (subs dir (count home)))
       :else                                         dir)))
 
-(defn git-branch [dir]
+(defn git-branch
   "Returns the current git branch for dir, truncated to 20 chars, or nil if not a git repo."
+  [dir]
   (when dir
     (try
       (let [branch (-> (process/sh "git" "-C" dir "branch" "--show-current")
                        :out str/trim)]
         (when (seq branch)
-          (let [max 20]
-            (if (> (count branch) max)
-              (str (subs branch 0 (- max 1)) "…")
+          (let [limit 20]
+            (if (> (count branch) limit)
+              (str (subs branch 0 (- limit 1)) "…")
               branch))))
       (catch Exception _ nil))))
 
-(let [input     (json/parse-string (slurp *in*) true)
-      five-pct  (get-in input [:rate_limits :five_hour :used_percentage])
-      week-pct  (get-in input [:rate_limits :seven_day :used_percentage])
-      five-eta  (eta-str (get-in input [:rate_limits :five_hour :resets_at]))
-      week-eta  (eta-str (get-in input [:rate_limits :seven_day :resets_at]))
-      raw-dir   (get-in input [:workspace :current_dir])
-      dir       (some-> raw-dir shorten-dir)
-      branch    (git-branch raw-dir)
-      model     (get-in input [:model :display_name])
-      effort    (get-in input [:effort :level])
-      ctx-tok   (get-in input [:context_window :total_input_tokens])
-      ctx       (when ctx-tok (format "%.1fk" (/ ctx-tok 1000.0)))
-      host      (try (-> (slurp "/etc/hostname") str/trim (str/split #"\.") first)
-                     (catch Exception _ "localhost"))
-      user      (or (System/getenv "USER") (System/getenv "LOGNAME") "user")
-      esc       (str (char 27) "[")
-      pct-str   (fn [pct]
-                  (let [n     (Math/round (double pct))
-                        color (cond (>= pct 90) (str esc "1;4;31m")
-                                    (>= pct 75) (str esc "31m")
-                                    (>= pct 50) (str esc "33m")
-                                    :else       (str esc "32m"))]
-                    (str color n "%" esc "0m")))
-      rate-seg  (fn [label pct eta]
-                  (when pct
-                    (str label ": " (pct-str pct)
-                         (when eta (str " (resets " eta ")")))))
-      parts     (remove nil?
-                  [(str user "@" host)
-                   (if branch (str dir " (" branch ")") dir)
-                   (when model (str model (when effort (str " - " effort))))
-                   (when (and effort (not model)) effort)
-                   (when ctx (str "ctx: " ctx))
-                   (rate-seg "5h" five-pct five-eta)
-                   (rate-seg "7d" week-pct week-eta)])]
-  (print (str/join " | " parts)))
+(when (= *file* (System/getProperty "babashka.file"))
+  (let [input     (json/parse-string (slurp *in*) true)
+        five-pct  (get-in input [:rate_limits :five_hour :used_percentage])
+        week-pct  (get-in input [:rate_limits :seven_day :used_percentage])
+        five-eta  (eta-str (get-in input [:rate_limits :five_hour :resets_at]))
+        week-eta  (eta-str (get-in input [:rate_limits :seven_day :resets_at]))
+        raw-dir   (get-in input [:workspace :current_dir])
+        dir       (some-> raw-dir shorten-dir)
+        branch    (git-branch raw-dir)
+        model     (get-in input [:model :display_name])
+        effort    (get-in input [:effort :level])
+        ctx-tok   (get-in input [:context_window :total_input_tokens])
+        ctx       (when ctx-tok (format "%.1fk" (/ ctx-tok 1000.0)))
+        host      (try (-> (slurp "/etc/hostname") str/trim (str/split #"\.") first)
+                       (catch Exception _ "localhost"))
+        user      (or (System/getenv "USER") (System/getenv "LOGNAME") "user")
+        esc       (str (char 27) "[")
+        pct-str   (fn [pct]
+                    (let [n     (Math/round (double pct))
+                          color (cond (>= pct 90) (str esc "1;4;31m")
+                                      (>= pct 75) (str esc "31m")
+                                      (>= pct 50) (str esc "33m")
+                                      :else       (str esc "32m"))]
+                      (str color n "%" esc "0m")))
+        rate-seg  (fn [label pct eta]
+                    (when pct
+                      (str label ": " (pct-str pct)
+                           (when eta (str " (resets " eta ")")))))
+        parts     (remove nil?
+                    [(str user "@" host)
+                     (if branch (str dir " (" branch ")") dir)
+                     (when model (str model (when effort (str " - " effort))))
+                     (when (and effort (not model)) effort)
+                     (when ctx (str "ctx: " ctx))
+                     (rate-seg "5h" five-pct five-eta)
+                     (rate-seg "7d" week-pct week-eta)])]
+    (print (str/join " | " parts))))

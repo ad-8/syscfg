@@ -62,6 +62,7 @@
     (set-wallpaper-xorg path)))
 
 
-(-> wallpaper-dir
-    random-wallpaper
-    set-wall)
+(when (= *file* (System/getProperty "babashka.file"))
+  (-> wallpaper-dir
+      random-wallpaper
+      set-wall))

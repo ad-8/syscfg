@@ -18,6 +18,7 @@
     (shell cmd)))
 
 
-(case (get-state)
-  :active (and (ntfy :paused) (shell "sleep 2") (shell "dunstctl set-paused true"))
-  :paused (and (shell "dunstctl set-paused false") (ntfy :active)))
+(when (= *file* (System/getProperty "babashka.file"))
+  (case (get-state)
+    :active (and (ntfy :paused) (shell "sleep 2") (shell "dunstctl set-paused true"))
+    :paused (and (shell "dunstctl set-paused false") (ntfy :active))))
