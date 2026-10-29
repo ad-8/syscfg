@@ -14,6 +14,7 @@
     home.packages = with pkgs; [
       anki
       brave
+      calibre
       gimp3
       kdePackages.okular
       keepassxc
