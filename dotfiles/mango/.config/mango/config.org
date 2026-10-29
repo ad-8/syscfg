@@ -169,6 +169,7 @@ window_rule=is_floating:1,app_id:Emacs$,title:^emacs-float$
 ** Scratchpads
 #+begin_src shell
 window_rule=is_named_scratchpad:1,width:0.5,height:0.6,app_id:^ax-scratchpad$
+window_rule=is_named_scratchpad:1,width:0.5,height:0.6,title:^emacs-scratchpad$
 scratchpad_cross_monitor=1
 scratchpad_width_ratio=0.8
 scratchpad_height_ratio=0.9
@@ -277,6 +278,8 @@ bind=SUPER+SHIFT,s,minimized,
 # retrieve from scratchpad
 bind=SUPER+ALT,s,restore_minimized
 bind=SUPER,s,toggle_named_scratchpad,ax-scratchpad,none,foot --app-id ax-scratchpad -e ~/syscfg/scripts/tmux-scratchpad.sh
+bind=SUPER,e,toggle_named_scratchpad,none,^emacs-scratchpad$,emacs -T emacs-scratchpad
+bind=SUPER,i,toggle_named_scratchpad,none,^emacs-scratchpad$,emacs -T emacs-scratchpad
 #+end_src
 ** Layouts
 #+begin_src shell
