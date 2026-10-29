@@ -174,9 +174,13 @@ into these two lists, or a task arrives without a start and without a due date.
 #+end_src
 
 *** auth for both =~/.authinfo=
+The first line is for Emacs 30, which looks the password up as host:port.
+The second line is for Emacs 31, which looks it up by the bare host.
+Both stay until every host runs Emacs 31, then the first one can go.
 #+begin_src sh :tangle no
 λ cat .authinfo
  machine 192.168.178.8:5232 port http login ax password <radicale-pw>
+ machine 192.168.178.8 port http login ax password <radicale-pw>
 #+end_src
 
 * Configuration of basic interal settings
