@@ -112,6 +112,8 @@ it, =org-caldav= does the two-way editing. Both read the password from
 =~/.authinfo=.
 
 *** viewing the calendar (read only): =SPC j c c=
+The radicale host =192.168.178.8= is also in =org-caldav-url= below and in both
+=~/.authinfo= lines (the server side is ax-fuji's =serverIp=).
 #+begin_src elisp
 (defun ax/open-calendar ()
   "Open a read-only view of the calendar on radicale."
@@ -195,7 +197,10 @@ the default height is same/similar as M-x, so way too small for browsing
         browse-url-generic-args '("--host" "xdg-open")))
 #+end_src
 
-** TODO clean up -- Misc Stuff
+** clean up -- Misc Stuff
+Many Emacs commands send POSIX shell syntax through =shell-file-name=, which fish
+doesn't accept everywhere, so it stays bash. =M-x shell= uses
+=explicit-shell-file-name=, so the interactive shell is still fish.
 #+begin_src emacs-lisp
 ;; doom doctor suggestions
 (setq shell-file-name (executable-find "bash"))
@@ -251,6 +256,8 @@ segment that a theme can set; other themes look the same.
   (setq fzf/window-height 35))
 #+end_src
 ** projectile
+Doom saves each project's file list across restarts, so files created outside
+Emacs were missing from project search until the cache was cleared.
 #+begin_src elisp
 (after! projectile
   (setq projectile-enable-caching nil))
@@ -322,6 +329,9 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 
 * Consult - Live previews for grep, ripgrep and others
 https://github.com/minad/consult?tab=readme-ov-file#use-package-example
+
+The preview shows once no key has been pressed for 0.4 s (0.2 s for themes),
+instead of after every key.
 #+begin_src elisp
 (after!
  consult
@@ -345,6 +355,9 @@ https://github.com/minad/consult?tab=readme-ov-file#use-package-example
 #+end_src
 
 *** auto-resize Emacs font size on =ax-bee= with 4k/1080 monitors
+On ax-bee this replaces the =doom-font= above with a per-monitor size and drops
+its =:weight 'semi-light=. It polls every second, so a move to the other monitor
+is noticed without a focus change.
 #+begin_src elisp
 (defvar ax/1080p-font-size 14
   "Font size for 1080p displays.")
@@ -389,6 +402,9 @@ https://github.com/minad/consult?tab=readme-ov-file#use-package-example
           (run-with-timer 0 1.0 (lambda () (ax/set-font-for-monitor (selected-frame)))))))
 #+end_src
 ** Theme
+=active-theme.el= is a gitignored symlink that =switch_theme.clj= points at the
+current theme. The file watch reloads it when the link changes, so a theme switch
+reaches a running Emacs without a restart.
 #+begin_src emacs-lisp
 (defvar ax/doom-active-theme-file (expand-file-name "~/.config/doom/active-theme.el"))
 
@@ -853,7 +869,7 @@ we keep =the-matrix-theme.el= byte-for-byte upstream.
 #+end_src
 
 * Elfeed - Atom and RSS Reader
-** TODO Database (syncthing seems to corrupt it)
+** Database (syncthing seems to corrupt it)
 #+begin_src emacs-lisp
 ;; (setq elfeed-db-directory (expand-file-name "~/sync/emacs/elfeed"))
 #+end_src
@@ -878,12 +894,8 @@ https://www.gnu.org/software/emms/
 ** basic setup
 https://lucidmanager.org/productivity/configure-emms/
 #+begin_src emacs-lisp
-(use-package emms
+(use-package! emms
   :config
-  (require 'emms-setup)
-  (require 'emms-mpris)
-  (emms-all)
-  (emms-default-players)
   (emms-mpris-enable)
   :custom
   (emms-browser-covers #'emms-browser-cache-thumbnail-async) ; without this, no covers in browser
@@ -899,6 +911,7 @@ https://lucidmanager.org/productivity/configure-emms/
 #+begin_src emacs-lisp
 (setq emms-browser-playlist-info-title-format "%T. %t")
 #+end_src
+Playlist titles then look like this:
 1/8. Am Sterbebett der Zeit
 2/8. Ballade auf den Tod
 [...]
@@ -1239,7 +1252,7 @@ Also drops the cached nav so nav.html edits are picked up."
   (org-publish "ax-website" t))
 #+end_src
 
-* TODO Spellchecking: ispell aspell hunspell
+* Spellchecking: ispell aspell hunspell
 #+begin_src elisp
 (setq ispell-program-name "hunspell")
 
@@ -1270,7 +1283,7 @@ Also drops the cached nav so nav.html edits are picked up."
 #+end_src
 
 
-* TODO testing file for my custom interactive functions
+* testing file for my custom interactive functions
 This way, we don't have to update the config every time we make changes
 or quickly want to try out a new idea.
 
@@ -1278,7 +1291,7 @@ or quickly want to try out a new idea.
 (when (file-exists-p "/home/ax/x/ax.el") (load-file "/home/ax/x/ax.el"))   
 #+end_src
 
-* TODO testing cljbang
+* testing cljbang
 Also to quickly write custom functionality, but partly in Clojure.
 #+begin_src elisp
 (when (file-exists-p "/home/ax/x/cljbang/axc.el") (load-file "/home/ax/x/cljbang/axc.el"))   

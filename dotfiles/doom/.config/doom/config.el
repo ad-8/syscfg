@@ -629,12 +629,8 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   (map! :map elfeed-show-mode-map
         :n "q" #'+rss/delete-pane))
 
-(use-package emms
+(use-package! emms
   :config
-  (require 'emms-setup)
-  (require 'emms-mpris)
-  (emms-all)
-  (emms-default-players)
   (emms-mpris-enable)
   :custom
   (emms-browser-covers #'emms-browser-cache-thumbnail-async) ; without this, no covers in browser
