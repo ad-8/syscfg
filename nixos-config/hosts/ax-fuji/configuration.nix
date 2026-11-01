@@ -28,7 +28,6 @@ in
     podman-compose
     rclone
     restic
-    ruby_3_4
     vlock
     yt-dlp
   ];
