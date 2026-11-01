@@ -20,7 +20,10 @@
     # replace stable waybar with master (pinned rev, see the waybar input in flake.nix) via overlay
     # TODO: remove (plus the waybar flake input) once nixos stable ships a waybar release with the mango/* modules (> 0.15.0), likely with the 26.11 upgrade
     (final: prev: {
-      waybar = inputs.waybar.packages.${prev.stdenv.hostPlatform.system}.default;
+      waybar = inputs.waybar.packages.${prev.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
+        doCheck = false;
+        mesonFlags = map (f: if f == "-Dtests=enabled" then "-Dtests=disabled" else f) old.mesonFlags;
+      });
     })
   ];
 
