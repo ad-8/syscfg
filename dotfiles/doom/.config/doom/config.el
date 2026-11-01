@@ -71,18 +71,6 @@
 
 ;; https://protesilaos.com/emacs/dired-preview
 (setq dired-preview-delay 0.1) ;; default 0.7
-(setq dired-preview-max-size (expt 2 20))
-(setq dired-preview-ignored-extensions-regexp
-        (concat "\\."
-                "\\(gz\\|"
-                "zst\\|"
-                "tar\\|"
-                "xz\\|"
-                "rar\\|"
-                "zip\\|"
-                "iso\\|"
-                "epub"
-                "\\)"))
 
 (defface ax/dirvish-modeline '((t))
   "Laid over dirvish's modeline segments; empty unless a theme sets it.")
@@ -98,24 +86,13 @@
 
 (setenv "FZF_DEFAULT_COMMAND" "fd -u")
 (use-package! fzf
-  :bind
-    ;; Don't forget to set keybinds!
   :config
-  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
-        fzf/executable "fzf"
-        fzf/git-grep-args "-i --line-number %s"
-        ;; command used for `fzf-grep-*` functions
-        ;; example usage for ripgrep:
-        ;; fzf/grep-command "rg --no-heading -nH"
-        fzf/grep-command "grep -nrH"
-        ;; If nil, the fzf buffer will appear at the top of the window
-        fzf/position-bottom t
-        fzf/window-height 35))
+  (setq fzf/window-height 35))
 
 (after! projectile
   (setq projectile-enable-caching nil))
 
-(defun ax-tmr-notify-send (timer)
+(defun ax/tmr-notify-send (timer)
   "Announce finished TIMER via notify-send.
 Fall back to `tmr-notification-notify' if notify-send is unavailable."
   (if (executable-find "notify-send")
@@ -134,7 +111,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   (setq tmr-sound-file (expand-file-name "~/sync/emacs/alarm.ogg")
         tmr-notification-urgency 'critical)
   (remove-hook 'tmr-timer-finished-functions #'tmr-notification-notify)
-  (add-hook 'tmr-timer-finished-functions #'ax-tmr-notify-send))
+  (add-hook 'tmr-timer-finished-functions #'ax/tmr-notify-send))
 
 (after! lsp-mode
   (setq lsp-ui-doc-enable t
@@ -142,7 +119,6 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
         lsp-ui-doc-position 'top))  ; Position pop-up at top of window
 
 (after! cider
-  (add-hook 'cider-mode-hook #'lsp)
   (setq cider-doc-view-function #'cider-docview-inline-symbol)  ; Inline docs with examples
   (set-popup-rule! "^\\*cider-repl" :side 'right :size 0.4 :quit nil :ttl nil)
   (map! :map cider-mode-map
@@ -223,7 +199,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
     (when (display-graphic-p)
       (ax/set-font-for-monitor (selected-frame)))
 
-    ;; Poll to detect monitor changes even when focus doesn't change (Hyprland)
+    ;; Poll to detect monitor changes even when focus doesn't change
     (when ax/monitor-font--timer
       (cancel-timer ax/monitor-font--timer))
     (setq ax/monitor-font--timer
@@ -683,7 +659,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   (emms-playlist-mode-go))
 
 (defun ax/trigger-scrobble (status)
-  "Run when a song starts or finishes. STATUS should be either 'started or 'finished."
+  "Run when a song starts or finishes. STATUS is `started' or `finished'."
   (let* ((track (emms-playlist-current-selected-track))
          (title (emms-track-get track 'info-title))
          (artist (emms-track-get track 'info-artist))
@@ -691,8 +667,6 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
          (message-text (format "%s — %s" (or artist "Unknown artist") (or title "Unknown title")))
          (status-text (if (eq status 'started) "Now playing" "Finished playing")))
     (message "%s: %s" status-text message-text)
-    ;; (shell-command (format "notify-send '%s' '%s'" status-text message-text))
-    
     (make-process
      :name "ax-scrobble"
      :buffer " *ax-scrobble*"
@@ -723,22 +697,21 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
     (setq-local header-line-format
                 (format " %s to insert text or %s to cancel."
                         (propertize "C-c C-c" 'face 'help-key-binding)
-			(propertize "C-c C-k" 'face 'help-key-binding)))
+                        (propertize "C-c C-k" 'face 'help-key-binding)))
     (local-set-key (kbd "C-c C-k")
-		   (lambda () (interactive)
-		     (kill-new (buffer-string))
-		     (delete-frame)))
+                   (lambda () (interactive)
+                     (kill-new (buffer-string))
+                     (delete-frame)))
     (local-set-key (kbd "C-c C-c")
-		   (lambda () (interactive)
-		     (start-process "wtype" nil "wtype" "-s" "350" "--" (buffer-string))
-		     (delete-frame)))))
+                   (lambda () (interactive)
+                     (start-process "wtype" nil "wtype" "-s" "350" "--" (buffer-string))
+                     (delete-frame)))))
 
 (defun ax/git-count-commits ()
-  "Count the number of commits in the current Git repository
-   using \='git log --oneline | wc -l\='."
+  "Show how many commits HEAD has."
   (interactive)
   (message "Number of commits: %s"
-           (string-trim (shell-command-to-string "git log --oneline | wc -l"))))
+           (string-trim (shell-command-to-string "git rev-list --count HEAD"))))
 
 (defun ax/org-fold-all-list-items ()
   "Fold every plain-list item in the current Org buffer."
@@ -805,13 +778,11 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
         :desc "org-babel-tangle" "t" #'org-babel-tangle)))
 
 (map! :leader
-      (:prefix ("t" . "toggle")
-       :desc "Toggle line highlight in frame" "h" #'hl-line-mode
+      (:prefix "t"
+       :desc "Toggle line highlight in buffer" "h" #'hl-line-mode
        :desc "Toggle line highlight globally" "H" #'global-hl-line-mode
        :desc "Toggle markdown-view-mode"      "M" #'ax/toggle-markdown-mode
        :desc "Toggle truncate lines"          "T" #'toggle-truncate-lines
-       :desc "Toggle zen"                     "z" #'+zen/toggle
-       :desc "Toggle zen"                     "Z" #'+zen/toggle-fullscreen
        :desc "Toggle treemacs"                "t" #'+treemacs/toggle))
 
 (after! magit
@@ -820,7 +791,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
           (unpushed . show))))
 
 (custom-set-faces
- '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "variable-pitch"))))
+ '(markdown-header-face ((t (:inherit (font-lock-function-name-face variable-pitch) :weight bold))))
  '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.6))))
  '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.5))))
  '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1.4))))
@@ -869,14 +840,12 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 (defun ax/org-collapse-except-dashed ()
   "Collapse all; show child headings of level-1 headings starting with \"-- \"."
   (interactive)
-  (if (fboundp 'org-cycle-overview) (org-cycle-overview) (org-overview))
+  (org-cycle-overview)
   (save-excursion
     (goto-char (point-min))
     (while (re-search-forward "^\\* -- " nil t)
       (when (org-at-heading-p)
-        (if (fboundp 'org-fold-show-children)
-            (org-fold-show-children)
-          (org-show-children))))))
+        (org-fold-show-children)))))
 
 (defun ax/org-maybe-collapse-except-dashed ()
   "Apply `ax/org-collapse-except-dashed' when visiting ~/org/todo.org."
