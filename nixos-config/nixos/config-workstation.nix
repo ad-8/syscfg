@@ -70,6 +70,8 @@
       libsecret
     ];
 
+    programs.direnv.enable = true;
+
     # The firewall is enabled by default on NixOS. Still, explicitly ensure it is enabled
     networking.firewall.enable = true;
     # Open ports in the firewall.

@@ -14,7 +14,6 @@
     home.packages = with pkgs; [
       clojure
       clojure-lsp
-      direnv
       geckodriver
       gh
       janet
