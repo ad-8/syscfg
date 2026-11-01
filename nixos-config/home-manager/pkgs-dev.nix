@@ -16,7 +16,6 @@
       clojure-lsp
       geckodriver
       gh
-      janet
       joker
       jq
       leiningen

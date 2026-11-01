@@ -128,25 +128,6 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 
 ;; (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 
-(after! lsp-mode
-  (add-to-list 'lsp-language-id-configuration '(janet-mode . "janet"))
-  (lsp-register-client
-    (make-lsp-client
-      :new-connection (lsp-stdio-connection "janet-lsp")
-      :activation-fn (lsp-activate-on "janet")
-      :server-id 'janet-lsp)))
-
-(use-package! janet-mode
-  :mode "\\.janet\\'"
-  :config
-  (add-hook 'janet-mode-hook (lambda () (setq indent-tabs-mode nil)))
-  (add-hook 'janet-mode-hook #'lsp))
-
-(use-package! ajrepl
-  :after janet-mode
-  :config
-  (add-hook 'janet-mode-hook #'ajrepl-interaction-mode))
-
 (after!
  consult
  (consult-customize
