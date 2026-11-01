@@ -17,7 +17,8 @@
     (final: prev: {
       emacs = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.emacs;
     })
-    # replace stable waybar with latest master via overlay
+    # replace stable waybar with master (pinned rev, see the waybar input in flake.nix) via overlay
+    # TODO: remove (plus the waybar flake input) once nixos stable ships a waybar release with the mango/* modules (> 0.15.0), likely with the 26.11 upgrade
     (final: prev: {
       waybar = inputs.waybar.packages.${prev.stdenv.hostPlatform.system}.default;
     })
