@@ -128,6 +128,24 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 
 ;; (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 
+(setq-hook! 'go-mode-hook devdocs-current-docs '("go"))
+
+(defun ax/go--qualified-symbol ()
+  (save-excursion
+    (skip-chars-backward "[:alnum:]_.")
+    (when (looking-at "[[:alnum:]_.]+")
+      (string-replace "." " " (string-trim (match-string 0) "\\.+" "\\.+")))))
+
+(defun ax/devdocs-lookup-at-point ()
+  "Look up the Go symbol at point in DevDocs."
+  (interactive)
+  (devdocs-lookup nil (ax/go--qualified-symbol)))
+
+(map! :after go-mode
+      :map go-mode-map
+      :localleader
+      "k" #'ax/devdocs-lookup-at-point)
+
 (after!
  consult
  (consult-customize
