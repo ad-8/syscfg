@@ -95,6 +95,7 @@
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        data                ; config/data formats
        emacs-lisp          ; drown in parentheses
+       (go +lsp)           ; the hipster dialect
        ;;json              ; At least it ain't XML
        ;;(java +lsp)       ; the poster child for carpal tunnel syndrome
        ;;latex             ; writing papers in Emacs has never been so fun
@@ -106,9 +107,6 @@
        (nix +lsp)          ; I hereby declare "nix geht mehr!"
 
        (org +pretty)       ; organize your plain life in plain text
-
-       ; run `gem install ruby-lsp` in project dir after `rbenv` is properly configured
-       (ruby +lsp +rails)  ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
 
        (rust +lsp)         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;(scheme +guile)   ; a fully conniving family of lisps
