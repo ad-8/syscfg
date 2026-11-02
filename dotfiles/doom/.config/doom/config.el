@@ -921,6 +921,3 @@ Also drops the cached nav so nav.html edits are picked up."
 (when (file-exists-p "/home/ax/x/ax.el") (load-file "/home/ax/x/ax.el"))
 
 (when (file-exists-p "/home/ax/x/cljbang/axc.el") (load-file "/home/ax/x/cljbang/axc.el"))
-
-(after! lsp-zig
-  (setq lsp-zig-enable-argument-placeholders nil))
