@@ -95,7 +95,6 @@ spawn-sh-at-startup "~/syscfg/scripts/waybar.clj launch"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "dunst"
 spawn-at-startup "emacs"
-spawn-at-startup "firefox"
 spawn-at-startup "nm-applet"
 spawn-sh-at-startup "swaybg -i ~/sync/wallpapers/default.jpg"
 
