@@ -48,6 +48,7 @@
         doCheck = false;
       }))
       thunderbird
+      vivaldi
       vlc
       waypaper
     ];
