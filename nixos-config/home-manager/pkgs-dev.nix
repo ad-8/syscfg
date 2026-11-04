@@ -21,7 +21,6 @@
       leiningen
       nil # nix language server
       nixfmt
-      semgrep # needed for clojure lsp and others in emacs
       sqlitebrowser
       vscodium
       youplot # cli plots
