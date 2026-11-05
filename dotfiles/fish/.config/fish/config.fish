@@ -1,7 +1,3 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
-
 abbr -a cd. 'cd ~/.config'
 abbr -a cdc 'cd ~/my/code'
 abbr -a cdd 'cd ~/syscfg/dotfiles'
@@ -29,35 +25,25 @@ abbr -a gsw 'git show'
 abbr -a sc systemctl
 abbr -a r 'clear && /usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'
 
-if type -q code
-   abbr -a c. 'code .'
-else
-   abbr -a c. 'codium --force-device-scale-factor=1 .'
-end
-
 abbr -a gi 'grep -i'
 abbr -a rg 'rg -i'
 
-abbr -a el 'eza -l --group-directories-first --icons'
 abbr -a hg 'history | grep -i'
 
 abbr -a t. 'thunar . & disown'
-abbr -a cm chezmoi
-abbr -a db distrobox
 
 abbr -a lt 'll -th'
 # by default, when in nnn, `e` opens a file with $VISUAL
 abbr -a n "VISUAL='vim' nnn"
-abbr -a o. 'xdg-open .'
-abbr -a pnc "protonvpn-cli ks --off && protonvpn-cli ks --permanent && protonvpn-cli c --protocol tcp --fastest" # RIP nice cli 
 abbr -a rc rclone
+abbr -a rcp 'rclone copy --progress'
+abbr -a rct 'rclone tree --level 2'
 abbr -a rd 'rm -rf'
 abbr -a ssa 'sha256sum'
 abbr -a ssc 'sha256sum --check --ignore-missing'
 abbr -a tl 'tree -L'
 abbr -a todo 'rg -i todo --stats'
 abbr -a vd vim -d
-abbr -a startw niri-session
 
 
 if test "$XDG_SESSION_TYPE" = "wayland"
@@ -97,13 +83,9 @@ abbr -a cgt 'cargo test'
 abbr -a fp flatpak
 abbr -a fpl flatpak list --app
 abbr -a fpu flatpak update
-abbr -a pm 'pacman -S'
-abbr -a pmq 'pacman -Q'
-abbr -a zy zypper
 
 if test -f /etc/os-release
     # Extract the distro ID from /etc/os-release, removing any quotes
-    #set distro (grep -oP '^ID=\K.*' /etc/os-release | tr -d '"')
     set distro (awk -F= '/^ID=/ { gsub(/["\047]/, "", $2); print $2 }' /etc/os-release)
     
     # defaults for any distro; the cases below override what they know better
@@ -119,19 +101,21 @@ if test -f /etc/os-release
         case arch
             abbr -a up 'sudo pacman -Syu'
             abbr -a cu "checkupdates | sed 's/->//g' | column -t"
+            abbr -a pm 'pacman -S'
+            abbr -a pmq 'pacman -Q'
         case fedora rocky almalinux
             abbr -a up 'sudo dnf upgrade --refresh'
             abbr -a cu "dnf check-update --refresh | wc -l"
         case opensuse-tumbleweed
             abbr -a up 'sudo zypper ref && sudo zypper dup'
             abbr -a nf "clear && fastfetch --logo opensuse"
+            abbr -a zy zypper
         case nixos
              abbr -a up "sudo nixos-rebuild switch --flake ~/syscfg/nixos-config#$hostname"
              abbr -a upb "sudo nixos-rebuild boot --flake ~/syscfg/nixos-config#$hostname"
              abbr -a upd "nixos-rebuild dry-run --flake ~/syscfg/nixos-config#$hostname"
              abbr -a up2 "NH_OS_FLAKE=~/syscfg/nixos-config nh os switch --ask --hostname $hostname"
              abbr -a up2b "NH_OS_FLAKE=~/syscfg/nixos-config nh os boot --ask --hostname $hostname"
-             abbr -a nxup "NH_OS_FLAKE=~/syscfg/nixos-config nh os switch --ask --hostname $hostname"
              abbr -a cu "cd ~/syscfg/nixos-config/ && nix flake update && git status && printf '\n----------\n\n' && nixos-rebuild dry-run --flake ~/syscfg/nixos-config#$hostname"
              abbr -a lg 'nixos-rebuild list-generations | head'
         case void
@@ -158,20 +142,8 @@ abbr -a flac2mp3 'fd -e flac --exec ffmpeg -loglevel error -i {} -codec:a libmp3
 
 abbr -a ytdlp-split-audio "yt-dlp --format ba[ext=m4a] --split-chapters URL"
 
-# abbr -a dcc 'steam-run $HOME/syscfg/scripts/bb/dict.cc.clj 2>/dev/null' # get rid of 'Warning: converting markup from :html to :hickory lost 1 form' 
 abbr -a ff rfv
 abbr -a ffa rfvuuu
-abbr -a rcp 'rclone copy --progress'
-abbr -a rct 'rclone tree --level 2'
-
-switch (uname)
-    case FreeBSD
-        abbr -a ifc ifconfig
-    case OpenBSD
-        abbr -a nf 'clear && fastfetch --config neofetch --logo openbsd_small && echo'
-    case Linux
-    case '*'
-end
 
 fish_add_path ~/.cargo/bin/
 fish_add_path ~/.config/emacs/bin/
@@ -189,21 +161,11 @@ alias free 'free -h'
 alias dcc 'joker $HOME/syscfg/scripts/bb/dict.cc.joke'
 alias csm '$HOME/my/code/clojure/csm/csm.clj'
 
-# --export -x is the same
-set -g theme_color_scheme "nord"
-set -Ux PAGER less
-
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -nw"
 export VISUAL="emacsclient -c"
 
 set -Ux fish_greeting "" # disable default welcome message
-
-function insert_timestamp --description 'Insert literal date command'
-    commandline -i '$(date +%Y%m%d-%H%M%S)'
-end
-
-bind ctrl-t insert_timestamp
 
 source ~/.config/fish/nnn.fish
 
