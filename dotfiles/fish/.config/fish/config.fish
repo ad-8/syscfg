@@ -207,8 +207,10 @@ bind ctrl-t insert_timestamp
 
 source ~/.config/fish/nnn.fish
 
-starship init fish | source
+if status is-interactive; and command -q starship
+    starship init fish | source
+end
 
-if command -q zoxide
+if status is-interactive; and command -q zoxide
     zoxide init fish | source
 end

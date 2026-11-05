@@ -287,13 +287,15 @@ source ~/.config/fish/nnn.fish
 #+end_src
 
 #+begin_src shell
-starship init fish | source
+if status is-interactive; and command -q starship
+    starship init fish | source
+end
 #+end_src
 
 ** zoxide
 not available on OpenBSD 7.8 and 7.9
 #+begin_src shell
-if command -q zoxide
+if status is-interactive; and command -q zoxide
     zoxide init fish | source
 end
 #+end_src
