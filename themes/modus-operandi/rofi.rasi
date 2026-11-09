@@ -49,6 +49,10 @@ message {
     background-color: @mocyan;
 }
 
+textbox {
+    text-color: inherit;
+}
+
 inputbar {
     color: @mofg;
     padding: 11px;
