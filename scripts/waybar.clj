@@ -30,22 +30,13 @@
       (format "%.1fT" (/ (double gib) 1024))
       (format "%dG" gib))))
 
-(defn- print-free-space
-  "Prints the free space on `/`, as waybar JSON when `output-fmt` is \"json\"."
-  [output-fmt]
-  (let [avail (df-avail-bytes)
-        fmt (format "󰋊 %s" (if avail (human-avail avail) "--"))
-        class (if (and avail (>= avail disk-low-bytes)) :ok :low)
-        json (json/encode {:text fmt :class class})]
-
-    (if (= "json" output-fmt)
-      (println json)
-      (println fmt))))
-
 (defn waybar-disk
   "Prints the free space on `/` as waybar JSON."
   []
-  (print-free-space "json"))
+  (let [avail (df-avail-bytes)
+        fmt (format "󰋊 %s" (if avail (human-avail avail) "--"))
+        class (if (and avail (>= avail disk-low-bytes)) :ok :low)]
+    (println (json/encode {:text fmt :class class}))))
 
 (defn waybar-licht
   "Prints the licht icon and the contents of `/tmp/licht-curr-val`, or `--`."
@@ -87,28 +78,20 @@
     :low
     :ok))
 
-(defn- print-memory-info
-  "Prints used memory in percent, as waybar JSON when `output-fmt` is \"json\"."
-  [output-fmt]
+(defn waybar-memory
+  "Prints used memory in percent as waybar JSON."
+  []
   (let [[total used] (determine-memory)
         class (determine-css-class total used)
-        fmt (format "󰍛 %.0f%%" (* (/ used total) 100))
-        json (json/encode {:text fmt :class class})]
-    (if (= "json" output-fmt)
-      (println json)
-      (println fmt))))
+        fmt (format "󰍛 %.0f%%" (* (/ used total) 100))]
+    (println (json/encode {:text fmt :class class}))))
 
 (comment
   (determine-memory)
   (format "%.0f" 15.6)
-  (print-memory-info "json")
+  (waybar-memory)
   ;;
   )
-
-(defn waybar-memory
-  "Prints used memory as waybar JSON."
-  []
-  (print-memory-info "json"))
 
 (defn- print-curr-playing
   "Prints the track in `out` (`status|number|title`), or nothing when stopped."
@@ -163,10 +146,13 @@
     (printf "active-compositor.json -> %s\n" (fs/file-name target))))
 
 (defn waybar-launch
-  "Sets the compositor symlink and starts waybar. Used by compositor autostart."
-  []
+  "Sets the compositor symlink and starts waybar with `args`, spliced unquoted into a
+  `sh -c` string (so no spaces or quotes inside a path). Used by compositor autostart
+  and `waybar-toggle`."
+  [& args]
   (point-compositor-symlink!)
-  (shell {:out :string} "sh -c 'setsid waybar >/dev/null 2>&1 &'"))
+  (shell {:out :string} (format "sh -c 'setsid waybar%s >/dev/null 2>&1 &'"
+                                (str/join (map #(str " " %) args)))))
 
 (defn waybar-toggle
   "Kills a running waybar, else starts it, with config-minimal when `minimal?`."
@@ -178,12 +164,10 @@
           (let [status (-> (shell {:out :string} "sh -c 'pkill waybar'") :exit)]
             (printf "killing waybar, status = %d\n" status)))
       (do (println "not runnin'")
-          (point-compositor-symlink!)
-          (if minimal?
-            (let [status (-> (shell {:out :string} "sh -c 'setsid waybar -c ~/.config/waybar/config-minimal -s ~/.config/waybar/style.css >/dev/null 2>&1 &'") :exit)]
-              (printf "starting waybar, status = %d\n" status))
-            (let [status (-> (shell {:out :string} "sh -c 'setsid waybar >/dev/null 2>&1 &'") :exit)]
-              (printf "starting waybar, status = %d\n" status)))))))
+          (let [status (:exit (if minimal?
+                                (waybar-launch "-c ~/.config/waybar/config-minimal" "-s ~/.config/waybar/style.css")
+                                (waybar-launch)))]
+            (printf "starting waybar, status = %d\n" status))))))
 
 (defn waybar-vpn
   "Prints the active WireGuard interfaces as waybar JSON, or `NO VPN CONN`."
