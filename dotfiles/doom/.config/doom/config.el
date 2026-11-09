@@ -615,6 +615,23 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
  '(org-block            :background "#0b2942" :extend t)
  '(org-block-begin-line :background "#0b2942" :foreground "#5f7e97" :extend t))
 
+(custom-theme-set-faces!
+ 'tron-legacy
+ '(org-agenda-date-today :foreground "#8Fd4FF" :weight normal :height 1.1)
+ '(org-scheduled-today   :foreground "#DEB45B" :weight normal))
+
+(custom-theme-set-faces!
+ 'tron-legacy
+ '(org-agenda-done           :foreground "#5A7387")
+ '(org-headline-done         :foreground "#5A7387")
+ '(elfeed-search-title-face  :foreground "#5A7387")
+ '(elfeed-search-unread-title-face :foreground "#FFFFFF" :weight bold))
+
+(custom-theme-set-faces!
+ 'doom-laserwave
+ '(elfeed-search-filter-face       :foreground "#1B1720")
+ '(elfeed-search-unread-count-face :foreground "#1B1720" :weight bold))
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
