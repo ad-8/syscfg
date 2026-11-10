@@ -133,6 +133,7 @@ determine the exact padding."
 
    ((line-number &override) :foreground base5)
    ((line-number-current-line &override) :foreground fg)
+   (vertical-border :background tint-strong :foreground tint-strong)
 
    ;; Current line: underline like matrix / meltbus (vantablack). Doom's
    ;; default fill is bg-alt, which is invisible against bg. fg-dim is

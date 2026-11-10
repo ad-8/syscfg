@@ -616,6 +616,28 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
  '(org-block-begin-line :background "#0b2942" :foreground "#5f7e97" :extend t))
 
 (custom-theme-set-faces!
+ 'doom-ayu-dark
+ '(vertical-border :background "#373b42" :foreground "#373b42"))
+(custom-theme-set-faces!
+ 'doom-dracula
+ '(vertical-border :background "#44475a" :foreground "#44475a"))
+(custom-theme-set-faces!
+ 'doom-laserwave
+ '(vertical-border :background "#4E415C" :foreground "#4E415C"))
+(custom-theme-set-faces!
+ 'doom-solarized-dark
+ '(vertical-border :background "#405A61" :foreground "#405A61"))
+(custom-theme-set-faces!
+ 'doom-tokyo-night
+ '(vertical-border :background "#51587a" :foreground "#51587a"))
+(custom-theme-set-faces!
+ 'doom-winter-is-coming-dark-blue
+ '(vertical-border :background "#445969" :foreground "#445969"))
+(custom-theme-set-faces!
+ 'doom-nord
+ '(vertical-border :background "#434C5E" :foreground "#434C5E"))
+
+(custom-theme-set-faces!
  'tron-legacy
  '(org-agenda-date-today :foreground "#8Fd4FF" :weight normal :height 1.1)
  '(org-scheduled-today   :foreground "#DEB45B" :weight normal))

@@ -109,6 +109,7 @@ determine the exact padding."
 
    ((line-number &override) :foreground base5)
    ((line-number-current-line &override) :foreground blue)
+   (vertical-border :background base4 :foreground base4)
 
    (font-lock-comment-face
     :foreground comments
