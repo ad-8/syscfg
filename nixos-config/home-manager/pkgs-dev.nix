@@ -33,6 +33,11 @@
       rust-analyzer
       rustc
       rustfmt
+
+      # TODO eval Gleam
+      gleam
+      beamPackages.erlang
+      beamPackages.rebar3
     ];
   };
 }
