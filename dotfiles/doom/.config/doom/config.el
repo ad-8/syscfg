@@ -128,6 +128,12 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 
 ;; (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 
+(use-package! gleam-ts-mode
+  :mode (rx ".gleam" eos)
+  :config
+  (when (modulep! :tools lsp)
+    (add-hook 'gleam-ts-mode-local-vars-hook #'lsp! 'append)))
+
 (setq-hook! 'go-mode-hook devdocs-current-docs '("go"))
 
 (defun ax/go--qualified-symbol ()
