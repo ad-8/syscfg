@@ -13,6 +13,9 @@
 
   networking.hostName = "ax-mac";
 
+  # PC layout on the built-in keyboard: swap left alt/cmd and fn/left ctrl (right side and AltGr untouched)
+  boot.extraModprobeConfig = "options hid_apple swap_opt_cmd=2 swap_fn_leftctrl=1";
+
   services.openssh = {
     enable = true;
     settings = {
