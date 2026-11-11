@@ -13,5 +13,14 @@
 
   networking.hostName = "ax-mac";
 
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
+
   system.stateVersion = "25.05"; # Did you read the comment?
 }
