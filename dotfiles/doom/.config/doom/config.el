@@ -23,18 +23,28 @@
           "calendar"
           "IndianRed"))))
 
+(defvar ax/org-todo-file "~/org/todo.org")
+
 (use-package! org-caldav
   :defer t
   :config
   (setq org-caldav-url "http://192.168.178.8:5232/ax"
         org-caldav-calendar-id "calendar"
         org-caldav-inbox "~/org/caldav-inbox.org"
-        org-caldav-files '("~/org/todo.org")
+        org-caldav-files (list ax/org-todo-file)
         org-caldav-sync-direction 'twoway
         org-caldav-save-directory "~/org/.org-caldav/"
         org-caldav-backup-file "~/org/.org-caldav/backup.org"))
 
 (set-popup-rule! "^\\*org caldav sync result" :size 0.3 :quit t :select nil)
+
+(add-hook 'before-save-hook
+          (defun ax/org-todo-ids-h ()
+            "Give every heading in todo.org an ID on save."
+            (when (and buffer-file-name
+                       (derived-mode-p 'org-mode)
+                       (file-equal-p buffer-file-name ax/org-todo-file))
+              (org-map-entries #'org-id-get-create))))
 
 (setq org-icalendar-timezone "Europe/Berlin")
 (setq org-icalendar-use-scheduled
@@ -889,9 +899,9 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
         (org-fold-show-children)))))
 
 (defun ax/org-maybe-collapse-except-dashed ()
-  "Apply `ax/org-collapse-except-dashed' when visiting ~/org/todo.org."
+  "Apply `ax/org-collapse-except-dashed' when visiting `ax/org-todo-file'."
   (when (and buffer-file-name
-             (file-equal-p buffer-file-name (expand-file-name "~/org/todo.org")))
+             (file-equal-p buffer-file-name ax/org-todo-file))
     (ax/org-collapse-except-dashed)))
 
 (add-hook 'find-file-hook #'ax/org-maybe-collapse-except-dashed)
