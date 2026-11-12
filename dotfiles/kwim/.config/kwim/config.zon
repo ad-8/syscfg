@@ -1,0 +1,8 @@
+.{
+    .input_device_rules = .{
+        .{ .repeat_info = .{ .rate = 35, .delay = 200 } },
+    },
+    .xkb_keyboard_rules = .{
+        .{ .numlock = .enabled, .keymap = .{ .options = .{ .layout = "mykeys", .options = "caps:escape" } } },
+    },
+}
