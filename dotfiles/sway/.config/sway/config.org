@@ -349,6 +349,15 @@ instead of =input *=, example for using different input types https://github.com
 input type:keyboard {
     xkb_layout "de"
     xkb_numlock enabled
+    xkb_options caps:escape
+    repeat_delay 200
+    repeat_rate 29
+}
+
+input "1160:4618:DELL09A0:00_0488:120A_Touchpad" {
+   natural_scroll enabled 
+   tap enabled
+   dwt enabled
 }
 
 set $cursor_theme 'Numix-Cursor'
@@ -444,7 +453,7 @@ bindsym $mod+v splitv
 # Switch the current container between different layout styles
 bindsym $mod+d layout stacking
 bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+w layout toggle split
 
 # Make the current focus fullscreen
 bindsym $mod+f fullscreen
@@ -499,7 +508,8 @@ bindsym $mod+u [app_id="ax-org-capture"] scratchpad show, resize set 1500 1000, 
 
 #+begin_src shell
 for_window [instance="ax-org-capture"] floating enable, move to scratchpad
-exec emacs --name ax-org-capture
+exec toolbox run --container arch emacs --name ax-org-capture
+bindsym $mod+e [instance="ax-org-capture"] scratchpad show, resize set 1500 1000, move position center
 bindsym $mod+u [instance="ax-org-capture"] scratchpad show, resize set 1500 1000, move position center
 #+end_src
 *** htop
@@ -538,10 +548,10 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 50px
-    bindsym $down resize grow height 50px
-    bindsym $up resize shrink height 50px
-    bindsym $right resize grow width 50px
+    bindsym $left resize shrink width 5ppt
+    bindsym $down resize grow height 5ppt
+    bindsym $up resize shrink height 5ppt
+    bindsym $right resize grow width 5ppt
 
     # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
