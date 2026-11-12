@@ -1,0 +1,20 @@
+// ANSI board, German layout -> no 102nd key. < > | live on AltGr instead.
+//
+//   <  AltGr+y     >  AltGr+x     |  AltGr+c
+//
+// we lose: » « and ¢
+//
+// Costs » « ¢ at level 3. Loaded by niri as layout "mykeys".
+// niri doesn't watch this file -> niri msg action reload-config
+
+default partial alphanumeric_keys
+xkb_symbols "de102" {
+    include "de(basic)"
+    name[Group1] = "German (102nd key on AltGr y/x/c)";
+
+// The bracketed list is the four levels of that key, in order:
+// plain, Shift, AltGr, AltGr+Shift. So y, Y, less, and then level 4.
+    key <AB01> { [ y, Y, less,    NoSymbol ] };
+    key <AB02> { [ x, X, greater, NoSymbol ] };
+    key <AB03> { [ c, C, bar,     NoSymbol ] };
+};
