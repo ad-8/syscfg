@@ -785,6 +785,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
 (map! :leader
       (:prefix-map ("j" . "ax custom binds")
        ;; non-nested
+       (:desc "agenda for today" "a" #'ax/agenda-today)
        (:desc "org-capture" "j" #'org-capture)
        (:desc "toggle the calm doom buffer" "k" #'ax/toggle-dashboard)
        (:desc "Toggle Dired Preview (global)" "p" #'dired-preview-global-mode)
