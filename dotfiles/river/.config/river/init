@@ -16,10 +16,6 @@ dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 # nothing else pulls it in under bare river
 /usr/libexec/polkit-mate-authentication-agent-1 &
 
-wlr-randr \
-  --output DP-1     --mode 3840x2160 --pos 0,0      --scale 1.25 \
-  --output HDMI-A-1 --mode 1920x1080 --pos 3072,648 --scale 1
-
 status_fifo="$XDG_RUNTIME_DIR/kwm-status"
 rm -f "$status_fifo"
 mkfifo "$status_fifo"
