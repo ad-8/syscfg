@@ -20,6 +20,7 @@ systemctl --user start river-session.target
 
 status_fifo="$XDG_RUNTIME_DIR/kwm-status"
 pkill -f kwm_status.janet
+pkill -f 'kwm_status@@main'
 rm -f "$status_fifo"
 mkfifo "$status_fifo"
 
