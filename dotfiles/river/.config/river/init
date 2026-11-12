@@ -12,6 +12,8 @@ systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 # does not start; upstream xdg-desktop-portal-wlr documents this exact line
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
+systemctl --user start river-session.target
+
 # graphical-session.target refuses manual start, so start the agent directly;
 # nothing else pulls it in under bare river
 /usr/libexec/polkit-mate-authentication-agent-1 &
