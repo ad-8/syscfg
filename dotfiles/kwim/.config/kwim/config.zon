@@ -2,6 +2,9 @@
     .input_device_rules = .{
         .{ .repeat_info = .{ .rate = 35, .delay = 200 } },
     },
+    .libinput_device_rules = .{
+        .{ .name = .{ .str = ".*[tT]ouchpad", .regex = true }, .natural_scroll = .enabled },
+    },
     .xkb_keyboard_rules = .{
         .{ .numlock = .enabled, .keymap = .{ .options = .{ .layout = "mykeys", .options = "caps:escape" } } },
     },
