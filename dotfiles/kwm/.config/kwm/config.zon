@@ -10,13 +10,14 @@
 
 
       .startup_cmds = .{
-          .{ "blueman-applet" },
+// TODO not layered on silverblue
+//          .{ "blueman-applet" },
+//          .{ "nm-applet" },
+// TODO dont want starting currently
+//          .{ "firefox" },
+//          .{ "foot", "-e", "btop" },
           .{ "dunst" },
-          .{ "nm-applet" },
-          .{ "emacs" },
- //         .{ "emacs", "--daemon" },
-          .{ "firefox" },
-          .{ "foot", "-e", "btop" },
+          .{ "toolbox", "run", "--container", "arch", "emacs" },
           .{ "/home/ax/syscfg/scripts/river-idle.sh" },
           .{ "/home/ax/syscfg/scripts/river-bg.sh" },
           .{ "toolbox", "run", "--container", "arch", "janet", "/home/ax/syscfg/scripts/bb/kwm_status.janet" },
