@@ -14,7 +14,7 @@ dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
 # graphical-session.target refuses manual start, so start the agent directly;
 # nothing else pulls it in under bare river
-systemctl --user start polkit-gnome-authentication-agent-1.service
+/usr/libexec/polkit-mate-authentication-agent-1 &
 
 wlr-randr \
   --output DP-1     --mode 3840x2160 --pos 0,0      --scale 1.25 \
@@ -26,4 +26,5 @@ mkfifo "$status_fifo"
 
 sleep 2
 
+export PATH="$HOME/git/kwim/zig-out/bin:$PATH"
 exec /home/ax/git/kwm/zig-out/bin/kwm
