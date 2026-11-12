@@ -17,6 +17,7 @@ dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 /usr/libexec/polkit-mate-authentication-agent-1 &
 
 status_fifo="$XDG_RUNTIME_DIR/kwm-status"
+pkill -f kwm_status.janet
 rm -f "$status_fifo"
 mkfifo "$status_fifo"
 
