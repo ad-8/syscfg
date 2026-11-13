@@ -145,6 +145,8 @@ abbr -a ytdlp-split-audio "yt-dlp --format ba[ext=m4a] --split-chapters URL"
 abbr -a ff rfv
 abbr -a ffa rfvuuu
 
+abbr -a zp 'zpool list && printf "\n---\n\n" && zpool status  && printf "\n---\n\n" && zfs list'
+
 fish_add_path ~/.cargo/bin/
 fish_add_path ~/.config/emacs/bin/
 fish_add_path ~/.local/bin
