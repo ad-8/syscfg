@@ -164,8 +164,8 @@
                 .area = .{ .mode = null },
                 .scheme = .{
                     .normal = .{
-                        .fg = 0x444a73ff,
-                        .bg = 0xc8d3f5d0,
+                        .fg = 0xedb443ff,
+                        .bg = 0x11151cff,
                     }
                 }
             },
