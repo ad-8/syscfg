@@ -400,6 +400,17 @@
     },
 },
 .{
+    .keysym = "odiaeresis",
+    .modifiers = .{ .mod4 = true },
+    .event = .{
+        .click = .{
+            .pressed = .{
+                .spawn_shell = .{ .cmd = "rofi -show ssh" },
+            },
+        },
+    },
+},
+.{
     .keysym = "w",
     .modifiers = .{ .mod4 = true, .shift = true },
     .event = .{
