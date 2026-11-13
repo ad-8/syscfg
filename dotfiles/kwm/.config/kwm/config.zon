@@ -735,7 +735,8 @@
                 .event = .{
                     .click = .{
                         .pressed = .{
-                            .zoom = .{ .swap = true },
+                            // TODO how to directly launch `foot toolbox enter arch`?
+                            .spawn = .{ .argv = .{ "/home/ax/x/footarch.sh" } },
                         },
                     },
                 },
