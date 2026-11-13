@@ -59,18 +59,20 @@
     {:pname pname :version version :output output}))
 
 (defn parse-dry-run
-  "Collect the fetched paths and built derivations from nixos-rebuild dry-run output."
+  "Collect the fetched paths, their total size and the built derivations from nixos-rebuild
+  dry-run output, counting store paths outside both lists as unparsed."
   [lines]
-  (loop [[line & more] lines, mode nil, acc {:fetched [] :built []}]
+  (loop [[line & more] lines, mode nil, acc {:fetched [] :built [] :unparsed 0}]
     (cond
       (nil? line) acc
-      (str/includes? line "will be fetched") (recur more :fetched acc)
+      (str/includes? line "will be fetched")
+      (recur more :fetched (assoc acc :fetch-size (second (re-find #"\(([^)]*)\)" line))))
       (str/includes? line "will be built") (recur more :built acc)
       (str/starts-with? line "  /nix/store/")
       (recur more mode (case mode
                          :fetched (update acc :fetched conj (store-name line))
                          :built (update acc :built conj (str/replace (store-name line) #"\.drv$" ""))
-                         acc))
+                         (update acc :unparsed inc)))
       :else (recur more nil acc))))
 
 (defn current-versions
@@ -101,16 +103,18 @@
   "Build all output lines: updated inputs, derivations to build, packages to fetch."
   [old-lock new-lock dry-run-lines current-paths]
   (let [inputs (updated-inputs old-lock new-lock)
-        {:keys [fetched built]} (parse-dry-run dry-run-lines)
+        {:keys [fetched built fetch-size unparsed]} (parse-dry-run dry-run-lines)
         current (current-versions current-paths)]
     (concat [(heading "Updated inputs:")]
             (if (seq inputs) inputs ["none"])
             ["" (heading (str (count built) " derivations to build:"))]
             (if (seq built) (sort-by str/lower-case built) ["none"])
-            ["" (heading "Packages to fetch:")]
+            ["" (heading (str "Packages to fetch" (when fetch-size (str " (" fetch-size ")")) ":"))]
             (if (seq fetched)
               (sort-by str/lower-case (map #(report-line current %) fetched))
-              ["none"]))))
+              ["none"])
+            (when (pos? unparsed)
+              ["" (str "warning: " unparsed " store paths in the dry-run output were not parsed; run upd for the raw output")]))))
 
 (defn read-lock
   "Parse the current flake.lock."
@@ -119,15 +123,15 @@
 
 (when (= *file* (System/getProperty "babashka.file"))
   (let [old-text (slurp lock-file)
+        _ (.addShutdownHook (Runtime/getRuntime) (Thread. #(spit lock-file old-text)))
         [new-lock {:keys [exit out err]}]
-        (try
+        (do
           (shell "nix" "flake" "update" "--flake" flake)
           (shell "git" "-C" flake "status" "--short")
           (println "\n----------\n")
           (println "evaluating...")
           [(read-lock)
-           (sh "nixos-rebuild" "dry-run" "--flake" (str flake "#" (str/trim (:out (sh "uname" "-n")))))]
-          (finally (spit lock-file old-text)))]
+           (sh "nixos-rebuild" "dry-run" "--flake" (str flake "#" (str/trim (:out (sh "uname" "-n")))))])]
     (println "\n----------\n")
     (when-not (zero? exit)
       (print (str out err))
