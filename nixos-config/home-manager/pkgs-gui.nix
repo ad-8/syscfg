@@ -27,7 +27,10 @@
       protonmail-bridge-gui
       qalculate-gtk
       qbittorrent
-      qutebrowser
+      ### TODO nixos won't build:
+      ### error: Refusing to evaluate package 'qutebrowser-3.7.0' in /nix/store/z8ncvs9623khkj8lsz4iznqffy89p6b9-source/pkgs/by-name/qu/qutebrowser/package…
+      ### Known issues: # - Still accepts eMudhra TLS certs.
+      # qutebrowser
       ristretto
       signal-desktop
       # strawberry

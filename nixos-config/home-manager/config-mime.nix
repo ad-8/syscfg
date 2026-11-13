@@ -8,7 +8,7 @@
 # ls ~/.nix-profile/share/applications # for home-manager packages
 let
   audioPlayer = [ "mpv.desktop" ];
-  browser = [ "firefox.desktop" ];
+  browser = [ "vivaldi-stable.desktop" ];
   emacs = [ "emacs.desktop" ];
   imageViewer = [ "org.xfce.ristretto.desktop" ];
   pdfReader = [ "org.kde.okular.desktop" ];
