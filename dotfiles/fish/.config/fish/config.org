@@ -157,7 +157,7 @@ if test -f /etc/os-release
              abbr -a upd "nixos-rebuild dry-run --flake ~/syscfg/nixos-config#$hostname"
              abbr -a up2 "NH_OS_FLAKE=~/syscfg/nixos-config nh os switch --ask --hostname $hostname"
              abbr -a up2b "NH_OS_FLAKE=~/syscfg/nixos-config nh os boot --ask --hostname $hostname"
-             abbr -a cu "cd ~/syscfg/nixos-config/ && nix flake update && git status && printf '\n----------\n\n' && nixos-rebuild dry-run --flake ~/syscfg/nixos-config#$hostname"
+             abbr -a cu 'bb --config ~/syscfg/bb.edn ~/syscfg/scripts/bb/check_updates.clj'
              abbr -a lg 'nixos-rebuild list-generations | head'
         case void
             abbr -a up 'sudo xbps-install -Su'
