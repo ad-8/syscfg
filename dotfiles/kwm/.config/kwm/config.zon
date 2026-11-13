@@ -218,7 +218,7 @@
             .focus = 0xd26937ff,
 //            .unfocus = 0x828bb8ff,
             .unfocus = 0x4e5166ff,
-            .swallowing = 0x0830e6ff,
+            .swallowing = 0x33859eff,
         },
     },
 
