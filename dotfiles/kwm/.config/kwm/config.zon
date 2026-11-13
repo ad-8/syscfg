@@ -20,7 +20,7 @@
           .{ "toolbox", "run", "--container", "arch", "emacs" },
           .{ "/home/ax/syscfg/scripts/river-idle.sh" },
           .{ "/home/ax/syscfg/scripts/river-bg.sh" },
-          .{ "toolbox", "run", "--container", "arch", "/home/ax/x/go/kwm_status/kwm_status" },
+          .{ "/home/ax/x/go/kwm_status/kwm_status" },
       },
 
 
@@ -523,17 +523,30 @@
                 },
             },
 
+
+            // ###########################################################
+            // Keybindings for my custom scratchpad patch
+            // ###########################################################
             .{
                 .keysym = "s",
                 .modifiers = .{ .mod4 = true },
-                .event = .{
-                    .click = .{
-                        .pressed = .{
-                            .spawn = .{ .argv = .{ "kitten", "quick-access-terminal" } },
-                        },
-                    },
-                },
+                .event = .{ .click = .{ .pressed = .{ .toggle_scratchpad = .{
+                    .app_id = .{ .str = "ax-scratchpad" },
+                    .width = 0.65, .height = 0.8,
+                    .argv = .{ "foot", "--app-id", "ax-scratchpad", "-e", "/home/ax/syscfg/scripts/tmux-scratchpad.sh" },
+                } } } },
             },
+            .{
+                .keysym = "e",
+                .modifiers = .{ .mod4 = true },
+                .event = .{ .click = .{ .pressed = .{ .toggle_scratchpad = .{
+                    .title = .{ .str = "^emacs-scratchpad$", .regex = true },
+                    .width = 0.65, .height = 0.8,
+                    .argv = .{ "toolbox", "run", "--container", "arch", "emacs", "-T", "emacs-scratchpad" },
+                } } } },
+            },
+            // ###########################################################
+            // ###########################################################
 
             // -------------------------
 
