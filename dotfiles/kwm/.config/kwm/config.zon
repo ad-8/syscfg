@@ -409,6 +409,17 @@
         },
     },
 },
+.{
+    .keysym = "odiaeresis",
+    .modifiers = .{ .mod4 = true },
+    .event = .{
+        .click = .{
+            .pressed = .{
+                .spawn_shell = .{ .cmd = "rofi -show ssh" },
+            },
+        },
+    },
+},
 
             // ax: ported from hyprland/niri (super+alt binds)
             .{

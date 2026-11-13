@@ -323,6 +323,7 @@ binds {
 
     Mod+Shift+F { spawn-sh "rofi -show recursivebrowser"; }
     Mod+Shift+W { spawn-sh "rofi -show window"; }
+    Mod+Odiaeresis { spawn-sh "rofi -show ssh"; }
 
     Mod+Shift+Space repeat=false { spawn-sh "wlr-which-key"; }
 

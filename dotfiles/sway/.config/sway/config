@@ -276,6 +276,7 @@ bindsym $mod+Shift+o exec rofi -show drun
 bindsym $mod+Shift+f exec rofi -show recursivebrowser
 bindsym $mod+Shift+space exec wlr-which-key
 bindsym $mod+shift+w exec rofi -show window
+bindsym $mod+odiaeresis exec rofi -show ssh
 
 bindsym $mod+$alt+l exec swaylock --color 000000 --show-failed-attempts
 
