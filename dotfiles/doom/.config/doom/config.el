@@ -721,9 +721,8 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
      :name "ax-scrobble"
      :buffer " *ax-scrobble*"
      :noquery t
-     :command (list "nix" "develop" (expand-file-name "~/x/lastfm")
-                    "--command" "python" (expand-file-name "~/x/lastfm/scrobble.py")
-                    ;; each list element is one argv entry, even when eg title is multiple words, so we only pass exactly 3 args to python
+     :command (list "bb" (expand-file-name "~/x/x.clj") "lastfm" "scrobble"
+                    ;; each list element is one argv entry, even when eg title is multiple words, so we only pass exactly 3 args
                     (or artist "Unknown artist")
                     (or album "Unknown album")
                     (or title "Unknown title")))))
