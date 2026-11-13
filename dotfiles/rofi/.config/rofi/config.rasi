@@ -15,6 +15,8 @@ font: "HackNerdFont 14";
 modi: "window,run,drun,recursivebrowser";
 combi-modi: "drun,recursivebrowser";
 terminal: "foot";
+parse-known-hosts: false;
+display-ssh: "SSH";
 
 /*	modi: "window,run,ssh";*/
 /*	font: "mono 12";*/
