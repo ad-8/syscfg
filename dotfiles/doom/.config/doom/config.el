@@ -9,6 +9,7 @@
 (setq bookmark-save-flag 1)
 
 (setq calendar-week-start-day 1)
+(setq system-time-locale "C")
 
 (defun ax/open-calendar ()
   "Open a read-only view of the calendar on radicale."
@@ -176,7 +177,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   ;; :preview-key "M-."
   :preview-key '(:debounce 0.4 any)))
 
-(setq doom-font (font-spec :family "Hack Nerd Font" :size 16 :weight 'semi-light))
+(setq doom-font (font-spec :family "Hack Nerd Font" :size 16))
 
 (defvar ax/1080p-font-size 14
   "Font size for 1080p displays.")

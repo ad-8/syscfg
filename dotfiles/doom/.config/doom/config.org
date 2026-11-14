@@ -98,6 +98,7 @@ this variable to ‘nil’, Emacs only saves bookmarks if you explicitly use
 Start week on monday.
 #+begin_src elisp
 (setq calendar-week-start-day 1)
+(setq system-time-locale "C")
 #+end_src
 
 ** Calendar setup to interact with radicale
@@ -393,12 +394,12 @@ instead of after every key.
 * Doom
 ** Font
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "Hack Nerd Font" :size 16 :weight 'semi-light))
+(setq doom-font (font-spec :family "Hack Nerd Font" :size 16))
 #+end_src
 
 *** auto-resize Emacs font size on =ax-bee= with 4k/1080 monitors
-On ax-bee this replaces the =doom-font= above with a per-monitor size and drops
-its =:weight 'semi-light=. It polls every second, so a move to the other monitor
+On ax-bee this replaces the =doom-font= above with a per-monitor size.
+It polls every second, so a move to the other monitor
 is noticed without a focus change.
 #+begin_src elisp
 (defvar ax/1080p-font-size 14
