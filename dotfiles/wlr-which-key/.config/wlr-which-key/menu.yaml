@@ -144,10 +144,16 @@ menu:
     submenu:
       - key: "a"
         desc: all outputs
-        cmd: grim - | swappy -f -
+        cmd: toolbox run --container arch sh -c 'sleep 0.2; grim - | env GTK_THEME=Adwaita:dark swappy -f -'
       - key: "s"
         desc: select region
-        cmd: grim -g "$(slurp)" - | swappy -f -
+        cmd: toolbox run --container arch sh -c 'sleep 0.2; geometry=$(slurp) || exit; grim -g "$geometry" - | env GTK_THEME=Adwaita:dark swappy -f -'
+      - key: "w"
+        desc: select window
+        cmd: toolbox run --container arch sh -c 'sleep 0.2; wayshot --choose-toplevel - | env GTK_THEME=Adwaita:dark swappy -f -'
+      - key: "m"
+        desc: select monitor
+        cmd: toolbox run --container arch sh -c 'sleep 0.2; geometry=$(slurp -o) || exit; grim -g "$geometry" - | env GTK_THEME=Adwaita:dark swappy -f -'
 
   - key: "t"
     desc: Toggle
