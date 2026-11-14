@@ -48,7 +48,7 @@
         // set null to disable tags part
         .tags = .{
             // tags show on bar
-            .tags = .{ "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+            .tags = .{ "", "", "3", "4", "5", "6", "7", "", "" },
 
             // click callback
             // each part supports left/right/middle/side/extra/forward/back/task
