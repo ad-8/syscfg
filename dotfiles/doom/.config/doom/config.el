@@ -11,6 +11,8 @@
 (setq calendar-week-start-day 1)
 (setq system-time-locale "C")
 
+(defvar ax/radicale-url "http://192.168.178.8:5232/ax")
+
 (defun ax/open-calendar ()
   "Open a read-only view of the calendar on radicale."
   (interactive)
@@ -20,7 +22,7 @@
   (calfw-open-calendar-buffer
    :contents-sources
    (list (calfw-ical-create-source
-          "http://192.168.178.8:5232/ax/calendar/"
+          (concat ax/radicale-url "/calendar/")
           "calendar"
           "IndianRed"))))
 
@@ -29,7 +31,7 @@
 (use-package! org-caldav
   :defer t
   :config
-  (setq org-caldav-url "http://192.168.178.8:5232/ax"
+  (setq org-caldav-url ax/radicale-url
         org-caldav-calendar-id "calendar"
         org-caldav-inbox "~/org/caldav-inbox.org"
         org-caldav-files (list ax/org-todo-file)
@@ -55,7 +57,8 @@
 
 (set-popup-rule! "^\\*eww" :size 0.8 :quit t)
 (setq browse-url-browser-function #'eww-browse-url)
-(when (file-exists-p "/run/.toolboxenv")
+(when (or (file-exists-p "/run/.toolboxenv")
+          (file-exists-p "/run/.toolbxenv"))
   (setq browse-url-secondary-browser-function #'browse-url-generic
         browse-url-generic-program "flatpak-spawn"
         browse-url-generic-args '("--host" "xdg-open")))

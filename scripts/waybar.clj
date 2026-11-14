@@ -191,7 +191,7 @@
     (when is-paused
       (printf "  "))))
 
-(def actions
+(def ^:private actions
   {"date"                waybar-date
    "launch"              waybar-launch
    "disk"                waybar-disk

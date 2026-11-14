@@ -102,7 +102,6 @@
        lua               ; one-based indices? one-based indices
        markdown            ; writing docs for people to ignore
 
-       ;; TODO
        ;; (nix +lsp +tree-sitter) ; I hereby declare "nix geht mehr!"
        (nix +lsp)          ; I hereby declare "nix geht mehr!"
 

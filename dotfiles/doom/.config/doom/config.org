@@ -112,8 +112,12 @@ Calendar on the radicale server, same account as the contacts. =calfw= only view
 it, =org-caldav= does the two-way editing. Both read the password from
 =~/.authinfo=.
 
+#+begin_src elisp
+(defvar ax/radicale-url "http://192.168.178.8:5232/ax")
+#+end_src
+
 *** viewing the calendar (read only): =SPC j c c=
-The radicale host =192.168.178.8= is also in =org-caldav-url= below and in both
+The radicale host in =ax/radicale-url= is also in both
 =~/.authinfo= lines (the server side is ax-fuji's =serverIp=).
 #+begin_src elisp
 (defun ax/open-calendar ()
@@ -125,7 +129,7 @@ The radicale host =192.168.178.8= is also in =org-caldav-url= below and in both
   (calfw-open-calendar-buffer
    :contents-sources
    (list (calfw-ical-create-source
-          "http://192.168.178.8:5232/ax/calendar/"
+          (concat ax/radicale-url "/calendar/")
           "calendar"
           "IndianRed"))))
 #+end_src
@@ -152,7 +156,7 @@ Run =SPC b r= first.
 (use-package! org-caldav
   :defer t
   :config
-  (setq org-caldav-url "http://192.168.178.8:5232/ax"
+  (setq org-caldav-url ax/radicale-url
         org-caldav-calendar-id "calendar"
         org-caldav-inbox "~/org/caldav-inbox.org"
         org-caldav-files (list ax/org-todo-file)
@@ -227,7 +231,8 @@ the default height is same/similar as M-x, so way too small for browsing
 #+begin_src emacs-lisp
 (set-popup-rule! "^\\*eww" :size 0.8 :quit t)
 (setq browse-url-browser-function #'eww-browse-url)
-(when (file-exists-p "/run/.toolboxenv")
+(when (or (file-exists-p "/run/.toolboxenv")
+          (file-exists-p "/run/.toolbxenv"))
   (setq browse-url-secondary-browser-function #'browse-url-generic
         browse-url-generic-program "flatpak-spawn"
         browse-url-generic-args '("--host" "xdg-open")))
