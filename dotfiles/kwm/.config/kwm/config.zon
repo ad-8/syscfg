@@ -42,16 +42,7 @@
         //.font = "monospace:size=10",
         .font = "Hack Nerd Font:size=10",
 
-        .scheme = .{
-            .normal = .{
-                .fg = 0x888ca6ff,
-                .bg = 0x11151cff,
-            },
-            .select = .{
-                .fg = 0x99d1ceff,
-                .bg = 0x0a3749ff,
-            },
-        },
+        // @include(/home/ax/.config/kwm/active-bar.zon)
 
         // set null to disable tags part
         .tags = .{
@@ -133,42 +124,6 @@
             },
         },
 
-        // override colors
-        .override_colors = .{
-            // areas:
-            //      .tags
-            //      .{ .mode = "floating" or other modes }, null will match all mode
-            //      .{ layout = .tile or other layout }, null will match all layouts
-            //      .title
-            //      .status
-            //
-            // scheme is a struct, no need to specify all fields:
-            //      .{
-            //          .normal = .{
-            //              .fg = u32,
-            //              .bg = u32,
-            //          },
-            //          .select = .{
-            //              .fg = u32,
-            //              .bg = u32,
-            //          }
-            //      }
-            //
-            // mode, layout and status will only use the `normal` color
-            // tags and title will use both `normal` and `select` color
-            //
-
-            // set scheme for mode tag
-            .{
-                .area = .{ .mode = null },
-                .scheme = .{
-                    .normal = .{
-                        .fg = 0x444a73ff,
-                        .bg = 0xc8d3f5d0,
-                    }
-                }
-            },
-        }
     },
 
     // TODO see what's better for me, it's interesting too
@@ -212,13 +167,7 @@
     // window border
     .border = .{
         .width = 3,
-        .color = .{
-            //.focus = 0xffc777ff,
-            .focus = 0xd26937ff,
-//            .unfocus = 0x828bb8ff,
-            .unfocus = 0x4e5166ff,
-            .swallowing = 0x0830e6ff,
-        },
+        // @include(/home/ax/.config/kwm/active-border.zon)
     },
 
     // .tile

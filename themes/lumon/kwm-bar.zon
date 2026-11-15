@@ -1,0 +1,47 @@
+        .scheme = .{
+            .normal = .{
+                .fg = 0xd6e2eeff,
+                .bg = 0x1b2d40ff,
+            },
+            .select = .{
+                .fg = 0x1b2d40ff,
+                .bg = 0x6fb8e3ff,
+            },
+        },
+
+        // override colors
+        .override_colors = .{
+            // areas:
+            //      .tags
+            //      .{ .mode = "floating" or other modes }, null will match all mode
+            //      .{ layout = .tile or other layout }, null will match all layouts
+            //      .title
+            //      .status
+            //
+            // scheme is a struct, no need to specify all fields:
+            //      .{
+            //          .normal = .{
+            //              .fg = u32,
+            //              .bg = u32,
+            //          },
+            //          .select = .{
+            //              .fg = u32,
+            //              .bg = u32,
+            //          }
+            //      }
+            //
+            // mode, layout and status will only use the `normal` color
+            // tags and title will use both `normal` and `select` color
+            //
+
+            // set scheme for mode tag
+            .{
+                .area = .{ .mode = null },
+                .scheme = .{
+                    .normal = .{
+                        .fg = 0x6fa4c9ff,
+                        .bg = 0x1b2d40ff,
+                    }
+                }
+            },
+        },

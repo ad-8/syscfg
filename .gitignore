@@ -21,3 +21,5 @@
 /dotfiles/clojure/.clojure/.cpcache/
 /dotfiles/wlr-which-key/.config/wlr-which-key/config.yaml
 /dotfiles/wlr-which-key/.config/wlr-which-key/config.yaml.tmp
+/dotfiles/kwm/.config/kwm/active-bar.zon
+/dotfiles/kwm/.config/kwm/active-border.zon
