@@ -20,7 +20,7 @@
           .{ "toolbox", "run", "--container", "arch", "emacs" },
           .{ "/home/ax/syscfg/scripts/river-idle.sh" },
           .{ "/home/ax/syscfg/scripts/river-bg.sh" },
-          .{ "/home/ax/x/go/kwm_status/kwm_status" },
+          .{ "/home/ax/.local/bin/kwm_status" },
       },
 
 
