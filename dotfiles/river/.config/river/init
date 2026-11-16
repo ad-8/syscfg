@@ -27,5 +27,5 @@ mkfifo "$status_fifo"
 
 sleep 2
 
-export PATH="$HOME/.local/bin:$HOME/git/kwim/zig-out/bin:$PATH"
-exec /home/ax/git/kwm/zig-out/bin/kwm
+export PATH="$HOME/.local/bin:$PATH"
+exec /home/ax/.local/bin/kwm
