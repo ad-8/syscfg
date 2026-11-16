@@ -183,8 +183,8 @@
         .tile = .{
             .nmaster = 1,
             .mfact = 0.55,
-            .inner_gap = 4,
-            .outer_gap = 4,
+            .inner_gap = 3,
+            .outer_gap = 3,
 
             // .left
             // .right
@@ -201,7 +201,7 @@
             .direction = .horizontal,
         },
         .monocle = .{
-            .gap = 9,
+            .gap = 3,
         },
         .deck = .{
             .nmaster = 1,
