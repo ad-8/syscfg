@@ -680,12 +680,11 @@
             },
             .{
                 .keysym = "Return",
-                .modifiers = .{ .mod4 = true, .shift = true },
+                .modifiers = .{ .mod4 = true },
                 .event = .{
                     .click = .{
                         .pressed = .{
-                            // TODO how to directly launch `foot toolbox enter arch`?
-                            .spawn = .{ .argv = .{ "/home/ax/x/footarch.sh" } },
+                            .spawn = .{ .argv = .{ "foot", "toolbox", "enter",  "arch" } },
                         },
                     },
                 },
@@ -1232,7 +1231,7 @@
             },
             .{
                 .keysym = "Return",
-                .modifiers = .{ .mod4 = true },
+                .modifiers = .{ .mod4 = true, .shift = true },
                 .event = .{
                     .click = .{
                         .pressed = .{
