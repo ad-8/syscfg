@@ -9,7 +9,7 @@
 let
   audioPlayer = [ "mpv.desktop" ];
   browser = [ "vivaldi-stable.desktop" ];
-  emacs = [ "emacs.desktop" ];
+  emacs = [ "emacsclient.desktop" ];
   imageViewer = [ "org.xfce.ristretto.desktop" ];
   pdfReader = [ "org.kde.okular.desktop" ];
   simpleTextEditor = [ "org.xfce.mousepad.desktop" ];

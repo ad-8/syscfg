@@ -94,11 +94,11 @@ menu:
         desc: Calculator
         cmd: qalculate-gtk
       - key: "e"
+        desc: Emacsclient
+        cmd: emacsclient -c -n -a ''
+      - key: "E"
         desc: Emacs
         cmd: emacs
-      - key: "E"
-        desc: Emacsclient
-        cmd: emacsclient -c -a emacs
       - key: "f"
         desc: File Manager
         cmd: thunar
@@ -107,7 +107,7 @@ menu:
         cmd: keepassxc
       - key: "m"
         desc: Emacs EMMS
-        cmd: emacs --name ax-emacs-emms --eval '(ax/open-emms-layout)'
+        cmd: emacsclient -c -n -a '' -F '((name . "ax-emacs-emms") (title . "ax-emacs-emms"))' --eval '(ax/open-emms-layout)'
       - key: "M"
         desc: Strawberry
         cmd: strawberry
