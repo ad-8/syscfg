@@ -12,10 +12,12 @@
     ../../nixos/all-modules.nix
   ];
 
-  # TODO: remove once nixos stable ships emacs >= 31.1, likely with the 26.11 upgrade (fixes the save-place tramp error)
+  # TODO: remove the emacs override once nixos stable ships emacs >= 31.1, likely with the 26.11 upgrade (fixes the save-place tramp error)
   nixpkgs.overlays = [
     (final: prev: {
       emacs = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.emacs;
+      emacsWithMu4e =
+        (final.emacsPackagesFor final.emacs).emacsWithPackages (epkgs: [ epkgs.mu4e ]);
     })
     # replace stable waybar with master (pinned rev, see the waybar input in flake.nix) via overlay
     # TODO: remove (plus the waybar flake input) once nixos stable ships a waybar release with the mango/* modules (> 0.15.0), likely with the 26.11 upgrade

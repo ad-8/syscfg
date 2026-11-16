@@ -49,6 +49,7 @@ This ~config.org~ gets tangled automatically into a ~config.el~ by Doom.
 - [[#markdown][Markdown]]
   - [[#headers][Headers]]
   - [[#toggle-markdown-view][Toggle Markdown View]]
+- [[#mu4e][mu4e]]
 - [[#openbsd-use-gnu-ls-and-diff-if-installed][OpenBSD: use GNU ls and diff if installed]]
 - [[#org-mode][Org Mode]]
   - [[#org-directory][org-directory]]
@@ -1211,6 +1212,12 @@ A custom function to toggle between standard =markdown-mode= and =markdown-view-
       (markdown-mode)
     (markdown-view-mode)))
 #+end_src
+* mu4e
+#+begin_src emacs-lisp
+(after! mu4e
+  (load (expand-file-name "~/.config/proton-mail/account.el") t))
+#+end_src
+
 * OpenBSD: use GNU ls and diff if installed
 Should've done this long ago, directories first alone is worth it.
 

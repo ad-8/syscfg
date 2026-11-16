@@ -46,7 +46,7 @@
     babashka
     bat
     delta
-    emacs
+    (pkgs.emacsWithMu4e or emacs)
     eza
     fastfetch
     fd
