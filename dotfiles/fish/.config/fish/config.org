@@ -221,6 +221,7 @@ alias s s-rs
 alias sj 'java -jar $HOME/my/code/clojure/strava/target/uberjar/strava-0.1.0-SNAPSHOT-standalone.jar'
 alias df 'df -hT'
 alias free 'free -h'
+alias cal 'cal -m'
 alias dcc 'joker $HOME/syscfg/scripts/bb/dict.cc.joke'
 alias csm '$HOME/my/code/clojure/csm/csm.clj'
 #+end_src
