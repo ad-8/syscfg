@@ -1215,6 +1215,8 @@ A custom function to toggle between standard =markdown-mode= and =markdown-view-
 * mu4e
 #+begin_src emacs-lisp
 (after! mu4e
+  (setq mu4e-headers-date-format "%d.%m.%y"
+        mu4e-headers-time-format "%H:%M")
   (load (expand-file-name "~/.config/proton-mail/account.el") t))
 #+end_src
 

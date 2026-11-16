@@ -861,6 +861,8 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
     (markdown-view-mode)))
 
 (after! mu4e
+  (setq mu4e-headers-date-format "%d.%m.%y"
+        mu4e-headers-time-format "%H:%M")
   (load (expand-file-name "~/.config/proton-mail/account.el") t))
 
 (when-let* ((gdiff (executable-find "gdiff")))
