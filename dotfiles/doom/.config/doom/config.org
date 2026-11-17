@@ -1218,6 +1218,15 @@ A custom function to toggle between standard =markdown-mode= and =markdown-view-
   (setq mu4e-headers-date-format "%d.%m.%y"
         mu4e-headers-time-format "%H:%M")
   (load (expand-file-name "~/.config/proton-mail/account.el") t))
+
+(defun ax/mm-shr-plain (orig handle)
+  (require 'shr)
+  (let ((shr-use-colors nil)
+        (shr-max-width 80))
+    (funcall orig handle)))
+
+(after! mm-decode
+  (advice-add 'mm-shr :around #'ax/mm-shr-plain))
 #+end_src
 
 * OpenBSD: use GNU ls and diff if installed

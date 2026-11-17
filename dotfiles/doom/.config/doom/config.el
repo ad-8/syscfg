@@ -865,6 +865,15 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
         mu4e-headers-time-format "%H:%M")
   (load (expand-file-name "~/.config/proton-mail/account.el") t))
 
+(defun ax/mm-shr-plain (orig handle)
+  (require 'shr)
+  (let ((shr-use-colors nil)
+        (shr-max-width 80))
+    (funcall orig handle)))
+
+(after! mm-decode
+  (advice-add 'mm-shr :around #'ax/mm-shr-plain))
+
 (when-let* ((gdiff (executable-find "gdiff")))
   (setq diff-command gdiff))
 
