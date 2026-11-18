@@ -52,11 +52,13 @@
   (str/replace path #"^\s*/nix/store/[a-z0-9]{32}-" ""))
 
 (defn split-name
-  "Split a store name into package name, version and output suffix; nil when there is no version."
+  "Split a store name into package name, version and suffix; nil when there is no version.
+  The suffix is any tail of letter-only parts (-env, -getent, -npm) plus the output (-bin, -dev, …);
+  prerelease tags (-alpha, -beta, -pre, -preview, -rc, any case) stay in the version."
   [n]
-  (when-let [[_ pname version output]
-             (re-matches #"(.+?)-([0-9][^_]*?)(-(?:bin|dev|doc|man|lib|info|devdoc|debug))?" n)]
-    {:pname pname :version version :output output}))
+  (when-let [[_ pname version tail output]
+             (re-matches #"(.+?)-([0-9][^_]*?)((?:-(?!(?i:alpha|beta|pre|preview|rc)\b)[A-Za-z][A-Za-z_]*)*?)(-(?:bin|dev|doc|man|lib|info|devdoc|debug))?" n)]
+    {:pname pname :version version :tail tail :suffix (str tail output)}))
 
 (defn parse-dry-run
   "Collect the fetched paths, their total size and the built derivations from nixos-rebuild
@@ -75,23 +77,39 @@
                          (update acc :unparsed inc)))
       :else (recur more nil acc))))
 
-(defn current-versions
-  "Map [name output] to the set of versions in the running system's closure."
-  [paths]
-  (->> (keep (comp split-name store-name) paths)
-       (group-by (juxt :pname :output))
+(defn versions
+  "Map [name key] to the set of versions among the given store names, key being :suffix or :tail."
+  [key names]
+  (->> (keep split-name names)
+       (group-by (juxt :pname key))
        (#(update-vals % (fn [xs] (set (map :version xs)))))))
+
+(defn shared-parts
+  "Count the leading version parts two versions share."
+  [a b]
+  (count (take-while true? (map = (str/split a #"[.+-]") (str/split b #"[.+-]")))))
+
+(defn replaced-versions
+  "The current versions a new one replaces: the closest matches by leading parts.
+  Those fetched or built again stay; empty when all of them stay, so the new version sits alongside."
+  [old staying version]
+  (let [by-score (group-by #(shared-parts version %) old)]
+    (sort (remove staying (by-score (apply max (keys by-score)))))))
 
 (defn report-line
   "Format one fetched package as old -> new, (new) or (rebuilt)."
-  [current n]
-  (if-let [{:keys [pname version output]} (split-name n)]
-    (let [label (str pname output)
-          old (get current [pname output])]
+  [current fetched built n]
+  (if-let [{:keys [pname version tail suffix]} (split-name n)]
+    (let [label (str pname suffix)
+          old (get current [pname suffix])
+          staying (into (get fetched [pname suffix] #{}) (get built [pname tail]))
+          from (cond (nil? old) []
+                     (old version) nil
+                     :else (replaced-versions old staying version))]
       (cond
-        (nil? old) (format "%-30s %s (new)" label version)
-        (old version) (format "%-30s %s (rebuilt)" label version)
-        :else (format "%-30s %s -> %s" label (str/join ", " (sort old)) version)))
+        (nil? from) (format "%-30s %s (rebuilt)" label version)
+        (empty? from) (format "%-30s %s (new)" label version)
+        :else (format "%-30s %s -> %s" label (str/join ", " from) version)))
     (format "%-30s (no version)" n)))
 
 (defn heading
@@ -104,14 +122,16 @@
   [old-lock new-lock dry-run-lines current-paths]
   (let [inputs (updated-inputs old-lock new-lock)
         {:keys [fetched built fetch-size unparsed]} (parse-dry-run dry-run-lines)
-        current (current-versions current-paths)]
+        current (versions :suffix (map store-name current-paths))
+        fetched-versions (versions :suffix fetched)
+        built-versions (versions :tail built)]
     (concat [(heading "Updated inputs:")]
             (if (seq inputs) inputs ["none"])
             ["" (heading (str (count built) " derivations to build:"))]
             (if (seq built) (sort-by str/lower-case built) ["none"])
             ["" (heading (str "Packages to fetch" (when fetch-size (str " (" fetch-size ")")) ":"))]
             (if (seq fetched)
-              (sort-by str/lower-case (map #(report-line current %) fetched))
+              (sort-by str/lower-case (map #(report-line current fetched-versions built-versions %) fetched))
               ["none"])
             (when (pos? unparsed)
               ["" (str "warning: " unparsed " store paths in the dry-run output were not parsed; run upd for the raw output")]))))
