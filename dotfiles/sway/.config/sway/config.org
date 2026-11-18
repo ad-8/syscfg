@@ -348,6 +348,7 @@ instead of =input *=, example for using different input types https://github.com
 #+begin_src shell
 input type:keyboard {
     xkb_layout "de"
+    xkb_options "caps:escape"
     xkb_numlock enabled
 }
 

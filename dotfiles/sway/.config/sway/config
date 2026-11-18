@@ -151,6 +151,7 @@ exec swayidle -w \
 
 input type:keyboard {
     xkb_layout "de"
+    xkb_options "caps:escape"
     xkb_numlock enabled
 }
 
