@@ -117,6 +117,14 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
                     (or (tmr--timer-description timer) "Time is up!"))
     (tmr-notification-notify timer)))
 
+(defun ax/tmr-sound-play (orig &rest args)
+  "Play `tmr-sound-file' with mpv when ffplay is missing, else call ORIG."
+  (if (or (executable-find "ffplay") (not (executable-find "mpv")))
+      (apply orig args)
+    (when-let* ((sound (and tmr-sound-file (expand-file-name tmr-sound-file)))
+                ((file-exists-p sound)))
+      (call-process "mpv" nil 0 nil "--no-video" "--really-quiet" sound))))
+
 (use-package! tmr
   :defer t
   :init
@@ -125,7 +133,8 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
   (setq tmr-sound-file (expand-file-name "~/sync/emacs/alarm.ogg")
         tmr-notification-urgency 'critical)
   (remove-hook 'tmr-timer-finished-functions #'tmr-notification-notify)
-  (add-hook 'tmr-timer-finished-functions #'ax/tmr-notify-send))
+  (add-hook 'tmr-timer-finished-functions #'ax/tmr-notify-send)
+  (advice-add 'tmr-sound-play :around #'ax/tmr-sound-play))
 
 (after! lsp-mode
   (setq lsp-ui-doc-enable t

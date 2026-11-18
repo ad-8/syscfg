@@ -155,6 +155,10 @@ input type:keyboard {
     xkb_numlock enabled
 }
 
+input type:touchpad {
+    natural_scroll enabled
+}
+
 set $cursor_theme 'Numix-Cursor'
 set $cursor_size 24
 seat * xcursor_theme $cursor_theme $cursor_size

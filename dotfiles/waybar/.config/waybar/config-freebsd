@@ -1,0 +1,205 @@
+// -*- mode: jsonc -*-
+{
+    "height": 24, // Waybar height (to be removed for auto height)
+    "spacing": 5, // Gaps between modules [px]
+    // FreeBSD variant (ax-lat, sway only): no babashka. sway's modules-left is
+    // inline (no active-compositor.json include). sh modules: scripts/freebsd/waybar.sh.
+    "modules-left": [
+        "custom/snowflake",
+        "sway/workspaces",
+        "sway/mode",
+        "sway/window"
+    ],
+    "modules-center": [
+        "custom/date",
+        "clock",
+        "custom/weather",
+    ],
+    "modules-right": [
+        "custom/volume",
+        "custom/sep3",
+        "custom/licht",
+        "custom/sep3",
+        "custom/cpu",
+        "custom/sepempty",
+        "custom/disk",
+        "custom/sepempty",
+        "custom/memory",
+        "battery",
+        "custom/sep3",
+        "custom/vpn",
+        "custom/sep3",
+        "tray",
+        "custom/sepempty"
+    ],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "  ",
+            "2": "  ",
+            "3": " 3 ",
+            "4": " 4 ",
+            "5": " 5 ",
+            "6": " 6 ",
+            "7": " 7 ",
+            "8": "  ",
+            "9": "  ",
+            "urgent": "!   !",
+            //   "focused": "",
+            //   "default": ""
+        }
+    },
+    "sway/mode": {
+        "format": "{}"
+    },
+    "sway/scratchpad": {
+        "format": "[{count}]",
+        "show-empty": false,
+        "tooltip-format": "{app}: {title}"
+    },
+    "sway/window": {
+        "format": "{title}",
+        "icon": false,
+        "rewrite": {
+            "(.*) - Mozilla Firefox": "$1",
+            "(.*) — Mozilla Firefox": "$1",
+            "(.*) - Brave": "$1"
+        }
+    },
+    "tray": {
+        "icon-size": 15,
+        "spacing": 10,
+    },
+    "custom/date": {
+        "interval": 30,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh date"
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%H:%M:%S}",
+        "interval": 1
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },
+    "custom/volume": {
+        "interval": 2,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh volume"
+    },
+    "custom/vpn": {
+        "interval": 10,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "json",
+        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh vpn"
+    },
+    "custom/licht": {
+        "interval": 10,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh licht"
+    },
+    "custom/cpu": {
+        "interval": 5,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh cpu"
+    },
+    "custom/disk": {
+        "interval": 10,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh disk"
+    },
+    "custom/memory": {
+        "interval": 10,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh memory"
+    },
+    "custom/weather": {
+        "interval": 600,
+        "tooltip": false,
+        "on-click": "~/syscfg/scripts/bb/weather.joke dunst",
+        "on-click-right": "~/syscfg/scripts/bb/weather.joke plot",
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/bb/weather.joke dwm"
+    },
+    // https://github.com/Alexays/Waybar/wiki/Module:-Custom:-Menu
+    "custom/snowflake": {
+        //        "format": "   ",
+        "format": "  <span color='#AB2B28'></span> ",
+        "tooltip-format": "Menu\n\nClick to open the SnowflakeMenu",
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/snowflake.xml",
+        "menu-actions": {
+            "About": "setsid $HOME/.cargo/bin/snowflake > /dev/null 2>&1 &",
+            "reboot": "notify-send reboot 'TODO: this is a work in progress ...'",
+            "shutdown": "notify-send shutdown 'TODO: this is a work in progress ...'",
+        },
+    },
+    "custom/sep1": {
+        "format": " | ",
+        "tooltip": false
+    },
+    "custom/sep2": {
+        "format": "•",
+        "tooltip": false
+    },
+    "custom/sep2b": {
+        "format": "•",
+        "tooltip": false
+    },
+    "custom/sep3": {
+        "format": " | ",
+        "tooltip": false
+    },
+    "custom/sepempty": {
+        "format": " ",
+        "tooltip": false
+    }
+}
