@@ -14,28 +14,17 @@
   ; LG-4K=display 2/bus 13, Acer=display 1/bus 4 — ordered LG-first so preset vectors read [LG-val Acer-val]
   ; :buses (when present) selects the --bus fast path; --bus skips display enumeration ddcutil otherwise does per call
   {"ax-bee" {:internal false :displays [2 1] :display-names {2 "LG" 1 "Acer"} :buses [13 4]}
-   "ax-mac" {:internal true  :displays :detect}
    "ax-t14" {:internal true  :displays :detect}})
 
 
+; :err :string suppresses brillo's device-not-found warnings so only our warn: line shows
 (defn light-screen [brightness]
   (let [res (shell {:continue true :err :string} "brillo" "-S" (str brightness))]
     (when (not= 0 (:exit res))
       (println "warn: light-screen failed (device may not exist)"))))
 
-; brillo -Lk lists available keyboard controllers
-; :err :string suppresses brillo's device-not-found warnings so only our warn: line shows
-(defn light-keyboard [brightness]
-  (let [res (shell {:continue true :err :string} "brillo" "-k" "-s" "smc::kbd_backlight" "-S" (str brightness))]
-    (when (not= 0 (:exit res))
-      (println "warn: light-keyboard failed (device may not exist)"))))
-
 (defn get-light-screen []
   (let [res (shell {:continue true :out :string} "brillo" "-G")]
-    (if (= 0 (:exit res)) (str/trim (:out res)) "err")))
-
-(defn get-light-keyboard []
-  (let [res (shell {:continue true :out :string} "brillo" "-k" "-s" "smc::kbd_backlight" "-G")]
     (if (= 0 (:exit res)) (str/trim (:out res)) "err")))
 
 
@@ -160,8 +149,8 @@
 (defn print-all-the-light-we-can-see []
   (let [{:keys [internal display-names]} (host-config (get-hostname))]
     (when internal
-      (printf "%s\nDisplay:  %s\nKeyboard: %s\n\n"
-              (heading "Internal") (get-light-screen) (get-light-keyboard)))
+      (printf "%s\nDisplay: %s\n\n"
+              (heading "Internal") (get-light-screen)))
     (println (heading "External"))
     (if-let [buses (get-buses)]
       (print-ext-bus-vals buses display-names)
@@ -173,12 +162,11 @@
          "--icon" "brightness-high-symbolic" "--replace-id" "127"
          "--" "Licht" (with-out-str (print-all-the-light-we-can-see))))
 
-(defn illuminate! [{:keys [internal keyboard ext-b ext-c col-temp]}]
+(defn illuminate! [{:keys [internal ext-b ext-c col-temp]}]
   ; only touch the internal backlight on hosts that have one (e.g. ax-bee is
   ; external-only); skips brillo entirely so a missing binary can't crash here
   (when (:internal (host-config (get-hostname)))
-    (light-screen internal)
-    (light-keyboard keyboard))
+    (light-screen internal))
   (if-let [buses (get-buses)]
     (do (set-ext-vcp-bus buses 10 ext-b)
         (set-ext-vcp-bus buses 12 ext-c))
@@ -190,27 +178,27 @@
 
 (def settings
   {"hi+"  {:name "High+"
-           :vals {:internal 90 :keyboard 0  :ext-b 90  :ext-c 90  :col-temp 6500}}
+           :vals {:internal 90 :ext-b 90  :ext-c 90  :col-temp 6500}}
    "hi"   {:name "High"
-           :vals {:internal 80 :keyboard 0  :ext-b 80  :ext-c 80  :col-temp 6000}}
+           :vals {:internal 80 :ext-b 80  :ext-c 80  :col-temp 6000}}
    "hi2"  {:name "High2"
-           :vals {:internal 67 :keyboard 67 :ext-b 67  :ext-c 67  :col-temp 5500}}
+           :vals {:internal 67 :ext-b 67  :ext-c 67  :col-temp 5500}}
    "hi3"  {:name "High3"
-           :vals {:internal 59 :keyboard 59 :ext-b 59  :ext-c 59  :col-temp 4900}}
+           :vals {:internal 59 :ext-b 59  :ext-c 59  :col-temp 4900}}
    "med"  {:name "Medium"
-           :vals {:internal 50 :keyboard 50 :ext-b 50  :ext-c 50  :col-temp 4250}}
+           :vals {:internal 50 :ext-b 50  :ext-c 50  :col-temp 4250}}
    "lo"   {:name "Low"
-           :vals {:internal 23 :keyboard 25 :ext-b 40  :ext-c 33  :col-temp 3750}}
+           :vals {:internal 23 :ext-b 40  :ext-c 33  :col-temp 3750}}
    "ul1"  {:name "Ultra-Low-1"
-           :vals {:internal 20 :keyboard 20 :ext-b 35  :ext-c 25  :col-temp 3000}}
+           :vals {:internal 20 :ext-b 35  :ext-c 25  :col-temp 3000}}
    "ul2"  {:name "Ultra-Low-2"
-           :vals {:internal 10 :keyboard 10 :ext-b 15  :ext-c 15  :col-temp 3000}}
+           :vals {:internal 10 :ext-b 15  :ext-c 15  :col-temp 3000}}
    "ni"   {:name "Night"
-           :vals {:internal 2  :keyboard 2  :ext-b 15  :ext-c 15  :col-temp 3000}}
+           :vals {:internal 2  :ext-b 15  :ext-c 15  :col-temp 3000}}
    "ni2"  {:name "Night-2"
-           :vals {:internal 2  :keyboard 2  :ext-b 8   :ext-c 8   :col-temp 2000}}
+           :vals {:internal 2  :ext-b 8   :ext-c 8   :col-temp 2000}}
    "max"  {:name "Max"
-           :vals {:internal 100 :keyboard 0 :ext-b 100 :ext-c 100 :col-temp 6500}}
+           :vals {:internal 100 :ext-b 100 :ext-c 100 :col-temp 6500}}
    "cust" {:name "Custom"}
    "get"  {:name "Get current values"}})
 
@@ -232,7 +220,7 @@
         acer (when lg   (ask-value "Acer brightness" b-opts))
         ct   (when acer (ask-value "color temp" ct-opts))]
     (when ct
-      (illuminate! {:internal 0 :keyboard 0 :ext-b [lg acer] :ext-c [lg acer] :col-temp ct})
+      (illuminate! {:internal 0 :ext-b [lg acer] :ext-c [lg acer] :col-temp ct})
       (spit "/tmp/licht-curr-val" "cust\n")
       (shell {:continue true} "notify-send" "Licht" (format "Custom %d/%d %dK" lg acer ct)
              "--app-name" "dwm-licht" "--expire-time" "4000"
