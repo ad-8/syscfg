@@ -1,0 +1,121 @@
+# Theming. background/color/border are NOT here — switch_theme.sh prepends
+# them from themes/<name>/wlr-which-key.yaml and writes the result to
+# config.yaml, which is what wlr-which-key actually reads.
+font: Hack Nerd Font 15
+separator: " ➜ "
+border_width: 2
+corner_r: 10
+padding: 15 # Defaults to corner_r
+rows_per_column: 5 # No limit by default
+column_padding: 25 # Defaults to padding
+
+# Anchor and margin
+anchor: center # One of center, left, right, top, bottom, bottom-left, top-left, etc.
+# Only relevant when anchor is not center
+margin_right: 0
+margin_bottom: 0
+margin_left: 0
+margin_top: 0
+
+# namespace to use for the layer shell surface
+#namespace: "wlr_which_key"
+
+# Permits key bindings that conflict with compositor key bindings.
+# Default is `false`.
+inhibit_compositor_keyboard_shortcuts: false
+
+# Try to guess the correct keyboard layout to use. Default is `false`.
+auto_kbd_layout: true
+
+
+
+menu:
+  - key: "c"
+    desc: Change ...
+    submenu:
+      - key: "l"
+        desc: TODO lights
+        cmd: $HOME/syscfg/scripts/bb/licht.clj
+      - key: "t"
+        desc: theme
+        cmd: $HOME/syscfg/freebsd/scripts/switch_theme.sh
+
+  - key: "n"
+    desc: Network ...
+    submenu:
+      - key: "m"
+        desc: TODO muc up
+        cmd: nmcli c up muc
+      - key: "M"
+        desc: TODO muc down
+        cmd: nmcli c down muc
+      - key: "v"
+        desc: TODO VPN up (CH-854)
+        cmd: sudo wg-quick up CH-854
+      - key: "V"
+        desc: TODO VPN down (CH-854)
+        cmd: sudo wg-quick down CH-854
+
+  - key: "w"
+    desc: Wallpaper ...
+    submenu:
+      - key: "c"
+        desc: TODO bing current - notify
+        cmd: bb $HOME/x/bing_wallpaper_cli.clj notify-current
+      - key: "d"
+        desc: TODO set daily wallpaper
+        cmd: bb $HOME/x/bing_wallpaper_cli.clj set-daily
+      - key: "i"
+        desc: TODO bing daily - notify info
+        cmd: bb $HOME/x/bing_wallpaper_cli.clj notify-daily
+      - key: "k"
+        desc: kill wallpaper background
+        cmd: pkill -f swaybg
+      - key: "o"
+        desc: TODO open bing wallpaper folder
+        cmd: setsid thunar $HOME/sync/wallpapers/bing & disown
+      - key: "r"
+        desc: TODO set random wallpaper
+        cmd: $HOME/syscfg/scripts/bb/set_random_wallpaper.clj
+
+  - key: "o"
+    desc: Open program ...
+    submenu:
+      - key: "e"
+        desc: Emacsclient
+        cmd: emacsclient -c -n -a ''
+      - key: "E"
+        desc: Emacs
+        cmd: emacs
+      - key: "k"
+        desc: TODO KeePassXC
+        cmd: keepassxc
+      - key: "m"
+        desc: Emacs EMMS
+        cmd: emacsclient -c -n -a '' -F '((name . "ax-emacs-emms") (title . "ax-emacs-emms"))' --eval '(ax/open-emms-layout)'
+      - key: "x"
+        desc: Firefox
+        cmd: firefox
+
+  - key: "s"
+    desc: Screenshot ...
+    submenu:
+      - key: "a"
+        desc: TODO all outputs
+        cmd: grim - | swappy -f -
+      - key: "s"
+        desc: TODO select region
+        cmd: grim -g "$(slurp)" - | swappy -f -
+
+  - key: "t"
+    desc: Toggle
+    submenu:
+      - key: "b"
+        desc: TODO toggle bluetooth
+        cmd: rfkill toggle bluetooth
+      - key: "n"
+        desc: TODO toggle notifications
+        cmd: $HOME/syscfg/scripts/dunst_toggle_and_notify.clj
+      - key: "w"
+        desc: TODO toggle wifi
+        cmd: rfkill toggle wifi

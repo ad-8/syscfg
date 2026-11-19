@@ -529,7 +529,7 @@ bindsym $mod+b exec [ "$(uname)" = FreeBSD ] && (pkill waybar || waybar -c ~/.co
 
 bindsym $mod+$alt+h exec dunstctl history-pop
 bindsym $mod+$alt+k exec dunstctl close-all
-bindsym $mod+$alt+w exec [ "$(uname)" = FreeBSD ] && ~/syscfg/scripts/bb/weather.joke dunst || ~/syscfg/scripts/bb/weather.clj dunst
+bindsym $mod+$alt+w exec [ "$(uname)" = FreeBSD ] && ~/syscfg/freebsd/scripts/weather.joke dunst || ~/syscfg/scripts/bb/weather.clj dunst
 
 bindsym $mod+m exec bb ~/x/ax_bookmarks.clj std
 bindsym $mod+shift+m exec bb ~/x/ax_bookmarks.clj archived

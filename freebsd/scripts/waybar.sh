@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 # waybar custom modules for FreeBSD, POSIX sh port of scripts/waybar.clj.
-# Used by dotfiles/waybar/.config/waybar/config-freebsd.
+# Used by freebsd/dotfiles/waybar/.config/waybar/config-freebsd.
 
 waybar_date() {
     set -- $(LC_ALL=C date '+%a %d.%m.')

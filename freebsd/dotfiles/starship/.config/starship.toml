@@ -1,0 +1,52 @@
+# # Get editor completions based on the config schema
+# "$schema" = 'https://starship.rs/config-schema.json'
+
+# Disable the blank line at the start of the prompt
+add_newline = true
+
+[line_break]
+disabled = false
+
+[character]
+format         = '$symbol '
+success_symbol = '[λ](bold green)'
+error_symbol   = '[λ](bold red)'
+
+[directory]
+format = '[$path]($style)[$read_only]($read_only_style) '	
+style = '245'
+truncation_length = 5
+truncate_to_repo = false
+truncation_symbol = '.../'
+
+
+[time]
+time_format = "%T"
+format = "🕙 $time($style) "
+style = "bright-white"
+disabled = true
+
+[cmd_duration]
+format = ' [$duration]($style) '
+style = '#EBCB8B'
+
+# git
+[git_branch]
+format = ' [$symbol$branch(:$remote_branch)]($style) '
+style = '#B48EAD' # Nord Aurora
+
+[git_status]
+style = '#BF616A'
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[golang]
+disabled = true
+
+[python]
+disabled = false
+
+[rust]
+disabled = true

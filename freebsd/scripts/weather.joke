@@ -226,7 +226,7 @@
 
 (defn- bg-light?
   "True when the active theme's background is light. Reads foot's active-theme
-  symlink (maintained by switch_theme.clj) -- the same `background=` value the
+  symlink (maintained by switch_theme.sh) -- the same `background=` value the
   rest of the theme set treats as a theme's true base. Anything that goes wrong
   reading it means dark, i.e. the palette every theme used before this existed.
   Measured across all themes (30 at the time) the split is wide: dark tops out

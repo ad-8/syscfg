@@ -3,7 +3,7 @@
     "height": 24, // Waybar height (to be removed for auto height)
     "spacing": 5, // Gaps between modules [px]
     // FreeBSD variant (ax-lat, sway only): no babashka. sway's modules-left is
-    // inline (no active-compositor.json include). sh modules: scripts/freebsd/waybar.sh.
+    // inline (no active-compositor.json include). sh modules: freebsd/scripts/waybar.sh.
     "modules-left": [
         "custom/snowflake",
         "sway/workspaces",
@@ -78,7 +78,7 @@
         "tooltip": false,
         "format": "{}",
         "return-type": "text",
-        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh date"
+        "exec": "$HOME/syscfg/freebsd/scripts/waybar.sh date"
     },
     "clock": {
         "format": "{:%H:%M}",
@@ -123,51 +123,51 @@
         "tooltip": false,
         "format": "{}",
         "return-type": "text",
-        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh volume"
+        "exec": "$HOME/syscfg/freebsd/scripts/waybar.sh volume"
     },
     "custom/vpn": {
         "interval": 10,
         "tooltip": false,
         "format": "{}",
         "return-type": "json",
-        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh vpn"
+        "exec": "$HOME/syscfg/freebsd/scripts/waybar.sh vpn"
     },
     "custom/licht": {
         "interval": 10,
         "tooltip": false,
         "format": "{}",
         "return-type": "text",
-        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh licht"
+        "exec": "$HOME/syscfg/freebsd/scripts/waybar.sh licht"
     },
     "custom/cpu": {
         "interval": 5,
         "tooltip": false,
         "format": "{}",
         "return-type": "text",
-        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh cpu"
+        "exec": "$HOME/syscfg/freebsd/scripts/waybar.sh cpu"
     },
     "custom/disk": {
         "interval": 10,
         "tooltip": false,
         "format": "{}",
         "return-type": "text",
-        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh disk"
+        "exec": "$HOME/syscfg/freebsd/scripts/waybar.sh disk"
     },
     "custom/memory": {
         "interval": 10,
         "tooltip": false,
         "format": "{}",
         "return-type": "text",
-        "exec": "$HOME/syscfg/scripts/freebsd/waybar.sh memory"
+        "exec": "$HOME/syscfg/freebsd/scripts/waybar.sh memory"
     },
     "custom/weather": {
         "interval": 600,
         "tooltip": false,
-        "on-click": "$HOME/syscfg/scripts/bb/weather.joke dunst",
-        "on-click-right": "$HOME/syscfg/scripts/bb/weather.joke plot",
+        "on-click": "$HOME/syscfg/freebsd/scripts/weather.joke dunst",
+        "on-click-right": "$HOME/syscfg/freebsd/scripts/weather.joke plot",
         "format": "{}",
         "return-type": "text",
-        "exec": "$HOME/syscfg/scripts/bb/weather.joke dwm"
+        "exec": "$HOME/syscfg/freebsd/scripts/weather.joke dwm"
     },
     // https://github.com/Alexays/Waybar/wiki/Module:-Custom:-Menu
     "custom/snowflake": {

@@ -24,42 +24,6 @@ Run the switcher again after pulling theme changes, and after editing
 only when the switcher runs. The first run has to be from a terminal, since
 `c t` and `c T` are bindings in that menu.
 
-### FreeBSD laptop (ax-lat, sway)
-The keyboard has no `<>` key next to left Shift. The `xkb` package adds a
-layout, `de-ansi`, that puts `<` `>` `|` on AltGr+y/x/c:
-
-```sh
-stow -v --target=$HOME xkb
-```
-
-Then enable it on this host only, as root, in `/etc/sway/config.d/keyboard`
-(the sway config includes `/etc/sway/config.d/*`; other hosts keep plain `de`):
-
-```
-input type:keyboard xkb_layout "de-ansi"
-```
-
-Reload sway with Super+Shift+R.
-
-#### Sound: mixer vs PulseAudio
-FreeBSD's sound system is OSS; `mixer` sets its volume, for every app. The
-waybar package pulls in PulseAudio, which starts on demand (any `pactl` call
-or app that wants it). Its sink volume *is* the card's `mixer vol`, not a
-layer on top, and on every start it writes its saved volume back to the card,
-overwriting whatever `mixer` was set to.
-
-Use `mixer` only, and keep PulseAudio from starting:
-
-```sh
-mkdir -p ~/.config/pulse
-echo 'autospawn = no' >> ~/.config/pulse/client.conf
-pulseaudio -k
-mixer vol=0.6
-```
-
-Apps then fall back to OSS directly. PulseAudio's log noise (no system D-Bus,
-console-kit, `caps.c`) is harmless.
-
 ## II. scripts
 Collection of maintained and long-forgotten scripts.
 
