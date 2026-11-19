@@ -116,6 +116,12 @@
    {:file    "mango.conf"
     :dest    (fs/path (fs/xdg-config-home) "mango/active-theme.conf")
     :reload  (fn [_] (shell ["mmsg" "dispatch" "reload_config"]))}
+   {:file    "sway.conf"
+    :dest    (fs/path (fs/xdg-config-home) "sway/active-theme")
+    :reload  (fn [src]
+               (shell ["swaymsg" (->> (str/split-lines (slurp (str src)))
+                                      (filter #(str/starts-with? % "client."))
+                                      (str/join ";"))]))}
    {:file    "emacs-theme.el"
     :dest    (fs/path (fs/xdg-config-home) "doom/active-theme.el")
     :reload  no-reload}

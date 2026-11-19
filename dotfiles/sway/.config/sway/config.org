@@ -10,8 +10,6 @@
 * ToC :toc:
 - [[#variables][Variables]]
   - [[#basics][Basics]]
-  - [[#nord-colors][Nord Colors]]
-  - [[#gotham-colors][Gotham colors]]
   - [[#workspaces][Workspaces]]
   - [[#default-layout][Default Layout]]
 - [[#autostart][Autostart]]
@@ -74,56 +72,6 @@ on the original workspace that the command was run on.
 set $menu rofi -show run -theme picker
 #+end_src
 
-** Nord Colors
-https://www.nordtheme.com/docs/colors-and-palettes
-
-#+begin_src shell
-# Nord Polar Night
-set $polar1 #2e3440
-set $polar2 #3b4252
-set $polar3 #434c5e
-set $polar4 #4c566a
-
-# Nord Snow Storm
-set $snow1 #d8dee9
-set $snow2 #e5e9f0
-set $snow3 #eceff4
-
-# Nord Frost
-set $frost1 #8fbcbb
-set $frost2 #88c0d0
-set $frost3 #81a1c1
-set $frost4 #5e81ac
-
-# Nord Aurora
-set $red    #bf616a
-set $orange #d08770
-set $yellow #ebcb8b
-set $green  #a3be8c
-set $lila   #b48ead
-#+end_src
-
-** Gotham colors
-#+begin_src shell
-set $gotham_black "#0c1014"
-set $gotham_brightblack "#11151c"
-set $gotham_brightgreen "#091f2e"
-set $gotham_brightblue "#0a3749"
-set $gotham_brightyellow "#245361"
-set $gotham_brightcyan "#599cab"
-set $gotham_white "#99d1ce"
-set $gotham_brightwhite "#d3ebe9"
-
-set $gotham_red "#c23127"
-set $gotham_brightred "#d26937"
-set $gotham_yellow "#edb443"
-set $gotham_brightmagenta "#888ca6"
-set $gotham_magenta "#4e5166"
-set $gotham_blue "#195466"
-set $gotham_cyan "#33859e"
-set $gotham_green "#2aa889"
-#+end_src
-
 ** Workspaces
 [[https://www.nerdfonts.com/cheat-sheet][Icons Cheat Sheet]]
 
@@ -165,15 +113,10 @@ font pango:HackNerdFont 9.0
 #+end_src
 
 ** Changing Colors
-Other than ~client.focused~, all values are the default ones.
+The ~client.*~ colors come from the active theme (~themes/*/sway.conf~, linked by the theme switcher).
 
 #+begin_src shell
-
-# class                 border               backgr.              text                 indicator            child_border
-client.focused          $gotham_brightyellow $gotham_brightyellow $gotham_brightwhite  $gotham_brightyellow $gotham_brightyellow
-client.focused_inactive #333333              #5f676a              #ffffff              #484e50              #5f676a
-client.unfocused        #333333              #222222              #888888              #292d2e              #222222
-client.urgent           #2f343a              #900000              #ffffff              #900000              #900000
+include ~/.config/sway/active-theme
 
 
 # default colors for reference

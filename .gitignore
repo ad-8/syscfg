@@ -25,6 +25,8 @@
 /dotfiles/niri/.config/niri/active-theme.kdl
 /dotfiles/mango/.config/mango/active-theme.conf
 /dotfiles/kitty/.config/kitty/active-theme.conf
+/dotfiles/sway/.config/sway/active-theme
+/freebsd/dotfiles/sway/.config/sway/active-theme
 /dotfiles/clojure/.clojure/tools/
 /dotfiles/clojure/.clojure/.cpcache/
 /dotfiles/wlr-which-key/.config/wlr-which-key/config.yaml

@@ -66,8 +66,8 @@ the top of this file; re-add those by hand, the switcher entry into the current
 `theme-categories` map. `git show <commit>` shows what was removed, but the
 older diffs no longer match today's `switch_theme.clj`.
 Delete the restored `fuzzel.ini`, fuzzel is gone (`a823d2ce`).
-white, everforest-light and oxocarbon-light predate the kitty, niri, tmux and
-wlr-which-key theme files; write those four, or those apps keep the previous
+white, everforest-light and oxocarbon-light predate the kitty, niri, sway, tmux
+and wlr-which-key theme files; write those five, or those apps keep the previous
 theme and the switcher reports them missing.
 
 | Theme            | Removed    | Commit     | Doom theme file (in `dotfiles/doom/.config/doom/themes/`) | Emacs theme source                      |

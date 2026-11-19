@@ -52,6 +52,11 @@ reload_waybar() {
     nohup waybar -c "$C/waybar/config-freebsd" >/dev/null 2>&1 &
 }
 
+reload_sway() {
+    pgrep -x sway >/dev/null || return 0
+    swaymsg "$(grep '^client\.' "$1" | paste -s -d ';' -)" >/dev/null
+}
+
 which_key() {
     src=$T/$theme/wlr-which-key.yaml dest=$C/wlr-which-key/config.yaml
     for f in "$src" "$MENU"; do [ -e "$f" ] || { missing "$f"; rc=1; return 1; }; done
@@ -80,5 +85,6 @@ link waybar.css "$C/waybar/active-theme.css" && reload_waybar
 link emacs-theme.el "$C/doom/active-theme.el"
 link rofi.rasi "$C/rofi/active-theme.rasi"
 link dunst.conf "$C/dunst/active-theme.conf" && reload_dunst
+link sway.conf "$C/sway/active-theme" && reload_sway "$T/$theme/sway.conf"
 which_key
 exit $rc
