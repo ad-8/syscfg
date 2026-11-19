@@ -101,11 +101,17 @@ menu:
     desc: Screenshot ...
     submenu:
       - key: "a"
-        desc: TODO all outputs
-        cmd: grim - | swappy -f -
+        desc: all outputs
+        cmd: sleep 0.3; grim - | swappy -f -
       - key: "s"
-        desc: TODO select region
+        desc: select region
         cmd: grim -g "$(slurp)" - | swappy -f -
+      - key: "w"
+        desc: select window
+        cmd: swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp | grim -g - - | swappy -f -
+      - key: "f"
+        desc: focused window
+        cmd: sleep 0.3; swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | grim -g - - | swappy -f -
 
   - key: "t"
     desc: Toggle
