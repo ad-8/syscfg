@@ -34,8 +34,8 @@ menu:
     desc: Change ...
     submenu:
       - key: "l"
-        desc: TODO lights
-        cmd: $HOME/syscfg/scripts/bb/licht.clj
+        desc: lights
+        cmd: $HOME/syscfg/freebsd/scripts/licht.sh
       - key: "t"
         desc: theme
         cmd: $HOME/syscfg/freebsd/scripts/switch_theme.sh

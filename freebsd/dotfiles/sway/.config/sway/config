@@ -71,7 +71,7 @@ exec --no-startup-id dunst
 #exec --no-startup-id megasync
 exec --no-startup-id nm-applet
 #exec --no-startup-id firewall-applet
-exec --no-startup-id "~/syscfg/scripts/bb/licht.clj hi"
+exec --no-startup-id "~/syscfg/freebsd/scripts/licht.sh hi"
 
 font pango:HackNerdFont 9.0
 
@@ -353,7 +353,7 @@ bindsym $mod+period focus output left
 #bindsym $mod+Shift+Tab focus output prev
 
 set $mode_space SPC: [a]ll-search [c]hange-settings [g]search
-set $mode_settings CHANGE SETTINGS: [b]luetooth [l]icht rand-[w]allpaper
+set $mode_settings CHANGE SETTINGS: [b]luetooth rand-[w]allpaper
 bindsym Mod1+space mode "$mode_space"
 
 mode "$mode_space" {
@@ -367,7 +367,6 @@ mode "$mode_space" {
 
 mode "$mode_settings" {
     bindsym b exec blueman-manager; mode "default"
-    bindsym l exec "~/syscfg/scripts/bb/licht.clj"; mode "default"
     bindsym w exec "$HOME/syscfg/scripts/bb/set_random_wallpaper.clj"; mode "default"
 
     bindsym Escape mode "default"
