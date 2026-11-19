@@ -463,6 +463,7 @@ bindsym $mod+F12 [title="htop-scratchpad"] scratchpad show, resize set 1024 768,
 bindsym $mod+Shift+o exec rofi -show drun
 bindsym $mod+Shift+f exec rofi -show recursivebrowser
 bindsym $mod+Shift+space exec wlr-which-key
+bindsym $mod+o exec wlr-which-key --initial-keys o
 bindsym $mod+shift+w exec rofi -show window
 bindsym $mod+odiaeresis exec rofi -show ssh
 
@@ -552,6 +553,7 @@ bindsym $mod+period focus output left
 
 *** TODO Interactive mode: scripts using dmenu for user interaction
 TODO lots of them don't work, because of their dmenu dependency
+TODO waybar should use whole width while in a mode to display the help
 
 #+begin_src shell
 set $mode_space SPC: [a]ll-search [c]hange-settings [g]search
@@ -573,48 +575,6 @@ mode "$mode_settings" {
     bindsym w exec "$HOME/syscfg/scripts/bb/set_random_wallpaper.clj"; mode "default"
 
     bindsym Escape mode "default"
-}
-#+end_src
-
-*** TODO (waybar should use whole width while in a mode to display the help) Launch applications with $mod+o
-#+begin_src shell
-set $mode_launcher Open:\n\n[b]luetooth [c]alc [e]macs [E]macsclient [f]ile-manager\n\n[k]eepass [m]usic-player [p]avucontrol\n\n[q]bittorrent [s]creenshot bra[v]e firefo[x]
-# set $mode_launcher Open: a b c e E f k m p q s v w x
-
-set $mode_screenshot Screenshot: [a]ll outputs [s]elect region [w]indow
-
-# bindsym $mod+o exec notify-send -t 30000 -u low -i keyboard "$mode_launcher"; mode "$mode_launcher"
-bindsym $mod+o exec wlr-which-key --initial-keys o
-
-mode "$mode_launcher" {
-    bindsym b exec foot --title bluetui --command bluetui; mode "default"; exec dunstctl close
-    bindsym c exec qalculate-gtk; mode "default"; exec dunstctl close
-    bindsym e exec emacs; mode "default"; exec dunstctl close
-    bindsym shift+e exec emacsclient --create-frame --alternate-editor=emacs; mode "default"; exec dunstctl close
-    bindsym f exec thunar; mode "default"; exec dunstctl close
-    bindsym k exec keepassxc; mode "default"; exec dunstctl close
-    bindsym m exec emacs -T ax-emacs-emms --eval '(ax/open-emms-layout)'; mode "default"; exec dunstctl close
-    bindsym p exec pavucontrol; mode "default"; exec dunstctl close
-    bindsym q exec qbittorrent; mode "default"; exec dunstctl close
-    bindsym s exec dunstctl close; mode "$mode_screenshot";
-    bindsym v exec brave; mode "default"; exec dunstctl close
-    bindsym x exec firefox; mode "default"; exec dunstctl close
-
-    bindsym Escape mode "default"; exec dunstctl close
-    bindsym Return mode "default"; exec dunstctl close
-}
-
-
-mode "$mode_screenshot" {
-    # mode default first, because swappy (the screenshot gui) might be open for a while,
-    # and we don't want to be stuck in a non-default meanwhile
-    # TODO until we get rid of the dunst notifs, we need to sleep here, else the notif is in the screenshot
-    bindsym a mode default; exec sleep 1; exec grim - | swappy -f -;
-    bindsym s mode default; exec grim -g "$(slurp)" - | swappy -f -;
-    bindsym w mode default; exec sleep 1; exec swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | grim -g - - | swappy -f -;
-    
-    bindsym Escape mode "default"; exec dunstctl close
-    bindsym Return mode "default"; exec dunstctl close
 }
 #+end_src
 
