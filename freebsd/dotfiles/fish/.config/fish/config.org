@@ -247,8 +247,17 @@ end
 
 ** zoxide
 not available on OpenBSD 7.8 and 7.9
-#+begin_src shell
+#+begin_src shell :tangle no
 if status is-interactive; and command -q zoxide
+    zoxide init fish | source
+end
+#+end_src
+
+#+begin_src shell
+# TODO: remove the __zoxide_cd_internal lines once the FreeBSD zoxide package is 0.9.9 or newer (0.9.8 can't read fish 4.x's embedded cd.fish)
+if status is-interactive; and command -q zoxide
+    functions --query __zoxide_cd_internal
+    or functions --copy cd __zoxide_cd_internal
     zoxide init fish | source
 end
 #+end_src

@@ -175,6 +175,9 @@ if status is-interactive; and command -q starship
     starship init fish | source
 end
 
+# TODO: remove the __zoxide_cd_internal lines once the FreeBSD zoxide package is 0.9.9 or newer (0.9.8 can't read fish 4.x's embedded cd.fish)
 if status is-interactive; and command -q zoxide
+    functions --query __zoxide_cd_internal
+    or functions --copy cd __zoxide_cd_internal
     zoxide init fish | source
 end
