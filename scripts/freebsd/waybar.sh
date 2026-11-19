@@ -18,11 +18,13 @@ waybar_date() {
 }
 
 waybar_licht() {
-    printf " %s\n" "$(backlight | awk '{print $2}')"
+    val=$(backlight | awk '{print $2}')
+    printf " %s\n" "${val:---}"
 }
 
 waybar_volume() {
-    printf " %s\n" "$(mixer | awk '$1 == "vol" { split($3, a, ":"); printf "%.0f%%", a[1] * 100 }')"
+    val=$(mixer | awk '$1 == "vol" { split($3, a, ":"); if ($NF == "mute") printf "MUTED"; else printf "%.0f%%", a[1] * 100 }')
+    printf "  %s\n" "${val:---}"
 }
 
 waybar_cpu() {

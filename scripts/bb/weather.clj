@@ -251,8 +251,8 @@
 
 (def ^:private palette-dark
   {:clear    "#f9d71c"  ;; gold
-   :cloudy   "#9aa0a6"  ;; grey
-   :fog      "#b0b0b0"  ;; pale grey
+   :cloudy   "#9aa0a6"  ;; gray
+   :fog      "#b0b0b0"  ;; pale gray
    :freezing "#7fd4d4"  ;; icy cyan
    :rain     "#5a9bd4"  ;; blue
    :snow     "#cfe8ff"  ;; pale blue
@@ -261,12 +261,12 @@
 
 ;; same hue families pulled down until they clear 5:1 on the darkest light theme
 ;; (doric-oak #e0d8c7) -- not on pure white, which is the easiest of the five and
-;; would leave the others short. The three greys keep the dark palette's ordering
+;; would leave the others short. The three grays keep the dark palette's ordering
 ;; (cloudy quietest, default loudest) so they stay tellable apart.
 (def ^:private palette-light
   {:clear    "#6e5400"  ;; gold
-   :cloudy   "#515962"  ;; grey
-   :fog      "#565656"  ;; pale grey
+   :cloudy   "#515962"  ;; gray
+   :fog      "#565656"  ;; pale gray
    :freezing "#005f5f"  ;; icy cyan
    :rain     "#1d5a97"  ;; blue
    :snow     "#2f5c7f"  ;; pale blue

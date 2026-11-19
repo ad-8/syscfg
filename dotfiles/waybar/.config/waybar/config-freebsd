@@ -118,7 +118,8 @@
         }
     },
     "custom/volume": {
-        "interval": 2,
+        "interval": 30,
+        "signal": 8,
         "tooltip": false,
         "format": "{}",
         "return-type": "text",
@@ -162,8 +163,8 @@
     "custom/weather": {
         "interval": 600,
         "tooltip": false,
-        "on-click": "~/syscfg/scripts/bb/weather.joke dunst",
-        "on-click-right": "~/syscfg/scripts/bb/weather.joke plot",
+        "on-click": "$HOME/syscfg/scripts/bb/weather.joke dunst",
+        "on-click-right": "$HOME/syscfg/scripts/bb/weather.joke plot",
         "format": "{}",
         "return-type": "text",
         "exec": "$HOME/syscfg/scripts/bb/weather.joke dwm"
