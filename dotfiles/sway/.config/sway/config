@@ -22,7 +22,7 @@ set $ws9 "9"
 
 workspace_layout default
 
-exec --no-startup-id [ "$(uname)" = FreeBSD ] && exec waybar -c ~/.config/waybar/config-freebsd || ~/syscfg/scripts/waybar.clj launch
+exec --no-startup-id ~/syscfg/scripts/waybar.clj launch
 exec --no-startup-id blueman-applet
 exec --no-startup-id dunst
 #exec --no-startup-id firefox
@@ -240,11 +240,11 @@ bindsym $mod+odiaeresis exec rofi -show ssh
 
 bindsym $mod+$alt+l exec swaylock --color 000000 --show-failed-attempts
 
-bindsym $mod+b exec [ "$(uname)" = FreeBSD ] && (pkill waybar || waybar -c ~/.config/waybar/config-freebsd || true) || ~/syscfg/scripts/waybar.clj toggle
+bindsym $mod+b exec ~/syscfg/scripts/waybar.clj toggle
 
 bindsym $mod+$alt+h exec dunstctl history-pop
 bindsym $mod+$alt+k exec dunstctl close-all
-bindsym $mod+$alt+w exec [ "$(uname)" = FreeBSD ] && ~/syscfg/freebsd/scripts/weather.joke dunst || ~/syscfg/scripts/bb/weather.clj dunst
+bindsym $mod+$alt+w exec ~/syscfg/scripts/bb/weather.clj dunst
 
 bindsym $mod+m exec bb ~/x/ax_bookmarks.clj std
 bindsym $mod+shift+m exec bb ~/x/ax_bookmarks.clj archived
@@ -285,16 +285,16 @@ bindsym $mod+r mode "resize"
 
 # sxhkd VOLUME keybindings
 # TODO not sure why sway on nixos doesn't see ~/.cargo/bin in $PATH
-bindsym XF86AudioRaiseVolume exec [ "$(uname)" = FreeBSD ] && (mixer vol=+5% && pkill -73 waybar || true) || ~/syscfg/scripts/wayland.clj volume-up
-bindsym XF86AudioLowerVolume exec [ "$(uname)" = FreeBSD ] && (mixer vol=-5% && pkill -73 waybar || true) || ~/syscfg/scripts/wayland.clj volume-down
-bindsym XF86AudioMute exec [ "$(uname)" = FreeBSD ] && (mixer vol.mute=toggle && pkill -73 waybar || true) || ~/syscfg/scripts/wayland.clj volume-mute
-bindsym XF86AudioPlay exec [ "$(uname)" = FreeBSD ] && playerctl play-pause || ~/syscfg/scripts/bb/play_pause.clj
+bindsym XF86AudioRaiseVolume exec ~/syscfg/scripts/wayland.clj volume-up
+bindsym XF86AudioLowerVolume exec ~/syscfg/scripts/wayland.clj volume-down
+bindsym XF86AudioMute exec ~/syscfg/scripts/wayland.clj volume-mute
+bindsym XF86AudioPlay exec ~/syscfg/scripts/bb/play_pause.clj
 
-bindsym $mod+$alt+up exec [ "$(uname)" = FreeBSD ] && (mixer vol=+5% && pkill -73 waybar || true) || ~/syscfg/scripts/wayland.clj volume-up
-bindsym $mod+$alt+down exec [ "$(uname)" = FreeBSD ] && (mixer vol=-5% && pkill -73 waybar || true) || ~/syscfg/scripts/wayland.clj volume-down
-bindsym $mod+$alt+left exec [ "$(uname)" = FreeBSD ] && (mixer vol.mute=toggle && pkill -73 waybar || true) || ~/syscfg/scripts/wayland.clj volume-mute
-bindsym $mod+$alt+right exec [ "$(uname)" = FreeBSD ] && playerctl play-pause || ~/syscfg/scripts/bb/play_pause.clj
-bindsym $mod+$alt+space exec [ "$(uname)" = FreeBSD ] && playerctl play-pause || ~/syscfg/scripts/bb/play_pause.clj
+bindsym $mod+$alt+up exec ~/syscfg/scripts/wayland.clj volume-up
+bindsym $mod+$alt+down exec ~/syscfg/scripts/wayland.clj volume-down
+bindsym $mod+$alt+left exec ~/syscfg/scripts/wayland.clj volume-mute
+bindsym $mod+$alt+right exec ~/syscfg/scripts/bb/play_pause.clj
+bindsym $mod+$alt+space exec ~/syscfg/scripts/bb/play_pause.clj
 
 workspace_auto_back_and_forth yes
 
