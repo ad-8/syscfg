@@ -82,6 +82,8 @@
 
   programs.fish.enable = true;
 
+  environment.sessionVariables.COLORTERM = "truecolor";
+
   # ensure the client has the necessary NFS utilities installed
   boot.supportedFilesystems = [ "nfs" ];
 

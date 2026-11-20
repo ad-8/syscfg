@@ -63,7 +63,6 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
-      AcceptEnv = [ "COLORTERM" ];
       # AllowUsers = [ "myUser" ];
     };
   };

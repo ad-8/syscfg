@@ -167,9 +167,11 @@ export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -nw"
 export VISUAL="emacsclient -c"
 
-if test "$COLORTERM" = truecolor
-    alias e "env TERM=xterm-direct emacsclient -nw"
-    export EDITOR="env TERM=xterm-direct emacsclient -nw"
+if test "$TERM" = linux
+    set -e COLORTERM
+    alias e "emacs -nw"
+    export EDITOR="emacs -nw"
+    export VISUAL="emacs -nw"
 end
 
 set -Ux fish_greeting "" # disable default welcome message
