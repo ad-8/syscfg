@@ -13,7 +13,7 @@
           .{ "blueman-applet" },
           .{ "dunst" },
           .{ "nm-applet" },
-          .{ "emacs" },
+          .{ "env", "COLORTERM=truecolor", "emacs" },
  //         .{ "emacs", "--daemon" },
           .{ "firefox" },
           .{ "foot", "-e", "btop" },

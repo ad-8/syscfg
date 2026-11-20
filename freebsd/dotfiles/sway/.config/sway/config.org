@@ -82,7 +82,7 @@ workspace_layout default
 #+begin_src shell
 exec --no-startup-id exec waybar -c ~/.config/waybar/config-freebsd
 exec --no-startup-id dunst
-exec --no-startup-id emacs --daemon
+exec --no-startup-id env COLORTERM=truecolor emacs --daemon
 exec --no-startup-id "~/syscfg/freebsd/scripts/licht.sh hi"
 #+end_src
 
