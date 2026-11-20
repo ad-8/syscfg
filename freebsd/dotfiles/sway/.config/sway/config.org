@@ -21,7 +21,7 @@
   - [[#float--resize-etc-certain-windows][FLOAT / RESIZE etc. CERTAIN WINDOWS]]
   - [[#window-rules-open-apps-on-specific-workspace][Window Rules: Open apps on specific workspace]]
 - [[#output-configuration][Output configuration]]
-- [[#swayidle][swayidle]]
+- [[#does-not-launch-on-freebsd-why-swayidle][(does not launch on FreeBSD, why?) swayidle]]
 - [[#input-configuration][Input configuration]]
 - [[#key-bindings][Key bindings]]
   - [[#basics-1][Basics]]
@@ -33,9 +33,6 @@
   - [[#other-2025-new][Other (2025 new)]]
   - [[#resizing-containers][Resizing containers]]
   - [[#from-i3][from i3]]
-- [[#status-bar][Status Bar]]
-  - [[#sway-default][sway default]]
-- [[#transparency][Transparency]]
 - [[#gaps][GAPS]]
   - [[#global][global]]
   - [[#per-workspace][per workspace]]
@@ -45,14 +42,11 @@
 * Variables
 ** Basics
 Logo key. Use Mod1 for Alt.
-
-(left_win and left_alt are swapped via =keyd=)
 #+begin_src shell
 set $mod Mod4
 set $alt Mod1
 #+end_src
 
-Home row direction keys, like vim
 #+begin_src shell
 set $left h
 set $down j
@@ -60,21 +54,12 @@ set $up k
 set $right l
 #+end_src
 
-Your preferred terminal emulator
 #+begin_src shell
 set $term foot
-#+end_src
-
-Your preferred application launcher
-Note: pass the final command to swaymsg so that the resulting window can be opened
-on the original workspace that the command was run on.
-#+begin_src shell
 set $menu rofi -show run -theme picker
 #+end_src
 
 ** Workspaces
-[[https://www.nerdfonts.com/cheat-sheet][Icons Cheat Sheet]]
-
 #+begin_src shell
 set $ws1 "1"
 set $ws2 "2"
@@ -88,8 +73,7 @@ set $ws9 "9"
 #+end_src
 
 ** Default Layout
-Specifies the initial layout for new containers in an empty workspace.
-=default|stacking|tabbed=
+Specifies the initial layout for new containers in an empty workspace. Options are: =default|stacking|tabbed=
 #+begin_src shell
 workspace_layout default
 #+end_src
@@ -97,12 +81,8 @@ workspace_layout default
 * Autostart
 #+begin_src shell
 exec --no-startup-id exec waybar -c ~/.config/waybar/config-freebsd
-exec --no-startup-id blueman-applet
 exec --no-startup-id dunst
-#exec --no-startup-id firefox
-#exec --no-startup-id megasync
-exec --no-startup-id nm-applet
-#exec --no-startup-id firewall-applet
+exec --no-startup-id emacs --daemon
 exec --no-startup-id "~/syscfg/freebsd/scripts/licht.sh hi"
 #+end_src
 
@@ -117,101 +97,44 @@ The ~client.*~ colors come from the active theme (~themes/*/sway.conf~, linked b
 
 #+begin_src shell
 include ~/.config/sway/active-theme
-
-
-# default colors for reference
-# ----------------------------
-
-# # class                 border  backgr. text    indicator child_border
-# client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-# client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-# client.urgent           #2f343a #900000 #ffffff #900000   #900000
-# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-#
-# client.background       #ffffff
-
 #+end_src
 
 ** Disable Title Bars
 Setting border style to pixel eliminates title bars. See https://i3wm.org/docs/userguide.html#default_border
-
 #+begin_src shell
-
-# hide title bar for all windows
 default_border pixel 4
 default_floating_border pixel 4
-
 #+end_src
+
 ** Mouse Warping
 #+begin_src shell
 mouse_warping container
 #+end_src
 
 ** FLOAT / RESIZE etc. CERTAIN WINDOWS
-are the classnames different in Wayland? About Firefox works, others here don't
---> use =wlprop | jq -r '.app_id'=
+to find out class name:
+#+begin_src sh :tangle no
+sleep 3; swaymsg -t get_tree | jq -r '.. | select(.focused? == true) | .app_id // .window_properties.class'
 
-*** examples (prose only, not tangled)
-# enable floating mode for all XTerm windows
-for_window [class="XTerm"] floating enable
-
-# Make all urxvts use a 1-pixel border:
-for_window [class="urxvt"] border pixel 1
-
-# A less useful, but rather funny example:
-# makes the window floating as soon as I change
-# directory to ~/work
-for_window [title="x200: ~/work"] floating enable
-
-# Move floating container to the center of all outputs -> not what I wanted :)
-bindsym $mod+c move absolute position center
-# ok
-for_window [class="Blueman-manager"] move position mouse
-
-# EXAMPLE how to combine stuff
-#for_window [title="Error" class="Lxpolkit"] kill; floating enable; border none
+# the longer version with click to select window
+set p (slurp -p -f '%x %y' | string split ' '); swaymsg -t get_tree | jq -r --argjson x $p[1] --argjson y $p[2] '.. | select(.pid? and .visible? and .rect.x <= $x and $x < .rect.x + .rect.width and .rect.y <= $y and $y < .rect.y + .rect.height) | .app_id // .window_properties.class'
+#+end_src
 
 *** rules
 #+begin_src shell
-for_window [app_id="blueman-manager"] floating enable
-for_window [app_id="blueman-manager"] resize set 640 480
-for_window [app_id="blueman-manager"] move position center
-
-for_window [app_id="foot" title="bluetui"] floating enable, resize set 1024 768, move position center
-for_window [app_id="foot" title="ax-wiremix"] floating enable, resize set 1024 768, move position center
-
 for_window [title="About Mozilla Firefox"] floating enable
-
-for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
-for_window [app_id="org.pulseaudio.pavucontrol"] resize set 800 600
-for_window [app_id="org.pulseaudio.pavucontrol"] move position center
-
-for_window [title="^About This System"] floating enable, move position center
-
-for_window [app_id="qalculate-gtk"] floating enable, move position center
 #+end_src
 
 ** Window Rules: Open apps on specific workspace
-This is a bit of a mess on =Wayland=, because some apps don't have the class,
-others are missing the app_id etc. Also names change between distros?!
-
 #+begin_src shell
 assign [app_id="firefox"] $ws2
-assign [app_id="qbittorrent"] $ws7
-assign [app_id="org.strawberrymusicplayer.strawberry"] $ws8
-
 assign [title="ax-emacs-emms"] $ws8
 assign [app_id="KeePassXC"] $ws9
 assign [class="KeePassXC"] $ws9
 #+end_src
 
 * Output configuration
-Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-#+begin_src shell :tangle no
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#+end_src
-
+we set a fallback color to avoid runtime error if default.jpg does not exist
 #+begin_src shell
 output * bg /home/ax/sync/wallpapers/default.jpg fill #5e81ac
 #+end_src
@@ -235,34 +158,13 @@ your coordinates will be (100, 80)
 get display names and available resolutions: =swaymsg -t get_outputs=
 also checkin =wdisplays= gui app to test/get position and scale values easily,
 sadly doesnt allow to save the settings like =arandr=
+        
+TODO verify: (ax-lat) not tangled because it should set this by default anyway
 #+begin_src shell :tangle no
-output HDMI-A-2 position 0 0 resolution 2560x1080
-output eDP-1 position 426 1080 resolution 2560x1600 scale 1.5
-#+end_src
-
-ax-bee, values kept in sync with =niri/config.kdl=
-#+begin_src shell
-output DP-1 position 0 0 resolution 3840x2160 scale 1.25
-output HDMI-A-1 position 3072 648 resolution 1920x1080
-
-
-workspace 1 output DP-1
-workspace 2 output DP-1
-workspace 3 output DP-1
-workspace 4 output DP-1
-workspace 5 output DP-1
-workspace 6 output DP-1
-workspace 7 output HDMI-A-1
-workspace 8 output HDMI-A-1
-workspace 9 output HDMI-A-1
-#+end_src
-
-ax-t14
-#+begin_src shell
 output eDP-1 position 0 0 resolution 1920x1080 scale 1
 #+end_src
 
-* swayidle
+* TODO  (does not launch on FreeBSD, why?) swayidle 
 Based on the example in =man swayidle=.
 
 #+begin_src shell
@@ -274,20 +176,9 @@ exec swayidle -w \
 #+end_src
 
 * TODO Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-
 instead of =input *=, example for using different input types https://github.com/Crandel/home/blob/master/.config/sway/config#L394
+
 #+begin_src shell
 input type:keyboard {
     xkb_layout "de"
@@ -422,22 +313,14 @@ bindsym $mod+minus scratchpad show
 #+end_src
 
 ** Scratchpad custom
-=exec= instead of =exec_always= should prolly used for all here - else multiple scratchpad after a cfg reload
-
-wayland *does* have titles, but the shell rewrites them (fish sets one via OSC), so =[title=...]= goes
-stale right after the window opens - match on =app_id= instead, no escape sequence can change that.
-=[class=...]= is the xwayland-only one.
-
 *** main one
-gpt says resize and move position only work when floating is enabled
 #+begin_src shell
-# the main scratchpad like on dwm; so i don't have to manually move it first and then cycle through the stack if multiple pads
 for_window [app_id="dwm-scratchpad"] floating enable, move to scratchpad
 exec foot --app-id=dwm-scratchpad
-# Show only that specific scratchpad terminal
 bindsym $mod+s [app_id="dwm-scratchpad"] scratchpad show, resize set 1280 900, move position center
+
 #+end_src
-*** org-capture
+*** TODO org-capture
 #+begin_src shell :tangle no
 # the main scratchpad like on dwm; so i don't have to manually move it first and then cycle through the stack if multiple pads
 for_window [app_id="ax-org-capture"] floating enable, move to scratchpad
@@ -451,13 +334,6 @@ for_window [instance="ax-org-capture"] floating enable, move to scratchpad
 exec emacs --name ax-org-capture
 bindsym $mod+u [instance="ax-org-capture"] scratchpad show, resize set 1500 1000, move position center
 #+end_src
-*** htop
-#+begin_src shell
-for_window [title="htop-scratchpad"] floating enable, move to scratchpad
-exec foot --title "htop-scratchpad" -e htop
-bindsym $mod+F12 [title="htop-scratchpad"] scratchpad show, resize set 1024 768, move position top-left
-#+end_src
-
 ** Other (2025 new)
 #+begin_src shell
 bindsym $mod+Shift+o exec rofi -show drun
@@ -474,10 +350,6 @@ bindsym $mod+b exec ~/syscfg/freebsd/scripts/sway.sh bar-toggle
 bindsym $mod+$alt+h exec dunstctl history-pop
 bindsym $mod+$alt+k exec dunstctl close-all
 bindsym $mod+$alt+w exec ~/syscfg/freebsd/scripts/weather.joke dunst
-
-bindsym $mod+m exec bb ~/x/ax_bookmarks.clj std
-bindsym $mod+shift+m exec bb ~/x/ax_bookmarks.clj archived
-bindsym $mod+shift+s exec bb ~/syscfg/scripts/bb/search.clj --select-provider
 #+end_src
 
 ** Resizing containers
@@ -509,23 +381,7 @@ bindsym $mod+r mode "resize"
 Auswahl der wichtigsten Keybindings
 
 *** audio
-https://faq.i3wm.org/question/3747/enabling-multimedia-keys/?answer=3759#post-id-3759
-https://askubuntu.com/questions/794403/media-keys-on-macbook-pro-and-i3
-
 #+begin_src shell
-# Pulse Audio controls
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
-
-# Media player controls
-#bindsym XF86AudioPlay exec playerctl play-pause
-#bindsym XF86AudioPause exec playerctl pause
-#bindsym XF86AudioNext exec playerctl next
-#bindsym XF86AudioPrev exec playerctl previous
-
-# sxhkd VOLUME keybindings
-# TODO not sure why sway on nixos doesn't see ~/.cargo/bin in $PATH
 bindsym XF86AudioRaiseVolume exec ~/syscfg/freebsd/scripts/sway.sh volume-up
 bindsym XF86AudioLowerVolume exec ~/syscfg/freebsd/scripts/sway.sh volume-down
 bindsym XF86AudioMute exec ~/syscfg/freebsd/scripts/sway.sh volume-mute
@@ -541,63 +397,11 @@ bindsym $mod+$alt+space exec playerctl play-pause
 *** Workspace
 #+begin_src shell
 workspace_auto_back_and_forth yes
-
 bindsym $mod+Tab workspace back_and_forth
-# bindsym $mod+Shift+b move container to workspace back_and_forth
 
 bindsym $mod+shift+period move window to output left
 bindsym $mod+shift+comma move workspace to output left
 bindsym $mod+period focus output left
-#bindsym $mod+Shift+Tab focus output prev
-#+end_src
-
-*** TODO Interactive mode: scripts using dmenu for user interaction
-TODO lots of them don't work, because of their dmenu dependency
-TODO waybar should use whole width while in a mode to display the help
-
-#+begin_src shell
-set $mode_space SPC: [a]ll-search [c]hange-settings [g]search
-set $mode_settings CHANGE SETTINGS: [b]luetooth rand-[w]allpaper
-bindsym Mod1+space mode "$mode_space"
-
-mode "$mode_space" {
-    bindsym a exec "~/syscfg/scripts/bb/search.clj --select-provider"; mode "default"
-    bindsym g exec "~/syscfg/scripts/bb/search.clj"; mode "default"
-
-    bindsym c mode "$mode_settings"
-
-    bindsym Escape mode "default"
-}
-
-mode "$mode_settings" {
-    bindsym b exec blueman-manager; mode "default"
-    bindsym w exec "$HOME/syscfg/scripts/bb/set_random_wallpaper.clj"; mode "default"
-
-    bindsym Escape mode "default"
-}
-#+end_src
-
-* Status Bar
-** sway default
-# Read `man 5 sway-bar` for more information about this section.
-#+begin_src shell :tangle no
-bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
-#+end_src
-* Transparency
-#+begin_src shell :tangle no
-for_window [class="Emacs"] opacity 0.97
 #+end_src
 
 * GAPS
@@ -751,8 +555,8 @@ mode "$mode_gaps_left" {
 }
 #+end_src
 
+
 * include
-On debian: =systemctl --user status xdg-desktop-portal= must be running and this must be included, else =waybar= won't start
 #+begin_src shell
 include /etc/sway/config.d/*
 #+end_src
