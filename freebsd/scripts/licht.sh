@@ -26,6 +26,7 @@ set -- $(printf '%s\n' "$presets" | awk -v k="$key" '$1 == k')
 [ $# -eq 4 ] || { echo "licht: unknown preset: $key" >&2; exit 1; }
 
 backlight "$3"
+printf '%s %s\n' "$key" "$3" > /tmp/licht-curr-val
 pkill -x gammastep
 i=0; while pgrep -x gammastep >/dev/null && [ $i -lt 30 ]; do sleep 0.1; i=$((i + 1)); done
 nohup gammastep -O "$4" -P >/dev/null 2>&1 &

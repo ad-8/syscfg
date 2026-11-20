@@ -18,7 +18,13 @@ waybar_date() {
 }
 
 waybar_licht() {
-    val=$(backlight | awk '{print $2}')
+    cur=$(backlight | awk '{print $2}')
+    set -- $(cat /tmp/licht-curr-val 2>/dev/null)
+    if [ -n "$1" ] && [ "$2" = "$cur" ]; then
+        val=$1
+    else
+        val=$cur
+    fi
     printf " %s\n" "${val:---}"
 }
 
