@@ -225,6 +225,11 @@ alias csm '$HOME/my/code/clojure/csm/csm.clj'
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -nw"
 export VISUAL="emacsclient -c"
+
+if test "$COLORTERM" = truecolor
+    alias e "env TERM=xterm-direct emacsclient -nw"
+    export EDITOR="env TERM=xterm-direct emacsclient -nw"
+end
 #+end_src
 
 * greeting

@@ -11,6 +11,8 @@ set -g set-clipboard on
 
 set -g renumber-windows on
 
+set -as terminal-features ",foot*:RGB"
+
 # clock mode
 setw -g clock-mode-colour yellow
 

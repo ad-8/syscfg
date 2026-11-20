@@ -167,6 +167,11 @@ export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -nw"
 export VISUAL="emacsclient -c"
 
+if test "$COLORTERM" = truecolor
+    alias e "env TERM=xterm-direct emacsclient -nw"
+    export EDITOR="env TERM=xterm-direct emacsclient -nw"
+end
+
 set -Ux fish_greeting "" # disable default welcome message
 
 source ~/.config/fish/nnn.fish
