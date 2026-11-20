@@ -21,7 +21,7 @@
   - [[#float--resize-etc-certain-windows][FLOAT / RESIZE etc. CERTAIN WINDOWS]]
   - [[#window-rules-open-apps-on-specific-workspace][Window Rules: Open apps on specific workspace]]
 - [[#output-configuration][Output configuration]]
-- [[#does-not-launch-on-freebsd-why-swayidle][(does not launch on FreeBSD, why?) swayidle]]
+- [[#swayidle][swayidle]]
 - [[#input-configuration][Input configuration]]
 - [[#key-bindings][Key bindings]]
   - [[#basics-1][Basics]]
@@ -164,15 +164,15 @@ TODO verify: (ax-lat) not tangled because it should set this by default anyway
 output eDP-1 position 0 0 resolution 1920x1080 scale 1
 #+end_src
 
-* TODO  (does not launch on FreeBSD, why?) swayidle 
+* swayidle
 Based on the example in =man swayidle=.
+No =before-sleep=: FreeBSD's swayidle has neither systemd nor elogind and exits on it.
 
 #+begin_src shell
 exec swayidle -w \
          timeout 1180 'notify-send locking-screen in-10-seconds' \
          timeout 1200 'swaylock -f -c 000000 -F' \
-         timeout 1250 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000 -F'
+         timeout 1250 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
 #+end_src
 
 * TODO Input configuration
