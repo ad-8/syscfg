@@ -18,7 +18,7 @@
       gimp3
       kdePackages.okular
       keepassxc
-      libreoffice-still
+      libreoffice-fresh
       mousepad
       mpv
       pavucontrol
