@@ -32,11 +32,42 @@ separate rows here.
 | osaka-jade                 | —                     | Justikun/omarchy-osaka-jade-theme                | https://github.com/Justikun/omarchy-osaka-jade-theme                                         |
 | solarized-dark             | —                     | altercation/solarized                            | https://github.com/altercation/solarized                                                     |
 | solarized-light            | —                     | altercation/solarized                            | https://github.com/altercation/solarized                                                     |
+| solarized-selenized-black  | black                 | jan-warchol/selenized (`9a753d5`)                | https://github.com/jan-warchol/selenized and bbatsov/solarized-emacs (MELPA) for emacs       |
+| solarized-selenized-dark   | dark                  | jan-warchol/selenized (`9a753d5`)                | https://github.com/jan-warchol/selenized and bbatsov/solarized-emacs (MELPA) for emacs       |
 | tokyo-night                | tokyo-night-night     | tokyo-night/tokyo-night-vscode-theme             | https://github.com/tokyo-night/tokyo-night-vscode-theme                                      |
 | tron-legacy                | —                     | ianpan870102/tron-legacy-emacs-theme             | https://github.com/ianpan870102/tron-legacy-emacs-theme                                      |
 | vantablack                 | —                     | basecamp/omarchy (bundled)                       | https://github.com/basecamp/omarchy                                                          |
 | winter-is-coming           | dark-blue             | johnpapa/vscode-winteriscoming                   | https://github.com/johnpapa/vscode-winteriscoming                                            |
 | zenburn                    | default, low contrast | jnurmine/Zenburn (`9d7988a`)                     | https://github.com/jnurmine/Zenburn and doom-zenburn (doom-themes) for emacs                  |
+
+## Selenized
+
+Source: jan-warchol/selenized `the-values.md` (`9a753d5`), canonical sRGB
+values for the dark and black variants. Emacs loads bbatsov/solarized-emacs's
+`solarized-selenized-dark` and `solarized-selenized-black` unchanged
+(`0f2c881`, unpinned like the other theme packages), with no face overrides
+and no `solarized-*` settings. Other apps use literal palette colors, with no
+computed blends. Existing solarized-dark layouts and alpha values remain;
+rofi is that house layout recolored, not selenized's rofi port.
+
+Background is bg_0, foreground fg_0. Inactive panels and unfocused borders
+use bg_1 (including the tmux surface), muted text dim_0. The accent is green,
+as in selenized's own i3 config; the second border color is cyan, and the
+dunst frame stays blue as in solarized-dark. Yellow marks the waybar CPU
+warning, notification status and the kwm mode tag; urgency and the battery
+warning are red. mango's maximized border is violet, since green is the
+focus color. Accent and red blocks (waybar mode, submap, battery warning;
+dunst critical) use bg_0 text.
+
+foot, kitty, and Hyprland follow selenized's ANSI table
+(`manual-installation.md`): 0 = bg_1, 7 = dim_0, 8 = bg_2, 15 = fg_1, the
+rest red/green/yellow/blue/magenta/cyan and their bright versions. The cursor
+is fg_1. kitty sets no selection colors, like every other theme: the
+switcher's live `set-colors` does not reset keys, so a selection set here
+would stick after switching away. Upstream's dark kitty file drifts from
+`the-values.md` (`color0 #174956`; `color8`, selection and active tab
+`#325b66`); we use the canonical `#184956` and `#2d5b69`. Upstream's black
+kitty file matches.
 
 ## Zenburn
 

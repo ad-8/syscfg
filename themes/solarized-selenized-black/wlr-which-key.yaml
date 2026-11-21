@@ -1,0 +1,4 @@
+# solarized-selenized-black — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#181818d0"
+color: "#b9b9b9"
+border: "#70b433"
