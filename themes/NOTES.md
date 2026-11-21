@@ -28,6 +28,7 @@ separate rows here.
 | modus-vivendi              | —                     | protesilaos/modus-themes (bundled with Emacs 30) | https://github.com/protesilaos/modus-themes                                                  |
 | nord                       | —                     | nordtheme/nord                                   | https://github.com/nordtheme/nord                                                            |
 | nord-light                 | —                     | doom-nord-light (doom-themes)                    | https://github.com/doomemacs/themes                                                          |
+| nova                       | true-color            | doomemacs/themes (doom-nova)                     | https://github.com/doomemacs/themes/blob/master/themes/doom-nova-theme.el                    |
 | osaka-jade                 | —                     | Justikun/omarchy-osaka-jade-theme                | https://github.com/Justikun/omarchy-osaka-jade-theme                                         |
 | solarized-dark             | —                     | altercation/solarized                            | https://github.com/altercation/solarized                                                     |
 | solarized-light            | —                     | altercation/solarized                            | https://github.com/altercation/solarized                                                     |
@@ -35,6 +36,27 @@ separate rows here.
 | tron-legacy                | —                     | ianpan870102/tron-legacy-emacs-theme             | https://github.com/ianpan870102/tron-legacy-emacs-theme                                      |
 | vantablack                 | —                     | basecamp/omarchy (bundled)                       | https://github.com/basecamp/omarchy                                                          |
 | winter-is-coming           | dark-blue             | johnpapa/vscode-winteriscoming                   | https://github.com/johnpapa/vscode-winteriscoming                                            |
+
+## Nova
+
+Source: Doom's `doom-nova-theme.el`, using the first (true-color) value of
+its palette entries. Emacs loads bundled `doom-nova` directly. App fragments
+use literal palette colors, with no computed blends or lightened shades.
+
+Background is `bg` (#3c4c55), foreground `fg` (#c5d4dd), and inactive panels
+use `bg-alt` (#44545d), including tmux. Cyan (#7fc1ca) is the highlight and
+selection accent; blue (#83afe5) is the secondary accent. Error, warning,
+and success use red (#df8c8c), yellow (#dada93), and green (#a8ce93).
+Pastel selection and critical-notification backgrounds use `base1`
+(#1e272c) text. Existing layouts and alpha values are preserved.
+
+foot, kitty, and Hyprland share the terminal mapping: black = `base1`
+(#1e272c), bright black = `base7` (#899ba6), white = `fg` (#c5d4dd), and
+bright white = `base8` (#e6eef3). Red, green, yellow, blue, magenta, and cyan
+use their named palette entries; bright accent slots repeat those colors.
+Other surfaces and gradients use the literal base ramp, dark-blue, orange,
+and teal entries. Waybar uses cyan for the clock, timer, and active workspace,
+with dark text on pastel status backgrounds.
 
 ## Catppuccin
 

@@ -1,0 +1,28 @@
+// Nova: literal Doom Nova bg, bg-alt, cyan highlight, and red error.
+// Merged per-property over config.kdl via include.
+layout {
+    background-color "#3c4c55"
+
+    border {
+        active-color   "#7fc1ca"
+        inactive-color "#44545d"
+        urgent-color   "#df8c8c" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#7fc1ca"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#3c4c55"
+}
+
+// alt-tab switcher highlight behind the focused preview
+recent-windows {
+    highlight {
+        active-color "#7fc1ca"
+        urgent-color "#df8c8c"
+    }
+}

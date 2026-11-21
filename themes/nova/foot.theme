@@ -1,0 +1,25 @@
+# Nova color theme for foot
+# https://github.com/doomemacs/themes/blob/master/themes/doom-nova-theme.el
+
+[colors-dark]
+background=3c4c55
+foreground=c5d4dd
+cursor=1e272c 7fc1ca
+
+regular0=1e272c
+regular1=df8c8c
+regular2=a8ce93
+regular3=dada93
+regular4=83afe5
+regular5=d18ec2
+regular6=7fc1ca
+regular7=c5d4dd
+
+bright0=899ba6
+bright1=df8c8c
+bright2=a8ce93
+bright3=dada93
+bright4=83afe5
+bright5=d18ec2
+bright6=7fc1ca
+bright7=e6eef3

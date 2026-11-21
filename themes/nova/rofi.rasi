@@ -1,0 +1,106 @@
+/** Nova: literal colors from doom-nova-theme.el. */
+* {
+    bg: #3c4c55;
+    bg-alt: #44545d;
+    fg: #c5d4dd;
+    base1: #1e272c;
+    accent: #7fc1ca;
+    foreground: @fg;
+    background-color: transparent;
+    highlight: underline bold #e6eef3;
+    transparent: rgba(60, 76, 85, 0);
+}
+
+window {
+    location: center;
+    anchor:   center;
+    transparency: "screenshot";
+    padding: 10px;
+    border:  0px;
+    border-radius: 6px;
+
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+
+    width: 33%;
+}
+
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
+}
+
+message {
+    color: @base1;
+    padding: 5;
+    border-color: @fg;
+    border:  0px 2px 2px 2px;
+    background-color: @accent;
+}
+
+inputbar {
+    color: @fg;
+    padding: 11px;
+    background-color: @bg-alt;
+
+    border: 1px;
+    border-radius:  6px 6px 0px 0px;
+    border-color: @accent;
+}
+
+entry, prompt, case-indicator {
+    text-font: inherit;
+    text-color: inherit;
+}
+
+prompt {
+    margin: 0px 1em 0em 0em;
+}
+
+listview {
+    padding: 8px;
+    border-radius: 0px 0px 6px 6px;
+    border-color: @accent;
+    border: 0px 1px 1px 1px;
+    background-color: rgba(60, 76, 85, 0.9);
+    dynamic: false;
+}
+
+element {
+    padding: 3px;
+    vertical-align: 0.5;
+    border-radius: 4px;
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @accent;
+    text-color: #1e272c;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element-text selected.normal {
+    highlight: underline bold #1e272c;
+}
+
+button {
+    padding: 6px;
+    color: @fg;
+    horizontal-align: 0.5;
+
+    border: 2px 0px 2px 2px;
+    border-radius: 4px 0px 0px 4px;
+    border-color: @fg;
+}
+
+button selected normal {
+    border: 2px 0px 2px 2px;
+    border-color: @fg;
+}
