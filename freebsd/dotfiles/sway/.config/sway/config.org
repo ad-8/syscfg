@@ -84,6 +84,7 @@ exec --no-startup-id exec waybar -c ~/.config/waybar/config-freebsd
 exec --no-startup-id dunst
 exec --no-startup-id pgrep -qx syncthing || syncthing serve --no-browser
 exec --no-startup-id "~/syscfg/freebsd/scripts/licht.sh hi"
+exec --no-startup-id foot --app-id=ax-top -e ~/syscfg/freebsd/scripts/tmux-top.sh
 #+end_src
 
 * COLORS AND UI
@@ -131,6 +132,7 @@ assign [app_id="firefox"] $ws2
 assign [title="ax-emacs-emms"] $ws8
 assign [app_id="KeePassXC"] $ws9
 assign [class="KeePassXC"] $ws9
+assign [app_id="ax-top"] $ws9
 #+end_src
 
 * Output configuration
