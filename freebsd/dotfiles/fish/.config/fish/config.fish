@@ -1,3 +1,5 @@
+abbr -a startw dbus-run-session sway
+
 abbr -a cd. 'cd ~/.config'
 abbr -a cdc 'cd ~/my/code'
 abbr -a cdd 'cd ~/syscfg/dotfiles'
@@ -22,7 +24,7 @@ abbr -a gr 'git restore'
 abbr -a gs 'git status'
 abbr -a gsw 'git show'
 
-abbr -a sc systemctl
+abbr -a sc sysctl
 abbr -a r 'clear && /usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'
 
 abbr -a gi 'grep -i'
@@ -168,6 +170,10 @@ export EDITOR="emacsclient -nw"
 export VISUAL="emacsclient -c"
 
 set -Ux fish_greeting "" # disable default welcome message
+
+function on_exit --on-event fish_exit
+    clear
+end
 
 source ~/.config/fish/nnn.fish
 

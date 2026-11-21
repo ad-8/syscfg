@@ -7,6 +7,7 @@
 
 * ToC :toc:
 - [[#abbr][abbr]]
+  - [[#new-ones-freebsd-only][new ones FreeBSD only]]
   - [[#cd][cd]]
   - [[#git][git]]
   - [[#heavy-hitters][heavy hitters]]
@@ -20,12 +21,17 @@
 - [[#---export][-- export]]
   - [[#editor--visual][EDITOR / VISUAL]]
 - [[#greeting][greeting]]
+- [[#logout][logout]]
 - [[#stuff-that-should-be-at-the-end][stuff that should be at the end]]
   - [[#nnn][nnn]]
   - [[#starship][starship]]
   - [[#zoxide][zoxide]]
 
 * abbr
+** new ones FreeBSD only
+#+begin_src shell
+abbr -a startw dbus-run-session sway
+#+end_src
 ** cd
 #+begin_src shell
 abbr -a cd. 'cd ~/.config'
@@ -56,7 +62,7 @@ abbr -a gsw 'git show'
 #+end_src
 ** heavy hitters
 #+begin_src shell
-abbr -a sc systemctl
+abbr -a sc sysctl
 abbr -a r 'clear && /usr/bin/env bb --config $HOME/syscfg/bb.edn $HOME/syscfg/scripts/command_runner.clj'
 
 abbr -a gi 'grep -i'
@@ -230,6 +236,12 @@ export VISUAL="emacsclient -c"
 * greeting
 #+begin_src shell
 set -Ux fish_greeting "" # disable default welcome message
+#+end_src
+* logout
+#+begin_src  shell
+function on_exit --on-event fish_exit
+    clear
+end
 #+end_src
 
 * stuff that should be at the end
