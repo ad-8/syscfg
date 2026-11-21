@@ -287,8 +287,8 @@
     },
     // https://github.com/Alexays/Waybar/wiki/Module:-Custom:-Menu
     "custom/snowflake": {
-        //        "format": "   ",
-        "format": "  λ",
+        "format": "  ",
+        //        "format": "  λ",
         "tooltip-format": "Menu\n\nClick to open the SnowflakeMenu",
         "tooltip": false,
         "menu": "on-click",

@@ -1,1 +1,9 @@
 @import "active-theme.css";
+
+#custom-snowflake {
+    padding-right: 13px;
+}
+
+#window {
+    margin-left: 13px;
+}
