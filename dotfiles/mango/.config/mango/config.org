@@ -345,8 +345,8 @@ bind=SUPER+SHIFT,period,tagmon,right
 #+end_src
 ** Gaps
 #+begin_src shell
-bind=SUPER,plus,incgaps,1
-bind=SUPER,minus,incgaps,-1
+bind=SUPER,plus,incgaps,5
+bind=SUPER,minus,incgaps,-5
 bind=SUPER+ALT,g,togglegaps
 #+end_src
 ** Move and resize
