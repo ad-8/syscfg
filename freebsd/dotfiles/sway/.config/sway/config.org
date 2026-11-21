@@ -82,6 +82,7 @@ workspace_layout default
 #+begin_src shell
 exec --no-startup-id exec waybar -c ~/.config/waybar/config-freebsd
 exec --no-startup-id dunst
+exec --no-startup-id syncthing serve
 exec --no-startup-id env COLORTERM=truecolor emacs --daemon
 exec --no-startup-id "~/syscfg/freebsd/scripts/licht.sh hi"
 #+end_src
@@ -205,7 +206,6 @@ bindsym $mod+Return exec $term
 
 # Kill focused window
 bindsym $mod+q kill
-bindsym $mod+Shift+q kill
 
 # Start your launcher
 bindsym $mod+p exec $menu
@@ -221,7 +221,7 @@ floating_modifier $mod normal
 bindsym $mod+Shift+r reload
 
 # Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 #+end_src
 
 ** Moving around
