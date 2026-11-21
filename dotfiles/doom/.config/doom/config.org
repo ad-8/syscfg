@@ -255,6 +255,12 @@ doesn't accept everywhere, so it stays bash. =M-x shell= uses
 (setq delete-pair-blink-delay 0.1)
 #+end_src
 
+** dired details
+#+begin_src emacs-lisp
+(after! dirvish
+  (setq dirvish-hide-details t))
+#+end_src
+
 * Configurations of external packages
 ** denote
 #+begin_src elisp

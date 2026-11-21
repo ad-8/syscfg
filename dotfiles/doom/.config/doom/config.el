@@ -73,6 +73,9 @@
 ;; get rid of the delay after executing delete-pair
 (setq delete-pair-blink-delay 0.1)
 
+(after! dirvish
+  (setq dirvish-hide-details t))
+
 (use-package! denote
   :hook (dired-mode . denote-dired-mode)
   :config
