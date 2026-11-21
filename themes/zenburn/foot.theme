@@ -1,0 +1,25 @@
+# Zenburn color theme for foot
+# https://github.com/jnurmine/Zenburn/blob/9d7988abf0d2654f837fcd288145afd5f316b70c/colors/zenburn.vim
+
+[colors-dark]
+background=3f3f3f
+foreground=dcdccc
+cursor=000d18 8faf9f
+
+regular0=1f1f1f
+regular1=cc9393
+regular2=5f7f5f
+regular3=ffd7a7
+regular4=8cb0d3
+regular5=8f8f8f
+regular6=71d3b4
+regular7=dfe4cf
+
+bright0=6f6f6f
+bright1=ecb3b3
+bright2=ffd7a7
+bright3=8cb0d3
+bright4=8f8f8f
+bright5=71d3b4
+bright6=dfe4cf
+bright7=ffcfaf

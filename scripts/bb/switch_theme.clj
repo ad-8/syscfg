@@ -13,7 +13,7 @@
   {:dark     #{"ayu-dark" "catppuccin-frappe" "catppuccin-macchiato" "catppuccin-mocha"
                "dracula" "everforest-dark" "gotham" "gruvbox-dark" "lumon"
                "modus-vivendi" "nord" "nova" "osaka-jade" "solarized-dark" "tokyo-night"
-               "winter-is-coming"}
+               "winter-is-coming" "zenburn"}
    :light    #{"catppuccin-latte" "doric-oak" "gruvbox-light" "modus-operandi"
                "nord-light" "solarized-light"}
    :muted    #{"doric-walnut" "doric-water"}

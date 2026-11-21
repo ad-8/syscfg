@@ -98,6 +98,8 @@ local accent    = colors.accent    or colors.blue
 local accent_fg = colors.accent_fg or colors.white
 local border_a  = colors.border_a  or "33ccff"
 local border_b  = colors.border_b  or "00ff99"
+local inactive_border = colors.inactive_border or colors.black
+local inactive_bg     = colors.inactive_bg     or colors.black
 
 
 hl.config({
@@ -112,7 +114,7 @@ hl.config({
       -- inactive_border = rgba("595959aa"),
       -- gotham
       -- active_border   = rgb(colors.blue),
-      inactive_border = rgb(colors.black),
+      inactive_border = rgb(inactive_border),
     },
 
     -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -152,7 +154,7 @@ hl.config({
   },
   group = {
     ["col.border_active"]   = rgb(accent),
-    ["col.border_inactive"] = rgb(colors.black),
+    ["col.border_inactive"] = rgb(inactive_border),
 
     groupbar                = {
       height              = 1,
@@ -166,7 +168,7 @@ hl.config({
       font_size           = 12,
 
       ["col.active"]      = rgb(accent),
-      ["col.inactive"]    = rgb(colors.black),
+      ["col.inactive"]    = rgb(inactive_bg),
       text_color          = rgb(accent_fg),
       text_color_inactive = rgb(colors.white),
     }

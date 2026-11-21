@@ -1,0 +1,28 @@
+// Zenburn: default background, yellow focus, gray borders, and red urgency.
+// Merged per-property over config.kdl via include.
+layout {
+    background-color "#3f3f3f"
+
+    border {
+        active-color   "#f0dfaf"
+        inactive-color "#8f8f8f"
+        urgent-color   "#cc9393" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#f0dfaf"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#3f3f3f"
+}
+
+// alt-tab switcher highlight behind the focused preview
+recent-windows {
+    highlight {
+        active-color "#f0dfaf"
+        urgent-color "#cc9393"
+    }
+}

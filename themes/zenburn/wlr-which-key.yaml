@@ -1,0 +1,4 @@
+# zenburn — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#3f3f3fd0"
+color: "#dcdccc"
+border: "#f0dfaf"

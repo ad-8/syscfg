@@ -36,6 +36,33 @@ separate rows here.
 | tron-legacy                | —                     | ianpan870102/tron-legacy-emacs-theme             | https://github.com/ianpan870102/tron-legacy-emacs-theme                                      |
 | vantablack                 | —                     | basecamp/omarchy (bundled)                       | https://github.com/basecamp/omarchy                                                          |
 | winter-is-coming           | dark-blue             | johnpapa/vscode-winteriscoming                   | https://github.com/johnpapa/vscode-winteriscoming                                            |
+| zenburn                    | default, low contrast | jnurmine/Zenburn (`9d7988a`)                     | https://github.com/jnurmine/Zenburn and doom-zenburn (doom-themes) for emacs                  |
+
+## Zenburn
+
+Source: [Jani Nurminen's Zenburn](https://github.com/jnurmine/Zenburn/blob/9d7988abf0d2654f837fcd288145afd5f316b70c/colors/zenburn.vim),
+revision `9d7988abf0d2654f837fcd288145afd5f316b70c`. Use the default,
+low-contrast variant (`zenburn_high_Contrast = 0`), without alternate options.
+Emacs loads bundled `doom-zenburn` directly; other apps use literal upstream
+RGB values, with no computed blends. Existing layouts and alpha values remain.
+
+Background is #3f3f3f and foreground #dcdccc. Inactive panels use #333333;
+inactive borders and muted text use #8f8f8f. Focus and selection use yellow
+#f0dfaf, information cyan #8cd0d3, success green #7f9f7f, and urgency red
+#cc9393. Pastel selections and critical backgrounds use #3f3f3f text.
+Additional graph and gradient stops are literal upstream colors.
+Hyprland uses separate `inactive_border` and `inactive_bg` overrides for
+these UI roles, keeping its ANSI palette intact.
+
+foot, kitty, and Hyprland preserve upstream's exact `terminal_ansi_colors`
+slot order, including its unconventional bright and magenta assignments:
+
+```
+0–7:  #1f1f1f #cc9393 #5f7f5f #ffd7a7 #8cb0d3 #8f8f8f #71d3b4 #dfe4cf
+8–15: #6f6f6f #ecb3b3 #ffd7a7 #8cb0d3 #8f8f8f #71d3b4 #dfe4cf #ffcfaf
+```
+
+Terminal cursor text is #000d18 on #8faf9f, matching upstream's `Cursor`.
 
 ## Nova
 
