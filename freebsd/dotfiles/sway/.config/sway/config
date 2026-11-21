@@ -24,7 +24,6 @@ workspace_layout default
 exec --no-startup-id exec waybar -c ~/.config/waybar/config-freebsd
 exec --no-startup-id dunst
 exec --no-startup-id syncthing serve
-exec --no-startup-id env COLORTERM=truecolor emacs --daemon
 exec --no-startup-id "~/syscfg/freebsd/scripts/licht.sh hi"
 
 font pango:HackNerdFont 9.0
@@ -164,14 +163,14 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-for_window [app_id="dwm-scratchpad"] floating enable, move to scratchpad
-exec foot --app-id=dwm-scratchpad
-bindsym $mod+s [app_id="dwm-scratchpad"] scratchpad show, resize set 1280 900, move position center
+for_window [app_id="ax-scratchpad-terminal"] floating enable, move to scratchpad
+exec foot --app-id=ax-scratchpad-terminal
+bindsym $mod+s [app_id="ax-scratchpad-terminal"] scratchpad show, resize set 1280 900, move position center
 
-for_window [instance="ax-org-capture"] floating enable, move to scratchpad
-exec emacs --name ax-org-capture
-bindsym $mod+u [instance="ax-org-capture"] scratchpad show, resize set 1500 1000, move position center
-bindsym $mod+e [instance="ax-org-capture"] scratchpad show, resize set 1500 1000, move position center
+for_window [title="^ax-scratchpad-emacs$"] floating enable, move to scratchpad
+exec --no-startup-id env COLORTERM=truecolor emacs --daemon && emacsclient -c -F '((name . "ax-scratchpad-emacs"))'
+bindsym $mod+u [title="^ax-scratchpad-emacs$"] scratchpad show, resize set 1500 1000, move position center
+bindsym $mod+e [title="^ax-scratchpad-emacs$"] scratchpad show, resize set 1500 1000, move position center
 
 bindsym $mod+Shift+o exec rofi -show drun
 bindsym $mod+Shift+f exec rofi -show recursivebrowser
