@@ -1,0 +1,25 @@
+# Catppuccin Latte color theme for foot
+# https://github.com/catppuccin/foot (ANSI 0-15 from catppuccin/palette)
+
+[colors-dark]
+background=eff1f5
+foreground=4c4f69
+cursor=eff1f5 dc8a78
+
+regular0=5c5f77
+regular1=d20f39
+regular2=40a02b
+regular3=df8e1d
+regular4=1e66f5
+regular5=ea76cb
+regular6=179299
+regular7=acb0be
+
+bright0=6c6f85
+bright1=de293e
+bright2=49af3d
+bright3=eea02d
+bright4=456eff
+bright5=fe85d8
+bright6=2d9fa8
+bright7=bcc0cc

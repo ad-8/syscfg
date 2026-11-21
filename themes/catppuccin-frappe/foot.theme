@@ -1,0 +1,25 @@
+# Catppuccin Frappé color theme for foot
+# https://github.com/catppuccin/foot (ANSI 0-15 from catppuccin/palette)
+
+[colors-dark]
+background=303446
+foreground=c6d0f5
+cursor=232634 f2d5cf
+
+regular0=51576d
+regular1=e78284
+regular2=a6d189
+regular3=e5c890
+regular4=8caaee
+regular5=f4b8e4
+regular6=81c8be
+regular7=a5adce
+
+bright0=626880
+bright1=e67172
+bright2=8ec772
+bright3=d9ba73
+bright4=7b9ef0
+bright5=f2a4db
+bright6=5abfb5
+bright7=b5bfe2

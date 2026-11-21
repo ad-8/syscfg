@@ -10,6 +10,10 @@ separate rows here.
 | everforest-dark            | everforest-dark-hard  | sainnhe/everforest                               | https://github.com/sainnhe/everforest                                                        |
 | amber                      | —                     | foxbunny/vim-amber                               | https://github.com/foxbunny/vim-amber                                                        |
 | ayu-dark                   | dark                  | ayu-theme/ayu-colors (9.1.0)                     | https://github.com/ayu-theme/ayu-colors and doom-ayu-dark (doom-themes) for emacs            |
+| catppuccin-frappe          | frappe                | catppuccin/catppuccin                            | https://github.com/catppuccin/catppuccin and catppuccin/emacs (MELPA) for emacs              |
+| catppuccin-latte           | latte                 | catppuccin/catppuccin                            | https://github.com/catppuccin/catppuccin and catppuccin/emacs (MELPA) for emacs              |
+| catppuccin-macchiato       | macchiato             | catppuccin/catppuccin                            | https://github.com/catppuccin/catppuccin and catppuccin/emacs (MELPA) for emacs              |
+| catppuccin-mocha           | mocha                 | catppuccin/catppuccin                            | https://github.com/catppuccin/catppuccin and catppuccin/emacs (MELPA) for emacs              |
 | doric-oak                  | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-walnut               | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
 | doric-water                | —                     | protesilaos/doric-themes                         | https://github.com/protesilaos/doric-themes                                                  |
@@ -31,6 +35,22 @@ separate rows here.
 | tron-legacy                | —                     | ianpan870102/tron-legacy-emacs-theme             | https://github.com/ianpan870102/tron-legacy-emacs-theme                                      |
 | vantablack                 | —                     | basecamp/omarchy (bundled)                       | https://github.com/basecamp/omarchy                                                          |
 | winter-is-coming           | dark-blue             | johnpapa/vscode-winteriscoming                   | https://github.com/johnpapa/vscode-winteriscoming                                            |
+
+## Catppuccin
+
+All colors are from catppuccin/palette `palette.json` (`07d02aa`). Accent is
+mauve, the second border color pink. btop is catppuccin/btop (`f437574`) with the
+house transparent background. dunst takes background and text from
+catppuccin/dunst (`5955cf0`), but follows the house style elsewhere: low urgency
+on surface0, highlight mauve, critical on red with base text. The port marks
+critical only with a peach frame, and our dunstrc draws no frame
+(`frame_width = 0`). waybar and rofi use dracula's layout with Catppuccin colors
+by role; on latte, info modules are blue and vpn/music teal, because sky, peach
+and green are too faint on the light bar. foot and kitty use the palette's
+`ansiColors`, as catppuccin/kitty (`177d447`) does. catppuccin/foot (`99384a8`)
+still repeats the normal colors as brights and swaps white and bright white.
+Emacs loads the single `catppuccin` theme with `catppuccin-flavor` set, so face
+overrides for `'catppuccin` hit all four flavors.
 
 ## The phosphor group
 

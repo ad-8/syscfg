@@ -1,0 +1,30 @@
+// catppuccin-macchiato
+// Themed via switch_theme.clj. Colors sourced from themes/catppuccin-macchiato/hyprland.lua
+// (accent / red) + foot.theme background, matching hyprland's border convention.
+// Merged per-property over config.kdl's layout block via `include`.
+layout {
+    background-color "#24273a"
+
+    border {
+        active-color   "#c6a0f6"
+        inactive-color "#363a4f"
+        urgent-color   "#ed8796" // windows requesting attention
+    }
+
+    tab-indicator {
+        active-color "#c6a0f6"
+    }
+}
+
+// overview/between-workspace void; global block merges (per-output backdrop does not)
+overview {
+    backdrop-color "#24273a"
+}
+
+// alt-tab switcher highlight behind the focused preview
+recent-windows {
+    highlight {
+        active-color "#c6a0f6"
+        urgent-color "#ed8796"
+    }
+}

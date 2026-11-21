@@ -57,6 +57,7 @@
 (package! devdocs)
 (package! rainbow-delimiters)
 (package! gotham-theme)
+(package! catppuccin-theme)
 
 (package! doric-themes)
 (package! tron-legacy-theme)

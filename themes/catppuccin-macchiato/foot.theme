@@ -1,0 +1,25 @@
+# Catppuccin Macchiato color theme for foot
+# https://github.com/catppuccin/foot (ANSI 0-15 from catppuccin/palette)
+
+[colors-dark]
+background=24273a
+foreground=cad3f5
+cursor=181926 f4dbd6
+
+regular0=494d64
+regular1=ed8796
+regular2=a6da95
+regular3=eed49f
+regular4=8aadf4
+regular5=f5bde6
+regular6=8bd5ca
+regular7=a5adcb
+
+bright0=5b6078
+bright1=ec7486
+bright2=8ccf7f
+bright3=e1c682
+bright4=78a1f6
+bright5=f2a9dd
+bright6=63cbc0
+bright7=b8c0e0

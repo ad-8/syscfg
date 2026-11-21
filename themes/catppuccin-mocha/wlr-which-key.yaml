@@ -1,0 +1,4 @@
+# catppuccin-mocha — bg/fg from foot.theme, border from hyprland.lua accent
+background: "#1e1e2ed0"
+color: "#cdd6f4"
+border: "#cba6f7"

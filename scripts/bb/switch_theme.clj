@@ -10,10 +10,11 @@
 (def themes-dir (fs/path (fs/home) "syscfg/themes"))
 
 (def theme-categories
-  {:dark     #{"ayu-dark" "dracula" "everforest-dark" "gotham" "gruvbox-dark" "lumon"
+  {:dark     #{"ayu-dark" "catppuccin-frappe" "catppuccin-macchiato" "catppuccin-mocha"
+               "dracula" "everforest-dark" "gotham" "gruvbox-dark" "lumon"
                "modus-vivendi" "nord" "osaka-jade" "solarized-dark" "tokyo-night"
                "winter-is-coming"}
-   :light    #{"doric-oak" "gruvbox-light" "modus-operandi"
+   :light    #{"catppuccin-latte" "doric-oak" "gruvbox-light" "modus-operandi"
                "nord-light" "solarized-light"}
    :muted    #{"doric-walnut" "doric-water"}
    :neon     #{"laserwave" "tron-legacy"}
