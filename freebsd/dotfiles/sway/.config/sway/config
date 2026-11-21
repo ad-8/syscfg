@@ -168,9 +168,9 @@ exec foot --app-id=ax-scratchpad-terminal
 bindsym $mod+s [app_id="ax-scratchpad-terminal"] scratchpad show, resize set 1280 900, move position center
 
 for_window [title="^ax-scratchpad-emacs$"] floating enable, move to scratchpad
-exec --no-startup-id env COLORTERM=truecolor emacs --daemon && emacsclient -c -F '((name . "ax-scratchpad-emacs"))'
-bindsym $mod+u [title="^ax-scratchpad-emacs$"] scratchpad show, resize set 1500 1000, move position center
-bindsym $mod+e [title="^ax-scratchpad-emacs$"] scratchpad show, resize set 1500 1000, move position center
+exec --no-startup-id "env COLORTERM=truecolor emacs --daemon; env COLORTERM=truecolor emacs --name ax-scratchpad-emacs"
+bindsym $mod+u exec "swaymsg '[title=\"^ax-scratchpad-emacs$\"] scratchpad show, resize set 1500 1000, move position center' || pgrep -f '^[^ ]*emacs --name ax-scratchpad-emacs' >/dev/null || env COLORTERM=truecolor emacs --name ax-scratchpad-emacs"
+bindsym $mod+e exec "swaymsg '[title=\"^ax-scratchpad-emacs$\"] scratchpad show, resize set 1500 1000, move position center' || pgrep -f '^[^ ]*emacs --name ax-scratchpad-emacs' >/dev/null || env COLORTERM=truecolor emacs --name ax-scratchpad-emacs"
 
 bindsym $mod+Shift+o exec rofi -show drun
 bindsym $mod+Shift+f exec rofi -show recursivebrowser
