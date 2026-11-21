@@ -255,10 +255,14 @@ doesn't accept everywhere, so it stays bash. =M-x shell= uses
 (setq delete-pair-blink-delay 0.1)
 #+end_src
 
-** dired details
+** dired details and dotfiles
 #+begin_src emacs-lisp
 (after! dirvish
-  (setq dirvish-hide-details t))
+  (setq dirvish-hide-details t
+        dirvish-preview-dired-sync-omit t))
+
+(after! dired-x
+  (setq dired-omit-files (concat dired-omit-files "\\|\\`[.]")))
 #+end_src
 
 * Configurations of external packages

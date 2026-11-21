@@ -74,7 +74,11 @@
 (setq delete-pair-blink-delay 0.1)
 
 (after! dirvish
-  (setq dirvish-hide-details t))
+  (setq dirvish-hide-details t
+        dirvish-preview-dired-sync-omit t))
+
+(after! dired-x
+  (setq dired-omit-files (concat dired-omit-files "\\|\\`[.]")))
 
 (use-package! denote
   :hook (dired-mode . denote-dired-mode)
