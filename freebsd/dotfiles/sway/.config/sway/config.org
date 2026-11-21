@@ -315,8 +315,8 @@ bindsym $mod+minus scratchpad show
 *** main one
 #+begin_src shell
 for_window [app_id="ax-scratchpad-terminal"] floating enable, move to scratchpad
-exec foot --app-id=ax-scratchpad-terminal
-bindsym $mod+s [app_id="ax-scratchpad-terminal"] scratchpad show, resize set 1280 900, move position center
+exec foot --app-id=ax-scratchpad-terminal -e ~/syscfg/freebsd/scripts/tmux-scratchpad.sh
+bindsym $mod+s exec "swaymsg '[app_id=\"ax-scratchpad-terminal\"] scratchpad show, resize set 1280 900, move position center' || pgrep -f '^[^ ]*foot --app-id=ax-scratchpad-terminal' >/dev/null || foot --app-id=ax-scratchpad-terminal -e ~/syscfg/freebsd/scripts/tmux-scratchpad.sh"
 
 #+end_src
 *** Emacs
