@@ -1,3 +1,9 @@
+if status is-login; and status is-interactive; and status test-feature query-term; and not set -q __ax_console_reexec; and string match -q '/dev/ttyv*' (tty)
+    set -gx __ax_console_reexec 1
+    set -l fish_bin (status fish-path)
+    exec $fish_bin --features no-query-term --login
+end
+
 abbr -a startw dbus-run-session sway
 
 abbr -a cd. 'cd ~/.config'

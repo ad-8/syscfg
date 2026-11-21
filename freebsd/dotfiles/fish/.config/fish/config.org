@@ -6,6 +6,7 @@
 #+PROPERTY: header-args:shell :tangle config.fish
 
 * ToC :toc:
+- [[#console][console]]
 - [[#abbr][abbr]]
   - [[#new-ones-freebsd-only][new ones FreeBSD only]]
   - [[#cd][cd]]
@@ -26,6 +27,27 @@
   - [[#nnn][nnn]]
   - [[#starship][starship]]
   - [[#zoxide][zoxide]]
+
+* console
+Fixes this warning on console logins:
+#+begin_example
+warning: fish could not read response to Primary Device Attribute query after waiting for 10 seconds. This is often due to a missing feature in your terminal. See 'help terminal-compatibility' or 'man fish-terminal-compatibility'. This fish process will no longer wait for outstanding queries, which disables some optional features.
+#+end_example
+
+Since 4.1, fish asks the terminal for its Primary Device Attribute at startup
+and waits 10 seconds for the answer. The FreeBSD console (vt(4)) never answers
+any terminal query: the kernel function that would send the reply,
+=termteken_respond= in =sys/kern/subr_terminal.c=, has its whole body disabled
+with =#if 0=. So a console login restarts fish once with the query turned off;
+foot under sway answers and keeps it on.
+
+#+begin_src shell
+if status is-login; and status is-interactive; and status test-feature query-term; and not set -q __ax_console_reexec; and string match -q '/dev/ttyv*' (tty)
+    set -gx __ax_console_reexec 1
+    set -l fish_bin (status fish-path)
+    exec $fish_bin --features no-query-term --login
+end
+#+end_src
 
 * abbr
 ** new ones FreeBSD only
