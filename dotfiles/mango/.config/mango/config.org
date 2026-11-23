@@ -9,6 +9,7 @@ More option see https://mangowm.github.io/
   - [[#animations][Animations]]
   - [[#blur][Blur]]
   - [[#shadows][Shadows]]
+- [[#outputs][Outputs]]
 - [[#autostart][Autostart]]
 - [[#input][Input]]
   - [[#keyboard][Keyboard]]
@@ -101,6 +102,11 @@ shadows_position_x=0
 shadows_position_y=0
 shadows_color=0x000000ff
 #+end_src
+* Outputs
+#+begin_src shell
+monitor_rule=name:^DP-1$,width:3840,height:2160,refresh:60,x:0,y:0,scale:1.25
+monitor_rule=name:^HDMI-A-1$,width:1920,height:1080,refresh:60,x:3072,y:648,scale:1
+#+end_src
 * Autostart
 #+begin_src shell
 exec_once=blueman-applet
@@ -112,7 +118,6 @@ exec_once=env COLORTERM=truecolor emacs --daemon
 exec_once=vivaldi
 
 exec_once=/usr/bin/env sh ~/syscfg/scripts/river-idle.sh
-exec_once=bb ~/x/x.clj monitors
 #+end_src
 * Input
 ** Keyboard
