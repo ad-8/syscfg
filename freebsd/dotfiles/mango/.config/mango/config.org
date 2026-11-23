@@ -110,7 +110,7 @@ shadowscolor=0x000000ff
 No monitor rule: mango configures connected outputs by itself.
 * Autostart
 #+begin_src shell
-exec-once=waybar -c ~/.config/waybar/config-freebsd
+exec-once=waybar -c ~/.config/waybar/config-freebsd-mango
 exec-once=dunst
 exec-once=pgrep -qx syncthing || syncthing serve --no-browser
 exec-once=~/syscfg/freebsd/scripts/licht.sh hi
@@ -220,7 +220,7 @@ bind=SUPER,p,spawn,rofi -show run -theme picker
 bind=SUPER+ALT,l,spawn,swaylock --show-failed-attempts --color 000000
 
 # toggle waybar
-bind=SUPER,b,spawn,~/syscfg/freebsd/scripts/sway.sh bar-toggle
+bind=SUPER,b,spawn,~/syscfg/freebsd/scripts/sway.sh bar-toggle ~/.config/waybar/config-freebsd-mango
 
 # notifications
 bind=SUPER+ALT,h,spawn,dunstctl history-pop
