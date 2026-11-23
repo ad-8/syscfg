@@ -132,6 +132,10 @@ numlockon=1
 xkb_rules_layout=de
 xkb_rules_options=caps:escape
 #+end_src
+Host-only override, e.g. =xkb_rules_layout=de-ansi= on an ANSI board (freebsd/dotfiles/xkb):
+#+begin_src shell
+source-optional=/usr/local/etc/mango/keyboard.conf
+#+end_src
 ** Trackpad
 #+begin_src shell
 # need relogin to make it apply
