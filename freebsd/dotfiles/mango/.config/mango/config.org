@@ -5,6 +5,9 @@ More option see https://mangowm.github.io/
 
 TODO: rename the keys to the 0.18 names (as in dotfiles/mango) once the
 quarterly pkg branch ships mango 0.18+ (2027Q1); this copy uses 0.17.4 syntax.
+Then also drop the `bindrc=...,space,spawn,true` lines and the `c` on their
+`bindc=` twins: they only stop 0.17.4 from passing the space release to the
+focused app (fixed in 0.18.1).
 
 * Table of Contents :toc:
 - [[#animations-and-other-eye-candy][Animations and other eye candy]]
@@ -211,7 +214,8 @@ bind=SUPER,odiaeresis,spawn,rofi -show ssh
 bind=SUPER,Return,spawn,foot
 
 # ax basics
-bind=SUPER+SHIFT,space,spawn,wlr-which-key
+bindc=SUPER+SHIFT,space,spawn,wlr-which-key
+bindrc=SUPER+SHIFT,space,spawn,true
 bind=SUPER,o,spawn,wlr-which-key --initial-keys o
 bind=SUPER,w,togglejump
 bind=SUPER,u,zoom
@@ -251,7 +255,8 @@ bindl=NONE,XF86AudioPrev,spawn,playerctl previous
 bind=SUPER+ALT,Left,spawn,~/syscfg/freebsd/scripts/sway.sh volume-mute
 bind=SUPER+ALT,Up,spawn,~/syscfg/freebsd/scripts/sway.sh volume-up
 bind=SUPER+ALT,Down,spawn,~/syscfg/freebsd/scripts/sway.sh volume-down
-bind=SUPER+ALT,space,spawn,playerctl play-pause
+bindc=SUPER+ALT,space,spawn,playerctl play-pause
+bindrc=SUPER+ALT,space,spawn,true
 bind=SUPER+ALT,Right,spawn,playerctl play-pause
 #+end_src
 TODO port: mic mute
@@ -315,7 +320,8 @@ bind=SUPER,i,toggle_named_scratchpad,none,^ax-scratchpad-emacs$,env COLORTERM=tr
 ** Layouts
 #+begin_src shell
 circle_layout=tile,monocle
-bind=SUPER,SPACE,switch_layout
+bindc=SUPER,SPACE,switch_layout
+bindrc=SUPER,SPACE,spawn,true
 bind=SUPER,t,setlayout,tile
 bind=SUPER,m,setlayout,monocle
 
