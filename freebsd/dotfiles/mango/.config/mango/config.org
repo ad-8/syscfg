@@ -187,8 +187,8 @@ windowrule=tags:9,isopensilent:1,appid:^ax-top$
 #+end_src
 ** Scratchpads
 #+begin_src shell
-windowrule=isnamedscratchpad:1,width:0.5,height:0.6,appid:^ax-scratchpad-terminal$
-windowrule=isnamedscratchpad:1,width:0.5,height:0.6,title:^ax-scratchpad-emacs$
+windowrule=isnamedscratchpad:1,width:0.65,height:0.8,appid:^ax-scratchpad-terminal$
+windowrule=isnamedscratchpad:1,width:0.65,height:0.8,title:^ax-scratchpad-emacs$
 scratchpad_cross_monitor=1
 scratchpad_width_ratio=0.8
 scratchpad_height_ratio=0.9
