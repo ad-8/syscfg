@@ -1,0 +1,474 @@
+#+title: Mango WM Config
+#+PROPERTY: header-args:shell :tangle config.conf
+
+More option see https://mangowm.github.io/
+
+TODO: rename the keys to the 0.18 names (as in dotfiles/mango) once the
+quarterly pkg branch ships mango 0.18+ (2027Q1); this copy uses 0.17.4 syntax.
+
+* Table of Contents :toc:
+- [[#animations-and-other-eye-candy][Animations and other eye candy]]
+  - [[#borders-and-opacity][Borders and opacity]]
+  - [[#animations][Animations]]
+  - [[#blur][Blur]]
+  - [[#shadows][Shadows]]
+- [[#outputs][Outputs]]
+- [[#autostart][Autostart]]
+- [[#input][Input]]
+  - [[#keyboard][Keyboard]]
+  - [[#trackpad][Trackpad]]
+  - [[#mouse][Mouse]]
+- [[#window-rules][Window rules]]
+  - [[#floating][Floating]]
+  - [[#tags][Tags]]
+  - [[#scratchpads][Scratchpads]]
+  - [[#privacy][Privacy]]
+- [[#keybindings][Keybindings]]
+  - [[#general][General]]
+  - [[#audio][Audio]]
+  - [[#screenshots][Screenshots]]
+  - [[#window-focus-and-size][Window focus and size]]
+  - [[#window-state][Window state]]
+  - [[#scratchpad][Scratchpad]]
+  - [[#layouts][Layouts]]
+  - [[#tags-1][Tags]]
+  - [[#monitors][Monitors]]
+  - [[#gaps][Gaps]]
+  - [[#move-and-resize][Move and resize]]
+  - [[#mouse-and-scroll][Mouse and scroll]]
+  - [[#dwm-like][dwm-like]]
+- [[#layout-settings][Layout Settings]]
+  - [[#master][Master]]
+  - [[#overview][Overview]]
+  - [[#focus][Focus]]
+  - [[#drag-and-snap][Drag and snap]]
+  - [[#misc][Misc]]
+  - [[#appearance][Appearance]]
+
+* Animations and other eye candy
+** Borders and opacity
+#+begin_src shell
+borderpx=4
+border_radius=6
+no_border_when_single=0
+no_radius_when_single=0
+focused_opacity=1.0
+unfocused_opacity=1.0
+#+end_src
+** Animations
+#+begin_src shell
+# Animation Configuration(support type:zoom,slide)
+# tag_animation_direction: 1-horizontal,0-vertical
+animations=0
+layer_animations=1
+animation_type_open=slide
+animation_type_close=slide
+animation_fade_in=1
+animation_fade_out=1
+tag_animation_direction=1
+zoom_initial_ratio=0.4
+zoom_end_ratio=0.8
+fadein_begin_opacity=0.5
+fadeout_begin_opacity=0.8
+animation_duration_move=500
+animation_duration_open=400
+animation_duration_tag=350
+animation_duration_close=800
+animation_duration_focus=0
+animation_curve_open=0.46,1.0,0.29,1
+animation_curve_move=0.46,1.0,0.29,1
+animation_curve_tag=0.46,1.0,0.29,1
+animation_curve_close=0.08,0.92,0,1
+animation_curve_focus=0.46,1.0,0.29,1
+animation_curve_opafadeout=0.5,0.5,0.5,0.5
+animation_curve_opafadein=0.46,1.0,0.29,1
+#+end_src
+** Blur
+#+begin_src shell
+blur=1
+blur_layer=0
+blur_optimized=1
+blur_params_num_passes=2
+blur_params_radius=5
+blur_params_noise=0.02
+blur_params_brightness=0.9
+blur_params_contrast=0.9
+blur_params_saturation=1.2
+#+end_src
+** Shadows
+#+begin_src shell
+shadows=0
+layer_shadows=0
+shadow_only_floating=1
+shadows_size=10
+shadows_blur=15
+shadows_position_x=0
+shadows_position_y=0
+shadowscolor=0x000000ff
+#+end_src
+* Outputs
+No monitor rule: mango configures connected outputs by itself.
+* Autostart
+#+begin_src shell
+exec-once=waybar -c ~/.config/waybar/config-freebsd
+exec-once=dunst
+exec-once=pgrep -qx syncthing || syncthing serve --no-browser
+exec-once=~/syscfg/freebsd/scripts/licht.sh hi
+exec-once=foot --app-id=ax-top -e ~/syscfg/freebsd/scripts/tmux-top.sh
+exec-once=env COLORTERM=truecolor emacs --daemon
+
+exec-once=swayidle -w timeout 1180 'notify-send locking-screen in-10-seconds' timeout 1200 'swaylock -f -c 000000 -F' timeout 1250 'mmsg dispatch sleep_monitor,.*' resume 'mmsg dispatch wakeup_monitor,.*'
+#+end_src
+TODO port: wallpaper (needs swaybg)
+#+begin_src shell :tangle no
+exec-once=swaybg -i ~/sync/wallpapers/default.jpg
+#+end_src
+* Input
+** Keyboard
+#+begin_src shell
+repeat_rate=35
+repeat_delay=200
+numlockon=1
+xkb_rules_layout=de
+xkb_rules_options=caps:escape
+#+end_src
+** Trackpad
+#+begin_src shell
+# need relogin to make it apply
+disable_trackpad=0
+tap_to_click=1
+tap_and_drag=1
+drag_lock=1
+trackpad_natural_scrolling=1
+trackpad_disable_while_typing=1
+trackpad_left_handed=0
+trackpad_middle_button_emulation=0
+swipe_min_threshold=1
+#+end_src
+** Mouse
+#+begin_src shell
+# need relogin to make it apply
+mouse_natural_scrolling=0
+mouse_accel_speed=0.8
+axis_bind_apply_timeout=100
+#+end_src
+* Window rules
+** Floating
+*** Tools
+#+begin_src shell
+windowrule=isfloating:1,width:1024,height:768,appid:foot$,title:^ax-bluetui$
+windowrule=isfloating:1,width:1024,height:768,appid:foot$,title:^ax-wiremix$
+windowrule=isfloating:1,width:1024,height:768,appid:foot$,title:^ax-command-runner$
+#+end_src
+*** Apps
+#+begin_src shell
+windowrule=isfloating:1,width:1024,height:768,appid:org.pulseaudio.pavucontrol$,title:^Volume Control$
+windowrule=isfloating:1,width:1024,height:768,appid:qalculate-gtk$,title:^Qalculate!$
+windowrule=isfloating:1,width:1280,height:1024,appid:waypaper
+windowrule=isfloating:1,width:1280,height:1024,appid:anki
+#+end_src
+*** Dialogs
+#+begin_src shell
+windowrule=isfloating:1,width:1024,height:768,appid:firefox$,title:^About Mozilla Firefox$
+windowrule=isfloating:1,appid:thunar$,title:^File Operation Progress$
+#+end_src
+*** Without size
+#+begin_src shell
+windowrule=isfloating:1,appid:firefox$,title:^Picture-in-Picture$
+windowrule=isfloating:1,appid:Emacs$,title:^emacs-float$
+#+end_src
+** Tags
+#+begin_src shell
+windowrule=tags:9,isopensilent:1,appid:^ax-top$
+#+end_src
+** Scratchpads
+#+begin_src shell
+windowrule=isnamedscratchpad:1,width:0.5,height:0.6,appid:^ax-scratchpad-terminal$
+windowrule=isnamedscratchpad:1,width:0.5,height:0.6,title:^ax-scratchpad-emacs$
+scratchpad_cross_monitor=1
+scratchpad_width_ratio=0.8
+scratchpad_height_ratio=0.9
+#+end_src
+** Privacy
+#+begin_src shell
+windowrule=shield_when_capture:1,appid:^org\.keepassxc\.KeePassXC$
+#+end_src
+* Keybindings
+** General
+#+begin_src shell
+# reload config
+bind=SUPER+SHIFT,r,reload_config
+
+# menu and terminal
+bind=SUPER+SHIFT,o,spawn,rofi -show drun
+bind=SUPER+SHIFT,w,spawn,rofi -show window
+bind=SUPER+SHIFT,f,spawn,rofi -show recursivebrowser
+bind=SUPER,odiaeresis,spawn,rofi -show ssh
+bind=SUPER,Return,spawn,foot
+
+# ax basics
+bind=SUPER+SHIFT,space,spawn,wlr-which-key
+bind=SUPER,o,spawn,wlr-which-key --initial-keys o
+bind=SUPER,w,togglejump
+bind=SUPER,u,zoom
+bind=SUPER+SHIFT,return,zoom
+
+bind=SUPER+SHIFT,q,spawn,swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit mango? This will end your Wayland session.' -B 'Yes, exit mango' 'mmsg dispatch quit'
+bind=SUPER,q,killclient,
+
+bind=SUPER,p,spawn,rofi -show run -theme picker
+bind=SUPER+ALT,l,spawn,swaylock --show-failed-attempts --color 000000
+
+# toggle waybar
+bind=SUPER,b,spawn,~/syscfg/freebsd/scripts/sway.sh bar-toggle
+
+# notifications
+bind=SUPER+ALT,h,spawn,dunstctl history-pop
+bind=SUPER+ALT,k,spawn,dunstctl close-all
+bind=SUPER+ALT,w,spawn,~/syscfg/freebsd/scripts/weather.joke dunst
+
+bind=SUPER+SHIFT,p,spawn_shell,swayidle -w timeout 1 'mmsg dispatch sleep_monitor,.*' resume 'mmsg dispatch wakeup_monitor,.*; pkill -f "^swayidle -w timeout 1 "'
+#+end_src
+TODO port: minimal waybar toggle (sway.sh has no toggle-min) and linkding bookmarks (need bb)
+#+begin_src shell :tangle no
+bind=SUPER+SHIFT,b,spawn,~/syscfg/scripts/waybar.clj toggle-min
+bind=SUPER+ALT,b,spawn_shell,bb ~/x/ax_bookmarks.clj std
+bind=SUPER+ALT,n,spawn_shell,bb ~/x/ax_bookmarks.clj archived
+#+end_src
+** Audio
+#+begin_src shell
+bindl=NONE,XF86AudioRaiseVolume,spawn,~/syscfg/freebsd/scripts/sway.sh volume-up
+bindl=NONE,XF86AudioLowerVolume,spawn,~/syscfg/freebsd/scripts/sway.sh volume-down
+bindl=NONE,XF86AudioMute,spawn,~/syscfg/freebsd/scripts/sway.sh volume-mute
+bindl=NONE,XF86AudioPlay,spawn,playerctl play-pause
+bindl=NONE,XF86AudioNext,spawn,playerctl next
+bindl=NONE,XF86AudioPrev,spawn,playerctl previous
+
+bind=SUPER+ALT,Left,spawn,~/syscfg/freebsd/scripts/sway.sh volume-mute
+bind=SUPER+ALT,Up,spawn,~/syscfg/freebsd/scripts/sway.sh volume-up
+bind=SUPER+ALT,Down,spawn,~/syscfg/freebsd/scripts/sway.sh volume-down
+bind=SUPER+ALT,space,spawn,playerctl play-pause
+bind=SUPER+ALT,Right,spawn,playerctl play-pause
+#+end_src
+TODO port: mic mute
+#+begin_src shell :tangle no
+bindl=NONE,XF86AudioMicMute,spawn,wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+#+end_src
+** Screenshots
+TODO port: needs grim, slurp, wl-clipboard, jq and swappy
+#+begin_src shell :tangle no
+bind=NONE,Print,spawn_shell,f=$HOME/sync/screenshots/$(date +%Y/Screenshot_from_%Y-%m-%d_%H-%M-%S).png; mkdir -p "${f%/*}"; grim -g "$(slurp)" "$f" && wl-copy < "$f"
+bind=SUPER+CTRL,s,spawn_shell,f=$HOME/sync/screenshots/$(date +%Y/Screenshot_from_%Y-%m-%d_%H-%M-%S).png; mkdir -p "${f%/*}"; grim -g "$(slurp)" "$f" && wl-copy < "$f"
+bind=CTRL,Print,spawn_shell,f=$HOME/sync/screenshots/$(date +%Y/Screenshot_from_%Y-%m-%d_%H-%M-%S).png; mkdir -p "${f%/*}"; grim "$f" && wl-copy < "$f"
+bind=SUPER+CTRL,a,spawn_shell,f=$HOME/sync/screenshots/$(date +%Y/Screenshot_from_%Y-%m-%d_%H-%M-%S).png; mkdir -p "${f%/*}"; grim "$f" && wl-copy < "$f"
+bind=ALT,Print,spawn_shell,f=$HOME/sync/screenshots/$(date +%Y/Screenshot_from_%Y-%m-%d_%H-%M-%S).png; mkdir -p "${f%/*}"; grim -g "$(mmsg get focusing-client | jq -r '"\(.x+4),\(.y+4) \(.width-8)x\(.height-8)"')" "$f" && wl-copy < "$f"
+bind=SUPER+CTRL,w,spawn_shell,f=$HOME/sync/screenshots/$(date +%Y/Screenshot_from_%Y-%m-%d_%H-%M-%S).png; mkdir -p "${f%/*}"; grim -g "$(mmsg get focusing-client | jq -r '"\(.x+4),\(.y+4) \(.width-8)x\(.height-8)"')" "$f" && wl-copy < "$f"
+
+# put into swappy for annotations
+bind=SUPER+CTRL+SHIFT,a,spawn_shell,grim - | swappy -f -
+bind=SUPER+CTRL+SHIFT,s,spawn_shell,grim -g "$(slurp)" - | swappy -f -
+bind=SUPER+CTRL+SHIFT,w,spawn_shell,grim -g "$(mmsg get focusing-client | jq -r '"\(.x+4),\(.y+4) \(.width-8)x\(.height-8)"')" - | swappy -f -
+#+end_src
+** Window focus and size
+#+begin_src shell
+bind=SUPER,l,setmfact,+0.05
+bind=SUPER,h,setmfact,-0.05
+bind=SUPER+SHIFT,i,incnmaster,+1
+bind=SUPER+SHIFT,d,incnmaster,-1
+bind=SUPER+CTRL,j,resizewin,+0,+50
+bind=SUPER+CTRL,k,resizewin,+0,-50
+
+# switch window focus
+bind=SUPER,j,focusstack,next
+bind=SUPER,k,focusstack,previous
+
+# swap window
+bind=SUPER+SHIFT,j,exchange_stack_client,next
+bind=SUPER+SHIFT,k,exchange_stack_client,previous
+#+end_src
+** Window state
+#+begin_src shell
+bind=SUPER+SHIFT,g,toggleglobal,
+bind=ALT,Tab,overcircle,next
+bind=SUPER,v,togglefloating,
+bind=ALT,a,togglemaximizescreen,
+
+# ax
+bind=SUPER,f,togglefullscreen,
+bind=SUPER+ALT,f,togglefakefullscreen,
+#+end_src
+** Scratchpad
+#+begin_src shell
+# send to scratchpad
+bind=SUPER+SHIFT,s,minimized,
+# retrieve from scratchpad
+bind=SUPER+ALT,s,restore_minimized
+bind=SUPER,a,toggle_scratchpad
+bind=SUPER,s,toggle_named_scratchpad,ax-scratchpad-terminal,none,foot --app-id ax-scratchpad-terminal -e ~/syscfg/freebsd/scripts/tmux-scratchpad.sh
+bind=SUPER,e,toggle_named_scratchpad,none,^ax-scratchpad-emacs$,env COLORTERM=truecolor emacs --name ax-scratchpad-emacs
+bind=SUPER,i,toggle_named_scratchpad,none,^ax-scratchpad-emacs$,env COLORTERM=truecolor emacs --name ax-scratchpad-emacs
+#+end_src
+** Layouts
+#+begin_src shell
+circle_layout=tile,monocle
+bind=SUPER,SPACE,switch_layout
+bind=SUPER,t,setlayout,tile
+bind=SUPER,m,setlayout,monocle
+
+bind=SUPER,c,setlayout,center_tile
+bind=SUPER,d,setlayout,deck
+bind=SUPER,g,setlayout,grid
+bind=SUPER,x,setlayout,fair
+bind=SUPER,y,setlayout,dwindle
+#+end_src
+TODO port: deck/monocle tab bar (mango 0.18+)
+#+begin_src shell :tangle no
+deck_tab_mode=1
+monocle_tab_mode=0
+#+end_src
+** Tags
+#+begin_src shell
+bind=SUPER,Left,viewtoleft,0
+bind=CTRL,Left,viewtoleft_have_client,0
+bind=SUPER,Right,viewtoright,0
+bind=CTRL,Right,viewtoright_have_client,0
+bind=CTRL+SUPER,Left,tagtoleft,0
+bind=CTRL+SUPER,Right,tagtoright,0
+
+bind=SUPER,1,view,1,0
+bind=SUPER,2,view,2,0
+bind=SUPER,3,view,3,0
+bind=SUPER,4,view,4,0
+bind=SUPER,5,view,5,0
+bind=SUPER,6,view,6,0
+bind=SUPER,7,view,7,0
+bind=SUPER,8,view,8,0
+bind=SUPER,9,view,9,0
+
+# tag: move client to the tag and focus it
+# tagsilent: move client to the tag and not focus it
+bind=SUPER+SHIFT,1,tagsilent,1,0
+bind=SUPER+SHIFT,2,tagsilent,2,0
+bind=SUPER+SHIFT,3,tagsilent,3,0
+bind=SUPER+SHIFT,4,tagsilent,4,0
+bind=SUPER+SHIFT,5,tagsilent,5,0
+bind=SUPER+SHIFT,6,tagsilent,6,0
+bind=SUPER+SHIFT,7,tagsilent,7,0
+bind=SUPER+SHIFT,8,tagsilent,8,0
+bind=SUPER+SHIFT,9,tagsilent,9,0
+#+end_src
+** Monitors
+#+begin_src shell
+bind=SUPER,comma,focusmon,left
+bind=SUPER,period,focusmon,right
+bind=SUPER+SHIFT,comma,tagmon,left
+bind=SUPER+SHIFT,period,tagmon,right
+#+end_src
+** Gaps
+#+begin_src shell
+bind=SUPER+ALT,plus,incgaps,5
+bind=SUPER+ALT,minus,incgaps,-5
+bind=SUPER+ALT,g,togglegaps
+#+end_src
+** Move and resize
+#+begin_src shell
+# movewin
+bind=CTRL+SHIFT,Up,movewin,+0,-50
+bind=CTRL+SHIFT,Down,movewin,+0,+50
+bind=CTRL+SHIFT,Left,movewin,-50,+0
+bind=CTRL+SHIFT,Right,movewin,+50,+0
+
+# resizewin
+bind=CTRL+ALT,Up,resizewin,+0,-50
+bind=CTRL+ALT,Down,resizewin,+0,+50
+bind=CTRL+ALT,Left,resizewin,-50,+0
+bind=CTRL+ALT,Right,resizewin,+50,+0
+#+end_src
+** Mouse and scroll
+#+begin_src shell
+# btn_left and btn_right can't bind none mod key
+mousebind=SUPER,btn_left,moveresize,curmove
+mousebind=SUPER,btn_right,moveresize,curresize
+
+# Axis Bindings
+axisbind=SUPER,UP,viewtoleft_have_client
+axisbind=SUPER,DOWN,viewtoright_have_client
+#+end_src
+** dwm-like
+#+begin_src shell
+# Toggle tag 1-9 on top of current view
+bind=SUPER+CTRL,1,toggleview,1
+bind=SUPER+CTRL,2,toggleview,2
+bind=SUPER+CTRL,3,toggleview,3
+bind=SUPER+CTRL,4,toggleview,4
+bind=SUPER+CTRL,5,toggleview,5
+bind=SUPER+CTRL,6,toggleview,6
+bind=SUPER+CTRL,7,toggleview,7
+bind=SUPER+CTRL,8,toggleview,8
+bind=SUPER+CTRL,9,toggleview,9
+
+# Show all tags - does not work with super+tab (yet?)
+bind=SUPER,0,view,00
+#+end_src
+TODO port: toggle between current and previous tag selection (needs jq)
+#+begin_src shell :tangle no
+bind=SUPER,Tab,spawn_shell,mmsg dispatch view,"$(mmsg get all-monitors | jq -r '.monitors[]|select(.active).active_tags[0]')"
+#+end_src
+* Layout Settings
+** Master
+#+begin_src shell
+new_is_master=1
+default_mfact=0.55
+default_nmaster=1
+#+end_src
+** Overview
+#+begin_src shell
+hotarea_size=10
+enable_hotarea=0
+overviewgappi=5
+overviewgappo=30
+#+end_src
+** Focus
+#+begin_src shell
+focus_on_activate=1
+sloppyfocus=1
+warpcursor=1
+focus_cross_monitor=0
+focus_cross_tag=0
+#+end_src
+** Drag and snap
+#+begin_src shell
+enable_floating_snap=0
+snap_distance=30
+drag_tile_to_tile=1
+drag_tile_small=1
+#+end_src
+** Misc
+#+begin_src shell
+idleinhibit_ignore_visible=0
+view_current_to_back=1
+tag_num=9
+#+end_src
+** Appearance
+#+begin_src shell
+gappih=5
+gappiv=5
+gappoh=10
+gappov=10
+smartgaps=0
+cursor_size=24
+cursor_theme=Numix-Cursor
+#+end_src
+TODO port: theme switcher (themes/*/mango.conf use the 0.18 key names); nord until then
+#+begin_src shell
+rootcolor=0x2e3440ff
+focuscolor=0x81a1c1ff
+bordercolor=0x3b4252ff
+urgentcolor=0xbf616aff
+maximizescreencolor=0xa3be8cff
+scratchpadcolor=0x81a1c1ff
+globalcolor=0xb48eadff
+overlaycolor=0x88c0d0ff
+dropcolor=0xa3be8c55
+splitcolor=0xbf616aff
+#+end_src

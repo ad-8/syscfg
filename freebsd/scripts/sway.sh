@@ -1,6 +1,6 @@
 #!/bin/sh
 # Usage: sway.sh volume-up|volume-down|volume-mute|bar-toggle
-# FreeBSD sway binds, used by freebsd/dotfiles/sway/.config/sway/config.
+# FreeBSD sway binds, used by freebsd/dotfiles/sway/.config/sway/config and freebsd/dotfiles/mango/.config/mango/config.conf.
 
 step=5%
 # SIGRTMIN (65) + "signal": 8 of custom/volume in config-freebsd

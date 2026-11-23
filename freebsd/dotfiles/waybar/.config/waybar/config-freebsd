@@ -2,7 +2,7 @@
 {
     "height": 24, // Waybar height (to be removed for auto height)
     "spacing": 5, // Gaps between modules [px]
-    // FreeBSD variant (ax-lat, sway only): no babashka. sway's modules-left is
+    // FreeBSD variant (ax-lat, sway; mango starts it too): no babashka. sway's modules-left is
     // inline (no active-compositor.json include). sh modules: freebsd/scripts/waybar.sh.
     "modules-left": [
         "custom/snowflake",
