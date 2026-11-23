@@ -64,6 +64,27 @@ which_key() {
         { rm -f "$dest.tmp"; rc=1; return 1; }
 }
 
+# TODO: mango 0.18 (2027Q1) takes the theme file as is; then link it like the others
+mango_theme() {
+    src=$T/$theme/mango.conf dest=$C/mango/active-theme.conf
+    [ -e "$src" ] || { missing "$src"; rc=1; return 1; }
+    mkdir -p "${dest%/*}" && sed \
+        -e '/^# deck \/ monocle tab bar$/d' \
+        -e '/^tab_bar_decorate_/d' \
+        -e 's/^root_color=/rootcolor=/' \
+        -e 's/^focus_color=/focuscolor=/' \
+        -e 's/^border_color=/bordercolor=/' \
+        -e 's/^urgent_color=/urgentcolor=/' \
+        -e 's/^maximized_screen_color=/maximizescreencolor=/' \
+        -e 's/^scratchpad_color=/scratchpadcolor=/' \
+        -e 's/^global_color=/globalcolor=/' \
+        -e 's/^overlay_color=/overlaycolor=/' \
+        -e 's/^drop_color=/dropcolor=/' \
+        -e 's/^split_color=/splitcolor=/' \
+        "$src" >"$dest.tmp" && mv -f "$dest.tmp" "$dest" ||
+        { rm -f "$dest.tmp"; rc=1; return 1; }
+}
+
 theme=$1
 if [ -z "$theme" ]; then
     list=$(for d in "$T"/*/; do d=${d%/}; echo "${d##*/}"; done)
@@ -87,4 +108,5 @@ link rofi.rasi "$C/rofi/active-theme.rasi"
 link dunst.conf "$C/dunst/active-theme.conf" && reload_dunst
 link sway.conf "$C/sway/active-theme" && reload_sway "$T/$theme/sway.conf"
 which_key
+mango_theme && { pgrep -x mango >/dev/null && mmsg dispatch reload_config; }
 exit $rc
