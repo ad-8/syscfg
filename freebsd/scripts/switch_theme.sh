@@ -47,9 +47,11 @@ reload_dunst() {
 
 reload_waybar() {
     pgrep -x waybar >/dev/null || return 0
+    cfg=$C/waybar/config-freebsd
+    pgrep -x mango >/dev/null && cfg=$C/waybar/config-freebsd-mango
     pkill -x waybar
     i=0; while pgrep -x waybar >/dev/null && [ $i -lt 30 ]; do sleep 0.1; i=$((i + 1)); done
-    nohup waybar -c "$C/waybar/config-freebsd" >/dev/null 2>&1 &
+    nohup waybar -c "$cfg" >/dev/null 2>&1 &
 }
 
 reload_sway() {
