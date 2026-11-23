@@ -265,6 +265,12 @@ doesn't accept everywhere, so it stays bash. =M-x shell= uses
   (setq dired-omit-files (concat dired-omit-files "\\|\\`[.]")))
 #+end_src
 
+** doc-view resolution
+#+begin_src emacs-lisp
+(after! doc-view
+  (setq doc-view-resolution 200))
+#+end_src
+
 * Configurations of external packages
 ** denote
 #+begin_src elisp

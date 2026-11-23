@@ -80,6 +80,9 @@
 (after! dired-x
   (setq dired-omit-files (concat dired-omit-files "\\|\\`[.]")))
 
+(after! doc-view
+  (setq doc-view-resolution 200))
+
 (use-package! denote
   :hook (dired-mode . denote-dired-mode)
   :config

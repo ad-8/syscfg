@@ -144,7 +144,7 @@ menu:
     submenu:
       - key: "a"
         desc: all outputs
-        cmd: grim - | swappy -f -
+        cmd: sleep 0.3; grim - | swappy -f -
       - key: "s"
         desc: select region
         cmd: grim -g "$(slurp)" - | swappy -f -

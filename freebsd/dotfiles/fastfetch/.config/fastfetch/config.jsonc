@@ -131,7 +131,7 @@
       "type": "command",
       "key": "   loadavg",
       "keyColor": "green",
-      "text": "awk '{print $1,$2,$3}' /proc/loadavg",
+      "text": "sysctl -n vm.loadavg | awk '{print $2,$3,$4}'",
     },
     {
       "type": "custom",
