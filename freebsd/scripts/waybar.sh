@@ -64,8 +64,6 @@ waybar_net() {
         state="NET OK"
     else
         router=$(netstat -rn -f inet 2>/dev/null | awk '$1 == "default" && $4 == "wlan0" { print $2; exit }')
-        [ -n "$router" ] || router=$(awk -F'[ ,;]+' '/option routers/ { r = $4 } END { print r }' \
-            /var/db/dhclient.leases.wlan0 2>/dev/null)
         if [ -n "$router" ] && ping -c1 -t2 "$router" >/dev/null 2>&1; then
             state="NO INTERNET"
         else

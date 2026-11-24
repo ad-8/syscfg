@@ -95,6 +95,10 @@ tooltip label {
     color: #df8c8c;
 }
 
+#custom-net.down {
+    color: #df8c8c;
+}
+
 #custom-cpu {
     color: #7fc1ca;
 }
