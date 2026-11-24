@@ -24,6 +24,7 @@ More option see https://mangowm.github.io/
   - [[#audio][Audio]]
   - [[#screenshots][Screenshots]]
   - [[#window-focus-and-size][Window focus and size]]
+  - [[#window-groups][Window groups]]
   - [[#window-state][Window state]]
   - [[#scratchpad][Scratchpad]]
   - [[#layouts][Layouts]]
@@ -272,6 +273,16 @@ bind=SUPER,k,focusstack,previous
 bind=SUPER+SHIFT,j,exchange_stack_client,next
 bind=SUPER+SHIFT,k,exchange_stack_client,previous
 #+end_src
+** Window groups
+#+begin_src shell
+bind=SUPER+CTRL+SHIFT,h,groupjoin,left
+bind=SUPER+CTRL+SHIFT,j,groupjoin,down
+bind=SUPER+CTRL+SHIFT,k,groupjoin,up
+bind=SUPER+CTRL+SHIFT,l,groupjoin,right
+bind=SUPER,n,groupfocus,next
+bind=SUPER+SHIFT,n,groupfocus,prev
+bind=SUPER,z,groupleave
+#+end_src
 ** Window state
 #+begin_src shell
 bind=SUPER+SHIFT,g,toggleglobal,
@@ -441,5 +452,7 @@ gap_outer_vertical=10
 smart_gaps=0
 cursor_size=24
 cursor_theme=Numix-Cursor
+group_bar_height=33
+group_bar_decorate_font_desc=monospace Bold 13
 source_optional=./active-theme.conf
 #+end_src
