@@ -29,6 +29,8 @@
         "custom/sep3",
         "custom/vpn",
         "custom/sep3",
+        "custom/net",
+        "custom/sep3",
         "tray",
         "custom/sepempty"
     ],
@@ -131,6 +133,13 @@
         "format": "{}",
         "return-type": "json",
         "exec": "$HOME/syscfg/freebsd/scripts/waybar.sh vpn"
+    },
+    "custom/net": {
+        "interval": 15,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "json",
+        "exec": "$HOME/syscfg/freebsd/scripts/waybar.sh net"
     },
     "custom/licht": {
         "interval": 10,

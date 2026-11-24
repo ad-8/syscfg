@@ -57,6 +57,32 @@ waybar_vpn() {
     fi
 }
 
+waybar_net() {
+    if ! ifconfig wlan0 2>/dev/null | grep -q 'status: associated'; then
+        state="NO WIFI"
+    elif ping -c1 -t2 1.1.1.1 >/dev/null 2>&1; then
+        state="NET OK"
+    else
+        router=$(netstat -rn -f inet 2>/dev/null | awk '$1 == "default" && $4 == "wlan0" { print $2; exit }')
+        [ -n "$router" ] || router=$(awk -F'[ ,;]+' '/option routers/ { r = $4 } END { print r }' \
+            /var/db/dhclient.leases.wlan0 2>/dev/null)
+        if [ -n "$router" ] && ping -c1 -t2 "$router" >/dev/null 2>&1; then
+            state="NO INTERNET"
+        else
+            state="NO ROUTER"
+        fi
+    fi
+    log="$HOME/.local/state/net.log"
+    mkdir -p "${log%/*}"
+    last=$(tail -n 1 "$log" 2>/dev/null | cut -d' ' -f3-)
+    [ "$state" = "$last" ] || printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$state" >>"$log"
+    if [ "$state" = "NET OK" ]; then
+        printf '{"text": "%s", "class": "ok"}\n' "$state"
+    else
+        printf '{"text": "%s", "class": "down"}\n' "$state"
+    fi
+}
+
 case "$1" in
     date) waybar_date ;;
     licht) waybar_licht ;;
@@ -65,8 +91,9 @@ case "$1" in
     disk) waybar_disk ;;
     memory) waybar_memory ;;
     vpn) waybar_vpn ;;
+    net) waybar_net ;;
     *)
-        echo "usage: $0 date|licht|volume|cpu|disk|memory|vpn" >&2
+        echo "usage: $0 date|licht|volume|cpu|disk|memory|vpn|net" >&2
         exit 1
         ;;
 esac
