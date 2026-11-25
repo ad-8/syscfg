@@ -56,20 +56,6 @@
     (doseq [pty (foot-ptys)]
       (try (spit pty osc :append true) (catch Exception _)))))
 
-(defn kitty-sockets
-  "Returns remote-control socket paths of running kitty instances. listen_on unix:/tmp/kitty appends -<pid>, so each instance has its own /tmp/kitty-<pid> socket."
-  []
-  (try (map str (fs/glob "/tmp" "kitty-*")) (catch Exception _ nil)))
-
-(defn reload-kitty
-  "Live-updates colors in every running kitty instance via remote control, reading the active theme file. --all recolors open windows, --configured makes new windows in the instance inherit it too."
-  [src]
-  (doseq [sock (kitty-sockets)]
-    (try
-      (shell {:continue true} "kitten" "@" "--to" (str "unix:" sock)
-             "set-colors" "--all" "--configured" (str src))
-      (catch Exception _))))
-
 (defn reload-tmux
   "Re-sources the active tmux theme file into the running tmux server, if any.
    Guarded by list-sessions so we don't spawn a server when none is running."
@@ -88,9 +74,6 @@
    {:file    "foot.theme"
     :dest    (fs/path (fs/xdg-config-home) "foot/active-theme")
     :reload  reload-foot}
-   {:file    "kitty.conf"
-    :dest    (fs/path (fs/xdg-config-home) "kitty/active-theme.conf")
-    :reload  reload-kitty}
    {:file    "tmux.conf"
     :dest    (fs/path (fs/xdg-config-home) "tmux/active-theme.conf")
     :reload  reload-tmux}

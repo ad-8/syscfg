@@ -22,7 +22,6 @@
       nil # nix language server
       nixfmt
       sqlitebrowser
-      vscodium
       youplot # cli plots
 
       # TODO evaluate rust pkgs

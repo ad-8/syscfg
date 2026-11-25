@@ -58,15 +58,10 @@ warning and notification status; urgency and the battery warning are red.
 mango's maximized border is violet, since green is the focus color. Accent
 and red blocks (waybar mode, battery warning; dunst critical) use bg_0 text.
 
-foot and kitty follow selenized's ANSI table
+foot follows selenized's ANSI table
 (`manual-installation.md`): 0 = bg_1, 7 = dim_0, 8 = bg_2, 15 = fg_1, the
 rest red/green/yellow/blue/magenta/cyan and their bright versions. The cursor
-is fg_1. kitty sets no selection colors, like every other theme: the
-switcher's live `set-colors` does not reset keys, so a selection set here
-would stick after switching away. Upstream's dark kitty file drifts from
-`the-values.md` (`color0 #174956`; `color8`, selection and active tab
-`#325b66`); we use the canonical `#184956` and `#2d5b69`. Upstream's black
-kitty file matches.
+is fg_1.
 
 ## Zenburn
 
@@ -82,7 +77,7 @@ inactive borders and muted text use #8f8f8f. Focus and selection use yellow
 #cc9393. Pastel selections and critical backgrounds use #3f3f3f text.
 Additional graph and gradient stops are literal upstream colors.
 
-foot and kitty preserve upstream's exact `terminal_ansi_colors`
+foot preserves upstream's exact `terminal_ansi_colors`
 slot order, including its unconventional bright and magenta assignments:
 
 ```
@@ -105,7 +100,7 @@ and success use red (#df8c8c), yellow (#dada93), and green (#a8ce93).
 Pastel selection and critical-notification backgrounds use `base1`
 (#1e272c) text. Existing layouts and alpha values are preserved.
 
-foot and kitty share the terminal mapping: black = `base1`
+foot uses the terminal mapping: black = `base1`
 (#1e272c), bright black = `base7` (#899ba6), white = `fg` (#c5d4dd), and
 bright white = `base8` (#e6eef3). Red, green, yellow, blue, magenta, and cyan
 use their named palette entries; bright accent slots repeat those colors.
@@ -123,7 +118,7 @@ on surface0, highlight mauve, critical on red with base text. The port marks
 critical only with a peach frame, and our dunstrc draws no frame
 (`frame_width = 0`). waybar and rofi use dracula's layout with Catppuccin colors
 by role; on latte, info modules are blue and vpn/music teal, because sky, peach
-and green are too faint on the light bar. foot and kitty use the palette's
+and green are too faint on the light bar. foot uses the palette's
 `ansiColors`, as catppuccin/kitty (`177d447`) does. catppuccin/foot (`99384a8`)
 still repeats the normal colors as brights and swaps white and bright white.
 Emacs loads the single `catppuccin` theme with `catppuccin-flavor` set, so face
@@ -163,10 +158,11 @@ The removal commits also dropped the theme from `scripts/bb/switch_theme.clj`
 the top of this file; re-add those by hand, the switcher entry into the current
 `theme-categories` map. `git show <commit>` shows what was removed, but the
 older diffs no longer match today's `switch_theme.clj`.
-Delete the restored `fuzzel.ini`, `hyprland.lua` and `niri.kdl`; fuzzel,
-Hyprland and niri are gone (`a823d2ce`, `ea01e5be`, `380a07d6`).
-white, everforest-light and oxocarbon-light predate the kitty, mango, tmux
-and wlr-which-key theme files; write those four, or
+Delete the restored `fuzzel.ini`, `hyprland.lua`, `kitty.conf` and `niri.kdl`;
+fuzzel, Hyprland, niri and kitty are gone (`a823d2ce`, `ea01e5be`, `380a07d6`,
+and the `retire: remove kitty, qutebrowser and vscodium` commit).
+white, everforest-light and oxocarbon-light predate the mango, tmux and
+wlr-which-key theme files; write those three, or
 those apps keep the previous theme and the switcher reports them missing.
 
 | Theme            | Removed    | Commit     | Doom theme file (in `dotfiles/doom/.config/doom/themes/` at removal) | Emacs theme source                      |
