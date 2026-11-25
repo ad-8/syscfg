@@ -11,7 +11,12 @@ in
       base
       home-manager
       ../../hosts/ax-vm/configuration.nix
-      { home-manager.users.ax.imports = [ ../../hosts/ax-vm/home.nix ]; }
+      {
+        home-manager.users.ax.imports = [
+          ../../hosts/ax-vm/home.nix
+          modules.homeManager.git
+        ];
+      }
     ];
   };
 }

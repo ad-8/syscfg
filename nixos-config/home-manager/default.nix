@@ -12,13 +12,9 @@
   pkgsGui.enable = true;
 
   configAuthAgent.enable = true;
-  configBtop.enable = true;
   configClojure.enable = true;
   configDoom.enable = true;
   configEmacs.enable = true;
-  configFastfetch.enable = true;
-  configFish.enable = true;
-  configGit.enable = true;
   configGtk.enable = true;
   configMegasync.enable = false;
   configMime.enable = true;
@@ -28,7 +24,5 @@
   configSecretService.enable = false;
   configSwappy.enable = true;
   configTealdeer.enable = true;
-  configTmux.enable = true;
-  configVim.enable = true;
   configWebApps.enable = true;
 }

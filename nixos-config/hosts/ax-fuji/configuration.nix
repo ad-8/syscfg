@@ -1,20 +1,11 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
 
 let
   serverIp = "192.168.178.8";
-  btopConf = pkgs.writeText "btop.conf" (
-    lib.generators.toKeyValue {
-      mkKeyValue = lib.generators.mkKeyValueDefault {
-        mkValueString =
-          v: if builtins.isString v then "\"${v}\"" else lib.generators.mkValueStringDefault { } v;
-      } " = ";
-    } (import ../../shared/btop.nix)
-  );
 in
 
 {
@@ -30,7 +21,6 @@ in
   networking.hostName = "ax-fuji";
 
   environment.systemPackages = with pkgs; [
-    btop
     # services.jellyfin only installs pkgs.jellyfin; web and ffmpeg must be explicit
     jellyfin-ffmpeg
     jellyfin-web
@@ -39,36 +29,7 @@ in
     restic
     vlock
     yt-dlp
-    (lib.hiPrio (
-      pkgs.writeShellScriptBin "btop" ''
-        exec ${pkgs.btop}/bin/btop --config ${btopConf} "$@"
-      ''
-    ))
   ];
-
-  programs.git = {
-    enable = true;
-    config = import ../../shared/git.nix { inherit pkgs; };
-  };
-
-  environment.etc = {
-    "fish/ax/config.fish".source = ../../shared/fish/config.fish;
-    "fish/ax/nnn.fish".source = ../../shared/fish/nnn.fish;
-    "fish/ax/functions/rfv.fish".source = ../../shared/fish/functions/rfv.fish;
-    "fish/ax/functions/rfvuuu.fish".source = ../../shared/fish/functions/rfvuuu.fish;
-    "fish/ax/functions/y.fish".source = ../../shared/fish/functions/y.fish;
-    "tmux.conf".source = ../../shared/tmux/.tmux.conf;
-    "vimrc".source = ../../shared/vim/vimrc;
-  };
-  programs.fish.shellInit = ''
-    set -a fish_function_path /etc/fish/ax/functions
-    source /etc/fish/ax/config.fish
-  '';
-  environment.variables.VIMINIT = "source /etc/vimrc";
-
-  environment.etc."xdg/fastfetch/config.jsonc".text = builtins.toJSON (
-    import ../../shared/fastfetch.nix
-  );
 
   users.users.ax = {
     packages = [ ];
