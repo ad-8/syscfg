@@ -822,6 +822,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
        (:desc "org-capture" "j" #'org-capture)
        (:desc "toggle the calm doom buffer" "k" #'ax/toggle-dashboard)
        (:desc "Toggle Dired Preview (global)" "p" #'dired-preview-global-mode)
+       (:desc "open scratch buffer" "s" #'doom/open-scratch-buffer)
        (:desc "winner-undo" "u" #'winner-undo)
        (:desc "winner-redo" "U" #'winner-redo)
        (:desc "show amount of git commits" "#" #'ax/git-count-commits)
