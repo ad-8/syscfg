@@ -12,10 +12,7 @@
   config = lib.mkIf config.configBtop.enable {
     programs.btop = {
       enable = true;
-      settings = {
-        color_theme = "active";
-        save_config_on_exit = false;
-      };
+      settings = import ../shared/btop.nix;
     };
   };
 }

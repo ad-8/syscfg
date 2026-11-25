@@ -1,0 +1,150 @@
+let
+  esc = builtins.fromJSON ''"\u001b"'';
+in
+
+{
+  "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
+  logo = {
+    source = "~/.config/fastfetch/logo-full.png";
+    type = "auto";
+    height = 15;
+    width = 15;
+    padding = {
+      top = 5;
+      left = 3;
+    };
+  };
+  display = {
+    separator = "  ";
+  };
+  modules = [
+    "break"
+    "title"
+    {
+      type = "custom";
+      format = "${esc}[90m┌────────────────────────Hardware────────────────────────┐";
+    }
+    {
+      type = "host";
+      key = " PC";
+      keyColor = "green";
+    }
+    {
+      type = "cpu";
+      key = "  ├";
+      keyColor = "green";
+    }
+    {
+      type = "gpu";
+      key = "  ├󰍛";
+      keyColor = "green";
+    }
+    {
+      type = "memory";
+      key = "  ├󰑭";
+      keyColor = "green";
+    }
+    {
+      type = "swap";
+      key = "  ├";
+      keyColor = "green";
+    }
+    {
+      type = "disk";
+      key = "  └󰋊";
+      keyColor = "green";
+    }
+    "break"
+    {
+      type = "display";
+      key = "   󰍹";
+      keyColor = "green";
+    }
+    {
+      type = "custom";
+      format = "${esc}[90m└────────────────────────────────────────────────────────┘";
+    }
+    "break"
+    {
+      type = "custom";
+      format = "${esc}[90m┌────────────────────────Software────────────────────────┐";
+    }
+    {
+      type = "os";
+      key = " OS";
+      keyColor = "green";
+    }
+    {
+      type = "command";
+      key = "  ├";
+      text = "sed -n -E 's/^VERSION_ID=\"([0-9]{4})([0-9]{2})([0-9]{2})\".*/\\1-\\2-\\3/p' /etc/os-release";
+    }
+    {
+      type = "command";
+      key = "  ├";
+      keyColor = "green";
+      text = "~/syscfg/scripts/nixos-last-updated.sh";
+    }
+    {
+      type = "kernel";
+      key = "  ├";
+      keyColor = "green";
+    }
+    {
+      type = "packages";
+      key = "  ├󰏖";
+      keyColor = "green";
+    }
+    {
+      type = "shell";
+      key = "  ├";
+      keyColor = "green";
+    }
+    {
+      type = "wm";
+      key = "  └";
+      keyColor = "green";
+    }
+    {
+      type = "custom";
+      format = "${esc}[90m└────────────────────────────────────────────────────────┘";
+    }
+    "break"
+    {
+      type = "custom";
+      format = "${esc}[90m┌────────────────────────Misc────────────────────────────┐";
+    }
+    {
+      type = "command";
+      key = "   Date   ";
+      text = "date '+%d.%m. %H:%M'";
+      keyColor = "green";
+    }
+    {
+      type = "command";
+      key = "   OS Age ";
+      keyColor = "green";
+      text = "b=$(stat -c %W / 2>/dev/null); [ \"\${b:-0}\" -gt 0 ] && echo $(( ($(date +%s) - b) / 86400 )) days || echo n/a";
+    }
+    {
+      type = "uptime";
+      key = "   Uptime ";
+      keyColor = "green";
+    }
+    {
+      type = "command";
+      key = "   loadavg";
+      keyColor = "green";
+      text = "awk '{print $1,$2,$3}' /proc/loadavg";
+    }
+    {
+      type = "custom";
+      format = "${esc}[90m└────────────────────────────────────────────────────────┘";
+    }
+    {
+      type = "colors";
+      symbol = "circle";
+    }
+    "break"
+  ];
+}
