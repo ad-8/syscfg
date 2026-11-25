@@ -581,7 +581,8 @@
     (let [light #{"modus-operandi" "nord-light" "solarized-light"
                   "gruvbox-light" "doric-oak" "catppuccin-latte"}]
       (doseq [d (fs/list-dir (fs/path (fs/home) "syscfg" "themes"))
-              :when (fs/directory? d)]
+              :when (and (fs/directory? d)
+                         (not (str/starts-with? (fs/file-name d) "_")))]
         (is (= (contains? light (fs/file-name d))
                (bg-light? (fs/path d "foot.theme")))
             (str (fs/file-name d) " misclassified"))))

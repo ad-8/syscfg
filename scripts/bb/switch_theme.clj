@@ -150,10 +150,11 @@
     :reload  no-reload}])
 
 (defn available-themes
-  "Returns a sorted list of theme names (directory names) found in themes-dir."
+  "Returns a sorted list of theme names (directory names) found in themes-dir, skipping `_`-prefixed ones."
   []
   (->> (fs/list-dir themes-dir)
        (filter fs/directory?)
+       (remove #(str/starts-with? (fs/file-name %) "_"))
        (map fs/file-name)
        sort))
 
@@ -187,7 +188,7 @@
    Each app is applied inside a try so that one failure — an unwritable config dir, a vanished file, a reload that blows up — leaves the remaining apps on the new theme instead of stranding them on the old one."
   [theme]
   (let [theme-dir (fs/path themes-dir theme)]
-    (when-not (fs/directory? theme-dir)
+    (when (or (str/starts-with? theme "_") (not (fs/directory? theme-dir)))
       (binding [*out* *err*] (println "Unknown theme:" theme))
       (System/exit 1))
     (run! (fn [{:keys [file] :as app}]

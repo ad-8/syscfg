@@ -581,7 +581,8 @@
           light #{"modus-operandi" "nord-light" "solarized-light"
                   "gruvbox-light" "doric-oak"}]
       (doseq [d (os/ls themes)
-              :when (:dir? d)]
+              :when (and (:dir? d)
+                         (not (str/starts-with? (:name d) "_")))]
         (is (= (contains? light (:name d))
                (bg-light? (str themes "/" (:name d) "/foot.theme")))
             (str (:name d) " misclassified"))))

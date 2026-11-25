@@ -240,6 +240,7 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
     (setq ax/monitor-font--timer
           (run-with-timer 0 1.0 (lambda () (ax/set-font-for-monitor (selected-frame)))))))
 
+(setq custom-theme-directory "~/syscfg/themes/_emacs/")
 (defvar ax/doom-active-theme-file (expand-file-name "~/.config/doom/active-theme.el"))
 
 ;; Load active theme from symlink if present, else fall back to gotham

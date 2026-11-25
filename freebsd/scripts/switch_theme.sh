@@ -89,12 +89,12 @@ mango_theme() {
 
 theme=$1
 if [ -z "$theme" ]; then
-    list=$(for d in "$T"/*/; do d=${d%/}; echo "${d##*/}"; done)
+    list=$(for d in "$T"/*/; do d=${d%/}; case ${d##*/} in _*) continue ;; esac; echo "${d##*/}"; done)
     n=$(printf '%s\n' "$list" | wc -l | tr -d ' ')
     theme=$(printf '%s\n' "$list" | rofi -dmenu -l "$n" -p "select theme ($n): " -theme picker)
     [ -z "$theme" ] && exit 0
 fi
-[ -d "$T/$theme" ] || {
+[ "${theme#_}" = "$theme" ] && [ -d "$T/$theme" ] || {
     echo "Unknown theme: $theme" >&2
     command -v notify-send >/dev/null && notify-send -u critical switch_theme "unknown theme: $theme"
     exit 1

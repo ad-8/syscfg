@@ -472,8 +472,10 @@ is noticed without a focus change.
 ** Theme
 =active-theme.el= is a gitignored symlink that =switch_theme.clj= points at the
 current theme. The file watch reloads it when the link changes, so a theme switch
-reaches a running Emacs without a restart.
+reaches a running Emacs without a restart. The custom theme files live in
+=~/syscfg/themes/_emacs/=, shared with the FreeBSD config.
 #+begin_src emacs-lisp
+(setq custom-theme-directory "~/syscfg/themes/_emacs/")
 (defvar ax/doom-active-theme-file (expand-file-name "~/.config/doom/active-theme.el"))
 
 ;; Load active theme from symlink if present, else fall back to gotham
