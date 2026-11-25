@@ -15,7 +15,6 @@
   outputs = { self, nixpkgs-stable, home-manager-stable, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs-stable.legacyPackages.${system};
       mkConfig = { hostname, username ? "ax", nixpkgs ? nixpkgs-stable, home-manager ? home-manager-stable, }:
         let
           hm =
@@ -51,11 +50,6 @@
         ax-fuji = mkConfig { hostname = "ax-fuji"; home-manager = null; };
         ax-t14  = mkConfig { hostname = "ax-t14"; };
         ax-vm   = mkConfig { hostname = "ax-vm"; };
-      };
-
-      # Build shell for kwm. From the kwm repo: nix develop ~/syscfg/nixos-config#kwm
-      devShells.${system}.kwm = pkgs.mkShell {
-        packages = with pkgs; [ zig_0_16 pkg-config wayland wayland-scanner wayland-protocols libxkbcommon pixman fcft ];
       };
     };
 }

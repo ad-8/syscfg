@@ -54,10 +54,9 @@ Background is bg_0, foreground fg_0. Inactive panels and unfocused borders
 use bg_1 (including the tmux surface), muted text dim_0. The accent is green,
 as in selenized's own i3 config; the second border color is cyan, and the
 dunst frame stays blue as in solarized-dark. Yellow marks the waybar CPU
-warning, notification status and the kwm mode tag; urgency and the battery
-warning are red. mango's maximized border is violet, since green is the
-focus color. Accent and red blocks (waybar mode, battery warning;
-dunst critical) use bg_0 text.
+warning and notification status; urgency and the battery warning are red.
+mango's maximized border is violet, since green is the focus color. Accent
+and red blocks (waybar mode, battery warning; dunst critical) use bg_0 text.
 
 foot and kitty follow selenized's ANSI table
 (`manual-installation.md`): 0 = bg_1, 7 = dim_0, 8 = bg_2, 15 = fg_1, the
@@ -166,8 +165,8 @@ the top of this file; re-add those by hand, the switcher entry into the current
 older diffs no longer match today's `switch_theme.clj`.
 Delete the restored `fuzzel.ini`, `hyprland.lua` and `niri.kdl`; fuzzel,
 Hyprland and niri are gone (`a823d2ce`, `ea01e5be`, `380a07d6`).
-white, everforest-light and oxocarbon-light predate the kitty, kwm-bar,
-kwm-border, mango, tmux and wlr-which-key theme files; write those six, or
+white, everforest-light and oxocarbon-light predate the kitty, mango, tmux
+and wlr-which-key theme files; write those four, or
 those apps keep the previous theme and the switcher reports them missing.
 
 | Theme            | Removed    | Commit     | Doom theme file (in `dotfiles/doom/.config/doom/themes/` at removal) | Emacs theme source                      |

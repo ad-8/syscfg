@@ -12,7 +12,6 @@
     ./config-gaming.nix
     ./config-mango.nix
     ./config-printing.nix
-    ./config-river.nix
     ./config-virtman.nix
     ./config-xorg.nix
   ];

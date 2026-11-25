@@ -1,7 +1,0 @@
-        .color = .{
-            //.focus = 0xffc777ff,
-            .focus = 0x8839efff,
-//            .unfocus = 0x828bb8ff,
-            .unfocus = 0xccd0daff,
-            .swallowing = 0x179299ff,
-        },

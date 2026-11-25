@@ -15,10 +15,6 @@ bb ~/syscfg/scripts/bb/switch_theme.clj <theme-name>
 
 Replace `<theme-name>` with a concrete value, like `nord`.
 
-For kwm, run the switcher before first starting or reloading the updated config.
-After switching themes in a running kwm session, press Super+Shift+R to apply
-the bar and border colors.
-
 Run the switcher again after pulling theme changes, and after editing
 `dotfiles/wlr-which-key/.config/wlr-which-key/menu.yaml`. The menu updates
 only when the switcher runs. The first run has to be from a terminal, since

@@ -82,13 +82,7 @@
   [_] nil)
 
 (def apps
-  [{:file    "kwm-bar.zon"
-    :dest    (fs/path (fs/xdg-config-home) "kwm/active-bar.zon")
-    :reload  no-reload}
-   {:file    "kwm-border.zon"
-    :dest    (fs/path (fs/xdg-config-home) "kwm/active-border.zon")
-    :reload  no-reload}
-   {:file    "btop.theme"
+  [{:file    "btop.theme"
     :dest    (fs/path (fs/xdg-config-home) "btop/themes/active.theme")
     :reload  (fn [_] (shell ["pkill" "-SIGUSR2" "btop"]))}
    {:file    "foot.theme"

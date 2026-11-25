@@ -118,7 +118,7 @@ exec_once=swaybg -i ~/sync/wallpapers/default.jpg
 exec_once=env COLORTERM=truecolor emacs --daemon
 exec_once=vivaldi
 
-exec_once=/usr/bin/env sh ~/syscfg/scripts/river-idle.sh
+exec_once=/usr/bin/env sh ~/syscfg/scripts/idle.sh
 #+end_src
 * Input
 ** Keyboard
