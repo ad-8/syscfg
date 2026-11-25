@@ -1,17 +1,7 @@
-{
-  config,
-  lib,
-  ...
-}:
-
 # man foot.ini
 
 {
-  options = {
-    configFoot.enable = lib.mkEnableOption "Enable foot config";
-  };
-
-  config = lib.mkIf config.configFoot.enable {
+  flake.modules.homeManager.foot = {
     programs.foot = {
       enable = true;
       settings = {

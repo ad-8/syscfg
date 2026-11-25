@@ -46,11 +46,6 @@ in
     ))
   ];
 
-  programs.starship = {
-    enable = true;
-    settings = import ../../shared/starship.nix;
-  };
-
   programs.git = {
     enable = true;
     config = import ../../shared/git.nix { inherit pkgs; };

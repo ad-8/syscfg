@@ -22,7 +22,6 @@
   ];
 
   configWorkstation.enable = true;
-  configMango.enable = true;
   configFirefox.enable = true;
   configAudio.enable = true;
   configClamav.enable = true;

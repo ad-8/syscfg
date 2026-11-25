@@ -10,7 +10,6 @@
     ./config-workstation.nix
     ./config-firefox.nix
     ./config-gaming.nix
-    ./config-mango.nix
     ./config-printing.nix
     ./config-virtman.nix
     ./config-xorg.nix
