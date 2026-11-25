@@ -106,6 +106,7 @@ menu:
       - key: "s"
         desc: select region
         cmd: grim -g "$(slurp)" - | swappy -f -
+      # TODO port: w and f need swaymsg, which went with sway; port to mmsg
       - key: "w"
         desc: select window
         cmd: swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp | grim -g - - | swappy -f -

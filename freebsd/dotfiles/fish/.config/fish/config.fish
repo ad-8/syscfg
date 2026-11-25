@@ -4,7 +4,7 @@ if status is-login; and status is-interactive; and status test-feature query-ter
     exec $fish_bin --features no-query-term --login
 end
 
-abbr -a startw 'dbus-run-session sway'
+abbr -a startw 'dbus-run-session mango'
 abbr -a up 'doas pkg upgrade'
 abbr -a nf 'clear && fastfetch'
 

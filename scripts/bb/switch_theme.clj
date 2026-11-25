@@ -102,9 +102,7 @@
     :reload  reload-tmux}
    {:file    "waybar.css"
     :dest    (fs/path (fs/xdg-config-home) "waybar/active-theme.css")
-    ;; Restart via `waybar.clj launch` (not bare `waybar`) so the gitignored
-    ;; active-compositor.json include target is (re)created first; a missing one
-    ;; is a fatal config-load error that kills the whole bar.
+    ;; Restart via `waybar.clj launch` (not bare `waybar`), which detaches it.
     :reload  (fn [_]
                (when (zero? (:exit (shell {:continue true} "sh -c 'pgrep waybar >/dev/null'")))
                  (shell {:continue true} "sh -c 'pkill waybar'")
@@ -112,12 +110,6 @@
    {:file    "mango.conf"
     :dest    (fs/path (fs/xdg-config-home) "mango/active-theme.conf")
     :reload  (fn [_] (shell ["mmsg" "dispatch" "reload_config"]))}
-   {:file    "sway.conf"
-    :dest    (fs/path (fs/xdg-config-home) "sway/active-theme")
-    :reload  (fn [src]
-               (shell ["swaymsg" (->> (str/split-lines (slurp (str src)))
-                                      (filter #(str/starts-with? % "client."))
-                                      (str/join ";"))]))}
    {:file    "emacs-theme.el"
     :dest    (fs/path (fs/xdg-config-home) "doom/active-theme.el")
     :reload  no-reload}

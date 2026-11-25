@@ -114,38 +114,10 @@
     (when (zero? (:exit proc))
       (print-curr-playing (-> proc :out str/trim)))))
 
-(defn- compositor
-  "Detects the running Wayland compositor. Both waybar launch paths (compositor
-  autostart + keybind exec) are spawned by the compositor and inherit its env, so
-  the per-compositor IPC socket vars are the strong signal; XDG_CURRENT_DESKTOP is
-  a weaker fallback. Defaults to :mango."
-  []
-  (cond
-    (System/getenv "SWAYSOCK")                     :sway
-    (System/getenv "MANGO_INSTANCE_SIGNATURE")     :mango
-    (= "sway" (System/getenv "XDG_CURRENT_DESKTOP")) :sway
-    (= "mango" (System/getenv "XDG_CURRENT_DESKTOP")) :mango
-    :else                                          :mango))
-
-(defn- point-compositor-symlink!
-  "Repoints ~/.config/waybar/active-compositor.json at the fragment matching the
-  running compositor, so config / config-minimal include the right modules-left."
-  []
-  (let [dir    (fs/expand-home "~/.config/waybar")
-        target (fs/file dir (case (compositor)
-                              :sway "compositor-sway.json"
-                              "compositor-mango.json"))
-        link   (fs/file dir "active-compositor.json")]
-    (fs/delete-if-exists link)
-    (fs/create-sym-link link target)
-    (printf "active-compositor.json -> %s\n" (fs/file-name target))))
-
 (defn waybar-launch
-  "Sets the compositor symlink and starts waybar with `args`, spliced unquoted into a
-  `sh -c` string (so no spaces or quotes inside a path). Used by compositor autostart
-  and `waybar-toggle`."
+  "Starts waybar detached with `args`, spliced unquoted into a `sh -c` string (so no
+  spaces or quotes inside a path). Used by compositor autostart and `waybar-toggle`."
   [& args]
-  (point-compositor-symlink!)
   (shell {:out :string} (format "sh -c 'setsid waybar%s >/dev/null 2>&1 &'"
                                 (str/join (map #(str " " %) args)))))
 

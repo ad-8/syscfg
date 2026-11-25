@@ -29,7 +29,7 @@
         name = "Papirus-Dark";
         package = pkgs.papirus-icon-theme;
       };
-      # works -> set in sway config
+      # works -> set in mango config
       cursorTheme = {
         name = "Numix-Cursor";
         package = pkgs.numix-cursor-theme;

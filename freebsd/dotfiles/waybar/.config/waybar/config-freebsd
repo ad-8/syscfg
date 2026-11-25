@@ -2,14 +2,8 @@
 {
     "height": 24, // Waybar height (to be removed for auto height)
     "spacing": 5, // Gaps between modules [px]
-    // FreeBSD variant (ax-lat, sway; mango includes it from config-freebsd-mango): no babashka. sway's modules-left is
-    // inline (no active-compositor.json include). sh modules: freebsd/scripts/waybar.sh.
-    "modules-left": [
-        "custom/snowflake",
-        "sway/workspaces",
-        "sway/mode",
-        "sway/window"
-    ],
+    // FreeBSD variant (ax-lat, mango): no babashka. sh modules: freebsd/scripts/waybar.sh.
+    "modules-left": ["custom/snowflake", "ext/workspaces"],
     "modules-center": [
         "custom/date",
         "clock",
@@ -34,11 +28,9 @@
         "tray",
         "custom/sepempty"
     ],
-    "sway/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "warp-on-scroll": false,
+    "ext/workspaces": {
         "format": "{icon}",
+        "on-click": "activate",
         "format-icons": {
             "1": "  ",
             "2": "  ",
@@ -49,26 +41,6 @@
             "7": " 7 ",
             "8": "  ",
             "9": "  ",
-            "urgent": "!   !",
-            //   "focused": "",
-            //   "default": ""
-        }
-    },
-    "sway/mode": {
-        "format": "{}"
-    },
-    "sway/scratchpad": {
-        "format": "[{count}]",
-        "show-empty": false,
-        "tooltip-format": "{app}: {title}"
-    },
-    "sway/window": {
-        "format": "{title}",
-        "icon": false,
-        "rewrite": {
-            "(.*) - Mozilla Firefox": "$1",
-            "(.*) — Mozilla Firefox": "$1",
-            "(.*) - Brave": "$1"
         }
     },
     "tray": {

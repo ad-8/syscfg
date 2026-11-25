@@ -10,7 +10,7 @@
 
   configWorkstation.enable = true;
   configFirefox.enable = true;
-  configSway.enable = true;
+  configMango.enable = true;
   configRiver.enable = true;
   configAudio.enable = true;
 

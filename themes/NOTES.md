@@ -164,12 +164,11 @@ The removal commits also dropped the theme from `scripts/bb/switch_theme.clj`
 the top of this file; re-add those by hand, the switcher entry into the current
 `theme-categories` map. `git show <commit>` shows what was removed, but the
 older diffs no longer match today's `switch_theme.clj`.
-Delete the restored `fuzzel.ini` and `hyprland.lua`; fuzzel and Hyprland are
-gone (`a823d2ce`, `ea01e5be`).
+Delete the restored `fuzzel.ini`, `hyprland.lua` and `niri.kdl`; fuzzel,
+Hyprland and niri are gone (`a823d2ce`, `ea01e5be`, `380a07d6`).
 white, everforest-light and oxocarbon-light predate the kitty, kwm-bar,
-kwm-border, mango, sway, tmux and wlr-which-key theme files; write those
-seven, or those apps keep the previous theme and the switcher reports them
-missing.
+kwm-border, mango, tmux and wlr-which-key theme files; write those six, or
+those apps keep the previous theme and the switcher reports them missing.
 
 | Theme            | Removed    | Commit     | Doom theme file (in `dotfiles/doom/.config/doom/themes/` at removal) | Emacs theme source                      |
 |------------------|------------|------------|----------------------------------------------------------------------|-----------------------------------------|

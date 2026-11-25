@@ -2,11 +2,9 @@
 {
     "height": 24, // Waybar height (to be removed for auto height)
     "spacing": 5, // Gaps between modules [px]
-    // modules-left is compositor-specific: the active-compositor.json symlink is
-    // repointed by waybar.clj (compositor-sway.json / compositor-mango.json)
-    // based on whether sway or mango is running. Keep modules-left out of this file
+    // modules-left lives in compositor-mango.json. Keep it out of this file
     // (waybar's include is main-wins, so a value here would shadow the fragment).
-    "include": ["~/.config/waybar/active-compositor.json"],
+    "include": ["~/.config/waybar/compositor-mango.json"],
     "modules-center": [
         "custom/date",
         "clock",
@@ -34,45 +32,7 @@
         "tray",
         "custom/sepempty"
     ],
-    // sway modules (referenced only when running under sway; inert otherwise).
-    "sway/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "warp-on-scroll": false,
-        "format": "{icon}",
-        "format-icons": {
-            "1": "  ",
-            "2": "  ",
-            "3": " 3 ",
-            "4": " 4 ",
-            "5": " 5 ",
-            "6": " 6 ",
-            "7": " 7 ",
-            "8": "  ",
-            "9": "  ",
-            "urgent": "!   !",
-            //   "focused": "",
-            //   "default": ""
-        }
-    },
-    "sway/mode": {
-        "format": "{}"
-    },
-    "sway/scratchpad": {
-        "format": "[{count}]",
-        "show-empty": false,
-        "tooltip-format": "{app}: {title}"
-    },
-    "sway/window": {
-        "format": "{title}",
-        "icon": false,
-        "rewrite": {
-            "(.*) - Mozilla Firefox": "$1",
-            "(.*) — Mozilla Firefox": "$1",
-            "(.*) - Brave": "$1"
-        }
-    },
-    // mango modules (referenced only when running under mango; inert otherwise).
+    // mango modules.
     "mango/workspaces": {
         "format": "{icon}",
         "on-click": "activate",

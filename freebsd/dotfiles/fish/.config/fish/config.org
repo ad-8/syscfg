@@ -36,7 +36,7 @@ and waits 10 seconds for the answer. The FreeBSD console (vt(4)) never answers
 any terminal query: the kernel function that would send the reply,
 =termteken_respond= in =sys/kern/subr_terminal.c=, has its whole body disabled
 with =#if 0=. So a console login restarts fish once with the query turned off;
-foot under sway answers and keeps it on.
+foot under mango answers and keeps it on.
 
 #+begin_src shell
 if status is-login; and status is-interactive; and status test-feature query-term; and not set -q __ax_console_reexec; and string match -q '/dev/ttyv*' (tty)
@@ -49,7 +49,7 @@ end
 * abbr
 ** new ones FreeBSD only
 #+begin_src shell
-abbr -a startw 'dbus-run-session sway'
+abbr -a startw 'dbus-run-session mango'
 abbr -a up 'doas pkg upgrade'
 abbr -a nf 'clear && fastfetch'
 

@@ -48,15 +48,9 @@ reload_dunst() {
 reload_waybar() {
     pgrep -x waybar >/dev/null || return 0
     cfg=$C/waybar/config-freebsd
-    pgrep -x mango >/dev/null && cfg=$C/waybar/config-freebsd-mango
     pkill -x waybar
     i=0; while pgrep -x waybar >/dev/null && [ $i -lt 30 ]; do sleep 0.1; i=$((i + 1)); done
     nohup waybar -c "$cfg" >/dev/null 2>&1 &
-}
-
-reload_sway() {
-    pgrep -x sway >/dev/null || return 0
-    swaymsg "$(grep '^client\.' "$1" | paste -s -d ';' -)" >/dev/null
 }
 
 which_key() {
@@ -108,7 +102,6 @@ link waybar.css "$C/waybar/active-theme.css" && reload_waybar
 link emacs-theme.el "$C/doom/active-theme.el"
 link rofi.rasi "$C/rofi/active-theme.rasi"
 link dunst.conf "$C/dunst/active-theme.conf" && reload_dunst
-link sway.conf "$C/sway/active-theme" && reload_sway "$T/$theme/sway.conf"
 which_key
 mango_theme && { pgrep -x mango >/dev/null && mmsg dispatch reload_config; }
 exit $rc

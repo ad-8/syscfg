@@ -1,6 +1,5 @@
 // -*- mode: jsonc -*-
-// mango-specific left modules. Symlinked to as active-compositor.json by
-// waybar.clj when running under mango; see config / config-minimal include.
+// mango-specific left modules. Included by config / config-minimal.
 // mango/layout ([T], [M], …) shows the dwm-style layout symbol.
 {
     "modules-left": [

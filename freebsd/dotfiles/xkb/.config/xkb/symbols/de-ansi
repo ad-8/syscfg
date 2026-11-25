@@ -4,8 +4,9 @@
 //
 // we lose: » « and ¢
 //
-// Costs » « ¢ at level 3. Loaded by sway as layout "de-ansi" via
-// /etc/sway/config.d/keyboard on the Latitude -> reload sway after edits
+// Costs » « ¢ at level 3. Loaded by mango as layout "de-ansi" via
+// xkb_rules_layout in /usr/local/etc/mango/keyboard.conf on the Latitude
+// -> reload mango after edits
 
 default partial alphanumeric_keys
 xkb_symbols "de102" {

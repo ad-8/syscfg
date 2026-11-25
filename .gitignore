@@ -16,7 +16,6 @@
 /freebsd/dotfiles/foot/.config/foot/active-theme
 /dotfiles/waybar/.config/waybar/active-theme.css
 /freebsd/dotfiles/waybar/.config/waybar/active-theme.css
-/dotfiles/waybar/.config/waybar/active-compositor.json
 /dotfiles/dunst/.config/dunst/active-theme.conf
 /freebsd/dotfiles/dunst/.config/dunst/active-theme.conf
 /dotfiles/rofi/.config/rofi/active-theme.rasi
@@ -24,8 +23,6 @@
 /dotfiles/mango/.config/mango/active-theme.conf
 /freebsd/dotfiles/mango/.config/mango/active-theme.conf
 /dotfiles/kitty/.config/kitty/active-theme.conf
-/dotfiles/sway/.config/sway/active-theme
-/freebsd/dotfiles/sway/.config/sway/active-theme
 /dotfiles/clojure/.clojure/tools/
 /dotfiles/clojure/.clojure/.cpcache/
 /dotfiles/wlr-which-key/.config/wlr-which-key/config.yaml
