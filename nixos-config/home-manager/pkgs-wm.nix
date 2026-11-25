@@ -22,7 +22,6 @@
       playerctl
       rofi
       slurp
-      swappy
       swaybg
       swaylock
       waybar

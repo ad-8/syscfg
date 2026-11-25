@@ -20,7 +20,6 @@
       keepassxc
       libreoffice-fresh
       mousepad
-      mpv
       pavucontrol
       picard
       pika-backup

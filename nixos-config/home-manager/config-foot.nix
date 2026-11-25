@@ -1,0 +1,39 @@
+{
+  config,
+  lib,
+  ...
+}:
+
+# man foot.ini
+
+{
+  options = {
+    configFoot.enable = lib.mkEnableOption "Enable foot config";
+  };
+
+  config = lib.mkIf config.configFoot.enable {
+    programs.foot = {
+      enable = true;
+      settings = {
+        main = {
+          include = "~/.config/foot/active-theme";
+          font = "Hack Nerd Font:size=11.5";
+          pad = "20x20 center-when-maximized-and-fullscreen";
+          resize-by-cells = "no";
+        };
+        scrollback = {
+          lines = 2000;
+          multiplier = "10.0"; # lines per mouse wheel
+          indicator-format = "line";
+        };
+        cursor = {
+          style = "underline";
+        };
+        colors-dark = {
+          alpha = "0.97";
+          blur = "yes";
+        };
+      };
+    };
+  };
+}

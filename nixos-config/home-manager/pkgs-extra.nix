@@ -13,7 +13,6 @@
   config = lib.mkIf config.pkgsExtra.enable {
     home.packages = with pkgs; [
       age
-      btop
       chafa
       gum
       imagemagick

@@ -13,12 +13,19 @@
   pkgsWm.enable = true;
 
   configAuthAgent.enable = true;
+  configBtop.enable = true;
   configEmacs.enable = true;
+  configFastfetch.enable = true;
+  configFoot.enable = true;
   configGit.enable = true;
   configGtk.enable = true;
   configMegasync.enable = false;
   configMime.enable = true;
+  configMpv.enable = true;
   configQt.enable = false;
   configSecretService.enable = false;
+  configStarship.enable = true;
+  configSwappy.enable = true;
+  configTealdeer.enable = true;
   configWebApps.enable = true;
 }
