@@ -1,6 +1,6 @@
 /clojure/.clojure/.cpcache/
 /clojure/.clojure/tools/
-/dotfiles/alacritty/.config/alacritty/themes/
+/openbsd/dotfiles/alacritty/.config/alacritty/themes/
 /dotfiles/fish/.config/fish/fish_variables
 /freebsd/dotfiles/fish/.config/fish/fish_variables
 **/.clj-kondo/

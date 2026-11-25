@@ -30,7 +30,7 @@
         name = "Papirus-Dark";
         package = pkgs.papirus-icon-theme;
       };
-      # works -> set in sway config and .Xresources (for xwayland)
+      # works -> set in sway config
       cursorTheme = {
         name = "Numix-Cursor";
         package = pkgs.numix-cursor-theme;

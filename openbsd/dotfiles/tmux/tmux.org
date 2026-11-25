@@ -1,0 +1,138 @@
+#+title:  tmux
+#+PROPERTY: header-args:shell :tangle .tmux.conf
+
+* Settings
+** General
+#+begin_src shell
+# Enable mouse control (clickable windows, panes, resizable panes)
+set -g mouse on
+
+set -g set-clipboard on
+
+set -g renumber-windows on
+
+set -as terminal-features ",foot*:RGB"
+
+# clock mode
+setw -g clock-mode-colour yellow
+
+# copy mode
+setw -g mode-style 'fg=black bg=red bold'
+
+# panes
+set -g pane-border-style 'fg=blue'
+set -g pane-active-border-style 'fg=blue'
+set -g pane-border-lines single
+set -g pane-border-indicators both
+
+# messages
+set -g display-time 2000
+set -g message-style 'fg=yellow bg=red bold'
+#+end_src
+** Statusbar
+#+begin_src shell
+set -g status-position top
+set -g status-justify left
+set -g status-style 'fg=red'
+
+set -g status-left ''
+set -g status-left-length 10
+
+set -g status-right-style 'fg=black bg=yellow'
+set -g status-right '%a, %d.%m. %H:%M [#S]'
+set -g status-right-length 50
+
+setw -g window-status-current-style 'fg=black bg=red'
+setw -g window-status-current-format ' #I #W #F '
+
+setw -g window-status-style 'fg=red bg=black'
+setw -g window-status-format ' #I #[bold]#W#[nobold] #[fg=yellow]#F '
+
+setw -g window-status-bell-style 'fg=yellow bg=red bold'
+#+end_src
+** Theme
+Per-theme colors managed by =switch_theme.clj=; overrides the default styles
+above. ~-q~ silently skips the file before the first theme pick, so tmux still
+starts clean.
+
+The default styles above are intentional fallbacks: on servers or minimal
+installs where =switch_theme= is not available, tmux still gets a usable
+(if garish) appearance from this config alone.
+#+begin_src shell
+source-file -q ~/.config/tmux/active-theme.conf
+#+end_src
+** Disable bell
+don't do anything when a 'bell' rings
+(*not used any of those settings so far* after a few month of using tmux (30.04.26))
+#+begin_src shell :tangle no
+set -g visual-activity off
+set -g visual-bell off
+set -g visual-silence off
+setw -g monitor-activity off
+set -g bell-action none
+#+end_src
+* Keybindings
+~bind~ = needs prefix; ~bind -n~ = no prefix
+** Remap Prefix Key
+#+begin_src shell 
+unbind C-b
+set -g prefix ö
+bind ö send-prefix
+#+end_src
+** Quality of Life
+#+begin_src shell
+# reload config file -- \; is just escape ;
+bind r source-file ~/.tmux.conf \; display "Config reloaded!"
+
+bind f resize-pane -Z
+
+unbind &
+bind-key x confirm-before -p "Kill window #W? (y/n)" kill-window
+
+# switch panes without prefix
+bind -n M-h select-pane -L
+bind -n M-l select-pane -R
+bind -n M-k select-pane -U
+bind -n M-j select-pane -D
+
+# These require prefix (e.g. Ctrl-b or your custom prefix)
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# split panes using | and -
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+#unbind '"'
+#unbind %
+
+# move window and focus it
+bind-key < swap-window -t -1 \; select-window -t -1
+bind-key > swap-window -t +1 \; select-window -t +1
+#+end_src
+** New Window
+=-a= inserts the new window immediately after the current one instead of appending
+at the far right. =-c= inherits the current pane's working directory.
+#+begin_src shell
+bind c new-window -a -c "#{pane_current_path}"
+#+end_src
+** vim copy-paste
+use =prefix [= to enter copy mode, then navigate with vim keys, enter or y to yank/copy
+use =preifx ]= to paste
+
+*also* can be just used for *fast navigation*
+
+#+begin_src shell
+# Vim-like copy/paste
+set-window-option -g mode-keys vi
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+unbind -T copy-mode-vi MouseDragEnd1Pane
+#+end_src
+
+** Testing
+#+begin_src shell
+bind ä display "keira"
+#+end_src
