@@ -14,18 +14,27 @@
 
   configAuthAgent.enable = true;
   configBtop.enable = true;
+  configClojure.enable = true;
+  configDunst.enable = true;
   configEmacs.enable = true;
   configFastfetch.enable = true;
+  configFish.enable = true;
   configFoot.enable = true;
   configGit.enable = true;
   configGtk.enable = true;
+  configMango.enable = true;
   configMegasync.enable = false;
   configMime.enable = true;
   configMpv.enable = true;
   configQt.enable = false;
+  configRestic.enable = true;
+  configRofi.enable = true;
   configSecretService.enable = false;
   configStarship.enable = true;
   configSwappy.enable = true;
   configTealdeer.enable = true;
+  configTmux.enable = true;
+  configVim.enable = true;
+  configWaybar.enable = true;
   configWebApps.enable = true;
 }

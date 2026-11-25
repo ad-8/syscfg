@@ -242,7 +242,7 @@ set -Ux fish_greeting "" # disable default welcome message
 * stuff that should be at the end
 ** nnn
 #+begin_src shell
-source ~/.config/fish/nnn.fish
+source (status dirname)/nnn.fish
 #+end_src
 
 ** starship

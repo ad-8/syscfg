@@ -1,0 +1,17 @@
+venv
+.venv
+qbit
+*.dmg
+**/rust/**/target
+**/code-v2/**/target
+**/.clj-kondo
+**/clojure/**/.shadow-cljs
+**/.lsp
+**/clojure/**/node_modules
+**/clojure/**/resources/public/js
+**/rails/**/tmp
+**/rails/store/vendor
+**/jpm_tree
+
+**/.calva/
+**/.ruby-lsp

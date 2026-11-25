@@ -1,0 +1,249 @@
+// -*- mode: jsonc -*-
+{
+    "height": 24, // Waybar height (to be removed for auto height)
+    "spacing": 5, // Gaps between modules [px]
+    // modules-left lives in compositor-mango.json. Keep it out of this file
+    // (waybar's include is main-wins, so a value here would shadow the fragment).
+    "include": ["~/.config/waybar/compositor-mango.json"],
+    "modules-center": [
+        "custom/date",
+        "clock",
+        "custom/timer",
+        "custom/weather",
+    ],
+    "modules-right": [
+        "custom/music-info",
+        "custom/sep3",
+        "pulseaudio",
+        "custom/notification-status",
+        "custom/sep3",
+        "custom/licht",
+        "custom/sep3",
+        "custom/cpu",
+        "custom/sepempty",
+        "custom/disk",
+        "custom/sepempty",
+        "custom/memory",
+        "battery",
+        "battery#bat2",
+        "custom/sep3",
+        "custom/vpn",
+        "custom/sep3",
+        "tray",
+        "custom/sepempty"
+    ],
+    // mango modules.
+    "mango/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "1": "  ",
+            "2": "  ",
+            "3": " 3 ",
+            "4": " 4 ",
+            "5": " 5 ",
+            "6": " 6 ",
+            "7": " 7 ",
+            "8": "  ",
+            "9": "  ",
+            "urgent": "!   !",
+            //   "focused": "",
+            //   "default": ""
+        }
+    },
+    "mango/keymode": {
+        "format": "{mode}",
+        "format-default": ""
+    },
+    "mango/layout": {
+        "format": "[{symbol}]"
+    },
+    "mango/window": {
+        "format": "{title}",
+        "icon": false,
+        "rewrite": {
+            "(.*) - Mozilla Firefox": "$1",
+            "(.*) — Mozilla Firefox": "$1",
+            "(.*) - Brave": "$1"
+        }
+    },
+    "tray": {
+        "icon-size": 15,
+        "spacing": 10,
+    },
+    "custom/date": {
+        "interval": 30,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/waybar.clj date"
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%H:%M:%S}",
+        "interval": 1
+    },
+    "custom/timer": {
+        "interval": 1,
+        "format": "{}",
+        "return-type": "json",
+        "exec": "$HOME/x/timer-bar.bb"
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        //"format": "{volume}% {icon} {format_source}",
+        "format": "{icon} {volume}%",
+        // "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon}",
+        // "format-bluetooth-muted": " {icon} {format_source}",
+        "format-bluetooth-muted": "MUTED {icon}",
+        "format-muted": "MUTED {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "󰋎 ",
+            "headset": " ",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol"
+    },
+    // https://git.sr.ht/%7Ekrathalan/waybar-modules
+    "custom/vpn": {
+        "interval": 10,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "json",
+        "exec": "$HOME/syscfg/scripts/waybar.clj vpn",
+    },
+    "custom/licht": {
+        "interval": 10,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/waybar.clj licht"
+    },
+    "custom/cpu": {
+        "interval": 5,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "json",
+        "exec": "$HOME/syscfg/scripts/waybar.clj load"
+    },
+    "custom/disk": {
+        "interval": 10,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "json",
+        "exec": "$HOME/syscfg/scripts/waybar.clj disk"
+    },
+    "custom/memory": {
+        "interval": 10,
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "json",
+        "exec": "$HOME/syscfg/scripts/waybar.clj memory"
+    },
+    "custom/weather": {
+        "interval": 600,
+        "tooltip": false,
+        "on-click": "~/syscfg/scripts/bb/weather.clj dunst",
+        "on-click-right": "~/syscfg/scripts/bb/weather.clj plot",
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/bb/weather.clj dwm"
+    },
+    "custom/music-info": {
+        "interval": 5,
+        "tooltip": false,
+        "on-click": "playerctl -p strawberry,fooyin,emms play-pause",
+        "format": "{}",
+        "return-type": "text",
+        "escape": true,
+        "exec": "$HOME/syscfg/scripts/waybar.clj music"
+    },
+    "custom/notification-status": {
+        "interval": 5,
+        "tooltip": false,
+        "on-click": "$HOME/syscfg/scripts/dunst_toggle_and_notify.clj",
+        "format": "{}",
+        "return-type": "text",
+        "exec": "$HOME/syscfg/scripts/waybar.clj notification-status"
+    },
+    // https://github.com/Alexays/Waybar/wiki/Module:-Custom:-Menu
+    "custom/snowflake": {
+        "format": "  ",
+        //        "format": "  λ",
+        "tooltip-format": "Menu\n\nClick to open the SnowflakeMenu",
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/snowflake.xml",
+        "menu-actions": {
+            "About": "setsid $HOME/.cargo/bin/snowflake > /dev/null 2>&1 &",
+            "reboot": "notify-send reboot 'TODO: this is a work in progress ...'",
+            "shutdown": "notify-send shutdown 'TODO: this is a work in progress ...'",
+        },
+    },
+    "custom/sep1": {
+        "format": " | ",
+        "tooltip": false
+    },
+    "custom/sep2": {
+        "format": "•",
+        "tooltip": false
+    },
+    "custom/sep2b": {
+        "format": "•",
+        "tooltip": false
+    },
+    "custom/sep3": {
+        "format": " | ",
+        "tooltip": false
+    },
+    "custom/sepempty": {
+        "format": " ",
+        "tooltip": false
+    }
+}

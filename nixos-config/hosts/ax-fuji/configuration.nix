@@ -56,16 +56,18 @@ in
     config = import ../../shared/git.nix { inherit pkgs; };
   };
 
-  environment.etc."vimrc".text = ''
-    " this setup uses rel numbers, except for the current line
-    set number
-    set relativenumber
-
-    " https://vi.stackexchange.com/a/25026
-    hi DiffAdd      ctermfg=NONE          ctermbg=Green
-    hi DiffChange   ctermfg=NONE          ctermbg=NONE
-    hi DiffDelete   ctermfg=LightBlue     ctermbg=Red
-    hi DiffText     ctermfg=Yellow        ctermbg=Red
+  environment.etc = {
+    "fish/ax/config.fish".source = ../../shared/fish/config.fish;
+    "fish/ax/nnn.fish".source = ../../shared/fish/nnn.fish;
+    "fish/ax/functions/rfv.fish".source = ../../shared/fish/functions/rfv.fish;
+    "fish/ax/functions/rfvuuu.fish".source = ../../shared/fish/functions/rfvuuu.fish;
+    "fish/ax/functions/y.fish".source = ../../shared/fish/functions/y.fish;
+    "tmux.conf".source = ../../shared/tmux/.tmux.conf;
+    "vimrc".source = ../../shared/vim/vimrc;
+  };
+  programs.fish.shellInit = ''
+    set -a fish_function_path /etc/fish/ax/functions
+    source /etc/fish/ax/config.fish
   '';
   environment.variables.VIMINIT = "source /etc/vimrc";
 

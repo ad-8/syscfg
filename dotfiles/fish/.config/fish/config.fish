@@ -176,7 +176,7 @@ end
 
 set -Ux fish_greeting "" # disable default welcome message
 
-source ~/.config/fish/nnn.fish
+source (status dirname)/nnn.fish
 
 if status is-interactive; and command -q starship
     starship init fish | source

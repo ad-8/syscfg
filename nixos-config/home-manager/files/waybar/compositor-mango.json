@@ -1,0 +1,12 @@
+// -*- mode: jsonc -*-
+// mango-specific left modules. Included by config / config-minimal.
+// mango/layout ([T], [M], …) shows the dwm-style layout symbol.
+{
+    "modules-left": [
+        "custom/snowflake",
+        "mango/workspaces",
+        "mango/keymode",
+        "mango/layout",
+        "mango/window"
+    ]
+}

@@ -1,10 +1,11 @@
 # One Big Beautiful Repository
 
 ## I. dotfiles
-On NixOS hosts, stow everything except btop, fastfetch, foot, gitconfig, mpv,
-starship, swappy and tealdeer: Home Manager owns those. Stowing them there
-makes the Home Manager switch fail, or for gitconfig silently overrides Home
-Manager's git config.
+On NixOS hosts, stow everything except btop, clojure, dunst, fastfetch, fish,
+foot, gitconfig, mango, mpv, restic, rofi, starship, swappy, tealdeer, tmux,
+vim and waybar: Home Manager owns those. Stowing them there makes the Home
+Manager switch fail, or for gitconfig silently overrides Home Manager's git
+config. Unstow them before the rebuild that moves them to Home Manager.
 
 From the root dotfiles folder:  
 `stow -vR --target=$HOME *` or `stow -vR --target=$HOME mango/`  

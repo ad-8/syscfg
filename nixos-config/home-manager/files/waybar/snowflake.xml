@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <object class="GtkMenu" id="menu">
+        <child>
+            <object class="GtkMenuItem" id="About">
+                <property name="label">About</property>
+            </object>
+        </child>
+
+        <!-- acts as a blank space -->
+        <child>
+          <object class="GtkMenuItem">
+            <property name="label"></property> <!-- Empty label -->
+            <property name="sensitive">false</property> <!-- Disables interaction -->
+          </object>
+        </child>
+
+        <child>
+            <object class="GtkSeparatorMenuItem" id="delimiter1" />
+        </child>
+
+        <child>
+            <object class="GtkMenuItem" id="reboot">
+                <property name="label">Reboot</property>
+            </object>
+        </child>
+
+        <child>
+            <object class="GtkMenuItem" id="shutdown">
+                <property name="label">Shutdown</property>
+            </object>
+        </child>
+
+    </object>
+</interface>
