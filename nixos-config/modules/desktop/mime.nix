@@ -1,5 +1,3 @@
-{ config, lib, ... }:
-
 # https://wiki.nixos.org/wiki/Default_applications
 #
 # To list all .desktop-files, run
@@ -16,11 +14,7 @@ let
   videoPlayer = [ "mpv.desktop" ];
 in
 {
-  options = {
-    configMime.enable = lib.mkEnableOption "Enable configMime";
-  };
-
-  config = lib.mkIf config.configMime.enable {
+  flake.modules.homeManager.mime = {
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {

@@ -15,10 +15,7 @@ in
       workstation
       ../../hosts/ax-t14/configuration.nix
       {
-        home-manager.users.ax.imports = [
-          ../../hosts/ax-t14/home.nix
-          modules.homeManager.ax
-        ];
+        home-manager.users.ax.imports = [ modules.homeManager.ax ];
       }
     ];
   };

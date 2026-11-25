@@ -1,15 +1,5 @@
 {
-  config,
-  lib,
-  ...
-}:
-
-{
-  options = {
-    configSwappy.enable = lib.mkEnableOption "Enable swappy config";
-  };
-
-  config = lib.mkIf config.configSwappy.enable {
+  flake.modules.homeManager.swappy = {
     programs.swappy = {
       enable = true;
       settings = {

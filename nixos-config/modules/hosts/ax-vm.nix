@@ -13,9 +13,11 @@ in
       audio
       ../../hosts/ax-vm/configuration.nix
       {
-        home-manager.users.ax.imports = [
-          ../../hosts/ax-vm/home.nix
-          modules.homeManager.git
+        home-manager.users.ax.imports = with modules.homeManager; [
+          base
+          emacs
+          git
+          pkgs-core
         ];
       }
     ];

@@ -1,15 +1,5 @@
 {
-  config,
-  lib,
-  ...
-}:
-
-{
-  options = {
-    configTealdeer.enable = lib.mkEnableOption "Enable tealdeer config";
-  };
-
-  config = lib.mkIf config.configTealdeer.enable {
+  flake.modules.homeManager.tealdeer = {
     programs.tealdeer = {
       enable = true;
       enableAutoUpdates = false;
