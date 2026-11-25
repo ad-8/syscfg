@@ -10,6 +10,14 @@ in
       base
       home-manager
       mango
+      audio
+      clamav
+      distrobox
+      firefox
+      gaming
+      printing
+      virtman
+      workstation
       ../../hosts/ax-bee/configuration.nix
       {
         home-manager.users.ax.imports = [

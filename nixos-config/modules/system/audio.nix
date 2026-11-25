@@ -1,15 +1,5 @@
 {
-  config,
-  lib,
-  ...
-}:
-
-{
-  options = {
-    configAudio.enable = lib.mkEnableOption "Enable sound with PipeWire";
-  };
-
-  config = lib.mkIf config.configAudio.enable {
+  flake.modules.nixos.audio = {
     # Enable sound with pipewire.
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;

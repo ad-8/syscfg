@@ -9,7 +9,6 @@
     ./restic.nix
     ./networkmanager-muc.nix
     ../../nixos/config-core.nix
-    ../../nixos/all-modules.nix
   ];
 
   # TODO: remove the emacs override once nixos stable ships emacs >= 31.1, likely with the 26.11 upgrade (fixes the save-place tramp error)
@@ -20,15 +19,6 @@
         (final.emacsPackagesFor final.emacs).emacsWithPackages (epkgs: [ epkgs.mu4e ]);
     })
   ];
-
-  configWorkstation.enable = true;
-  configFirefox.enable = true;
-  configAudio.enable = true;
-  configClamav.enable = true;
-  configGaming.enable = true;
-  configPrinting.enable = true;
-  configVirtman.enable = true;
-  configDistrobox.enable = true;
 
   boot.initrd.luks.devices."luks-1101d87b-2380-4455-a516-1dda026f32e3".device =
     "/dev/disk/by-uuid/1101d87b-2380-4455-a516-1dda026f32e3";

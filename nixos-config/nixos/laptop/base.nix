@@ -5,12 +5,7 @@
 {
   imports = [
     ../config-core.nix
-    ../all-modules.nix
   ];
-
-  configWorkstation.enable = true;
-  configFirefox.enable = true;
-  configAudio.enable = true;
 
   # ignore short presses of the power button entirely. Long-pressing your power button (5 seconds or longer)
   # to do a hard reset is handled by your machine’s BIOS/EFI and thus still possible.

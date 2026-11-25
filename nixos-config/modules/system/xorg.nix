@@ -1,21 +1,9 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
-# Opt-in X11 + XFCE + LightDM fallback, kept for games that don't run on Wayland.
-# NOTE: enabling this reinstates a display manager and graphical.target, which pauses
-# the tty1-launch Wayland workflow. Default-off; the clean Wayland + tty1 setup is
-# the normal state.
-
-{
-  options = {
-    configXorg.enable = lib.mkEnableOption "Enable the opt-in X11/XFCE (LightDM) fallback session";
-  };
-
-  config = lib.mkIf config.configXorg.enable {
+  # Opt-in X11 + XFCE + LightDM fallback, kept for games that don't run on Wayland.
+  # NOTE: enabling this reinstates a display manager and graphical.target, which pauses
+  # the tty1-launch Wayland workflow. Default-off; the clean Wayland + tty1 setup is
+  # the normal state.
+  flake.modules.nixos.xorg = {
     services.xserver = {
       enable = true;
       autoRepeatDelay = 200;

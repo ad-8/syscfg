@@ -10,6 +10,9 @@ in
       base
       home-manager
       mango
+      audio
+      firefox
+      workstation
       ../../hosts/ax-t14/configuration.nix
       {
         home-manager.users.ax.imports = [

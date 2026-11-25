@@ -10,6 +10,7 @@ in
     modules = with modules.nixos; [
       base
       home-manager
+      audio
       ../../hosts/ax-vm/configuration.nix
       {
         home-manager.users.ax.imports = [

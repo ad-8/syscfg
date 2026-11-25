@@ -1,20 +1,7 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
-# https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/firefox.nix
-# https://mozilla.github.io/policy-templates/
-
-{
-  options = {
-    configFirefox.enable = lib.mkEnableOption "Enable Firefox with locked-down defaults";
-  };
-
-  config = lib.mkIf config.configFirefox.enable {
-
+  # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/firefox.nix
+  # https://mozilla.github.io/policy-templates/
+  flake.modules.nixos.firefox = {
     programs.firefox = {
       enable = true;
 
