@@ -1,25 +1,30 @@
 # One Big Beautiful Repository
 
 ## I. dotfiles
-On NixOS hosts, stow everything except btop, clojure, doom, dunst, fastfetch,
-fish, foot, gitconfig, mango, mpv, restic, rofi, starship, swappy, tealdeer,
-tmux, vim and waybar: Home Manager owns those. Stowing them there makes the Home
-Manager switch fail, or for gitconfig silently overrides Home Manager's git
-config. Unstow them before the rebuild that moves them to Home Manager.
+NixOS hosts stow nothing. Their configs come from `nixos-config/`: Home
+Manager on ax-bee and ax-t14, `/etc` on ax-fuji. Edit them there and
+rebuild; the fish, mango and tmux configs are tangled there too.
+Two exceptions:
+- doom is a live link to `dotfiles/doom`, until it moves to its own folder at
+  the repo root.
+- csm stays stowed until its config moves into the script. NixOS hosts have
+  no stow, so use `nix run nixpkgs#stow -- -D --target=$HOME csm` there.
 
-From the root dotfiles folder:  
+`dotfiles/` is for non-NixOS machines. From the root dotfiles folder:  
 `stow -vR --target=$HOME *` or `stow -vR --target=$HOME mango/`  
 To remove all:  
 `stow -D --target=$HOME *`
 
-### After stowing on a new machine
+### After setting up a new machine (stow or rebuild)
 Run the theme switcher once to create the per-app `active-theme.*` symlinks that the configs include/source:
 
 ```sh
 bb ~/syscfg/scripts/bb/switch_theme.clj <theme-name>
 ```
 
-Replace `<theme-name>` with a concrete value, like `nord`.
+Replace `<theme-name>` with a concrete value, like `nord`. On NixOS, start
+waybar afterwards with `~/syscfg/scripts/waybar.clj launch`: it doesn't start
+without its `active-theme.css`.
 
 Run the switcher again after pulling theme changes, and after editing
 `dotfiles/wlr-which-key/.config/wlr-which-key/menu.yaml`. The menu updates
@@ -63,5 +68,5 @@ Also add `git` and `vim` to `environment.systemPackages` for the next steps.
 
 6. `sudo nixos-rebuild boot --flake ~/syscfg/nixos-config#<host>` and reboot
 
-7. follow the ~5 post-setup steps in `~/org/nixos.org` (stow dotfiles, set up doom emacs and firefox, ...)
+7. follow the ~5 post-setup steps in `~/org/nixos.org` (run the theme switcher, set up doom emacs and firefox, ...)
 

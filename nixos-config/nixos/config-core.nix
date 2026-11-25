@@ -60,7 +60,6 @@
     psmisc # provides killall
     ripgrep
     starship
-    stow
     tmux
     tokei
     tree
