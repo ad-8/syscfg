@@ -5,6 +5,7 @@
     ./config-auth-agent.nix
     ./config-btop.nix
     ./config-clojure.nix
+    ./config-doom.nix
     ./config-dunst.nix
     ./config-emacs.nix
     ./config-fastfetch.nix

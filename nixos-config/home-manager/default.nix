@@ -15,6 +15,7 @@
   configAuthAgent.enable = true;
   configBtop.enable = true;
   configClojure.enable = true;
+  configDoom.enable = true;
   configDunst.enable = true;
   configEmacs.enable = true;
   configFastfetch.enable = true;
