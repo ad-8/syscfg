@@ -17,7 +17,7 @@ setopt autocd
 export LANG=en_US.UTF-8
 # export LC_ALL=en_US.UTF-8
 
-alias dcc='joker /home/ax/syscfg/scripts/bb/dict.cc.joke'
+alias dcc='joker /home/ax/syscfg/openbsd/scripts/dict.cc.joke'
 alias df='df -h'
 alias e='emacs -nw'
 alias n="VISUAL='vim' nnn -a -e"
@@ -49,3 +49,5 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 export NNN_PLUG='p:preview-tabbed;F:fzcd;f:fzopen;'
 
 export NNN_BMS=".:$HOME/.config;d:$HOME/Downloads/;h:$HOME;o:$HOME/org;s:$HOME/sync"
+
+source ~/x/z.sh

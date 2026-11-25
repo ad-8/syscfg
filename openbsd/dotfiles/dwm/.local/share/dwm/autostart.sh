@@ -1,9 +1,6 @@
 #!/usr/bin/env sh
 
-backlight 40 &
-
-dwmblocks &
-dunst &
+xbacklight -set 40 &
 
 xset b off
 # xset s off
@@ -16,26 +13,20 @@ xset r rate 200 35
 
 setxkbmap de -option caps:escape
 
-xautolock -time 20 -locker slock &
-
-sleep 0.5
-
-
-# info terminals, sleep makes the correct tiling order more likely
-alacritty -T ax-log -e tail -F /var/log/messages &
-sleep 0.5
-alacritty -T ax-top -e top &
-sleep 0.5
-alacritty -T ax-btop -e btop &
-
-
-# feh --bg-scale --randomize ~/sync/wallpapers/wallpapers-ax-fav &
-emacs --daemon &
-sleep 1
-firefox &
-sleep 0.5
+# autostart programs
+# ----------------------------------------------------------
+dunst &
+dwmblocks &
 emacs ~/org/todo.org &
 sleep 0.5
+feh --bg-max ~/sync/openbsd-art/openbsd-7.9-PinkPuffy.png
+sleep 0.5
+firefox &
+sleep 0.5
+st -T ax-top -e ~/x/openbsd/tmux-monitor.sh &
 sxhkd -t 3 &
+sleep 0.5
 syncthing --no-browser &
+xautolock -time 30 -locker slock &
+# ----------------------------------------------------------
 

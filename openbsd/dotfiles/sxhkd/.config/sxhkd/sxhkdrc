@@ -1,141 +1,90 @@
-# grouping is nice for readability in this rc file
-# but missing the "mode" display like in i3
-#
 # --------------------------------------------------------------
 #                       MODE OPEN
-#
-# apps: [a]ppfinder, [f]ile-manager
-super + o ; {a,f}
-      {xfce4-appfinder,thunar}
-
-# apps: [q]utebrowser, bra[v]e, libre[w]olf, firefo[x]
-super + o ; {q,v,w,x}
-      {qbittorrent,~/scripts/brave.sh,flatpak run io.gitlab.librewolf-community,firefox}
-
-# blueman, keepass, pavuctl, system-monitor
-super + o ; {b,k,p,s}
-      {alacritty --title bluetui --command bluetui,keepassxc,pavucontrol,mate-system-monitor}
-
-# calc
-super + o ; c
-      rofi -show calc -modi calc -no-show-match -no-sort
-
-# emacs
-super + o; e
-      emacsclient --create-frame --alternate-editor="vim"
+super + o ; {d, e, k, x}
+      {dillo, emacs, keepassxc, firefox}
 
 # --------------------------------------------------------------
 
-# rofi-open, rofi-windows
-super + shift + {o, w}
-      {rofi -show drun, rofi -show window}
 
-# show THIS help menu
-alt + space ; h
-     ~/scripts/sxhkd-show-help.sh
+# --------------------------------------------------------------
+#                       MODE EXEC
+super + x ; w
+     janet ~/syscfg/openbsd/scripts/weather.janet dunst
+# --------------------------------------------------------------
+
 
 # --------------------------------------------------------------
 #                       MODE CHANGE
-# lulz nice, this just works
-# TODO use prefix for all my wm scripts
-# should be easier to manage and find
 
-# CHANGE [l]icht, [s]creen, [w]allpaper
-alt + space ; c ; {l, s, w}
-     {~/scripts/bb/licht.clj, ~/scripts/bb/screen_config.clj, $HOME/scripts/bb/set_random_wallpaper.clj}
-# --------------------------------------------------------------
-
-# SEARCH all, ddg
-alt + space ; s ; {a,g}
-     {~/scripts/bb/search.clj --select-provider,~/scripts/bb/search.clj}
-
-# RUN emoji, run_script
-alt + space ; r ; {e,r}
-     {~/scripts/dmenuunicode,~/scripts/bb/run_script.clj}
+super + o; l
+      ~/syscfg/openbsd/scripts/dmenu-light.sh
+super + o; v
+      ~/syscfg/openbsd/scripts/dmenu-sound.sh
 
 # --------------------------------------------------------------
-#                       TOGGLE
-# toggle notifications on/off
-alt + space; t; n
-     ~/scripts/dwm_toggle_notifications.clj
+
 
 # --------------------------------------------------------------
 #                       VOLUME
+# OpenBSD already implements these, at least on my Thinkpad -
+# still works when "overloading" by notify-send
+# (same for XF86 brightness keys - deleted thos from this config)
 XF86AudioRaiseVolume
-     ~/scripts/legacy-xorg-dwm/volume up
+      notify-send -t 1000 "INC Vol"
 XF86AudioLowerVolume
-     ~/scripts/legacy-xorg-dwm/volume down
+      notify-send -t 1000 "DEC Vol"
 XF86AudioMute
-     ~/scripts/legacy-xorg-dwm/volume mute
-XF86AudioPlay
-    ~/scripts/bb/play_pause.clj
+      notify-send -t 1000 "toggle MUTE"
 
 super + mod1 + Up
-     ~/scripts/legacy-xorg-dwm/volume up
+    vol=$(sndioctl -n output.level=+0.05 | awk '\{printf "%.0f", $1*100\}'); \
+    notify-send -t 1500 -h int:value:"$vol" -h string:x-canonical-private-synchronous:volume "Volume: $vol%"
+
 super + mod1 + Down
-     ~/scripts/legacy-xorg-dwm/volume down
+    vol=$(sndioctl -n output.level=-0.05 | awk '\{printf "%.0f", $1*100\}'); \
+    notify-send -t 1500 -h int:value:"$vol" -h string:x-canonical-private-synchronous:volume "Volume: $vol%"
+
 super + mod1 + Left
-     ~/scripts/legacy-xorg-dwm/volume mute
-super + mod1 + Right
-    ~/scripts/bb/play_pause.clj
-super + mod1 + space
-    ~/scripts/bb/play_pause.clj
+    if [ "$(sndioctl -n output.mute=!)" = 1 ]; \
+      then dunstify -t 1500 -h int:value:-1 -h string:x-canonical-private-synchronous:volume "Volume: muted"; \
+    else \
+      vol=$(printf '%.0f' "$(echo "$(sndioctl -n output.level)*100" | bc)"); \
+      notify-send -t 1500 -h int:value:"$vol" -h string:x-canonical-private-synchronous:volume "Volume unmuted: $vol%"; fi
+# --------------------------------------------------------------
+ 
 
 # --------------------------------------------------------------
-#                       NOTIFICATIONS
+#                       MISC
 # kill all notifications
 super + mod1 + k
       dunstctl close-all
-
 # pop last notification from history
 super + mod1 + h
       dunstctl history-pop
-
-# get weather info (test)
-super + mod1 + w
-      ~/scripts/bb/weather.clj dunst
-
-# display departures
-super + mod1 + t
-      ~/my/code/scripts/mvg.clj
-# --------------------------------------------------------------
-
 # lock screen
 super + mod1 + l
       slock
-
 # restart sxhkd
 super + Escape
-      pkill --exact sxhkd && notify-send "sxhkd" "restarting sxhkd" && sleep 1 && sxhkd &
+      pkill -x sxhkd && notify-send -t 2000 "sxhkd" "restarting sxhkd" && sleep 1 && sxhkd -t 3 &
+# TODO
+super + mod1 + Right
+    xdotool search --name "Picture-in-Picture" key space
+# TODO
+super + mod1 + space
+    xdotool search --name "Picture-in-Picture" key space
+# --------------------------------------------------------------
 
-# powermenu
-alt + space; p
-      ~/scripts/bb/powermenu.clj
 
 # --------------------------------------------------------------
 #                       SCREENSHOTS
-
-# screenshot - everything (on all monitors)
-alt + space; s; e
-     ax-screenshot
-# screenshot - everything (on all monitors) + copy to clipboard
-alt + space; s; E
-     ax-screenshot --clipboard
-# screenshot - select (window or rectangle)
-alt + space; s; s
-     ax-screenshot --select
-# screenshot - select (window or rectangle) + copy to clipboard
-alt + space; s; S
-     ax-screenshot --clipboard --select
-
+# screenshot - everything
+super + x; s; e
+     p='/tmp/screenshot_openbsd_'"$(date '+%Y%m%d_%H%M%S')"'.png'; scrot "$p" && notify-send -t 4000 'screenshot everything' "$p"
+# screenshot - select rectangle
+super + x; s; s
+     p='/tmp/screenshot_openbsd_'"$(date '+%Y%m%d_%H%M%S')"'.png'; scrot -s "$p" && notify-send -t 4000 'screenshot selection' "$p"
+# screenshot - window
+super + x; s; w
+     p='/tmp/screenshot_openbsd_'"$(date '+%Y%m%d_%H%M%S')"'.png'; scrot -u "$p" && notify-send -t 4000 'screenshot window' "$p"
 # --------------------------------------------------------------
-#                       MacBook / Media keys
-XF86LaunchA
-    rofi -show window
-XF86LaunchB
-    xfce4-appfinder
-
-XF86AudioPrev
-    playerctl previous
-XF86AudioNext
-    playerctl next
