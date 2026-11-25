@@ -170,14 +170,6 @@ menuitem {
     color: #6AE4B9;
 }
 
-#submap {
-    background-color: #FF5F59;
-    color: #000000;
-    padding: 3px 10px;
-    font-weight: bold;
-    border-radius: 8px;
-}
-
 #custom-timer {
     color: #00BCFF;
     font-weight: bold;

@@ -167,14 +167,6 @@ menuitem {
     color: #C56306;
 }
 
-#submap {
-    background-color: #FC9505;
-    color: #140B05;
-    padding: 3px 10px;
-    font-weight: bold;
-    border-radius: 8px;
-}
-
 #custom-timer {
     color: #FC9505;
     font-weight: bold;

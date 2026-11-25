@@ -56,10 +56,10 @@ as in selenized's own i3 config; the second border color is cyan, and the
 dunst frame stays blue as in solarized-dark. Yellow marks the waybar CPU
 warning, notification status and the kwm mode tag; urgency and the battery
 warning are red. mango's maximized border is violet, since green is the
-focus color. Accent and red blocks (waybar mode, submap, battery warning;
+focus color. Accent and red blocks (waybar mode, battery warning;
 dunst critical) use bg_0 text.
 
-foot, kitty, and Hyprland follow selenized's ANSI table
+foot and kitty follow selenized's ANSI table
 (`manual-installation.md`): 0 = bg_1, 7 = dim_0, 8 = bg_2, 15 = fg_1, the
 rest red/green/yellow/blue/magenta/cyan and their bright versions. The cursor
 is fg_1. kitty sets no selection colors, like every other theme: the
@@ -82,10 +82,8 @@ inactive borders and muted text use #8f8f8f. Focus and selection use yellow
 #f0dfaf, information cyan #8cd0d3, success green #7f9f7f, and urgency red
 #cc9393. Pastel selections and critical backgrounds use #3f3f3f text.
 Additional graph and gradient stops are literal upstream colors.
-Hyprland uses separate `inactive_border` and `inactive_bg` overrides for
-these UI roles, keeping its ANSI palette intact.
 
-foot, kitty, and Hyprland preserve upstream's exact `terminal_ansi_colors`
+foot and kitty preserve upstream's exact `terminal_ansi_colors`
 slot order, including its unconventional bright and magenta assignments:
 
 ```
@@ -108,7 +106,7 @@ and success use red (#df8c8c), yellow (#dada93), and green (#a8ce93).
 Pastel selection and critical-notification backgrounds use `base1`
 (#1e272c) text. Existing layouts and alpha values are preserved.
 
-foot, kitty, and Hyprland share the terminal mapping: black = `base1`
+foot and kitty share the terminal mapping: black = `base1`
 (#1e272c), bright black = `base7` (#899ba6), white = `fg` (#c5d4dd), and
 bright white = `base8` (#e6eef3). Red, green, yellow, blue, magenta, and cyan
 use their named palette entries; bright accent slots repeat those colors.

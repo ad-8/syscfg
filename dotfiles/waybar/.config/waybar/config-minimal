@@ -16,27 +16,7 @@
         "tray",
         "custom/sepempty"
     ],
-    "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "warp-on-scroll": false,
-        "format": "{icon}",
-        "format-icons": {
-            "1": "  ",
-            "2": "  ",
-            "3": " 3 ",
-            "4": " 4 ",
-            "5": " 5 ",
-            "6": " 6 ",
-            "7": " 7 ",
-            "8": "  ",
-            "9": "  ",
-            "urgent": "!   !",
-            //   "focused": "",
-            //   "default": ""
-        }
-    },
-    // sway equivalents (referenced only when running under sway; inert otherwise).
+    // sway modules (referenced only when running under sway; inert otherwise).
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -74,7 +54,7 @@
             "(.*) - Brave": "$1"
         }
     },
-    // niri equivalents (referenced only when running under niri; inert otherwise).
+    // niri modules (referenced only when running under niri; inert otherwise).
     "niri/workspaces": {
         "format": "{value}"
     },
@@ -87,7 +67,7 @@
             "(.*) - Brave": "$1"
         }
     },
-    // mango equivalents (referenced only when running under mango; inert otherwise).
+    // mango modules (referenced only when running under mango; inert otherwise).
     "mango/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
@@ -290,23 +270,5 @@
     "custom/sepempty": {
         "format": " ",
         "tooltip": false
-    },
-    "hyprland/windowcount": {
-        "format": "[{}]",
-        "format-empty": "[]=",
-        "format-windowed": "[]=",
-        // "format-fullscreen": "[{}]",
-        "separate-outputs": true
-    },
-    "hyprland/window": {
-        "format": "",
-        "icon": false,
-        "icon-size": 20,
-        //        "max-length": 50,
-        "rewrite": {
-            "(.*) - Mozilla Firefox": "$1",
-            "(.*) — Mozilla Firefox": "$1",
-            "(.*) - Brave": "$1",
-        }
     }
 }

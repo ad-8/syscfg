@@ -12,7 +12,7 @@
 (def lock-file (str flake "/flake.lock"))
 
 (defn node-names
-  "Map each flake.lock node key to a readable input path, e.g. hyprland/hyprutils."
+  "Map each flake.lock node key to a readable input path, e.g. mangowm/scenefx."
   [lock]
   (let [nodes (get lock "nodes")]
     (loop [queue [[(get lock "root") nil]], names {}]

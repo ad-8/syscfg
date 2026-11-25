@@ -23,7 +23,7 @@
     services.gnome.gnome-keyring.enable = true;
     # seahorse is a GUI to manage secrets.
     # Make sure make 'Login' the default keyring, so it gets unlocked automatically
-    # (now works via `start-hyprland` from TTY, no display manager).
+    # (now works from the TTY, no display manager).
     # 'Default keyring' was set as default before, and after reboot, the keyring had to be manually unlocked ...
     # Also, apparently, the passwd for the 'Login' keyring and the user passwd should match.
     programs.seahorse.enable = true;

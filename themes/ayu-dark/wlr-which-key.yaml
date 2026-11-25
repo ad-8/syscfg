@@ -1,4 +1,4 @@
-# ayu-dark — bg/fg from foot.theme, border from hyprland.lua accent
+# ayu-dark — bg/fg from foot.theme, border from mango.conf accent
 background: "#0d1017d0"
 color: "#bfbdb6"
 border: "#e6b450"

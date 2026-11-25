@@ -112,30 +112,22 @@
                          (label row) brightness contrast))))))
 
 
-; hyprsunset speaks Hyprland's proprietary hyprland-ctm-control-v1, which niri
-; doesn't implement (it errors "Compositor doesn't support hyprland-ctm-control-v1"),
-; so on niri we use gammastep, which speaks the standard wlr-gamma-control-v1.
-; Both hold the temperature only while resident, so set-color-temp kills the old
-; instance and spawns a fresh background one (gammastep -O likewise stays running
-; on Wayland; the gamma resets if it exits). -P resets stale gamma ramps first.
-; color-temp-tool is the single source for the active compositor's setter:
+; gammastep speaks the standard wlr-gamma-control-v1. It holds the temperature
+; only while resident (gammastep -O stays running on Wayland; the gamma resets if
+; it exits), so set-color-temp kills the old instance and spawns a fresh
+; background one. -P resets stale gamma ramps first.
+; color-temp-tool is the single source for the setter:
 ; [binary temp-flag & extra-flags] — both get and set destructure it.
-(defn on-hyprland? []
-  (some? (System/getenv "HYPRLAND_INSTANCE_SIGNATURE")))
-
-(defn color-temp-tool []
-  (if (on-hyprland?)
-    ["hyprsunset" "-t"]
-    ["gammastep" "-O" "-P"]))
+(def color-temp-tool ["gammastep" "-O" "-P"])
 
 (defn get-color-temp []
-  (let [[proc flag] (color-temp-tool)
+  (let [[proc flag] color-temp-tool
         res (shell {:continue true :out :string} "pgrep" "-a" proc)]
     (when (= 0 (:exit res))
       (second (re-find (re-pattern (str flag "\\s+(\\d+)")) (:out res))))))
 
 (defn set-color-temp [n]
-  (let [[proc flag & extra] (color-temp-tool)]
+  (let [[proc flag & extra] color-temp-tool]
     (shell {:continue true} "pkill" "-f" proc)
     (Thread/sleep 500)
     (process (into [proc flag (str n)] extra))))

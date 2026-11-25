@@ -7,8 +7,8 @@
 
 # Opt-in X11 + XFCE + LightDM fallback, kept for games that don't run on Wayland.
 # NOTE: enabling this reinstates a display manager and graphical.target, which pauses
-# the tty1-launch Hyprland workflow (Hyprland is still selectable at the LightDM
-# greeter). Default-off; the clean Wayland + tty1 setup is the normal state.
+# the tty1-launch Wayland workflow. Default-off; the clean Wayland + tty1 setup is
+# the normal state.
 
 {
   options = {
@@ -31,7 +31,8 @@
     # config-extra, used to force this off via
     # `systemd.services.display-manager.enable = false`; that hack is gone now
     # that X is opt-in.)
-    # LightDM auto-enables; pick XFCE or Hyprland at the greeter.
+    # LightDM auto-enables; XFCE is the default, other enabled sessions stay
+    # selectable at the greeter.
     services.displayManager.defaultSession = "xfce";
   };
 }

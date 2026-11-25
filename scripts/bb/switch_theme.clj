@@ -109,9 +109,6 @@
                (when (zero? (:exit (shell {:continue true} "sh -c 'pgrep waybar >/dev/null'")))
                  (shell {:continue true} "sh -c 'pkill waybar'")
                  (shell {:continue true} (str "bb " (fs/path (fs/home) "syscfg/scripts/waybar.clj") " launch"))))}
-   {:file    "hyprland.lua"
-    :dest    (fs/path (fs/xdg-config-home) "hypr/active-theme.lua")
-    :reload  (fn [_] (shell ["hyprctl" "reload"]))}
    {:file    "niri.kdl"
     :dest    (fs/path (fs/xdg-config-home) "niri/active-theme.kdl")
     :reload  (fn [_] (shell ["niri" "msg" "action" "load-config-file"]))}

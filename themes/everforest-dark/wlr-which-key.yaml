@@ -1,4 +1,4 @@
-# everforest-dark — bg/fg from foot.theme, border from hyprland.lua accent
+# everforest-dark — bg/fg from foot.theme, border from mango.conf accent
 background: "#272e33d0"
 color: "#d3c6aa"
 border: "#7fbbb3"

@@ -118,17 +118,16 @@
   "Detects the running Wayland compositor. Both waybar launch paths (compositor
   autostart + keybind exec) are spawned by the compositor and inherit its env, so
   the per-compositor IPC socket vars are the strong signal; XDG_CURRENT_DESKTOP is
-  a weaker fallback. Defaults to :hypr (the common case)."
+  a weaker fallback. Defaults to :mango."
   []
   (cond
     (System/getenv "NIRI_SOCKET")                  :niri
-    (System/getenv "HYPRLAND_INSTANCE_SIGNATURE")  :hypr
     (System/getenv "SWAYSOCK")                     :sway
     (System/getenv "MANGO_INSTANCE_SIGNATURE")     :mango
     (= "niri" (System/getenv "XDG_CURRENT_DESKTOP")) :niri
     (= "sway" (System/getenv "XDG_CURRENT_DESKTOP")) :sway
     (= "mango" (System/getenv "XDG_CURRENT_DESKTOP")) :mango
-    :else                                          :hypr))
+    :else                                          :mango))
 
 (defn- point-compositor-symlink!
   "Repoints ~/.config/waybar/active-compositor.json at the fragment matching the
@@ -138,8 +137,7 @@
         target (fs/file dir (case (compositor)
                               :niri "compositor-niri.json"
                               :sway "compositor-sway.json"
-                              :mango "compositor-mango.json"
-                              "compositor-hypr.json"))
+                              "compositor-mango.json"))
         link   (fs/file dir "active-compositor.json")]
     (fs/delete-if-exists link)
     (fs/create-sym-link link target)

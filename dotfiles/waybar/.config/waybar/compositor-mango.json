@@ -1,7 +1,7 @@
 // -*- mode: jsonc -*-
 // mango-specific left modules. Symlinked to as active-compositor.json by
 // waybar.clj when running under mango; see config / config-minimal include.
-// mango/layout ([T], [M], …) takes hyprland/windowcount's dwm-style slot.
+// mango/layout ([T], [M], …) shows the dwm-style layout symbol.
 {
     "modules-left": [
         "custom/snowflake",

@@ -170,14 +170,6 @@ menuitem {
     color: #005E8B;
 }
 
-#submap {
-    background-color: #A60000;
-    color: #FFFFFF;
-    padding: 3px 10px;
-    font-weight: bold;
-    border-radius: 8px;
-}
-
 #tray {
     background-color: rgba(0, 0, 0, 0.65);
     border-radius: 4px;
