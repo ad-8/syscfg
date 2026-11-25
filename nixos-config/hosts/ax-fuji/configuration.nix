@@ -1,11 +1,20 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }:
 
 let
   serverIp = "192.168.178.8";
+  btopConf = pkgs.writeText "btop.conf" (
+    lib.generators.toKeyValue {
+      mkKeyValue = lib.generators.mkKeyValueDefault {
+        mkValueString =
+          v: if builtins.isString v then "\"${v}\"" else lib.generators.mkValueStringDefault { } v;
+      } " = ";
+    } (import ../../shared/btop.nix)
+  );
 in
 
 {
@@ -30,7 +39,39 @@ in
     restic
     vlock
     yt-dlp
+    (lib.hiPrio (
+      pkgs.writeShellScriptBin "btop" ''
+        exec ${pkgs.btop}/bin/btop --config ${btopConf} "$@"
+      ''
+    ))
   ];
+
+  programs.starship = {
+    enable = true;
+    settings = import ../../shared/starship.nix;
+  };
+
+  programs.git = {
+    enable = true;
+    config = import ../../shared/git.nix { inherit pkgs; };
+  };
+
+  environment.etc."vimrc".text = ''
+    " this setup uses rel numbers, except for the current line
+    set number
+    set relativenumber
+
+    " https://vi.stackexchange.com/a/25026
+    hi DiffAdd      ctermfg=NONE          ctermbg=Green
+    hi DiffChange   ctermfg=NONE          ctermbg=NONE
+    hi DiffDelete   ctermfg=LightBlue     ctermbg=Red
+    hi DiffText     ctermfg=Yellow        ctermbg=Red
+  '';
+  environment.variables.VIMINIT = "source /etc/vimrc";
+
+  environment.etc."xdg/fastfetch/config.jsonc".text = builtins.toJSON (
+    import ../../shared/fastfetch.nix
+  );
 
   users.users.ax = {
     packages = [ ];
@@ -108,7 +149,7 @@ in
       group = "users";
       openFirewall = true;
     };
- 
+
     forgejo = {
       enable = true;
       settings = {
