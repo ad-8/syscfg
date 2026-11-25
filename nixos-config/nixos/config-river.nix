@@ -41,12 +41,12 @@
         ];
       }
 
-      # the same file the niri and sway modules pull in: polkit,
+      # the same file the sway module pulls in: polkit,
       # swaylock's pam entry, dconf, xwayland, default fonts, xdg-utils,
       # the gtk portal and xdg autostart
       (import (modulesPath + "/programs/wayland/wayland-session.nix") {
         inherit lib pkgs;
-        enableWlrPortal = true; # river is wlroots; niri sets false
+        enableWlrPortal = true; # river is wlroots
       })
     ]
   );

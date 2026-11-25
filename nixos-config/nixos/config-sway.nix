@@ -22,8 +22,8 @@
 
     # sway's module defines xdg.portal.config.sway with default = [ "gtk" ] and
     # never names Secret; gtk has no Secret backend, and an explicit default
-    # suppresses the fallback search. niri's module names it and also pulls in
-    # the gnome portal -- match that, since we enable gnome-keyring ourselves.
+    # suppresses the fallback search. Route it to gnome-keyring's own portal
+    # backend, since we enable gnome-keyring ourselves.
     xdg.portal = {
       config.sway."org.freedesktop.impl.portal.Secret" = "gnome-keyring";
       extraPortals = [ pkgs.xdg-desktop-portal-gnome ];

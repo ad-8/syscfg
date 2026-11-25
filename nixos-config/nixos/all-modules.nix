@@ -11,7 +11,6 @@
     ./config-firefox.nix
     ./config-gaming.nix
     ./config-mango.nix
-    ./config-niri.nix
     ./config-printing.nix
     ./config-river.nix
     ./config-sway.nix

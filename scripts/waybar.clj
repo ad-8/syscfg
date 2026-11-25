@@ -121,10 +121,8 @@
   a weaker fallback. Defaults to :mango."
   []
   (cond
-    (System/getenv "NIRI_SOCKET")                  :niri
     (System/getenv "SWAYSOCK")                     :sway
     (System/getenv "MANGO_INSTANCE_SIGNATURE")     :mango
-    (= "niri" (System/getenv "XDG_CURRENT_DESKTOP")) :niri
     (= "sway" (System/getenv "XDG_CURRENT_DESKTOP")) :sway
     (= "mango" (System/getenv "XDG_CURRENT_DESKTOP")) :mango
     :else                                          :mango))
@@ -135,7 +133,6 @@
   []
   (let [dir    (fs/expand-home "~/.config/waybar")
         target (fs/file dir (case (compositor)
-                              :niri "compositor-niri.json"
                               :sway "compositor-sway.json"
                               "compositor-mango.json"))
         link   (fs/file dir "active-compositor.json")]

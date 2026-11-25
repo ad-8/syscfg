@@ -240,7 +240,7 @@ output HDMI-A-2 position 0 0 resolution 2560x1080
 output eDP-1 position 426 1080 resolution 2560x1600 scale 1.5
 #+end_src
 
-ax-bee, values kept in sync with =niri/config.kdl=
+ax-bee, values kept in sync with mango's =config.org=
 #+begin_src shell
 output DP-1 position 0 0 resolution 3840x2160 scale 1.25
 output HDMI-A-1 position 3072 648 resolution 1920x1080

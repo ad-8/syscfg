@@ -12,9 +12,8 @@
 
   config = lib.mkIf config.configGtk.enable {
     # creates ~/.icons/default/index.theme (Inherits=Numix-Cursor), the catch-all for
-    # apps whose cursor lookup falls back to the "default" theme -- XWayland apps under
-    # xwayland-satellite don't learn the theme name from niri's XCURSOR_THEME env var
-    # (xwayland-satellite issue #421); also sets XCURSOR_THEME/XCURSOR_SIZE session vars
+    # apps whose cursor lookup falls back to the "default" theme; also sets
+    # XCURSOR_THEME/XCURSOR_SIZE session vars
     home.pointerCursor = {
       name = "Numix-Cursor";
       package = pkgs.numix-cursor-theme;

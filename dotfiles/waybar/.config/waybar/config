@@ -3,8 +3,8 @@
     "height": 24, // Waybar height (to be removed for auto height)
     "spacing": 5, // Gaps between modules [px]
     // modules-left is compositor-specific: the active-compositor.json symlink is
-    // repointed by waybar.clj (compositor-niri.json / compositor-sway.json /
-    // compositor-mango.json) based on which of niri, sway or mango is running. Keep modules-left out of this file
+    // repointed by waybar.clj (compositor-sway.json / compositor-mango.json)
+    // based on whether sway or mango is running. Keep modules-left out of this file
     // (waybar's include is main-wins, so a value here would shadow the fragment).
     "include": ["~/.config/waybar/active-compositor.json"],
     "modules-center": [
@@ -64,19 +64,6 @@
         "tooltip-format": "{app}: {title}"
     },
     "sway/window": {
-        "format": "{title}",
-        "icon": false,
-        "rewrite": {
-            "(.*) - Mozilla Firefox": "$1",
-            "(.*) — Mozilla Firefox": "$1",
-            "(.*) - Brave": "$1"
-        }
-    },
-    // niri modules (referenced only when running under niri; inert otherwise).
-    "niri/workspaces": {
-        "format": "{value}"
-    },
-    "niri/window": {
         "format": "{title}",
         "icon": false,
         "rewrite": {

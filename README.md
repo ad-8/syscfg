@@ -2,7 +2,7 @@
 
 ## I. dotfiles
 From the root dotfiles folder:  
-`stow -vR --target=$HOME *` or `stow -vR --target=$HOME niri/`  
+`stow -vR --target=$HOME *` or `stow -vR --target=$HOME mango/`  
 To remove all:  
 `stow -D --target=$HOME *`
 
