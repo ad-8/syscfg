@@ -5,15 +5,15 @@ NixOS hosts stow nothing. Their configs come from `nixos-config/`: Home
 Manager on ax-bee and ax-t14, `/etc` on ax-fuji. Edit them there and
 rebuild; the fish, mango and tmux configs are tangled there too.
 Two exceptions:
-- doom is a live link to `dotfiles/doom`, until it moves to its own folder at
-  the repo root.
+- doom is a live link to `doom/`.
 - csm stays stowed until its config moves into the script. NixOS hosts have
   no stow, so use `nix run nixpkgs#stow -- -D --target=$HOME csm` there.
 
 `dotfiles/` is for non-NixOS machines. From the root dotfiles folder:  
 `stow -vR --target=$HOME *` or `stow -vR --target=$HOME mango/`  
 To remove all:  
-`stow -D --target=$HOME *`
+`stow -D --target=$HOME *`  
+doom sits at the repo root: from `~/syscfg`, `stow -vR --target=$HOME doom`
 
 ### After setting up a new machine (stow or rebuild)
 Run the theme switcher once to create the per-app `active-theme.*` symlinks that the configs include/source:
