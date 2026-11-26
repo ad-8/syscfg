@@ -25,7 +25,7 @@ in
     { pkgs, ... }:
     {
       imports = [
-        ./_hardware.nix
+        ./_hardware-configuration.nix
       ];
 
       boot.initrd.luks.devices."luks-2fc19056-a600-4e50-8de6-47b442b623c9".device =

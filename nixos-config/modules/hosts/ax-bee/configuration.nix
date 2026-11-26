@@ -40,7 +40,7 @@ in
 
     {
       imports = [
-        ./_hardware.nix
+        ./_hardware-configuration.nix
       ];
 
       # TODO: remove the emacs override once nixos stable ships emacs >= 31.1, likely with the 26.11 upgrade (fixes the save-place tramp error)

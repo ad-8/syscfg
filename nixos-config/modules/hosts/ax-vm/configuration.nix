@@ -29,7 +29,7 @@ in
 
     {
       imports = [
-        ./_hardware.nix
+        ./_hardware-configuration.nix
       ];
 
       services.qemuGuest.enable = true;

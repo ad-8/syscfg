@@ -30,7 +30,7 @@ in
 
     {
       imports = [
-        ./_hardware.nix
+        ./_hardware-configuration.nix
       ];
 
       # ignore short presses of the power button entirely. Long-pressing your power button (5 seconds or longer)
