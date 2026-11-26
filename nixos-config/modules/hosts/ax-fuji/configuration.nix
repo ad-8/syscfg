@@ -10,6 +10,7 @@ in
       base
       core
       btop
+      doom-link
       fastfetch
       fish
       git

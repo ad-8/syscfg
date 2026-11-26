@@ -5,7 +5,8 @@ NixOS hosts stow nothing. Their configs come from `nixos-config/`: Home
 Manager on ax-bee and ax-t14, `/etc` on ax-fuji. Edit them there and
 rebuild; the fish, mango and tmux configs are tangled there too.
 Two exceptions:
-- doom is a live link to `doom/`.
+- doom is a live link to `doom/`: Home Manager on ax-bee and ax-t14, a
+  tmpfiles rule on ax-fuji.
 - csm stays stowed until its config moves into the script. NixOS hosts have
   no stow, so use `nix run nixpkgs#stow -- -D --target=$HOME csm` there.
 
