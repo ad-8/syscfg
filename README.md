@@ -57,10 +57,10 @@ Also add `git` and `vim` to `environment.systemPackages` for the next steps.
 
 3. `git clone https://github.com/ad-8/syscfg`
 
-4. `cp /etc/nixos/hardware-configuration.nix ~/syscfg/nixos-config/hosts/<host>/`
+4. `cp /etc/nixos/hardware-configuration.nix ~/syscfg/nixos-config/modules/hosts/<host>/_hardware.nix`
 
 5. if *not* using LUKS, skip this step  
-   add this line from `/etc/nixos/configuration.nix` to `~/syscfg/nixos-config/hosts/<host>/configuration.nix`  
+   add this line from `/etc/nixos/configuration.nix` to `~/syscfg/nixos-config/modules/hosts/<host>/configuration.nix`  
    (or replace existing equivalent)
 ```nix
    boot.initrd.luks.devices... = "/dev/disk/by-uuid/..."

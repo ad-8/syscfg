@@ -8,7 +8,7 @@
     # home-manager-unstable = { url = "github:nix-community/home-manager/master"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
     mangowm = { url = "github:mangowm/mango/0.18.6"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
     agenix = { url = "github:ryantm/agenix"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
-    # TODO: pinned to the last rev before fdd668c8 broke the nix build (libcava.wrap vs nix/default.nix); back to plain master once Alexays/Waybar#5427 is merged (moot if the input goes first, see the waybar overlay TODO in hosts/ax-bee/configuration.nix)
+    # TODO: pinned to the last rev before fdd668c8 broke the nix build (libcava.wrap vs nix/default.nix); back to plain master once Alexays/Waybar#5427 is merged (moot if the input goes first, see the waybar overlay TODO in modules/desktop/mango.nix)
     waybar = { url = "github:alexays/waybar/c15ec02ede4343592a59eb5c2ff4443c9c045f7c"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
     flake-parts = { url = "github:hercules-ci/flake-parts"; inputs.nixpkgs-lib.follows = "nixpkgs-stable"; };
     # TODO: consider replacing with a ~10-line lib.fileset import (vimjoyer/nixconf flake.nix) once dendritic has proven itself; his filter only skips `_` file names, add a whole-path `/_` check
