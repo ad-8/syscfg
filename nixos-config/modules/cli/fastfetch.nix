@@ -18,6 +18,24 @@ let
       };
       display = {
         separator = "  ";
+        percent = {
+          type = [
+            "bar"
+            "num"
+            "num-color"
+            "bar-monochrome"
+          ];
+          ndigits = 0;
+        };
+        bar = {
+          width = 10;
+          char = {
+            elapsed = "■";
+            total = "■";
+          };
+          border = null;
+          color.total = "90";
+        };
       };
       modules = [
         "break"
@@ -45,16 +63,19 @@ let
           type = "memory";
           key = "  ├󰑭";
           keyColor = "green";
+          format = "{percentage-bar}  {percentage}  {used} / {total}";
         }
         {
           type = "swap";
           key = "  ├";
           keyColor = "green";
+          format = "{percentage-bar}  {percentage}  {used} / {total}";
         }
         {
           type = "disk";
           key = "  └󰋊";
           keyColor = "green";
+          format = "{size-percentage-bar}  {size-percentage}  {size-used} / {size-total} - {filesystem}";
         }
         "break"
         {
