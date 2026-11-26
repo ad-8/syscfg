@@ -14,7 +14,7 @@ Two exceptions:
 `stow -vR --target=$HOME *` or `stow -vR --target=$HOME mango/`  
 To remove all:  
 `stow -D --target=$HOME *`  
-doom sits at the repo root: from `~/syscfg`, `stow -vR --target=$HOME doom`
+doom sits at the repo root (all stow machines, FreeBSD and OpenBSD too): from `~/syscfg`, `stow -vR --target=$HOME doom`
 
 ### After setting up a new machine (stow or rebuild)
 Run the theme switcher once to create the per-app `active-theme.*` symlinks that the configs include/source:
