@@ -17,6 +17,16 @@ in
       starship
       tmux
       vim
+      audiobookshelf
+      forgejo
+      gatus-push
+      homepage
+      jellyfin
+      navidrome
+      podman
+      radicale
+      searx
+      syncthing
       ax-fuji
     ];
   };
@@ -34,25 +44,13 @@ in
       networking.hostName = "ax-fuji";
 
       environment.systemPackages = with pkgs; [
-        # services.jellyfin only installs pkgs.jellyfin; web and ffmpeg must be explicit
-        jellyfin-ffmpeg
-        jellyfin-web
-        podman-compose
         rclone
         restic
         vlock
         yt-dlp
       ];
 
-      users.users.ax = {
-        packages = [ ];
-        extraGroups = [
-          "podman"
-          "render"
-        ];
-        # start ax's user services at boot, without a login (for podman-restart)
-        linger = true;
-      };
+      users.users.ax.packages = [ ];
 
       hardware.graphics = {
         enable = true;
@@ -66,10 +64,7 @@ in
         enable = true;
         allowedTCPPorts = [
           2283 # immich
-          3000 # forgejo
           3388 # TODOmacs
-          5232 # radicale
-          8888 # searxng
           9090 # linkding
         ];
         allowedUDPPorts = [ ];

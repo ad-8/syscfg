@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.ax-fuji = {
+  flake.modules.nixos.audiobookshelf = {
     services.audiobookshelf = {
       enable = true;
       host = "0.0.0.0";

@@ -1,8 +1,10 @@
 {
-  flake.modules.nixos.ax-fuji =
+  flake.modules.nixos.searx =
     { config, ... }:
     {
-      age.secrets.searx-secret-key.file = ../../../secrets/searx-secret-key.age;
+      networking.firewall.allowedTCPPorts = [ 8888 ];
+
+      age.secrets.searx-secret-key.file = ../../secrets/searx-secret-key.age;
 
       services.searx = {
         enable = true;

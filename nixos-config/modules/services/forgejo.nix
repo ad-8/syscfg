@@ -2,9 +2,11 @@ let
   serverIp = "192.168.178.8";
 in
 {
-  flake.modules.nixos.ax-fuji =
+  flake.modules.nixos.forgejo =
     { config, pkgs, ... }:
     {
+      networking.firewall.allowedTCPPorts = [ 3000 ];
+
       services.forgejo = {
         enable = true;
         settings = {

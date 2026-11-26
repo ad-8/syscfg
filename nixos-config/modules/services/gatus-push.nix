@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.ax-fuji =
+  flake.modules.nixos.gatus-push =
     { config, pkgs, ... }:
     {
       systemd.timers.gatus-push = {

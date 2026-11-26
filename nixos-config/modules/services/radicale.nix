@@ -1,5 +1,7 @@
 {
-  flake.modules.nixos.ax-fuji = {
+  flake.modules.nixos.radicale = {
+    networking.firewall.allowedTCPPorts = [ 5232 ];
+
     services.radicale = {
       enable = true;
       settings = {
