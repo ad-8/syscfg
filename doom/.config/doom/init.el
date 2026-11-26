@@ -114,7 +114,8 @@
        yaml                ; JSON, but readable
 
        :email
-       (mu4e +mbsync +org)
+       (:when (string= (system-name) "ax-bee")
+        (mu4e +mbsync +org))
        ;;notmuch
        ;;(wanderlust +gmail)
 
