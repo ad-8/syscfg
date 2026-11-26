@@ -109,7 +109,7 @@
       (cond
         (nil? from) (format "%-30s %s (rebuilt)" label version)
         (empty? from) (format "%-30s %s (new)" label version)
-        :else (format "%-30s %s -> %s" label (str/join ", " from) version)))
+        :else (bling [:system-green (format "%-30s %s -> %s" label (str/join ", " from) version)])))
     (format "%-30s (no version)" n)))
 
 (defn heading
@@ -131,7 +131,7 @@
             (if (seq built) (sort-by str/lower-case built) ["none"])
             ["" (heading (str "Packages to fetch" (when fetch-size (str " (" fetch-size ")")) ":"))]
             (if (seq fetched)
-              (sort-by str/lower-case (map #(report-line current fetched-versions built-versions %) fetched))
+              (map #(report-line current fetched-versions built-versions %) (sort-by str/lower-case fetched))
               ["none"])
             (when (pos? unparsed)
               ["" (str "warning: " unparsed " store paths in the dry-run output were not parsed; run upd for the raw output")]))))
