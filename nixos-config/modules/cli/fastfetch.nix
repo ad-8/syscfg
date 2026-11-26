@@ -26,6 +26,7 @@ let
             "bar-monochrome"
           ];
           ndigits = 0;
+          width = 3;
         };
         bar = {
           width = 10;
@@ -63,19 +64,19 @@ let
           type = "memory";
           key = "  ├󰑭";
           keyColor = "green";
-          format = "{percentage-bar}  {percentage}  {used} / {total}";
+          format = "{used>11} / {total>11}  {percentage-bar}  {percentage}";
         }
         {
           type = "swap";
           key = "  ├";
           keyColor = "green";
-          format = "{percentage-bar}  {percentage}  {used} / {total}";
+          format = "{used>11} / {total>11}  {percentage-bar}  {percentage}";
         }
         {
           type = "disk";
           key = "  └󰋊";
           keyColor = "green";
-          format = "{size-percentage-bar}  {size-percentage}  {size-used} / {size-total} - {filesystem}";
+          format = "{size-used>11} / {size-total>11}  {size-percentage-bar}  {size-percentage}";
         }
         "break"
         {
