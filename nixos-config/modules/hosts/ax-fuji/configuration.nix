@@ -5,7 +5,6 @@ let
 in
 {
   flake.nixosConfigurations.ax-fuji = inputs.nixpkgs-stable.lib.nixosSystem {
-    specialArgs = { inherit inputs; };
     modules = with modules.nixos; [
       base
       core

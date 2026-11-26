@@ -40,8 +40,6 @@ in
             wlopm
             wlr-randr
           ];
-
-          home-manager.sharedModules = [ modules.homeManager.mango ];
         }
 
         (import (modulesPath + "/programs/wayland/wayland-session.nix") {

@@ -5,7 +5,6 @@ let
 in
 {
   flake.nixosConfigurations.ax-bee = inputs.nixpkgs-stable.lib.nixosSystem {
-    specialArgs = { inherit inputs; };
     modules = with modules.nixos; [
       base
       core
@@ -25,8 +24,9 @@ in
       ax-bee
       {
         home-manager.users.ax.imports = [
-          modules.homeManager.ax-bee
           modules.homeManager.ax
+          modules.homeManager.mango
+          modules.homeManager.ax-bee
         ];
       }
     ];
@@ -34,7 +34,7 @@ in
 
   flake.modules.nixos.ax-bee =
     {
-      pkgs, config, inputs,
+      pkgs, config,
       ...
     }:
 

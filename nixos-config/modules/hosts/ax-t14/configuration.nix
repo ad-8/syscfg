@@ -5,7 +5,6 @@ let
 in
 {
   flake.nixosConfigurations.ax-t14 = inputs.nixpkgs-stable.lib.nixosSystem {
-    specialArgs = { inherit inputs; };
     modules = with modules.nixos; [
       base
       core
@@ -18,7 +17,10 @@ in
       zfs
       ax-t14
       {
-        home-manager.users.ax.imports = [ modules.homeManager.ax ];
+        home-manager.users.ax.imports = [
+          modules.homeManager.ax
+          modules.homeManager.mango
+        ];
       }
     ];
   };
