@@ -8,10 +8,12 @@ in
     specialArgs = { inherit inputs; };
     modules = with modules.nixos; [
       base
+      core
       btop
       fastfetch
       fish
       git
+      openssh
       starship
       tmux
       vim

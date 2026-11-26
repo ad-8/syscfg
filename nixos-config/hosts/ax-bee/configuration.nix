@@ -8,7 +8,6 @@
     ./hardware-configuration.nix
     ./restic.nix
     ./networkmanager-muc.nix
-    ../../nixos/config-core.nix
   ];
 
   # TODO: remove the emacs override once nixos stable ships emacs >= 31.1, likely with the 26.11 upgrade (fixes the save-place tramp error)
@@ -25,33 +24,11 @@
   networking.hostName = "ax-bee";
   networking.networkmanager.wifi.powersave = false;
 
-  services.keyd = {
-    enable = true;
-    keyboards.default = {
-      ids = [ "*" ];
-      settings.main.capslock = "overload(control, esc)";
-    };
-  };
-
   # android adb setup
   # 26.05: programs.adb removed (systemd 258 handles uaccess rules
   # automatically); just install the tool and the adbusers group is gone
   environment.systemPackages = [ pkgs.android-tools ];
 
-  services.openssh = {
-    enable = true;
-    # ports = [ 5432 ];
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      PermitRootLogin = "no";
-      # AllowUsers = [ "myUser" ];
-    };
-  };
-
-  # setup from https://openzfs.github.io/openzfs-docs/Getting%20Started/NixOS/index.html
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.forceImportRoot = false;
   networking.hostId = "315ecd42"; # generated via `head -c4 /dev/urandom | od -A none -t x4`
 
   # This value determines the NixOS release from which the default

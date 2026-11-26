@@ -11,7 +11,6 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ../../nixos/config-core.nix
     ./homepage-dashboard.nix
   ];
 
@@ -152,16 +151,6 @@ in
         MusicFolder = "/nas/tmp/music-discographies";
         # verify with `journalctl -u navidrome -b | grep -E "DISABLED|scan"`
         Scanner.Enabled = false;
-      };
-    };
-    openssh = {
-      enable = true;
-      # ports = [ 5432 ];
-      settings = {
-        PasswordAuthentication = false;
-        KbdInteractiveAuthentication = false;
-        PermitRootLogin = "no";
-        # AllowUsers = [ "myUser" ];
       };
     };
     radicale = {

@@ -70,7 +70,7 @@ in
       };
 
       home.packages = with pkgs; [
-        # brillo enabled in nixos/config-workstation.nix
+        # brillo enabled in modules/system/workstation.nix
         bluetui
         ddcutil
         dunst

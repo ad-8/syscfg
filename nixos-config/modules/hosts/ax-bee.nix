@@ -8,6 +8,7 @@ in
     specialArgs = { inherit inputs; };
     modules = with modules.nixos; [
       base
+      core
       home-manager
       mango
       audio
@@ -15,9 +16,12 @@ in
       distrobox
       firefox
       gaming
+      keyd
+      openssh
       printing
       virtman
       workstation
+      zfs
       ../../hosts/ax-bee/configuration.nix
       {
         home-manager.users.ax.imports = [

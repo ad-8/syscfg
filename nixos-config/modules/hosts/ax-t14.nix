@@ -8,11 +8,14 @@ in
     specialArgs = { inherit inputs; };
     modules = with modules.nixos; [
       base
+      core
       home-manager
       mango
       audio
       firefox
+      keyd
       workstation
+      zfs
       ../../hosts/ax-t14/configuration.nix
       {
         home-manager.users.ax.imports = [ modules.homeManager.ax ];

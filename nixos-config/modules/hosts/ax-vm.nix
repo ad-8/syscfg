@@ -9,6 +9,7 @@ in
     specialArgs = { inherit inputs; };
     modules = with modules.nixos; [
       base
+      core
       home-manager
       audio
       ../../hosts/ax-vm/configuration.nix
