@@ -75,7 +75,7 @@
        rgb                 ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
        ;;tmux              ; an API for interacting with tmux
-       ;;tree-sitter       ; syntax and parsing, sitting in a tree...
+       tree-sitter
        ;;upload            ; map local to remote projects via ssh/ftp
 
        :os
@@ -83,7 +83,7 @@
        ;; tty
 
        :lang
-       (clojure +lsp)
+       (clojure +lsp +tree-sitter)
        data
        emacs-lisp
        (go +lsp)
