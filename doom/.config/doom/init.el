@@ -86,13 +86,13 @@
        (clojure +lsp +tree-sitter)
        data
        emacs-lisp
-       (go +lsp)
-       markdown
-       (nix +lsp)
+       (go +lsp +tree-sitter)
+       (markdown +tree-sitter)
+       (nix +lsp +tree-sitter)
        (org +pretty)
-       (rust +lsp)
+       (rust +lsp +tree-sitter)
        (sh +fish)
-       yaml
+       (yaml +tree-sitter)
 
        :email
        (:when (string= (system-name) "ax-bee")
