@@ -23,6 +23,7 @@
     restic
     starship
     swappy
+    swayimg
     tealdeer
     tmux
     vim

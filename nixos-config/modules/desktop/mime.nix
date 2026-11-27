@@ -8,7 +8,7 @@ let
   audioPlayer = [ "mpv.desktop" ];
   browser = [ "vivaldi-stable.desktop" ];
   emacs = [ "emacsclient.desktop" ];
-  imageViewer = [ "org.xfce.ristretto.desktop" ];
+  imageViewer = [ "swayimg.desktop" ];
   pdfReader = [ "org.kde.okular.desktop" ];
   simpleTextEditor = [ "org.xfce.mousepad.desktop" ];
   videoPlayer = [ "mpv.desktop" ];
@@ -25,9 +25,14 @@ in
         "x-scheme-handler/about" = browser;
         "x-scheme-handler/unknown" = browser;
         # Images
+        "image/avif" = imageViewer;
+        "image/bmp" = imageViewer;
         "image/gif" = imageViewer;
+        "image/heif" = imageViewer;
         "image/jpeg" = imageViewer;
+        "image/jxl" = imageViewer;
         "image/png" = imageViewer;
+        "image/tiff" = imageViewer;
         "image/webp" = imageViewer;
         # Documents
         "application/json" = browser;

@@ -17,7 +17,6 @@
         protonmail-bridge-gui
         qalculate-gtk
         qbittorrent
-        ristretto
         signal-desktop
         # strawberry
         # TODO: remove once nixpkgs ships strawberry >= 1.2.29 (old Last.fm API key suspended)
