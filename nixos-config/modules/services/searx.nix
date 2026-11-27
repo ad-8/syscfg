@@ -1,7 +1,14 @@
+{ config, ... }:
+
+let
+  modules = config.flake.modules;
+in
 {
   flake.modules.nixos.searx =
     { config, ... }:
     {
+      imports = [ modules.nixos.agenix ];
+
       networking.firewall.allowedTCPPorts = [ 8888 ];
 
       age.secrets.searx-secret-key.file = ../../secrets/searx-secret-key.age;
