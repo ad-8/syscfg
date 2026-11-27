@@ -185,6 +185,94 @@ Fall back to `tmr-notification-notify' if notify-send is unavailable."
       :localleader
       "k" #'ax/devdocs-lookup-at-point)
 
+(when (modulep! :lang janet)
+  (after! lsp-mode
+    (add-to-list 'lsp-language-id-configuration '(janet-mode . "janet"))
+    (add-to-list 'lsp-language-id-configuration '(janet-ts-mode . "janet"))
+    (lsp-register-client
+     (make-lsp-client
+      :new-connection (lsp-stdio-connection "janet-lsp")
+      :activation-fn (lsp-activate-on "janet")
+      :server-id 'janet-lsp)))
+
+  (add-hook! '(janet-mode-local-vars-hook janet-ts-mode-local-vars-hook)
+             :append #'lsp!)
+
+  (use-package! ajrepl
+    :hook ((janet-mode janet-ts-mode) . ajrepl-interaction-mode)))
+
+(when (modulep! :lang janet)
+  (defvar ax/janetdocs-file (file-name-concat doom-cache-dir "janetdocs.json"))
+  (defvar ax/janetdocs--table nil)
+
+  (defun ax/janetdocs-refresh ()
+    "Download all examples from janetdocs.org."
+    (interactive)
+    (let ((tmp (make-temp-file "janetdocs" nil ".json")))
+      (unwind-protect
+          (progn
+            (url-copy-file "https://janetdocs.org/export.json" tmp t)
+            (with-temp-buffer
+              (insert-file-contents tmp)
+              (unless (vectorp (json-parse-buffer))
+                (error "janetdocs: unexpected export format")))
+            (rename-file tmp ax/janetdocs-file t)
+            (setq ax/janetdocs--table nil)
+            (message "janetdocs: examples downloaded"))
+        (when (file-exists-p tmp)
+          (delete-file tmp)))))
+
+  (defun ax/janetdocs--table ()
+    (unless ax/janetdocs--table
+      (unless (file-exists-p ax/janetdocs-file)
+        (ax/janetdocs-refresh))
+      (let ((table (make-hash-table :test #'equal)))
+        (with-temp-buffer
+          (insert-file-contents ax/janetdocs-file)
+          (seq-doseq (entry (nreverse (json-parse-buffer)))
+            (push entry (gethash (gethash "binding-name" entry) table))))
+        (setq ax/janetdocs--table table)))
+    ax/janetdocs--table)
+
+  (defun ax/janetdocs--fontify (code)
+    (with-temp-buffer
+      (insert (string-trim (string-replace "\r" "" code)))
+      (delay-mode-hooks (janet-mode))
+      (font-lock-ensure)
+      (buffer-string)))
+
+  (defun ax/janetdocs-examples (symbol)
+    "Show the janetdocs.org examples for SYMBOL."
+    (interactive
+     (list (or (thing-at-point 'symbol t)
+               (read-string "Janet symbol: "))))
+    (if-let* ((entries (gethash symbol (ax/janetdocs--table))))
+        (with-help-window "*janetdocs*"
+          (with-current-buffer standard-output
+            (insert (propertize symbol 'face 'bold) "\n\n"
+                    (string-trim (gethash "binding-docstring" (car entries)) "\n+")
+                    "\n")
+            (dolist (entry entries)
+              (insert "\n" (propertize (make-string 60 ?─) 'face 'shadow) "\n\n"
+                      (ax/janetdocs--fontify (gethash "example" entry)) "\n\n"
+                      (propertize (concat "by " (gethash "gh-username" entry))
+                                  'face 'shadow)
+                      "\n"))))
+      (message "janetdocs: no examples for %s, showing the docs" symbol)
+      (+lookup/documentation symbol)))
+
+  (set-popup-rule! "^\\*janetdocs\\*" :slot 2 :vslot -8 :size 0.42 :select t)
+
+  (map! :after janet-mode
+        :map janet-mode-map
+        :localleader
+        "k" #'ax/janetdocs-examples)
+
+  (map! :after janet-ts-mode
+        :map janet-ts-mode-map
+        :localleader
+        "k" #'ax/janetdocs-examples))
+
 (after!
  consult
  (consult-customize

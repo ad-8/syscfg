@@ -63,6 +63,11 @@
 (package! doric-themes)
 (package! tron-legacy-theme)
 
+(when (modulep! :lang janet)
+  (package! ajrepl
+    :recipe (:type git :host github :repo "sogaiu/ajrepl"
+             :files (:defaults ("ajrepl/" "ajrepl/*")))))
+
 (package! org-caldav)
 
 (package! denote)

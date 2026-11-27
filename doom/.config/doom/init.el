@@ -87,6 +87,8 @@
        data
        emacs-lisp
        (go +lsp +tree-sitter)
+       (:when (featurep :system 'bsd)
+        (janet +tree-sitter))
        (markdown +tree-sitter)
        (nix +lsp +tree-sitter)
        (org +pretty)
