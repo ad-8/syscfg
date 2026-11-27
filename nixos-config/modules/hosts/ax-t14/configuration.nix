@@ -6,7 +6,6 @@ in
 {
   flake.nixosConfigurations.ax-t14 = inputs.nixpkgs-stable.lib.nixosSystem {
     modules = with modules.nixos; [
-      base
       core
       home-manager
       mango

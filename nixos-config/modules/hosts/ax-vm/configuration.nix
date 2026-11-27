@@ -7,7 +7,6 @@ in
   flake.nixosConfigurations.ax-vm = inputs.nixpkgs-stable.lib.nixosSystem {
     system = "x86_64-linux";
     modules = with modules.nixos; [
-      base
       core
       home-manager
       audio

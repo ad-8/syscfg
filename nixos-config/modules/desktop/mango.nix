@@ -13,7 +13,10 @@ in
       ...
     }:
     {
-      imports = [ modules.nixos.home-manager ];
+      imports = [
+        inputs.mangowm.nixosModules.mango
+        modules.nixos.home-manager
+      ];
 
       config = lib.mkMerge [
         {

@@ -6,7 +6,7 @@ in
 {
   flake.nixosConfigurations.ax-fuji = inputs.nixpkgs-stable.lib.nixosSystem {
     modules = with modules.nixos; [
-      base
+      agenix
       core
       btop
       doom-link

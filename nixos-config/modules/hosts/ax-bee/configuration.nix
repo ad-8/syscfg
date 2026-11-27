@@ -6,7 +6,7 @@ in
 {
   flake.nixosConfigurations.ax-bee = inputs.nixpkgs-stable.lib.nixosSystem {
     modules = with modules.nixos; [
-      base
+      agenix
       core
       home-manager
       mango
