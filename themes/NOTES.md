@@ -32,7 +32,6 @@ separate rows here.
 | osaka-jade                 | —                     | Justikun/omarchy-osaka-jade-theme                | https://github.com/Justikun/omarchy-osaka-jade-theme                                         |
 | solarized-dark             | —                     | altercation/solarized                            | https://github.com/altercation/solarized                                                     |
 | solarized-light            | —                     | altercation/solarized                            | https://github.com/altercation/solarized                                                     |
-| solarized-selenized-black  | black                 | jan-warchol/selenized (`9a753d5`)                | https://github.com/jan-warchol/selenized and bbatsov/solarized-emacs (MELPA) for emacs       |
 | solarized-selenized-dark   | dark                  | jan-warchol/selenized (`9a753d5`)                | https://github.com/jan-warchol/selenized and bbatsov/solarized-emacs (MELPA) for emacs       |
 | tokyo-night                | tokyo-night-night     | tokyo-night/tokyo-night-vscode-theme             | https://github.com/tokyo-night/tokyo-night-vscode-theme                                      |
 | tron-legacy                | —                     | ianpan870102/tron-legacy-emacs-theme             | https://github.com/ianpan870102/tron-legacy-emacs-theme                                      |
@@ -43,8 +42,8 @@ separate rows here.
 ## Selenized
 
 Source: jan-warchol/selenized `the-values.md` (`9a753d5`), canonical sRGB
-values for the dark and black variants. Emacs loads bbatsov/solarized-emacs's
-`solarized-selenized-dark` and `solarized-selenized-black` unchanged
+values for the dark variant. Emacs loads bbatsov/solarized-emacs's
+`solarized-selenized-dark` unchanged
 (`0f2c881`, unpinned like the other theme packages), with no face overrides
 and no `solarized-*` settings. Other apps use literal palette colors, with no
 computed blends. Existing solarized-dark layouts and alpha values remain;
