@@ -6,7 +6,7 @@
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager-stable = { url = "github:nix-community/home-manager/release-26.05"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
     # home-manager-unstable = { url = "github:nix-community/home-manager/master"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
-    mangowm = { url = "github:mangowm/mango/0.18.6"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
+    mangowm = { url = "github:mangowm/mango/0.19.3"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
     agenix = { url = "github:ryantm/agenix"; inputs.nixpkgs.follows = "nixpkgs-stable"; };
     # TODO: pinned to the last rev before fdd668c8 broke the nix build (libcava.wrap vs nix/default.nix);
     #       back to plain master once Alexays/Waybar#5427 is merged
