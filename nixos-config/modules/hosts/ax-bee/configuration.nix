@@ -40,7 +40,7 @@ in
       ax-bee
       {
         home-manager.users.ax.imports = with modules.homeManager; [
-          ax
+          workstation
           mango
           gaming
           mu4e

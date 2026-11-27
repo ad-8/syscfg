@@ -2,7 +2,7 @@
 
 {
   # megasync, qt and secret-service exist as features but are off on purpose
-  flake.modules.homeManager.ax.imports = with config.flake.modules.homeManager; [
+  flake.modules.homeManager.workstation.imports = with config.flake.modules.homeManager; [
     auth-agent
     base
     btop

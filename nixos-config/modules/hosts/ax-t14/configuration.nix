@@ -32,7 +32,7 @@ in
       ax-t14
       {
         home-manager.users.ax.imports = with modules.homeManager; [
-          ax
+          workstation
           mango
         ];
       }
