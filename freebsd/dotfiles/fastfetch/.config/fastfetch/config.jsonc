@@ -50,19 +50,19 @@
       "type": "memory",
       "key": "  ├󰑭",
       "keyColor": "green",
-      "format": "{used>11} / {total>11}  {percentage-bar}  {percentage}",
+      "format": "{percentage-bar}  {percentage}  {used>10} / {total}",
     },
     {
       "type": "swap",
       "key": "  ├",
       "keyColor": "green",
-      "format": "{used>11} / {total>11}  {percentage-bar}  {percentage}",
+      "format": "{percentage-bar}  {percentage}  {used>10} / {total}",
     },
     {
       "type": "disk",
       "key": "  └󰋊",
       "keyColor": "green",
-      "format": "{size-used>11} / {size-total>11}  {size-percentage-bar}  {size-percentage}",
+      "format": "{size-percentage-bar}  {size-percentage}  {size-used>10} / {size-total}",
     },
     "break",
     {
