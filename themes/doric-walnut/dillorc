@@ -1,0 +1,18 @@
+# Doric Walnut theme for Dillo
+
+# ---- page ----
+bg_color=#153227
+allow_white_bg=NO
+white_bg_replacement=#153227
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#b9d3b0
+ui_main_bg_color=#303931
+ui_text_bg_color=#303931
+ui_selection_color=#0c512c
+ui_button_highlight_color=#42342f
+ui_tab_active_bg_color=#42342f
+ui_tab_active_fg_color=#b9d3b0
+ui_tab_bg_color=#153227
+ui_tab_fg_color=#9ba3a2

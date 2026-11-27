@@ -1,0 +1,4 @@
+/* Catppuccin Frappe theme for Dillo: page text and link colors */
+body { color: #c6d0f5; }
+a:link { color: #8caaee; }
+a:visited { color: #ca9ee6; }

@@ -1,0 +1,18 @@
+# Selenized Dark theme for Dillo
+
+# ---- page ----
+bg_color=#103c48
+allow_white_bg=NO
+white_bg_replacement=#103c48
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#adbcbc
+ui_main_bg_color=#184956
+ui_text_bg_color=#103c48
+ui_selection_color=#2d5b69
+ui_button_highlight_color=#2d5b69
+ui_tab_active_bg_color=#2d5b69
+ui_tab_active_fg_color=#cad8d9
+ui_tab_bg_color=#103c48
+ui_tab_fg_color=#72898f

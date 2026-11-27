@@ -1,0 +1,4 @@
+/* Modus Operandi theme for Dillo: page text and link colors */
+body { color: #000000; }
+a:link { color: #3548cf; }
+a:visited { color: #721045; }

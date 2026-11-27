@@ -1,0 +1,4 @@
+/* Amber theme for Dillo: page text and link colors */
+body { color: #fc9505; }
+a:link { color: #fc9505; }
+a:visited { color: #c56306; }

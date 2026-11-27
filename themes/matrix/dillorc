@@ -1,0 +1,18 @@
+# Matrix theme for Dillo
+
+# ---- page ----
+bg_color=#000000
+allow_white_bg=NO
+white_bg_replacement=#000000
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#00b25f
+ui_main_bg_color=#01120a
+ui_text_bg_color=#01120a
+ui_selection_color=#011f11
+ui_button_highlight_color=#011f11
+ui_tab_active_bg_color=#011f11
+ui_tab_active_fg_color=#00ff88
+ui_tab_bg_color=#000000
+ui_tab_fg_color=#00733d

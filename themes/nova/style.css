@@ -1,0 +1,4 @@
+/* Nova theme for Dillo: page text and link colors */
+body { color: #c5d4dd; }
+a:link { color: #7fc1ca; }
+a:visited { color: #d18ec2; }

@@ -1,0 +1,4 @@
+/* Selenized Dark theme for Dillo: page text and link colors */
+body { color: #adbcbc; }
+a:link { color: #4695f7; }
+a:visited { color: #af88eb; }

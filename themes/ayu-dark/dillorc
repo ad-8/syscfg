@@ -1,0 +1,18 @@
+# Ayu Dark theme for Dillo
+
+# ---- page ----
+bg_color=#0d1017
+allow_white_bg=NO
+white_bg_replacement=#0d1017
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#bfbdb6
+ui_main_bg_color=#141821
+ui_text_bg_color=#10141c
+ui_selection_color=#475266
+ui_button_highlight_color=#1b1f29
+ui_tab_active_bg_color=#1b1f29
+ui_tab_active_fg_color=#ffffff
+ui_tab_bg_color=#0d1017
+ui_tab_fg_color=#5a6673

@@ -1,0 +1,4 @@
+/* Dracula theme for Dillo: page text and link colors */
+body { color: #f8f8f2; }
+a:link { color: #8be9fd; }
+a:visited { color: #bd93f9; }

@@ -1,0 +1,18 @@
+# Amber theme for Dillo
+
+# ---- page ----
+bg_color=#140b05
+allow_white_bg=NO
+white_bg_replacement=#140b05
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#fc9505
+ui_main_bg_color=#1c1008
+ui_text_bg_color=#140b05
+ui_selection_color=#fc9505
+ui_button_highlight_color=#372005
+ui_tab_active_bg_color=#372005
+ui_tab_active_fg_color=#fc9505
+ui_tab_bg_color=#140b05
+ui_tab_fg_color=#c56306

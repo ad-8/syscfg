@@ -1,0 +1,4 @@
+/* Doric Water theme for Dillo: page text and link colors */
+body { color: #edf0f8; }
+a:link { color: #adade0; }
+a:visited { color: #aea6b8; }

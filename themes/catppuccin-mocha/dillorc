@@ -1,0 +1,18 @@
+# Catppuccin Mocha theme for Dillo
+
+# ---- page ----
+bg_color=#1e1e2e
+allow_white_bg=NO
+white_bg_replacement=#1e1e2e
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#cdd6f4
+ui_main_bg_color=#181825
+ui_text_bg_color=#11111b
+ui_selection_color=#45475a
+ui_button_highlight_color=#313244
+ui_tab_active_bg_color=#313244
+ui_tab_active_fg_color=#cdd6f4
+ui_tab_bg_color=#1e1e2e
+ui_tab_fg_color=#a6adc8

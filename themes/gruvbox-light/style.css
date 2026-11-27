@@ -1,0 +1,4 @@
+/* Gruvbox Light theme for Dillo: page text and link colors */
+body { color: #3c3836; }
+a:link { color: #076678; }
+a:visited { color: #8f3f71; }

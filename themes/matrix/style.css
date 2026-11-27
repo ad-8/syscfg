@@ -1,0 +1,4 @@
+/* Matrix theme for Dillo: page text and link colors */
+body { color: #00b25f; }
+a:link { color: #00b25f; }
+a:visited { color: #00733d; }

@@ -1,0 +1,4 @@
+/* Osaka Jade theme for Dillo: page text and link colors */
+body { color: #c1c497; }
+a:link { color: #75bbb3; }
+a:visited { color: #d2689c; }

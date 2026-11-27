@@ -1,0 +1,4 @@
+/* Tokyo Night theme for Dillo: page text and link colors */
+body { color: #a9b1d6; }
+a:link { color: #6183bb; }
+a:visited { color: #bb9af7; }

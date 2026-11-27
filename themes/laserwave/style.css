@@ -1,0 +1,4 @@
+/* Laserwave theme for Dillo: page text and link colors */
+body { color: #ffffff; }
+a:link { color: #eb64b9; }
+a:visited { color: #b381c5; }

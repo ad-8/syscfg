@@ -27,3 +27,6 @@
 /freebsd/dotfiles/wlr-which-key/.config/wlr-which-key/config.yaml
 /dotfiles/wlr-which-key/.config/wlr-which-key/config.yaml.tmp
 /freebsd/dotfiles/wlr-which-key/.config/wlr-which-key/config.yaml.tmp
+/openbsd/dotfiles/dillo/.dillo/*
+!/openbsd/dotfiles/dillo/.dillo/dillorc
+!/openbsd/dotfiles/dillo/.dillo/style.css

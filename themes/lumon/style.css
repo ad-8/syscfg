@@ -1,0 +1,4 @@
+/* Lumon theme for Dillo: page text and link colors */
+body { color: #d6e2ee; }
+a:link { color: #6fb8e3; }
+a:visited { color: #5e95bc; }

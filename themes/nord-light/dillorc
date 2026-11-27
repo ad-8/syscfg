@@ -1,0 +1,18 @@
+# Nord Light theme for Dillo
+
+# ---- page ----
+bg_color=#e5e9f0
+allow_white_bg=NO
+white_bg_replacement=#e5e9f0
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#3b4252
+ui_main_bg_color=#d8dee9
+ui_text_bg_color=#f0f4fc
+ui_selection_color=#b8c5db
+ui_button_highlight_color=#c2d0e7
+ui_tab_active_bg_color=#c2d0e7
+ui_tab_active_fg_color=#2e3440
+ui_tab_bg_color=#e5e9f0
+ui_tab_fg_color=#60728c

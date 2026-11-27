@@ -1,0 +1,4 @@
+/* Modus Vivendi theme for Dillo: page text and link colors */
+body { color: #ffffff; }
+a:link { color: #79a8ff; }
+a:visited { color: #feacd0; }

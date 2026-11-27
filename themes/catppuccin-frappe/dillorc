@@ -1,0 +1,18 @@
+# Catppuccin Frappe theme for Dillo
+
+# ---- page ----
+bg_color=#303446
+allow_white_bg=NO
+white_bg_replacement=#303446
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#c6d0f5
+ui_main_bg_color=#292c3c
+ui_text_bg_color=#232634
+ui_selection_color=#51576d
+ui_button_highlight_color=#414559
+ui_tab_active_bg_color=#414559
+ui_tab_active_fg_color=#c6d0f5
+ui_tab_bg_color=#303446
+ui_tab_fg_color=#a5adce

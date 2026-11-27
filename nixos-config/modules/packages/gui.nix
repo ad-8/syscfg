@@ -6,6 +6,7 @@
         anki
         brave
         calibre
+        dillo
         gimp3
         kdePackages.okular
         keepassxc

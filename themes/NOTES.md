@@ -147,6 +147,66 @@ deviates with a warm near-black #140b05, inherited from vim-amber.
 `vantablack` fills the white slot but its greys are dead neutral
 (R=G=B throughout), so it reads as modern minimal rather than P4 paper-white.
 
+## Dillo
+
+Two files per theme: `dillorc` (page background, browser chrome) and
+`style.css` (page text and link colors, which dillorc can't set; without
+it, pages with no colors of their own render black text on the dark
+background). Dillo reads `dillorc` only at startup, so restart it after a
+switch; `style.css` is re-read for every page it loads.
+
+The roles come from the user's hand-made Gotham file:
+
+| Role                     | Keys                                                  | Gotham   |
+|--------------------------|-------------------------------------------------------|----------|
+| page background          | `bg_color`, `white_bg_replacement`, `ui_tab_bg_color` | `0c1014` |
+| chrome surface           | `ui_main_bg_color`                                    | `11151c` |
+| input field              | `ui_text_bg_color`                                    | `091f2e` |
+| hover, active tab        | `ui_button_highlight_color`, `ui_tab_active_bg_color` | `0a3749` |
+| selection                | `ui_selection_color`                                  | `245361` |
+| UI and page text         | `ui_fg_color`, `body`                                 | `99d1ce` |
+| active tab text          | `ui_tab_active_fg_color`                              | `d3ebe9` |
+| inactive tab text        | `ui_tab_fg_color`                                     | `599cab` |
+| link, visited link       | `a:link`, `a:visited`                                 | `d26937`, `edb443` |
+
+Gotham's links come from gotham-theme.el (`link` orange, `link-visited`
+yellow); the rest of its file is the hand-made original.
+
+Every theme fills the roles from its upstream source (the one in the
+table at the top), using upstream's own role where it has one: its
+selection or region color for selection, its form-field color for the
+input field, its link and visited-link faces for links, its comment or
+inactive-tab color for inactive tabs. Where upstream gives one color to
+several roles, they all get it. Examples: dracula's `44475a` is hover and
+selection, nova's cyan `7fc1ca` is selection and link, the selenized
+`bg_2` is hover and selection, doric's form fields share the toolbar's
+bg-shadow-subtle, and amber's and matrix's links are the body text color
+(upstream underlines them; Dillo does too).
+
+Picks where upstream has no exact role, from the closest one it has:
+doric's inactive tabs use fg-shadow-subtle (its `mode-line-inactive`
+text), osaka-jade's use `629c89` (a btop gradient color; upstream has no
+dim text), lumon's hover is `304860` (its inactive border, alpha
+dropped), and tokyo-night's selection is `515c7e` (its editor selection,
+alpha dropped). Zenburn's selection is the house yellow `f0dfaf` (see
+Zenburn above): upstream's low-contrast Visual `2f2f2f` is invisible on
+its own field and toolbar. Two exceptions where the palette has no step
+at all: amber's hover `372005` (the derived border color its other files
+already use) and the Solarized hover (`143b44`, `e6e4d5`: bg 15% toward
+fg, the blends those themes already use). Vantablack uses only greys its
+own files already use, since the omarchy palette it was ported from
+isn't pinned.
+
+`allow_white_bg=NO` everywhere, light themes included: white pages take
+the theme background. A page that sets a white background and dark text
+then shows dark text on the theme background in dark themes; that's
+how Dillo works, kept on purpose (`YES` would leave white pages white instead).
+
+Low contrast that comes from the upstream palette itself, kept: Solarized
+(dark and light), Nova's link colors on its mid-grey background, and the
+comment colors used as inactive-tab text in Nord (`616e88`), Lumon
+(`4a6b80`) and Solarized, and Matrix's faint selection `011f11`.
+
 ## Removed themes
 
 Restore the theme dir plus its Doom theme file, if the table lists one,

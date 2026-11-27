@@ -1,0 +1,4 @@
+/* Vantablack theme for Dillo: page text and link colors */
+body { color: #ffffff; }
+a:link { color: #cecece; }
+a:visited { color: #9b9b9b; }

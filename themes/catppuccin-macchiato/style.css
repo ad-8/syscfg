@@ -1,0 +1,4 @@
+/* Catppuccin Macchiato theme for Dillo: page text and link colors */
+body { color: #cad3f5; }
+a:link { color: #8aadf4; }
+a:visited { color: #c6a0f6; }

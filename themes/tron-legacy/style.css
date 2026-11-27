@@ -1,0 +1,4 @@
+/* Tron Legacy theme for Dillo: page text and link colors */
+body { color: #b0ccdc; }
+a:link { color: #bbf0ef; }
+a:visited { color: #ff7dbb; }

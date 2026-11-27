@@ -1,0 +1,18 @@
+# Modus Vivendi theme for Dillo
+
+# ---- page ----
+bg_color=#000000
+allow_white_bg=NO
+white_bg_replacement=#000000
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#ffffff
+ui_main_bg_color=#1e1e1e
+ui_text_bg_color=#000000
+ui_selection_color=#5a5a5a
+ui_button_highlight_color=#303030
+ui_tab_active_bg_color=#303030
+ui_tab_active_fg_color=#ffffff
+ui_tab_bg_color=#000000
+ui_tab_fg_color=#989898

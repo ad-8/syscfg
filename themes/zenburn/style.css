@@ -1,0 +1,4 @@
+/* Zenburn theme for Dillo: page text and link colors */
+body { color: #dcdccc; }
+a:link { color: #8cd0d3; }
+a:visited { color: #bc8cbc; }

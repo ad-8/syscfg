@@ -64,7 +64,7 @@
          (str "tmux list-sessions >/dev/null 2>&1 && tmux source-file " src)))
 
 (defn no-reload
-  "Placeholder reload for apps that don't require an explicit restart."
+  "Placeholder reload for apps that pick up the theme on their own or on their next start."
   [_] nil)
 
 (def apps
@@ -92,6 +92,12 @@
     :reload  no-reload}
    {:file    "rofi.rasi"
     :dest    (fs/path (fs/xdg-config-home) "rofi/active-theme.rasi")
+    :reload  no-reload}
+   {:file    "dillorc"
+    :dest    (fs/path (fs/home) ".dillo/dillorc")
+    :reload  no-reload}
+   {:file    "style.css"
+    :dest    (fs/path (fs/home) ".dillo/style.css")
     :reload  no-reload}
    {:file    "dunst.conf"
     :dest    (fs/path (fs/xdg-config-home) "dunst/active-theme.conf")

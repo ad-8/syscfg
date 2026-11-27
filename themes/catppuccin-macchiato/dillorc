@@ -1,0 +1,18 @@
+# Catppuccin Macchiato theme for Dillo
+
+# ---- page ----
+bg_color=#24273a
+allow_white_bg=NO
+white_bg_replacement=#24273a
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#cad3f5
+ui_main_bg_color=#1e2030
+ui_text_bg_color=#181926
+ui_selection_color=#494d64
+ui_button_highlight_color=#363a4f
+ui_tab_active_bg_color=#363a4f
+ui_tab_active_fg_color=#cad3f5
+ui_tab_bg_color=#24273a
+ui_tab_fg_color=#a5adcb

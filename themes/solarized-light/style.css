@@ -1,0 +1,4 @@
+/* Solarized Light theme for Dillo: page text and link colors */
+body { color: #657b83; }
+a:link { color: #268bd2; }
+a:visited { color: #6c71c4; }

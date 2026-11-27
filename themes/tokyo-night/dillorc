@@ -1,0 +1,18 @@
+# Tokyo Night theme for Dillo
+
+# ---- page ----
+bg_color=#1a1b26
+allow_white_bg=NO
+white_bg_replacement=#1a1b26
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#a9b1d6
+ui_main_bg_color=#16161e
+ui_text_bg_color=#14141b
+ui_selection_color=#515c7e
+ui_button_highlight_color=#202330
+ui_tab_active_bg_color=#202330
+ui_tab_active_fg_color=#c0caf5
+ui_tab_bg_color=#1a1b26
+ui_tab_fg_color=#787c99

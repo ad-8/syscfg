@@ -1,0 +1,4 @@
+/* Gotham dark theme for Dillo: page text and link colors */
+body { color: #99d1ce; }
+a:link { color: #d26937; }
+a:visited { color: #edb443; }

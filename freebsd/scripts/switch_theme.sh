@@ -101,6 +101,8 @@ link tmux.conf "$C/tmux/active-theme.conf" &&
 link waybar.css "$C/waybar/active-theme.css" && reload_waybar
 link emacs-theme.el "$C/doom/active-theme.el"
 link rofi.rasi "$C/rofi/active-theme.rasi"
+link dillorc "$HOME/.dillo/dillorc"
+link style.css "$HOME/.dillo/style.css"
 link dunst.conf "$C/dunst/active-theme.conf" && reload_dunst
 which_key
 mango_theme && { pgrep -x mango >/dev/null && mmsg dispatch reload_config; }

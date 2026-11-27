@@ -1,0 +1,4 @@
+/* Doric Oak theme for Dillo: page text and link colors */
+body { color: #3a2018; }
+a:link { color: #0f5420; }
+a:visited { color: #6b5225; }

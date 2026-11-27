@@ -1,0 +1,4 @@
+/* Winter Is Coming theme for Dillo: page text and link colors */
+body { color: #d6deeb; }
+a:link { color: #219fd5; }
+a:visited { color: #c792ea; }

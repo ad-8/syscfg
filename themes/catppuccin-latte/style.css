@@ -1,0 +1,4 @@
+/* Catppuccin Latte theme for Dillo: page text and link colors */
+body { color: #4c4f69; }
+a:link { color: #1e66f5; }
+a:visited { color: #8839ef; }

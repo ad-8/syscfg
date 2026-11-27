@@ -1,0 +1,4 @@
+/* Everforest Dark theme for Dillo: page text and link colors */
+body { color: #d3c6aa; }
+a:link { color: #7fbbb3; }
+a:visited { color: #d699b6; }

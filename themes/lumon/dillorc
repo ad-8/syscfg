@@ -1,0 +1,18 @@
+# Lumon theme for Dillo
+
+# ---- page ----
+bg_color=#1b2d40
+allow_white_bg=NO
+white_bg_replacement=#1b2d40
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#d6e2ee
+ui_main_bg_color=#112a3c
+ui_text_bg_color=#0c1822
+ui_selection_color=#4d9ed3
+ui_button_highlight_color=#304860
+ui_tab_active_bg_color=#304860
+ui_tab_active_fg_color=#f2fcff
+ui_tab_bg_color=#1b2d40
+ui_tab_fg_color=#4a6b80

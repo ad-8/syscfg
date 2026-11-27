@@ -1,0 +1,18 @@
+# Gotham dark theme for Dillo
+
+# ---- page ----
+bg_color=#0c1014
+allow_white_bg=NO
+white_bg_replacement=#0c1014
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#99d1ce
+ui_main_bg_color=#11151c
+ui_text_bg_color=#091f2e
+ui_selection_color=#245361
+ui_button_highlight_color=#0a3749
+ui_tab_active_bg_color=#0a3749
+ui_tab_active_fg_color=#d3ebe9
+ui_tab_bg_color=#0c1014
+ui_tab_fg_color=#599cab

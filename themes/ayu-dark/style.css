@@ -1,0 +1,4 @@
+/* Ayu Dark theme for Dillo: page text and link colors */
+body { color: #bfbdb6; }
+a:link { color: #59c2ff; }
+a:visited { color: #d2a6ff; }

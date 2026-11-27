@@ -1,0 +1,4 @@
+/* Catppuccin Mocha theme for Dillo: page text and link colors */
+body { color: #cdd6f4; }
+a:link { color: #89b4fa; }
+a:visited { color: #cba6f7; }

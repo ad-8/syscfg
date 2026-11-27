@@ -1,0 +1,18 @@
+# Doric Water theme for Dillo
+
+# ---- page ----
+bg_color=#2a283d
+allow_white_bg=NO
+white_bg_replacement=#2a283d
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#edf0f8
+ui_main_bg_color=#3a3c4c
+ui_text_bg_color=#3a3c4c
+ui_selection_color=#496278
+ui_button_highlight_color=#403f75
+ui_tab_active_bg_color=#403f75
+ui_tab_active_fg_color=#edf0f8
+ui_tab_bg_color=#2a283d
+ui_tab_fg_color=#aea6b8

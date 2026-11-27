@@ -1,0 +1,4 @@
+/* Nord Light theme for Dillo: page text and link colors */
+body { color: #3b4252; }
+a:link { color: #3b6ea8; }
+a:visited { color: #842879; }

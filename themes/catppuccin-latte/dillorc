@@ -1,0 +1,18 @@
+# Catppuccin Latte theme for Dillo
+
+# ---- page ----
+bg_color=#eff1f5
+allow_white_bg=NO
+white_bg_replacement=#eff1f5
+contrast_visited_color=YES
+
+# ---- UI ----
+ui_fg_color=#4c4f69
+ui_main_bg_color=#e6e9ef
+ui_text_bg_color=#dce0e8
+ui_selection_color=#bcc0cc
+ui_button_highlight_color=#ccd0da
+ui_tab_active_bg_color=#ccd0da
+ui_tab_active_fg_color=#4c4f69
+ui_tab_bg_color=#eff1f5
+ui_tab_fg_color=#6c6f85

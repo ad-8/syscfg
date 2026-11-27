@@ -1,0 +1,4 @@
+/* Doric Walnut theme for Dillo: page text and link colors */
+body { color: #b9d3b0; }
+a:link { color: #aea084; }
+a:visited { color: #9ba3a2; }
