@@ -16,4 +16,8 @@
         })
       ];
     };
+
+  flake.modules.homeManager.gaming = {
+    programs.mangohud.enable = true;
+  };
 }

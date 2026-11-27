@@ -56,8 +56,6 @@
 
       environment.systemPackages = with pkgs; [
         ffmpeg-full
-        restic
-        rclone
         libsecret
       ];
 

@@ -16,8 +16,10 @@ in
       firefox
       gaming
       keyd
+      mu4e
       openssh
       printing
+      restic
       virtman
       workstation
       zfs
@@ -26,7 +28,8 @@ in
         home-manager.users.ax.imports = [
           modules.homeManager.ax
           modules.homeManager.mango
-          modules.homeManager.ax-bee
+          modules.homeManager.gaming
+          modules.homeManager.mu4e
         ];
       }
     ];
@@ -34,7 +37,8 @@ in
 
   flake.modules.nixos.ax-bee =
     {
-      pkgs, config,
+      pkgs,
+      config,
       ...
     }:
 
@@ -47,8 +51,6 @@ in
       nixpkgs.overlays = [
         (final: prev: {
           emacs = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.emacs;
-          emacsWithMu4e =
-            (final.emacsPackagesFor final.emacs).emacsWithPackages (epkgs: [ epkgs.mu4e ]);
         })
       ];
 

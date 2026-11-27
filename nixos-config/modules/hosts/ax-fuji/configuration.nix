@@ -14,6 +14,7 @@ in
       fish
       git
       openssh
+      restic
       starship
       tmux
       vim
@@ -44,8 +45,6 @@ in
       networking.hostName = "ax-fuji";
 
       environment.systemPackages = with pkgs; [
-        rclone
-        restic
         vlock
         yt-dlp
       ];

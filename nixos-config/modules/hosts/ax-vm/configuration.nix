@@ -11,6 +11,7 @@ in
       core
       home-manager
       audio
+      btop
       ax-vm
       {
         home-manager.users.ax.imports = with modules.homeManager; [
@@ -37,7 +38,6 @@ in
       programs.dconf.enable = true;
 
       environment.systemPackages = with pkgs; [
-        btop
         unzip
       ];
 
