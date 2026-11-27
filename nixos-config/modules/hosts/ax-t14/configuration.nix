@@ -6,16 +6,29 @@ in
 {
   flake.nixosConfigurations.ax-t14 = inputs.nixpkgs-stable.lib.nixosSystem {
     modules = with modules.nixos; [
+      # foundation
       core
       home-manager
-      mango
+
+      # role
       audio
-      firefox
-      keyd
-      restic
-      syncthing
+      mango
       workstation
+
+      # services
+      syncthing
+
+      # system
+      keyd
       zfs
+
+      # apps
+      firefox
+
+      # cli
+      restic
+
+      # host
       ax-t14
       {
         home-manager.users.ax.imports = with modules.homeManager; [

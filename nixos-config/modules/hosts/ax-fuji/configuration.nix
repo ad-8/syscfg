@@ -6,28 +6,39 @@ in
 {
   flake.nixosConfigurations.ax-fuji = inputs.nixpkgs-stable.lib.nixosSystem {
     modules = with modules.nixos; [
+      # foundation
       agenix
       core
-      btop
-      doom-link
-      fastfetch
-      fish
-      git
-      openssh
-      restic
-      starship
-      tmux
-      vim
+
+      # services
       audiobookshelf
       forgejo
       gatus-push
       homepage
       jellyfin
       navidrome
-      podman
       radicale
       searx
       syncthing
+
+      # system
+      openssh
+      podman
+
+      # apps
+      doom-link
+
+      # cli
+      btop
+      fastfetch
+      fish
+      git
+      restic
+      starship
+      tmux
+      vim
+
+      # host
       ax-fuji
     ];
   };

@@ -6,24 +6,37 @@ in
 {
   flake.nixosConfigurations.ax-bee = inputs.nixpkgs-stable.lib.nixosSystem {
     modules = with modules.nixos; [
+      # foundation
       agenix
       core
       home-manager
-      mango
+
+      # role
       audio
+      mango
+      workstation
+
+      # services
+      syncthing
+
+      # system
       clamav
       distrobox
-      firefox
-      gaming
       keyd
-      mu4e
       openssh
       printing
-      restic
-      syncthing
       virtman
-      workstation
       zfs
+
+      # apps
+      firefox
+      gaming
+      mu4e
+
+      # cli
+      restic
+
+      # host
       ax-bee
       {
         home-manager.users.ax.imports = with modules.homeManager; [
