@@ -21,7 +21,6 @@ in
       ax-vm
       {
         home-manager.users.ax.imports = with modules.homeManager; [
-          base
           emacs
           git
           pkgs-core
