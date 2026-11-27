@@ -158,7 +158,8 @@ The roles come from the user's hand-made Gotham file:
 
 | Role                     | Keys                                                  | Gotham   |
 |--------------------------|-------------------------------------------------------|----------|
-| page background          | `bg_color`, `white_bg_replacement`, `ui_tab_bg_color` | `0c1014` |
+| page background          | `bg_color`, `ui_tab_bg_color`                         | `0c1014` |
+| site white replaced by   | `white_bg_replacement`                                | `abc0bf` |
 | chrome surface           | `ui_main_bg_color`                                    | `11151c` |
 | input field              | `ui_text_bg_color`                                    | `091f2e` |
 | hover, active tab        | `ui_button_highlight_color`, `ui_tab_active_bg_color` | `0a3749` |
@@ -196,10 +197,17 @@ fg, the blends those themes already use). Vantablack uses only greys its
 own files already use, since the omarchy palette it was ported from
 isn't pinned.
 
-`allow_white_bg=NO` everywhere, light themes included: white pages take
-the theme background. A page that sets a white background and dark text
-then shows dark text on the theme background in dark themes; that's
-how Dillo works, kept on purpose (`YES` would leave white pages white instead).
+`allow_white_bg=NO` everywhere: Dillo swaps a site's white background for
+`white_bg_replacement` but keeps the site's own text colors. Replacing it
+with the dark theme background made sites like Phoronix unreadable (dark
+text on dark), and `YES` (plain white) was too bright, so dark themes use
+a "paper" shade: the theme's brightest text color, darkened toward its
+background until it reaches half luminance (8:1 for dark site text). A
+computed blend, not a palette color. Exceptions: solarized-dark uses its
+`base1` `93a1a1` as is (already dimmer); matrix and amber use the neutral
+grey `bcbcbc` that vantablack and modus-vivendi also get, because a green
+paper hides green links and amber's is loud orange. Light themes replace
+white with their own background (modus-operandi's is white itself).
 
 Low contrast that comes from the upstream palette itself, kept: Solarized
 (dark and light), Nova's link colors on its mid-grey background, and the

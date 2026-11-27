@@ -3,7 +3,7 @@
 # ---- page ----
 bg_color=#103c48
 allow_white_bg=NO
-white_bg_replacement=#103c48
+white_bg_replacement=#adbfc2
 contrast_visited_color=YES
 
 # ---- UI ----
