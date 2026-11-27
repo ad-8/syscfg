@@ -20,6 +20,7 @@ in
       openssh
       printing
       restic
+      syncthing
       virtman
       workstation
       zfs

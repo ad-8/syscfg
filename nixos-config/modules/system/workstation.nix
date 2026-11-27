@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.workstation =
-    { config, pkgs, ... }:
+    { pkgs, ... }:
     {
       networking.networkmanager.enable = true;
 
@@ -18,26 +18,6 @@
       # 'Default keyring' was set as default before, and after reboot, the keyring had to be manually unlocked ...
       # Also, apparently, the passwd for the 'Login' keyring and the user passwd should match.
       programs.seahorse.enable = true;
-
-      # https://wiki.nixos.org/wiki/Backlight
-      hardware.i2c.enable = true;
-      users.users.ax.extraGroups = [
-        config.hardware.i2c.group
-      ];
-      # brillo replaces light (removed from nixpkgs in 26.05, unmaintained upstream);
-      # same udev + video-group model, no setuid. licht.clj calls `brillo` now.
-      hardware.brillo.enable = true;
-
-      services = {
-        syncthing = {
-          enable = true;
-          openDefaultPorts = true;
-          group = "users";
-          user = "ax";
-          dataDir = "/home/ax/syncthing"; # Default folder for new synced folders
-          configDir = "/home/ax/.config/syncthing"; # Folder for Syncthing's settings and keys
-        };
-      };
 
       programs.java.enable = true;
       # https://wiki.nixos.org/wiki/Thunar

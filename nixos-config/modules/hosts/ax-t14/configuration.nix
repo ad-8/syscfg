@@ -14,6 +14,7 @@ in
       firefox
       keyd
       restic
+      syncthing
       workstation
       zfs
       ax-t14

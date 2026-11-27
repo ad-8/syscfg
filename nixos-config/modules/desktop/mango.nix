@@ -6,6 +6,7 @@ in
 {
   flake.modules.nixos.mango =
     {
+      config,
       lib,
       pkgs,
       modulesPath,
@@ -33,6 +34,15 @@ in
             chooser_type = "dmenu";
             chooser_cmd = "${lib.getExe pkgs.rofi} -dmenu -p share";
           };
+
+          # https://wiki.nixos.org/wiki/Backlight
+          hardware.i2c.enable = true;
+          users.users.ax.extraGroups = [
+            config.hardware.i2c.group
+          ];
+          # brillo replaces light (removed from nixpkgs in 26.05, unmaintained upstream);
+          # same udev + video-group model, no setuid. licht.clj calls `brillo` now.
+          hardware.brillo.enable = true;
 
           environment.systemPackages = with pkgs; [
             gammastep
@@ -68,7 +78,6 @@ in
       };
 
       home.packages = with pkgs; [
-        # brillo enabled in modules/system/workstation.nix
         bluetui
         ddcutil
         dunst
