@@ -26,22 +26,18 @@ in
       zfs
       ax-bee
       {
-        home-manager.users.ax.imports = [
-          modules.homeManager.ax
-          modules.homeManager.mango
-          modules.homeManager.gaming
-          modules.homeManager.mu4e
+        home-manager.users.ax.imports = with modules.homeManager; [
+          ax
+          mango
+          gaming
+          mu4e
         ];
       }
     ];
   };
 
   flake.modules.nixos.ax-bee =
-    {
-      pkgs,
-      config,
-      ...
-    }:
+    { pkgs, ... }:
 
     {
       imports = [

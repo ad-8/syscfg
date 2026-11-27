@@ -3,7 +3,6 @@
     home.stateVersion = "25.05";
     home.username = "ax";
     home.homeDirectory = "/home/ax";
-    home.packages = [ ];
 
     programs.bash = {
       enable = true;

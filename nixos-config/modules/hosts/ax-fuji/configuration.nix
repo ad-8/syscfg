@@ -49,8 +49,6 @@ in
         yt-dlp
       ];
 
-      users.users.ax.packages = [ ];
-
       hardware.graphics = {
         enable = true;
         extraPackages = with pkgs; [
