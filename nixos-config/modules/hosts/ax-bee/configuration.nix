@@ -44,6 +44,7 @@ in
           mango
           gaming
           mu4e
+          strawberry
         ];
       }
     ];
