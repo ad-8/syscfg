@@ -66,18 +66,18 @@ in
     { pkgs, ... }:
     {
       xdg.configFile = {
-        "mango/config.conf".source = ./mango/config.conf;
+        "mango/config.conf".source = ../../desktop/mango/config.conf;
 
-        "waybar/compositor-mango.json".source = ./waybar/compositor-mango.json;
-        "waybar/config".source = ./waybar/config;
-        "waybar/config-minimal".source = ./waybar/config-minimal;
-        "waybar/snowflake.xml".source = ./waybar/snowflake.xml;
-        "waybar/style.css".source = ./waybar/style.css;
+        "waybar/compositor-mango.json".source = ../../desktop/waybar/compositor-mango.json;
+        "waybar/config".source = ../../desktop/waybar/config;
+        "waybar/config-minimal".source = ../../desktop/waybar/config-minimal;
+        "waybar/snowflake.xml".source = ../../desktop/waybar/snowflake.xml;
+        "waybar/style.css".source = ../../desktop/waybar/style.css;
 
-        "dunst/dunstrc".source = ./dunst/dunstrc;
+        "dunst/dunstrc".source = ../../desktop/dunst/dunstrc;
 
-        "rofi/config.rasi".source = ./rofi/config.rasi;
-        "rofi/picker.rasi".source = ./rofi/picker.rasi;
+        "rofi/config.rasi".source = ../../desktop/rofi/config.rasi;
+        "rofi/picker.rasi".source = ../../desktop/rofi/picker.rasi;
       };
 
       home.packages = with pkgs; [
