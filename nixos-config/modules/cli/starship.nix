@@ -69,11 +69,4 @@ in
       inherit settings;
     };
   };
-
-  flake.modules.nixos.starship = {
-    programs.starship = {
-      enable = true;
-      inherit settings;
-    };
-  };
 }

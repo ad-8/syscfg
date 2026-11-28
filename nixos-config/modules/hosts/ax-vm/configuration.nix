@@ -22,8 +22,12 @@ in
       {
         home-manager.users.ax.imports = with modules.homeManager; [
           emacs
+          fastfetch
           git
           pkgs-core
+          starship
+          tmux
+          vim
         ];
       }
     ];

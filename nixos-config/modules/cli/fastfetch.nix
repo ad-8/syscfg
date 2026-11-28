@@ -180,8 +180,4 @@ in
       inherit settings;
     };
   };
-
-  flake.modules.nixos.fastfetch = {
-    environment.etc."xdg/fastfetch/config.jsonc".text = builtins.toJSON settings;
-  };
 }

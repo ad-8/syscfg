@@ -47,22 +47,17 @@
         delta
         (pkgs.emacsWithMu4e or emacs)
         eza
-        fastfetch
         fd
         file
         fzf
-        git
         htop
         ncdu
         nh
         (nnn.override { withNerdIcons = true; })
         psmisc # provides killall
         ripgrep
-        starship
-        tmux
         tokei
         tree
-        vim
         wget
         zoxide
       ];

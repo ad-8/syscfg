@@ -9,6 +9,7 @@ in
       # foundation
       agenix
       core
+      home-manager
 
       # services
       audiobookshelf
@@ -25,21 +26,26 @@ in
       openssh
       podman
 
-      # apps
-      doom-link
-
       # cli
-      btop
-      fastfetch
-      fish
-      git
       restic
-      starship
-      tmux
-      vim
 
       # host
       ax-fuji
+      {
+        home-manager.users.ax = { lib, ... }: {
+          imports = with modules.homeManager; [
+            btop
+            doom
+            fastfetch
+            fish
+            git
+            starship
+            tmux
+            vim
+          ];
+          programs.starship.enableBashIntegration = lib.mkForce true;
+        };
+      }
     ];
   };
 

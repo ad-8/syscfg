@@ -1,9 +1,8 @@
 {
-  flake.modules.homeManager.tmux = {
-    home.file.".tmux.conf".source = ./tmux/.tmux.conf;
-  };
-
-  flake.modules.nixos.tmux = {
-    environment.etc."tmux.conf".source = ./tmux/.tmux.conf;
-  };
+  flake.modules.homeManager.tmux =
+    { pkgs, ... }:
+    {
+      home.packages = [ pkgs.tmux ];
+      home.file.".tmux.conf".source = ./tmux/.tmux.conf;
+    };
 }

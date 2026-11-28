@@ -50,13 +50,4 @@ in
         settings = settings { inherit pkgs; };
       };
     };
-
-  flake.modules.nixos.git =
-    { pkgs, ... }:
-    {
-      programs.git = {
-        enable = true;
-        config = settings { inherit pkgs; };
-      };
-    };
 }
